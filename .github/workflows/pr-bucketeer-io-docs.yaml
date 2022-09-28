@@ -7,9 +7,6 @@ on:
     paths-ignore:
       - "**/**.md"
 
-env:
-  DOCS_DIRECTORY: docs
-
 jobs:
   build_and_preview:
     runs-on: ubuntu-latest
@@ -17,20 +14,15 @@ jobs:
       - uses: actions/checkout@v3
       - name: Yarn install cache
         uses: c-hive/gha-yarn-cache@v2
-        with:
-          directory: ${{ env.DOCS_DIRECTORY }}
       - name: Yarn install dependencies
         run: |
-          cd ${{ env.DOCS_DIRECTORY }}
           yarn install
       - name: Yarn Build
         run: |
-          cd ${{ env.DOCS_DIRECTORY }}
           yarn build
       - name: Deploy
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          entryPoint: ${{ env.DOCS_DIRECTORY }}
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_BUCKETEER_IO }}
           expires: 14d
