@@ -12,7 +12,7 @@ const config = {
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
-  favicon: 'img/favicon.png',
+  favicon: 'img/favicon.ico',
   organizationName: 'bucketeer-io', // Usually your GitHub org/user name.
   projectName: 'bucketeer', // Usually your repo name.
 
