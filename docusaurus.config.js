@@ -33,7 +33,7 @@ const config = {
           routeBasePath: '/',
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl:
-            'https://github.com/bucketeer-io/bucketeer/tree/master',
+            'https://github.com/bucketeer-io/bucketeer-docs/tree/master',
           showLastUpdateTime: true,
         },
         blog: false,
