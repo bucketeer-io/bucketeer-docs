@@ -1,0 +1,177 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+ @font-face {
+  font-family: "sofiapro";
+  src: url("../webfonts/sofiapro/sofia-pro-regular.eot");
+  src: url("../webfonts/sofiapro/sofia-pro-regular.eot?#iefix")
+      format("embedded-opentype"),
+    url("../webfonts/sofiapro/sofia-pro-regular.woff2") format("woff2"),
+    url("../webfonts/sofiapro/sofia-pro-regular.woff") format("woff"),
+    url("../webfonts/sofiapro/sofia-pro-regular.ttf") format("truetype"),
+    url("../webfonts/sofiapro/sofia-pro-regular.svg#sofiapro") format("svg");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "sofiapro";
+  src: url("../webfonts/sofiapro/sofia-pro-bold.eot");
+  src: url("../webfonts/sofiapro/sofia-pro-bold.eot?#iefix")
+      format("embedded-opentype"),
+    url("../webfonts/sofiapro/sofia-pro-bold.woff2") format("woff2"),
+    url("../webfonts/sofiapro/sofia-pro-bold.woff") format("woff"),
+    url("../webfonts/sofiapro/sofia-pro-bold.ttf") format("truetype"),
+    url("../webfonts/sofiapro/sofia-pro-bold.svg#sofiapro") format("svg");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* You can override the default Infima variables here. */
+:root {
+  --ifm-color-primary: #5d3597;
+  --ifm-color-primary-dark: #5d3597;
+  --ifm-color-primary-darker: #5d3597;
+  --ifm-color-primary-darkest: #5d3597;
+  --ifm-color-primary-light: #5d3597;
+  --ifm-color-primary-lighter: #5d3597;
+  --ifm-color-primary-lightest: #5d3597;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --ifm-font-family-base: sofiapro, system-ui, sans-serif !important;
+  --ifm-navbar-height: 4.5rem;
+  --ifm-heading-font-weight: var(--font-weight-medium);
+  --ifm-font-color-base: #585858;
+}
+
+.markdown h1 {
+  --ifm-h1-font-size: 2.125rem !important;
+}
+
+.markdown h2 {
+  --ifm-h2-font-size: 1.625rem !important;
+}
+
+.markdown h3 {
+  --ifm-h3-font-size: 1.375rem !important;
+}
+
+.markdown ul.tabs {
+  font-size: 0.875rem;
+  font-weight: var(--font-weight-medium);
+}
+
+.hash-link:before {
+  content: '' !important;
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='%23555' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11.006 12C11.0201 12.5657 10.5676 13.0182 10.0019 13.0041C9.45034 13.0041 8.99779 12.5516 8.99779 12C8.99779 9.24229 11.2393 7.00076 13.997 7.00076L17.0034 7.00076C19.7611 7.00076 22.0026 9.24229 22.0026 12C22.0026 14.7577 19.7611 16.9993 17.0034 16.9993H14.8962C15.4831 16.4265 15.971 15.7547 16.3245 15.0052L16.9963 14.9981C18.658 15.0052 20.0015 13.6617 19.9944 12C20.0015 10.3383 18.658 8.9948 16.9963 9.00187L14.0041 9.00188C12.3424 8.9948 10.9989 10.3383 11.006 12ZM13.9982 10.9959C14.5497 10.9959 15.0022 11.4485 15.0022 12C15.0022 14.7577 12.7607 16.9993 10.003 16.9993L6.99668 16.9993C4.23896 16.9993 1.99744 14.7577 1.99744 12C1.99744 9.24229 4.23897 7.00076 6.99668 7.00076L9.10386 7.00076C8.51696 7.57352 8.02906 8.24527 7.66843 9.00187H7.00375C5.34205 8.9948 3.99855 10.3383 4.00562 12C3.99855 13.6617 5.34205 15.0052 7.00375 14.9981L9.99593 14.9981C11.6576 15.0052 13.0011 13.6617 12.9941 12C12.9799 11.4343 13.4325 10.9818 13.9982 10.9959Z'/%3E%3C/svg%3E") no-repeat !important;
+  position: relative;
+  top: 3px;
+}
+
+code {
+  font-size: 0.785rem !important;
+  font-family: Courier, monospace !important;
+}
+
+@media (min-width: 1440px) {
+	.main-wrapper {
+		align-self: center;
+		max-width: 1360px;
+		width: 1360px;
+	}
+}
+
+.navbar .navbar__inner {
+  margin: 0 auto;
+  max-width: 1360px;
+  background-color: #5d3597;
+}
+
+.navbar--fixed-top {
+  height: 70px;
+  background-color: #5d3597;
+}
+
+.navbar__link, .navbar__link:hover {
+  color: #fff;
+}
+
+.navbar__logo {
+  flex: 0 0 auto;
+  height: 3rem;
+  margin-top: 0.5rem;
+}
+
+.navbar__logo {
+  height: 45px;
+}
+
+.menu {
+  padding: 1.8rem 0 0.5rem 0.5rem !important;
+  background-color: #ededed;
+}
+
+.navbar-sidebar__brand {
+  background-color: #5d3597;
+}
+
+.navbar-sidebar__back {
+  color: #585858 !important;
+}
+
+.clean-btn {
+  color: #ffffff
+}
+
+.padding-top--md {
+  padding: 2rem !important;
+}
+
+.header-github-link:hover {
+  opacity: 0.7;
+  color: #ffffff;
+}
+
+.header-github-link:before {
+  content: '';
+  width: 24px;
+  height: 24px;
+  display: flex;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='white' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12'/%3E%3C/svg%3E")
+      no-repeat;
+}
+
+.header-twitter-link:hover {
+  opacity: 0.7;
+  color: #ffffff;
+}
+
+.header-twitter-link:before {
+  content: '';
+  width: 24px;
+  height: 24px;
+  display: flex;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='white' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z'/%3E%3C/svg%3E")
+      no-repeat;
+}
+
+.header-slack-link:hover {
+  opacity: 0.7;
+  color: #ffffff;
+}
+
+.header-slack-link:before {
+  content: '';
+  width: 24px;
+  height: 24px;
+  display: flex;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='white' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zM8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312zM18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834zM17.688 8.834a2.528 2.528 0 0 1-2.523 2.521 2.527 2.527 0 0 1-2.52-2.521V2.522A2.527 2.527 0 0 1 15.165 0a2.528 2.528 0 0 1 2.523 2.522v6.312zM15.165 18.956a2.528 2.528 0 0 1 2.523 2.522A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.52-2.522v-2.522h2.52zM15.165 17.688a2.527 2.527 0 0 1-2.52-2.523 2.526 2.526 0 0 1 2.52-2.52h6.313A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.523h-6.313z'/%3E%3C/svg%3E")
+      no-repeat;
+}

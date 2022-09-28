@@ -1,0 +1,29 @@
+name: pr-bucketeer-io-docs
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths-ignore:
+      - "**/**.md"
+
+jobs:
+  build_and_preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Yarn install cache
+        uses: c-hive/gha-yarn-cache@v2
+      - name: Yarn install dependencies
+        run: |
+          yarn install
+      - name: Yarn Build
+        run: |
+          yarn build
+      - name: Deploy
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_BUCKETEER_IO }}
+          expires: 14d
+          projectId: ${{ secrets.FIREBASE_HOSTING_PROJECT_ID }}
