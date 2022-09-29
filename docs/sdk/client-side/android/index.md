@@ -27,7 +27,7 @@ Implement the dependency in your Gradle file. Please refer to the [SDK releases 
 
 ```groovy showLineNumbers
 dependencies {
-  implementation 'io.bucketeer:bucketeer-android-client-sdk:LATEST_VERSION'
+  implementation 'io.bucketeer:android-client-sdk:LATEST_VERSION'
 }
 ```
 
@@ -63,13 +63,13 @@ Configure the SDK config and user configuration.
 <TabItem value="kt" label="Kotlin">
 
 ```kotlin showLineNumbers
-val config = BKTConfig.Builder()
+val config = BKTConfig.builder()
   .apiKey("YOUR_API_KEY")
-  .apiURL("YOUR_API_URL")
+  .endpoint("YOUR_API_URL")
   .featureTag("YOUR_FEATURE_TAG")
   .build()
 
-val user = BKTUser.Builder()
+val user = BKTUser.builder()
   .id("USER_ID")
   .build()
 ```
@@ -81,9 +81,9 @@ val user = BKTUser.Builder()
 
 Depending on your use, you may want to change the optional configurations available in the **BKTConfig.Builder**.
 
-- **pollingInterval** (Minimum 5 minutes. Default is 10 minutes)
+- **pollingInterval** (Minimum 60 seconds. Default is 10 minutes)
 - **backgroundPollingInterval** (Minimum 20 minutes. Default is 1 hour)
-- **eventsFlushInterval** (Default is 30 seconds)
+- **eventsFlushInterval** (Minimum 60 seconds. Default is 60 seconds)
 - **eventsMaxQueueSize** (Default is 50 events)
 
 :::
@@ -102,7 +102,8 @@ Initialize the client by passing the configurations in the previous step.
 <TabItem value="kt" label="Kotlin">
 
 ```kotlin showLineNumbers
-val client = BKTClient.initialize(this.application, config, user)
+BKTClient.initialize(this.application, config, user)
+val client = BKTClient.getInstance()
 ```
 
 </TabItem>
@@ -116,31 +117,35 @@ The initialize process starts polling the latest variations from Bucketeer in th
 
 If you want to use the feature flag on Splash or Main views, and the user opens your application for the first time, it may not have enough time to fetch the variations from the Bucketeer server.
 
-For this case, we recommend using the callback in the initialize method.
+For this case, we recommend using the `Future<BKTException?>` returned from the initialize method.
 
 <Tabs>
 <TabItem value="kt" label="Kotlin">
 
 ```kotlin showLineNumbers
-val callback = object : BKTClientInterface.FetchEvaluationsCallback {
-  override fun onSuccess() {
-    val showNewFeature = client.booleanVariation("YOUR_FEATURE_FLAG_ID", false)
+// The callback will return without waiting until the fetching variation process finishes
+val timeout = 1000 // Default is 5 seconds
+
+viewLifecycleOwner.lifecycleScope.launch {
+  val future = BKTClient.initialize(this.application, config, user, timeout)
+
+  // Future is blocking, so you need to wait on non-main thread.
+  val error = withContext(Dispatchers.IO) {
+    future.get()
+  }
+  
+  // Future returns null if BKTClient successfully fetched evaluations.
+  if (error == null) {
+    val showNewFeature = BKTClient.getInstance().booleanVariation("YOUR_FEATURE_FLAG_ID", false)
     if (showNewFeature) {
         // The Application code to show the new feature
     } else {
         // The code to run when the feature is off
     }
-  }
-
-  override fun onError(exception: BKTException) {
-    // Handle the error
+  } else {
+    // Handle error
   }
 }
-
-// The callback will return without waiting until the fetching variation process finishes
-val timeout = 1000 // Default is 5 seconds
-
-val client = BKTClient.initialize(this.application, config, user, callback, timeout)
 ```
 
 </TabItem>
@@ -202,32 +207,31 @@ Sometimes depending on your use, you may need to ensure the variations in the SD
 
 The fetch method uses the following parameters.
 
-- **Callback**
 - **Timeout** (The callback will return without waiting until the fetching process finishes. The default is 5 seconds)
+
+The fetch method returns `Future<BKTExeptIon?>`, make sure to wait its completion.
 
 <Tabs>
 <TabItem value="kt" label="Kotlin">
 
 ```kotlin showLineNumbers
-val callback = object : BKTClientInterface.FetchEvaluationsCallback {
-  override fun onSuccess() {
-    val showNewFeature = client.booleanVariation("YOUR_FEATURE_FLAG_ID", false)
-    if (showNewFeature) {
-        // The Application code to show the new feature
-    } else {
-        // The code to run when the feature is off
-    }
-  }
-
-  override fun onError(exception: BKTException) {
-    // Handle the error
-  }
-}
-
 // The callback will return without waiting until the fetching variation process finishes
 val timeout = 1000 // Default is 5 seconds
 
-client.fetchEvaluations(callback, timeout)
+val future = client.fetchEvaluations(timeout)
+
+// Future is blocking, avoid waiting it on the main thread.
+val error = future.get()
+if (error == null) {
+  val showNewFeature = client.booleanVariation("YOUR_FEATURE_FLAG_ID", false)
+  if (showNewFeature) {
+      // The Application code to show the new feature
+  } else {
+      // The code to run when the feature is off
+  }
+} else {
+  // Handle the error
+}
 ```
 
 </TabItem>
@@ -256,25 +260,21 @@ override fun onMessageReceived(remoteMessage: RemoteMessage?) {
   remoteMessage?.data?.also { data ->
     val isFeatureFlagUpdated = data["bucketeer_feature_flag_updated"]
     if (isFeatureFlagUpdated) {
-      val callback = object : BKTClientInterface.FetchEvaluationsCallback {
-        override fun onSuccess() {
-          val showNewFeature = client.booleanVariation("YOUR_FEATURE_FLAG_ID", false)
-          if (showNewFeature) {
-              // The Application code to show the new feature
-          } else {
-              // The code to run when the feature is off
-          }
-        }
-
-        override fun onError(exception: BKTException) {
-          // Handle the error
-        }
-      }
-      
       // The callback will return without waiting until the fetching variation process finishes
       val timeout = 1000 // Default is 5 seconds
 
-      client.fetchEvaluations(callback, timeout)
+      val future = client.fetchEvaluations(timeout)
+      val error = future.get()
+      if (error == null) {
+        val showNewFeature = client.booleanVariation("YOUR_FEATURE_FLAG_ID", false)
+        if (showNewFeature) {
+            // The Application code to show the new feature
+        } else {
+            // The code to run when the feature is off
+        }
+      } else {
+        // Handle the error
+      }
     }
   }
 }
@@ -348,7 +348,8 @@ val user = BKTUser.Builder()
   .customAttributes(attributes)
   .build()
 
-val client = BKTClient.initialize(this.application, config, user)
+BKTClient.initialize(this.application, config, user)
+val client = BKTClient.getInstance()
 ```
 
 </TabItem>
@@ -371,7 +372,7 @@ val attributes = mapOf(
   "country" to "japan",
 )
 
-client.updateUserAttributes(attributes)
+client.setUserAttributes(attributes)
 ```
 
 </TabItem>
@@ -385,7 +386,7 @@ This updating method will override the current data.
 
 ### Getting user information
 
-This method will return the current user configured in the SDK. This is useful when you want to check the current user id and attributes before updating them through [updateUserAttributes](#getting-user-information).
+This method will return the current user configured in the SDK. This is useful when you want to check the current user id and attributes before updating them through [setUserAttributes](#getting-user-information).
 
 <Tabs>
 <TabItem value="kt" label="Kotlin">
