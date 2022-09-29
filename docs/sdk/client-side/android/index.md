@@ -49,7 +49,7 @@ Import the Bucketeer client into your application code.
 <TabItem value="kt" label="Kotlin">
 
 ```kotlin showLineNumbers
-import jp.bucketeer.sdk.android.*
+import io.bucketeer.sdk.android.*
 ```
 
 </TabItem>
@@ -344,7 +344,7 @@ val attributes = mapOf(
   "genre" to "female",
 )
 
-val user = BKTUser.Builder()
+val user = BKTUser.builder()
   .id("USER_ID")
   .customAttributes(attributes)
   .build()
