@@ -133,7 +133,7 @@ viewLifecycleOwner.lifecycleScope.launch {
   val error = withContext(Dispatchers.IO) {
     future.get()
   }
-  
+
   // Future returns null if BKTClient successfully fetched evaluations.
   if (error == null) {
     val showNewFeature = BKTClient.getInstance().booleanVariation("YOUR_FEATURE_FLAG_ID", false)
