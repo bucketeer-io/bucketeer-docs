@@ -6,6 +6,6 @@ slug: /sdk/server-side/node-js
 
 ## Getting started
 
-Before starting, ensure that you follow the [Getting started](/) process.
+Before starting, ensure that you follow the [Getting started](/) guide.
 
 TODO
