@@ -34,13 +34,6 @@ dependencies {
 </TabItem>
 </Tabs>
 
-:::info ProGuard
-
-You may need to include the ProGuard configuration lines from [consumer-proguard-rules.pro](https://github.com/bucketeer-io/android-client-sdk/blob/master/bucketeer/proguard-rules.pro)
-into your proguard file if the aar artifact doesn't include the configuration automatically.
-
-:::
-
 ### Importing client
 
 Import the Bucketeer client into your application code.
