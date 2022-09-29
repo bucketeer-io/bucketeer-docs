@@ -315,7 +315,8 @@ This method will send all pending analytics events to the Bucketeer server as so
 <TabItem value="kt" label="Kotlin">
 
 ```kotlin showLineNumbers
-client.flush()
+// this method returns Future<BKTException?>
+val future = client.flush()
 ```
 
 </TabItem>
@@ -414,6 +415,36 @@ val evaluationDetails = client.evaluationDetails("YOUR_FEATURE_FLAG_ID")
 This method will return null if the feature flag is missing in the SDK.
 
 :::
+
+</TabItem>
+</Tabs>
+
+
+### Listening to evaluation updates
+
+BKTClient can notify when the evaluation is updated.  
+The listener can detect both automatic polling and manual fetching.
+
+<Tabs>
+<TabItem value="kt" label="Kotlin">
+
+```kotlin showLineNumbers
+// returned value is used when you want to remove listener
+val key = client.addEvaluationUpdateListener {
+  val showNewFeature = client.booleanVariation("YOUR_FEATURE_FLAG_ID", false)
+  if (showNewFeature) {
+      // The Application code to show the new feature
+  } else {
+      // The code to run when the feature is off
+  }
+}
+
+// remove a listener associated with the key
+client.removeEvaluationUpdateListener(key)
+
+// remove all listeners
+client.clearEvaluationUpdateListeners()
+```
 
 </TabItem>
 </Tabs>
