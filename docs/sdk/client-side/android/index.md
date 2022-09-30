@@ -58,7 +58,7 @@ Configure the SDK config and user configuration.
 ```kotlin showLineNumbers
 val config = BKTConfig.builder()
   .apiKey("YOUR_API_KEY")
-  .endpoint("YOUR_API_URL")
+  .apiEndpoint("YOUR_API_ENDPOINT")
   .featureTag("YOUR_FEATURE_TAG")
   .build()
 
@@ -198,11 +198,9 @@ fun jsonVariation(featureId: String, defaultValue: JSONObject): JSONObject
 
 Sometimes depending on your use, you may need to ensure the variations in the SDK are up to date before evaluating a user.
 
-The fetch method uses the following parameters.
+The fetch method uses the following parameters and returns `Future<BKTExeptIon?>`. Make sure to wait for its completion.
 
 - **Timeout** (The callback will return without waiting until the fetching process finishes. The default is 5 seconds)
-
-The fetch method returns `Future<BKTExeptIon?>`, make sure to wait its completion.
 
 <Tabs>
 <TabItem value="kt" label="Kotlin">
@@ -302,13 +300,12 @@ client.track("YOUR_GOAL_ID", 10.50)
 
 ### Flushing events
 
-This method will send all pending analytics events to the Bucketeer server as soon as possible. This process is asynchronous, so it returns before it is complete.
+This method will send all pending analytics events to the Bucketeer server as soon as possible. This process is asynchronous, but the method returns `Future<BKTExeptIon?>` if you want to wait for its completion before doing something else.
 
 <Tabs>
 <TabItem value="kt" label="Kotlin">
 
 ```kotlin showLineNumbers
-// this method returns Future<BKTException?>
 val future = client.flush()
 ```
 
@@ -366,7 +363,7 @@ val attributes = mapOf(
   "country" to "japan",
 )
 
-client.setUserAttributes(attributes)
+client.updateUserAttributes(attributes)
 ```
 
 </TabItem>
@@ -380,7 +377,7 @@ This updating method will override the current data.
 
 ### Getting user information
 
-This method will return the current user configured in the SDK. This is useful when you want to check the current user id and attributes before updating them through [setUserAttributes](#getting-user-information).
+This method will return the current user configured in the SDK. This is useful when you want to check the current user id and attributes before updating them through [updateUserAttributes](#updating-user-attributes).
 
 <Tabs>
 <TabItem value="kt" label="Kotlin">
@@ -394,7 +391,8 @@ val user = client.currentUser()
 
 ### Getting evaluation details
 
-This method will return the evaluation details for a specific feature flag. This is useful if you need to know the variation reason or send this data elsewhere.
+This method will return the evaluation details for a specific feature flag. It is useful if you need to know the variation reason or send this data elsewhere.
+It will return null if the feature flag is missing in the SDK.
 
 <Tabs>
 <TabItem value="kt" label="Kotlin">
@@ -403,9 +401,9 @@ This method will return the evaluation details for a specific feature flag. This
 val evaluationDetails = client.evaluationDetails("YOUR_FEATURE_FLAG_ID")
 ```
 
-:::note
+:::caution
 
-This method will return null if the feature flag is missing in the SDK.
+Do not call this method without calling the [Evaluating user method](#evaluating-user). The Evaluating user method must always be called because it generates analytics events that will be sent to the server.
 
 :::
 
@@ -422,7 +420,7 @@ The listener can detect both automatic polling and manual fetching.
 <TabItem value="kt" label="Kotlin">
 
 ```kotlin showLineNumbers
-// returned value is used when you want to remove listener
+// Returned value is used when you want to remove listener
 val key = client.addEvaluationUpdateListener {
   val showNewFeature = client.booleanVariation("YOUR_FEATURE_FLAG_ID", false)
   if (showNewFeature) {
@@ -432,10 +430,10 @@ val key = client.addEvaluationUpdateListener {
   }
 }
 
-// remove a listener associated with the key
+// Remove a listener associated with the key
 client.removeEvaluationUpdateListener(key)
 
-// remove all listeners
+// Remove all listeners
 client.clearEvaluationUpdateListeners()
 ```
 
