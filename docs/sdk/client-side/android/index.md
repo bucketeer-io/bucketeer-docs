@@ -58,7 +58,7 @@ Configure the SDK config and user configuration.
 ```kotlin showLineNumbers
 val config = BKTConfig.builder()
   .apiKey("YOUR_API_KEY")
-  .endpoint("YOUR_ENDPOINT")
+  .apiEndpoint("YOUR_API_ENDPOINT")
   .featureTag("YOUR_FEATURE_TAG")
   .build()
 
