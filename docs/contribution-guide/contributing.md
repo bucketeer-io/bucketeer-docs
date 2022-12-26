@@ -20,6 +20,8 @@ Please create an issue in the [bucketeer-io/bucketeer](https://github.com/bucket
 
 ## Creating a pull request
 
+Fork the repository.
+
 To find good issues for your first pull request, you can use our [help wanted issues](https://github.com/bucketeer-io/bucketeer/issues?q=is%3Aissue+is%3Aopen+label%3A"help+wanted") or our [good first issues](https://github.com/bucketeer-io/bucketeer/issues?q=is%3Aissue+is%3Aopen+label%3A"good+first+issue") as a reference.
 
 :::info
