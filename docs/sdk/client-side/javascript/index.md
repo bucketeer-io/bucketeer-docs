@@ -128,6 +128,17 @@ const client = getBKTClient()
 </TabItem>
 </Tabs>
 
+### Handling exceptions
+
+While most of the time error is handled internally, some methods throw `BKTException` when something goes wrong.  
+Those methods are:
+
+- **`initializeBKTClient()`**
+- **`BKTClient#fetchEvaluations()`**
+- **`BKTClient#flush()`**
+
+These methods return `Promise` and might rejects with `BKTException`, so you should make sure to catch the error.
+
 ## Supported features
 
 ### Evaluating user
