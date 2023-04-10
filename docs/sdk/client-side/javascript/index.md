@@ -41,7 +41,7 @@ Import the Bucketeer client into your application code.
 <TabItem value="js" label="Javascript">
 
 ```js showLineNumbers
-import * as BKTClient from '@bucketeer/sdk';
+import { BKTClient, getBKTClient, defineBKTConfig, defineBKTUser, initializeBKTClient } from '@bucketeer/sdk';
 ```
 
 </TabItem>
@@ -55,13 +55,17 @@ Configure the SDK config and user configuration.
 <TabItem value="js" label="Javascript">
 
 ```js showLineNumbers
-const config = {
+const config = defineBKTConfig({
   apiKey: 'YOUR_API_KEY',
-  apiURL: 'YOUR_API_URL',
-  featureTag: 'YOUR_FEATURE_TAG'
-};
+  apiEndpoint: 'YOUR_API_URL',
+  featureTag: 'YOUR_FEATURE_TAG',
+  appVersion: 'YOUR_APP_VERSION',
+  fetch: window.fetch // your fetch implementation
+});
 
-const user = {id: 'USER_ID'};
+const user = defineBKTUser({
+  id: 'USER_ID'
+});
 ```
 
 </TabItem>
@@ -72,9 +76,10 @@ const user = {id: 'USER_ID'};
 Depending on your use, you may want to change the optional configurations available.
 
 - **pollingInterval** (Minimum 5 minutes. Default is 10 minutes)
-- **backgroundPollingInterval** (Minimum 20 minutes. Default is 1 hour)
 - **eventsFlushInterval** (Default is 30 seconds)
 - **eventsMaxQueueSize** (Default is 50 events)
+- **storageKeyPrefix** (Default is empty) 
+- **userAgent** (Default is `window.navigator.userAgent`)
 
 :::
 
@@ -92,7 +97,8 @@ Initialize the client by passing the configurations in the previous step.
 <TabItem value="js" label="Javascript">
 
 ```js showLineNumbers
-const client = BKTClient.initialize(config, user);
+await initializeBKTClient(config, user);
+const client = getBKTClient()
 ```
 
 </TabItem>
@@ -100,13 +106,13 @@ const client = BKTClient.initialize(config, user);
 
 :::note
 
-The initialize process starts polling the latest variations from Bucketeer in the background using the interval `pollingInterval` configuration. When your application moves to the background state, it will use the `backgroundPollingInterval` configuration.
+The initialize process starts polling the latest variations from Bucketeer in the background using the interval `pollingInterval` configuration.
 
 :::
 
 If you want to use the feature flag on Splash or Main views, and the user opens your application for the first time, it may not have enough time to fetch the variations from the Bucketeer server.
 
-For this case, we recommend using the callback in the initialize method.
+For this case, we recommend using the `Promise` returned from the initialize method. The Promise rejects with `BKTException` when something goes wrong.
 
 <Tabs>
 <TabItem value="js" label="Javascript">
@@ -115,7 +121,8 @@ For this case, we recommend using the callback in the initialize method.
 // The callback will return without waiting until the fetching variation process finishes
 const timeout = 1000 // Default is 5 seconds
 
-const client = await BKTClient.initialize(config, user, timeout);
+await initializeBKTClient(config, user, timeout);
+const client = getBKTClient()
 ```
 
 </TabItem>
@@ -233,7 +240,7 @@ This method will send all pending analytics events to the Bucketeer server as so
 <TabItem value="js" label="Javascript">
 
 ```js showLineNumbers
-client.flush();
+await client.flush();
 ```
 
 </TabItem>
@@ -253,20 +260,20 @@ This feature will give you robust and granular control over what users can see o
 <TabItem value="js" label="Javascript">
 
 ```js showLineNumbers
-const attributes = new Map([
-  ['app_version', '1.0.0'],
-  ['os_version', '11.0.0'],
-  ['device_model', 'pixel-5'],
-  ['language', 'english'],
-  ['genre', 'female']
-]);
-
-const user = {
-  id: 'USER_ID',
-  attributes: attributes
+const attributes = {
+  app_version: '1.0.0',
+  os_version: '11.0.0',
+  device_model: 'pixel-5',
+  language: 'english',
+  genre: 'female'
 };
 
-const client = BKTClient.initialize(config, user);
+const user = defineBKTUser({
+  id: 'USER_ID',
+  attributes: attributes
+});
+
+await initializeBKTClient(config, user);
 ```
 
 </TabItem>
@@ -280,15 +287,15 @@ This method will update all the current user attributes. This is useful in case 
 <TabItem value="js" label="Javascript">
 
 ```js showLineNumbers
-const attributes = new Map([
-  ['app_version', '1.0.0'],
-  ['os_version', '11.0.0'],
-  ['device_model', 'pixel-5'],
-  ['language', 'english'],
-  ['genre', 'female']
-]);
+const attributes = {
+  app_version: '1.0.0',
+  os_version: '11.0.0',
+  device_model: 'pixel-5',
+  language: 'english',
+  genre: 'female'
+}
 
-await client.updateUserAttributes(attributes);
+client.updateUserAttributes(attributes);
 ```
 
 </TabItem>
@@ -308,7 +315,7 @@ This method will return the current user configured in the SDK. This is useful w
 <TabItem value="js" label="Javascript">
 
 ```js showLineNumbers
-const user = await client.currentUser();
+const user = client.currentUser();
 ```
 
 </TabItem>
@@ -322,7 +329,7 @@ This method will return the evaluation details for a specific feature flag. This
 <TabItem value="js" label="Javascript">
 
 ```js showLineNumbers
-const evaluationDetails = await client.evaluationDetails("YOUR_FEATURE_FLAG_ID");
+const evaluationDetails = client.evaluationDetails("YOUR_FEATURE_FLAG_ID");
 ```
 
 :::note
