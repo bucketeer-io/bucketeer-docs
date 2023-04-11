@@ -60,7 +60,6 @@ const config = defineBKTConfig({
   apiEndpoint: 'YOUR_API_URL',
   featureTag: 'YOUR_FEATURE_TAG',
   appVersion: 'YOUR_APP_VERSION',
-  fetch: window.fetch // your fetch implementation
 });
 
 const user = defineBKTUser({
@@ -80,6 +79,7 @@ Depending on your use, you may want to change the optional configurations availa
 - **eventsMaxQueueSize** (Default is 50 events)
 - **storageKeyPrefix** (Default is empty) 
 - **userAgent** (Default is `window.navigator.userAgent`)
+- **fetch** (Default is `window.fetch`)
 
 :::
 
