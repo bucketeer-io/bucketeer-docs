@@ -21,7 +21,7 @@ If we don't support the language you wish to use, don't hesitate to [contact us]
 
 - [Android](/sdk/client-side/android)
 - [iOS](/sdk/client-side/ios)
-- [Javascript](/sdk/client-side/javascript)
+- [JavaScript](/sdk/client-side/javascript)
 - [Flutter](/sdk/client-side/flutter)
 
 ### Server-side
