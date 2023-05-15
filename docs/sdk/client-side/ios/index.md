@@ -20,7 +20,7 @@ Before starting, ensure that you follow the [Getting started](/) guide.
 
 ### Implementing dependency
 
-Implement the dependency in your Podfile file. Please refer to the [SDK releases page](https://github.com/bucketeer-io/android-client-sdk/releases) to find the latest version.
+Implement the dependency in your Podfile file. Please refer to the [SDK releases page](https://github.com/bucketeer-io/ios-client-sdk/releases) to find the latest version.
 
 <Tabs>
 <TabItem value="swift" label="Swift">
@@ -58,13 +58,13 @@ Configure the SDK config and user configuration.
 <TabItem value="swift" label="Swift">
 
 ```swift showLineNumbers
-let config = BKTConfig(
+let config = try! BKTConfig(
   apiKey: "YOUR_API_KEY",
-  apiURL: "YOUR_API_URL",
-  featureTag: "YOUR_FEATURE_TAG"
+  apiEndpoint: "YOUR_API_ENDPOINT",
+  featureTag: "ios",
+  appVersion: bundle.infoDictionary?["CFBundleShortVersionString"] as! String
 )
-
-let user = BKTUser(id: "USER_ID")
+let user = try !BKTUser(id: "USER_ID")
 ```
 
 </TabItem>
@@ -74,9 +74,9 @@ let user = BKTUser(id: "USER_ID")
 
 Depending on your use, you may want to change the optional configurations available in the **BKTConfig**.
 
-- **pollingInterval** (Minimum 5 minutes. Default is 10 minutes)
+- **pollingInterval** (Minimum 60 seconds. Default is 10 minutes)
 - **backgroundPollingInterval** (Minimum 20 minutes. Default is 1 hour)
-- **eventsFlushInterval** (Default is 30 seconds)
+- **eventsFlushInterval** (Minimum 60 seconds. Default is 60 seconds)
 - **eventsMaxQueueSize** (Default is 50 events)
 
 :::
@@ -95,13 +95,11 @@ Initialize the client by passing the configurations in the previous step.
 <TabItem value="swift" label="Swift">
 
 ```swift showLineNumbers
-BKTClient.initialize(config: config, user: user)
+BKTClient.initialize(config: config, user: user, completion: nil)
 ```
 
 </TabItem>
 </Tabs>
-
-:::
 
 :::note
 
@@ -118,22 +116,25 @@ For this case, we recommend using the callback in the initialize method.
 
 ```swift showLineNumbers
 // The callback will return without waiting until the fetching variation process finishes
-let timeout = 1000 // Default is 5 seconds
+let timeout = 2000 // Default is 5 seconds
 
-BKTClient.initialize(config: config, user: user, completion: { (result) -> () in
-  let client = BKTClient.get()!
-  guard case .success = result else {
-    // The code to run when the feature is off
-    return
-  }
-
-  let showNewFeature = client.boolVariation(featureID: "YOUR_FEATURE_FLAG_ID", defaultValue: false)
-  if (showNewFeature) {
-      // The Application code to show the new feature
-  } else {
-      // The code to run when the feature is off
-  }
-}, timeout: timeout)
+BKTClient.initialize(
+  config: config,
+  user: user,
+  timeoutMillis: timeout
+) { error in
+    guard error == nil else {
+      // The code to run when there is an error while initializing the SDK
+      return
+    }
+    let client = BKTClient.shared
+    let showNewFeature = client.boolVariation(featureId: "YOUR_FEATURE_FLAG_ID", defaultValue: false)
+    if (showNewFeature) {
+        // The Application code to show the new feature
+    } else {
+        // The code to run when the feature is off
+    }
+}
 ```
 
 </TabItem>
@@ -150,7 +151,7 @@ To check which variation a specific user will receive, you can use the client li
 <TabItem value="swift" label="Swift">
 
 ```swift showLineNumbers
-let client = BKTClient.get()!
+let client = BKTClient.shared
 let showNewFeature = client.boolVariation(featureID: "YOUR_FEATURE_FLAG_ID", defaultValue: false)
 if (showNewFeature) {
     // The Application code to show the new feature
@@ -184,7 +185,7 @@ func intVariation(featureId: String, defaultValue: Int) -> Int
 
 func doubleVariation(featureId: String, defaultValue: Double) -> Double
 
-func jsonVariation(featureId: String, defaultValue: Any?) -> Any?
+func jsonVariation(featureId: String, defaultValue: [String: AnyHashable]) -> [String: AnyHashable]
 ```
 
 </TabItem>
@@ -196,29 +197,29 @@ Sometimes depending on your use, you may need to ensure the variations in the SD
 
 The fetch method uses the following parameters.
 
-- **Callback**
-- **Timeout** (The callback will return without waiting until the fetching variation process finishes. The default is 5 seconds)
+- **Completion callback**
+- **Timeout** (The callback will return without waiting until the fetching variation process finishes. The default is 30 seconds)
 
 <Tabs>
 <TabItem value="swift" label="Swift">
 
 ```swift showLineNumbers
 // The callback will return without waiting until the fetching variation process finishes
-let timeout = 1000 // Default is 5 seconds
-let client = BKTClient.get()!
+let timeout = 2000 // Default is 30 seconds
+let client = BKTClient.shared
 
-client.fetchEvaluations(completion: { (result) -> () in
-  guard case .success = result else {
-    // The code to run when the feature is off
+client.fetchEvaluations(timeoutMillis: timeout) { error in
+  guard error == nil else {
+    // The code to run when there is an error while initializing the SDK
     return
   }
-  let showNewFeature = client.boolVariation(featureID: "YOUR_FEATURE_FLAG_ID", defaultValue: false)
+  let showNewFeature = client.boolVariation(featureId: "YOUR_FEATURE_FLAG_ID", defaultValue: false)
   if (showNewFeature) {
       // The Application code to show the new feature
   } else {
       // The code to run when the feature is off
   }
-}, timeout: timeout)
+}
 ```
 
 </TabItem>
@@ -237,13 +238,28 @@ You don't need to call this method manually in regular use because the SDK is po
 The Bucketeer SDK supports FCM ([Firebase Cloud Messaging](https://firebase.google.com/docs/cloud-messaging)).
 Every time you change some feature flag, Bucketeer will send notifications using the FCM API to notify the client so that you can update the variations in real-time.
 
-Assuming you already have the FCM implementation in your application.
+Assuming you already have the FCM implementation in your application, the following example shows how to handle silent push notifications.
 
 <Tabs>
 <TabItem value="swift" label="Swift">
 
 ```swift showLineNumbers
-// TODO
+// Receiving notification in background
+func application(
+  _ application: UIApplication,
+  didReceiveRemoteNotification userInfo: [AnyHashable: Any]
+) async -> UIBackgroundFetchResult {
+  if userInfo["bucketeer_feature_flag_updated"] == "true" {
+    let client = BKTClient.shared
+    let showNewFeature = client.boolVariation(featureId: "YOUR_FEATURE_FLAG_ID", defaultValue: false)
+    if (showNewFeature) {
+        // The Application code to show the new feature
+    } else {
+        // The code to run when the feature is off
+    }
+  }
+  return UIBackgroundFetchResult.newData
+}
 ```
 
 :::note
@@ -262,6 +278,8 @@ Assuming you already have the FCM implementation in your application.
 This method lets you save user actions in your application as events. You can connect these events to metrics in the experiments console UI.
 
 In addition, you can pass a double value to the goal event. These values will sum and show as <br />`Value total` on the experiments console UI. This is useful if you have a goal event for tracking how much a user spent on your application buying items, etc.
+
+The default track value is 0.0.
 
 <Tabs>
 <TabItem value="swift" label="Swift">
@@ -304,14 +322,14 @@ This feature will give you robust and granular control over what users can see o
 let attributes = [
   "app_version": "1.0.0",
   "os_version": "11.0.0",
-  "device_model": "pixel-5"
+  "device_model": "iphone-12",
   "language": "english",
-  "genre": "female",
+  "genre": "female"
 ]
-
-let user = BKTUser(id: "USER_ID", attributes)
+let user = try! BKTUser(id: "USER_ID", attributes: attributes)
 
 BKTClient.initialize(config: config, user: user)
+let client = BKTClient.shared
 ```
 
 </TabItem>
@@ -328,13 +346,13 @@ This method will update all the current user attributes. This is useful in case 
 let attributes = [
   "app_version": "1.0.1",
   "os_version": "11.0.0",
-  "device_model": "pixel-5"
+  "device_model": "iphone-12",
   "language": "english",
   "genre": "female",
-  "country": "japan",
+  "country": "japan"
 ]
 
-client.updateUserAttributes(attributes)
+client.updateUserAttributes(attributes: attributes)
 ```
 
 </TabItem>
@@ -362,20 +380,54 @@ let user = client.currentUser()
 
 ### Getting evaluation details
 
-This method will return the evaluation details for a specific feature flag. This is useful if you need to know the variation reason or send this data elsewhere.
+This method will return the evaluation details for a specific feature flag. This is useful if you need to know the variation reason or send this data to your own analysis database.
+It will return null if the feature flag is missing in the SDK.
 
 <Tabs>
 <TabItem value="swift" label="Swift">
 
 ```swift showLineNumbers
-let evaluationDetails = client.evaluationDetails("YOUR_FEATURE_FLAG_ID")
+let evaluationDetails = client.evaluationDetails(featureId: "YOUR_FEATURE_FLAG_ID")
 ```
 
-:::note
+:::caution
 
-This method will return nil if the feature flag is missing in the SDK.
+Do not call this method without calling the [Evaluating user method](#evaluating-user). The Evaluating user method must always be called because it generates analytics events that will be sent to the server.
 
 :::
+
+</TabItem>
+</Tabs>
+
+### Listening to evaluation updates
+
+BKTClient can notify when the evaluation is updated.
+The listener can detect both automatic polling and manual fetching.
+
+<Tabs>
+<TabItem value="swift" label="Swift">
+
+```swift showLineNumbers
+class EvaluationUpdateListenerImpl: EvaluationUpdateListener {
+  func onUpdate() {
+    let client = BKTClient.shared
+    let showNewFeature = client.boolVariation(featureId: "YOUR_FEATURE_FLAG_ID", defaultValue: false)
+    if (showNewFeature) {
+      // The Application code to show the new feature
+    } else {
+      // The code to run when the feature is off
+    }
+  }
+}
+// Returned value is used when you want to remove listener
+let key = client.addEvaluationUpdateListener(listener: listener)
+
+// Remove a listener associated with the key
+client.removeEvaluationUpdateListener(key)
+
+// Remove all listeners
+client.clearEvaluationUpdateListeners()
+```
 
 </TabItem>
 </Tabs>
