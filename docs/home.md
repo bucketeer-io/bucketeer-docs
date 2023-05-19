@@ -7,9 +7,9 @@ description: Describes what the Bucketeer is and its solution. In addition, the 
 tags: ['home', 'guide', 'presentation', 'overview', 'contact']
 ---
 
-# Welcome to Bucketeer docs
+## Welcome to Bucketeer docs
 
-This is the documentation site for the Bucketeer platform, integrations, and SDKs. 
+This is the documentation site for the Bucketeer platform, integrations, and SDKs.
 
 ## What is Bucketeer
 
@@ -29,7 +29,8 @@ If you don't find your answer here, feel free to [contact us](https://app.slack.
 
 :::info
 
-Due to the renewal of the admin console, we are also renewing the documentation website.<br />
+Due to the renewal of the admin console, we are also renewing the documentation website.
+
 We will update it weekly. Stay tuned!
 
 :::
