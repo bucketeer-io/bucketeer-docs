@@ -34,6 +34,43 @@ const sidebars = {
     },
     {
       type: 'category',
+      label: 'Using Feature Flags',
+      link: {
+        type: 'doc',
+        id: 'using-feature-flags/index'
+      },
+      items: [
+        {
+          type: 'category',
+          label: 'Creating feature flags',
+          items: [
+            'using-feature-flags/creating-feature-flags/create-feature-flag',
+            'using-feature-flags/creating-feature-flags/targeting',
+            'using-feature-flags/creating-feature-flags/manage-variations',
+            'using-feature-flags/creating-feature-flags/auto-operation',
+            'using-feature-flags/creating-feature-flags/evaluate-results',
+            'using-feature-flags/creating-feature-flags/other-flag-settings'
+          ],
+        },
+        'using-feature-flags/api-keys',
+        {
+          type: 'category',
+          label: 'Testing with flags',
+          link: {
+            type: 'doc',
+            id: 'using-feature-flags/testing-with-flags/index'
+          },
+          items: [
+            'using-feature-flags/testing-with-flags/goals',
+            'using-feature-flags/testing-with-flags/experiments',
+            'using-feature-flags/testing-with-flags/using-experiments',
+          ],
+        },
+        'using-feature-flags/integration'
+      ],
+    },
+    {
+      type: 'category',
       label: 'SDKs',
       link: {
         type: 'doc',
