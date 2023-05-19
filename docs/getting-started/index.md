@@ -15,4 +15,5 @@ Sumirizes the main steps to create an account and start using Bucketeers. In thi
 * Bucketeer dashboard (presents the main tabs from the dashboard)
 * Choose an SDK (lists the SDKs, explain each one briefily and link to the SDK documentation.)
 * Integrate Bucketeers
+* Feature Flags
 
