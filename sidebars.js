@@ -15,7 +15,22 @@
 
 const sidebars = {
   docs: [
-    'getting-started',
+    'home',
+    {
+      type: 'category',
+      label: 'Getting Started',
+      link: {
+        type: 'doc',
+        id: 'getting-started/index'
+      },
+      items: [
+        'getting-started/create-bucketeer-account',
+        'getting-started/get-your-credentials',
+        'getting-started/bucketeer-dashboard',
+        'getting-started/choose-sdk',
+        'getting-started/integrate-bucketeers'
+      ],
+    },
     {
       type: 'category',
       label: 'SDKs',
