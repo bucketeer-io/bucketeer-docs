@@ -3,8 +3,8 @@ id: home
 title: Bucketeer Docs
 sidebar_position: 1
 slug: /
-description: 
-tags: []
+description: Describes what the Bucketeer is and its solution. In addition, the page also provides an overview of the main sections covered in the documentation.
+tags: ['home', 'guide', 'presentation', 'overview', 'contact']
 ---
 
 # Welcome to Bucketeer docs

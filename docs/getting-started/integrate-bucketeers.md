@@ -5,3 +5,5 @@ slug: /getting-started/integrate-bucketeers
 description: Describes the steps to integrate the user application with Bucketeer.
 tags: ['guide','integration','sdk']
 ---
+
+Describes the steps to integrate the user application with Bucketeer.

@@ -5,3 +5,5 @@ slug: /getting-started/get-your-credentials
 description: This page guides the user on getting credentials to use Bucketeer's services.
 tags: ['guide', 'credential', 'access']
 ---
+
+This page guides the user on getting credentials to use Bucketeer's services.
