@@ -1,4 +1,9 @@
-# UI elements and interaction
+---
+title: UI elements and interaction
+# sidebar_position: 
+slug: /documentation-style-guide/ui
+tags: ['contribuition','documentation']
+---
 
 Instead of focusing on the widgets and gestures, it is better to state instructions in terms of what the user should accomplish. This approach helps the user understand the purpose of the instruction and future-proof procedures by avoiding reference to UI elements.
 

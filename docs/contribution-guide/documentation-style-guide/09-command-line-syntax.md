@@ -1,4 +1,10 @@
-# Command-line syntax
+---
+title: Command-line syntax
+# sidebar_position: 
+slug: /documentation-style-guide/command-line-syntax
+tags: ['contribuition','documentation']
+---
+
 
 On this section, you will understand how to document command-line commands and their respective arguments.
 

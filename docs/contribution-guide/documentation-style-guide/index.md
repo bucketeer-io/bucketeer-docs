@@ -2,7 +2,7 @@
 title: Documentation Style Guide
 slug: /contribution-guide/documentation-style-guide
 description: This page provides the content style guide for contributing with documentation. 
-tags: ['contribuition']
+tags: ['contribuition', 'documentation']
 ---
 
 # Welcome to the Bucketeer content style guide

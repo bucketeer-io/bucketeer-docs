@@ -105,7 +105,26 @@ const sidebars = {
         id: 'contribution-guide/index',
       },
       items: [
-        'contribution-guide/contributing'
+        'contribution-guide/contributing',
+        {
+          type: 'category',
+          label: 'Documentation style guide',
+          link: {
+            type: 'doc',
+            id: 'contribution-guide/documentation-style-guide/index',
+          },
+          items: [
+            'contribution-guide/documentation-style-guide/about-this-guide',
+            'contribution-guide/documentation-style-guide/voice-and-tone',
+            'contribution-guide/documentation-style-guide/formatting-and-organization',
+            'contribution-guide/documentation-style-guide/language-and-grammar',
+            'contribution-guide/documentation-style-guide/punctuation',
+            'contribution-guide/documentation-style-guide/ui-elements-and-interaction',
+            'contribution-guide/documentation-style-guide/links',
+            'contribution-guide/documentation-style-guide/code-elements',
+            'contribution-guide/documentation-style-guide/command-line-syntax',
+          ],
+        }
       ],
     },
   ],

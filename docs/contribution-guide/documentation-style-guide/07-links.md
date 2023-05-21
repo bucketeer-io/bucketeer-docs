@@ -1,4 +1,9 @@
-# Links
+---
+title: Links
+# sidebar_position: 
+slug: /documentation-style-guide/links
+tags: ['contribuition','documentation']
+---
 
 When writing link text, it's best to use brief yet descriptive phrases that offer an idea of the content you're linking to.
 

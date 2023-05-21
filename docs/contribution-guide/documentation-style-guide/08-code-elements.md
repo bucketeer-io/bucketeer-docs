@@ -1,4 +1,10 @@
-# Code elements
+---
+title: Code elements
+# sidebar_position: 
+slug: /documentation-style-guide/code-elements
+tags: ['contribuition','documentation']
+---
+
 
 In this section, you will find guidelines for using standard formatting codes correctly. Follow these recommendations and avoid common errors and make your content assertive.
 

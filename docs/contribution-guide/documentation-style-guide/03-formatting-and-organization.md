@@ -1,4 +1,10 @@
-# Formatting and Organization
+---
+title: Formatting and Organization
+# sidebar_position: 
+slug: /documentation-style-guide/formatting-and-organization
+tags: ['contribuition','documentation']
+---
+
 
 This section covers a range of elements that contribute to your content's overall structure and presentation. By following these guidelines, you'll ensure your content is well-organized, visually appealing, and consistent.
 

@@ -19,11 +19,11 @@ Describes what is Buckteer and what you can do with it.
 
 Describe the use cases where Bucketeer can be used.
 
-## What is coververed in each documentation section?
+## What is covered in each documentation section?
 
 Link all sections (using buttons) and provide a brief overview about each one.
 
-## Contact the Bucketeer Team
+## Contact the Bucketeer team
 
 If you don't find your answer here, feel free to [contact us](https://app.slack.com/client/T08PSQ7BQ/C043026BME1).
 

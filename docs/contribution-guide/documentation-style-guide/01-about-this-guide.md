@@ -1,4 +1,9 @@
-# About this Content Style Guide
+---
+title: About this Content Style Guide
+# sidebar_position: 
+slug: /documentation-style-guide/about-this-guide
+tags: ['contribuition','documentation']
+---
 
 This content style guide provides guidelines and standards for creating and maintaining consistent and cohesive Bucketeer developer content.
 

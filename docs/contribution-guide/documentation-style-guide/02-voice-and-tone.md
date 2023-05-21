@@ -1,4 +1,9 @@
-# Voice and Tone
+---
+title: Voice and Tone
+# sidebar_position: 
+slug: /documentation-style-guide/voice-and-tone
+tags: ['contribuition','documentation']
+---
 
 It is essential to be aware of the following aspects of voice and tone:
 

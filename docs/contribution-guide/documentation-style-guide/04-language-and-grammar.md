@@ -1,4 +1,10 @@
-# Language and Grammar
+---
+title: Language and Grammar
+# sidebar_position: 
+slug: /documentation-style-guide/language-and-grammar
+tags: ['contribuition','documentation']
+---
+
 
 Within this section on language and grammar, you'll discover the primary information and guidelines to navigate the complexities of grammar. From abbreviations and active voice to sentence structure and contractions, we've compiled a set of standards to make your writing clear, concise, and easily understandable.
 
