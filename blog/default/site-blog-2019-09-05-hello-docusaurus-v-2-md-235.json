@@ -1,0 +1,63 @@
+{
+  "permalink": "/blog/welcome-docusaurus-v2",
+  "source": "@site/blog/2019-09-05-hello-docusaurus-v2.md",
+  "title": "Welcome Docusaurus v2",
+  "description": "This is my first post on Docusaurus 2.",
+  "date": "2019-09-05T00:00:00.000Z",
+  "formattedDate": "September 5, 2019",
+  "tags": [
+    {
+      "label": "hello",
+      "permalink": "/blog/tags/hello"
+    },
+    {
+      "label": "docusaurus-v2",
+      "permalink": "/blog/tags/docusaurus-v-2"
+    }
+  ],
+  "readingTime": 0.135,
+  "hasTruncateMarker": true,
+  "authors": [
+    {
+      "name": "Joel Marcey",
+      "title": "Co-creator of Docusaurus 1",
+      "url": "https://github.com/JoelMarcey",
+      "image_url": "https://github.com/JoelMarcey.png",
+      "imageURL": "https://github.com/JoelMarcey.png"
+    },
+    {
+      "name": "Sébastien Lorber",
+      "title": "Docusaurus maintainer",
+      "url": "https://sebastienlorber.com",
+      "image_url": "https://github.com/slorber.png",
+      "imageURL": "https://github.com/slorber.png"
+    }
+  ],
+  "frontMatter": {
+    "title": "Welcome Docusaurus v2",
+    "description": "This is my first post on Docusaurus 2.",
+    "slug": "welcome-docusaurus-v2",
+    "authors": [
+      {
+        "name": "Joel Marcey",
+        "title": "Co-creator of Docusaurus 1",
+        "url": "https://github.com/JoelMarcey",
+        "image_url": "https://github.com/JoelMarcey.png",
+        "imageURL": "https://github.com/JoelMarcey.png"
+      },
+      {
+        "name": "Sébastien Lorber",
+        "title": "Docusaurus maintainer",
+        "url": "https://sebastienlorber.com",
+        "image_url": "https://github.com/slorber.png",
+        "imageURL": "https://github.com/slorber.png"
+      }
+    ],
+    "tags": [
+      "hello",
+      "docusaurus-v2"
+    ],
+    "image": "https://i.imgur.com/mErPwqL.png",
+    "hide_table_of_contents": false
+  }
+}
