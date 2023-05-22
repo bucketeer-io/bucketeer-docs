@@ -10,7 +10,7 @@ This category contains topics explaining how to configure Bucketeer's iOS SDK.
 
 :::info Compatibility
 
-The Bucketeer iOS SDK is compatible with iOS versions 10.0 and higher.
+The Bucketeer iOS SDK is compatible with iOS versions 11.0 and higher.
 
 :::
 
