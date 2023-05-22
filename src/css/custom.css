@@ -297,6 +297,15 @@ code {
 
 @media (min-width: 991px) {
 
+  .navbar {
+    opacity: 0;
+    transition: opacity 1s ease;
+  }
+
+  .blog-wrapper .navbar {
+    opacity: 1;
+  }
+
   .home-navbar {
     position: fixed !important;
     top: 0;

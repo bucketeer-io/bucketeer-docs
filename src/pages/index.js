@@ -6,18 +6,18 @@ import Intro from '../theme/sections/intro/intro';
 import Features from '../theme/sections/features/features';
 
 
-require('/static/css/aos.css');
-require('/static/css/custom.css');
 
 import jquery from 'jquery';
 if(typeof window !== 'undefined'){
 	window.$ = window.jQuery=jquery;
 }
 import AOS from 'aos';
-import "aos/dist/aos.css";
+// import "aos/dist/aos.css";
 
 import 'font-awesome/css/font-awesome.min.css'
 require('bootstrap/dist/css/bootstrap.css');
+require('/static/css/aos.css');
+require('/static/css/custom.css');
 
 export default function Home() {
 
@@ -50,12 +50,13 @@ export default function Home() {
 			}, 100);
 		}
 
-		$(".navbar").addClass("home-navbar");
+		// $(".navbar").addClass("home-navbar");
 		setTimeout(function(){
 			$(".main-wrapper").addClass("main-wrapper-home");
 		}, 0);
 
 		checkhome();
+		$(".navbar").addClass("internal-navbar");
 
 		AOS.init({
 			duration: 1200,

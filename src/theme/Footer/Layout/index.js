@@ -1,7 +1,7 @@
 import React from 'react';
 import Layout from '@theme-original/Footer/Layout';
-import Social from '/src/theme/sections/Social/social';
-import Footer from '/src/theme/sections/Footer/footer';
+import Social from './../../../theme/sections/Social/social';
+import Footer from './../../../theme/sections/Footer/footer';
 
 // <Layout {...props} />
 
