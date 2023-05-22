@@ -16,7 +16,7 @@ The Bucketeer iOS SDK is compatible with iOS versions 10.0 and higher.
 
 ## Getting started
 
-Before starting, ensure that you follow the [Getting started](/) guide.
+Before starting, ensure that you follow the [Getting Started](/) guide.
 
 ### Implementing dependency
 
@@ -62,9 +62,9 @@ let config = try! BKTConfig(
   apiKey: "YOUR_API_KEY",
   apiEndpoint: "YOUR_API_ENDPOINT",
   featureTag: "ios",
-  appVersion: bundle.infoDictionary?["CFBundleShortVersionString"] as! String
+  appVersion: Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
 )
-let user = try !BKTUser(id: "USER_ID")
+let user = try! BKTUser(id: "USER_ID")
 ```
 
 </TabItem>
@@ -116,7 +116,7 @@ For this case, we recommend using the callback in the initialize method.
 
 ```swift showLineNumbers
 // The callback will return without waiting until the fetching variation process finishes
-let timeout = 2000 // Default is 5 seconds
+let timeout: Int64 = 2000 // Default is 5 seconds
 
 BKTClient.initialize(
   config: config,
@@ -152,7 +152,7 @@ To check which variation a specific user will receive, you can use the client li
 
 ```swift showLineNumbers
 let client = BKTClient.shared
-let showNewFeature = client.boolVariation(featureID: "YOUR_FEATURE_FLAG_ID", defaultValue: false)
+let showNewFeature = client.boolVariation(featureId: "YOUR_FEATURE_FLAG_ID", defaultValue: false)
 if (showNewFeature) {
     // The Application code to show the new feature
 } else {
@@ -205,7 +205,7 @@ The fetch method uses the following parameters.
 
 ```swift showLineNumbers
 // The callback will return without waiting until the fetching variation process finishes
-let timeout = 2000 // Default is 30 seconds
+let timeout: Int64 = 2000 // Default is 30 seconds
 let client = BKTClient.shared
 
 client.fetchEvaluations(timeoutMillis: timeout) { error in
@@ -249,7 +249,8 @@ func application(
   _ application: UIApplication,
   didReceiveRemoteNotification userInfo: [AnyHashable: Any]
 ) async -> UIBackgroundFetchResult {
-  if userInfo["bucketeer_feature_flag_updated"] == "true" {
+  let flag = userInfo["bucketeer_feature_flag_updated"] as? String
+  if flag == "true" {
     let client = BKTClient.shared
     let showNewFeature = client.boolVariation(featureId: "YOUR_FEATURE_FLAG_ID", defaultValue: false)
     if (showNewFeature) {
@@ -285,7 +286,7 @@ The default track value is 0.0.
 <TabItem value="swift" label="Swift">
 
 ```swift showLineNumbers
-client.track("YOUR_GOAL_ID", 10.50)
+client.track(goalId: "YOUR_GOAL_ID", value: 10.50)
 ```
 
 </TabItem>
@@ -419,11 +420,12 @@ class EvaluationUpdateListenerImpl: EvaluationUpdateListener {
     }
   }
 }
-// Returned value is used when you want to remove listener
+let listener = EvaluationUpdateListenerImpl()
+// The returned key value is used to remove the listener
 let key = client.addEvaluationUpdateListener(listener: listener)
 
 // Remove a listener associated with the key
-client.removeEvaluationUpdateListener(key)
+client.removeEvaluationUpdateListener(key: key)
 
 // Remove all listeners
 client.clearEvaluationUpdateListeners()
