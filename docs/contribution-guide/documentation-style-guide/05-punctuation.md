@@ -55,7 +55,7 @@ To set apart an aside, use an em dash (—) with no spaces on either side. Make 
 
 Be careful when using with quotation marks.
 
--Question marks go inside quotation marks if they’re part of the quote. Like periods, they go outside parentheses when they are associated with a main sentence, and inside parentheses when the content related stands alone.
+Question marks go inside quotation marks if they’re part of the quote. Like periods, they go outside parentheses when they are associated with a main sentence, and inside parentheses when the content related stands alone.
 
 In this example, the question mark is part of the quote, so place it inside the quotation marks: "Are you familiar with the CSS framework Bootstrap?" The instructor asked.
 
