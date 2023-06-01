@@ -64,6 +64,40 @@ const config = {
         },
         items: [
           {
+            href: '/',
+            label: 'Home',
+            position: 'left',
+            'aria-label': 'Bucketeer - Feature Flag and A/B Testing Managment platform',
+          },
+          {
+            to: '/',
+            label: 'Getting Started',
+            position: 'left',
+            'aria-label': 'Bucketeer - Getting Started',
+            activeBaseRegex: "/$",
+          },
+          {
+            to: 'sdk/client-side/android',
+            label: 'Client-side',
+            position: 'left',
+            'aria-label': 'Bucketeer - Client-side',
+            activeBasePath: "sdk/client-side",
+          },
+          {
+            to: 'sdk/server-side/go',
+            label: 'Server-side',
+            position: 'left',
+            'aria-label': 'Bucketeer - Server-side',
+            activeBasePath: "sdk/server-side",
+          },
+          {
+            to: 'contribution-guide/contributing',
+            label: 'Contributing',
+            position: 'left',
+            'aria-label': 'Bucketeer - Contributing',
+            activeBasePath: "contribution-guide/contributing",
+          },
+          {
             type: 'localeDropdown',
             position: 'right',
           },
@@ -91,8 +125,10 @@ const config = {
         ],
       },
       prism: {
-        // theme: darkCodeTheme,
-        theme: lightCodeTheme,
+        theme: darkCodeTheme,
+        // theme: lightCodeTheme,
+        // theme: require("prism-react-renderer/themes/vsDark"),
+        // theme: require("prism-react-renderer/themes/shadesOfPurple"),
         additionalLanguages: [
           'groovy',
           'kotlin',
