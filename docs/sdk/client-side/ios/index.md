@@ -52,19 +52,26 @@ import Bucketeer
 
 ### Configuring client
 
-Configure the SDK config and user configuration.
+Configure the SDK config and user configuration.<br />
+All the settings in the example below are required.
 
 <Tabs>
 <TabItem value="swift" label="Swift">
 
 ```swift showLineNumbers
-let config = try! BKTConfig(
-  apiKey: "YOUR_API_KEY",
-  apiEndpoint: "YOUR_API_ENDPOINT",
-  featureTag: "ios",
-  appVersion: Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
-)
-let user = try! BKTUser(id: "USER_ID")
+do {
+  // SDK configuration
+  let config = try BKTConfig(
+    apiKey: "YOUR_API_KEY",
+    apiEndpoint: "YOUR_API_ENDPOINT",
+    featureTag: "ios",
+    appVersion: Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
+  )
+  // User configuration
+  let user = try BKTUser(id: "USER_ID")
+} catch {
+  // Error handling
+}
 ```
 
 </TabItem>
@@ -95,7 +102,7 @@ Initialize the client by passing the configurations in the previous step.
 <TabItem value="swift" label="Swift">
 
 ```swift showLineNumbers
-BKTClient.initialize(config: config, user: user, completion: nil)
+BKTClient.initialize(config: config, user: user)
 ```
 
 </TabItem>
@@ -320,17 +327,29 @@ This feature will give you robust and granular control over what users can see o
 <TabItem value="swift" label="Swift">
 
 ```swift showLineNumbers
-let attributes = [
-  "app_version": "1.0.0",
-  "os_version": "11.0.0",
-  "device_model": "iphone-12",
-  "language": "english",
-  "genre": "female"
-]
-let user = try! BKTUser(id: "USER_ID", attributes: attributes)
+do {
+  // SDK configuration
+  let config = try BKTConfig(
+    apiKey: "YOUR_API_KEY",
+    apiEndpoint: "YOUR_API_ENDPOINT",
+    featureTag: "ios",
+    appVersion: Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
+  )
+  // User attributes configuration
+  let attributes = [
+    "app_version": "1.0.0",
+    "os_version": "11.0.0",
+    "device_model": "iphone-12",
+    "language": "english",
+    "genre": "female"
+  ]
 
-BKTClient.initialize(config: config, user: user)
-let client = BKTClient.shared
+  let user = try BKTUser(id: "USER_ID", attributes: attributes)
+  BKTClient.initialize(config: config, user: user)
+  let client = BKTClient.shared
+} catch {
+  // Error handling
+}
 ```
 
 </TabItem>
