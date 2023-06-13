@@ -32,21 +32,21 @@ As a open-souce project, you also can host your own Buckteers version and create
 
 :::
 
-## Creating a normal account
+## Creating an Enviroment account
 
-To add a new member to a Buckteer organization, an Admin needs to create a normal account. 
+To add a new member to a Buckteer organization, an Admin needs to create an Enviroment account.
 
 :::note
 
-Only Admins are capable of creating normal accounts.
+Only Admins are capable of creating Enviroment accounts.
 
 :::
 
-As an Admin, you can follow the steps below to crate a normal account for a new user:
+As an Admin, you can follow the steps below to crate an Enviroment account for a new user:
 
 1. Access the [Bucketeer Dashboard](https://dev.bucketeer.jp/) using your Admin account credentials.
 2. Select the desired project environment from the available options.
-3. Navigate to the Accounts page within the Dashboard.
+3. Navigate to the **Accounts** page within the Dashboard.
 4. Click on the **+ Add** button to add a new account.
 
 ![Bucketeer account page](./img/create-bucketeer-account-1.png)
