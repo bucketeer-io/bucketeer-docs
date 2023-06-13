@@ -28,8 +28,7 @@ const sidebars = {
         'getting-started/get-your-credentials',
         'getting-started/bucketeer-dashboard',
         'getting-started/choose-sdk',
-        'getting-started/integrate-bucketeers',
-        'getting-started/feature-flags'
+        'getting-started/integrate-bucketeers'
       ],
     },
     {
