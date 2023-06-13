@@ -25,10 +25,10 @@ const sidebars = {
       },
       items: [
         'getting-started/create-bucketeer-account',
-        'getting-started/get-your-credentials',
         'getting-started/bucketeer-dashboard',
         'getting-started/choose-sdk',
-        'getting-started/integrate-bucketeers'
+        'getting-started/integrate-bucketeers',
+        'getting-started/bucketeer-vocabulary'
       ],
     },
     {
