@@ -1,5 +1,5 @@
 ---
-title: Create a Bucketeer acccount
+title: Create a Bucketeer account
 # sidebar_position:
 slug: /getting-started/create-bucketeer-account
 description: This page guides the user on how to create the Bucketeer account.
@@ -14,11 +14,11 @@ Buckteers is an open-source project that allows you to manage and track data rel
 
 There are two types of accounts available in Buckteers, each with different access levels:
 
-- **Admin account**: it provides full access and control over all existing projects. Users with admin accounts can access all existing environments and manage other users accounts.
+- **Admin account**: it provides full access and control over all existing projects. Users with admin accounts can access all existing environments and manage other users' accounts.
 
-- **Enviroment account**: it is associated with a specific environment on the platform. Users with Enviroment accounts can only access tags, reports, and data related to that particular environment.
+- **Environment account**: it is associated with a specific environment on the platform. Users with Environment accounts can only access tags, reports, and data related to that particular environment.
 
-### Enviroment account roles
+### Environment account roles
 
 In addition to being limited to a specific environment, Environment accounts also have predefined roles assigned during the account creation process. The defined role will change the account access level. The available roles for Environment accounts are described below:
 
@@ -28,23 +28,23 @@ In addition to being limited to a specific environment, Environment accounts als
 
 :::note
 
-If you are using the Bucketeer system, to create an Admin account you need to get in touch with the Bucketeer team.
+If you are using the Bucketeer system, to create an Admin account, you need to contact the Bucketeer team.
 
-As a open-souce project, you also can host your own Buckteers version and create an Admin account for your.
+As an open-source project, you can host your Buckteers version and create an Admin account.
 
 :::
 
-## Creating an Enviroment account
+## Creating an Environment account
 
-To add a new member to a Buckteer organization, an Admin needs to create an Enviroment account.
+To add a new member to a Buckteer organization, an Admin needs to create an Environment account.
 
 :::note
 
-Only Admins are capable of creating Enviroment accounts.
+Only Admins are capable of creating Environment accounts.
 
 :::
 
-As an Admin, you can follow the steps below to crate an Enviroment account for a new user:
+As an Admin, you can follow the steps below to create an Environment account for a new user:
 
 1. Access the [Bucketeer Dashboard](https://dev.bucketeer.jp/) using your Admin account credentials.
 2. Select the desired project environment from the available options.
