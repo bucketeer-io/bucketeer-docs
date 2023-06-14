@@ -27,7 +27,7 @@ const sidebars = {
         'getting-started/create-bucketeer-account',
         'getting-started/bucketeer-dashboard',
         'getting-started/choose-sdk',
-        'getting-started/integrate-bucketeers',
+        'getting-started/integrate-bucketeer',
         'getting-started/bucketeer-vocabulary'
       ],
     },

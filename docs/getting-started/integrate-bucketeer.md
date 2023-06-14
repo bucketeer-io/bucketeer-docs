@@ -8,17 +8,17 @@ tags: ['guide','integration','sdk']
 
 Integrating Bucketeer with your application is a simple process that is the same across all SDKs. Bucketeer has multiple SDKs available, and you can refer to the [Choose an SDK](./choose-sdk.md) guide to determine which one best suits your needs. To integrate Bucketeer into your application, follow these steps:
 
-1. **Install the Bucketeer SDK**: Use your project's dependency manager to install the Bucketeer SDK in your application, allowing your application to access the Bucketeer SDK and its features.
+1. **Install the Bucketeer SDK**: Use your project's dependency manager to install the Bucketeer SDK in your application, allowing it to access the Bucketeer SDK and its features.
 
-2. **Import the Bucketeer Client**: In your application's code, import the Bucketeer client, the primary interface to interact with the Bucketeer SDK, and communicate with the Bucketeer service. This step and the previous one are covered in details on each SDK guide. Access the [SDKs](../sdk/) page to get more information.
+2. **Import the Bucketeer Client**: In your application's code, import the Bucketeer client, the primary interface to interact with the Bucketeer SDK, and communicate with the Bucketeer service. Each SDK guide covers this step and the previous one in detail. Access the [SDKs](../sdk/) page to get more information.
 
 3. **Configure the Bucketeer Client**: Provide the credentials for your environment to configure the Bucketeer client, including setting up the API key and specifying the endpoint URL. These credentials uniquely identify your project and environment and authorize your application to connect with Bucketeer. Check [API keys](../using-feature-flags/api-keys.md) to learn how to access your credentials.
 
-4. **Assign Feature Flag Variations**: Use the feature flag ID to associate specific flag variations with different users. Each feature flag has a ID, and by using it, you can control which variation of the flag a user will see in your application.
+4. **Assign Feature Flag Variations**: Use the feature flag ID to associate specific flag variations with different users. Each feature flag has an ID, and by using it, you can control which variation of the flag a user will see in your application.
 
 :::tip
 
-When configuring the SDK, on step 3, you must provide your `apiKey`, `apiURL`, and `featureTag`. To get this information, you need to create a feature flag. Therefore, we recommend you review the [Using Feature Flags](../using-feature-flags/) guides before using any SDK.
+When configuring the SDK, in step 3, you must provide your `apiKey`, `apiURL`, and `featureTag`. To get this information, you need to create a feature flag. Therefore, we recommend you review the [Using Feature Flags](../using-feature-flags/) guides before using any SDK.
 
 :::
 
@@ -39,6 +39,6 @@ Despite the significance and impact on performance and costs, using tags within 
 
 :::tip
 
-The Bucketeer team strongly reccomend the use of `featureTag` to optimize your operation.
+The Bucketeer team strongly recommends the use of `featureTag` to optimize your operation.
 
 :::
