@@ -6,7 +6,18 @@ description: Details each Bucketeer dashboard section, listing the available fun
 tags: ['guide', 'dashboard']
 ---
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+import CenteredImg from '@site/src/components/centered-img/CenteredImg';
+
 The Bucketeer dashboard provides all the necessary tools to manage users, projects, and feature flags. In addition, it offers other functionalities, such as creating and analyzing test results. This guide will walk you through the main options available when accessing the Bucketeer dashboard.
+
+The image below presents the Bucketeer dashboard sidebar and after you find a description for each option available.
+
+<CenteredImg
+  imgURL="img/getting-started/dashboard-sidebar.png"
+  wSize="200px"
+  alt="Bucketeer dashboard sidebar"
+/>
 
 - **(Project) Environment Selector**: use this selector to choose the desired project and environment. The modifications you make will only affect the current project/environment. Environments can be used to target specific parts of the project and make it easier to manage.
 - **Feature Flags**: this section displays all the feature flags within the selected project. You can choose a flag to manage its environment-specific targeting and rollout rules.
@@ -19,7 +30,3 @@ The Bucketeer dashboard provides all the necessary tools to manage users, projec
 - **Documentation**: use this link to access the Bucketeer documentation quickly.
 - **Settings**: check and configure all the settings for the current environment. You can create notifications, pushes, and webhooks. Pushes enable real-time SDK updates. Notifications can alert you when someone adds or updates something in the admin console, and you can also monitor operational task statuses. The webhook feature allows you to control the on/off status of Feature Flags.
 - **Admin Settings**: this section allows you to define several admin settings. You can create and manage projects and environments, create accounts, and review notifications and audit logs.
-
-The image below presents the sidebar with all the options listed and described above.
-
-![Bucketeer dashboard sidebar](./img/dashboard-sidebar.png)

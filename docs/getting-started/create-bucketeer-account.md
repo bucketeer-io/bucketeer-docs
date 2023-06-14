@@ -6,6 +6,8 @@ description: This page guides the user on how to create the Bucketeer account.
 tags: ['guide', 'account', 'create']
 ---
 
+import CenteredImg from '@site/src/components/centered-img/CenteredImg';
+
 Buckteers is an open-source project that allows you to manage and track data related to different environments. To begin using Buckteers, you need to create an account. This guide assumes that the Buckteers system is already up and running and that you have access to an Admin account.
 
 ## Account types
@@ -49,12 +51,19 @@ As an Admin, you can follow the steps below to crate an Enviroment account for a
 3. Navigate to the **Accounts** page within the Dashboard.
 4. Click on the **+ Add** button to add a new account.
 
-![Bucketeer account page](./img/create-bucketeer-account-1.png)
+<CenteredImg
+  imgURL='img/getting-started/create-bucketeer-account-1.png'
+  alt='Account dashboard tab'
+  wSize='100%'
+/>
 
 5. On the left panel, enter the new user's email and define their role.
 6. Click **Submit** to create the account.
 
-![Bucketeer new user panel](./img/create-bucketeer-account-2.png)
+<CenteredImg 
+  imgURL='img/getting-started/create-bucketeer-account-2.png'
+  wSize='400px'
+  alt='Create an account'
+  borderWidth='1px'/>
 
 The newly added member will receive an email invitation to join the project. If the new user does not receive the invitation email, the Admin can resend it by going to the Accounts page, locating the user's name in the Accounts list, and clicking on it.
-
