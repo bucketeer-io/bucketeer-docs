@@ -6,7 +6,7 @@ description: Lists and briefly describes each SKD available to use in the integr
 tags: ['guide','sdk','select']
 ---
 
-In this section you find information describing what are SDKs and listing the Bucketeer SDKs available to use in the integration process.
+In this section, you will find information describing what SDKs are and listing the Bucketeer SDKs available for integration.
 
 ## What are SDKs
 
@@ -18,7 +18,7 @@ With SDKs, developers don't have to start the development process from scratch. 
 
 ## Choose a Bucketeer SDK
 
-When integrating a Bucketeer SDK with you code, it is important to consider two factors. First, to choose the right SDK you need to asses  your specific requirements to determine whether you need a server-side or client-side SDK. Typically, you will only need one SDK per application or service. However, if your product consists of applications or services written in multiple languages, you can use multiple SDKs. After you need to select the programming language, which normally will be the one used on your system.
+When integrating a Bucketeer SDK with your code, it is important to consider two factors. First, to choose the right SDK, you need to assess your specific requirements to determine whether you need a server-side or client-side SDK. Typically, you will only need one SDK per application or service. However, you can use multiple SDKs if your product consists of applications or services written in multiple languages. Afterward, you need to select the programming language which will normally be used on your system.
 
 Currently, Bucketeer SDK supports the following programming languages for client-side:
 
@@ -36,7 +36,7 @@ To understand the SDK integration process, access the [SDKs](/sdk) page.
 
 :::tip
 
-We strongly recommend you check the [Integrate Bucketeers](./integrate-bucketeers.md) and [Using Feature Flags](../using-feature-flags/) guides before using Bucketeer SDKs in your application.
+We strongly recommend that you check the [Integrate Bucketeers](./integrate-bucketeers.md) and [Using Feature Flags](../using-feature-flags/) guides before using Bucketeer SDKs in your application.
 
 :::
 
