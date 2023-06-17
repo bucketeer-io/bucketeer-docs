@@ -15,59 +15,135 @@
 
 const sidebars = {
   docs: [
-    'getting-started',
+    {
+      type: 'doc',
+      id: 'bucketeer-docs',
+      label: 'Bucketeer Docs',
+      className: "sidebar-bucketeer-docs",
+    },
     {
       type: 'html',
-      value: '<span class="sidebar-title">SDKs</span>', // The HTML to be rendered
-      defaultStyle: true, // Use the default menu item styling
+      value: '<span class="sidebar-title">Getting started</span>',
+      defaultStyle: true,
     },
-    // {
-      // type: 'category',
-      // label: 'SDKs',
-      // link: {
-      //   type: 'doc',
-      //   id: 'sdk/index',
-      // },
-      // items: [
         {
           type: 'category',
-          label: 'Client-side',
-          className: "sidebar-client-side",
+          label: "Create Bucketeer's Account",
+          className: "sidebar-create-bucketeers-account",
           items: [
-            'sdk/client-side/android/index',
-            'sdk/client-side/ios/index',
-            'sdk/client-side/javascript/index',
-            'sdk/client-side/flutter/index'
+            'lorem/ipsum/index',
+            {
+              type: 'category',
+              label: "Submenu test",
+              items: [
+                'lorem/ipsum/dolor/sit/amet/consectetur/adipiscing/index',
+              ],
+            },
+          ],
+        },
+        {
+          type: 'doc',
+          id: 'get-your-credentials',
+          label: 'Get Your Credentials',
+          className: "sidebar-get-your-credentials",
+        },
+        {
+          type: 'doc',
+          id: 'bucketeer-dashboard',
+          label: 'Bucketeer Dashboard',
+          className: "sidebar-bucketeer-dashboard",
+        },
+        {
+          type: 'doc',
+          id: 'choose-an-sdk',
+          label: 'Choose An SDK',
+          className: "sidebar-choose-an-sdk",
+        },
+        {
+          type: 'doc',
+          id: 'integrate-bucketeers',
+          label: 'Integrate Bucketeers',
+          className: "sidebar-integrate-bucketeers",
+        },
+        {
+          type: 'doc',
+          id: 'feature-flags',
+          label: 'Feature Flags',
+          className: "sidebar-feature-flags",
+        },
+    {
+      type: 'html',
+      value: '<span class="sidebar-title">Using feature flag</span>',
+      defaultStyle: true,
+    },
+        {
+          type: 'category',
+          label: "Creating Feature Flags",
+          className: "sidebar-creating-feature-flags",
+          items: [
+            'lorem/ipsum/dolor/index',
+          ],
+        },
+        {
+          type: 'doc',
+          id: 'api-keys',
+          label: 'API Keys',
+          className: "sidebar-api-keys",
+        },
+        {
+          type: 'category',
+          label: "Testing With Flags",
+          className: "sidebar-testing-with-flags",
+          items: [
+            'lorem/ipsum/dolor/sit/index',
+          ],
+        },
+        {
+          type: 'doc',
+          id: 'feature-flags-integration',
+          label: 'Feature Flags Integration',
+          className: "sidebar-feature-flags-integration",
+        },
+    {
+      type: 'html',
+      value: '<span class="sidebar-title">SDKS</span>',
+      defaultStyle: true,
+    },
+        {
+          type: 'category',
+          label: "Client",
+          className: "sidebar-client",
+          items: [
+            'lorem/ipsum/dolor/sit/amet/index',
           ],
         },
         {
           type: 'category',
-          label: 'Server-side',
-          className: "sidebar-server-side",
+          label: "Server",
+          className: "sidebar-server",
           items: [
-            'sdk/server-side/go/index',
-            'sdk/server-side/node-js/index'
+            'lorem/ipsum/dolor/sit/amet/consectetur/index',
           ],
         },
-    //   ],
-    // },
     {
       type: 'html',
-      value: '<span class="sidebar-title">Guides</span>', // The HTML to be rendered
-      defaultStyle: true, // Use the default menu item styling
+      value: '<span class="sidebar-title">Guides</span>',
+      defaultStyle: true,
     },
-    {
-      type: 'category',
-      label: 'Contribution Guide',
-      className: "sidebar-contribution-guide",
-      link: {
-        type: 'doc',
-        id: 'contribution-guide/index',
-      },
-      items: [
-        'contribution-guide/contributing'
-      ],
-    },
+        {
+          type: 'doc',
+          id: 'contributing',
+          label: 'Contributing',
+          className: "sidebar-contributing",
+        },
+        {
+          type: 'category',
+          label: "Documentation Style Guide",
+          className: "sidebar-documentation-style-guide",
+          items: [
+            'lorem/ipsum/dolor/sit/amet/consectetur/adipiscing/index',
+          ],
+        },
   ],
 }
 

@@ -6,6 +6,16 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
+
+  plugins: [
+    [
+      require.resolve("@cmfcmf/docusaurus-search-local"),
+      {
+        indexBlog: false,
+      },
+    ],
+  ],
+
   title: 'Bucketeer Docs',
   tagline: 'Feature Flag and A/B Testing Managment platform',
   url: 'https://docs.bucketeer.io',
@@ -61,14 +71,15 @@ const config = {
         logo: {
           alt: 'Feature Flag and A/B Testing Managment platform',
           src: 'img/bucketeer-logo-white.png',
+          className: 'header-logo',
         },
         items: [
-          {
-            href: '/',
-            label: 'Home',
-            position: 'left',
-            'aria-label': 'Bucketeer - Feature Flag and A/B Testing Managment platform',
-          },
+          // {
+          //   href: '/',
+          //   label: 'Home',
+          //   position: 'left',
+          //   'aria-label': 'Bucketeer - Feature Flag and A/B Testing Managment platform',
+          // },
           {
             to: '/',
             label: 'Getting Started',
@@ -77,30 +88,34 @@ const config = {
             activeBaseRegex: "/$",
           },
           {
-            to: 'sdk/client-side/android',
-            label: 'Client-side',
+            to: 'lorem/ipsum/dolor/sit/amet',
+            label: 'Client',
             position: 'left',
             'aria-label': 'Bucketeer - Client-side',
-            activeBasePath: "sdk/client-side",
+            activeBaseRegex: "/lorem/ipsum/dolor/sit/amet$",
           },
           {
-            to: 'sdk/server-side/go',
-            label: 'Server-side',
+            to: 'lorem/ipsum/dolor/sit/amet/consectetur',
+            label: 'Server',
             position: 'left',
             'aria-label': 'Bucketeer - Server-side',
-            activeBasePath: "sdk/server-side",
+            activeBaseRegex: "/lorem/ipsum/dolor/sit/amet/consectetur$",
           },
+          // {
+          //   to: 'contribution-guide/contributing',
+          //   label: 'Contributing',
+          //   position: 'left',
+          //   'aria-label': 'Bucketeer - Contributing',
+          //   activeBasePath: "contribution-guide/contributing",
+          // },
           {
-            to: 'contribution-guide/contributing',
-            label: 'Contributing',
-            position: 'left',
-            'aria-label': 'Bucketeer - Contributing',
-            activeBasePath: "contribution-guide/contributing",
-          },
-          {
-            type: 'localeDropdown',
+            type: 'search',
             position: 'right',
           },
+          // {
+          //   type: 'localeDropdown',
+          //   position: 'right',
+          // },
           {
             href: 'https://github.com/bucketeer-io/bucketeer',
             // label: 'GitHub',
@@ -125,8 +140,8 @@ const config = {
         ],
       },
       prism: {
-        theme: darkCodeTheme,
-        // theme: lightCodeTheme,
+        // theme: darkCodeTheme,
+        theme: lightCodeTheme,
         // theme: require("prism-react-renderer/themes/vsDark"),
         // theme: require("prism-react-renderer/themes/shadesOfPurple"),
         additionalLanguages: [
