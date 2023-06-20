@@ -1,0 +1,11 @@
+API keys play a crucial role when using feature flags in the context of Bucketeer or similar platforms. The purpose of API keys is to authorize and control access to the feature flag management system. Here's why API keys are important:
+
+    Authentication: API keys act as a form of authentication, allowing your application to connect securely with the feature flag management service. When you configure the Bucketeer client with the appropriate API key, it verifies that your application has the necessary authorization to access and interact with the feature flags.
+
+    Project and Environment Identification: Each API key is associated with a specific project and environment within the feature flag management system. By providing the correct API key, you can uniquely identify and link your application to the desired project and environment. This ensures that your application retrieves and applies the correct feature flag configurations for the intended context.
+
+    Authorization and Access Control: API keys also help enforce access control and permission levels. Different API keys can have different access rights and restrictions. This allows you to grant specific privileges to different components or instances of your application. For example, you can create separate API keys for development, staging, and production environments, each with its own set of permissions to control who can modify feature flags or access certain functionality.
+
+    Security: API keys help maintain the security and integrity of your feature flag system. By requiring a valid API key for access, you reduce the risk of unauthorized access or tampering with your feature flag configurations. It ensures that only authorized applications can interact with the feature flag management service.
+
+In summary, API keys serve as a means of authentication, project and environment identification, access control, and security when using feature flags. They help ensure that your application interacts with the correct project and environment, and that only authorized components can modify or retrieve feature flag configurations.
