@@ -1,0 +1,44 @@
+---
+title: Integrate to Bucketeer
+sidebar_position: 1
+slug: /getting-started/integrate-bucketeers
+description: Describes the steps to integrate the user application with Bucketeer.
+tags: ['guide', 'integration', 'sdk']
+---
+
+Integrating Bucketeer with your application is a simple process that is the same across all SDKs. Bucketeer has multiple SDKs available, and you can refer to the [Choose an SDK](./choose-sdk.md) guide to determine which one best suits your needs. To integrate Bucketeer into your application, follow these steps:
+
+1. **Install the Bucketeer SDK**: Use your project's dependency manager to install the Bucketeer SDK in your application, allowing it to access the Bucketeer SDK and its features.
+
+2. **Import the Bucketeer Client**: In your application's code, import the Bucketeer client, the primary interface to interact with the Bucketeer SDK, and communicate with the Bucketeer service. Each SDK guide covers this step and the previous one in detail. Access the [SDKs](../sdk/) page to get more information.
+
+3. **Configure the Bucketeer Client**: Provide the credentials for your environment to configure the Bucketeer client, including setting up the API key and specifying the endpoint URL. These credentials uniquely identify your project and environment and authorize your application to connect with Bucketeer. Check [API keys](../using-feature-flags/api-keys.md) to learn how to access your credentials.
+
+4. **Assign Feature Flag Variations**: Use the feature flag ID to associate specific flag variations with different users. Each feature flag has an ID, and by using it, you can control which variation of the flag a user will see in your application.
+
+:::tip
+
+When configuring the SDK, in step 3, you must provide your `apiKey`, `apiURL`, and `featureTag`. To get this information, you need to create a feature flag. Therefore, we recommend you review the [Using Feature Flags](../using-feature-flags/) guides before using any SDK.
+
+:::
+
+By following these steps, you can successfully integrate Bucketeer into your application and take advantage of its powerful feature flag management capabilities. If you run into any problems during the integration process or need further assistance, [contact the Bucketeer team](https://app.slack.com/client/T08PSQ7BQ/C043026BME1).
+
+## Optimize Bucketeer use
+
+The integration and utilization of Bucketeer are straightforward, giving you complete control over configuration and usage. However, one step can significantly impact server response time and costs, ultimately affecting the user experience. In this regard, we provide a brief overview of this topic, which is covered in more detail in the [Using Feature Flags](../using-feature-flags/) section.
+
+During step 3 of the integration process, describe before, you are required to provide the `featureTag`. The `featureTag` is defined when creating the feature flag and serves two purposes. Firstly, it assists in searching within the tag list on the Bucketeer dashboard. Secondly, and more crucially, the `featureTag` plays a critical role in optimizing the usage of the Bucketeer system.
+
+Feature tags act as limiters when making server calls to evaluate users. Consequently, if a call does not use tags or employs a tag used by numerous feature flags, a large number of feature flags will be returned for evaluation. This might not pose a problem for small systems with few feature flags. However, as the system expands, failure to utilize tags for identifying and optimizing evaluation calls can result in excessive processing on your server and increased operational costs. Moreover, it can lead to larger response times, negatively impacting the user experience. Therefore, employing targeted and assertive tags will:
+
+- Accelerate the evaluation process by analyzing only the necessary aspects.
+- Reduce information traffic between the server and the local application.
+
+Despite the significance and impact on performance and costs, using tags within Bucketeer is optional.
+
+:::tip
+
+The Bucketeer team strongly recommends the use of `featureTag` to optimize your operation.
+
+:::
