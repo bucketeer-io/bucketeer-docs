@@ -3,43 +3,93 @@
  * bundles Infima by default. Infima is a CSS framework designed to
  * work well for content-centric websites.
  */
- @font-face {
-  font-family: "sofiapro";
-  src: url("../webfonts/sofiapro/sofia-pro-regular.eot");
-  src: url("../webfonts/sofiapro/sofia-pro-regular.eot?#iefix")
+@font-face {
+  font-family: sofiapro;
+  src: url("../webfonts/sofiapro/sofiapro-light.eot");
+  src: url("../webfonts/sofiapro/sofiapro-light.eot?#iefix")
       format("embedded-opentype"),
-    url("../webfonts/sofiapro/sofia-pro-regular.woff2") format("woff2"),
-    url("../webfonts/sofiapro/sofia-pro-regular.woff") format("woff"),
-    url("../webfonts/sofiapro/sofia-pro-regular.ttf") format("truetype"),
-    url("../webfonts/sofiapro/sofia-pro-regular.svg#sofiapro") format("svg");
+    url("../webfonts/sofiapro/sofiapro-light.woff2") format("woff2"),
+    url("../webfonts/sofiapro/sofiapro-light.woff") format("woff"),
+    url("../webfonts/sofiapro/sofiapro-light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: sofiapro;
+  src: url("../webfonts/sofiapro/sofiapro-regular.eot");
+  src: url("../webfonts/sofiapro/sofiapro-regular.eot?#iefix")
+      format("embedded-opentype"),
+    url("../webfonts/sofiapro/sofiapro-regular.woff2") format("woff2"),
+    url("../webfonts/sofiapro/sofiapro-regular.woff") format("woff"),
+    url("../webfonts/sofiapro/sofiapro-regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: sofiapro;
+  src: url("../webfonts/sofiapro/sofiapro-medium.eot");
+  src: url("../webfonts/sofiapro/sofiapro-medium.eot?#iefix")
+      format("embedded-opentype"),
+    url("../webfonts/sofiapro/sofiapro-medium.woff2") format("woff2"),
+    url("../webfonts/sofiapro/sofiapro-medium.woff") format("woff"),
+    url("../webfonts/sofiapro/sofiapro-medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: sofiapro;
+  src: url("../webfonts/sofiapro/sofiapro-semi-bold.eot");
+  src: url("../webfonts/sofiapro/sofiapro-semi-bold.eot?#iefix")
+      format("embedded-opentype"),
+    url("../webfonts/sofiapro/sofiapro-semi-bold.woff2") format("woff2"),
+    url("../webfonts/sofiapro/sofiapro-semi-bold.woff") format("woff"),
+    url("../webfonts/sofiapro/sofiapro-semi-bold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: sofiapro;
+  src: url("../webfonts/sofiapro/sofiapro-bold.eot");
+  src: url("../webfonts/sofiapro/sofiapro-bold.eot?#iefix")
+      format("embedded-opentype"),
+    url("../webfonts/sofiapro/sofiapro-bold.woff2") format("woff2"),
+    url("../webfonts/sofiapro/sofiapro-bold.woff") format("woff"),
+    url("../webfonts/sofiapro/sofiapro-bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: sofiapro;
+  src: url("../webfonts/sofiapro/sofiapro-black.eot");
+  src: url("../webfonts/sofiapro/sofiapro-black.eot?#iefix")
+      format("embedded-opentype"),
+    url("../webfonts/sofiapro/sofiapro-black.woff2") format("woff2"),
+    url("../webfonts/sofiapro/sofiapro-black.woff") format("woff"),
+    url("../webfonts/sofiapro/sofiapro-black.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'FiraCode';
+  src: url('../webfonts/firecode/FiraCode-Regular.woff2') format('woff2'),
+      url('../webfonts/firecode/FiraCode-Regular.woff') format('woff'),
+      url('../webfonts/firecode/FiraCode-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
-
-@font-face {
-  font-family: "sofiapro";
-  src: url("../webfonts/sofiapro/sofia-pro-bold.eot");
-  src: url("../webfonts/sofiapro/sofia-pro-bold.eot?#iefix")
-      format("embedded-opentype"),
-    url("../webfonts/sofiapro/sofia-pro-bold.woff2") format("woff2"),
-    url("../webfonts/sofiapro/sofia-pro-bold.woff") format("woff"),
-    url("../webfonts/sofiapro/sofia-pro-bold.ttf") format("truetype"),
-    url("../webfonts/sofiapro/sofia-pro-bold.svg#sofiapro") format("svg");
-  font-weight: bold;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-    font-family: 'FiraCode';
-    src: url('../webfonts/firecode/FiraCode-Regular.woff2') format('woff2'),
-        url('../webfonts/firecode/FiraCode-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-
 
 /* You can override the default Infima variables here. */
 :root {
@@ -54,7 +104,6 @@
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
   --ifm-font-family-base: sofiapro, system-ui, sans-serif !important;
   --ifm-navbar-height: 4.5rem;
-  --ifm-heading-font-weight: var(--font-weight-medium);
   --ifm-font-color-base: #555;
 
   --ifm-menu-color-background-hover: rgba(145,33,194,0.05);
@@ -127,7 +176,6 @@ code {
 
 .menu {
   padding: 1.8rem 0 0.5rem 0.5rem !important;
-  /*background-color: #ededed;*/
   background-color: #f9f4fc;
 }
 
@@ -254,8 +302,8 @@ code {
 }
 
 .menu .theme-doc-sidebar-menu .theme-doc-sidebar-item-category > .menu__list .menu__link {
-  	padding-left: 0px;
-  	margin-left: 15px;
+  padding-left: 0px;
+  margin-left: 15px;
 }
 
 .menu .theme-doc-sidebar-menu .theme-doc-sidebar-item-category > .menu__list .menu__link:before {
@@ -283,28 +331,12 @@ code {
 	padding-left: 0;
 }
 
-.menu__link--sublist.menu__link--active {
-	/*background-color: var(--ifm-menu-color-background-active) !important;*/
-}
-
-.theme-doc-sidebar-item-link-level-2 .menu__link {
-	/*padding-right: 0;
-    width: 85%;*/
-}
-
-.theme-doc-sidebar-item-link-level-2 .menu__link:before {
-	/*width: 15px;*/
-}
-
 .menu__list-item-collapsible:hover {
 	background: none;
 }
 
 .menu__list-item-collapsible .menu__link:hover {
     background: #DDD7E9 !important;
-}
-
-.menu__list-item-collapsible:hover a {
 }
 
 .menu__list-item-collapsible:hover .menu__link {
@@ -324,9 +356,9 @@ code {
   background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0_977_27206)'%3E%3Cpath d='M11.6666 2.5V5.83333C11.6666 6.05435 11.7544 6.26631 11.9107 6.42259C12.067 6.57887 12.2789 6.66667 12.5 6.66667H15.8333' stroke='%23795FA8' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M14.1666 17.5H5.83329C5.39127 17.5 4.96734 17.3244 4.65478 17.0118C4.34222 16.6993 4.16663 16.2754 4.16663 15.8333V4.16667C4.16663 3.72464 4.34222 3.30072 4.65478 2.98816C4.96734 2.67559 5.39127 2.5 5.83329 2.5H11.6666L15.8333 6.66667V15.8333C15.8333 16.2754 15.6577 16.6993 15.3451 17.0118C15.0326 17.3244 14.6087 17.5 14.1666 17.5Z' stroke='%23795FA8' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M7.5 7.5H8.33333' stroke='%23795FA8' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M7.5 10.8333H12.5' stroke='%23795FA8' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M7.5 14.1667H12.5' stroke='%23795FA8' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0_977_27206'%3E%3Crect width='20' height='20' fill='white'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E");
 }
 
-    .sidebar-bucketeer-docs .menu__link--active:before {
-      background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0_977_27206)'%3E%3Cpath d='M11.6666 2.5V5.83333C11.6666 6.05435 11.7544 6.26631 11.9107 6.42259C12.067 6.57887 12.2789 6.66667 12.5 6.66667H15.8333' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M14.1666 17.5H5.83329C5.39127 17.5 4.96734 17.3244 4.65478 17.0118C4.34222 16.6993 4.16663 16.2754 4.16663 15.8333V4.16667C4.16663 3.72464 4.34222 3.30072 4.65478 2.98816C4.96734 2.67559 5.39127 2.5 5.83329 2.5H11.6666L15.8333 6.66667V15.8333C15.8333 16.2754 15.6577 16.6993 15.3451 17.0118C15.0326 17.3244 14.6087 17.5 14.1666 17.5Z' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M7.5 7.5H8.33333' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M7.5 10.8333H12.5' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M7.5 14.1667H12.5' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0_977_27206'%3E%3Crect width='20' height='20' fill='white'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E");
-    }
+.sidebar-bucketeer-docs .menu__link--active:before {
+  background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0_977_27206)'%3E%3Cpath d='M11.6666 2.5V5.83333C11.6666 6.05435 11.7544 6.26631 11.9107 6.42259C12.067 6.57887 12.2789 6.66667 12.5 6.66667H15.8333' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M14.1666 17.5H5.83329C5.39127 17.5 4.96734 17.3244 4.65478 17.0118C4.34222 16.6993 4.16663 16.2754 4.16663 15.8333V4.16667C4.16663 3.72464 4.34222 3.30072 4.65478 2.98816C4.96734 2.67559 5.39127 2.5 5.83329 2.5H11.6666L15.8333 6.66667V15.8333C15.8333 16.2754 15.6577 16.6993 15.3451 17.0118C15.0326 17.3244 14.6087 17.5 14.1666 17.5Z' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M7.5 7.5H8.33333' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M7.5 10.8333H12.5' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M7.5 14.1667H12.5' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0_977_27206'%3E%3Crect width='20' height='20' fill='white'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E");
+}
 
 .sidebar-create-bucketeers-account > .menu__list-item-collapsible > .menu__link--sublist:before {
   background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0_977_27221)'%3E%3Cpath d='M6.66663 5.83333C6.66663 6.71739 7.01782 7.56523 7.64294 8.19036C8.26806 8.81548 9.1159 9.16667 9.99996 9.16667C10.884 9.16667 11.7319 8.81548 12.357 8.19036C12.9821 7.56523 13.3333 6.71739 13.3333 5.83333C13.3333 4.94928 12.9821 4.10143 12.357 3.47631C11.7319 2.85119 10.884 2.5 9.99996 2.5C9.1159 2.5 8.26806 2.85119 7.64294 3.47631C7.01782 4.10143 6.66663 4.94928 6.66663 5.83333Z' stroke='%23795FA8' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M5 17.5V15.8333C5 14.9493 5.35119 14.1014 5.97631 13.4763C6.60143 12.8512 7.44928 12.5 8.33333 12.5H11.6667' stroke='%23795FA8' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M12.5 15.8333L14.1667 17.5L17.5 14.1667' stroke='%23795FA8' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0_977_27221'%3E%3Crect width='20' height='20' fill='white'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E");
@@ -336,41 +368,41 @@ code {
   background-image: url("data:image/svg+xml,%0A%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0_977_27231)'%3E%3Cpath d='M5.83337 10H8.33337V13.3333H5.83337V10Z' stroke='%23795FA8' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M8.33333 5H3.33333C3.11232 5 2.90036 5.0878 2.74408 5.24408C2.5878 5.40036 2.5 5.61232 2.5 5.83333V15.8333C2.5 16.0543 2.5878 16.2663 2.74408 16.4226C2.90036 16.5789 3.11232 16.6667 3.33333 16.6667H16.6667C16.8877 16.6667 17.0996 16.5789 17.2559 16.4226C17.4122 16.2663 17.5 16.0543 17.5 15.8333V5.83333C17.5 5.61232 17.4122 5.40036 17.2559 5.24408C17.0996 5.0878 16.8877 5 16.6667 5H11.6667' stroke='%23795FA8' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M8.33337 3.33333C8.33337 3.11232 8.42117 2.90036 8.57745 2.74408C8.73373 2.5878 8.94569 2.5 9.16671 2.5H10.8334C11.0544 2.5 11.2663 2.5878 11.4226 2.74408C11.5789 2.90036 11.6667 3.11232 11.6667 3.33333V5.83333C11.6667 6.05435 11.5789 6.26631 11.4226 6.42259C11.2663 6.57887 11.0544 6.66667 10.8334 6.66667H9.16671C8.94569 6.66667 8.73373 6.57887 8.57745 6.42259C8.42117 6.26631 8.33337 6.05435 8.33337 5.83333V3.33333Z' stroke='%23795FA8' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M11.6666 13.3333H13.3333' stroke='%23795FA8' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M11.6666 10H15' stroke='%23795FA8' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0_977_27231'%3E%3Crect width='20' height='20' fill='white'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E");
 }
 
-    .sidebar-get-your-credentials .menu__link--active:before {
-      background-image: url("data:image/svg+xml,%0A%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0_977_27231)'%3E%3Cpath d='M5.83337 10H8.33337V13.3333H5.83337V10Z' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M8.33333 5H3.33333C3.11232 5 2.90036 5.0878 2.74408 5.24408C2.5878 5.40036 2.5 5.61232 2.5 5.83333V15.8333C2.5 16.0543 2.5878 16.2663 2.74408 16.4226C2.90036 16.5789 3.11232 16.6667 3.33333 16.6667H16.6667C16.8877 16.6667 17.0996 16.5789 17.2559 16.4226C17.4122 16.2663 17.5 16.0543 17.5 15.8333V5.83333C17.5 5.61232 17.4122 5.40036 17.2559 5.24408C17.0996 5.0878 16.8877 5 16.6667 5H11.6667' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M8.33337 3.33333C8.33337 3.11232 8.42117 2.90036 8.57745 2.74408C8.73373 2.5878 8.94569 2.5 9.16671 2.5H10.8334C11.0544 2.5 11.2663 2.5878 11.4226 2.74408C11.5789 2.90036 11.6667 3.11232 11.6667 3.33333V5.83333C11.6667 6.05435 11.5789 6.26631 11.4226 6.42259C11.2663 6.57887 11.0544 6.66667 10.8334 6.66667H9.16671C8.94569 6.66667 8.73373 6.57887 8.57745 6.42259C8.42117 6.26631 8.33337 6.05435 8.33337 5.83333V3.33333Z' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M11.6666 13.3333H13.3333' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M11.6666 10H15' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0_977_27231'%3E%3Crect width='20' height='20' fill='white'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E");
-    }
+.sidebar-get-your-credentials .menu__link--active:before {
+  background-image: url("data:image/svg+xml,%0A%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0_977_27231)'%3E%3Cpath d='M5.83337 10H8.33337V13.3333H5.83337V10Z' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M8.33333 5H3.33333C3.11232 5 2.90036 5.0878 2.74408 5.24408C2.5878 5.40036 2.5 5.61232 2.5 5.83333V15.8333C2.5 16.0543 2.5878 16.2663 2.74408 16.4226C2.90036 16.5789 3.11232 16.6667 3.33333 16.6667H16.6667C16.8877 16.6667 17.0996 16.5789 17.2559 16.4226C17.4122 16.2663 17.5 16.0543 17.5 15.8333V5.83333C17.5 5.61232 17.4122 5.40036 17.2559 5.24408C17.0996 5.0878 16.8877 5 16.6667 5H11.6667' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M8.33337 3.33333C8.33337 3.11232 8.42117 2.90036 8.57745 2.74408C8.73373 2.5878 8.94569 2.5 9.16671 2.5H10.8334C11.0544 2.5 11.2663 2.5878 11.4226 2.74408C11.5789 2.90036 11.6667 3.11232 11.6667 3.33333V5.83333C11.6667 6.05435 11.5789 6.26631 11.4226 6.42259C11.2663 6.57887 11.0544 6.66667 10.8334 6.66667H9.16671C8.94569 6.66667 8.73373 6.57887 8.57745 6.42259C8.42117 6.26631 8.33337 6.05435 8.33337 5.83333V3.33333Z' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M11.6666 13.3333H13.3333' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M11.6666 10H15' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0_977_27231'%3E%3Crect width='20' height='20' fill='white'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E");
+}
 
 .sidebar-bucketeer-dashboard .menu__link:before {
   background-image: url("data:image/svg+xml,%0A%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0_977_27243)'%3E%3Cpath d='M3.33337 3.33334H8.33337V10H3.33337V3.33334Z' stroke='%23795FA8' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M3.33337 13.3333H8.33337V16.6667H3.33337V13.3333Z' stroke='%23795FA8' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M11.6666 10H16.6666V16.6667H11.6666V10Z' stroke='%23795FA8' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M11.6666 3.33334H16.6666V6.66668H11.6666V3.33334Z' stroke='%23795FA8' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0_977_27243'%3E%3Crect width='20' height='20' fill='white'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E");
 }
 
-    .sidebar-bucketeer-dashboard .menu__link--active:before {
-      background-image: url("data:image/svg+xml,%0A%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0_977_27243)'%3E%3Cpath d='M3.33337 3.33334H8.33337V10H3.33337V3.33334Z' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M3.33337 13.3333H8.33337V16.6667H3.33337V13.3333Z' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M11.6666 10H16.6666V16.6667H11.6666V10Z' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M11.6666 3.33334H16.6666V6.66668H11.6666V3.33334Z' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0_977_27243'%3E%3Crect width='20' height='20' fill='white'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E");
-    }
+.sidebar-bucketeer-dashboard .menu__link--active:before {
+  background-image: url("data:image/svg+xml,%0A%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0_977_27243)'%3E%3Cpath d='M3.33337 3.33334H8.33337V10H3.33337V3.33334Z' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M3.33337 13.3333H8.33337V16.6667H3.33337V13.3333Z' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M11.6666 10H16.6666V16.6667H11.6666V10Z' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M11.6666 3.33334H16.6666V6.66668H11.6666V3.33334Z' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0_977_27243'%3E%3Crect width='20' height='20' fill='white'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E");
+}
 
 .sidebar-choose-an-sdk .menu__link:before {
   background-image: url("data:image/svg+xml,%0A%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0_977_27254)'%3E%3Cpath d='M5.83333 6.66666H3.33333C3.11232 6.66666 2.90036 6.75445 2.74408 6.91073C2.5878 7.06701 2.5 7.27898 2.5 7.49999V9.16666C2.5 9.38767 2.5878 9.59963 2.74408 9.75591C2.90036 9.91219 3.11232 9.99999 3.33333 9.99999H5C5.22101 9.99999 5.43298 10.0878 5.58926 10.2441C5.74554 10.4003 5.83333 10.6123 5.83333 10.8333V12.5C5.83333 12.721 5.74554 12.933 5.58926 13.0892C5.43298 13.2455 5.22101 13.3333 5 13.3333H2.5' stroke='%23795FA8' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M14.1666 6.66666V13.3333' stroke='%23795FA8' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M17.5 6.66666L15 9.99999L17.5 13.3333' stroke='%23795FA8' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M14.1666 10H15' stroke='%23795FA8' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M8.33337 6.66666V13.3333H10C10.4421 13.3333 10.866 13.1577 11.1786 12.8452C11.4911 12.5326 11.6667 12.1087 11.6667 11.6667V8.33332C11.6667 7.8913 11.4911 7.46737 11.1786 7.15481C10.866 6.84225 10.4421 6.66666 10 6.66666H8.33337Z' stroke='%23795FA8' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0_977_27254'%3E%3Crect width='20' height='20' fill='white'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E");
 }
 
-    .sidebar-choose-an-sdk .menu__link--active:before {
-      background-image: url("data:image/svg+xml,%0A%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0_977_27254)'%3E%3Cpath d='M5.83333 6.66666H3.33333C3.11232 6.66666 2.90036 6.75445 2.74408 6.91073C2.5878 7.06701 2.5 7.27898 2.5 7.49999V9.16666C2.5 9.38767 2.5878 9.59963 2.74408 9.75591C2.90036 9.91219 3.11232 9.99999 3.33333 9.99999H5C5.22101 9.99999 5.43298 10.0878 5.58926 10.2441C5.74554 10.4003 5.83333 10.6123 5.83333 10.8333V12.5C5.83333 12.721 5.74554 12.933 5.58926 13.0892C5.43298 13.2455 5.22101 13.3333 5 13.3333H2.5' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M14.1666 6.66666V13.3333' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M17.5 6.66666L15 9.99999L17.5 13.3333' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M14.1666 10H15' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M8.33337 6.66666V13.3333H10C10.4421 13.3333 10.866 13.1577 11.1786 12.8452C11.4911 12.5326 11.6667 12.1087 11.6667 11.6667V8.33332C11.6667 7.8913 11.4911 7.46737 11.1786 7.15481C10.866 6.84225 10.4421 6.66666 10 6.66666H8.33337Z' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0_977_27254'%3E%3Crect width='20' height='20' fill='white'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E");
-    }
-
-.sidebar-integrate-bucketeers .menu__link:before {
- background-image: url("data:image/svg+xml,%0A%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0_977_27266)'%3E%3Cpath d='M15.8333 6.89C16.0867 7.03628 16.297 7.24667 16.4433 7.50003C16.5896 7.75339 16.6666 8.04078 16.6666 8.33334V15C16.6666 15.442 16.491 15.866 16.1785 16.1785C15.8659 16.4911 15.442 16.6667 15 16.6667H8.33329C7.89127 16.6667 7.46734 16.4911 7.15478 16.1785C6.84222 15.866 6.66663 15.442 6.66663 15V8.33334C6.66663 7.89131 6.84222 7.46739 7.15478 7.15483C7.46734 6.84227 7.89127 6.66667 8.33329 6.66667H10.8333' stroke='%23795FA8' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M4.16671 13.1117C3.9131 12.9652 3.70255 12.7546 3.55626 12.5009C3.40996 12.2472 3.33309 11.9595 3.33337 11.6667V4.99999C3.33337 4.55797 3.50897 4.13404 3.82153 3.82148C4.13409 3.50892 4.55801 3.33333 5.00004 3.33333H11.6667C12.1087 3.33333 12.5327 3.50892 12.8452 3.82148C13.1578 4.13404 13.3334 4.55797 13.3334 4.99999V11.6667C13.3334 12.1087 13.1578 12.5326 12.8452 12.8452C12.5327 13.1577 12.1087 13.3333 11.6667 13.3333H9.16671' stroke='%23795FA8' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0_977_27266'%3E%3Crect width='20' height='20' fill='white'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E%0A");
+.sidebar-choose-an-sdk .menu__link--active:before {
+  background-image: url("data:image/svg+xml,%0A%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0_977_27254)'%3E%3Cpath d='M5.83333 6.66666H3.33333C3.11232 6.66666 2.90036 6.75445 2.74408 6.91073C2.5878 7.06701 2.5 7.27898 2.5 7.49999V9.16666C2.5 9.38767 2.5878 9.59963 2.74408 9.75591C2.90036 9.91219 3.11232 9.99999 3.33333 9.99999H5C5.22101 9.99999 5.43298 10.0878 5.58926 10.2441C5.74554 10.4003 5.83333 10.6123 5.83333 10.8333V12.5C5.83333 12.721 5.74554 12.933 5.58926 13.0892C5.43298 13.2455 5.22101 13.3333 5 13.3333H2.5' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M14.1666 6.66666V13.3333' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M17.5 6.66666L15 9.99999L17.5 13.3333' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M14.1666 10H15' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M8.33337 6.66666V13.3333H10C10.4421 13.3333 10.866 13.1577 11.1786 12.8452C11.4911 12.5326 11.6667 12.1087 11.6667 11.6667V8.33332C11.6667 7.8913 11.4911 7.46737 11.1786 7.15481C10.866 6.84225 10.4421 6.66666 10 6.66666H8.33337Z' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0_977_27254'%3E%3Crect width='20' height='20' fill='white'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E");
 }
 
-    .sidebar-integrate-bucketeers .menu__link--active:before {
-      background-image: url("data:image/svg+xml,%0A%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0_977_27266)'%3E%3Cpath d='M15.8333 6.89C16.0867 7.03628 16.297 7.24667 16.4433 7.50003C16.5896 7.75339 16.6666 8.04078 16.6666 8.33334V15C16.6666 15.442 16.491 15.866 16.1785 16.1785C15.8659 16.4911 15.442 16.6667 15 16.6667H8.33329C7.89127 16.6667 7.46734 16.4911 7.15478 16.1785C6.84222 15.866 6.66663 15.442 6.66663 15V8.33334C6.66663 7.89131 6.84222 7.46739 7.15478 7.15483C7.46734 6.84227 7.89127 6.66667 8.33329 6.66667H10.8333' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M4.16671 13.1117C3.9131 12.9652 3.70255 12.7546 3.55626 12.5009C3.40996 12.2472 3.33309 11.9595 3.33337 11.6667V4.99999C3.33337 4.55797 3.50897 4.13404 3.82153 3.82148C4.13409 3.50892 4.55801 3.33333 5.00004 3.33333H11.6667C12.1087 3.33333 12.5327 3.50892 12.8452 3.82148C13.1578 4.13404 13.3334 4.55797 13.3334 4.99999V11.6667C13.3334 12.1087 13.1578 12.5326 12.8452 12.8452C12.5327 13.1577 12.1087 13.3333 11.6667 13.3333H9.16671' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0_977_27266'%3E%3Crect width='20' height='20' fill='white'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E%0A");
-    }
+.sidebar-integrate-bucketeers .menu__link:before {
+  background-image: url("data:image/svg+xml,%0A%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0_977_27266)'%3E%3Cpath d='M15.8333 6.89C16.0867 7.03628 16.297 7.24667 16.4433 7.50003C16.5896 7.75339 16.6666 8.04078 16.6666 8.33334V15C16.6666 15.442 16.491 15.866 16.1785 16.1785C15.8659 16.4911 15.442 16.6667 15 16.6667H8.33329C7.89127 16.6667 7.46734 16.4911 7.15478 16.1785C6.84222 15.866 6.66663 15.442 6.66663 15V8.33334C6.66663 7.89131 6.84222 7.46739 7.15478 7.15483C7.46734 6.84227 7.89127 6.66667 8.33329 6.66667H10.8333' stroke='%23795FA8' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M4.16671 13.1117C3.9131 12.9652 3.70255 12.7546 3.55626 12.5009C3.40996 12.2472 3.33309 11.9595 3.33337 11.6667V4.99999C3.33337 4.55797 3.50897 4.13404 3.82153 3.82148C4.13409 3.50892 4.55801 3.33333 5.00004 3.33333H11.6667C12.1087 3.33333 12.5327 3.50892 12.8452 3.82148C13.1578 4.13404 13.3334 4.55797 13.3334 4.99999V11.6667C13.3334 12.1087 13.1578 12.5326 12.8452 12.8452C12.5327 13.1577 12.1087 13.3333 11.6667 13.3333H9.16671' stroke='%23795FA8' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0_977_27266'%3E%3Crect width='20' height='20' fill='white'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E%0A");
+}
+
+.sidebar-integrate-bucketeers .menu__link--active:before {
+  background-image: url("data:image/svg+xml,%0A%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0_977_27266)'%3E%3Cpath d='M15.8333 6.89C16.0867 7.03628 16.297 7.24667 16.4433 7.50003C16.5896 7.75339 16.6666 8.04078 16.6666 8.33334V15C16.6666 15.442 16.491 15.866 16.1785 16.1785C15.8659 16.4911 15.442 16.6667 15 16.6667H8.33329C7.89127 16.6667 7.46734 16.4911 7.15478 16.1785C6.84222 15.866 6.66663 15.442 6.66663 15V8.33334C6.66663 7.89131 6.84222 7.46739 7.15478 7.15483C7.46734 6.84227 7.89127 6.66667 8.33329 6.66667H10.8333' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M4.16671 13.1117C3.9131 12.9652 3.70255 12.7546 3.55626 12.5009C3.40996 12.2472 3.33309 11.9595 3.33337 11.6667V4.99999C3.33337 4.55797 3.50897 4.13404 3.82153 3.82148C4.13409 3.50892 4.55801 3.33333 5.00004 3.33333H11.6667C12.1087 3.33333 12.5327 3.50892 12.8452 3.82148C13.1578 4.13404 13.3334 4.55797 13.3334 4.99999V11.6667C13.3334 12.1087 13.1578 12.5326 12.8452 12.8452C12.5327 13.1577 12.1087 13.3333 11.6667 13.3333H9.16671' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0_977_27266'%3E%3Crect width='20' height='20' fill='white'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E%0A");
+}
 
 .sidebar-feature-flags .menu__link:before {
   background-image: url("data:image/svg+xml,%0A%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M13.3333 5H6.66663C3.9052 5 1.66663 7.23858 1.66663 10C1.66663 12.7614 3.9052 15 6.66663 15H13.3333C16.0947 15 18.3333 12.7614 18.3333 10C18.3333 7.23858 16.0947 5 13.3333 5Z' stroke='%23795FA8' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M13.3333 11.6667C14.2538 11.6667 15 10.9205 15 10C15 9.07953 14.2538 8.33333 13.3333 8.33333C12.4128 8.33333 11.6666 9.07953 11.6666 10C11.6666 10.9205 12.4128 11.6667 13.3333 11.6667Z' stroke='%23795FA8' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 }
 
-    .sidebar-feature-flags .menu__link--active:before {
-      background-image: url("data:image/svg+xml,%0A%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M13.3333 5H6.66663C3.9052 5 1.66663 7.23858 1.66663 10C1.66663 12.7614 3.9052 15 6.66663 15H13.3333C16.0947 15 18.3333 12.7614 18.3333 10C18.3333 7.23858 16.0947 5 13.3333 5Z' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M13.3333 11.6667C14.2538 11.6667 15 10.9205 15 10C15 9.07953 14.2538 8.33333 13.3333 8.33333C12.4128 8.33333 11.6666 9.07953 11.6666 10C11.6666 10.9205 12.4128 11.6667 13.3333 11.6667Z' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-    }
+.sidebar-feature-flags .menu__link--active:before {
+  background-image: url("data:image/svg+xml,%0A%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M13.3333 5H6.66663C3.9052 5 1.66663 7.23858 1.66663 10C1.66663 12.7614 3.9052 15 6.66663 15H13.3333C16.0947 15 18.3333 12.7614 18.3333 10C18.3333 7.23858 16.0947 5 13.3333 5Z' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M13.3333 11.6667C14.2538 11.6667 15 10.9205 15 10C15 9.07953 14.2538 8.33333 13.3333 8.33333C12.4128 8.33333 11.6666 9.07953 11.6666 10C11.6666 10.9205 12.4128 11.6667 13.3333 11.6667Z' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
 
 .sidebar-creating-feature-flags > .menu__list-item-collapsible > .menu__link--sublist:before {
   background-image: url("data:image/svg+xml,%0A%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M18.3333 10C18.3333 7.23858 16.0947 5 13.3333 5H6.66663C3.9052 5 1.66663 7.23858 1.66663 10C1.66663 12.7614 3.9052 15 6.66663 15H9.99996M15 10C15 10.9205 14.2538 11.6667 13.3333 11.6667C12.4128 11.6667 11.6666 10.9205 11.6666 10C11.6666 9.07953 12.4128 8.33333 13.3333 8.33333C14.2538 8.33333 15 9.07953 15 10Z' stroke='%23795FA8' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M16 12V18M13 15H19' stroke='%23795FA8' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
@@ -380,9 +412,9 @@ code {
   background-image: url("data:image/svg+xml,%0A%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9.04171 10.125L15.8334 3.33333M15 4.16667L16.6667 5.83333M12.5 6.66667L14.1667 8.33333M10 12.5C10 14.341 8.50766 15.8333 6.66671 15.8333C4.82576 15.8333 3.33337 14.341 3.33337 12.5C3.33337 10.6591 4.82576 9.16667 6.66671 9.16667C8.50766 9.16667 10 10.6591 10 12.5Z' stroke='%23795FA8' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
 }
 
-    .sidebar-api-keys .menu__link--active:before {
-      background-image: url("data:image/svg+xml,%0A%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9.04171 10.125L15.8334 3.33333M15 4.16667L16.6667 5.83333M12.5 6.66667L14.1667 8.33333M10 12.5C10 14.341 8.50766 15.8333 6.66671 15.8333C4.82576 15.8333 3.33337 14.341 3.33337 12.5C3.33337 10.6591 4.82576 9.16667 6.66671 9.16667C8.50766 9.16667 10 10.6591 10 12.5Z' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
-    }
+.sidebar-api-keys .menu__link--active:before {
+  background-image: url("data:image/svg+xml,%0A%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9.04171 10.125L15.8334 3.33333M15 4.16667L16.6667 5.83333M12.5 6.66667L14.1667 8.33333M10 12.5C10 14.341 8.50766 15.8333 6.66671 15.8333C4.82576 15.8333 3.33337 14.341 3.33337 12.5C3.33337 10.6591 4.82576 9.16667 6.66671 9.16667C8.50766 9.16667 10 10.6591 10 12.5Z' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
+}
 
 .sidebar-testing-with-flags > .menu__list-item-collapsible > .menu__link--sublist:before {
   background-image: url("data:image/svg+xml,%0A%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0_977_27302)'%3E%3Cpath d='M4.69667 16.1367C3.64779 15.0878 2.93349 13.7514 2.64411 12.2965C2.35473 10.8417 2.50326 9.33369 3.07092 7.96325C3.63858 6.59281 4.59987 5.42148 5.83324 4.59737C7.0666 3.77326 8.51665 3.3334 10 3.3334C11.4834 3.3334 12.9334 3.77326 14.1668 4.59737C15.4001 5.42148 16.3614 6.59281 16.9291 7.96325C17.4968 9.33369 17.6453 10.8417 17.3559 12.2965C17.0665 13.7514 16.3522 15.0878 15.3033 16.1367' stroke='%23795FA8' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M13.3333 7.5L10 10.8333' stroke='%23795FA8' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0_977_27302'%3E%3Crect width='20' height='20' fill='white'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E%0A");
@@ -392,9 +424,9 @@ code {
   background-image: url("data:image/svg+xml,%0A%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0_977_27311)'%3E%3Cpath d='M8.33337 2.5H11.6667V5.83333H8.33337V2.5Z' stroke='%23795FA8' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M2.5 14.1667H5.83333V17.5H2.5V14.1667Z' stroke='%23795FA8' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M14.1666 14.1667H17.5V17.5H14.1666V14.1667Z' stroke='%23795FA8' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M5.83337 14.1667L10 10.8333L14.1667 14.1667' stroke='%23795FA8' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M10 5.83334V10.8333' stroke='%23795FA8' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0_977_27311'%3E%3Crect width='20' height='20' fill='white'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E%0A");
 }
 
-    .sidebar-feature-flags-integration .menu__link--active:before {
-      background-image: url("data:image/svg+xml,%0A%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0_977_27311)'%3E%3Cpath d='M8.33337 2.5H11.6667V5.83333H8.33337V2.5Z' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M2.5 14.1667H5.83333V17.5H2.5V14.1667Z' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M14.1666 14.1667H17.5V17.5H14.1666V14.1667Z' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M5.83337 14.1667L10 10.8333L14.1667 14.1667' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M10 5.83334V10.8333' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0_977_27311'%3E%3Crect width='20' height='20' fill='white'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E%0A");
-    }
+.sidebar-feature-flags-integration .menu__link--active:before {
+  background-image: url("data:image/svg+xml,%0A%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0_977_27311)'%3E%3Cpath d='M8.33337 2.5H11.6667V5.83333H8.33337V2.5Z' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M2.5 14.1667H5.83333V17.5H2.5V14.1667Z' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M14.1666 14.1667H17.5V17.5H14.1666V14.1667Z' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M5.83337 14.1667L10 10.8333L14.1667 14.1667' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M10 5.83334V10.8333' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0_977_27311'%3E%3Crect width='20' height='20' fill='white'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E%0A");
+}
 
 .sidebar-client > .menu__list-item-collapsible > .menu__link--sublist:before {
   background-image: url("data:image/svg+xml,%0A%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2.5 17.5H17.5M7.5 6.66667H8.33333M7.5 10H8.33333M7.5 13.3333H8.33333M11.6667 6.66667H12.5M11.6667 10H12.5M11.6667 13.3333H12.5M4.16667 17.5V4.16667C4.16667 3.72464 4.34226 3.30072 4.65482 2.98816C4.96738 2.67559 5.39131 2.5 5.83333 2.5H14.1667C14.6087 2.5 15.0326 2.67559 15.3452 2.98816C15.6577 3.30072 15.8333 3.72464 15.8333 4.16667V17.5' stroke='%23573792' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
@@ -408,21 +440,34 @@ code {
   background-image: url("data:image/svg+xml,%0A%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M16.25 10.4767L9.99997 16.6667L3.74997 10.4767C3.33772 10.0755 3.013 9.59337 2.79626 9.06055C2.57951 8.52774 2.47543 7.95582 2.49058 7.3808C2.50573 6.80579 2.63977 6.24014 2.88426 5.71947C3.12876 5.19881 3.47841 4.7344 3.9112 4.35551C4.344 3.97661 4.85055 3.69143 5.39898 3.51793C5.9474 3.34442 6.5258 3.28635 7.09777 3.34736C7.66974 3.40837 8.22288 3.58716 8.72236 3.87245C9.22184 4.15774 9.65684 4.54336 9.99997 5.00502C10.3446 4.54671 10.7801 4.16446 11.2792 3.8822C11.7784 3.59993 12.3304 3.42373 12.9007 3.36463C13.4711 3.30552 14.0475 3.36477 14.5939 3.53869C15.1404 3.7126 15.645 3.99742 16.0763 4.37533C16.5075 4.75324 16.8562 5.2161 17.1003 5.73494C17.3445 6.25378 17.4789 6.81743 17.4952 7.39062C17.5115 7.9638 17.4093 8.53419 17.1951 9.06607C16.9808 9.59795 16.6591 10.0799 16.25 10.4817M9.99997 5.00002L7.2558 7.74419C7.09957 7.90046 7.01181 8.11239 7.01181 8.33336C7.01181 8.55433 7.09957 8.76625 7.2558 8.92252L7.7083 9.37502C8.2833 9.95002 9.21663 9.95002 9.79163 9.37502L10.625 8.54169C11.1222 8.04441 11.7967 7.76505 12.5 7.76505C13.2032 7.76505 13.8777 8.04441 14.375 8.54169L16.25 10.4167M10.4166 12.9167L12.0833 14.5834M12.5 10.8334L14.1666 12.5' stroke='%23795FA8' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
 }
 
-    .sidebar-contributing .menu__link--active:before {
-      background-image: url("data:image/svg+xml,%0A%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M16.25 10.4767L9.99997 16.6667L3.74997 10.4767C3.33772 10.0755 3.013 9.59337 2.79626 9.06055C2.57951 8.52774 2.47543 7.95582 2.49058 7.3808C2.50573 6.80579 2.63977 6.24014 2.88426 5.71947C3.12876 5.19881 3.47841 4.7344 3.9112 4.35551C4.344 3.97661 4.85055 3.69143 5.39898 3.51793C5.9474 3.34442 6.5258 3.28635 7.09777 3.34736C7.66974 3.40837 8.22288 3.58716 8.72236 3.87245C9.22184 4.15774 9.65684 4.54336 9.99997 5.00502C10.3446 4.54671 10.7801 4.16446 11.2792 3.8822C11.7784 3.59993 12.3304 3.42373 12.9007 3.36463C13.4711 3.30552 14.0475 3.36477 14.5939 3.53869C15.1404 3.7126 15.645 3.99742 16.0763 4.37533C16.5075 4.75324 16.8562 5.2161 17.1003 5.73494C17.3445 6.25378 17.4789 6.81743 17.4952 7.39062C17.5115 7.9638 17.4093 8.53419 17.1951 9.06607C16.9808 9.59795 16.6591 10.0799 16.25 10.4817M9.99997 5.00002L7.2558 7.74419C7.09957 7.90046 7.01181 8.11239 7.01181 8.33336C7.01181 8.55433 7.09957 8.76625 7.2558 8.92252L7.7083 9.37502C8.2833 9.95002 9.21663 9.95002 9.79163 9.37502L10.625 8.54169C11.1222 8.04441 11.7967 7.76505 12.5 7.76505C13.2032 7.76505 13.8777 8.04441 14.375 8.54169L16.25 10.4167M10.4166 12.9167L12.0833 14.5834M12.5 10.8334L14.1666 12.5' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
-    }
+.sidebar-contributing .menu__link--active:before {
+  background-image: url("data:image/svg+xml,%0A%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M16.25 10.4767L9.99997 16.6667L3.74997 10.4767C3.33772 10.0755 3.013 9.59337 2.79626 9.06055C2.57951 8.52774 2.47543 7.95582 2.49058 7.3808C2.50573 6.80579 2.63977 6.24014 2.88426 5.71947C3.12876 5.19881 3.47841 4.7344 3.9112 4.35551C4.344 3.97661 4.85055 3.69143 5.39898 3.51793C5.9474 3.34442 6.5258 3.28635 7.09777 3.34736C7.66974 3.40837 8.22288 3.58716 8.72236 3.87245C9.22184 4.15774 9.65684 4.54336 9.99997 5.00502C10.3446 4.54671 10.7801 4.16446 11.2792 3.8822C11.7784 3.59993 12.3304 3.42373 12.9007 3.36463C13.4711 3.30552 14.0475 3.36477 14.5939 3.53869C15.1404 3.7126 15.645 3.99742 16.0763 4.37533C16.5075 4.75324 16.8562 5.2161 17.1003 5.73494C17.3445 6.25378 17.4789 6.81743 17.4952 7.39062C17.5115 7.9638 17.4093 8.53419 17.1951 9.06607C16.9808 9.59795 16.6591 10.0799 16.25 10.4817M9.99997 5.00002L7.2558 7.74419C7.09957 7.90046 7.01181 8.11239 7.01181 8.33336C7.01181 8.55433 7.09957 8.76625 7.2558 8.92252L7.7083 9.37502C8.2833 9.95002 9.21663 9.95002 9.79163 9.37502L10.625 8.54169C11.1222 8.04441 11.7967 7.76505 12.5 7.76505C13.2032 7.76505 13.8777 8.04441 14.375 8.54169L16.25 10.4167M10.4166 12.9167L12.0833 14.5834M12.5 10.8334L14.1666 12.5' stroke='%23FFFFFF' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
+}
 
 .sidebar-documentation-style-guide > .menu__list-item-collapsible > .menu__link--sublist:before {
   background-image: url("data:image/svg+xml,%0A%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0_977_27365)'%3E%3Cpath d='M11.6666 12.9167C11.6666 13.6902 11.9739 14.4321 12.5209 14.9791C13.0679 15.526 13.8097 15.8333 14.5833 15.8333C15.3568 15.8333 16.0987 15.526 16.6457 14.9791C17.1927 14.4321 17.5 13.6902 17.5 12.9167C17.5 12.1431 17.1927 11.4013 16.6457 10.8543C16.0987 10.3073 15.3568 10 14.5833 10C13.8097 10 13.0679 10.3073 12.5209 10.8543C11.9739 11.4013 11.6666 12.1431 11.6666 12.9167Z' stroke='%23795FA8' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M2.5 15.8334V7.08335C2.5 6.30981 2.80729 5.56794 3.35427 5.02096C3.90125 4.47398 4.64312 4.16669 5.41667 4.16669C6.19021 4.16669 6.93208 4.47398 7.47906 5.02096C8.02604 5.56794 8.33333 6.30981 8.33333 7.08335V15.8334' stroke='%23795FA8' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M2.5 10.8333H8.33333' stroke='%23795FA8' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M17.5 10V15.8333' stroke='%23795FA8' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0_977_27365'%3E%3Crect width='20' height='20' fill='white'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E%0A");
 }
 
 .navbar__items:not(.navbar__items--right) .navbar__link {
-	padding-left: 30px;
-	padding-right: 30px;
+	padding-left: 35px;
+	padding-right: 35px;
+  font-weight: 700;
+  font-size: 16px;
 }
 
 .navbar__link:hover {
-  /*color: #de0b99;*/
+	position: relative;
+}
+
+.navbar__items:not(.navbar__items--right) .navbar__link:hover:not(.navbar__link--active):before {
+	content: '■';
+	position: absolute;
+	top: 11px;
+	margin-left: -18px;
+	color: #E439AC;
+	transform: rotate(45deg);
+	font-size: 12px;
+	line-height: 11px;
 }
 
 .navbar__link--active {
@@ -438,14 +483,12 @@ code {
 	width: 100%;
 	height: 70px;
 	background-color: #684B9D;
-  	z-index: -1;
+  z-index: -1;
 }
 
 .menu__link--active:not(.menu__link--sublist) {
-    /*background-color: #DDD7E9;*/
-    background-color: #573792;
-    /*color: #573792;*/
-    color: #FFF;
+  background-color: #573792;
+  color: #FFF;
 }
 
 .sidebar-title {
@@ -453,8 +496,8 @@ code {
 	margin-top: 10px;
 	font-size: 11px;
 	text-transform: uppercase;
-  	color: #9789BA;
-  	letter-spacing: 1px;
+  color: #9789BA;
+  letter-spacing: 1px;
 }
 
 .prism-code .token-line > span:nth-child(1) {
@@ -472,10 +515,6 @@ code {
 
 .prism-code {
   background: linear-gradient(90deg,#573792 2.5rem,#EFECF5 0);
-}
-
-.codeLineNumber_node_modules-@docusaurus-theme-classic-lib-theme-CodeBlock-Line-styles-module {
-  background-color: transparent !important;
 }
 
 .prism-code .token-line:before {
@@ -497,7 +536,6 @@ code {
     counter-increment: a;
     position: relative;
     font-family: "FiraCode";
-    /*font-weight: 400;*/
 }
 
 .prism-code .token-line:before {
@@ -529,7 +567,7 @@ code {
 
 @media (max-width: 400px) {
 	.aa-DetachedSearchButton {
-    	width: 100px !important;
+    width: 100px !important;
 	}
 }
 
