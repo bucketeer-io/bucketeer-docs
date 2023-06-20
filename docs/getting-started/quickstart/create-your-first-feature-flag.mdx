@@ -1,0 +1,32 @@
+---
+title: Create your first feature flag
+# sidebar_position:
+slug: /getting-started/create-your-first-feature-flag
+description: This page guides the user on how to create a API key to be used with a feature flag.
+tags: ['guide', 'feature-flage', 'create']
+---
+
+:::tip
+
+When configuring the SDK, in step 3, you must provide your `apiKey`, `apiURL`, and `featureTag`. To get this information, you need to create a feature flag. Therefore, we recommend you review the [Using Feature Flags](../using-feature-flags/) guides before using any SDK.
+
+:::
+
+## Optimize Bucketeer use
+
+The integration and utilization of Bucketeer are straightforward, giving you complete control over configuration and usage. However, one step can significantly impact server response time and costs, ultimately affecting the user experience. In this regard, we provide a brief overview of this topic, which is covered in more detail in the [Using Feature Flags](../using-feature-flags/) section.
+
+During step 3 of the integration process, describe before, you are required to provide the `featureTag`. The `featureTag` is defined when creating the feature flag and serves two purposes. Firstly, it assists in searching within the tag list on the Bucketeer dashboard. Secondly, and more crucially, the `featureTag` plays a critical role in optimizing the usage of the Bucketeer system.
+
+Feature tags act as limiters when making server calls to evaluate users. Consequently, if a call does not use tags or employs a tag used by numerous feature flags, a large number of feature flags will be returned for evaluation. This might not pose a problem for small systems with few feature flags. However, as the system expands, failure to utilize tags for identifying and optimizing evaluation calls can result in excessive processing on your server and increased operational costs. Moreover, it can lead to larger response times, negatively impacting the user experience. Therefore, employing targeted and assertive tags will:
+
+- Accelerate the evaluation process by analyzing only the necessary aspects.
+- Reduce information traffic between the server and the local application.
+
+Despite the significance and impact on performance and costs, using tags within Bucketeer is optional.
+
+:::tip
+
+The Bucketeer team strongly recommends the use of `featureTag` to optimize your operation.
+
+:::
