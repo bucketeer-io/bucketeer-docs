@@ -26,8 +26,30 @@ const sidebars = {
       items: [
         'getting-started/create-bucketeer-account',
         'getting-started/bucketeer-dashboard',
-        'getting-started/choose-sdk',
-        'getting-started/integrate-bucketeer',
+        {
+          type: 'category',
+          label: 'Quickstart',
+          link: {
+            type: 'doc',
+            id: 'getting-started/quickstart/index'
+          },
+          items: [
+            'getting-started/quickstart/create-an-api-key',
+            'getting-started/quickstart/create-your-first-feature-flag',
+            {
+              type: 'category',
+              label: 'Integrate Bucketeer',
+              link: {
+                type: 'doc',
+                id: 'getting-started/quickstart/integrate-bucketeer/index'
+              },
+              items: [
+                'getting-started/quickstart/integrate-bucketeer/choose-sdk',
+              ]
+            },
+            'getting-started/quickstart/check-events'
+          ]
+        },
         'getting-started/bucketeer-vocabulary'
       ],
     },
