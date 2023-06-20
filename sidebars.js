@@ -148,6 +148,18 @@ const sidebars = {
         }
       ],
     },
+    {
+      type: 'category',
+      label: 'Best Practices',
+      link: {
+        type: 'doc',
+        id: 'best-practices/index',
+      },
+      items: [
+          'best-practices/feature-flags-life-cycle',
+          'best-practices/optimize-bucketeer-with-tags'
+      ],
+    },
   ],
 }
 
