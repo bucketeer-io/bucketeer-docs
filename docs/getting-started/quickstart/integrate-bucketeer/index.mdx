@@ -1,7 +1,7 @@
 ---
 title: Integrate to Bucketeer
 sidebar_position: 1
-slug: /getting-started/integrate-bucketeers
+slug: /getting-started/integrate-bucketeer
 description: Describes the steps to integrate the user application with Bucketeer.
 tags: ['guide', 'integration', 'sdk']
 ---
@@ -99,7 +99,7 @@ import {
 
 3. **Configure the Bucketeer Client**: Provide the credentials for your environment to configure the Bucketeer client. These credentials uniquely identify your project and environment and authorize your application to connect with Bucketeer. Here is the description of each required information:
 
-   - API key: This is a unique key that grants access to Bucketeer. If you haven't done so, you can create an API key by following the instructions in the [Create an API key](../create-an-api-key) guide.
+   - API key: This is a unique key that grants access to Bucketeer. If you have not created one yet, you can create an API key by following the instructions in the [Create an API key](../create-an-api-key) guide.
    - API URL: The Administrator will provide you with the API URL when your user account is created. It serves as the endpoint for your application to connect with Bucketeer's API.
    - User ID: This refers to the ID of the end user who will be utilizing the application integrated with Bucketeer. It's important to note that the User ID corresponds to the end user, not the user accessing the admin console or dashboard.
    - Feature tag: When creating a feature flag in Bucketeer, you define a feature tag associated with it. This tag helps identify the specific feature flag within Bucketeer.
@@ -166,7 +166,7 @@ const user = defineBKTUser({
 </TabItem>
 </Tabs>
 
-4. **Assign Feature Flag Variations**: The variation method allows you to control whether a feature flag is enabled or disabled for specific users. By using the feature flag ID, you can associate different variations of the flag with different users. Each feature flag has a unique ID, which enables you to determine which variation of the flag a user will see in your application.
+4. **Assign Feature Flag Variations**: The variation method allows you to control whether a feature flag is enabled or disabled for specific users. By using the feature flag ID, you can associate different variations of the flag with different users. Each feature flag has a unique ID, which enables you to determine which variation of the flag a user will see in your application. If you have not create one yet, you can create a feature flag by following the instructions in the [Create your first feature flag](../create-your-first-feature-flag) guide.
 
 <Tabs>
 <TabItem value="kt" label="Android">
