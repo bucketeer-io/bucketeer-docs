@@ -6,27 +6,35 @@ description: This page guides the user on how to create a API key to be used wit
 tags: ['guide', 'feature-flage', 'create']
 ---
 
-:::tip
+import CenteredImg from '@site/src/components/centered-img/CenteredImg';
 
-When configuring the SDK, in step 3, you must provide your `apiKey`, `apiURL`, and `featureTag`. To get this information, you need to create a feature flag. Therefore, we recommend you review the [Using Feature Flags](../using-feature-flags/) guides before using any SDK.
+To create a feature flag on the [Bucketeer dashboard](https://dev.bucketeer.jp/)., access the **Feature Flags** tab. You will find all existing feature flags available on the current environment on this page. To add a new feature flag, click **+ Add**. A side panel will appear on the right side of the screen.
 
-:::
+To create the feature flag, you will need to provide the following information through the side panel fields:
 
-## Optimize Bucketeer use
+- **ID**: This is used to uniquely identify the feature flag and has a maximum length of 100 characters.
+- **Name**: Provide a descriptive name for the feature flag (up to 100 characters) to easily identify it.
+- **Description**: Add a brief explanation of the feature flag's purpose and usage. Keep it concise within 100 characters.
+- **Tags** (optional): You can add tags to the feature flag, which help in searching within the Bucketeer dashboard's tag list and filtering server-returned information after a request.
+- **Flag type**: Specify the type of flag you want to create. It can be boolean, string, number, or JSON. Boolean flags allow only two variations (true and false), while other flag types can have any number of variations (at least two). To add more variations, use the **Add variation** button.
+- **Variation data**: For each variation, provide its corresponding value. For boolean flags, the variations are predefined as "true" and "false." For other flag types, you need to define the value for each variation. Names and descriptions for variations are optional but recommended for easier review later on.
+- **On and off variation**: Specify which variation should be returned when the feature flag is turned on or off respectively.
 
-The integration and utilization of Bucketeer are straightforward, giving you complete control over configuration and usage. However, one step can significantly impact server response time and costs, ultimately affecting the user experience. In this regard, we provide a brief overview of this topic, which is covered in more detail in the [Using Feature Flags](../using-feature-flags/) section.
+The following image presents an example of data used to create a feature flag.
 
-During step 3 of the integration process, describe before, you are required to provide the `featureTag`. The `featureTag` is defined when creating the feature flag and serves two purposes. Firstly, it assists in searching within the tag list on the Bucketeer dashboard. Secondly, and more crucially, the `featureTag` plays a critical role in optimizing the usage of the Bucketeer system.
+<CenteredImg
+  imgURL="img/getting-started/quickstart/create-feature-flag.png"
+  alt="create feature flag panel"
+  wSize="400px"
+  borderWidth="1px"
+/>
 
-Feature tags act as limiters when making server calls to evaluate users. Consequently, if a call does not use tags or employs a tag used by numerous feature flags, a large number of feature flags will be returned for evaluation. This might not pose a problem for small systems with few feature flags. However, as the system expands, failure to utilize tags for identifying and optimizing evaluation calls can result in excessive processing on your server and increased operational costs. Moreover, it can lead to larger response times, negatively impacting the user experience. Therefore, employing targeted and assertive tags will:
+After creating the feature flag, it will apear on the **Feature Flags** page and have the **OFF** state, as shown in the image below. To turn it **ON**, use the toggle. In addition, you have access to its ID (feature flag ID), which is used when integrating a feature flag, and tags defined when creating the feature flags. For the example below, the feature flag ID is **feature-javascript-e2e-boolean**, and the **javascript** and **web** tags were used.
 
-- Accelerate the evaluation process by analyzing only the necessary aspects.
-- Reduce information traffic between the server and the local application.
+<CenteredImg
+  imgURL="img/getting-started/quickstart/created-feature-flag.png"
+  alt="created feature flag"
+  borderWidth="1px"
+/>
 
-Despite the significance and impact on performance and costs, using tags within Bucketeer is optional.
-
-:::tip
-
-The Bucketeer team strongly recommends the use of `featureTag` to optimize your operation.
-
-:::
+With the API key and the feature flag ID, you can follow to the next step and [integrate Bucketeer](./integrate-bucketeer/index) to your application.
