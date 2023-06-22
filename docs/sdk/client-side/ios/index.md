@@ -20,10 +20,12 @@ Before starting, ensure that you follow the [Getting Started](/) guide.
 
 ### Implementing dependency
 
-Implement the dependency in your Podfile file. Please refer to the [SDK releases page](https://github.com/bucketeer-io/ios-client-sdk/releases) to find the latest version.
+To find the latest version, refer to the [SDK releases page](https://github.com/bucketeer-io/ios-client-sdk/releases).
 
 <Tabs>
-<TabItem value="swift" label="Swift">
+<TabItem value="swift" label="Cocoapods">
+
+Implement the dependency in your **Podfile** file.
 
 ```swift showLineNumbers
 use_frameworks!
@@ -32,6 +34,27 @@ target 'YOUR_TARGET_NAME' do
   pod 'Bucketeer', 'LATEST_VERSION'
 end
 ```
+
+</TabItem>
+<TabItem value="spm" label="Swift Package Manager">
+
+You can install the SDK as a dependency in your **Package.swift** file or through Xcode.
+
+```swift showLineNumbers
+// Package.swift
+dependencies: [
+  .package(url: "https://github.com/bucketeer-io/ios-client-sdk.git", .exact("LATEST_VERSION")),
+],
+targets: [
+  .target(
+    name: "YOUR_TARGET_NAME",
+    dependencies: ["Bucketeer"]
+  )
+],
+```
+To include a package dependency in your Xcode project, follow these steps:
+
+Go to **File** -> **Swift Packages** -> **Add Package Dependency**. Next, enter the clone URL of the [iOS SDK repository](https://github.com/bucketeer-io/ios-client-sdk), and specify the version you desire.
 
 </TabItem>
 </Tabs>
