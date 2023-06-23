@@ -156,6 +156,7 @@ const sidebars = {
         id: 'best-practices/index',
       },
       items: [
+          'best-practices/account-types',
           'best-practices/feature-flags-life-cycle',
           'best-practices/optimize-bucketeer-with-tags'
       ],
