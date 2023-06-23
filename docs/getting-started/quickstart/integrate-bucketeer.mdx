@@ -14,8 +14,6 @@ Integrating Bucketeer with your application is a simple process that is the same
 
 1. **Install the Bucketeer SDK**: Use your project's dependency manager to install or implement the Bucketeer SDK in your application, allowing it to access the Bucketeer SDK and its features.
 
-<Tabs defaultValue={null} groupId="integrate-buckteer-side">
-<TabItem value="client-side" label="Client Side">
 <Tabs groupId="integrate-buckteer-platform">
 <TabItem value="kt" label="Android">
 
@@ -59,16 +57,24 @@ yarn add @bucketeer/sdk
 ```
 
 </TabItem>
-</Tabs>
+<TabItem value="go" label="Go">
+
+```sh showLineNumbers
+not available
+```
+
 </TabItem>
-<TabItem value="server-side" label="Server Side">
+<TabItem value="node-js" label="Node JS">
+
+```sh showLineNumbers
+not available
+```
+
 </TabItem>
 </Tabs>
 
 2. **Import the Bucketeer Client**: In your application's code, import the Bucketeer client, the primary interface to interact with the Bucketeer SDK, and communicate with the Bucketeer service. Each SDK guide covers this step and the previous one in detail. Access the [SDKs](../sdk/) page to get more information.
 
-<Tabs defaultValue={null} groupId="integrate-buckteer-side">
-<TabItem value="client-side" label="Client Side">
 <Tabs groupId="integrate-buckteer-platform">
 <TabItem value="kt" label="Android">
 
@@ -104,9 +110,19 @@ import {
 ```
 
 </TabItem>
-</Tabs>
+<TabItem value="go" label="Go">
+
+```sh showLineNumbers
+not available
+```
+
 </TabItem>
-<TabItem value="server-side" label="Server Side">
+<TabItem value="node-js" label="Node JS">
+
+```sh showLineNumbers
+not available
+```
+
 </TabItem>
 </Tabs>
 
@@ -117,8 +133,6 @@ import {
    - **User ID**: This refers to the ID of the end user who will be utilizing the application integrated with Bucketeer. It's important to note that the User ID corresponds to the end user, not the user accessing the admin console or dashboard.
    - **Feature tag**: When creating a feature flag in Bucketeer, you define a tag associated with it. This tag helps identify the specific flag within Bucketeer.
 
-<Tabs defaultValue={null} groupId="integrate-buckteer-side">
-<TabItem value="client-side" label="Client Side">
 <Tabs groupId="integrate-buckteer-platform">
 <TabItem value="kt" label="Android">
 
@@ -197,16 +211,24 @@ const client = getBKTClient();
 ```
 
 </TabItem>
-</Tabs>
+<TabItem value="go" label="Go">
+
+```sh showLineNumbers
+not available
+```
+
 </TabItem>
-<TabItem value="server-side" label="Server Side">
+<TabItem value="node-js" label="Node JS">
+
+```sh showLineNumbers
+not available
+```
+
 </TabItem>
 </Tabs>
 
 4. **Assign Feature Flag Variations**: The variation method allows you to control whether a flag is enabled or disabled for specific users. By using the `FLAG_ID`, you can associate different variations of the flag with different users. If you have not create one yet, use the [Create your first feature flag](../create-your-first-feature-flag) guide. Every time the SDK query to the server, an event is generated. The flag call and the variations are stored on the server in real-time.
 
-<Tabs defaultValue={null} groupId="integrate-buckteer-side">
-<TabItem value="client-side" label="Client Side">
 <Tabs groupId="integrate-buckteer-platform">
 <TabItem value="kt" label="Android">
 
@@ -257,10 +279,19 @@ if (showNewFeature) {
 ```
 
 </TabItem>
-</Tabs>
+<TabItem value="go" label="Go">
+
+```sh showLineNumbers
+not available
+```
 
 </TabItem>
-<TabItem value="server-side" label="Server Side">
+<TabItem value="node-js" label="Node JS">
+
+```sh showLineNumbers
+not available
+```
+
 </TabItem>
 </Tabs>
 
