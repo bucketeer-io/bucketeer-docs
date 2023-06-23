@@ -16,7 +16,7 @@ The following steps show how to create an account as an Admin.
 
 There are two types of accounts available in Buckteers, each with different access levels:
 
-- **Admin account**: it provides full access and control over all existing projects. Users with admin accounts can access all existing environments and manage other users' accounts.
+- **Admin account**: it provides full access and control over all existing projects. Members with admin accounts can access all existing environments and manage other users' accounts.
 
 - **Environment account**: it is associated with a specific environment on the platform. Users with Environment accounts can only access tags, reports, and data related to that particular environment.
 
