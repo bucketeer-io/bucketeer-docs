@@ -18,7 +18,7 @@ There are two types of accounts available in Buckteers, each with different acce
 
 - **Admin account**: it provides full access and control over all existing projects. Members with admin accounts can access all existing environments and manage other users' accounts.
 
-- **Environment account**: it is associated with a specific environment on the platform. Users with Environment accounts can only access tags, reports, and data related to that particular environment.
+- **Environment account**: it is associated with a specific environment on the platform. Members with Environment accounts can access all the features of that particular environment.
 
 ### Environment account roles
 
