@@ -10,13 +10,13 @@ On this page, you will find a list of essential technical terms commonly used in
 
 **Environment**: An environment represents an organizational unit within a project. It corresponds to the deployment environments of your code, such as development, staging, and production. Each project can have multiple environments containing the same flags with potentially different states, targets, and rules.
 
-**Evaluation**: Evaluation refers to the process where the Bucketeer SDK receives information about a flag and its associated context from your application's code. The SDK then returns the appropriate flag variation for that context, allowing the flag to be evaluated for a specific customer or context.
+**Evaluation**: Evaluation refers to the process where the Bucketeer SDK receives information about a flag and the associated user from your application's code. The SDK then returns the appropriate flag variation for that user, allowing the flag to be evaluated for a specific user or users group.
 
 **Experiment**: Experiments in Bucketeer are crucial for measuring the impact of a chosen feature on selected users. An experiment combines a feature flag, defined goals, and user segments to analyze how the feature contributes to achieving those goals.
 
 **Feature**: A feature refers to a specification or element of your application, such as a button, picture, or more complex components like a purchase flow or recommendation algorithm.
 
-**Flag**: A flag is the fundamental unit of feature management in Bucketeer. It represents different feature variations and includes rules that determine which entities can access each variation. Entities can be a percentage of your application's traffic, individuals, or software entities with common characteristics.
+**Flag**: A flag is the fundamental unit of feature management in Bucketeer. It represents different feature variations and includes rules that determine which entities can access each variation. Entities can be a percentage of your application's traffic, individuals, or software entities with common characteristics. Flag and feature flag are considered synonyms inside the Bucketeer documentation.
 
 **Goal**: Goals are important metrics for tracking and making decisions based on certain indexes. They represent conversions or business metrics, such as clicks, page views, or user engagement on a website.
 
