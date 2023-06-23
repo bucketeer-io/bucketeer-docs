@@ -26,7 +26,7 @@ In addition to being limited to a specific environment, Environment accounts als
 
 - **Viewer**: viewers have read-only access to their assigned environments. They can view all data but cannot make any modifications. This role is suitable for individuals in your organization who need visibility into feature flags without the ability to modify rollout rules or administer the system.
 - **Editor**: editors can modify feature flags, goals, experiments, and more within their assigned environments. However, they cannot add new team members or create API keys.
-- **Owner**: owners possess complete control over their assigned environments. They can perform various actions and make changes across the environment, including adding and removing team members.
+- **Owner**: owners can do anything within their assigned environments. Including adding team members, and API keys.
 
 :::note
 
