@@ -43,15 +43,16 @@ You can install the SDK as a dependency in your **Package.swift** file or throug
 ```swift showLineNumbers
 // Package.swift
 dependencies: [
-  .package(url: "https://github.com/bucketeer-io/ios-client-sdk.git", .exact("LATEST_VERSION")),
+  .package(url: "https://github.com/bucketeer-io/ios-client-sdk.git", exact: "LATEST_VERSION"),
 ],
 targets: [
   .target(
     name: "YOUR_TARGET_NAME",
-    dependencies: ["Bucketeer"]
+    dependencies: [.product(name: "Bucketeer", package: "ios-client-sdk")],
   )
 ],
 ```
+
 To include a package dependency in your Xcode project, follow these steps:
 
 Go to **File** -> **Swift Packages** -> **Add Package Dependency**. Next, enter the clone URL of the [iOS SDK repository](https://github.com/bucketeer-io/ios-client-sdk), and specify the version you desire.
