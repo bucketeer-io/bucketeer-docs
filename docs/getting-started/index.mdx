@@ -51,15 +51,21 @@ Getting started with Bucketeer is a straightforward process. This section provid
 
 If you are unsure about the role of feature flags or how your team will utilize Bucketeer, we recommend exploring the following sections for further clarification and guidance. These resources will provide insights and help you understand how feature flags and Bucketeer can benefit your development process.
 
+:::note
+
+The terms **feature flag** and **flag** are considered synonymous in this documentation.
+
+:::
+
 ## What are feature flags
 
-Feature flags are a framework that allows developers to control the visibility and behavior of features in real-time without deploying new code. One key advantage of feature flags is the ability to perform a progressive rollout of new features. By gradually releasing features to a subset of users or specific environments, developers can monitor performance, collect user feedback, and resolve issues before making the features available. This controlled deployment reduces the risks of releasing untested or unstable features, resulting in a smoother user experience.
+Feature flags are a framework that allows developers to control the visibility and behavior of features in real-time without deploying new code. One key advantage of using them is the ability to perform a progressive rollout of new features. By gradually releasing features to a subset of users or specific environments, developers can monitor performance, collect user feedback, and resolve issues before making the features available. This controlled deployment reduces the risks of releasing untested or unstable features, resulting in a smoother user experience.
 
-Feature flags also enable A/B testing, allowing developers to compare different feature variations and make data-driven decisions. This optimization technique enhances user engagement, conversions, and overall product performance.
+Flags also enable A/B testing, allowing developers to compare different feature variations and make data-driven decisions. This optimization technique enhances user engagement, conversions, and overall product performance.
 
 Additionally, feature flags align with trunk-based development, enabling developers to merge changes to a shared codebase without affecting production users. This practice ensures a releasable codebase, fostering collaboration within large teams.
 
-To learn how to use and take advantage feature flags on Bucketeer, check the [Using Feature Flags](../using-feature-flags) section.
+To learn how to use and take advantage of flags on Bucketeer, check the [Using Feature Flags](../using-feature-flags) section.
 
 ## User roles on Bucketeer
 
@@ -86,16 +92,14 @@ Bucketeer was designed to accommodate different types of users. Below you find a
     integrate the chosen SDK into your codebase.
   </p>
   <p>
-    Once you grasp how feature flags work, you can collaborate with other
+    Once you grasp how flags work, you can collaborate with other
     organization members to determine how you want to target different
-    variations of feature flags to specific contexts or segments, such as user
-    groups or environments.As you add more feature flags to your application, your team can organize them
-    across different environments to ensure effective management and deployment.
+    variations to specific users or user groups. As you add more feature flags to your application, your team can organize them across different environments to ensure effective management and deployment.
   </p>
 
   <p>
     In addition to working with feature flags, as a software developer, you may
-    also have responsibilities related to feature management. You cna use automation solutions to toggle feature flags.
+    also have responsibilities related to feature management. You can use automation solutions to toggle flags according to your needs.
   </p>
 </details>
 
@@ -107,15 +111,15 @@ Bucketeer was designed to accommodate different types of users. Below you find a
   </p>
   <p>
     First and foremost, it is important to understand how to enable or disable
-    feature flags. Familiarize yourself with managing feature flags and the
-    mechanisms for toggling them on and off with the
+    feature flags. Familiarize yourself with managing flags and the mechanisms
+    for toggling them on and off with the
     <a href="../using-feature-flags"> Using Feature Flags</a> guide.
   </p>
   <p>
-    In addition to managing feature flags, you play a crucial role in designing
-    and monitoring experiments to assess the impact of feature releases. These
+    In addition to managing flags, you play a crucial role in designing and
+    monitoring experiments to assess the impact of feature releases. These
     experiments involve a series of actions to test specific hypotheses. By
-    leveraging feature flags, you can selectively target different feature flag
+    leveraging feature flags, you can selectively target different flag
     variations to specific user base segments. Thus, you can observe and compare
     the reactions and behaviors of different user groups.
   </p>
@@ -127,10 +131,10 @@ Bucketeer was designed to accommodate different types of users. Below you find a
     resource.
   </p>
   <p>
-    By effectively utilizing feature flags and conducting thoughtful
-    experiments, you can gain valuable insights into the impact of feature
-    releases, optimize user experiences, and make informed decisions to drive
-    the success of your product.
+    By effectively utilizing flags and conducting thoughtful experiments, you
+    can gain valuable insights into the impact of feature releases, optimize
+    user experiences, and make informed decisions to drive the success of your
+    product.
   </p>
 </details>
 
@@ -140,31 +144,33 @@ Bucketeer was designed to accommodate different types of users. Below you find a
     As an account administrator in Bucketeer, you hold important
     responsibilities related to project and environment management, as well as
     user administration. Your role involves creating new projects, setting up
-    environments, and managing users within the Bucketeer platform.
+    environments, and managing members within the Bucketeer platform.
   </p>
   <p>
     One of your primary tasks is to create new projects. Projects serve as a way
-    to organize and manage multiple users within Bucketeer. Each project has its
-    own distinct set of environments and feature flags, allowing for efficient
-    management of different development initiatives. A guide on how to create
-    new projects will be provided in the feature.
+    to organize and manage multiple members within Bucketeer. Each project has
+    its own distinct set of environments and feature flags, allowing for
+    efficient management of different development initiatives. A guide on how to
+    create new projects will be provided in the feature.
   </p>
   <p>
     Creating and managing environments is another key responsibility.
     Environments enable you to oversee and control your feature flags throughout
     the entire development lifecycle, from local development to various stages.
     By setting up different environments, you can ensure smooth and
-    well-organized feature flag management within specific contexts. A guide on
-    how to create new projects will be provided in the feature.
+    well-organized flag management within specific contexts. A guide on how to
+    create new projects will be provided in the feature.
   </p>
   <p>
-    Additionally, as an administrator, you manage users within the Bucketeer
-    platform. This includes tasks such as adding or removing users, assigning
+    Additionally, as an administrator, you manage members within the Bucketeer
+    platform. This includes tasks such as adding or removing members, assigning
     appropriate roles and permissions, and ensuring that the right level of
     access is granted to individuals based on their responsibilities. Check{' '}
-    <a href="..//getting-started/create-bucketeer-account">
+    <a href="../getting-started/create-bucketeer-account">
       Create Bucketeer's account
     </a>{' '}
-    to learn more about accounts creation and available roles.
+    to learn more about accounts creation or access the{' '}
+    <a href="../best-practice/account-types">Bucketeer account types</a> to
+    learn more about the existing roles.
   </p>
 </details>
