@@ -8,7 +8,9 @@ tags: ['guide', 'account', 'create']
 
 import CenteredImg from '@site/src/components/centered-img/CenteredImg';
 
-Buckteers is an open-source project that allows you to manage and track data related to different environments. To begin using Buckteers, you need to create an account. This guide assumes that the Buckteers system is already up and running and that you have access to an Admin account.
+Bucketeer allows you to manage and track data related to different environments. To begin using Bucketeer, you need an account. Ask the administrator to create an account if you are a new team member.
+
+The following steps show how to create an account as an Admin.
 
 ## Account types
 
