@@ -6,6 +6,9 @@ description: Describe the impact of using tags with feature flags and the best p
 tags: ['best-practices', 'tags']
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 The integration and utilization of Bucketeer are straightforward, giving you complete control over configuration and usage. However, one step can significantly impact server response time and costs, ultimately affecting the user experience. In this regard, we provide a brief overview of this topic, which's covered in more detail in the [Using Feature Flags](../using-feature-flags/) section.
 
 During step 3 of the [integration process](../getting-started/integrate-bucketeer) you are required to provide the `featureTag`. To make your undertand easier, the code is replicated below:
@@ -20,14 +23,6 @@ val config = BKTConfig.builder()
   .apiEndpoint("YOUR_API_ENDPOINT")
   .featureTag("YOUR_FEATURE_TAG")
   .build()
-
-val user = BKTUser.builder()
-  .id("USER_ID")
-  .build()
-
-/* Initialize the client */
-BKTClient.initialize(this.application, config, user)
-val client = BKTClient.getInstance()
 ```
 
 </TabItem>
@@ -40,13 +35,6 @@ final config = BKTConfigBuilder()
   .apiURL("YOUR_API_URL")
   .featureTag("YOUR_FEATURE_TAG")
   .build();
-
-final user = BKTUserBuilder
-  .id("USER_ID")
-  .build();
-
-// Initialize the client
-final client = await BKTClient.initialize(config, user);
 ```
 
 </TabItem>
@@ -59,11 +47,6 @@ let config = BKTConfig(
   apiURL: "YOUR_API_URL",
   featureTag: "YOUR_FEATURE_TAG"
 )
-
-let user = BKTUser(id: "USER_ID")
-
-// Initialize the client
-BKTClient.initialize(config: config, user: user)
 ```
 
 </TabItem>
@@ -77,14 +60,6 @@ const config = defineBKTConfig({
   featureTag: 'YOUR_FEATURE_TAG',
   appVersion: 'YOUR_APP_VERSION',
 });
-
-const user = defineBKTUser({
-  id: 'USER_ID',
-});
-
-// Initialize the client
-await initializeBKTClient(config, user);
-const client = getBKTClient();
 ```
 
 </TabItem>
