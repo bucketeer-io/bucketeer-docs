@@ -25,7 +25,7 @@ To find the latest version, refer to the [SDK releases page](https://github.com/
 <Tabs>
 <TabItem value="swift" label="Cocoapods">
 
-Implement the dependency in your **Podfile** file.
+Implement the SDK in your **Podfile** file.
 
 ```swift showLineNumbers
 use_frameworks!
@@ -38,7 +38,7 @@ end
 </TabItem>
 <TabItem value="spm" label="Swift Package Manager">
 
-You can install the SDK as a dependency in your **Package.swift** file or through Xcode.
+Implement the SDK as a dependency in your **Package.swift** file or through Xcode.
 
 ```swift showLineNumbers
 // Package.swift
@@ -56,6 +56,15 @@ targets: [
 To include a package dependency in your Xcode project, follow these steps:
 
 Go to **File** -> **Swift Packages** -> **Add Package Dependency**. Next, enter the clone URL of the [iOS SDK repository](https://github.com/bucketeer-io/ios-client-sdk), and specify the version you desire.
+
+</TabItem>
+<TabItem value="carthage" label="Carthage">
+
+Implement the SDK in your **Cartfile** file.
+
+```swift showLineNumbers
+github "bucketeer-io/ios-client-sdk" ~> LATEST_VERSION
+```
 
 </TabItem>
 </Tabs>
