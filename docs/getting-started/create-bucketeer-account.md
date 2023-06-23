@@ -2,7 +2,7 @@
 title: Create a Bucketeer account
 # sidebar_position:
 slug: /getting-started/create-bucketeer-account
-description: This page guides the user on how to create the Bucketeer account.
+description: This page guides the the Admin on how to create a Bucketeer account.
 tags: ['guide', 'account', 'create']
 ---
 
@@ -33,8 +33,8 @@ The following steps show how to create an account as an Admin.
 
 :::info
 
-The new member's email must be a Gmail Account. Otherwise, the user will not have access to the dashboard.
+The new member's email must be a Gmail Account. Otherwise, the new member will not have access to the dashboard.
 
 :::
 
-Once the account is created, the Admin needs to contact the new member, letting him know he can access the dashboard. No notification email is sent to the new member after their account creation.
+Once the account is created, the Admin needs to contact the new member, informing them that they can access the dashboard. No notification email is sent to the new member after their account creation.

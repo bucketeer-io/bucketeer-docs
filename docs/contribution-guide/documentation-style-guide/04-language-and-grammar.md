@@ -16,7 +16,7 @@ It's important to explain unfamiliar abbreviations or acronyms when first introd
 
 | :one: First use                           | :two: Second use                  |
 |-------------------------------------------|-----------------------------------|
-| Content Management System                 | CMS                               |
+| Content Management System  (CMS)          | CMS                               |
 | Product Backlog Item (PBI)                | PBI                               |
 
 If the abbreviation or acronym is well known, like UX or HTML, use it instead (and don’t worry about spelling it out).
