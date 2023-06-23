@@ -10,7 +10,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import CenteredImg from '@site/src/components/centered-img/CenteredImg';
 
-Integrating Bucketeer with your application is a simple process that is the same across all SDKs. Bucketeer has multiple SDKs available, and you can refer to the [SDK](../sdk) page for further information. To integrate Bucketeer into your application, follow these steps:
+Integrating Bucketeer with your application is a simple process that's the same across all SDKs. Bucketeer has multiple SDKs available, and you can refer to the [SDK](../sdk) page for further information. To integrate Bucketeer into your application, follow these steps:
 
 1. **Install the Bucketeer SDK**: Use your project's dependency manager to install or implement the Bucketeer SDK in your application, allowing it to access the Bucketeer SDK and its features.
 
@@ -128,7 +128,7 @@ not available
 
 3. **Configure and initialize the Bucketeer Client**: Provide the credentials for your environment to configure the Bucketeer client and call the initialization function. The credentials uniquely identify your project and environment and authorize your application to connect with Bucketeer. Below you will find the description of each required information:
 
-   - **API key**: This is a unique key that grants access to Bucketeer. If you have not created one yet, you can create an API key by following the instructions in the [Create an API key](../create-an-api-key) guide.
+   - **API key**: This is a unique key that grants access to Bucketeer. If you have't created one yet, you can create an API key by following the instructions in the [Create an API key](../create-an-api-key) guide.
    - **API URL**: The Administrator will provide you with the API URL when your user account is created. It serves as the endpoint for your application to connect with Bucketeer's API.
    - **User ID**: This refers to the ID of the end user who will be utilizing the application integrated with Bucketeer. It's important to note that the User ID corresponds to the end user, not the user accessing the admin console or dashboard.
    - **Feature tag**: When creating a feature flag in Bucketeer, you define a tag associated with it. This tag helps identify the specific flag within Bucketeer.
@@ -227,7 +227,7 @@ not available
 </TabItem>
 </Tabs>
 
-4. **Assign Feature Flag Variations**: The variation method allows you to control whether a flag is enabled or disabled for specific users. By using the `FLAG_ID`, you can associate different variations of the flag with different users. If you have not create one yet, use the [Create your first feature flag](../create-your-first-feature-flag) guide. Every time the SDK query to the server, an event is generated. The flag call and the variations are stored on the server in real-time.
+4. **Assign Feature Flag Variations**: The variation method allows you to control whether a flag is enabled or disabled for specific users. By using the `FLAG_ID`, you can associate different variations of the flag with different users. If you have't created one yet, use the [Create your first feature flag](../create-your-first-feature-flag) guide. Every time the SDK queries the server, an event is generated. The flag call and the variations are stored on the server in real time.
 
 <Tabs groupId="integrate-buckteer-platform">
 <TabItem value="kt" label="Android">
@@ -303,4 +303,4 @@ not available
   wSize="100%"
 />
 
-By following these steps, you can successfully integrate Bucketeer into your application and take advantage of its powerful feature flag management capabilities. If you run into problems related to the Bucketer system or have some feedback, [contact the Bucketeer team](https://app.slack.com/client/T08PSQ7BQ/C043026BME1). For integration-related issues, contact your Admin or revisit the documentation.
+By following these steps, you can successfully integrate Bucketeer into your application and take advantage of its powerful feature flag management capabilities. If you run into problems related to the Bucketeer system or have some feedback, [contact the Bucketeer team](https://app.slack.com/client/T08PSQ7BQ/C043026BME1). For integration-related issues, contact your Admin or revisit the documentation.

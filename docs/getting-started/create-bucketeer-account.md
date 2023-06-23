@@ -8,7 +8,7 @@ tags: ['guide', 'account', 'create']
 
 import CenteredImg from '@site/src/components/centered-img/CenteredImg';
 
-Bucketeer allows you to manage and track data related to different environments. To begin using Bucketeer, you need an account. For additional information regarding the available account types on Bucketeer, check the [Bucketeer account types](../best-practice/account-types). Ask the project administrator to create an account if you are a new team member.
+Bucketeer allows you to manage and track data related to different environments. To begin using Bucketeer, you need an account. For additional information regarding the available account types on Bucketeer, check the [Bucketeer account types](../best-practice/account-types). Ask the project administrator to create an account if you're a new team member.
 
 The following steps show how to create an account as an Admin.
 
@@ -22,7 +22,7 @@ The following steps show how to create an account as an Admin.
   wSize='100%'
 />
 
-4. Enter the new member's email and define his role.
+4. Enter the new member's email and define their role.
 5. Click **Submit** to create the account.
 
 <CenteredImg 

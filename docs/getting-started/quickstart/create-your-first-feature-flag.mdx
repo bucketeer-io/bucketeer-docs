@@ -18,7 +18,7 @@ To create the feature flag, you will need to provide the following information t
 - **Tags** (required): You can add tags to the feature flag, which help in searching within the Bucketeer dashboard's tag list and filtering server-returned information after a request.
 - **Flag type**: Specify the type of flag you want to create. It can be boolean, string, number, or JSON. Boolean flags allow only two variations (true and false), while other flag types can have any number of variations (at least two). To add more variations, use the **Add variation** button.
 - **Variation data**: For each variation, provide its corresponding value. For boolean flags, the variations are predefined as "true" and "false." For other flag types, you need to define the value for each variation. Names and descriptions for variations are optional but recommended for easier review later on.
-- **On and off variation**: Specify which variation should be returned when the feature flag is turned on or off respectively.
+- **On and off variation**: Specify which variation should be returned when the feature flag is turned on or off, respectively.
 
 The following image presents an example of data used to create a flag.
 
@@ -37,4 +37,4 @@ After creating a flag, it will apear on the **Feature Flags** page and have the 
   borderWidth="1px"
 />
 
-With the API key and the `FLAG_ID`, you can follow to the next step and [integrate Bucketeer](./integrate-bucketeer) to your application.
+With the API key and the `FLAG_ID`, you can move on to the next step and [integrate Bucketeer](./integrate-bucketeer) into your application.
