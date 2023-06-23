@@ -8,50 +8,13 @@ tags: ['guide', 'account', 'create']
 
 import CenteredImg from '@site/src/components/centered-img/CenteredImg';
 
-Bucketeer allows you to manage and track data related to different environments. To begin using Bucketeer, you need an account. Ask the administrator to create an account if you are a new team member.
+Bucketeer allows you to manage and track data related to different environments. To begin using Bucketeer, you need an account. Ask the project administrator to create an account if you are a new team member.
 
 The following steps show how to create an account as an Admin.
 
-## Account types
-
-There are two types of accounts available in Buckteers, each with different access levels:
-
-- **Admin account**: it provides full access and control over all existing projects. Members with admin accounts can access all existing environments and manage other users' accounts.
-
-- **Environment account**: it is associated with a specific environment on the platform. Members with Environment accounts can access all the features of that particular environment.
-
-### Environment account roles
-
-In addition to being limited to a specific environment, Environment accounts also have predefined roles assigned during the account creation process. The defined role will change the account access level. The available roles for Environment accounts are described below:
-
-- **Viewer**: viewers have read-only access to their assigned environments. They can view all data but can't make any modifications. This role is suitable for members of your organization who need visibility into feature flags without the ability to modify them.
-- **Editor**: editors can modify feature flags, goals, experiments, and more within their assigned environments. However, they cannot add new team members or create API keys.
-- **Owner**: owners can do anything within their assigned environments. Including adding team members, and API keys.
-
-:::note
-
-If you are using the Bucketeer system, to create an Admin account, you need to contact the Bucketeer team.
-
-As an open-source project, you can host your Buckteers version and create an Admin account.
-
-:::
-
-## Creating an Environment account
-
-To add a new member to a Buckteer organization, an Admin needs to create an Environment account.
-
-:::note
-
-Only Admins are capable of creating Environment accounts.
-
-:::
-
-As an Admin, you can follow the steps below to create an Environment account for a new user:
-
-1. Access the [Bucketeer Dashboard](https://dev.bucketeer.jp/) using your Admin account credentials.
-2. Select the desired project environment from the available options.
-3. Navigate to the **Accounts** page within the Dashboard.
-4. Click on the **+ Add** button to add a new account.
+1. Select the target environment from the select menu on the top left.
+2. Navigate to the **Accounts** page from the sidebar menu.
+3. Click **+ Add** button to add a new account.
 
 <CenteredImg
   imgURL='img/getting-started/create-bucketeer-account-1.png'
@@ -59,8 +22,8 @@ As an Admin, you can follow the steps below to create an Environment account for
   wSize='100%'
 />
 
-5. On the left panel, enter the new user's email and define their role.
-6. Click **Submit** to create the account.
+4. Enter the new member's email and define his role.
+5. Click **Submit** to create the account.
 
 <CenteredImg 
   imgURL='img/getting-started/create-bucketeer-account-2.png'
@@ -68,4 +31,10 @@ As an Admin, you can follow the steps below to create an Environment account for
   alt='Create an account'
   borderWidth='1px'/>
 
-The newly added member will receive an email invitation to join the project. If the new user does not receive the invitation email, the Admin can resend it by going to the Accounts page, locating the user's name in the Accounts list, and clicking on it.
+:::info
+
+The new member's email must be a Gmail Account. Otherwise, the user will not have access to the dashboard.
+
+:::
+
+Once the account is created, the Admin needs to contact the new member, letting him know he can access the dashboard. No notification email is sent to the new member after their account creation.
