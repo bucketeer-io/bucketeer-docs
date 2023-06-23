@@ -6,4 +6,26 @@ description: Describe where results can be evaluated and the data on this page.
 tags: ['feature-flag','results','evaluation']
 ---
 
+import CenteredImg from '@site/src/components/centered-img/CenteredImg';
+
 Describe where results can be evaluated and the data on this page.
+
+<!-- 
+
+Once you've implemented Bucketeer into your system, it is important to know how to check events related to feature flags. This allows you to track the usage of feature flag variations and analyze the associated data.
+
+Once the Bucketeer SDK is integrated into your system, every evaluation of a feature flag triggers a server call. This call is made through the SDK's interface, which retrieves the variation for the feature flag. As a result, an event is generated with a request sent to the server to identify the specific feature flag and its associated variation requested by the client.
+
+To check usage data for each feature flag, you can access the Bucketeer dashboard and go to the **Feature Flags** section. From there, select the desired feature flag. Switch to the **Evaluation** tab to see the historical usage associated with the selected feature flag. Bucketeer records these events and stores them for 30 days so you can review the event data and evaluate the performance of each variation. The image bellow presents an example of the **Evaluation** board.
+
+<CenteredImg
+  imgURL="img/getting-started/quickstart/evaluation-panel.png"
+  alt="Evaluation panel"
+  wSize="100%"
+/>
+
+Checking the Evaluation tab for your created feature flag allows you to see if recorded data exists. If it does, your feature flag implementation was successful. If not, revisit the previous steps to ensure you correctly integrated the feature flag into your system and executed tests using the created feature flag.
+
+Regularly checking events in Bucketeer provides valuable insights into feature flag usage patterns, allowing you to make informed decisions based on the collected information.
+
+After completing the quickstart guide, you can explore more detailed information on [using feature flags](../../using-feature-flags) or refer to the [SDK](../../sdk) guides for further integration details. If you encounter unfamiliar technical terms, consult the [Bucketeer vocabulary](../getting-started/bucketeer-vocabulary) page for clarification. Additionally, the [Best Practices](../best-practices) page is available to help you better understand the available functionalities and learn how to enhance your utilization of Bucketeer solutions. -->

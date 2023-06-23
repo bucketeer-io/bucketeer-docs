@@ -36,8 +36,7 @@ const sidebars = {
           items: [
             'getting-started/quickstart/create-an-api-key',
             'getting-started/quickstart/create-your-first-feature-flag',
-            'getting-started/quickstart/integrate-bucketeer',
-            'getting-started/quickstart/check-events'
+            'getting-started/quickstart/integrate-bucketeer'
           ]
         },
         'getting-started/bucketeer-vocabulary'
