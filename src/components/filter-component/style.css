@@ -1,0 +1,77 @@
+.filterComponent .inputs{
+  margin-bottom: var(--ifm-leading);
+  display: flex;
+  justify-content: space-between;
+}
+
+
+/* Input styles */
+.filterComponent input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 200px;
+  margin-right: 10px;
+}
+
+/* Select styles */
+.filterComponent label {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.filterComponent select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 150px;
+}
+
+/* Vocabulary card styles */
+.filterComponent .vocabulary-card {
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #ededed;
+  border-radius: 4px;
+}
+
+.filterComponent .vocabulary-card h4 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.filterComponent .vocabulary-card p {
+  margin: 0;
+  /* color: #666; */
+}
+
+/* .button h3 {
+  font-size: 1rem;
+  color: var(--ifm-color-primary);
+  margin: 0 0 0.5rem 0;
+  display: flex;
+  text-align: left;
+}
+
+.button p {
+  margin: 0;
+  color: var(--ifm-font-color-base);
+  text-align: left;
+  
+  
+}
+
+.button {
+  padding: 0.7rem;
+  flex: 1;
+  border-radius: 7px;
+  border: 1px solid var(--ifm-color-primary);
+  white-space: pre-wrap;
+}
+
+.button:hover {
+  transform: scale(1.02);
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+} */

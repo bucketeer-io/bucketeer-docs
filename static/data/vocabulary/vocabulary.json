@@ -1,0 +1,60 @@
+{
+  "vocabularyList": [
+    {
+      "name": "Environment",
+      "description": "An environment represents an organizational unit within a project. It corresponds to the deployment environments of your code, such as development, staging, and production. Each project can have multiple environments containing the same flags with potentially different states, targets, and rules."
+    },
+    {
+      "name": "Evaluation",
+      "description": "Evaluation refers to the process where the Bucketeer SDK receives information about a flag and the associated user from your application's code. The SDK then returns the appropriate flag variation for that user, allowing the flag to be evaluated for a specific user or users group."
+    },
+    {
+      "name": "Experiment",
+      "description": "Experiments in Bucketeer are crucial for measuring the impact of a chosen feature on selected users. An experiment combines a feature flag, defined goals, and user segments to analyze how the feature contributes to achieving those goals."
+    },
+    {
+      "name": "Feature",
+      "description": "A feature refers to a specification or element of your application, such as a button, picture, or more complex components like a purchase flow or recommendation algorithm."
+    },
+    {
+      "name": "Flag",
+      "description": "A flag is the fundamental unit of feature management in Bucketeer. It represents different feature variations and includes rules that determine which entities can access each variation. Entities can be a percentage of your application's traffic, individuals, or software entities with common characteristics. Flag and feature flag are considered synonyms inside the Bucketeer documentation."
+    },
+    {
+      "name": "Goal",
+      "description": "Goals are important metrics for tracking and making decisions based on certain indexes. They represent conversions or business metrics, such as clicks, page views, or user engagement on a website."
+    },
+    {
+      "name": "Iteration",
+      "description": "An iteration is a defined period during which an experiment runs. It can have any length, and you can run multiple iterations of the same experiment to gather data and analyze the impact of a feature."
+    },
+    {
+      "name": "Member",
+      "description": "A member, also referred to as an account member, is a person who uses Bucketeer within your organization. They can be employees, contractors, or individuals with access rights to your Bucketeer environment."
+    },
+    {
+      "name": "Percentage Rollout",
+      "description": "Percentage rollout is a targeting rule that gradually exposes a specific flag variation to a specified percentage of contexts. This rule allows you to incrementally increase the share of customers targeted by a flag until 100% receive a particular variation."
+    },
+    {
+      "name": "Project",
+      "description": "A project represents an organizational unit for flags in your Bucketeer account. It allows you to organize flags based on your desired structure, such as creating a project for each product your company develops. Projects can contain multiple environments."
+    },
+    {
+      "name": "Role",
+      "description": "A role defines the level of access a member has within Bucketeer. Built-in roles include Viewer, Editor, Owner, and Admin, each providing different levels of access to information within Bucketeer."
+    },
+    {
+      "name": "SDK",
+      "description": "The Bucketeer SDK (Software Development Kit) is a set of tools and libraries to integrate Bucketeer with your application's code. It allows you to initialize the SDK, evaluate feature flags, and retrieve the appropriate flag variation for each customer."
+    },
+    {
+      "name": "User Segment",
+      "description": "User segments are defined groups of users used for comparison and testing purposes. In Bucketeer, you can configure user segments in different ways, allowing you to offer different user experiences and test beta features with a subset of users."
+    },
+    {
+      "name": "Variation",
+      "description": "Feature flags enable you to manage the visibility of specific features in your application, allowing you to activate them for specific users or roll them out to a percentage of your traffic. These feature flags consist of variations representing the different options or configurations available for the feature. In Bucketeer, a variation represents a possible value for a flag, defining the various options and states of a feature. Variations can be binary (e.g., true/false) for boolean flags or have multiple options for multivariate flags, each with a value of the same type, such as a string, and potentially accompanied by a name and description."
+    }
+  ]
+}
