@@ -8,15 +8,11 @@ tags: ['feature-flag','results','evaluation']
 
 import CenteredImg from '@site/src/components/centered-img/CenteredImg';
 
-Describe where results can be evaluated and the data on this page.
+On Bucketeer dashboard you've the option to monitor each feature flag usage. On this page you will learn how to check events related to flags' usage allowing you to track flag variation and analyze the associated data. It's important to notice that this information will only be available after you start using feature flags on your system.
 
-<!-- 
+Once the Bucketeer SDK is integrated into your system, every evaluation of a feature flag triggers a server call. This call is made through the SDK's interface, which retrieves the variation for the flag. As a result, an event is generated with a request sent to the server to identify the specific flag and its associated variation requested by the client.
 
-Once you've implemented Bucketeer into your system, it is important to know how to check events related to feature flags. This allows you to track the usage of feature flag variations and analyze the associated data.
-
-Once the Bucketeer SDK is integrated into your system, every evaluation of a feature flag triggers a server call. This call is made through the SDK's interface, which retrieves the variation for the feature flag. As a result, an event is generated with a request sent to the server to identify the specific feature flag and its associated variation requested by the client.
-
-To check usage data for each feature flag, you can access the Bucketeer dashboard and go to the **Feature Flags** section. From there, select the desired feature flag. Switch to the **Evaluation** tab to see the historical usage associated with the selected feature flag. Bucketeer records these events and stores them for 30 days so you can review the event data and evaluate the performance of each variation. The image bellow presents an example of the **Evaluation** board.
+To check usage data for each flag, you can access the Bucketeer dashboard and go to the **Feature Flags** section and select the desired one. Switch to the **Evaluation** tab to see the historical usage associated with the selected feature flag. Bucketeer records these events and stores them for 30 days so you can review the event data and evaluate the performance of each variation. The image bellow presents an example of the **Evaluation** board considering the 30 days view.
 
 <CenteredImg
   imgURL="img/getting-started/quickstart/evaluation-panel.png"
@@ -24,8 +20,6 @@ To check usage data for each feature flag, you can access the Bucketeer dashboar
   wSize="100%"
 />
 
-Checking the Evaluation tab for your created feature flag allows you to see if recorded data exists. If it does, your feature flag implementation was successful. If not, revisit the previous steps to ensure you correctly integrated the feature flag into your system and executed tests using the created feature flag.
+Checking the Evaluation tab for your created feature flag allows you to see if recorded data exists. It may help you to identify if your integration was done correclty. If data exists on the board, your feature flag implementation was successful. If not, we reccomend you to review the integration of the feature flag into your system and executed tests using the created feature flag.
 
-Regularly checking events in Bucketeer provides valuable insights into feature flag usage patterns, allowing you to make informed decisions based on the collected information.
-
-After completing the quickstart guide, you can explore more detailed information on [using feature flags](../../using-feature-flags) or refer to the [SDK](../../sdk) guides for further integration details. If you encounter unfamiliar technical terms, consult the [Bucketeer vocabulary](../getting-started/bucketeer-vocabulary) page for clarification. Additionally, the [Best Practices](../best-practices) page is available to help you better understand the available functionalities and learn how to enhance your utilization of Bucketeer solutions. -->
+Regularly checking events in Bucketeer provides valuable insights into feature flag usage patterns, allowing you to make informed decisions based on the collected information. In addition it is an essential part of the flag life cycle.
