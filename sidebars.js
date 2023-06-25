@@ -109,6 +109,19 @@ const sidebars = {
     },
     {
       type: 'category',
+      label: 'Best Practices',
+      link: {
+        type: 'doc',
+        id: 'best-practices/index',
+      },
+      items: [
+          'best-practices/account-types',
+          'best-practices/feature-flags-life-cycle',
+          'best-practices/optimize-bucketeer-with-tags'
+      ],
+    },
+    {
+      type: 'category',
       label: 'Contribution Guide',
       link: {
         type: 'doc',
@@ -135,19 +148,6 @@ const sidebars = {
             'contribution-guide/documentation-style-guide/command-line-syntax',
           ],
         }
-      ],
-    },
-    {
-      type: 'category',
-      label: 'Best Practices',
-      link: {
-        type: 'doc',
-        id: 'best-practices/index',
-      },
-      items: [
-          'best-practices/account-types',
-          'best-practices/feature-flags-life-cycle',
-          'best-practices/optimize-bucketeer-with-tags'
       ],
     },
   ],
