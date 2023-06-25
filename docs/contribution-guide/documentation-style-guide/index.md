@@ -17,62 +17,48 @@ If this is your first time here, we recommend that you start by reading the [Abo
 
 We cover all topics into sections, and each section is identified by a number and a title, followed by key points about its content, if applicable. For more information about the topics presented, follow the links.
 
-### [01 – About this guide](01-about-this-guide.md)
+### [About this guide](01-about-this-guide.md)
 
-### [02 – Voice and tone](02-voice-and-tone.md)
+### [Voice and tone](02-voice-and-tone.md)
 
-### [03 – Formatting and organization](03-formatting-and-organization.md)
+### [Formatting and organization](03-formatting-and-organization.md)
 
-<details>
-  <summary>Expand too see</summary>
-  <p>
-    <br/> <a href="03-formatting-and-organization.md#date-and-time">Dates and time</a>
-    <br/> <a href="03-formatting-and-organization.md#images-and-graphs">Images and graphs</a>
-    <br/> <a href="03-formatting-and-organization.md#use-of-examples">Use of examples</a>
-    <br/> <a href="03-formatting-and-organization.md#headings">Headings</a>
-    <br/> <a href="03-formatting-and-organization.md#notes-and-notices">Notes and notices</a>
-    <br/> <a href="03-formatting-and-organization.md#numbers">Numbers</a>
-    <br/> <a href="03-formatting-and-organization.md#tables">Tables</a>
-    <br/> <a href="03-formatting-and-organization.md#text-formatting">Text-formatting</a>
-  </p>
-</details>
+- [Dates and time](/documentation-style-guide/formatting-and-organization#date-and-time)
+- [Images and graphs](/documentation-style-guide/formatting-and-organization#images-and-graphs)
+- [Use of examples](/documentation-style-guide/formatting-and-organization#use-of-examples)
+- [Headings](/documentation-style-guide/formatting-and-organization#headings)
+- [Notes and notices](/documentation-style-guide/formatting-and-organization#notes-and-notices)
+- [Numbers](/documentation-style-guide/formatting-and-organization#numbers)
+- [Tables](/documentation-style-guide/formatting-and-organization#tables)
+- [Text-formatting](/documentation-style-guide/formatting-and-organization#text-formatting)
 
-### [04 – Language and grammar](04-language-and-grammar.md)
+### [Language and grammar](04-language-and-grammar.md)
 
-<details>
-  <summary>Expand too see</summary>
-  <p>
-    <br/> <a href="04-language-and-grammar.md#abbreviations-and-acronyms">Abbreviations and acronyms</a>
-    <br/> <a href="04-language-and-grammar.md#active-voice">Active voice</a>
-    <br/> <a href="04-language-and-grammar.md#capitalization">Capitalization</a>
-    <br/> <a href="04-language-and-grammar.md#contractions">Contractions</a>
-    <br/> <a href="04-language-and-grammar.md#pronouns">Pronouns</a>
-    <br/> <a href="04-language-and-grammar.md#sentence-structure">Sentence structure</a>
-  </p>
-</details>
+- [Abbreviations and acronyms](/documentation-style-guide/language-and-grammar#abbreviations-and-acronyms)
+- [Active voice](/documentation-style-guide/language-and-grammar#active-voice)
+- [Capitalization](/documentation-style-guide/language-and-grammar#capitalization)
+- [Contractions](/documentation-style-guide/language-and-grammar#contractions)
+- [Pronouns](/documentation-style-guide/language-and-grammar#pronouns)
+- [Sentence structure](/documentation-style-guide/language-and-grammar#sentence-structure)
 
-### [05 – Punctuation](05-punctuation.md)
+### [Punctuation](05-punctuation.md)
 
-<details>
-  <summary>Expand too see</summary>
-  <p>
-    <br/> <a href="05-punctuation.md#apostrophes">Apostrophes</a>
-    <br/> <a href="05-punctuation.md#colons">Colons</a>
-    <br/> <a href="05-punctuation.md#commas">Commas</a>
-    <br/> <a href="05-punctuation.md#dashes-and-hyphens">Dashes and hyphens</a>
-    <br/> <a href="05-punctuation.md#question-marks">Question marks</a>
-    <br/> <a href="05-punctuation.md#exclamation-points">Exclamation points</a>
-    <br/> <a href="05-punctuation.md#quotation-marks">Quotation marks </a>
-  </p>
-</details>
+- [Apostrophes](/documentation-style-guide/punctuation#apostrophes)
+- [Colons](/documentation-style-guide/punctuation#colons)
+- [Commas](/documentation-style-guide/punctuation#commas)
+- [Dashes and hyphens](/documentation-style-guide/punctuation#dashes-and-hyphens)
+- [Question marks](/documentation-style-guide/punctuation#question-marks)
+- [Exclamation points](/documentation-style-guide/punctuation#exclamation-points)
+- [Quotation marks](/documentation-style-guide/punctuation#quotation-marks)
 
-### [06 – UI elements and interaction](06-ui-elements-and-interaction.md)
 
-### [07 – Links](07-links.md)
+### [UI elements and interaction](06-ui-elements-and-interaction.md)
 
-### [08 – Code elements](08-code-elements.md)
+### [Links](07-links.md)
 
-### [09 – Command line syntax](09-command-line-syntax.md)
+### [Code elements](08-code-elements.md)
+
+### [Command line syntax](09-command-line-syntax.md)
 
 <!--
 #TODO:
