@@ -2,8 +2,53 @@
 title: Targeting with feature flags
 # sidebar_position: 
 slug: /using-feature-flags/targeting
-description: Explain the targeting process and presents how to configure the feature flag targeting. The page will describe the fields and show an example. Adding a complex example could be a good The page will show the feature flag tab and cover the fields required to create a feature flag.
+description: Explain the targeting process and presents how to configure the feature flag targeting. The page will describe the fields and show an example. 
 tags: ['create','guide','feature-flag']
 ---
 
-Explain the targeting process and presents how to configure the feature flag targeting. The page will describe the fields and show an example. Adding a complex example could be a good The page will show the feature flag tab and cover the fields required to create a feature flag.
+import CenteredImg from '@site/src/components/centered-img/CenteredImg';
+
+The targeting tab in Bucketeer allows you to define which users or targets will see each variation of a feature flag. This powerful functionality enables you to roll out features for specific purposes like internal testing, private betas, or usability tests before conducting a broader release. Let's explore some examples.
+
+While the Targeting tab refers to *users*, it's important to note that a user can represent any identifier that uniquely corresponds to a target. You can target users of your application, email addresses, systems, services, machines, resources, or any other entities that can be uniquely identified.
+
+To access the targeting page on the Bucketeer dashboard, access the **Feature Flags** tab, choose the desired flags, and click on its name. You will be redirected to the **Targeting** page for that flag.
+
+## The targeting page
+
+On the **Targeting** page, you'll find a range of options to customize and control the behavior of your feature flags:
+
+- **Switch Button**: Use the switch button to turn on or off the targeting configuration for your feature flag. This allows you to activate or deactivate the targeting rules you have defined.
+- [**Prerequisites**](/using-feature-flags/targeting#prerequisites): Configure prerequisites to set up conditions for your feature flags. With prerequisites, you can establish dependencies between feature flags. For example, if the value of feature flag A is true, feature flag B is evaluated. If feature flag A is false (not the expected value), the default value is returned, and feature flag B is not evaluated.
+- [**Targeting**](/using-feature-flags/targeting#targeting): Define targets for each variation of your feature flag. Examples of targets can be specific systems such as Android, iOS, and Web. 
+- **Rule rollout percentage**: Manage the deployment risk by gradually rolling out your feature to a percentage of contexts. Start with a small portion and increase it as you gain confidence in the stability and effectiveness of your feature. This helps mitigate any potential issues that may arise during the rollout.
+- **Default strategy**: Define the default variation for your feature flag. This variation is served when no specific targeting rule or prerequisite is met. 
+- **Off variation**: Specify the variation that is returned when the feature flag is turned off. 
+
+The below image presents an example of the **Targeting** page.
+
+<CenteredImg
+  imgURL="img/using-feature-flags/targeting/targeting-page.png"
+  alt="create feature flag panel"
+/>
+
+### Prerequisites
+
+When multiple feature flags are configured as prerequisites, they are evaluated using the logical operator AND. In other words, the target feature flag is only evaluated if the returned values from all the prerequisite feature flags match their respective configured variation values. This ensures that all prerequisite conditions are met before proceeding with the evaluation of the target feature flag.
+
+Now, let's consider the scenario where the return value from one of the prerequisite feature flags is not the expected value. In this case, the off variation in the target feature flag is returned. The off variation serves as the fallback option when the prerequisite conditions are not fulfilled. It allows you to define the default behavior or value for the target feature flag when the prerequisites are not met.
+
+By understanding and utilizing these behaviors, you can create complex dependency chains among feature flags, ensuring that the evaluation of each flag is performed based on precise conditions and providing fallback options when necessary. This level of control and flexibility empowers you to customize the behavior of your application in a granular and controlled manner.
+
+### Targeting
+
+The targeting section of Bucketeer allows you to specify the specific users or user groups that will receive each variation of a feature flag. In the example image above, there are two available variations. However, you can add more variations as needed when using flag types other than boolean. All variations you define will be accessible within the targeting section.
+
+Let's consider a real-world example related to a string flag with four variations: **value-1**, **value-2**, **value-3**, and **value-4**. In the example, each variation is associated with a specific platform. This means that Android users will receive the **value-1**, Web users will receive **value-2**, iOS users will receive **value-3**, and users on other platforms will receive the **value-4** variation. The configuration for this example is presented in the image below.
+
+<CenteredImg
+  imgURL="img/using-feature-flags/targeting/targeting.png"
+  alt="create feature flag panel"
+  wSize="100%"
+  
+/>

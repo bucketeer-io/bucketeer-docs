@@ -27,7 +27,9 @@ You also need to define the **Tags** related to the new flag. You can specify an
 
 Once you have defined the **Tags** for your feature flag, the next step is to select the **Flag type**. Refer to the [Feature flags types](/using-feature-flags/create-feature-flag#feature-flags-types) page to understand the differences among the four available types. If you choose the boolean type, only two variations will be available, `true`and `false`, with their respective predefined values. On the other hand, if you select a different type, you can add more variations by clicking **Add variation** button. Additionally, you need to provide the corresponding value for each variation. While the name and description for variations are optional, we highly recommend using them as they facilitate understanding and future review of your results.
 
-Select the default variations for the **ON** and **OFF** states to finalize the flag creation process. This is especially important to ensure which variation will be returned by the flag if no targeting is defined. For further information regarding flag targeting, refer to the [Targeting with feature flags](../using-feature-flags/targeting) page. Once you have defined the **ON** and **OFF** variations, click **Submit** to create the feature flag.
+Select the default variations for the **ON** and **OFF** states to finalize the flag creation process. This is especially important to ensure which variation will be returned by the flag if no targeting is defined. Once you have defined the **ON** and **OFF** variations, click **Submit** to create the feature flag.
+
+After creating the new flag, you will be redirected to the Targeting page. For further information regarding flag targeting, refer to the [Targeting with feature flags](../using-feature-flags/targeting) page.
 
 ## Manage feature flags
 
