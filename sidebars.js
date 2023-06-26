@@ -75,8 +75,7 @@ const sidebars = {
             'using-feature-flags/testing-with-flags/experiments',
             'using-feature-flags/testing-with-flags/using-experiments',
           ],
-        },
-        'using-feature-flags/integration'
+        }
       ],
     },
     {
