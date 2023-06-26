@@ -31,7 +31,21 @@ Select the default variations for the **ON** and **OFF** states to finalize the 
 
 ## Manage feature flags
 
-After creating a flag, it automaticaly appear on the **Feature Flag** page.
+Once you have created a flag, it will automatically appear on the **Feature Flags** page with its initial state set to **OFF**. Consequently, if an SDK request is made for this flag, the Bucketeer system will return the variation associated with the **OFF** state. To change the state, use the switch button. In addition to the state, you will also find the flag **ID** and related tags displayed on the flag card. Taking the flag card example below, its **ID** is **feature-javascript-e2e-boolean**, associated with the **javascript** and **web** tags.
+
+<CenteredImg
+  imgURL="img/getting-started/quickstart/created-feature-flag.png"
+  alt="created feature flag"
+  borderWidth="1px"
+/>
+
+You can duplicate and archive feature flags as well. To perform these actions, click the three-dot button on the desired flag.
+
+:::tip
+
+When a feature flag is archived, any SDK requests related to that flag will return the default value, typically the value associated with the **OFF** state. To ensure proper functionality, we recommend removing flag evaluations from your code when archiving the flag in the Bucketeer system.
+
+:::
 
 ## Feature flags types
 
