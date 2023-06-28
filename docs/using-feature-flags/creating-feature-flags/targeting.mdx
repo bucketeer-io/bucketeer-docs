@@ -1,18 +1,18 @@
 ---
 title: Targeting with feature flags
-# sidebar_position: 
+# sidebar_position:
 slug: /using-feature-flags/targeting
-description: Explain the targeting process and presents how to configure the feature flag targeting. The page will describe the fields and show an example. 
-tags: ['create','guide','feature-flag']
+description: Explain the targeting process and presents how to configure the feature flag targeting. The page will describe the fields and show an example.
+tags: ['create', 'guide', 'feature-flag']
 ---
 
 import CenteredImg from '@site/src/components/centered-img/CenteredImg';
 
 The targeting tab in Bucketeer allows you to define which users or targets will see each variation of a feature flag. This powerful functionality enables you to roll out features for specific purposes like internal testing, private betas, or usability tests before conducting a broader release. Let's explore some examples.
 
-While the Targeting tab refers to *users*, it's important to note that a user can represent any identifier that uniquely corresponds to a target. You can target users of your application, email addresses, systems, services, machines, resources, or any other entities that can be uniquely identified.
+While the Targeting tab refers to _users_, it's important to note that a user can represent any identifier that uniquely corresponds to a target. You can target users of your application, email addresses, systems, services, machines, resources, or any other entities that can be uniquely identified.
 
-To access the targeting page on the Bucketeer dashboard, access the **Feature Flags** tab, choose the desired flags, and click on its name. You will be redirected to the **Targeting** page for that flag.
+To access the targeting page on the Bucketeer dashboard, access the **Feature Flags** tab, choose the desired flag, and click on is name. You will be redirected to the **Targeting** page for that flag.
 
 ## The targeting page
 
@@ -20,10 +20,10 @@ On the **Targeting** page, you'll find a range of options to customize and contr
 
 - **Switch Button**: Use the switch button to turn on or off the targeting configuration for your feature flag. This allows you to activate or deactivate the targeting rules you have defined.
 - [**Prerequisites**](/using-feature-flags/targeting#prerequisites): Configure prerequisites to set up conditions for your feature flags. With prerequisites, you can establish dependencies between feature flags. For example, if the value of feature flag A is true, feature flag B is evaluated. If feature flag A is false (not the expected value), the default value is returned, and feature flag B is not evaluated.
-- [**Targeting**](/using-feature-flags/targeting#targeting): Define targets for each variation of your feature flag. Examples of targets can be specific systems such as Android, iOS, and Web. 
+- [**Targeting**](/using-feature-flags/targeting#targeting): Define targets for each variation of your feature flag. Examples of targets can be specific systems such as Android, iOS, and Web.
 - **Rule rollout percentage**: Manage the deployment risk by gradually rolling out your feature to a percentage of contexts. Start with a small portion and increase it as you gain confidence in the stability and effectiveness of your feature. This helps mitigate any potential issues that may arise during the rollout.
-- **Default strategy**: Define the default variation for your feature flag. This variation is served when no specific targeting rule or prerequisite is met. 
-- **Off variation**: Specify the variation that is returned when the feature flag is turned off. 
+- **Default strategy**: Define the default variation for your feature flag. This variation is served when no specific targeting rule or prerequisite is met.
+- **Off variation**: Specify the variation that is returned when the feature flag is turned off.
 
 The below image presents an example of the **Targeting** page.
 
@@ -50,10 +50,8 @@ Let's consider a real-world example related to a string flag with four variation
   imgURL="img/using-feature-flags/targeting/targeting.png"
   alt="create feature flag panel"
   wSize="100%"
-  
 />
 
 ## Targeting examples
 
 Targeting examples will be provide in the next documentation update.
-
