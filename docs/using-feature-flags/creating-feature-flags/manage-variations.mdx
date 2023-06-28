@@ -19,6 +19,12 @@ To access the variations page on the Bucketeer dashboard, access the **Feature F
 
 For boolean flags, you can modify the name and description of each variation. When dealing with multivariate flags (string, number, and JSON types), you can not only edit the value, name, and description of any variation but also add or delete variations as needed. After finishing the flag variations edition, save it and provide a comment describing your changes.
 
+:::note
+
+You can't delete a variation if it was selected as the **Default strategy** or as the **OFF variation** on the **Targeting** tab. To be able to delete it, you will need to choose another variation as default or OFF variation first.
+
+:::
+
 It's important to note that any changes made to the variations of a feature flag will affect all environments within the project. This ensures consistent behavior across the board.
 
-When you delete a variation, individual targeting and custom rules associated with that variation will be removed as well. In cases where a custom rule employs a percentage rollout for the deleted variation, the rollout for that specific variation will be set to zero. Suppose the default rule originally returned the deleted variation. In that case, it will be automatically updated to return the default OFF value instead. This ensures that your feature flag's logic remains intact and functional.
+When you delete a variation, individual targeting and custom rules associated with that variation will be removed as well. In cases where a custom rule employs a percentage rollout for the deleted variation, the rollout for that specific variation will be set to zero. This ensures that your feature flag's logic remains intact and functional.
