@@ -52,3 +52,8 @@ Let's consider a real-world example related to a string flag with four variation
   wSize="100%"
   
 />
+
+## Targeting examples
+
+Targeting examples will be provide in the next documentation update.
+
