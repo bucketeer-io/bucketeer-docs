@@ -31,7 +31,7 @@ const config = {
   // to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'en',
-    locales: ['en', 'ja'],
+    locales: [ 'en', 'ja' ],
   },
 
   presets: [
@@ -74,40 +74,30 @@ const config = {
           className: 'header-logo',
         },
         items: [
-          // {
-          //   href: '/',
-          //   label: 'Home',
-          //   position: 'left',
-          //   'aria-label': 'Bucketeer - Feature Flag and A/B Testing Managment platform',
-          // },
           {
             to: '/',
-            label: 'Getting Started',
+            label: 'Home',
             position: 'left',
-            'aria-label': 'Bucketeer - Getting Started',
             activeBaseRegex: "/$",
           },
           {
-            to: 'lorem/ipsum/dolor/sit/amet',
-            label: 'Client',
+            to: 'getting-started',
+            label: 'Getting Started',
             position: 'left',
-            'aria-label': 'Bucketeer - Client-side',
-            activeBaseRegex: "/lorem/ipsum/dolor/sit/amet$",
+            activeBaseRegex: "/getting-started",
           },
           {
-            to: 'lorem/ipsum/dolor/sit/amet/consectetur',
-            label: 'Server',
+            to: 'sdk',
+            label: 'SDKs',
             position: 'left',
-            'aria-label': 'Bucketeer - Server-side',
-            activeBaseRegex: "/lorem/ipsum/dolor/sit/amet/consectetur$",
+            activeBaseRegex: "/sdk",
           },
-          // {
-          //   to: 'contribution-guide/contributing',
-          //   label: 'Contributing',
-          //   position: 'left',
-          //   'aria-label': 'Bucketeer - Contributing',
-          //   activeBasePath: "contribution-guide/contributing",
-          // },
+          {
+            to: 'contribution-guide/contributing',
+            label: 'Contributing',
+            position: 'left',
+            activeBasePath: "contribution-guide/",
+          },
           {
             type: 'search',
             position: 'right',
