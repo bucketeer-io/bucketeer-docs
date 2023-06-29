@@ -9,11 +9,12 @@ const config = {
 
   plugins: [
     [
-      require.resolve("@cmfcmf/docusaurus-search-local"),
+      require.resolve('@cmfcmf/docusaurus-search-local'),
       {
         indexBlog: false,
       },
     ],
+    require.resolve('docusaurus-plugin-image-zoom'),
   ],
 
   title: 'Bucketeer Docs',
@@ -65,6 +66,13 @@ const config = {
         defaultMode: 'light',
         disableSwitch: true,
         respectPrefersColorScheme: false,
+      },
+      zoom: {
+        selector: '.markdown :not(em) > img',
+        background: {
+          light: 'rgb(255, 255, 255)',
+          dark: 'rgb(50, 50, 50)'
+        }
       },
       navbar: {
         title: '',
