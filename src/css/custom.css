@@ -295,6 +295,7 @@ code {
 .menu .menu__link {
   font-size: 15px;
   color: #7462A3;
+  line-height: 0 !important;
 }
 
 .menu__link:not(.menu__link--active):hover {
@@ -336,7 +337,7 @@ code {
 }
 
 .menu__list-item-collapsible .menu__link:hover {
-    background: #DDD7E9 !important;
+  background: #DDD7E9 !important;
 }
 
 .menu__list-item-collapsible:hover .menu__link {
@@ -345,11 +346,11 @@ code {
 
 .menu__list-item:hover > .menu__link:not(.menu__link--active) {
 	background: #DDD7E9;
-    color: #573792;
+  color: #573792;
 }
 
 .menu__list-item:not(:first-child) {
-    margin-top: 0.5rem;
+  margin-top: 0.5rem;
 }
 
 .sidebar-bucketeer-docs .menu__link:before {
