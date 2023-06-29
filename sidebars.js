@@ -151,6 +151,17 @@ const sidebars = {
     },
     {
       type: 'html',
+      value: "<span class='sidebar-title'>Best practices</span>",
+      defaultStyle: true,
+    },
+    {
+      type: 'doc',
+      id: 'best-practices/optimize-bucketeer-with-tags',
+      label: 'Optimize with tags',
+      className: 'sidebar-contributing',
+    },
+    {
+      type: 'html',
       value: "<span class='sidebar-title'>Contribution</span>",
       defaultStyle: true,
     },
@@ -176,17 +187,6 @@ const sidebars = {
         'contribution-guide/documentation-style/code-elements',
         'contribution-guide/documentation-style/command-line-syntax',
       ],
-    },
-    {
-      type: 'html',
-      value: "<span class='sidebar-title'>Best practices</span>",
-      defaultStyle: true,
-    },
-    {
-      type: 'doc',
-      id: 'best-practices/optimize-bucketeer-with-tags',
-      label: 'Optimize with tags',
-      className: 'sidebar-contributing',
     },
   ],
 }
