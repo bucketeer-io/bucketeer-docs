@@ -290,12 +290,14 @@ code {
   background-repeat: no-repeat;
   background-position: center;
   margin-right: 12px;
+  margin-top: -4px;
 }
 
 .menu .menu__link {
   font-size: 15px;
   color: #7462A3;
-  line-height: 0 !important;
+  padding-top: 10px;
+  padding-bottom: 8px;
 }
 
 .menu__link:not(.menu__link--active):hover {
@@ -313,7 +315,7 @@ code {
 
 .menu__link--sublist-caret:after {
   background: var(--ifm-menu-link-sublist-icon) 30% / 1rem 1rem;
-  padding-top: 4px;
+  padding-top: 0px !important;
 }
 
 .menu__caret:before {
