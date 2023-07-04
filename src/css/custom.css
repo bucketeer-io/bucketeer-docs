@@ -296,6 +296,8 @@ code {
   font-size: 15px;
   color: #7462A3;
   line-height: 0.9 !important;
+  font-weight: 400;
+  min-height: 30px
 }
 
 .menu__link:not(.menu__link--active):hover {
@@ -320,11 +322,11 @@ code {
 }
 
 .menu > .menu__list {
-	padding-right: 10px;
+	padding-right: 5px;
 }
 
 .menu__list-item {
-  padding-left: 10px;
+  padding-left: 5px;
 }
 
 .menu__list .menu__list {
