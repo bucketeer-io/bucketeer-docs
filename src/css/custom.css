@@ -290,17 +290,20 @@ code {
   background-repeat: no-repeat;
   background-position: center;
   margin-right: 12px;
-  line-height: 0.9 !important;
+  /* line-height: 0.9 !important;
+  padding-top: 5px; */
 }
 
 .menu .menu__link {
   font-size: 15px;
   color: #7462A3;
   line-height: 0.9 !important;
+  padding-top: 5px;
 }
 
 .menu__link:not(.menu__link--active):hover {
     background-color: transparent;
+    /* padding-top: 5px; */
 }
 
 .menu .theme-doc-sidebar-menu .theme-doc-sidebar-item-category > .menu__list .menu__link {
