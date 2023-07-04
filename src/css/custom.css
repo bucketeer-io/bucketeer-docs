@@ -290,14 +290,13 @@ code {
   background-repeat: no-repeat;
   background-position: center;
   margin-right: 12px;
-  margin-top: -4px;
+  line-height: 0.9 !important;
 }
 
 .menu .menu__link {
   font-size: 15px;
   color: #7462A3;
-  padding-top: 10px;
-  padding-bottom: 8px;
+  line-height: 0.9 !important;
 }
 
 .menu__link:not(.menu__link--active):hover {
@@ -315,11 +314,10 @@ code {
 
 .menu__link--sublist-caret:after {
   background: var(--ifm-menu-link-sublist-icon) 30% / 1rem 1rem;
-  padding-top: 0px !important;
 }
 
 .menu__caret:before {
-    background: var(--ifm-menu-link-sublist-icon) 30% / 1rem 1rem;
+  background: var(--ifm-menu-link-sublist-icon) 30% / 1rem 1rem;
 }
 
 .menu > .menu__list {
