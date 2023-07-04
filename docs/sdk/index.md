@@ -18,10 +18,34 @@ Client-side SDKs are developed for single-user desktop, mobile, and embedded app
 
 Supported SDKs for client-side:
 
-- [Android](/sdk/client-side/android)
-- [iOS](/sdk/client-side/ios)
-- [JavaScript](/sdk/client-side/javascript)
-- [Flutter](/sdk/client-side/flutter)
+<table border="0" cellpadding="0" cellspacing="0">
+  <tr border="0">
+    <td border="0" align="center">
+      <a href="/sdk/client-side/android">
+        <em><img src="/img/getting-started/quickstart/create-api-key.png" width="60"></img></em><br />
+        Android
+      </a>
+    </td>
+    <td border="0" align="center">
+      <a href="/sdk/client-side/ios">
+        <em><img src="/img/getting-started/quickstart/create-api-key.png" width="60"></img></em><br />
+        iOS
+      </a>
+    </td>
+    <td border="0" align="center">
+      <a href="/sdk/client-side/flutter">
+        <em><img src="/img/getting-started/quickstart/create-api-key.png" width="60"></img></em><br />
+        Flutter
+      </a>
+    </td>
+    <td border="0" align="center">
+      <a href="/sdk/client-side/javascript">
+        <em><img src="/img/getting-started/quickstart/create-api-key.png" width="60"></img></em><br />
+        JavaScript
+      </a>
+    </td>
+  </tr>
+</table>
 
 ### Server-side SDK
 
