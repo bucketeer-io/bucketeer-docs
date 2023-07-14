@@ -1,0 +1,55 @@
+Improved version:
+
+Auto Operation
+
+The Auto Operation feature automates the manipulation of feature flag configurations based on predefined conditions. Instead of manually performing the operations, this feature executes them automatically on your behalf.
+
+How Auto Operation Works
+
+The Auto Operation feature consists of three key elements:
+
+1. Rule: A rule defines the specific action to be taken in certain situations. When creating a rule, you specify the operation to be performed and the conditions that trigger it. The operation represents the action to be executed, while the condition determines when the operation is triggered. Essentially, if the condition is satisfied (returns true), the operation is triggered.
+
+2. Operation: An operation is the action that is triggered by the rule. Currently, the available operations are:
+
+   - Enable Feature Flag: Activates the feature flag.
+   - Disable Feature Flag: Deactivates the feature flag.
+
+3. Condition: A condition specifies the circumstances under which the operation is triggered. Multiple conditions can be associated with a single rule. It's important to note that if any one of the conditions is satisfied, the corresponding operation is triggered.
+
+Conditions
+
+The following conditions are available for defining Auto Operations:
+
+1. Date: This condition evaluates whether the specified date and time have been reached. You can set a future date and time to schedule the operation. It is useful, for example, to release a feature when a specific event starts or to disable a beta feature after a certain period.
+
+2. Event Rate: This condition triggers the operation based on the event rate reaching a specified threshold. It allows you to automatically turn off a feature if it is causing a high error rate or disable it once enough data has been collected for analysis.
+
+The table below outlines the configuration options for setting up the Event Rate condition:
+
+| Name          | Description                                                |
+| ------------- | ---------------------------------------------------------- |
+| Variation     | The specific variation observed by the target user.         |
+| Goal ID       | The ID of the goal event to be monitored.                   |
+| Percentage    | The threshold for the event rate.                           |
+| Operator      | The comparison operator used to assess the event rate.      |
+| Minimum Count | The minimum count required for the condition to be enabled. |
+
+How Event Rate is Calculated
+
+The event rate is calculated using the following formula:
+
+Event Rate = (User Count of Goal Events) / (User Count of Evaluation Events)
+
+For a better understanding of the user count of goals and evaluations, please refer to the experiment and evaluation count section.
+
+Setting up Auto Operation
+
+Configuring Auto Operations is a straightforward process. Follow these steps:
+
+1. Go to the settings tab of the feature's detail page.
+2. Click the "+" button at the bottom to add a new rule.
+3. The Auto Operation rule setting panel will appear. Choose the desired operation, such as enabling a feature flag.
+4. Set up the desired condition, such as a scheduled time.
+5. Click the update button to create the Auto Operation rule.
+6. When the scheduled time arrives, the feature flag will be automatically enabled based on the defined rule.
