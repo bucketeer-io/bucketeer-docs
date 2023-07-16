@@ -8,50 +8,152 @@ tags: ['create', 'guide', 'feature-flag']
 
 import CenteredImg from '@site/src/components/centered-img/CenteredImg';
 
-The targeting tab in Bucketeer allows you to define which users or targets will see each variation of a feature flag. This powerful functionality enables you to roll out features for specific purposes like internal testing, private betas, or usability tests before conducting a broader release. Let's explore some examples.
+The targeting tab in Bucketeer allows you to define which users or targets will see each variation of a flag. This powerful functionality enables you to roll out features for specific purposes like internal testing, private betas, or usability tests before conducting a broader release. Let's explore some examples.
+
+:::info What targets are
 
 While the Targeting tab refers to _users_, it's important to note that a user can represent any identifier that uniquely corresponds to a target. You can target users of your application, email addresses, systems, services, machines, resources, or any other entities that can be uniquely identified.
+
+:::
 
 To access the targeting page on the Bucketeer dashboard, access the **Feature Flags** tab, choose the desired flag, and click on is name. You will be redirected to the **Targeting** page for that flag.
 
 ## The targeting page
 
-On the **Targeting** page, you'll find a range of options to customize and control the behavior of your feature flags:
+On the **Targeting** page, you'll find a range of options to customize and control the behavior of your flags:
 
-- **Switch Button**: Use the switch button to turn on or off the targeting configuration for your feature flag. This allows you to activate or deactivate the targeting rules you have defined.
-- [**Prerequisites**](/using-feature-flags/targeting#prerequisites): Configure prerequisites to set up conditions for your feature flags. With prerequisites, you can establish dependencies between feature flags. For example, if the value of feature flag A is true, feature flag B is evaluated. If feature flag A is false (not the expected value), the default value is returned, and feature flag B is not evaluated.
-- [**Targeting**](/using-feature-flags/targeting#targeting): Define targets for each variation of your feature flag. Examples of targets can be specific systems such as Android, iOS, and Web.
-- **Rule rollout percentage**: Manage the deployment risk by gradually rolling out your feature to a percentage of contexts. Start with a small portion and increase it as you gain confidence in the stability and effectiveness of your feature. This helps mitigate any potential issues that may arise during the rollout.
-- **Default strategy**: Define the default variation for your feature flag. This variation is served when no specific targeting rule or prerequisite is met.
-- **Off variation**: Specify the variation that is returned when the feature flag is turned off.
+- **Switch Button**: Use the switch button to turn ON or OFF the targeting configuration for your feature flag. This allows you to activate or deactivate the targeting rules you have defined.
+- [**Prerequisites**](/using-feature-flags/targeting#prerequisites): Configure prerequisites to set up conditions for your flags. With prerequisites, you can establish dependencies between flags.
+- [**Targeting**](/using-feature-flags/targeting#targeting): Define targets for each variation of your flag. Examples of targets can be specific systems such as Android, iOS, and Web.
+- [**Rule rollout percentage**](/using-feature-flags/targeting#rollout-percentage): Manage the deployment risk by gradually rolling out your feature to a percentage of contexts. Start with a small portion and increase it as you gain confidence in the stability and effectiveness of your feature. This helps mitigate any potential issues that may arise during the rollout.
+- **Default strategy**: Define the default variation for your flag. This variation is served when no specific targeting rule or prerequisite is met.
+- **Off variation**: Specify the variation that is returned when the flag OFF.
 
 The below image presents an example of the **Targeting** page.
 
 <CenteredImg
   imgURL="img/using-feature-flags/targeting/targeting-page.png"
-  alt="create feature flag panel"
+  alt="targeting page panel"
+/>
+
+## How targeting works
+
+On the targeting page, you can define a series of conditions which will define which flag variation the user will receive. Since several targeting option are provide, you need to undertand the evaluation order, otherwise, the targeting strategy may not reflect your objectives. To help you to have a better undertanding, the list below show the evaluation order with description related to the possible results.
+
+1. **Switch Button**: If the swtch in on the OFF position, users receive the OFF variation and no further evaluation is required. Otherwise, the evaluation checks if prerequisites exists.
+2. [**Prerequisites**](/using-feature-flags/targeting#prerequisites): Evaluate all existing prerequisite flags, if they exists. If all flags return the selected variation, satisfying all conditions, the evaluation goes to the next stage, defined by targeting or rollout percentage. If one of prerequisites fail, returning a different variation from the one specified, the user will receive the default strategy variation and no further evaluation is required.
+3. [**Targeting**](/using-feature-flags/targeting#targeting): After prerequisites are satisfied, the targets are evaluated. Each user or user group will receive the variation you defined. In case the user/user group is not listed on any variation, rollout rules are evaluated if at least one exists, otherwise the user receive the default strategy variation.
+4. [**Rule rollout percentage**](/using-feature-flags/targeting#rollout-percentage): In case no rule is satisfied, the user receive the default strategy variation.
+
+The fluxogram below summirizes how targeting on Bucketeer works.
+
+<CenteredImg
+  imgURL="img/using-feature-flags/targeting/targeting-fluxogram.svg"
+  alt="targeting fluxogram panel"
+  wSize="600px"
 />
 
 ### Prerequisites
 
-When multiple feature flags are configured as prerequisites, they are evaluated using the logical operator AND. In other words, the target feature flag is only evaluated if the returned values from all the prerequisite feature flags match their respective configured variation values. This ensures that all prerequisite conditions are met before proceeding with the evaluation of the target feature flag.
+When a prerequisite flag is added to targeting, the current flag is only evaluated if the prerequisite flag's returned value matches the configured value. This means that the target flag is only evaluated if the prerequisite conditions are satisfied.
 
-Now, let's consider the scenario where the return value from one of the prerequisite feature flags is not the expected value. In this case, the off variation in the target feature flag is returned. The off variation serves as the fallback option when the prerequisite conditions are not fulfilled. It allows you to define the default behavior or value for the target feature flag when the prerequisites are not met.
+If multiple flags are set as prerequisites, they are evaluated using the logical operator AND. This ensures that all prerequisite conditions are met before evaluating the target flag. If the return value from one of the prerequisite flags is not the expected value, the OFF variation in the target flag is returned. The OFF variation serves as the fallback option when the prerequisite conditions are not fulfilled, allowing you to define the default behavior for the target flag.
 
-By understanding and utilizing these behaviors, you can create complex dependency chains among feature flags, ensuring that the evaluation of each flag is performed based on precise conditions and providing fallback options when necessary. This level of control and flexibility empowers you to customize the behavior of your application in a granular and controlled manner.
+The image below presents an example using two flags as prerequisites. Therefore, the targeting or rollout percentage evaluation will only happen if the first flag returns the **true** variation and the second returns the **a** variation. Otherwise, the Bucketeer will provide the default variation.
+
+<CenteredImg
+  imgURL="img/using-feature-flags/targeting/prerequisites.png"
+  alt="prerequisites example"
+  wSize="500px"
+/>
 
 ### Targeting
 
-The targeting section of Bucketeer allows you to specify the specific users or user groups that will receive each variation of a feature flag. In the example image above, there are two available variations. However, you can add more variations as needed when using flag types other than boolean. All variations you define will be accessible within the targeting section.
-
-Let's consider a real-world example related to a string flag with four variations: **value-1**, **value-2**, **value-3**, and **value-4**. In the example, each variation is associated with a specific platform. This means that Android users will receive the **value-1**, Web users will receive **value-2**, iOS users will receive **value-3**, and users on other platforms will receive the **value-4** variation. The configuration for this example is presented in the image below.
+The Bucketeer targeting section allows you to define which users or groups receive each feature flag variation. Taking a boolean flag as an example, you could provide the true variation for Android users and the false variation for ios users, as shown in the image below.
 
 <CenteredImg
-  imgURL="img/using-feature-flags/targeting/targeting.png"
-  alt="create feature flag panel"
-  wSize="100%"
+  imgURL="img/using-feature-flags/targeting/targeting-boolean-example.png"
+  alt="targeting boolean example panel"
+  wSize="500px"
 />
 
-## Targeting examples
+In the example image above, there are two available variations. However, you can add more variations when using flag types other than boolean. All variations you define will be accessible within the targeting section.
 
-Targeting examples will be provide in the next documentation update.
+Let's consider a real-world example related to a string flag with four variations: **value-1**, **value-2**, **value-3**, and **value-4**. In the example, each variation is associated with a specific platform. This means that Android users would receive the **value-1**, Web users would receive **value-2**, iOS users would receive **value-3**, and users on other platforms would receive the **value-4** variation. The configuration for this example is presented in the image below.
+
+<CenteredImg
+  imgURL="img/using-feature-flags/targeting/targeting-string-example.png"
+  alt="create feature flag panel"
+  wSize="500px"
+/>
+
+## Rollout percentage
+
+The rollout percentage enables you to define rules to evaluate users. When the rule is satisfied, the user will receive the variation you have defined, or you can use a percentage distribution to determine which variation to return. The rules can be based on one or multiple conditions using:
+
+- User attributes.
+- User segments.
+- Date.
+
+### User attributes
+
+The user attributes used by rollout percentage rules refer to the end-user attributes. You can define these attributes when initializing the SDK on the client-side. If you are using dynamic attributes you will use the `updateUserAttributes` function. For further details on how to set up attributes, check the [SDK](/sdk) content. The code block below presents an example of end-user attributes configuration when initializing the SDK using Javascript.
+
+```js showLineNumbers
+const attributes = {
+  app_version: '1.0.0',
+  os_version: '11.0.0',
+  device_model: 'pixel-5',
+  language: 'english',
+  genre: 'female',
+};
+
+const user = defineBKTUser({
+  id: 'USER_ID',
+  attributes: attributes,
+});
+
+await initializeBKTClient(config, user);
+```
+
+When the SDK makes a request to the server, the Bucketeer system will have access to all attributes above to perform the targeting evaluation.
+
+To use rollout rules based on end-users' attributes, you will select the **Compare** option after clicking on **Add rule** button. Then, you can use any existing end-user attributes to compare and assign different variations.
+
+Suppose you created users using the attributes listed above the code block. For users with `app_version = 1.0.0` and `language = english`, you want to provide the **value-1** variation. On the other hand, for users with `app_version = 2.0.0`, you want to provide all variations using a percentual distribution, where 10% will receive **value-1**, where 20% will receive **value-2**, where 30% will receive **value-3**, and where 40% will receive variation **value-4**. Such targeting rule could be defined on the Bucketeer dashboard as presented by the image below.
+
+<CenteredImg
+  imgURL="img/using-feature-flags/targeting/rollout-user-atributes.png"
+  alt="rollout rule definition based on attributes"
+  wSize="500px"
+/>
+
+:::info Rollout percentage
+When using rollout percentage based on percentual distribution, the sum should always be equal to 100%.
+:::
+
+If the user did not satisfy any of these rules, he would receive the default variation.
+
+### User segments
+
+The user segment refers to a specific group of users that you can define within the dashboard based on their unique `id`. Each user's `id` is established when you create the user using the defineBKTUser function. To associate users with segments, you can manually assign them within the dashboard or upload .txt or .csv files. These segments can be created based on various criteria, such as email type, gender, location, and more. You can precisely target and group users for testing by creating segments. The image below presents a rollout rule where the **value-1** variation is returned if the requiring user belongs to the **Testing users** segment.
+
+<CenteredImg
+  imgURL="img/using-feature-flags/targeting/rollout-rule-segment.png"
+  alt="rollout rule definition based on segment"
+  wSize="500px"
+/>
+
+### Date
+
+You also can define rollout rules based on dates. Along with selecting the specific date and the desired variation or variation distribution, you need to indicate whether you expect the intended behavior to occur before or after the provided date. The example below illustrates a rollout rule where users will receive the **value-2** variation if the SDK request is made prior to **2023-08-16 18:02**.
+
+<CenteredImg
+  imgURL="img/using-feature-flags/targeting/rollout-rule-date.png"
+  alt="rollout rule definition based on date"
+  wSize="500px"
+/>
+
+:::info Combine conditions
+Despite presenting examples using only one type of condition, you can combine user attributes, user segments, and date conditions on your system to improve the targeting of your rollout rules.
+:::
