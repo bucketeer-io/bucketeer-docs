@@ -41,14 +41,14 @@ The below image presents an example of the **Targeting** page.
 On the targeting page, you can define a series of conditions which will define which flag variation the user will receive. Since several targeting option are provide, you need to undertand the evaluation order, otherwise, the targeting strategy may not reflect your objectives. To help you to have a better undertanding, the list below show the evaluation order with description related to the possible results.
 
 1. **Switch Button**: If the swtch in on the OFF position, users receive the OFF variation and no further evaluation is required. Otherwise, the evaluation checks if prerequisites exists.
-2. [**Prerequisites**](/using-feature-flags/targeting#prerequisites): Evaluate all existing prerequisite flags, if they exists. If all flags return the selected variation, satisfying all conditions, the evaluation goes to the next stage, defined by targeting or rollout percentage. If one of prerequisites fail, returning a different variation from the one specified, the user will receive the default strategy variation and no further evaluation is required.
+2. [**Prerequisites**](/using-feature-flags/targeting#prerequisites): Evaluate all existing prerequisite flags, if they exists. If all flags return the selected variation, satisfying all conditions, the evaluation goes to the next stage, defined by targeting or rollout percentage. If one of prerequisites fail, returning a different variation from the one specified, the user will receive the OFF variation and no further evaluation is required.
 3. [**Targeting**](/using-feature-flags/targeting#targeting): After prerequisites are satisfied, the targets are evaluated. Each user or user group will receive the variation you defined. In case the user/user group is not listed on any variation, rollout rules are evaluated if at least one exists, otherwise the user receive the default strategy variation.
 4. [**Rule rollout percentage**](/using-feature-flags/targeting#rollout-percentage): In case no rule is satisfied, the user receive the default strategy variation.
 
 The fluxogram below summirizes how targeting on Bucketeer works.
 
 <CenteredImg
-  imgURL="img/using-feature-flags/targeting/targeting-fluxogram.svg"
+  imgURL="img/using-feature-flags/targeting/targeting-fluxogram-2.svg"
   alt="targeting fluxogram panel"
   wSize="600px"
 />
@@ -57,9 +57,9 @@ The fluxogram below summirizes how targeting on Bucketeer works.
 
 When a prerequisite flag is added to targeting, the current flag is only evaluated if the prerequisite flag's returned value matches the configured value. This means that the target flag is only evaluated if the prerequisite conditions are satisfied.
 
-If multiple flags are set as prerequisites, they are evaluated using the logical operator AND. This ensures that all prerequisite conditions are met before evaluating the target flag. If the return value from one of the prerequisite flags is not the expected value, the OFF variation in the target flag is returned. The OFF variation serves as the fallback option when the prerequisite conditions are not fulfilled, allowing you to define the default behavior for the target flag.
+If multiple flags are set as prerequisites, they are evaluated using the logical operator AND. This ensures that all prerequisite conditions are met before evaluating the target flag. If the return value from one of the prerequisite flags is not the expected value, the OFF variation in the target flag is returned. The OFF variation serves as the fallback option when the prerequisite conditions are not fulfilled.
 
-The image below presents an example using two flags as prerequisites. Therefore, the targeting or rollout percentage evaluation will only happen if the first flag returns the **true** variation and the second returns the **a** variation. Otherwise, the Bucketeer will provide the default variation.
+The image below presents an example using two flags as prerequisites. Therefore, the targeting or rollout percentage evaluation will only happen if the first flag returns the **true** variation and the second returns the **a** variation. Otherwise, the Bucketeer will provide the OFF variation.
 
 <CenteredImg
   imgURL="img/using-feature-flags/targeting/prerequisites.png"
