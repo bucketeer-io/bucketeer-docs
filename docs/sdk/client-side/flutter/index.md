@@ -377,7 +377,7 @@ The listener can detect both automatic polling and manual fetching.
 <TabItem value="dart" label="Dart">
 
 ```dart showLineNumbers
-class EvaluationUpdateListenerImpl implements EvaluationUpdateListener {
+class EvaluationUpdateListenerImpl implements BKTEvaluationUpdateListener {
   @override
   void onUpdate() {
     final client = BKTClient.instance;
