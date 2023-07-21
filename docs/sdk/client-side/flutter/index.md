@@ -59,12 +59,14 @@ All the settings in the example below are required.
 ```dart showLineNumbers
 final config = BKTConfigBuilder()
   .apiKey("YOUR_API_KEY")
-  .apiURL("YOUR_API_URL")
+  .apiEndpoint("YOUR_API_URL")
   .featureTag("YOUR_FEATURE_TAG")
+  .appVersion("YOUR_APP_VERSION")
   .build();
 
 final user = BKTUserBuilder
   .id("USER_ID")
+  .data(YOUR_USER_ATTRIBUTES) //userAttributes is Map<String, String>
   .build();
 ```
 
@@ -75,9 +77,9 @@ final user = BKTUserBuilder
 
 Depending on your use, you may want to change the optional configurations available in the **BKTConfig.Builder**.
 
-- **pollingInterval** (Minimum 5 minutes. Default is 10 minutes)
+- **pollingInterval** (Minimum 60 seconds. Default is 10 minutes)
 - **backgroundPollingInterval** (Minimum 20 minutes. Default is 1 hour)
-- **eventsFlushInterval** (Default is 30 seconds)
+- **eventsFlushInterval** (Minimum 60 seconds. Default is 60 seconds)
 - **eventsMaxQueueSize** (Default is 50 events)
 
 :::
@@ -96,7 +98,8 @@ Initialize the client by passing the configurations in the previous step.
 <TabItem value="dart" label="Dart">
 
 ```dart showLineNumbers
-final client = await BKTClient.initialize(config, user);
+await BKTClient.instance.initialize(config: config, user: user);
+final client = BKTClient.instance;
 ```
 
 </TabItem>
@@ -116,6 +119,7 @@ For this case, we recommend using the `timeout` option in the initialize method.
 <TabItem value="dart" label="Dart">
 
 ```dart showLineNumbers
+/// It will unlock without waiting until the fetching variation process finishes
 int timeout = 1000;
 
 final client = await BKTClient.initialize(config, user, timeout);
@@ -160,15 +164,15 @@ The Bucketeer SDK supports the following variation types.
 <TabItem value="dart" label="Dart">
 
 ```dart showLineNumbers
-static Future<bool> boolVariation(String featureId, bool defaultValue);
+Future<bool> boolVariation(String featureId, { required bool defaultValue });
 
-static Future<String> stringVariation(String featureId, String defaultValue);
+Future<String> stringVariation(String featureId, { required String defaultValue });
 
-static Future<int> intVariation(String featureId, int defaultValue);
+Future<int> intVariation(String featureId, { required int defaultValue });
 
-static Future<double> doubleVariation(String featureId, double defaultValue);
+Future<double> doubleVariation(String featureId, { required double defaultValue });
 
-static Future<Map<String, dynamic>> jsonVariation(String featureId, LDValue defaultValue);
+Future<Map<String, dynamic>> jsonVariation(String featureId, { required Map<String, dynamic> defaultValue });
 ```
 
 </TabItem>
@@ -188,9 +192,9 @@ The fetch method uses the following parameter. Make sure to wait for its complet
 ```dart showLineNumbers
 int timeout = 5000;
 
-final result = await client.fetchEvaluations(timeout);
+final result = await client.fetchEvaluations(timeoutMillis: timeout);
 if (result.isSuccess) {
-  final showNewFeature = await client.boolVariation("YOUR_FEATURE_FLAG_ID", false);
+  final showNewFeature = await client.boolVariation("YOUR_FEATURE_FLAG_ID", defaultValue: false);
   if (showNewFeature) {
       // The Application code to show the new feature
   } else {
@@ -246,7 +250,7 @@ In addition, you can pass a double value to the goal event. These values will su
 <TabItem value="dart" label="Dart">
 
 ```dart showLineNumbers
-await client.track("YOUR_GOAL_ID", 10.50);
+await client.track("YOUR_GOAL_ID", value: 10.50);
 ```
 
 </TabItem>
@@ -293,7 +297,7 @@ final user = BKTUserBuilder()
   .customAttributes(attributes)
   .build();
 
-final client = await BKTClient.initialize(config, user);
+await BKTClient.initialize(config, user);
 ```
 
 </TabItem>
@@ -316,7 +320,7 @@ final attributes = {
   'country': 'japan'
 };
 
-await client.updateUserAttributes(attributes);
+await client.updateUserAttributes(userAttributes: attributes);
 ```
 
 </TabItem>
@@ -358,6 +362,44 @@ final evaluationDetails = await client.evaluationDetails("YOUR_FEATURE_FLAG_ID")
 This method will return null if the feature flag is missing in the SDK.
 
 :::
+
+</TabItem>
+</Tabs>
+
+
+### Listening to evaluation updates
+
+BKTClient can notify when the evaluation is updated.
+The listener can detect both automatic polling and manual fetching.
+
+<Tabs>
+<TabItem value="dart" label="Dart">
+
+```dart showLineNumbers
+class EvaluationUpdateListenerImpl: EvaluationUpdateListener {
+  func onUpdate() {
+    final client = BKTClient.instance;
+    final showNewFeature = client.boolVariation("YOUR_FEATURE_FLAG_ID", defaultValue: false);
+    if (showNewFeature) {
+      // The Application code to show the new feature
+    } else {
+      // The code to run when the feature is off
+    }
+  }
+}
+
+final client = BKTClient.instance;
+
+final listener = EvaluationUpdateListenerImpl();
+// The returned key value is used to remove the listener
+final key = client.addEvaluationUpdateListener(listener);
+
+// Remove a listener associated with the key
+client.removeEvaluationUpdateListener(key: key)
+
+// Remove all listeners
+client.clearEvaluationUpdateListeners()
+```
 
 </TabItem>
 </Tabs>
