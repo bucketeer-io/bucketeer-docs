@@ -66,7 +66,7 @@ final config = BKTConfigBuilder()
 
 final user = BKTUserBuilder
   .id("USER_ID")
-  .data(YOUR_USER_ATTRIBUTES) //userAttributes is Map<String, String>
+  .customAttributes(YOUR_USER_ATTRIBUTES) //userAttributes is Map<String, String>
   .build();
 ```
 
@@ -141,9 +141,9 @@ To check which variation a specific user will receive, you can use the client li
 ```dart showLineNumbers
 final showNewFeature = await client.boolVariation("YOUR_FEATURE_FLAG_ID", false);
 if (showNewFeature) {
-    // The Application code to show the new feature
+    /// The Application code to show the new feature
 } else {
-    // The code to run if the feature is off
+    /// The code to run if the feature is off
 }
 ```
 
@@ -190,18 +190,19 @@ The fetch method uses the following parameter. Make sure to wait for its complet
 <TabItem value="dart" label="Dart">
 
 ```dart showLineNumbers
+/// It will unlock without waiting until the fetching variation process finishes
 int timeout = 5000;
 
 final result = await client.fetchEvaluations(timeoutMillis: timeout);
 if (result.isSuccess) {
   final showNewFeature = await client.boolVariation("YOUR_FEATURE_FLAG_ID", defaultValue: false);
   if (showNewFeature) {
-      // The Application code to show the new feature
+      /// The Application code to show the new feature
   } else {
-      // The code to run if the feature is off
+      /// The code to run if the feature is off
   }
 } else {
-   // The code to run if the feature is off
+   /// The code to run if the feature is off
 }
 ```
 
@@ -234,7 +235,7 @@ Assuming you already have the FCM implementation in your application.
 <TabItem value="dart" label="Dart">
 
 ```dart showLineNumbers
-// TODO
+/// TODO
 ```
 
 </TabItem>
@@ -376,8 +377,9 @@ The listener can detect both automatic polling and manual fetching.
 <TabItem value="dart" label="Dart">
 
 ```dart showLineNumbers
-class EvaluationUpdateListenerImpl: EvaluationUpdateListener {
-  func onUpdate() {
+class EvaluationUpdateListenerImpl implements EvaluationUpdateListener {
+  @override
+  void onUpdate() {
     final client = BKTClient.instance;
     final showNewFeature = client.boolVariation("YOUR_FEATURE_FLAG_ID", defaultValue: false);
     if (showNewFeature) {
