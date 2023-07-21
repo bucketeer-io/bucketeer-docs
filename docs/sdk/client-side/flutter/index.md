@@ -75,7 +75,7 @@ final user = BKTUserBuilder
 
 :::info Custom configuration
 
-Depending on your use, you may want to change the optional configurations available in the **BKTConfig.Builder**.
+Depending on your use, you may want to change the optional configurations available in the **BKTConfigBuilder**.
 
 - **pollingInterval** (Minimum 60 seconds. Default is 10 minutes)
 - **backgroundPollingInterval** (Minimum 20 minutes. Default is 1 hour)
@@ -98,7 +98,7 @@ Initialize the client by passing the configurations in the previous step.
 <TabItem value="dart" label="Dart">
 
 ```dart showLineNumbers
-await BKTClient.instance.initialize(config: config, user: user);
+await BKTClient.initialize(config: config, user: user);
 final client = BKTClient.instance;
 ```
 
@@ -122,7 +122,8 @@ For this case, we recommend using the `timeout` option in the initialize method.
 /// It will unlock without waiting until the fetching variation process finishes
 int timeout = 1000;
 
-final client = await BKTClient.initialize(config, user, timeout);
+await BKTClient.initialize(config: config, user: user, timeoutMillis: timeout);
+final client = BKTClient.instance;
 ```
 
 </TabItem>
@@ -298,7 +299,7 @@ final user = BKTUserBuilder()
   .customAttributes(attributes)
   .build();
 
-await BKTClient.initialize(config, user);
+await BKTClient.initialize(config: config, user: user);
 ```
 
 </TabItem>
@@ -321,7 +322,7 @@ final attributes = {
   'country': 'japan'
 };
 
-await client.updateUserAttributes(userAttributes: attributes);
+await client.updateUserAttributes(attributes);
 ```
 
 </TabItem>
@@ -383,9 +384,9 @@ class EvaluationUpdateListenerImpl implements BKTEvaluationUpdateListener {
     final client = BKTClient.instance;
     final showNewFeature = client.boolVariation("YOUR_FEATURE_FLAG_ID", defaultValue: false);
     if (showNewFeature) {
-      // The Application code to show the new feature
+      /// The Application code to show the new feature
     } else {
-      // The code to run when the feature is off
+      /// The code to run when the feature is off
     }
   }
 }
@@ -393,13 +394,13 @@ class EvaluationUpdateListenerImpl implements BKTEvaluationUpdateListener {
 final client = BKTClient.instance;
 
 final listener = EvaluationUpdateListenerImpl();
-// The returned key value is used to remove the listener
+/// The returned key value is used to remove the listener
 final key = client.addEvaluationUpdateListener(listener);
 
-// Remove a listener associated with the key
+/// Remove a listener associated with the key
 client.removeEvaluationUpdateListener(key: key)
 
-// Remove all listeners
+/// Remove all listeners
 client.clearEvaluationUpdateListeners()
 ```
 
