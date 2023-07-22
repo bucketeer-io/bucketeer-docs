@@ -236,7 +236,24 @@ Assuming you already have the FCM implementation in your application.
 <TabItem value="dart" label="Dart">
 
 ```dart showLineNumbers
-/// TODO
+FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
+  final isFeatureFlagUpdated = message.data["bucketeer_feature_flag_updated"]
+    if (isFeatureFlagUpdated) {
+      int timeout = 1000;
+
+      final result = await client.fetchEvaluations(timeoutMillis: timeout);
+      if (result.isSuccess) {
+        final showNewFeature = await client.boolVariation("YOUR_FEATURE_FLAG_ID", defaultValue: false);
+        if (showNewFeature) {
+            /// The Application code to show the new feature
+        } else {
+            /// The code to run if the feature is off
+        }
+      } else {
+        /// The code to run if the feature is off
+      }
+    }
+});
 ```
 
 </TabItem>
