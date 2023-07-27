@@ -56,7 +56,7 @@ The variation data table in the experiment results provides valuable information
 - **Goal user**: Indicates the number of unique users who fired the goal event. Unlike the goal total, this count does not increase when the same user triggers the goal event multiple times. It represents the distinct count of users who achieved the goal.
 - **Conversion rate**: The conversion rate column is calculated by dividing the number of unique users who fired the goal event by the number of unique users for whom a variation was returned. It provides insights into the percentage of users who successfully completed the goal based on the assigned variation.
 - **Value total**: The value total column represents the total number of values assigned to a goal event. This column may have different values for each variation. For example, it can measure how much a user spends based on each variation. In cases where the goal is to check if the user performed a desired task (e.g., clicking a button), this column may contain only nullable values.
-**Value/User**: The value/user column calculates the average values assigned to the goal event per user. It is calculated as the sum of the numbers assigned to the goal event divided by the number of unique users who fired the goal event.
+- **Value/User**: The value/user column calculates the average values assigned to the goal event per user. It is calculated as the sum of the numbers assigned to the goal event divided by the number of unique users who fired the goal event.
 
 ### Best variation based on the Bayesian inference
 
@@ -83,4 +83,3 @@ The Bucketeer team suggests selecting the best variation with a minimum 95% conf
 :::
 
 Based on the Bucketeer recommendation, the current test should continue to acquire more data before selecting the best variation. If no variation reaches the recommended confidence value, the test should keep running.
-

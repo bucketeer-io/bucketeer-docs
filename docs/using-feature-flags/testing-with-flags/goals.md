@@ -48,7 +48,7 @@ You can define goals for a wide range of scenarios related to your system. To im
 
 ## How to use goals
 
-To make goals data relevant, you need to report the end-user journey. You will use the reporting solutions provided by the Bucketeer SDK to achieve it. To report goal achievements, you will use the SDK `track` function, which enables you to register when a client (end-user) reaches a goal from the journey you defined. The code block below presents an example of registering the goal achievement by the client using the `track`` function in Javascript.
+To make goals data relevant, you need to report the end-user journey. You will use the reporting solutions provided by the Bucketeer SDK to achieve it. To report goal achievements, you will use the SDK `track` function, which enables you to register when a client (end-user) reaches a goal from the journey you defined. The code block below presents an example of registering the goal achievement by the client using the `track` function in Javascript.
 
 ```js showLineNumbers
 client.track("GOAL_ID");
