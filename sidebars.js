@@ -94,7 +94,7 @@ const sidebars = {
       type: 'doc',
       id: 'feature-flags/index',
       label: 'Overview',
-      // className: '',
+      className: 'sidebar-overview',
     },
     {
       type: 'category',
@@ -103,6 +103,8 @@ const sidebars = {
       items: [
         'feature-flags/creating-feature-flags/create-feature-flag',
         'feature-flags/creating-feature-flags/targeting',
+        'feature-flags/creating-feature-flags/manage-variations',
+        'feature-flags/creating-feature-flags/auto-operation',
       ],
     },
     // {
