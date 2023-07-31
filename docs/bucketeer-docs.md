@@ -20,8 +20,8 @@ Welcome to the Bucketeer documentation site, your comprehensive resource for eve
     info="Provides a quickstart guide on how to use the Bucketeer solution, covering flag creating and integration to your system."
   />
   <Button
-    redirect="../using-feature-flags"
-    title="Using feature flgs"
+    redirect="../feature-flags"
+    title="Feature Flgs"
     info="Explain how to create and manage feature flags and execute tests using them."
   />
   <Button
@@ -30,13 +30,8 @@ Welcome to the Bucketeer documentation site, your comprehensive resource for eve
     info="Describes in detail how to integrate the Bucketeer SDK into your system, including server and client applications."
   />
   <Button
-    redirect="../best-practices"
-    title="Best practices"
-    info="Supplies detailed instructions on how to make the most of the Bucketeer solution."
-  />
-  <Button
-    redirect="../contribution-guide"
-    title="Contribution guide"
+    redirect="../contribution-guide/contributing"
+    title="Contribution Guide"
     info="Presents the process of contributing to the Bucketeer system and includes a style guide for those creating the documentation."
   />
 </ButtonShelf>
