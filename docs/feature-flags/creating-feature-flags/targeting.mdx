@@ -23,9 +23,9 @@ To access the targeting page on the Bucketeer dashboard, access the **Feature Fl
 On the **Targeting** page, you'll find a range of options to customize and control the behavior of your flags:
 
 - **Switch Button**: Use the switch button to turn ON or OFF the targeting configuration for your feature flag. This allows you to activate or deactivate the targeting rules you have defined.
-- [**Prerequisites**](/using-feature-flags/targeting#prerequisites): Configure prerequisites to set up conditions for your flags. With prerequisites, you can establish dependencies between flags.
-- [**Targeting**](/using-feature-flags/targeting#targeting): Define targets for each variation of your flag. Examples of targets can be specific systems such as Android, iOS, and Web.
-- [**Rule rollout percentage**](/using-feature-flags/targeting#rollout-percentage): Manage the deployment risk by gradually rolling out your feature to a percentage of contexts. Start with a small portion and increase it as you gain confidence in the stability and effectiveness of your feature. This helps mitigate any potential issues that may arise during the rollout.
+- [**Prerequisites**](/feature-flags/targeting#prerequisites): Configure prerequisites to set up conditions for your flags. With prerequisites, you can establish dependencies between flags.
+- [**Targeting**](/feature-flags/targeting#targeting): Define targets for each variation of your flag. Examples of targets can be specific systems such as Android, iOS, and Web.
+- [**Rule rollout percentage**](/feature-flags/targeting#rollout-percentage): Manage the deployment risk by gradually rolling out your feature to a percentage of contexts. Start with a small portion and increase it as you gain confidence in the stability and effectiveness of your feature. This helps mitigate any potential issues that may arise during the rollout.
 - **Default strategy**: Define the default variation for your flag. This variation is served when no specific targeting rule or prerequisite is met.
 - **Off variation**: Specify the variation that is returned when the flag OFF.
 
@@ -41,9 +41,9 @@ The below image presents an example of the **Targeting** page.
 On the targeting page, you can define a series of conditions which will define which flag variation the user will receive. Since several targeting option are provide, you need to undertand the evaluation order, otherwise, the targeting strategy may not reflect your objectives. To help you to have a better undertanding, the list below show the evaluation order with description related to the possible results.
 
 1. **Switch Button**: If the swtch in on the OFF position, users receive the OFF variation and no further evaluation is required. Otherwise, the evaluation checks if prerequisites exists.
-2. [**Prerequisites**](/using-feature-flags/targeting#prerequisites): Evaluate all existing prerequisite flags, if they exists. If all flags return the selected variation, satisfying all conditions, the evaluation goes to the next stage, defined by targeting or rollout percentage. If one of prerequisites fail, returning a different variation from the one specified, the user will receive the OFF variation and no further evaluation is required.
-3. [**Targeting**](/using-feature-flags/targeting#targeting): After prerequisites are satisfied, the targets are evaluated. Each user or user group will receive the variation you defined. In case the user/user group is not listed on any variation, rollout rules are evaluated if at least one exists, otherwise the user receive the default strategy variation.
-4. [**Rule rollout percentage**](/using-feature-flags/targeting#rollout-percentage): In case no rule is satisfied, the user receive the default strategy variation.
+2. [**Prerequisites**](/feature-flags/targeting#prerequisites): Evaluate all existing prerequisite flags, if they exists. If all flags return the selected variation, satisfying all conditions, the evaluation goes to the next stage, defined by targeting or rollout percentage. If one of prerequisites fail, returning a different variation from the one specified, the user will receive the OFF variation and no further evaluation is required.
+3. [**Targeting**](/feature-flags/targeting#targeting): After prerequisites are satisfied, the targets are evaluated. Each user or user group will receive the variation you defined. In case the user/user group is not listed on any variation, rollout rules are evaluated if at least one exists, otherwise the user receive the default strategy variation.
+4. [**Rule rollout percentage**](/feature-flags/targeting#rollout-percentage): In case no rule is satisfied, the user receive the default strategy variation.
 
 The fluxogram below summirizes how targeting on Bucketeer works.
 

@@ -1,7 +1,7 @@
 ---
 title: Create a feature flag
 # sidebar_position: 
-slug: /using-feature-flags/creating-feature-flags/create-feature-flag
+slug: /feature-flags/creating-feature-flags/create-feature-flag
 description: Presents how to create a feature flag. The page will show the feature flag tab and cover the fields required to create a feature flag.
 tags: ['create','guide','feature-flag']
 ---
@@ -25,11 +25,11 @@ To create the flag, you need to fulfill the fields on the creation panel, which 
 
 You also need to define the **Tags** related to the new flag. You can specify any number of tags. However, you need to provide at least one value. Tags have two functions on Buketeer. First, then help while searching flags on the dashboard. Second, they help filter the information the server returns after a request from an SDK. Therefore, providing more specific tags helps reduce the amount of information transferred from the server to your application, reducing response time and the amount of data transferred. For additional information regarding the optimization of Bucketeer based on the use of tags, access the [Optimize Bucketeer with tags](/best-practices/optimize-bucketeer-with-tags) guide. It's important to notice that during the integration and in the [SDKs](../sdk) section, tags are also referenced as `featureTag`.
 
-Once you have defined the **Tags** for your flag, the next step is to select the **Flag type**. Refer to the [Feature flags types](/using-feature-flags/create-feature-flag#feature-flags-types) to understand the differences among the four available types. If you choose the boolean type, only two variations will be available, `true`and `false`, with their respective predefined values. On the other hand, if you select a different type, you can add more variations by clicking **Add variation** button. Additionally, you need to provide the corresponding value for each variation. While the name and description for variations are optional, we highly recommend using them as they facilitate understanding and future review of your results.
+Once you have defined the **Tags** for your flag, the next step is to select the **Flag type**. Refer to the [Feature flags types](/feature-flags/create-feature-flag#feature-flags-types) to understand the differences among the four available types. If you choose the boolean type, only two variations will be available, `true`and `false`, with their respective predefined values. On the other hand, if you select a different type, you can add more variations by clicking **Add variation** button. Additionally, you need to provide the corresponding value for each variation. While the name and description for variations are optional, we highly recommend using them as they facilitate understanding and future review of your results.
 
 Select the default variations for the **ON** and **OFF** states to finalize the flag creation process. This is especially important to ensure which variation will be returned by the flag if no targeting is defined. Once you have defined the **ON** and **OFF** variations, click **Submit** to create the flag.
 
-After creating the new flag, you will be redirected to the Targeting page. For further information regarding flag targeting, refer to the [Targeting with feature flags](../using-feature-flags/targeting) page.
+After creating the new flag, you will be redirected to the Targeting page. For further information regarding flag targeting, refer to the [Targeting with feature flags](../feature-flags/targeting) page.
 
 ## Manage feature flags
 
