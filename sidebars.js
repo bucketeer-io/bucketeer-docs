@@ -105,6 +105,7 @@ const sidebars = {
         'feature-flags/creating-feature-flags/targeting',
         'feature-flags/creating-feature-flags/manage-variations',
         'feature-flags/creating-feature-flags/auto-operation',
+        'feature-flags/creating-feature-flags/evaluate-results',
       ],
     },
     // {
