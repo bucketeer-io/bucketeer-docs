@@ -109,12 +109,12 @@ const sidebars = {
         'feature-flags/creating-feature-flags/settings-and-history'
       ],
     },
-    // {
-    //   type: 'doc',
-    //   id: 'api-keys',
-    //   label: 'API Keys',
-    //   className: 'sidebar-api-keys',
-    // },
+    {
+      type: 'doc',
+      id: 'feature-flags/api-keys',
+      label: 'API Keys',
+      className: 'sidebar-api-keys',
+    },
     // {
     //   type: 'category',
     //   label: 'Testing With Flags',
