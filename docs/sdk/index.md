@@ -18,34 +18,38 @@ Client-side SDKs are developed for single-user desktop, mobile, and embedded app
 
 Supported SDKs for client-side:
 
-<table border="0" cellpadding="0" cellspacing="0">
-  <tr border="0">
-    <td border="0" align="center">
-      <a href="/sdk/client-side/android">
-        <em><img src="/img/getting-started/quickstart/create-api-key.png" width="60"></img></em><br />
-        Android
-      </a>
-    </td>
-    <td border="0" align="center">
-      <a href="/sdk/client-side/ios">
-        <em><img src="/img/getting-started/quickstart/create-api-key.png" width="60"></img></em><br />
-        iOS
-      </a>
-    </td>
-    <td border="0" align="center">
-      <a href="/sdk/client-side/flutter">
-        <em><img src="/img/getting-started/quickstart/create-api-key.png" width="60"></img></em><br />
-        Flutter
-      </a>
-    </td>
-    <td border="0" align="center">
-      <a href="/sdk/client-side/javascript">
-        <em><img src="/img/getting-started/quickstart/create-api-key.png" width="60"></img></em><br />
-        JavaScript
-      </a>
-    </td>
-  </tr>
-</table>
+
+<div className="row" style={{maxWidth: '500px'}}>
+
+  <div className="col--3 text--center">
+    <a href="/sdk/client-side/android" className="brand-link">
+      <i className="android-icon brand-icon"></i>
+      <span>Android</span>
+    </a>
+  </div>
+
+  <div className="col--3 text--center">
+    <a href="/sdk/client-side/ios" className="brand-link">
+      <i className="ios-icon brand-icon"></i>
+      <span>iOS</span>
+    </a>
+  </div>
+
+  <div className="col--3 text--center">
+    <a href="/sdk/client-side/flutter" className="brand-link">
+      <i className="flutter-icon brand-icon"></i>
+      <span>Flutter</span>
+    </a>
+  </div>
+
+  <div className="col--3 text--center">
+    <a href="/sdk/client-side/javascript" className="brand-link">
+      <i className="javascript-icon brand-icon"></i>
+      <span>JavaScript</span>
+    </a>
+  </div>
+
+</div>
 
 ### Server-side SDK
 
@@ -53,5 +57,20 @@ Server-side SDKs are built for multi-user systems in secure environments like we
 
 Supported SDKs for server-side:
 
-- [Go](/sdk/server-side/go)
-- [NodeJS](/sdk/server-side/node-js)
+<div className="row" style={{maxWidth: '500px'}}>
+
+  <div className="col--3 text--center">
+    <a href="/sdk/server-side/go" className="brand-link">
+      <i className="golang-icon brand-icon"></i>
+      <span>Go</span>
+    </a>
+  </div>
+
+  <div className="col--3 text--center">
+    <a href="/sdk/server-side/node-js" className="brand-link">
+      <i className="nodejs-icon brand-icon"></i>
+      <span>Node.js</span>
+    </a>
+  </div>
+
+</div>
