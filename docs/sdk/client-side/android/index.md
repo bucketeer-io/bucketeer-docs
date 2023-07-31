@@ -16,7 +16,7 @@ The Bucketeer SDK is compatible with Android SDK versions 21 and higher (Android
 
 ## Getting started
 
-Before starting, ensure that you follow the [Getting started](/) guide.
+Before starting, ensure that you follow the [Getting Started](/getting-started) guide.
 
 ### Implementing dependency
 

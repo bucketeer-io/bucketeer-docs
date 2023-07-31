@@ -1,6 +1,6 @@
 ---
-id: getting-started
-title: GETTING STARTED
+id: bucketeer-docs
+title: Bucketeer Docs
 sidebar_position: 1
 slug: /
 ---

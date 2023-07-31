@@ -1,0 +1,39 @@
+---
+title: Create your first Flag
+slug: /getting-started/quickstart/create-your-first-flag
+description: This page guides the user on how to create a API key to be used with a feature flag.
+tags: ['guide', 'feature-flag', 'create']
+---
+
+import CenteredImg from '@site/src/components/centered-img/CenteredImg';
+
+To create a feature flag on the Bucketeer dashboard, access the **Feature Flags** tab. You will find all existing flags available on the current environment on this page. To add a new one, click **+ Add**. A side panel will appear on the right side of the screen.
+
+To create the feature flag, you will need to provide the following information through the side panel fields:
+
+- **ID**: This unique identifier is used to identify the flag when adding it to your application. In code examples, the ID is also referenced as `FLAG_ID`. It has a maximum length of 100 characters.
+- **Name**: Provide a descriptive name for the feature flag (up to 100 characters) to easily identify it.
+- **Description**: Add a brief explanation of the flag's purpose and usage. Keep it concise within 100 characters.
+- **Tags** (required): You can add tags to the feature flag, which help in searching within the Bucketeer dashboard's tag list and filtering server-returned information after a request.
+- **Flag type**: Specify the type of flag you want to create. It can be boolean, string, number, or JSON. Boolean flags allow only two variations (true and false), while other flag types can have any number of variations (at least two). To add more variations, use the **Add variation** button.
+- **Variation data**: For each variation, provide its corresponding value. For boolean flags, the variations are predefined as "true" and "false." For other flag types, you need to define the value for each variation. Names and descriptions for variations are optional but recommended for easier review later on.
+- **On and off variation**: Specify which variation should be returned when the feature flag is turned on or off, respectively.
+
+The following image presents an example of data used to create a flag.
+
+<CenteredImg
+  imgURL="img/getting-started/quickstart/create-feature-flag.png"
+  alt="create feature flag panel"
+  wSize="400px"
+  borderWidth="1px"
+/>
+
+After creating a flag, it will apear on the **Feature Flags** page and have the **OFF** state, as shown in the image below. To turn it **ON**, use the toggle. In addition, you have access to its ID (`FLAG_ID`), which is used when integrating the feature flag, and tags defined when creating it. For the example below, the `FLAG_ID` is **feature-javascript-e2e-boolean**, and the **javascript** and **web** tags were used.
+
+<CenteredImg
+  imgURL="img/getting-started/quickstart/created-feature-flag.png"
+  alt="created feature flag"
+  borderWidth="1px"
+/>
+
+With the API key and the `FLAG_ID`, you can move on to the next step and [integrate Bucketeer](/getting-started/quickstart/integrate-bucketeer) into your application.

@@ -10,7 +10,7 @@ This category contains topics explaining how to configure Bucketeer's JavaScript
 
 ## Getting started
 
-Before starting, ensure that you follow the [Getting started](/) guide.
+Before starting, ensure that you follow the [Getting Started](/getting-started) guide.
 
 ### Installing dependency
 

@@ -1,0 +1,30 @@
+.button h3 {
+  font-size: 1rem;
+  color: var(--ifm-color-primary);
+  margin: 0 0 0.5rem 0;
+  display: flex;
+  text-align: left;
+}
+
+.button p {
+  margin: 0;
+  color: var(--ifm-font-color-base);
+  text-align: left;
+  
+  
+}
+
+.button {
+  padding: 0.7rem;
+  flex: 1;
+  border-radius: 7px;
+  border: 1px solid var(--ifm-color-primary);
+  transition: transform .2s;
+  white-space: pre-wrap;
+}
+
+.button:hover {
+  transform: scale(1.02);
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}

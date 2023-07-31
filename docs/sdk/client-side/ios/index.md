@@ -16,7 +16,7 @@ The Bucketeer iOS SDK is compatible with iOS versions 11.0 and higher.
 
 ## Getting started
 
-Before starting, ensure that you follow the [Getting Started](/) guide.
+Before starting, ensure that you follow the [Getting Started](/getting-started) guide.
 
 ### Implementing dependency
 

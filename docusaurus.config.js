@@ -6,6 +6,17 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
+
+  plugins: [
+    [
+      require.resolve('@cmfcmf/docusaurus-search-local'),
+      {
+        indexBlog: false,
+      },
+    ],
+    require.resolve('docusaurus-plugin-image-zoom'),
+  ],
+
   title: 'Bucketeer Docs',
   tagline: 'Feature Flag and A/B Testing Managment platform',
   url: 'https://docs.bucketeer.io',
@@ -21,7 +32,7 @@ const config = {
   // to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'en',
-    locales: ['en', 'ja'],
+    locales: [ 'en', 'ja' ],
   },
 
   presets: [
@@ -56,17 +67,53 @@ const config = {
         disableSwitch: true,
         respectPrefersColorScheme: false,
       },
+      zoom: {
+        selector: '.markdown :not(em) > img',
+        background: {
+          light: 'rgb(255, 255, 255)',
+          dark: 'rgb(50, 50, 50)'
+        }
+      },
       navbar: {
         title: '',
         logo: {
           alt: 'Feature Flag and A/B Testing Managment platform',
           src: 'img/bucketeer-logo-white.png',
+          className: 'header-logo',
         },
         items: [
           {
-            type: 'localeDropdown',
+            to: '/',
+            label: 'Home',
+            position: 'left',
+            activeBaseRegex: "/$",
+          },
+          {
+            to: 'getting-started',
+            label: 'Getting Started',
+            position: 'left',
+            activeBaseRegex: "/getting-started",
+          },
+          {
+            to: 'sdk',
+            label: 'SDKs',
+            position: 'left',
+            activeBaseRegex: "/sdk",
+          },
+          {
+            to: 'contribution-guide/contributing',
+            label: 'Contributing',
+            position: 'left',
+            activeBasePath: "contribution-guide/",
+          },
+          {
+            type: 'search',
             position: 'right',
           },
+          // {
+          //   type: 'localeDropdown',
+          //   position: 'right',
+          // },
           {
             href: 'https://github.com/bucketeer-io/bucketeer',
             // label: 'GitHub',
@@ -93,6 +140,8 @@ const config = {
       prism: {
         // theme: darkCodeTheme,
         theme: lightCodeTheme,
+        // theme: require("prism-react-renderer/themes/vsDark"),
+        // theme: require("prism-react-renderer/themes/shadesOfPurple"),
         additionalLanguages: [
           'groovy',
           'kotlin',
