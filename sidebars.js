@@ -102,6 +102,7 @@ const sidebars = {
       className: 'sidebar-creating-feature-flags',
       items: [
         'feature-flags/creating-feature-flags/create-feature-flag',
+        'feature-flags/creating-feature-flags/targeting',
       ],
     },
     // {
