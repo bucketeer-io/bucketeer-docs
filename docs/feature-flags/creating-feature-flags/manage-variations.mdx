@@ -1,0 +1,31 @@
+---
+title: Manage variations
+# sidebar_position:
+slug: /using-feature-flags/creating-feature-flags/manage-variations
+description: Describe how to manage feature flag variations.
+tags: ['feature-flag', 'variations']
+---
+
+import CenteredImg from '@site/src/components/centered-img/CenteredImg';
+
+The Variations tab allows you to manage variations for your feature flag with ease. You can add, edit, or remove variations based on your requirements.
+
+To access the variations page on the Bucketeer dashboard, access the **Feature Flags** tab, choose the desired flag, and click on its name. On the new page, select the **Variation** tab on the top. The image below presents an example of the **Variations** panel for a string flag with 4 variations.
+
+<CenteredImg
+  imgURL="img/feature-flags/variations/manage-variations.png"
+  alt="variations panel"
+  wSize="650px"
+/>
+
+For boolean flags, you can modify the name and description of each variation. When dealing with multivariate flags (string, number, and JSON types), you can not only edit the value, name, and description of any variation but also add or delete variations as needed. After finishing the flag variations edition, save it and provide a comment describing your changes.
+
+:::note
+
+You can't delete a variation if it was selected as the **Default strategy** or as the **OFF variation** on the **Targeting** tab. To be able to delete it, you will need to choose another variation as default or OFF variation first.
+
+:::
+
+It's important to note that any changes made to the variations of a feature flag will affect all environments within the project. This ensures consistent behavior across the board.
+
+When you delete a variation, individual targeting and custom rules associated with that variation will be removed as well. In cases where a custom rule employs a percentage rollout for the deleted variation, the rollout for that specific variation will be set to zero. This ensures that your feature flag's logic remains intact and functional.
