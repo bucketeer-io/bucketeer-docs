@@ -115,14 +115,17 @@ const sidebars = {
       label: 'API Keys',
       className: 'sidebar-api-keys',
     },
-    // {
-    //   type: 'category',
-    //   label: 'Testing With Flags',
-    //   className: 'sidebar-testing-with-flags',
-    //   items: [
-    //     'lorem/ipsum/dolor/sit/index',
-    //   ],
-    // },
+    {
+      type: 'category',
+      label: 'Testing With Flags',
+      className: 'sidebar-testing-with-flags',
+      items: [
+        'feature-flags/testing-with-flags/index',
+        'feature-flags/testing-with-flags/goals',
+        'feature-flags/testing-with-flags/experiments',
+        'feature-flags/testing-with-flags/using-experiments',
+      ],
+    },
     // {
     //   type: 'doc',
     //   id: 'feature-flags-integration',
