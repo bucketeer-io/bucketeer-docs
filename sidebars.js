@@ -91,11 +91,17 @@ const sidebars = {
       defaultStyle: true,
     },
     {
+      type: 'doc',
+      id: 'feature-flags/index',
+      label: 'Overview',
+      // className: '',
+    },
+    {
       type: 'category',
       label: 'Creating Feature Flags',
       className: 'sidebar-creating-feature-flags',
       items: [
-        'feature-flags/index',
+        'feature-flags/creating-feature-flags/create-feature-flag',
       ],
     },
     // {
