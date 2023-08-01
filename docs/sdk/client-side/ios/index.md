@@ -268,21 +268,20 @@ func jsonVariation(featureId: String, defaultValue: [String: AnyHashable]) -> [S
 </TabItem>
 </Tabs>
 
-### Updating user variations
+### Updating user evaluations
 
-Sometimes depending on your use, you may need to ensure the variations in the SDK are up to date before evaluating a user.
+Depending on the use case, you may need to ensure the evaluations in the SDK are up to date before requesting the variation.
 
 The fetch method uses the following parameters.
 
 - **Completion callback**
-- **Timeout** (The callback will return without waiting until the fetching variation process finishes. The default is 30 seconds)
+- **Timeout** (Default is 30 seconds)
 
 <Tabs>
 <TabItem value="swift" label="Swift">
 
 ```swift showLineNumbers
-// The callback will return without waiting until the fetching variation process finishes
-let timeout: Int64 = 2000 // Default is 30 seconds
+let timeout: Int64 = 5000
 let client = BKTClient.shared
 
 client.fetchEvaluations(timeoutMillis: timeout) { error in
@@ -310,10 +309,17 @@ You don't need to call this method manually in regular use because the SDK is po
 
 :::
 
-### Updating user variations in real-time
+### Updating user evaluations in real-time
 
-The Bucketeer SDK supports FCM ([Firebase Cloud Messaging](https://firebase.google.com/docs/cloud-messaging)).
-Every time you change some feature flag, Bucketeer will send notifications using the FCM API to notify the client so that you can update the variations in real-time.
+The Bucketeer SDK supports FCM ([Firebase Cloud Messaging](https://firebase.google.com/docs/cloud-messaging)).<br />
+Every time you change a feature flag on the admin console, Bucketeer will send notifications using the FCM API to notify the client so that you can update the evaluations in real-time.
+
+:::note
+
+1- You need to register your FCM API Key on the admin console. [See more](#).<br />
+2- This feature may not work if the user has the notification disabled.
+
+:::
 
 Assuming you already have the FCM implementation in your application, the following example shows how to handle silent push notifications.
 
@@ -339,14 +345,6 @@ func application(
   return UIBackgroundFetchResult.newData
 }
 ```
-
-:::note
-
-1- You need to register your FCM API Key on the console UI. [See more](#).
-
-2- This feature may not work if the user has the notification disabled.
-
-:::
 
 </TabItem>
 </Tabs>

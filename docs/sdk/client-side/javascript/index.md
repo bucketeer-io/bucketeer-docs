@@ -193,16 +193,19 @@ jsonVariation(featureId: string, defaultValue: object): Promise<object>;
 </TabItem>
 </Tabs>
 
-### Updating user variations
+### Updating user evaluations
 
-Sometimes depending on your use, you may need to ensure the variations in the SDK are up to date before evaluating a user.
+Depending on the use case, you may need to ensure the evaluations in the SDK are up to date before requesting the variation.
+
+The fetch method uses the following parameter. Make sure to wait for its completion.
+
+- **Timeout** (Default is 30 seconds)
 
 <Tabs>
 <TabItem value="js" label="JavaScript">
 
 ```js showLineNumbers
-// It will unlock without waiting until the fetching variation process finishes
-val timeout = 1000 // Default is 5 seconds
+val timeout = 5000
 
 await client.fetchEvaluations(timeout);
 ```
