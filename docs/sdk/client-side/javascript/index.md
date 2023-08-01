@@ -114,7 +114,7 @@ const client = getBKTClient()
 
 :::note
 
-The initialize process starts polling the latest variations from Bucketeer in the background using the interval `pollingInterval` configuration.
+The initialize process starts polling right away the latest evaluations from Bucketeer in the background using the interval `pollingInterval` configuration. JavaScript SDK **does not support** Background fetch.
 
 :::
 
