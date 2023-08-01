@@ -19,7 +19,7 @@ Suppose you need to locate a particular goal. In that case, Bucketeer offers a s
 To create a goal, you must fulfill the fields in the creation panel, which becomes visible after selecting **+ Add**. It's essential to provide the goal's ID, name, and description. You will use the goal's ID to report the end-users progress on your application. The image below presents an example of the creation panel.
 
 <CenteredImg
-  imgURL="img/feature-flags/goals/create-goal.png"
+  imgURL="img/feature-flags/goals/create-goal-v2.png"
   alt="create goal example"
   wSize="400px"
   borderWidth="1px"
