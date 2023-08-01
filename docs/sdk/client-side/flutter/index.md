@@ -45,6 +45,14 @@ import 'package:bucketeer_flutter_client_sdk/bucketeer_flutter_client_sdk.dart';
 
 Configure the SDK config and user configuration.
 
+:::note
+
+The **featureTag** setting is the tag that you configure when creating a Feature Flag.
+
+:::
+
+All the settings in the example below are required.
+
 <Tabs>
 <TabItem value="dart" label="Dart">
 

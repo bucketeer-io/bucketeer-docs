@@ -52,6 +52,14 @@ import io.bucketeer.sdk.android.*
 
 Configure the SDK config and user configuration.
 
+:::note
+
+The **featureTag** setting is the tag that you configure when creating a Feature Flag.
+
+:::
+
+All the settings in the example below are required.
+
 <Tabs>
 <TabItem value="kt" label="Kotlin">
 

@@ -85,7 +85,14 @@ import Bucketeer
 
 ### Configuring client
 
-Configure the SDK config and user configuration.<br />
+Configure the SDK config and user configuration.
+
+:::note
+
+The **featureTag** setting is the tag that you configure when creating a Feature Flag.
+
+:::
+
 All the settings in the example below are required.
 
 <Tabs>
@@ -97,7 +104,7 @@ do {
   let config = try BKTConfig(
     apiKey: "YOUR_API_KEY",
     apiEndpoint: "YOUR_API_ENDPOINT",
-    featureTag: "ios",
+    featureTag: "YOUR_FEATURE_TAG",
     appVersion: Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
   )
   // User configuration
@@ -126,6 +133,34 @@ Depending on your use, you may want to change the optional configurations availa
 The Bucketeer SDK doesn't save the user data. The Application must save and set it when initializing the client SDK.
 
 :::
+
+### Background fetch
+
+When the application changes to the background state, the SDK will continue fetching the user evaluations according to the background polling interval setting.
+
+The default setting is **1 hour** and a minimum of **20 minutes**.
+
+To use the background fetch in iOS, you must configure your application as follows:
+
+**1.** Enable the `Background fetch` and `Background processing` options in the `Signing & Capabilities` settings. <br />
+**2.** Add the `Permitted background task scheduler identifiers` key in the **Info.plist**, and set the task id `io.bucketeer.evaluation.refresh` as the value.
+
+To change the background polling default interval, add the `backgroundPollingInterval` setting in the **BKTConfig** as follows:
+
+```swift showLineNumbers
+do {
+  // SDK configuration
+  let config = try BKTConfig(
+    apiKey: "YOUR_API_KEY",
+    apiEndpoint: "YOUR_API_ENDPOINT",
+    featureTag: "YOUR_FEATURE_TAG",
+    appVersion: Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String,
+    backgroundPollingInterval: 1800 // 30 minutes
+  )
+} catch {
+  // Error handling
+}
+```
 
 ### Initializing client
 
