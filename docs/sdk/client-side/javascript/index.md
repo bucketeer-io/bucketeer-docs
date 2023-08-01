@@ -51,13 +51,11 @@ import { BKTClient, getBKTClient, defineBKTConfig, defineBKTUser, initializeBKTC
 
 Configure the SDK config and user configuration.
 
-:::note
+:::info
 
-The **featureTag** setting is the tag that you configure when creating a Feature Flag.
+The **featureTag** setting is the tag that you configure when creating a Feature Flag. When it is not configured, it will evaluate all the Feature Flags in the environment. **We strongly recommend** using tags to speed up the evaluation process and reduce the cache size in the client.
 
 :::
-
-All the settings in the example below are required.
 
 <Tabs>
 <TabItem value="js" label="JavaScript">
@@ -66,7 +64,7 @@ All the settings in the example below are required.
 const config = defineBKTConfig({
   apiKey: 'YOUR_API_KEY',
   apiEndpoint: 'YOUR_API_URL',
-  featureTag: 'YOUR_FEATURE_TAG',
+  featureTag: 'YOUR_FEATURE_TAG', // Optional
   appVersion: 'YOUR_APP_VERSION',
 });
 
