@@ -91,13 +91,13 @@ The Bucketeer SDK doesn't save the user data. The Application must save and set 
 :::
 
 ### Background mode
-For Android, background mode works without any configuration by default.
+For Android, background mode works without any configuration by default.<br />
 For iOS, this feature is optional but it can be used by configuring the Background Mode in Xcode Project.<br />
 The default setting is **1 hour** and a minimum of **20 minutes** for the `backgroundPollingInterval`, and **1 minute** for the `eventsFlushInterval` settings.
 
 #### Configuration for iOS
-**1.** Open iOS folder, using Xcode IDE to open the Runner project
-**2.** Open XCode project setting
+**1.** Open iOS folder, using Xcode IDE to open the Runner project<br />
+**2.** Open XCode project setting<br />
 **3.** Enable the `Background fetch` option in the `Signing & Capabilities` settings.<br />
 **4.** Register the identifier by adding the `Permitted background task scheduler identifiers` option in the **Info.plist**, and set the following task ids as the values.
 
