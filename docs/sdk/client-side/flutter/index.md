@@ -91,8 +91,8 @@ The Bucketeer SDK doesn't save the user data. The Application must save and set 
 :::
 
 ### Background mode
-For Android, background mode works without any configuration by default.<br />
-For iOS, this feature is optional but it can be used by configuring the Background Mode in Xcode Project.<br />
+For Android, the background mode works without any configuration by default.<br />
+For iOS, this feature is optional but it can be used by configuring the background mode in the Xcode project..<br />
 The default setting is **1 hour** and a minimum of **20 minutes** for the `backgroundPollingInterval`, and **1 minute** for the `eventsFlushInterval` settings.
 
 #### Configuration for iOS
