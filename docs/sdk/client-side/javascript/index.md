@@ -51,6 +51,12 @@ import { BKTClient, getBKTClient, defineBKTConfig, defineBKTUser, initializeBKTC
 
 Configure the SDK config and user configuration.
 
+:::info
+
+The **featureTag** setting is the tag that you configure when creating a Feature Flag. When it is not configured, it will evaluate all the Feature Flags in the environment. **We strongly recommend** using tags to speed up the evaluation process and reduce the cache size in the client.
+
+:::
+
 <Tabs>
 <TabItem value="js" label="JavaScript">
 
@@ -58,7 +64,7 @@ Configure the SDK config and user configuration.
 const config = defineBKTConfig({
   apiKey: 'YOUR_API_KEY',
   apiEndpoint: 'YOUR_API_URL',
-  featureTag: 'YOUR_FEATURE_TAG',
+  featureTag: 'YOUR_FEATURE_TAG', // Optional
   appVersion: 'YOUR_APP_VERSION',
 });
 
@@ -106,7 +112,7 @@ const client = getBKTClient()
 
 :::note
 
-The initialize process starts polling the latest variations from Bucketeer in the background using the interval `pollingInterval` configuration.
+The initialize process starts polling right away the latest evaluations from Bucketeer in the background using the interval `pollingInterval` configuration. JavaScript SDK **does not support** Background fetch.
 
 :::
 
@@ -187,16 +193,19 @@ jsonVariation(featureId: string, defaultValue: object): Promise<object>;
 </TabItem>
 </Tabs>
 
-### Updating user variations
+### Updating user evaluations
 
-Sometimes depending on your use, you may need to ensure the variations in the SDK are up to date before evaluating a user.
+Depending on the use case, you may need to ensure the evaluations in the SDK are up to date before requesting the variation.
+
+The fetch method uses the following parameter. Make sure to wait for its completion.
+
+- **Timeout** (Default is 30 seconds)
 
 <Tabs>
 <TabItem value="js" label="JavaScript">
 
 ```js showLineNumbers
-// It will unlock without waiting until the fetching variation process finishes
-val timeout = 1000 // Default is 5 seconds
+val timeout = 5000
 
 await client.fetchEvaluations(timeout);
 ```

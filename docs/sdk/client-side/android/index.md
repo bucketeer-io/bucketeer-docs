@@ -52,6 +52,14 @@ import io.bucketeer.sdk.android.*
 
 Configure the SDK config and user configuration.
 
+:::note
+
+The **featureTag** setting is the tag that you configure when creating a Feature Flag.
+
+:::
+
+All the settings in the example below are required.
+
 <Tabs>
 <TabItem value="kt" label="Kotlin">
 
@@ -104,7 +112,7 @@ val client = BKTClient.getInstance()
 
 :::note
 
-The initialize process starts polling the latest variations from Bucketeer in the background using the interval `pollingInterval` configuration. When your application moves to the background state, it will use the `backgroundPollingInterval` configuration.
+The initialize process starts polling right away the latest evaluations from Bucketeer in the background using the interval `pollingInterval` configuration while the application is in the **foreground state**. When the application changes to the **background state**, it will use the `backgroundPollingInterval` configuration.
 
 :::
 
@@ -194,21 +202,19 @@ fun jsonVariation(featureId: String, defaultValue: JSONObject): JSONObject
 </TabItem>
 </Tabs>
 
-### Updating user variations
+### Updating user evaluations
 
-Sometimes depending on your use, you may need to ensure the variations in the SDK are up to date before evaluating a user.
+Depending on the use case, you may need to ensure the evaluations in the SDK are up to date before requesting the variation.
 
-The fetch method uses the following parameters and returns `Future<BKTExeptIon?>`. Make sure to wait for its completion.
+The fetch method uses the following parameter and returns a `Future<BKTExeptIon?>`.
 
-- **Timeout** (The callback will return without waiting until the fetching process finishes. The default is 5 seconds)
+- **Timeout** (Default is 30 seconds)
 
 <Tabs>
 <TabItem value="kt" label="Kotlin">
 
 ```kotlin showLineNumbers
-// The callback will return without waiting until the fetching variation process finishes
-val timeout = 1000 // Default is 5 seconds
-
+val timeout = 5000
 val future = client.fetchEvaluations(timeout)
 
 // Future is blocking, avoid waiting it on the main thread.
@@ -236,10 +242,17 @@ You don't need to call this method manually in regular use because the SDK is po
 
 :::
 
-### Updating user variations in real-time
+### Updating user evaluations in real-time
 
-The Bucketeer SDK supports FCM ([Firebase Cloud Messaging](https://firebase.google.com/docs/cloud-messaging)).
-Every time you change some feature flag, Bucketeer will send notifications using the FCM API to notify the client so that you can update the variations in real-time.
+The Bucketeer SDK supports FCM ([Firebase Cloud Messaging](https://firebase.google.com/docs/cloud-messaging)).<br />
+Every time you change a feature flag on the admin console, Bucketeer will send notifications using the FCM API to notify the client so that you can update the evaluations in real-time.
+
+:::note
+
+1- You need to register your FCM API Key on the admin console. [See more](#).<br />
+2- This feature may not work if the user has the notification disabled.
+
+:::
 
 Assuming you already have the FCM implementation in your application.
 
@@ -270,14 +283,6 @@ override fun onMessageReceived(remoteMessage: RemoteMessage?) {
   }
 }
 ```
-
-:::note
-
-1- You need to register your FCM API Key on the console UI. [See more](#).
-
-2- This feature may not work if the user has the notification disabled.
-
-:::
 
 </TabItem>
 </Tabs>
