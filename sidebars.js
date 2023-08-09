@@ -91,27 +91,41 @@ const sidebars = {
       defaultStyle: true,
     },
     {
+      type: 'doc',
+      id: 'feature-flags/index',
+      label: 'Overview',
+      className: 'sidebar-overview',
+    },
+    {
       type: 'category',
       label: 'Creating Feature Flags',
       className: 'sidebar-creating-feature-flags',
       items: [
-        'feature-flags/index',
+        'feature-flags/creating-feature-flags/create-feature-flag',
+        'feature-flags/creating-feature-flags/targeting',
+        'feature-flags/creating-feature-flags/manage-variations',
+        'feature-flags/creating-feature-flags/auto-operation',
+        'feature-flags/creating-feature-flags/evaluate-results',
+        'feature-flags/creating-feature-flags/settings-and-history'
       ],
     },
-    // {
-    //   type: 'doc',
-    //   id: 'api-keys',
-    //   label: 'API Keys',
-    //   className: 'sidebar-api-keys',
-    // },
-    // {
-    //   type: 'category',
-    //   label: 'Testing With Flags',
-    //   className: 'sidebar-testing-with-flags',
-    //   items: [
-    //     'lorem/ipsum/dolor/sit/index',
-    //   ],
-    // },
+    {
+      type: 'doc',
+      id: 'feature-flags/api-keys',
+      label: 'API Keys',
+      className: 'sidebar-api-keys',
+    },
+    {
+      type: 'category',
+      label: 'Testing With Flags',
+      className: 'sidebar-testing-with-flags',
+      items: [
+        'feature-flags/testing-with-flags/index',
+        'feature-flags/testing-with-flags/goals',
+        'feature-flags/testing-with-flags/experiments',
+        'feature-flags/testing-with-flags/using-experiments',
+      ],
+    },
     // {
     //   type: 'doc',
     //   id: 'feature-flags-integration',

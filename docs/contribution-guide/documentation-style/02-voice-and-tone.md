@@ -8,10 +8,8 @@ tags: ['contribution', 'documentation']
 It is essential to be aware of the following aspects of voice and tone:
 
 - When creating your documents, prioritize achieving a conversational, friendly, and respectful voice and tone while maintaining professionalism. Avoid excessive casualness or frivolity and seek a simple, approachable style that conveys a natural feel. Envision yourself as a knowledgeable friend who comprehends the needs and goals of the developer.
-<br/>
 
 - While we recommend embracing a conversational tone, it is crucial to strike a balance and avoid overly colloquial or verbose language, especially in developer documentation. Remember that the objective is to provide clear and concise information rather than imitating casual conversation.
-<br/>
 
 - Take into account that your readers may come from diverse cultural backgrounds and have varying English proficiency levels. Therefore, it is advisable to minimize using culturally specific references as much as possible. Moreover, employing simple and consistent writing can facilitate the translation of documents into other languages.
 

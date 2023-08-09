@@ -6,6 +6,19 @@ slug: /sdk
 
 In this category, you will find guides explaining the difference between **client** and **server-side** SDKs. To connect to the Bucketeer server, you will need an SDK for your programming language and an API key.
 
+:::note
+
+The API Key is generated on the Bucketeer dashboard from the **API Keys** menu.
+
+:::
+
+## Choose a Bucketeer SDK
+
+When integrating a Bucketeer SDK with your code, it is important to consider two factors.
+
+1. First, you need to assess your specific requirements to determine whether you need a server-side or client-side SDK. Typically, you will only need one SDK per application or service. However, you can use multiple SDKs if your product consists of applications or services written in multiple languages.
+2. Afterward, you need to select the programming language which will normally be used on your system.
+
 :::tip
 
 We strongly recommend that you check our [Quickstart](/getting-started/quickstart) guide before using Bucketeer SDKs in your application.
@@ -14,7 +27,7 @@ We strongly recommend that you check our [Quickstart](/getting-started/quickstar
 
 ### Client-side SDK
 
-Client-side SDKs are developed for single-user desktop, mobile, and embedded applications, including mobile SDKs.
+Client-side SDKs are designed for single-user desktop, mobile, and embedded applications. They are intended for use in potentially less secure environments, such as personal computers or mobile devices, including mobile SDKs. These SDKs typically run on end-user devices, which makes them vulnerable to compromise by users who unpack a mobile app to examine the SDK bytecode or use developer tools in their browser to inspect internal site data. Therefore, never using a server-side SDK key in a client-side or mobile application is essential.
 
 Supported SDKs for client-side:
 
@@ -53,7 +66,7 @@ Supported SDKs for client-side:
 
 ### Server-side SDK
 
-Server-side SDKs are built for multi-user systems in secure environments like web servers. This setup enables server-side SDKs to receive flag data including rules, and segments safely without filtering out sensitive information.
+Server-side SDKs are designed for multi-user systems and intended for use in trusted environments, like corporate networks or web servers. They operate within server-architected applications running on your infrastructure or trusted cloud-based infrastructure. These locations are not directly accessible by end-users. The restricted access of server-based applications allows server-side SDKs to safely receive flag data and rulesets without the need to filter out sensitive information. This setup enables server-side SDKs to receive flag data including rules, and segments safely without filtering out sensitive information.
 
 Supported SDKs for server-side:
 
