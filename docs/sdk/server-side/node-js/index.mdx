@@ -1,0 +1,231 @@
+---
+title: Node JS reference
+sidebar_position: 1
+slug: /sdk/server-side/node-js
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+This category contains topics explaining how to configure Bucketeer's Node.js SDK. The Bucketeer's Node.js SDK was developed using TypeScript.
+
+## Getting started
+
+Before starting, ensure that you follow the [Getting Started](/getting-started) guide.
+
+### Installing dependency
+
+Install the dependency in your application.
+
+<Tabs>
+<TabItem value="npm" label="npm">
+
+```sh showLineNumbers
+npm install @bucketeer/sdk
+```
+
+</TabItem>
+<TabItem value="yarn" label="Yarn">
+
+</TabItem>
+</Tabs>
+
+### Importing server
+
+Import the Bucketeer server into your application code.
+
+<Tabs>
+<TabItem value="ts" label="TypeScript">
+
+```ts showLineNumbers
+
+```
+
+</TabItem>
+</Tabs>
+
+### Configuring server
+
+<Tabs>
+<TabItem value="ts" label="TypeScript">
+
+```ts showLineNumbers
+
+```
+
+</TabItem>
+</Tabs>
+
+:::info Custom configuration
+
+Depending on your use, you may want to change the optional configurations available.
+
+- **pollingInterval** (Minimum 5 minutes. Default is 10 minutes)
+- **eventsFlushInterval** (Default is 30 seconds)
+- **eventsMaxQueueSize** (Default is 50 events)
+- **storageKeyPrefix** (Default is empty)
+- **userAgent** (Default is `window.navigator.userAgent`)
+- **fetch** (Default is `window.fetch`)
+
+:::
+
+### Initializing server
+
+Initialize the server by passing the configurations in the previous step.
+
+<Tabs>
+<TabItem value="ts" label="TypeScript">
+
+```ts showLineNumbers
+
+```
+
+</TabItem>
+</Tabs>
+
+<Tabs>
+<TabItem value="ts" label="TypeScript">
+
+```ts showLineNumbers
+
+```
+
+</TabItem>
+</Tabs>
+
+### Handling exceptions
+
+## Supported features
+
+### Evaluating user
+
+The variation method determines whether or not a feature flag is enabled for a specific user.<br />
+To check which variation a specific user will receive, you can use the server like below.
+
+<Tabs>
+<TabItem value="ts" label="TypeScript">
+
+```ts showLineNumbers
+
+```
+
+</TabItem>
+</Tabs>
+
+:::note
+
+The variation method will return the default value if the feature flag is missing in the SDK.
+
+:::
+
+### Variation types
+
+The Bucketeer SDK supports the following variation types.
+
+<Tabs>
+<TabItem value="ts" label="TypeScript">
+
+```ts showLineNumbers
+
+```
+
+</TabItem>
+</Tabs>
+
+### Updating user evaluations
+
+<Tabs>
+<TabItem value="ts" label="TypeScript">
+
+```ts showLineNumbers
+
+```
+
+</TabItem>
+</Tabs>
+
+### Reporting custom events
+
+<Tabs>
+<TabItem value="ts" label="TypeScript">
+
+```ts showLineNumbers
+
+```
+
+</TabItem>
+</Tabs>
+
+### Flushing events
+
+<Tabs>
+<TabItem value="ts" label="TypeScript">
+
+```ts showLineNumbers
+
+```
+
+</TabItem>
+</Tabs>
+
+### User attributes configuration
+
+This feature will give you robust and granular control over what users can see on your application. You can add rules using these attributes on the console UI's feature flag's targeting tab. [See more](#).
+
+<Tabs>
+<TabItem value="ts" label="TypeScript">
+
+```ts showLineNumbers
+
+```
+
+</TabItem>
+</Tabs>
+
+### Updating user attributes
+
+<Tabs>
+<TabItem value="ts" label="TypeScript">
+
+```ts showLineNumbers
+
+```
+
+</TabItem>
+</Tabs>
+
+### Getting user information
+
+<Tabs>
+<TabItem value="ts" label="TypeScript">
+
+```ts showLineNumbers
+
+```
+
+</TabItem>
+</Tabs>
+
+### Getting evaluation details
+
+<Tabs>
+<TabItem value="ts" label="TypeScript">
+
+```ts showLineNumbers
+
+```
+
+</TabItem>
+</Tabs>
+
+### Listening to evaluation updates
+
+<Tabs>
+<TabItem value="ts" label="TypeScript">
+
+```ts showLineNumbers
+
+```
+
+</TabItem>
+</Tabs>

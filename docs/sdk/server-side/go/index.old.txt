@@ -1,0 +1,360 @@
+---
+title: Go reference
+sidebar_position: 1
+slug: /sdk/server-side/go
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+This category contains topics explaining how to configure Bucketeer's Go SDK.
+
+## Getting started
+
+Before starting, ensure that you follow the [Getting Started](/getting-started) guide.
+
+### Installing dependency
+
+Install the dependency in your application.
+
+### Importing server
+
+Import the Bucketeer into your application code.
+
+<Tabs>
+<TabItem value="go" label="Go">
+
+```go showLineNumbers
+import (
+  "context"
+  "flag"
+  "github.com/ca-dp/bucketeer-go-server-sdk/pkg/bucketeer"
+  "github.com/ca-dp/bucketeer-go-server-sdk/pkg/bucketeer/user"
+  "github.com/ca-dp/bucketeer-go-server-sdk/pkg/bucketeer/uuid"
+)
+```
+
+</TabItem>
+</Tabs>
+
+### Configuring server
+
+Define the the SDK configurations.
+
+:::info
+The **bucketeerTag** setting is the tag that you configure when creating a Feature Flag. When it is not configured, it will evaluate all the Feature Flags in the environment. **We strongly recommend** using tags to speed up the evaluation process and reduce the cache size in the client.
+:::
+
+<Tabs>
+<TabItem value="go" label="Go">
+
+```go showLineNumbers
+var (
+	bucketeerTag    = flag.String("bucketeer-tag", "<YOUR_FEATURE_TAG>", "Bucketeer tag")
+	bucketeerAPIKey = flag.String("bucketeer-api-key", "<YOUR_API_KEY>", "Bucketeer api key")
+	bucketeerHost   = flag.String("bucketeer-host", "<YOUR_API_URL>", "Bucketeer host name, e.g. api-dev.bucketeer.jp")
+)
+```
+
+</TabItem>
+</Tabs>
+
+:::info Custom configuration
+
+Depending on your use, you may want to change the optional configurations available.
+
+- **port** (Default is 443)
+- **eventQueueCapacity** (Default is 100000 events)
+- **numEventFlushWorkers** (Default is 50 workers)
+- **eventFlushInterval** (Default is 1 minute)
+- **eventFlushSize**: (Default is 100 events)
+- **enableDebugLog** (Default is `false`)
+- **errorLogger** (Default is `log.DefaultErrorLogger`)
+
+:::
+
+:::note
+
+The Bucketeer SDK doesn't save the user data. The Application must save and set it when initializing the client SDK.
+
+:::
+
+### Initializing sever
+
+Initialize the server by passing the configurations in the previous step.
+
+<Tabs>
+<TabItem value="go" label="Go">
+
+```go showLineNumbers
+// Setup Bucketeer SDK
+ctx, cancel := context.WithTimeout(context.Background(), timeout)
+defer cancel()
+sdk := bucketeer.NewSDK(
+  ctx,
+  bucketeer.WithTag(*bucketeerTag),
+  bucketeer.WithAPIKey(*bucketeerAPIKey),
+  bucketeer.WithHost(*bucketeerHost),
+
+)
+
+// Setup http server
+app := exampleApp{
+  sdk:       sdk,
+  featureID: *bucketerFeatureID,
+  goalID:    *bucketerGoalID,
+}
+srv := &http.Server{
+  Addr:         ":8080",
+  Handler:      app.rootHandler(),
+  ReadTimeout:  timeout,
+  WriteTimeout: timeout,
+}
+
+// Serve
+srvShutdownCh := make(chan struct{})
+go func() {
+  sigint := make(chan os.Signal, 1)
+  signal.Notify(sigint, os.Interrupt)
+  <-sigint
+
+  ctx, cancel := context.WithTimeout(context.Background(), timeout)
+  defer cancel()
+  // We received an interrupt signal, shut down.
+  if err := srv.Shutdown(ctx); err != nil {
+    // Error from closing listeners, or context timeout:
+    log.Fatalf("failed to shutdown http server: %v", err)
+  }
+  close(srvShutdownCh)
+}()
+
+```
+
+</TabItem>
+</Tabs>
+
+### Handling exceptions
+
+?????
+
+## Supported features
+
+### Evaluating user
+
+The variation method determines whether or not a feature flag is enabled for a specific user.<br />
+To check which variation a specific user will receive, you can use the client like below.
+
+<Tabs>
+<TabItem value="js" label="JavaScript">
+
+```js showLineNumbers
+const showNewFeature = client.boolVariation('YOUR_FEATURE_FLAG_ID', false);
+if (showNewFeature) {
+  // The Application code to show the new feature
+} else {
+  // The code to run when the feature is off
+}
+```
+
+</TabItem>
+</Tabs>
+
+:::note
+
+The variation method will return the default value if the feature flag is missing in the SDK.
+
+:::
+
+### Variation types
+
+The Bucketeer SDK supports the following variation types.
+
+<Tabs>
+<TabItem value="js" label="JavaScript">
+
+```js showLineNumbers
+boolVariation(featureId: string, defaultValue: boolean): Promise<boolean>;
+
+stringVariation(featureId: string, defaultValue: string): Promise<string>;
+
+numberVariation(featureId: string, defaultValue: number): Promise<number>;
+
+jsonVariation(featureId: string, defaultValue: object): Promise<object>;
+```
+
+</TabItem>
+</Tabs>
+
+### Updating user evaluations
+
+Depending on the use case, you may need to ensure the evaluations in the SDK are up to date before requesting the variation.
+
+The fetch method uses the following parameter. Make sure to wait for its completion.
+
+- **Timeout** (Default is 30 seconds)
+
+<Tabs>
+<TabItem value="js" label="JavaScript">
+
+```js showLineNumbers
+val timeout = 5000
+
+await client.fetchEvaluations(timeout);
+```
+
+</TabItem>
+</Tabs>
+
+### Reporting custom events
+
+This method lets you save user actions in your application as events. You can connect these events to metrics in the experiments console UI.
+
+In addition, you can pass a double value to the goal event. These values will sum and show as <br />`Value total` on the experiments console UI. This is useful if you have a goal event for tracking how much a user spent on your application buying items, etc.
+
+<Tabs>
+<TabItem value="js" label="JavaScript">
+
+```js showLineNumbers
+client.track('YOUR_GOAL_ID', 10.5);
+```
+
+</TabItem>
+</Tabs>
+
+### Flushing events
+
+This method will send all pending analytics events to the Bucketeer server as soon as possible. This process is asynchronous, so it returns before it is complete.
+
+<Tabs>
+<TabItem value="js" label="JavaScript">
+
+```js showLineNumbers
+await client.flush();
+```
+
+</TabItem>
+</Tabs>
+
+:::note
+
+In regular use, you don't need to call the flush method because the events are sent every 30 seconds in the background.
+
+:::
+
+### User attributes configuration
+
+This feature will give you robust and granular control over what users can see on your application. You can add rules using these attributes on the console UI's feature flag's targeting tab. [See more](#).
+
+<Tabs>
+<TabItem value="js" label="JavaScript">
+
+```js showLineNumbers
+const attributes = {
+  app_version: '1.0.0',
+  os_version: '11.0.0',
+  device_model: 'pixel-5',
+  language: 'english',
+  genre: 'female',
+};
+
+const user = defineBKTUser({
+  id: 'USER_ID',
+  attributes: attributes,
+});
+
+await initializeBKTClient(config, user);
+```
+
+</TabItem>
+</Tabs>
+
+### Updating user attributes
+
+This method will update all the current user attributes. This is useful in case the user attributes update dynamically on the application after initializing the SDK.
+
+<Tabs>
+<TabItem value="js" label="JavaScript">
+
+```js showLineNumbers
+const attributes = {
+  app_version: '1.0.0',
+  os_version: '11.0.0',
+  device_model: 'pixel-5',
+  language: 'english',
+  genre: 'female',
+};
+
+client.updateUserAttributes(attributes);
+```
+
+</TabItem>
+</Tabs>
+
+:::caution
+
+This updating method will override the current data.
+
+:::
+
+### Getting user information
+
+This method will return the current user configured in the SDK. This is useful when you want to check the current user id and attributes before updating them through [updateUserAttributes](#getting-user-information).
+
+<Tabs>
+<TabItem value="js" label="JavaScript">
+
+```js showLineNumbers
+const user = client.currentUser();
+```
+
+</TabItem>
+</Tabs>
+
+### Getting evaluation details
+
+This method will return the evaluation details for a specific feature flag. This is useful if you need to know the variation reason or send this data elsewhere.
+
+<Tabs>
+<TabItem value="js" label="JavaScript">
+
+```js showLineNumbers
+const evaluationDetails = client.evaluationDetails('YOUR_FEATURE_FLAG_ID');
+```
+
+:::note
+
+This method will return null if the feature flag is missing in the SDK.
+
+:::
+
+</TabItem>
+</Tabs>
+
+### Listening to evaluation updates
+
+BKTClient can notify when the evaluation is updated.  
+The listener can detect both automatic polling and manual fetching.
+
+<Tabs>
+<TabItem value="js" label="JavaScript">
+
+```js showLineNumbers
+// Returned value is used when you want to remove listener
+val key = client.addEvaluationUpdateListener(() => {
+  val showNewFeature = client.booleanVariation("YOUR_FEATURE_FLAG_ID", false)
+  if (showNewFeature) {
+      // The Application code to show the new feature
+  } else {
+      // The code to run when the feature is off
+  }
+})
+
+// Remove a listener associated with the key
+client.removeEvaluationUpdateListener(key)
+
+// Remove all listeners
+client.clearEvaluationUpdateListeners()
+```
+
+</TabItem>
+</Tabs>

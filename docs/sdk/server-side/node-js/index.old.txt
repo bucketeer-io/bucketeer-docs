@@ -1,0 +1,30 @@
+---
+title: Node JS reference
+sidebar_position: 1
+slug: /sdk/server-side/node-js
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+This category contains topics explaining how to configure Bucketeer's Node.js SDK. The Bucketeer's Node.js SDK was developed using TypeScript.
+
+## Getting started
+
+Before starting, ensure that you follow the [Getting Started](/getting-started) guide.
+
+### Installing dependency
+
+Install the dependency in your application.
+
+<Tabs>
+  <TabItem value="npm" label="npm">
+
+```sh showLineNumbers
+npm install --save @bucketeer/node-server-sdk
+```
+
+  </TabItem>
+</Tabs>
+
+### Importing client (is it necessary?)
