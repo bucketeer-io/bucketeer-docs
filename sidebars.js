@@ -165,6 +165,29 @@ const sidebars = {
     },
     {
       type: 'html',
+      value: "<span class='sidebar-title'>Integration</span>",
+      defaultStyle: true,
+    },
+    {
+      type: 'doc',
+      id: 'integration/index',
+      label: 'Overview',
+      className: 'sidebar-overview',
+    },
+    {
+      type: 'doc',
+      id: 'integration/pushes',
+      label: 'Pushes',
+      className: 'sidebar-contributing',
+    },
+    {
+      type: 'doc',
+      id: 'integration/notifications',
+      label: 'Notifications',
+      className: 'sidebar-contributing',
+    },
+    {
+      type: 'html',
       value: "<span class='sidebar-title'>Best practices</span>",
       defaultStyle: true,
     },
