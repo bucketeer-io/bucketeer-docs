@@ -220,8 +220,8 @@ Every time you change a feature flag on the admin console, Bucketeer will send n
 
 :::note
 
-1- You need to register your FCM API Key on the admin console. [See more](#).<br />
-2- This feature may not work if the user has the notification disabled.
+1. You need to register your FCM API Key on the admin console. Check the [Pushes](/integration/pushes) section to learn how to do it.
+2. This feature may not work if the user has the notification disabled.
 
 :::
 
