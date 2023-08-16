@@ -178,13 +178,13 @@ const sidebars = {
       type: 'doc',
       id: 'integration/pushes',
       label: 'Pushes',
-      className: 'sidebar-contributing',
+      className: 'sidebar-fcm',
     },
     {
       type: 'doc',
       id: 'integration/notifications',
       label: 'Notifications',
-      className: 'sidebar-contributing',
+      className: 'sidebar-slack',
     },
     {
       type: 'html',
