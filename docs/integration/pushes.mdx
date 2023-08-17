@@ -1,0 +1,115 @@
+---
+title: Pushes
+sidebar_position: 2
+slug: /integration/pushes
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import CenteredImg from '@site/src/components/centered-img/CenteredImg';
+
+Push notifications are utilized in Bucketeer to send silent updates to user applications through Google Firebase Cloud Messaging (FCM). **These silent notifications ensure that user applications are automatically updated in real time with the latest flag configurations**. This approach guarantees that user data remains current and allows for user-side actions upon receiving notifications.
+
+To configure push notifications, access the **Settings** in the left dashboard menu and navigate to the **Pushes** tab. Here, you'll find a list of previously created Pushes and the option to create new ones using the **+ Add** button.
+
+## Create a Push
+
+When creating a new Push, you need to provide the following information:
+
+- **Name**: This identifies the push. Bucketeer recommends using descriptive names.
+- **Firebase Cloud Messaging API Key**: This key identifies the desired group of users who will receive the notification.
+- **Tags**: Add tags related to the flags you wish to monitor. Upon updating or modifying a flag with the provided tag, the push notification will be triggered. You can select one or multiple tags to trigger the push notification.
+
+:::info Tag selection
+You can include multiple tags while creating a push. However, for larger user groups requiring numerous notifications, there might be a time delay or potential server overload on FCM.
+
+Bucketeer's team suggests employing distinct FCM API Keys for each user group and associating specific tags with each group. This strategy minimizes the number of notifications after each flag modification.
+:::
+
+<CenteredImg
+  imgURL="img/integration/pushes/create-push.png"
+  alt="Create push"
+  wSize="350px"
+  borderWidth="1px"
+/>
+
+After defining the Name, Firebase Cloud Messaging API Key, and Tags, click **Submit** to create the push.
+
+## Push notifications restrictions
+
+Push notifications function is contingent on end-user configurations to operate effectively. When end-users install applications on their devices, such as iPhones, they are prompted to grant authorization for the application to use notifications. If users authorize the application for notifications, push notifications will function as intended. On the other hand, push notifications will not operate on their applications if users do not grant authorization. Refer to the flowchart below for an overview of the push notification process.
+
+<CenteredImg
+  imgURL="img/integration/pushes/push_flow.svg"
+  alt="Create push"
+  wSize="550px"
+/>
+
+:::info Auto updates
+Even if users disable notifications, their system will automatically update every ten minutes.
+:::
+
+## Update user evaluation in real time
+
+To leverage push notifications, implement a function in your application. This function will receive notifications from FCM and verify if `bucketeer_feature_flag_updated` is `true`. In such cases, update flag configurations using the `fetchEvaluations` function. Below are code examples of this function. For further details, consult the **Updating user evaluations in real-time** section on [SDK](/sdk) documentation.
+
+<Tabs groupId="integrate-buckteer-platform">
+<TabItem value="kt" label="Kotlin">
+
+```kotlin showLineNumbers
+override fun onMessageReceived(remoteMessage: RemoteMessage?) {
+  remoteMessage?.data?.also { data ->
+    val isFeatureFlagUpdated = data["bucketeer_feature_flag_updated"]
+    if (isFeatureFlagUpdated) {
+      // The callback will return without waiting until the fetching variation process finishes
+      val timeout = 1000 // Default is 5 seconds
+
+      val future = client.fetchEvaluations(timeout)
+      val error = future.get()
+      if (error == null) {
+        val showNewFeature = client.booleanVariation("YOUR_FEATURE_FLAG_ID", false)
+        if (showNewFeature) {
+            // The Application code to show the new feature
+        } else {
+            // The code to run when the feature is off
+        }
+      } else {
+        // Handle the error
+      }
+    }
+  }
+}
+```
+
+</TabItem>
+<TabItem value="dart" label="Dart">
+
+```dart showLineNumbers
+// TODO
+```
+
+</TabItem>
+<TabItem value="swift" label="Swift">
+
+```swift showLineNumbers
+// Receiving notification in background
+func application(
+  _ application: UIApplication,
+  didReceiveRemoteNotification userInfo: [AnyHashable: Any]
+) async -> UIBackgroundFetchResult {
+  let flag = userInfo["bucketeer_feature_flag_updated"] as? String
+  if flag == "true" {
+    let client = BKTClient.shared
+    let showNewFeature = client.boolVariation(featureId: "YOUR_FEATURE_FLAG_ID", defaultValue: false)
+    if (showNewFeature) {
+        // The Application code to show the new feature
+    } else {
+        // The code to run when the feature is off
+    }
+  }
+  return UIBackgroundFetchResult.newData
+}
+```
+
+</TabItem>
+</Tabs>
