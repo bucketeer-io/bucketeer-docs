@@ -16,14 +16,19 @@ To access the auto operation page on the Bucketeer dashboard, select the **Featu
 
 The auto operation feature consists of two key elements:
 
-1. **Operation**: An operation is an action that is triggered by the condition. The available operations are:
+- **Operation**: An operation refers to an action that impacts a feature flag. Each action is linked to one or more triggering conditions. When a condition is met, the associated operation's action is executed. Currently, Bucketeer supports two types of operations:
 
-   - _Enable_: Enables the flag.
-   - _Kill Switch_: Disables the flag.
+  - **Enable**: This operation type enables the chosen flag.
+  - **Kill Switch**: This operation type disables the chosen flag.
 
-2. **Condition**: A condition specifies the circumstances under which the operation is triggered. Multiple conditions can be associated with a single killing operation. On the other hand, only one condition can be related to enabling a feature. It's important to note that the corresponding operation is triggered if any conditions are satisfied.
+- **Condition**: A condition specifies the circumstances under which the operation is triggered. Multiple conditions can be associated with a single killing operation. On the other hand, only one condition can be related to enabling a feature. It's important to note that the corresponding operation is triggered if any conditions are satisfied.
 
-After a condition is triggered, the related operation changes from active to complete. As a result, the operation is moved from the **Active** to the **Completed** panel.
+Based on the operations and condition the auto operation works as:
+
+1. The server monitors the specified conditions.
+2. When a condition is met, the corresponding operation is executed.
+3. After enabling or disabling the associated flag, the triggered operation's status changes from active to complete.
+4. The operation is moved from the Active to the Completed panel, indicating that it has been executed.
 
 ## Conditions
 
