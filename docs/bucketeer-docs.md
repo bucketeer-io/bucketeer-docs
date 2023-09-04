@@ -54,17 +54,31 @@ Bucketeer is a feature management platform that enables organizations to optimiz
 
 Bucketeer offers a powerful A/B testing solution beyond superficial changes, allowing teams to test substantial functionality. With the feature management platform, organizations can establish goals and effectively measure the impact of different features.
 
+Check how to create [A/B tests](./feature-flags/testing-with-flags/experiments) on Bucketeer.
+
 ### User Targeting
 
 Unlock the potential of highly customized metadata to achieve precise and effective user targeting. By utilizing attributes such as region, age, or email, you can create segments or groups tailored to specific criteria. This level of granularity provides complete control over determining who sees what, empowering you to deliver personalized experiences.
+
+Explore how [targeting works](./feature-flags/creating-feature-flags/targeting) within Bucketeer.
+
+### Prerequisites
+
+Use prerequisites to establish dependencies between flags and improve user targeting. Define the conditions or dependencies between flags, which will determine whether a flag should be evaluated or which variation should be provided to the end user.
+
+Learn more about [Bucketeer prerequisites functionality](./feature-flags/creating-feature-flags/targeting#prerequisites).
 
 ### Kill Switch
 
 No need to revert code to undo a feature release—Bucketeer allows anyone to deactivate any feature at any time instantly. Leveraging feature flags as a kill switch is a common practice for mitigating risks associated with feature releases. With this functionality, product and marketing teams can participate in feature testing and releases without heavy reliance on engineering support. Whether you're conducting tests in production, implementing a canary launch, or preparing to retire a feature, rest easy knowing that it's as simple as flipping a switch.
 
+Check how [kill switch](./feature-flags/creating-feature-flags/auto-operation#how-auto-operation-works) works on Bucketeer.
+
 ### Beta Testing
 
 Bucketeer's feature management platform is widely used for efficiently managing beta testing programs at scale. Creating specific groups based on targeting rules allows you to include entire groups or segments in tests as needed. The feedback from beta groups is invaluable, enabling you to validate new features and identify and address bugs before rolling them out to your entire user base.
+
+Explore how to use [user groups](./feature-flags/creating-feature-flags/targeting#targeting) when targeting with Bucketeer.
 
 ### Dynamic Configuration
 
@@ -77,6 +91,8 @@ With Bucketeer, you can introduce new features to the production environment wit
 ### Rolling Out Releases
 
 Effortlessly roll out new features to a subset of users, such as a dedicated beta tester group, and gather valuable feedback and bug reports from real-world usage scenarios. This allows you to refine and optimize features based on user experiences before launching them to a broader audience.
+
+Learn how to create [roll out releases](./feature-flags/creating-feature-flags/targeting#rollout-percentage) on Bucketeer.
 
 ### Trunk Base Development
 
@@ -93,4 +109,3 @@ Bucketeer's feature management platform aids teams in troubleshooting and resolv
 ## Contact the Bucketeer team
 
 If you don't find your answer here, feel free to [contact us](https://app.slack.com/client/T08PSQ7BQ/C043026BME1).
-
