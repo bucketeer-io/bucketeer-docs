@@ -36,7 +36,7 @@
     "description": "The label for the doc item Introduction in sidebar docs, linking to the doc getting-started/introduction"
   },
   "sidebar.docs.doc.Create an account": {
-    "message": "Create an account",
+    "message": "アカウントの作成",
     "description": "The label for the doc item Create an account in sidebar docs, linking to the doc getting-started/create-an-account"
   },
   "sidebar.docs.doc.Bucketeer Vocabulary": {

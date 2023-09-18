@@ -1,5 +1,5 @@
 ---
-title: Create an account
+title: アカウントの作成
 slug: /getting-started/create-an-account
 description: This page guides the Admin on how to create a Bucketeer account.
 tags: ['guide', 'account', 'create']
@@ -7,13 +7,14 @@ tags: ['guide', 'account', 'create']
 
 import CenteredImg from '@site/src/components/centered-img/CenteredImg';
 
-Bucketeer allows you to manage and track data related to different environments. To begin using Bucketeer, you need an account. For additional information regarding the available account types on Bucketeer, check the [Bucketeer account types](../best-practice/account-types). Ask the project administrator to create an account if you're a new team member.
+Bucketeerは、さまざまな環境に関連するデータを管理および追跡するためのツールです。Bucketeerを使用するには、アカウントが必要となります。Bucketeerで利用できるアカウントの種類の詳細については、[Bucketeerアカウントの種類](./best-practice/account-types)をご参照ください。新しいチームメンバーの場合は、プロジェクト管理者にアカウントを作成してもらうように依頼してください。
 
-The following steps show how to create an account as an Admin.
 
-1. Select the target environment from the select menu on the top left.
-2. Navigate to the **Accounts** page from the sidebar menu.
-3. Click **+ Add** button to add a new account.
+以下のステップは、管理者としてアカウントを作成する方法を示しています。
+
+1. 左上の選択メニューからターゲット環境を選択します。
+2.  サイドバーメニューから **アカウント** ページに移動します。
+3. 新しいアカウントを追加するには、**+追加**ボタンをクリックします。
 
 <CenteredImg
   imgURL='img/getting-started/create-bucketeer-account-1.png'
@@ -21,8 +22,8 @@ The following steps show how to create an account as an Admin.
   wSize='100%'
 />
 
-4. Enter the new member's email and define their role.
-5. Click **Submit** to create the account.
+4.  新しいメンバーのメールアドレスを入力し、ロールを定義します。
+5.  **送信**をクリックしてアカウントを作成します。
 
 <CenteredImg 
   imgURL='img/getting-started/create-bucketeer-account-2.png'
@@ -32,8 +33,9 @@ The following steps show how to create an account as an Admin.
 
 :::info
 
-The new member's email must be a Gmail Account. Otherwise, the new member will not have access to the dashboard.
+新しいメンバーのメールアドレスはGmailアカウントでなければなりません。そうでない場合、新しいメンバーはダッシュボードにアクセスすることができません。
+
 
 :::
 
-Once the account is created, the Admin needs to contact the new member, informing them that they can access the dashboard. No notification email is sent to the new member after their account creation.
+アカウントの作成後、管理者は新しいメンバーにダッシュボードにアクセスできる旨を伝える必要があります。アカウントの作成後、新しいメンバーに通知メールは送信されません。
