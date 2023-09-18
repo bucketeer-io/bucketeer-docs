@@ -1,0 +1,123 @@
+---
+title: Notifications
+sidebar_position: 3
+slug: /integration/notifications
+---
+
+The Notifications feature on Bucketeer is designed to keep you and your team informed about important changes and events within your dashboard. **These notifications are automatically delivered to your Slack workspace whenever an event occurs**.
+
+To configure notifications, access the **Settings** in the left dashboard menu and navigate to the **Notifications** tab. Here, you'll find a list of previously condifured Notifications and the option to create new ones using the **+ Add** button.
+
+## Create a notifications
+
+When setting up a new notification, you will need to provide the following information:
+
+- **Name**: Identifies the notification and make it easier when looking for it on the dashboard. Bucketeer recommends using descriptive names.
+- **Type**: Specify the types of events that should trigger this notification. You can choose one or more event types.
+- **Slack incoming webhook URL**: Define the incoming webhook URL to which the notifications will be sent. Refer to the [Sending messages using Incoming Webhooks](https://api.slack.com/messaging/webhooks) guide for instructions on creating an app and configuring webhooks. Once you've designated the appropriate channel or account for receiving notifications, you'll obtain the webhook URL.
+
+Refer to the table below for a list of event types, along with descriptions and triggering conditions.
+
+<table>
+  <thead>
+    <tr>
+      <th>Event type</th>
+      <th>Description</th>
+      <th>Triggering</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Account</td>
+      <td>
+        Get notified when a new account is added or an existing one is updated.
+      </td>
+      <td>Event</td>
+    </tr>
+    <tr>
+      <td>API Key</td>
+      <td>
+        Get notified when a new API Key is added or an existing one is updated.
+      </td>
+      <td>Event</td>
+    </tr>
+    <tr>
+      <td>Auto-Ops</td>
+      <td>Get notified when the Auto-Ops system is triggered.</td>
+      <td>Event</td>
+    </tr>
+    <tr>
+      <td>Experiment</td>
+      <td>
+        Get notified when a new experiment is added or an existing one is
+        updated.
+      </td>
+      <td>Event</td>
+    </tr>
+    <tr>
+      <td>Feature Flag</td>
+      <td>
+        Get notified when a new feature flag is added or an existing one is
+        updated.
+      </td>
+      <td>Event</td>
+    </tr>
+    <tr>
+      <td>Goal</td>
+      <td>
+        Get notified when a new goal is added or an existing one is updated.
+      </td>
+      <td>Event</td>
+    </tr>
+    <tr>
+      <td>Monthly Active Users count</td>
+      <td>
+        Get monthly notifications for the count of active users on the first day
+        of each month.
+      </td>
+      <td>Monthly</td>
+    </tr>
+    <tr>
+      <td>Notification</td>
+      <td>
+        Get notified when a new notification is added or an existing one is
+        updated.
+      </td>
+      <td>Event</td>
+    </tr>
+    <tr>
+      <td>Push</td>
+      <td>
+        Get notified when a new push notification is added or an existing one is
+        updated.
+      </td>
+      <td>Event</td>
+    </tr>
+    <tr>
+      <td>Running Experiments</td>
+      <td>
+        Get daily notifications for the list of currently running experiments.
+      </td>
+      <td>Daily</td>
+    </tr>
+    <tr>
+      <td>User Segment</td>
+      <td>
+        Get notified when a new user segment is added or an existing one is
+        updated.
+      </td>
+      <td>Event</td>
+    </tr>
+    <tr>
+      <td>Stale feature flag</td>
+      <td>Get daily notifications regarding stale feature flag.</td>
+      <td>Daily</td>
+    </tr>
+  </tbody>
+</table>
+
+:::info Stale flags
+Refers to flags that have remained inactive, not received any request, for seven consecutive days. These flags are typically candidates for archiving.
+:::
+
+Once you have defined the Name, selected the desired event types, and provided the Slack webhook URL, click **Submit** to create the notification. You can further manage or remove notifications by accessing the **Notifications** tab under **Settings**.

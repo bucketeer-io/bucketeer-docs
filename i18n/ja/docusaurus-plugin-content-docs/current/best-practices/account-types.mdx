@@ -1,0 +1,31 @@
+---
+title: Bucketeer account types
+# sidebar_position:
+slug: /best-practice/account-types
+description: This page describes the existing account types available on Bucketter.
+tags: ['guide', 'account', 'account-types']
+---
+
+import CenteredImg from '@site/src/components/centered-img/CenteredImg';
+
+There are two types of accounts available in Buckteers, each with different access levels:
+
+- **Admin account**: it provides full access and control over all existing projects. Members with admin accounts can access all existing environments and manage other member' accounts.
+
+- **Environment account**: it is associated with a specific environment on the platform. Members with Environment accounts can access all the features of that particular environment.
+
+:::note
+
+As an open-source project, you can host your Buckteers system version. In this case, you will create your own Admin account.
+
+If you are using the system hosted by Bucketeer, to create an Admin account you need to contact the Bucketeer team.
+
+:::
+
+## Environment account roles
+
+In addition to being limited to a specific environment, Environment accounts also have predefined roles assigned during the account creation process. The defined role will change the account access level. The available roles for Environment accounts are described below:
+
+- **Viewer**: viewers have read-only access to their assigned environments. They can view all data but can't make any modifications. This role is suitable for members of your organization who need visibility into feature flags without the ability to modify them.
+- **Editor**: editors can modify feature flags, goals, experiments, and more within their assigned environments. However, they cannot add new team members or create API keys.
+- **Owner**: owners can do anything within their assigned environments. Including adding team members, and API keys.

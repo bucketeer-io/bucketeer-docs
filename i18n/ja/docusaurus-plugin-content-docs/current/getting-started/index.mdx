@@ -1,0 +1,160 @@
+---
+id: introduction
+title: Introduction
+sidebar_position: 1
+slug: /getting-started
+description: This page introduces a quick guide to getting started with the documentation.
+tags: ['getting-started']
+---
+
+import Button from '@site/src/components/button/Button';
+import ButtonShelf from '@site/src/components/button-shelf/ButtonShelf';
+
+Getting started with Bucketeer is a straightforward process. This section provides the necessary steps and critical concepts to begin your journey with Bucketeer. You can use the buttons below to navigate directly to the pages covering the five essential steps.
+
+<ButtonShelf>
+  <Button
+    redirect="../getting-started/create-an-account"
+    title="1. Create an acccount"
+    info="Learn about account types, roles and how to create an account."
+  />
+  <Button
+    redirect="../getting-started/bucketeer-dashboard"
+    title="2. Bucketeer dashboard"
+    info="Check all the main functions and panels available on the Bucketeer Dashboard."
+  />
+  <Button
+    redirect="../getting-started/quickstart"
+    title="3. Quickstart"
+    info="Present all steps to create a feature flag and integrate it to your system."
+  />
+  <Button
+    redirect="../getting-started/bucketeer-vocabulary"
+    title="4. Bucketeer vocabulary "
+    info="Guides you through the principal terms used in Bucketeer's documentation."
+  />
+</ButtonShelf>
+
+If you're unsure about the role of feature flags or how your team will utilize Bucketeer, we recommend exploring the following sections for further clarification and guidance. These resources will provide insights and help you understand how feature flags and Bucketeer can benefit your development process.
+
+:::note
+
+The terms **feature flag** and **flag** are considered synonymous in this documentation.
+
+:::
+
+## What are feature flags
+
+Feature flags're a framework that allows developers to control the visibility and behavior of features in real-time without deploying new code. One key advantage of using them is the ability to perform a progressive rollout of new features. By gradually releasing features to a subset of users or specific environments, developers can monitor performance, collect user feedback, and resolve issues before making the features available. This controlled deployment reduces the risks of releasing untested or unstable features, resulting in a smoother user experience.
+
+Flags also enable A/B testing, allowing developers to compare different feature variations and make data-driven decisions. This optimization technique enhances user engagement, conversions, and overall product performance.
+
+Additionally, feature flags align with trunk-based development, enabling developers to merge changes to a shared codebase without affecting production users. This practice ensures a releasable codebase, fostering collaboration within large teams.
+
+To learn how to use and take advantage of flags on Bucketeer, check the [Using Feature Flags](#) section.
+
+## Member roles on Bucketeer
+
+Bucketeer was designed to accommodate different types of members. Below you find a description about how each member role can take advantage of Bucketeer system.
+
+<details>
+  <summary>Software developer</summary>
+  <p>
+    As a software developer, your role in using Bucketeer involves creating and
+    implementing feature flags in your code to control the behavior and
+    visibility of features in your application. Bucketeer provides a
+    comprehensive dashboard where you can define and manage feature flags.
+  </p>
+  <p>
+    To get started, you will need to set up feature flags on the Bucketeer
+    dashboard. You can refer to the
+    <a href="#"> Using Feature Flags</a> guide to learn more
+    about the process. Once you have your credentials and have created a feature
+    flag, you can choose an SDK that best suits your application. The <a href="/sdk">
+      SDK
+    </a> section of the documentation provides instructions on how to set up and
+    integrate the chosen SDK into your codebase.
+  </p>
+  <p>
+    Once you grasp how flags work, you can collaborate with other
+    organization members to determine how you want to target different
+    variations to specific users or user groups. As you add more feature flags to your application, your team can organize them across different environments to ensure effective management and deployment.
+  </p>
+
+  <p>
+    In addition to working with feature flags, as a software developer, you may
+    also have responsibilities related to feature management. You can use automation solutions to toggle flags according to your needs.
+  </p>
+</details>
+
+<details>
+  <summary>Product manager</summary>
+  <p>
+    As a product manager or rollout manager, part of your responsibilities
+    involves strategically coordinating deployments and feature releases.
+  </p>
+  <p>
+    First and foremost, it's important to understand how to enable or disable
+    feature flags. Familiarize yourself with managing flags and the mechanisms
+    for toggling them on and off with the
+    <a href="#"> Using Feature Flags</a> guide.
+  </p>
+  <p>
+    In addition to managing flags, you play a crucial role in designing and
+    monitoring experiments to assess the impact of feature releases. These
+    experiments involve a series of actions to test specific hypotheses. By
+    leveraging feature flags, you can selectively target different flag
+    variations to specific user base segments. Thus, you can observe and compare
+    the reactions and behaviors of different user groups.
+  </p>
+  <p>
+    Utilizing feature flags enables you to conduct various types of testing,
+    such as A/B testing. For more detailed information on experimentation,
+    please refer to the
+    <a href="#/testing-with0flags"> Testing with flags </a>
+    resource.
+  </p>
+  <p>
+    By effectively utilizing flags and conducting thoughtful experiments, you
+    can gain valuable insights into the impact of feature releases, optimize
+    user experiences, and make informed decisions to drive the success of your
+    product.
+  </p>
+</details>
+
+<details>
+  <summary>Administrator</summary>
+  <p>
+    As an account administrator in Bucketeer, you hold important
+    responsibilities related to project and environment management, as well as
+    user administration. Your role involves creating new projects, setting up
+    environments, and managing members within the Bucketeer platform.
+  </p>
+  <p>
+    One of your primary tasks is to create new projects. Projects serve as a way
+    to organize and manage multiple members within Bucketeer. Each project has
+    its own distinct set of environments and feature flags, allowing for
+    efficient management of different development initiatives. A guide on how to
+    create new projects will be provided in the feature.
+  </p>
+  <p>
+    Creating and managing environments is another key responsibility.
+    Environments enable you to oversee and control your feature flags throughout
+    the entire development lifecycle, from local development to various stages.
+    By setting up different environments, you can ensure smooth and
+    well-organized flag management within specific contexts. A guide on how to
+    create new projects will be provided in the feature.
+  </p>
+  <p>
+    Additionally, as an administrator, you manage members within the Bucketeer
+    platform. This includes tasks such as adding or removing members, assigning
+    appropriate roles and permissions, and ensuring that the right level of
+    access is granted to individuals based on their responsibilities. Check{' '}
+    <a href="/getting-started/create-an-account">
+      Create Bucketeer's account
+    </a>{' '}
+    to learn more about account creation or access the{' '}
+    <a href="#">Bucketeer account types</a> to
+    learn more about the existing roles.
+  </p>
+</details>
