@@ -1,6 +1,6 @@
 ---
 id: introduction
-title: Introduction
+title: 概要
 sidebar_position: 1
 slug: /getting-started
 description: This page introduces a quick guide to getting started with the documentation.
@@ -10,151 +10,134 @@ tags: ['getting-started']
 import Button from '@site/src/components/button/Button';
 import ButtonShelf from '@site/src/components/button-shelf/ButtonShelf';
 
-Getting started with Bucketeer is a straightforward process. This section provides the necessary steps and critical concepts to begin your journey with Bucketeer. You can use the buttons below to navigate directly to the pages covering the five essential steps.
+Bucketeerを使い始めるのはとても簡単です。このセクションでは、Bucketeerを使い始めるにあたって必要となるステップや重要なコンセプトについて説明します。以下のボタンをクリックすることで、5つの重要なステップを説明するページへ直接移動することができます。
+
 
 <ButtonShelf>
   <Button
-    redirect="../getting-started/create-an-account"
-    title="1. Create an acccount"
-    info="Learn about account types, roles and how to create an account."
+    redirect="./getting-started/create-an-account"
+    title="1. アカウントの作成"
+    info="アカウントの種類、ロール、アカウントの作成方法についてご紹介します。"
   />
   <Button
-    redirect="../getting-started/bucketeer-dashboard"
-    title="2. Bucketeer dashboard"
-    info="Check all the main functions and panels available on the Bucketeer Dashboard."
+    redirect="./getting-started/bucketeer-dashboard"
+    title="2. Bucketeerダッシュボード"
+    info="Bucketeer ダッシュボードで利用できる主な機能とパネルをすべてご覧ください。"
   />
   <Button
-    redirect="../getting-started/quickstart"
-    title="3. Quickstart"
-    info="Present all steps to create a feature flag and integrate it to your system."
+    redirect="./getting-started/quickstart"
+    title="3.  クイックスタート"
+    info="フィーチャーフラグを作成し、システムに統合するためのすべての手順をご紹介します。"
   />
   <Button
-    redirect="../getting-started/bucketeer-vocabulary"
-    title="4. Bucketeer vocabulary "
-    info="Guides you through the principal terms used in Bucketeer's documentation."
+    redirect="./getting-started/bucketeer-vocabulary"
+    title="4. Bucketeer用語"
+    info="Bucketeerのドキュメントで使用されている主な用語をご紹介します。"
   />
 </ButtonShelf>
 
-If you're unsure about the role of feature flags or how your team will utilize Bucketeer, we recommend exploring the following sections for further clarification and guidance. These resources will provide insights and help you understand how feature flags and Bucketeer can benefit your development process.
+フィーチャーフラグのロールやチームがどのように Bucketeer を活用するかについてよくわからない場合は、以下のセクションを調べて、理解を深め、より明確な情報を得ることをお勧めします。これらのリソースは、フィーチャーフラグと Bucketeer が開発プロセスにどのように役立つことができるかを理解するのに役立ちます。
 
 :::note
 
-The terms **feature flag** and **flag** are considered synonymous in this documentation.
+このドキュメントでは、**フィーチャーフラグ** と **フラグ** は同義語とみなします。
 
 :::
 
-## What are feature flags
+## フィーチャーフラグとは
 
-Feature flags're a framework that allows developers to control the visibility and behavior of features in real-time without deploying new code. One key advantage of using them is the ability to perform a progressive rollout of new features. By gradually releasing features to a subset of users or specific environments, developers can monitor performance, collect user feedback, and resolve issues before making the features available. This controlled deployment reduces the risks of releasing untested or unstable features, resulting in a smoother user experience.
+フィーチャーフラグは、開発者が新しいコードをデプロイせずに、リアルタイムで機能の可視性と動作を制御するためのフレームワークです。フィーチャーフラグを使用する主な利点の1つは、新機能の段階的ロールアウトを実行できることです。機能をユーザーのサブセットまたは特定の環境に段階的にリリースすることで、開発者はパフォーマンスを監視し、ユーザーフィードバックを収集し、機能をリリースする前に問題を解決できます。この制御されたデプロイにより、テストされていないまたは不安定な機能をリリースするリスクが軽減され、ユーザーエクスペリエンスが向上します。
 
-Flags also enable A/B testing, allowing developers to compare different feature variations and make data-driven decisions. This optimization technique enhances user engagement, conversions, and overall product performance.
+フラグはまた、A/B テストを可能にし、開発者がさまざまな機能バリエーションを比較して、データに基づいた意思決定を行うことが可能です。この最適化手法は、ユーザーエンゲージメント、コンバージョン、および全体的な製品のパフォーマンスを向上させます。
 
-Additionally, feature flags align with trunk-based development, enabling developers to merge changes to a shared codebase without affecting production users. This practice ensures a releasable codebase, fostering collaboration within large teams.
+フィーチャーフラグはトランクベース開発と一致しており、開発者は共有コードベースの変更を本番ユーザーに影響を与えることなくマージすることが可能です。この方法は、リリース可能なコードベースを保証し、大規模なチーム内の共同作業を促進します。
 
-To learn how to use and take advantage of flags on Bucketeer, check the [Using Feature Flags](#) section.
+Bucketeer でフラグを使用する方法とその活用方法を学ぶには、[フィーチャーフラグの使用](/feature-flags) セクションを確認してください。
 
-## Member roles on Bucketeer
 
-Bucketeer was designed to accommodate different types of members. Below you find a description about how each member role can take advantage of Bucketeer system.
+## Bucketeerにおけるメンバーのロール
+
+Bucketeer は、さまざまなタイプのメンバーに対応するように設計されています。以下では、各メンバーのロールがBucketeerシステムをどのように活用できるかを説明しています。
+
+
+
 
 <details>
-  <summary>Software developer</summary>
+  <summary>ソフトウェア開発者</summary>
   <p>
-    As a software developer, your role in using Bucketeer involves creating and
-    implementing feature flags in your code to control the behavior and
-    visibility of features in your application. Bucketeer provides a
-    comprehensive dashboard where you can define and manage feature flags.
+    ソフトウェア開発者として、Bucketeer を使用するためのロールは、アプリケーションの機能の動作と可視性を制御するために、コードにフィーチャーフラグを作成して実装することです。Bucketeer は、フィーチャーフラグを定義して管理できる包括的なダッシュボードを提供します。
   </p>
   <p>
-    To get started, you will need to set up feature flags on the Bucketeer
-    dashboard. You can refer to the
-    <a href="#"> Using Feature Flags</a> guide to learn more
-    about the process. Once you have your credentials and have created a feature
-    flag, you can choose an SDK that best suits your application. The <a href="/sdk">
-      SDK
-    </a> section of the documentation provides instructions on how to set up and
-    integrate the chosen SDK into your codebase.
+    Bucketeer を使用するには、まず Bucketeer ダッシュボードでフィーチャーフラグを設定する必要があります。
+    フィーチャーフラグのプロセスについては、<a href="/feature-flags"> フィーチャーフラグの使用</a> ガイドをご参照ください。
+    認証情報を取得して機能フラグを作成したら、アプリケーションに最適な SDK を選択できます。また、
+    ドキュメントの<a href="/sdk">SDK</a>セクションには、選択した SDK をコードベースに設定して統合する方法についての説明が記載されています。
   </p>
   <p>
-    Once you grasp how flags work, you can collaborate with other
-    organization members to determine how you want to target different
-    variations to specific users or user groups. As you add more feature flags to your application, your team can organize them across different environments to ensure effective management and deployment.
+    Bucketeer のフィーチャーフラグの仕組みを理解すると、他の組織メンバーと協力して、
+    さまざまなバリエーションを特定のユーザーまたはユーザーグループにどのようにターゲットするかを決定できます。
+    さらに、アプリケーションにフィーチャーフラグを追加するにつれ、効率的な管理とデプロイを保証するために、
+    チームはそれらを異なる環境に合わせて整理することができます。
   </p>
 
   <p>
-    In addition to working with feature flags, as a software developer, you may
-    also have responsibilities related to feature management. You can use automation solutions to toggle flags according to your needs.
+    Bucketeer のフィーチャーフラグを使用することに加えて、ソフトウェア開発者として、
+    機能管理に関連する業務を担当する場合があります。自動化ソリューションを使用して、
+    必要に応じてフラグを切り替えることが可能です。
   </p>
 </details>
 
 <details>
-  <summary>Product manager</summary>
+  <summary>プロダクトマネージャー</summary>
   <p>
-    As a product manager or rollout manager, part of your responsibilities
-    involves strategically coordinating deployments and feature releases.
+    プロダクトマネージャーまたはロールアウトマネージャーとして、デプロイメントおよび機能リリースの戦略的な調整を担当します。
   </p>
   <p>
-    First and foremost, it's important to understand how to enable or disable
-    feature flags. Familiarize yourself with managing flags and the mechanisms
-    for toggling them on and off with the
-    <a href="#"> Using Feature Flags</a> guide.
+    機能管理において最も重要なことは、フィーチャーフラグを有効または無効にする方法を理解することです。
+    フィーチャーフラグを管理する方法および切り替えるメカニズムについては
+    <a href="/feature-flags">フィーチャーフラグの使用</a> ガイドをご参照ください。
   </p>
   <p>
-    In addition to managing flags, you play a crucial role in designing and
-    monitoring experiments to assess the impact of feature releases. These
-    experiments involve a series of actions to test specific hypotheses. By
-    leveraging feature flags, you can selectively target different flag
-    variations to specific user base segments. Thus, you can observe and compare
-    the reactions and behaviors of different user groups.
+   Bucketeer のフィーチャーフラグを管理することに加えて、機能リリースの影響を評価するためのエクスペリメン
+   トを設計および監視する重要なロールを果たす必要があります。これらのエクスペリメントは、特定の仮説をテスト
+   するための連続的なアクションです。フィーチャーフラグを活用することで、さまざまなフラグバリエーションを特定
+   のユーザーベースセグメントに選択的にターゲティングできます。したがって、異なるユーザーグループの反応や
+   行動を観察して比較することが可能になります。
   </p>
   <p>
-    Utilizing feature flags enables you to conduct various types of testing,
-    such as A/B testing. For more detailed information on experimentation,
-    please refer to the
-    <a href="#/testing-with0flags"> Testing with flags </a>
-    resource.
+    フィーチャーフラグを活用することで、A/B テストなど、さまざまな種類のテストを実施することが可能です。
+    エクスペリメントの詳細については、<a href="/feature-flags#testing-with-flags">フラグを使用したテスト</a> リソースをご参照ください。
   </p>
   <p>
-    By effectively utilizing flags and conducting thoughtful experiments, you
-    can gain valuable insights into the impact of feature releases, optimize
-    user experiences, and make informed decisions to drive the success of your
-    product.
+    フラグを効果的に活用し、入念なエクスペリメントを行うことで、機能リリースの影響に関する貴重な洞察を
+    得ることが可能になります。これにより、ユーザーエクスペリエンスを最適化し、製品の成功を促進するた
+    めの情報に基づいた意思決定を行うことができます。
   </p>
 </details>
 
 <details>
-  <summary>Administrator</summary>
+  <summary>管理者</summary>
   <p>
-    As an account administrator in Bucketeer, you hold important
-    responsibilities related to project and environment management, as well as
-    user administration. Your role involves creating new projects, setting up
-    environments, and managing members within the Bucketeer platform.
+    Bucketeer のアカウント管理者として、プロジェクト管理、環境管理、ユーザー管理に関連する重要なロールを担
+    います。これには、新しいプロジェクトの作成、環境のセットアップ、Bucketeer プラットフォーム内のメンバーの管理などが含まれます。
   </p>
   <p>
-    One of your primary tasks is to create new projects. Projects serve as a way
-    to organize and manage multiple members within Bucketeer. Each project has
-    its own distinct set of environments and feature flags, allowing for
-    efficient management of different development initiatives. A guide on how to
-    create new projects will be provided in the feature.
+    アカウント管理者としての主なタスクの 1 つは、新しいプロジェクトを作成することです。プロジェクトは、
+    Bucketeer 内で複数のメンバーを整理および管理するための方法として機能します。各プロジェクトには、
+    独自の環境とフィーチャーフラグのセットがあり、異なる開発イニシアチブを効率的に管理することが可能になります。
+    新しいプロジェクトを作成する方法については、本機能の中でご紹介します。
   </p>
   <p>
-    Creating and managing environments is another key responsibility.
-    Environments enable you to oversee and control your feature flags throughout
-    the entire development lifecycle, from local development to various stages.
-    By setting up different environments, you can ensure smooth and
-    well-organized flag management within specific contexts. A guide on how to
-    create new projects will be provided in the feature.
+    環境の作成および管理は、アカウント管理者にとってもう 1 つの重要なロールです。環境を使用すると、
+    ローカル開発からさまざまなステージング環境まで、開発ライフサイクル全体を通してフィーチャーフラグを監視お
+    よび管理することが可能になります。多様な環境を設定することで、特定のコンテキスト内でスムーズで体系的な
+    フラグ管理を確保できます。新しいプロジェクトを作成する方法については、本機能の中でご紹介します。
   </p>
   <p>
-    Additionally, as an administrator, you manage members within the Bucketeer
-    platform. This includes tasks such as adding or removing members, assigning
-    appropriate roles and permissions, and ensuring that the right level of
-    access is granted to individuals based on their responsibilities. Check{' '}
-    <a href="/getting-started/create-an-account">
-      Create Bucketeer's account
-    </a>{' '}
-    to learn more about account creation or access the{' '}
-    <a href="#">Bucketeer account types</a> to
-    learn more about the existing roles.
+    さらに、アカウント管理者として、 Bucketeer プラットフォーム内のメンバーを管理します。これには、
+    メンバーの追加または削除、適切なロールおよび権限の割り当て、個人の責任に基づいて適切なアクセス
+    レベルが保証されていることを確認するなどのタスクが含まれます。アカウントの作成の詳細については
+    <a href="/getting-started/create-an-account">Bucketeer アカウントの作成</a>
+    、そして既存のロールの詳細については<a href="#">Bucketeer アカウントの種類</a>をご覧ください。
   </p>
 </details>

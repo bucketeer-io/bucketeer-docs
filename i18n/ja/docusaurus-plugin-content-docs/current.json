@@ -32,7 +32,7 @@
     "description": "The label for the doc item Bucketeer Docs in sidebar docs, linking to the doc bucketeer-docs"
   },
   "sidebar.docs.doc.Introduction": {
-    "message": "Introduction",
+    "message": "概要",
     "description": "The label for the doc item Introduction in sidebar docs, linking to the doc getting-started/introduction"
   },
   "sidebar.docs.doc.Create an account": {
