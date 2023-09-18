@@ -40,7 +40,7 @@
     "description": "The label for the doc item Create an account in sidebar docs, linking to the doc getting-started/create-an-account"
   },
   "sidebar.docs.doc.Bucketeer Vocabulary": {
-    "message": "Bucketeer Vocabulary",
+    "message": "Bucketeer用語",
     "description": "The label for the doc item Bucketeer Vocabulary in sidebar docs, linking to the doc getting-started/bucketeer-vocabulary"
   },
   "sidebar.docs.doc.Overview": {
