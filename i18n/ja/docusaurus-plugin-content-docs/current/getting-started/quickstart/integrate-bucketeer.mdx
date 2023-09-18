@@ -1,5 +1,5 @@
 ---
-title: Integrate to Bucketeer
+title: Bucketeerへの統合
 sidebar_position: 1
 slug: /getting-started/quickstart/integrate-bucketeer
 description: Describes the steps to integrate the user application with Bucketeer.
@@ -10,9 +10,12 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import CenteredImg from '@site/src/components/centered-img/CenteredImg';
 
-Integrating Bucketeer with your application is a simple process that's the same across all SDKs. Bucketeer has multiple SDKs available, and you can refer to the [SDK](/sdk) page for further information. To integrate Bucketeer into your application, follow these steps:
+Bucketeerをアプリケーションと統合するのは、すべてのSDKで同じで、簡単なプロセスです。
+Bucketeerには複数のSDKがあり、詳細については[SDK]ページをご参照ください。
+Bucketeerをアプリケーションに統合するには、以下のステップに従います：
 
-1. **Install the Bucketeer SDK**: Use your project's dependency manager to install or implement the Bucketeer SDK in your application, allowing it to access the Bucketeer SDK and its features.
+1. **Bucketeer SDKのインストール**: プロジェクトの依存関係マネージャーを使用して、
+Bucketeer SDKをアプリケーションにインストールまたは実装します。これにより、Bucketeer SDKとその機能にアクセスできます。
 
 <Tabs groupId="integrate-buckteer-platform">
 <TabItem value="kt" label="Android">
@@ -73,7 +76,7 @@ comming soon
 </TabItem>
 </Tabs>
 
-2. **Import the Bucketeer Client**: In your application's code, import the Bucketeer client, the primary interface to interact with the Bucketeer SDK, and communicate with the Bucketeer service. Each SDK guide covers this step and the previous one in detail. Access the [SDKs](/sdk) page to get more information.
+2. **Bucketeerクライアントのインポート**: お使いのアプリケーションのコードで、Bucketeer SDK と Bucketeer サービスとの通信を可能にする主要なインターフェイスである Bucketeer クライアントをインポートします。各 SDK ガイドでは、このステップと前のステップについて詳しく説明しています。詳細については、[SDK](/sdk)ページをご参照ください。
 
 <Tabs groupId="integrate-buckteer-platform">
 <TabItem value="kt" label="Android">
@@ -126,12 +129,15 @@ comming soon
 </TabItem>
 </Tabs>
 
-3. **Configure and initialize the Bucketeer Client**: Provide the credentials for your environment to configure the Bucketeer client and call the initialization function. The credentials uniquely identify your project and environment and authorize your application to connect with Bucketeer. Below you will find the description of each required information:
+3. **Bucketeerクライアントの設定と初期化**: 環境の認証情報を提供して Bucketeer クライアントを構成し、
+初期化関数を呼び出します。認証情報は、プロジェクトと環境を一意に識別し、アプリケーションが Bucketeer 
+に接続することを許可します。以下では、それぞれの必要情報についての説明をご覧いただけます：
 
-   - **API key**: This is a unique key that grants access to Bucketeer. If you have't created one yet, you can create an API key by following the instructions in the [Create an API key](/getting-started/quickstart/create-an-api-key) guide.
-   - **API URL**: The Administrator will provide you with the API URL when your user account is created. It serves as the endpoint for your application to connect with Bucketeer's API.
-   - **User ID**: This refers to the ID of the end user who will be utilizing the application integrated with Bucketeer. It's important to note that the User ID corresponds to the end user, not the user accessing the admin console or dashboard.
-   - **Feature tag**: When creating a feature flag in Bucketeer, you define a tag associated with it. This tag helps identify the specific flag within Bucketeer.
+   - **APIキー**: これは、Bucketeerへのアクセスを許可する一意のキーです。まだ作成していない場合は、[APIキーの作成](/getting-started/quickstart/create-an-api-key) ガイドのステップに従ってAPIキーを作成できます。
+   - **API URL**: 管理者は、ユーザーアカウントの作成時にAPI URLを提供します。これは、アプリケーションがBucketeerのAPIに接続するためのエンドポイントです。
+   - **ユーザーID**: これは、Bucketeerと統合されたアプリケーションを使用するエンドユーザーのIDを指します。ユーザーIDはエンドユーザーに対応しており、管理コンソールやダッシュボードにアクセスするユーザーには対応していないことに注意してください。
+   - **フィーチャータグ**: Bucketeerでフィーチャーフラグを作成する際に、それに関連付けられたタグを定義します。このタグは、Bucketeer内で特定のフラグを識別するのに役立ちます。
+
 
 <Tabs groupId="integrate-buckteer-platform">
 <TabItem value="kt" label="Android">
@@ -227,7 +233,11 @@ comming soon
 </TabItem>
 </Tabs>
 
-4. **Assign Feature Flag Variations**: The variation method allows you to control whether a flag is enabled or disabled for specific users. By using the `FLAG_ID`, you can associate different variations of the flag with different users. If you have't created one yet, use the [Create your first feature flag](/getting-started/quickstart/create-your-first-flag) guide. Every time the SDK queries the server, an event is generated. The flag call and the variations are stored on the server in real time.
+4. **フィーチャーフラグバリエーションの割り当て**: バリエーションメソッドを使用すると、特定のユーザーに対して
+フラグを有効にするか無効にするかを制御できます。`FLAG_ID`を使用することで、フラグの様々なバリエーションを異な
+るユーザーに関連付けることができます。まだ作成していない場合は、[最初のフィーチャーフラグを作成]ガイドをご覧
+ください。SDKがサーバーにクエリを実行する度に、イベントが生成されます。フラグ呼び出しとバリエーションは、
+サーバーにリアルタイムで保存されます。
 
 <Tabs groupId="integrate-buckteer-platform">
 <TabItem value="kt" label="Android">
@@ -295,7 +305,7 @@ comming soon
 </TabItem>
 </Tabs>
 
-5. **Check events**: Each flag has an Evaluation page where you can track its usage. To check usage data, access the dashboard, go to **Feature Flags**, select the desired flag, and switch to the **Evaluation** tab. If recorded data exists on this page, your implementation was successful. Otherwise, revisit the previous steps and make sure you executed tests using the created flag. The image below presents an example of a correct integration.
+5. **イベントの確認**: 各フラグには、その使用状況を追跡できるエバリュエーションページがあります。使用状況データを確認するには、ダッシュボードにアクセスし、**フィーチャーフラグ**に進み、目的のフラグを選択して**エバリュエーション**タブに切り替えます。このページに記録されたデータが存在する場合、統合は成功しています。それ以外の場合は、前のステップを見直し、作成したフラグを使用してテストを実行したことを確認してください。以下の画像は、正しい統合の例を示しています。
 
 <CenteredImg
   imgURL="img/getting-started/quickstart/evaluation-panel-24h.png"
@@ -303,4 +313,7 @@ comming soon
   wSize="100%"
 />
 
-By following these steps, you can successfully integrate Bucketeer into your application and take advantage of its powerful feature flag management capabilities. If you run into problems related to the Bucketeer system or have some feedback, [contact the Bucketeer team](https://app.slack.com/client/T08PSQ7BQ/C043026BME1). For integration-related issues, contact your Admin or revisit the documentation.
+これらのステップに従うことで、Bucketeerをアプリケーションに正常に統合し、その強力なフィーチャーフラグ
+管理機能を活用することができます。Bucketeerシステムに関連する問題が発生した場合や、ご意見がある場合は、
+[Bucketeerチームまでお問い合わせください](https://app.slack.com/client/T08PSQ7BQ/C043026BME1)。
+また、統合に関連する問題については、管理者にお問い合わせいただくか、もう一度ドキュメントをご参照ください。
