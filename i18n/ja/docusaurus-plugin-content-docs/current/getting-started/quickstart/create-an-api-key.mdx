@@ -1,5 +1,5 @@
 ---
-title: Create an API key
+title: APIキーの作成
 slug: /getting-started/quickstart/create-an-api-key
 description: This page guides the user on how to create a API key to be used with a feature flag.
 tags: ['quickstart', 'api-key']
@@ -7,15 +7,21 @@ tags: ['quickstart', 'api-key']
 
 import CenteredImg from '@site/src/components/centered-img/CenteredImg';
 
-To use feature flags, start by creating an API key on the Bucketeer dashboard. The client SDK requires the API key to access the server API. These keys are crucial for authentication and authorization.
 
-They identify your project and environment, ensuring your application retrieves the correct flag configurations. Additionally, they improve security by preventing unauthorized access and maintaining the integrity of your feature flag system.
+フィーチャーフラグを使用するには、まずBucketeerのダッシュボード上でAPIキーを作成します。クライアントSDKはサーバ
+ーAPIにアクセスするためにAPIキーを必要とします。これらのキーは認証および承認のために非常に重要です。
 
-To create an API key, access the **API Keys** from the sidebar. You will find all existing API keys on this page. To add a new API key, click **+ Add**. On the side panel, provide a name for the new API key and click **Submit**. The API key name has a length limit of a hundred characters.
+これにより、プロジェクトと環境が識別され、アプリケーションが適切なフラグ設定を取得できるようになります。さらに、
+不正アクセスを防止し、フィーチャーフラグシステムの整合性を保つことで、セキュリティを向上させます。
+
+APIキーの作成には、サイドバーから **APIキー** にアクセスしてください。このページには既存のAPIキーがすべて表示さ
+れます。新しいAPIキーの追加には、**+追加**をクリックします。サイドパネルで新しいAPIキーの名前を入力し、**送信**
+をクリックします。APIキー名の文字数は100文字までとなっています。
 
 :::tip
 
-The Bucketeer team recommends naming the API key based on the system where it will be used. It will make it easier to identify the API key used on each project. For example, if you will use the flag on Android systems, name the API key **android**.
+Bucketeerチームは、使用されるシステムに応じてAPIキーを名付けることを推奨しています。これにより、各プロジェクト
+で使用されるAPIキーの識別が容易になります。例えば、フラグをAndroidシステムで使用する場合は、APIキーに**android**という名前を付けます。
 
 :::
 
@@ -25,4 +31,6 @@ The Bucketeer team recommends naming the API key based on the system where it wi
   wSize="100%"
 />
 
-After creating the API key, it will appear on the **API Keys** page, and its state will be **ON**, meaning it's ready for use. Now you can move on to the next step and [create your first feature flag](/getting-started/quickstart/create-your-first-flag). However, if you want to learn more about the usage of the API keys, check the [API keys](#) page.
+API キーの作成が完了すると **API キー** ページに表示され、状態が **ON**、つまり使用可能な状態になります。
+そして、次のステップに進み、[最初のフィーチャーフラグを作成]することが可能になります。なお、APIキーの使い方
+について詳しく知りたい場合は、[APIキー](/feature-flags/api-keys)ページをご覧ください。

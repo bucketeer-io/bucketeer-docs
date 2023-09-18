@@ -4,7 +4,7 @@
     "description": "The label for version current"
   },
   "sidebar.docs.category.Quickstart": {
-    "message": "Quickstart",
+    "message": "クイックスタート",
     "description": "The label for category Quickstart in sidebar docs"
   },
   "sidebar.docs.category.Creating Feature Flags": {
@@ -44,7 +44,7 @@
     "description": "The label for the doc item Bucketeer Vocabulary in sidebar docs, linking to the doc getting-started/bucketeer-vocabulary"
   },
   "sidebar.docs.doc.Overview": {
-    "message": "Overview",
+    "message": "概要",
     "description": "The label for the doc item Overview in sidebar docs, linking to the doc integration/index"
   },
   "sidebar.docs.doc.API Keys": {
