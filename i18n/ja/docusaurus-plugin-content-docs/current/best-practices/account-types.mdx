@@ -1,5 +1,5 @@
 ---
-title: Bucketeer account types
+title: Bucketeerアカウントの種類
 # sidebar_position:
 slug: /best-practice/account-types
 description: This page describes the existing account types available on Bucketter.
@@ -8,24 +8,26 @@ tags: ['guide', 'account', 'account-types']
 
 import CenteredImg from '@site/src/components/centered-img/CenteredImg';
 
-There are two types of accounts available in Buckteers, each with different access levels:
+Buckteersには、それぞれ異なるアクセスレベルを持つ2種類のアカウントがあります。
 
-- **Admin account**: it provides full access and control over all existing projects. Members with admin accounts can access all existing environments and manage other member' accounts.
+- **管理者アカウント**: 管理者アカウントは、すべての既存プロジェクトに完全なアクセスと制御を提供します。管理者アカウントを持つメンバーは、すべての既存環境にアクセスし、他のメンバーのアカウントを管理できます。
 
-- **Environment account**: it is associated with a specific environment on the platform. Members with Environment accounts can access all the features of that particular environment.
+- **環境アカウント**: 環境アカウントは、プラットフォーム上の特定の環境に関連付けられています。環境アカウントを持つメンバーは、その特定の環境のすべての機能にアクセスできます。
 
 :::note
 
-As an open-source project, you can host your Buckteers system version. In this case, you will create your own Admin account.
+オープンソースプロジェクトとして、Buckteersシステムバージョンをホストすることができます。この場合、独自の管理者アカウントを作成することになります。
 
-If you are using the system hosted by Bucketeer, to create an Admin account you need to contact the Bucketeer team.
+Bucketeerがホストするシステムを使用している場合は、管理者アカウントを作成するにはBucketeerチームに連絡する必要があります。
 
 :::
 
-## Environment account roles
+## 環境アカウントのロール
 
-In addition to being limited to a specific environment, Environment accounts also have predefined roles assigned during the account creation process. The defined role will change the account access level. The available roles for Environment accounts are described below:
+環境アカウントは、特定の環境に限定されていることに加えて、アカウント作成プロセス中に事前定義されたロールが割り当てられます。定義されたロールは、アカウントのアクセスレベルを変更します。環境アカウントで使用できるロールは次のとおりです。
 
-- **Viewer**: viewers have read-only access to their assigned environments. They can view all data but can't make any modifications. This role is suitable for members of your organization who need visibility into feature flags without the ability to modify them.
-- **Editor**: editors can modify feature flags, goals, experiments, and more within their assigned environments. However, they cannot add new team members or create API keys.
-- **Owner**: owners can do anything within their assigned environments. Including adding team members, and API keys.
+- **閲覧者**: 閲覧者は、割り当てられた環境への読み取り専用アクセス権を持っています。すべてのデータを表示できますが、変更はできません。このロールは、フィーチャーフラグの可視性が必要でありながら、変更する権限は必要のない組織のメンバーに適しています。
+
+- **編集者**: 編集者は、割り当てられた環境内のフィーチャーフラグ、ゴール、エクスペリメントなどを変更できます。ただし、新しいチームメンバーを追加したり、APIキーを作成したりすることはできません。
+
+- **オーナー**: オーナーは、割り当てられた環境内で何でもすることができます。これにはチームメンバーやAPIキーの追加を含みます。
