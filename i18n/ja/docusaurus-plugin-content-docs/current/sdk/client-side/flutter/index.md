@@ -1,20 +1,20 @@
 ---
-title: Flutter reference
+title: Flutterリファレンス
 slug: /sdk/client-side/flutter
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-This category contains topics explaining how to configure Bucketeer's Flutter SDK.
+このカテゴリには、BucketeerのFlutter SDKの設定方法に関する内容が含まれています。
 
-## Getting started
+## はじめに
 
-Before starting, ensure that you follow the [Getting Started](/getting-started) guide.
+始める前に、必ず[はじめに](/getting-started)ガイドに従ってください。
 
-### Implementing dependency
+### 依存関係の実装
 
-Implement the dependency in your Pubspec file. Please refer to the [SDK releases page](https://github.com/bucketeer-io/flutter-client-sdk/releases) to find the latest version.
+依存関係を Pubspec ファイルに実装します。最新バージョンについては、[SDKリリースページ](https://github.com/bucketeer-io/flutter-client-sdk/releases)をご参照ください。
 
 <Tabs>
 <TabItem value="yaml" label="Pubspec">
@@ -27,9 +27,9 @@ dependencies:
 </TabItem>
 </Tabs>
 
-### Importing client
+### クライアントのインポート
 
-Import the Bucketeer client into your application code.
+Bucketeerクライアントをアプリケーションコードにインポートします。
 
 <Tabs>
 <TabItem value="dart" label="Dart">
@@ -41,17 +41,17 @@ import 'package:bucketeer_flutter_client_sdk/bucketeer_flutter_client_sdk.dart';
 </TabItem>
 </Tabs>
 
-### Configuring client
+### クライアント構成
 
-Configure the SDK config and user configuration.
+SDK 設定とユーザー設定を構成します。
 
 :::note
 
-The **featureTag** setting is the tag that you configure when creating a Feature Flag.
+**フィーチャータグ**設定は、フィーチャーフラグを作成する際に構成するタグです。
 
 :::
 
-All the settings in the example below are required.
+以下の例の設定はすべて必須となっています。
 
 <Tabs>
 <TabItem value="dart" label="Dart">
@@ -71,26 +71,26 @@ final user = BKTUserBuilder
 </TabItem>
 </Tabs>
 
-:::info Custom configuration
+:::info カスタム構成
 
-Depending on your use, you may want to change the optional configurations available in the **BKTConfig.Builder**.
+使用目的に応じて、**BKTConfig.Builder**で使用できるオプション構成を変更することができます。
 
-- **pollingInterval** (Minimum 5 minutes. Default is 10 minutes)
-- **backgroundPollingInterval** (Minimum 20 minutes. Default is 1 hour)
-- **eventsFlushInterval** (Default is 30 seconds)
-- **eventsMaxQueueSize** (Default is 50 events)
+- **pollingInterval** (最低5分。デフォルトは10分)
+- **backgroundPollingInterval** (最低20分。デフォルトは1時間)
+- **eventsFlushInterval** (デフォルトは30秒)
+- **eventsMaxQueueSize** (デフォルトは50イベント)
 
 :::
 
 :::note
 
-The Bucketeer SDK doesn't save the user data. The Application must save and set it when initializing the client SDK.
+Bucketeer SDKはユーザーデータを保存しません。アプリケーションは、クライアントSDKを初期化する際にユーザーデータを保存して設定する必要があります。
 
 :::
 
-### Initializing client
+### 「クライアントの初期化」
 
-Initialize the client by passing the configurations in the previous step.
+前のステップで設定を渡して、クライアントを初期化します。
 
 <Tabs>
 <TabItem value="dart" label="Dart">
@@ -104,13 +104,13 @@ final client = await BKTClient.initialize(config, user);
 
 :::note
 
-The initialize process starts polling right away the latest evaluations from Bucketeer in the background using the interval `pollingInterval` configuration while the application is in the **foreground state**. When the application changes to the **background state**, it will use the `backgroundPollingInterval` configuration.
+初期化処理は、アプリケーションが**フォアグラウンド状態**にある間、`pollingInterval`設定のインターバルを使用して、バックグラウンドでBucketeerから最新のエバリュエーションをすぐにポーリングし始めます。アプリケーションが**バックグラウンド状態**に変わると、`backgroundPollingInterval`設定を使用します。
 
 :::
 
-If you want to use the feature flag on Splash or Main views, and the user opens your application for the first time, it may not have enough time to fetch the variations from the Bucketeer server.
+スプラッシュやメイン画面でフィーチャーフラグを使用したい場合、ユーザーが初めてアプリを開くと、Bucketeerサーバーからバリエーションを取得するのに十分な時間が取れない場合があります。
 
-For this case, we recommend using the `timeout` option in the initialize method. It will block until the SDK receives the latest user variations.
+このケースでは、initializeメソッドの`timeout`オプションを使用することをお勧めします。これにより、SDKが最新のユーザーバリエーションを受信するまでブロックされます。
 
 <Tabs>
 <TabItem value="dart" label="Dart">
@@ -125,12 +125,13 @@ final client = await BKTClient.initialize(config, user, timeout);
 </TabItem>
 </Tabs>
 
-## Supported features
+## サポートされている機能
 
-### Evaluating user
+### ユーザーエバリュエーション
 
-The variation method determines whether or not a feature flag is enabled for a specific user.<br />
-To check which variation a specific user will receive, you can use the client like below.
+バリエーションメソッドは、フィーチャーフラグが特定のユーザーに対して有効であるかどうかを決定します。<br />
+特定のユーザーがどのバリエーションを受け取るかを確認するには、以下のようなクライアントを使用します。
+
 
 <Tabs>
 <TabItem value="dart" label="Dart">
@@ -149,13 +150,13 @@ if (showNewFeature) {
 
 :::caution
 
-In case of the feature flag is missing in the SDK, it will return the default value.
+SDKにフィーチャーフラグがない場合、デフォルト値が返されます。
 
 :::
 
-### Variation types
+### バリエーションの種類
 
-The Bucketeer SDK supports the following variation types.
+Bucketeer SDKは、以下のバリエーションの種類をサポートしています。
 
 <Tabs>
 <TabItem value="dart" label="Dart">
@@ -175,13 +176,13 @@ static Future<Map<String, dynamic>> jsonVariation(String featureId, LDValue defa
 </TabItem>
 </Tabs>
 
-### Updating user evaluations
+### ユーザーエバリュエーションの更新
 
-Depending on the use case, you may need to ensure the evaluations in the SDK are up to date before requesting the variation.
+ユースケースによっては、バリエーションをリクエストする前に、SDK内のエバリュエーションが最新であることを確認する必要がある場合があります。
 
-The fetch method uses the following parameter. Make sure to wait for its completion.
+fetchメソッドは次のパラメータを使用します。完了するまで必ずお待ちください。
 
-- **Timeout** (Default is 30 seconds)
+- **タイムアウト** (デフォルトは30秒)
 
 <Tabs>
 <TabItem value="dart" label="Dart">
@@ -207,25 +208,26 @@ if (result.isSuccess) {
 
 :::caution
 
-Depending on the client network, it could take a few seconds until the SDK fetches the data from the server, so use this carefully.
+クライアントのネットワークによっては、SDKがサーバーからデータをフェッチするまでに数秒かかる場合がありますので、注意してください。
 
-You don't need to call this method manually in regular use because the SDK is polling the latest variations in the background.
+SDKはバックグラウンドで最新のバリエーションをポーリングしているので、通常の使用ではこのメソッドを手動で呼び出す必要はありません。
 
 :::
 
-### Updating user evaluations in real-time
+### ユーザーエバリュエーションのリアルタイム更新
 
-The Bucketeer SDK supports FCM ([Firebase Cloud Messaging](https://firebase.google.com/docs/cloud-messaging)).<br />
-Every time you change a feature flag on the admin console, Bucketeer will send notifications using the FCM API to notify the client so that you can update the evaluations in real-time.
+Bucketeer SDKはFCM ([Firebase Cloud Messaging](https://firebase.google.com/docs/cloud-messaging))をサポートしています。<br />
+管理コンソールでフィーチャーフラグを変更するたびに、BucketeerはFCM APIを使用してクライアントに通知を送信し、エバリュエーションをリアルタイムで更新可能にします。
+
 
 :::note
 
-1. You need to register your FCM API Key on the admin console. Check the [Pushes](/integration/pushes) section to learn how to do it.
-2. This feature may not work if the user has the notification disabled.
+1. 管理コンソールでFCM APIキーを登録する必要があります。登録方法は、[プッシュ](/integration/pushes)セクションをご参照ください。
+2. ユーザーが通知を無効にしている場合、この機能は動作しない場合があります。
 
 :::
 
-Assuming you already have the FCM implementation in your application.
+アプリケーションにFCM実装が既にあると仮定します。
 
 <Tabs>
 <TabItem value="dart" label="Dart">
@@ -237,11 +239,11 @@ Assuming you already have the FCM implementation in your application.
 </TabItem>
 </Tabs>
 
-### Reporting custom events
+### カスタムイベントの報告
 
-This method lets you save user actions in your application as events. You can connect these events to metrics in the experiments console UI.
+このメソッドを使用すると、アプリケーション内のユーザー操作をイベントとして保存できます。これらのイベントは、エクスペリメントコンソールUIの指標に接続できます。
 
-In addition, you can pass a double value to the goal event. These values will sum and show as <br />`Value total` on the experiments console UI. This is useful if you have a goal event for tracking how much a user spent on your application buying items, etc.
+さらに、目標イベントにダブル値を渡すことができます。これらの値は合計され、エクスペリメントコンソールUIの<br />`Value total`として表示されます。これは、ユーザーがアプリケーションでアイテムを購入した金額などを追跡するための目標イベントがある場合に役立ちます。
 
 <Tabs>
 <TabItem value="dart" label="Dart">
@@ -253,9 +255,9 @@ await client.track("YOUR_GOAL_ID", 10.50);
 </TabItem>
 </Tabs>
 
-### Flushing events
+### イベントのフラッシュ
 
-This method will send all pending analytics events to the Bucketeer server as soon as possible. This process is asynchronous, so it returns before it is complete.
+このメソッドは、保留中のすべての分析イベントを可能な限り早くBucketeerサーバーに送信します。このプロセスは非同期であるため、完了前に返されます。
 
 <Tabs>
 <TabItem value="dart" label="Dart">
@@ -269,14 +271,13 @@ client.flush();
 
 :::note
 
-In regular use, you don't need to call the flush method because the events are sent every 30 seconds in the background.
+通常の使用では、イベントはバックグラウンドで30秒ごとに送信されるため、flushメソッド呼び出す必要はありません
 
 :::
 
-### User attributes configuration
+### ユーザー属性の設定
 
-This feature will give you robust and granular control over what users can see on your application. You can add rules using these attributes on the console UI's feature flag's targeting tab. [See more](#).
-
+この機能を使用すると、ユーザーがアプリケーションで表示できるコンテンツを堅牢かつ詳細に制御できます。これらの属性を使用して、コンソールUIのフィーチャーフラグのターゲティングタブでルールを追加できます。[詳細を見る](#)
 <Tabs>
 <TabItem value="dart" label="Dart">
 
@@ -300,9 +301,9 @@ final client = await BKTClient.initialize(config, user);
 </TabItem>
 </Tabs>
 
-### Updating user attributes
+### ユーザー属性の更新
 
-This method will update all the current user attributes. This is useful in case the user attributes update dynamically on the application after initializing the SDK.
+このメソッドは、現在のユーザー属性をすべて更新します。これは、SDKの初期化後にアプリケーションでユーザー属性が動的に更新される場合に役立ちます。
 
 <Tabs>
 <TabItem value="dart" label="Dart">
@@ -325,13 +326,14 @@ await client.updateUserAttributes(attributes);
 
 :::caution
 
-This updating method will override the current data.
+この更新メソッドは、現在のデータを上書きします。
 
 :::
 
-### Getting user information
+### ユーザー情報の取得
 
-This method will return the current user configured in the SDK. This is useful when you want to check the current user id and attributes before updating them through [updateUserAttributes](#getting-user-information).
+このメソッドは、SDKで設定されている現在のユーザーを返します。これは、[updateUserAttributes](#getting-user-information)を使用して現在のユーザーIDと属性を更新する前に確認したい場合に役立ちます。
+
 
 <Tabs>
 <TabItem value="dart" label="Dart">
@@ -343,9 +345,9 @@ final user = await client.currentUser();
 </TabItem>
 </Tabs>
 
-### Getting evaluation details
+### エバリュエーションの詳細を取得
 
-This method will return the evaluation details for a specific feature flag. This is useful if you need to know the variation reason or send this data elsewhere.
+このメソッドは、特定のフィーチャーフラグのエバリュエーションの詳細を返します。これは、バリエーションの理由を知ったり、このデータを他の場所に送信する必要がある場合に役立ちます。
 
 <Tabs>
 <TabItem value="dart" label="Dart">
@@ -356,7 +358,7 @@ final evaluationDetails = await client.evaluationDetails("YOUR_FEATURE_FLAG_ID")
 
 :::note
 
-This method will return null if the feature flag is missing in the SDK.
+このメソッドは、SDKにフィーチャーフラグがない場合はnullを返します。
 
 :::
 
