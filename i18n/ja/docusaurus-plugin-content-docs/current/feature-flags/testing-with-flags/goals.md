@@ -1,5 +1,5 @@
 ---
-title: Goals
+title: ゴール
 # sidebar_position: 
 slug: /feature-flags/testing-with-flags/goals
 description: Describes how to create goals, what to consider when creating them, and how to use them.
@@ -8,15 +8,15 @@ tags: ['goals']
 
 import CenteredImg from '@site/src/components/centered-img/CenteredImg';
 
-The goal feature in the Bucketeer system is designed to facilitate the organization and analysis of experiments. Goals serve as a means to group end-users' data based on specific behaviors you intend to monitor. However, the main objective of using goals is to track the user journey. By defining goals, you can effectively measure user behaviors that are influenced by your feature flags within experiments. Goals play a pivotal role in both the creation and evaluation of experiments.
+Bucketeerシステムのゴール機能は、エクスペリメントの整理および分析を容易にするために設計されています。ゴールは、特定の行動に基づいてエンドユーザーのデータをグループ化するための手段として機能します。ただし、ゴールを使用する主な目的は、ユーザージャーニーを追跡することです。ゴールを定義することで、エクスペリメント内のフィーチャーフラグによって影響を受けるユーザーの行動を効果的に測定できます。ゴールは、エクスペリメントの作成と評価の両方において重要な役割を果たします。
 
-## Create a goal
+## ゴールの作成
 
-To create goals in Bucketeer, begin by accessing the dashboard. Once in the dashboard, navigate to the **Goals** tab, which provides an overview of all existing goals within the current environment. 
+Bucketeerでゴールを作成するには、まずダッシュボードにアクセスします。ダッシュボードにアクセス後、**ゴール**タブに移動します。このタブには、現在の環境内のすべての既存のゴールの概要が表示されます。
 
-Suppose you need to locate a particular goal. In that case, Bucketeer offers a search functionality that allows you to find goals based on their name, ID, or description. On the other hand, if you wish to create a new goal, you can click the **+ Add** button.
+特定のゴールを見つける必要がある場合は、Bucketeerに用意されている検索機能を使用して、名前、ID、または説明に基づいてゴールを検索することができます。また、新しいゴールを作成したい場合は、**+ 追加**ボタンをクリックすることができます。
 
-To create a goal, you must fulfill the fields in the creation panel, which becomes visible after selecting **+ Add**. It's essential to provide the goal's ID, name, and description. You will use the goal's ID to report the end-users progress on your application. The image below presents an example of the creation panel.
+ゴールを作成するには、**+ 追加**を選択すると表示される作成パネルの項目に入力する必要があります。ゴールのID、名前、および説明を入力することが不可欠です。ゴールのIDは、アプリケーションでエンドユーザーの進捗状況を報告するために使用します。以下の画像は、作成パネルの例を示しています。
 
 <CenteredImg
   imgURL="img/feature-flags/goals/create-goal-v2.png"
@@ -25,34 +25,34 @@ To create a goal, you must fulfill the fields in the creation panel, which becom
   borderWidth="1px"
 />
 
-:::tip Description
-The Bucketeer team strongly recommends using descriptive names and thoroughly documenting the goal's description to ensure better comprehension of the data during future analyses of the experiments.
+:::tip 説明
+Bucketeerチームは、将来のエクスペリメント分析においてデータをよりよく理解できるように、わかりやすい名前を使用し、ゴールの説明を徹底的に文書化することを強く推奨しています。
 :::
 
 
-### Goals examples
+### ゴール例
 
-You can define goals for a wide range of scenarios related to your system. To improve your understanding of possible scenarios, the following subsections present goal descriptions related to A/B and multivariable tests.
+Bucketeerでは、システムに関連するあらゆるシナリオに対してゴールを定義することができます。可能なシナリオをよりよく理解するために、以下のサブセクションでは、A/Bテストと多変量テストに関連するゴールの説明をご紹介します。
 
-#### A/B test example
+#### A/Bテストの例
 
-- **Goal ID**: ab_test_contact_button_position
-- **Goal Name**: Compare Contact Button Position (Top vs. Bottom)
-- **Goal Description**: The goal is to assess the performance and user engagement of two different positions for the contact button on the webpage: positioned at the top or at the bottom. By tracking user interactions with the contact button under both variants, we can determine which position yields higher click-through rates, conversions, and overall user satisfaction. The results will provide insights to inform the optimal placement of the contact button for improved user experience and desired business outcomes.
+- **ゴールID**: ab_test_contact_button_position
+- **ゴール名**: お問い合わせボタンの位置を比較（上部と下部）
+**ゴール説明**: ゴールは、ウェブページ上のお問い合わせボタンの2つの異なる位置（上部と下部）のパフォーマンスとユーザーエンゲージメントを評価することです。両方のバリエーションでお問い合わせボタンとのユーザーのやり取りを追跡することで、どの位置が高いクリック率、コンバージョン率、および全体的なユーザー満足度をもたらすかを決定できます。結果は、ユーザーエクスペリエンスの向上と望ましいビジネス成果を実現するために、お問い合わせボタンの最適な配置を知らせる洞察を提供します。
 
-#### Multivariable example
+#### 多変量の例
 
-- **Goal ID**: multivariable_test_cta_performance
-- **Goal Name**: Evaluate CTA Performance (Four Defined CTAs)
-- **Goal Description**: The goal aims to evaluate the effectiveness and impact of four different Call-to-Action (CTA) variations within the feature. The experiment will measure user interactions, click-through rates, and conversion rates for each CTA variant. By analyzing the data, we can identify which CTA design, wording, or visual elements perform better regarding user engagement, conversions, and desired actions. The results will provide valuable insights to optimize the CTA strategy and enhance overall user engagement and conversion rates.
+- **ゴールID**: multivariable_test_cta_performance
+- **ゴール名**: CTAパフォーマンスの評価（4つの定義されたCTA）
+- **ゴール説明**: ゴールは、機能内の4つの異なるコールトゥアクション（CTA）バリエーションの効果と影響を評価することです。このエクスペリメントでは、各CTAバリエーションのユーザーインタラクション、クリック率、およびコンバージョン率を測定します。データを分析することで、ユーザーエンゲージメント、コンバージョン、および望ましいアクションに関してパフォーマンスの高いCTAデザイン、文言、または視覚要素を特定できます。結果は、CTA戦略を最適化し、全体的なユーザーエンゲージメントとコンバージョン率を高めるための貴重な洞察を提供します。
 
-## How to use goals
+## ゴールの使い方
 
-To make goals data relevant, you need to report the end-user journey. You will use the reporting solutions provided by the Bucketeer SDK to achieve it. To report goal achievements, you will use the SDK `track` function, which enables you to register when a client (end-user) reaches a goal from the journey you defined. The code block below presents an example of registering the goal achievement by the client using the `track` function in Javascript.
+ゴールのデータを関連付けるには、エンドユーザージャーニーを報告する必要があります。これを実現するには、Bucketeer SDKで提供されているレポートソリューションを使用します。ゴールの達成を報告するには、SDKの`track`関数を使用します。この関数を使用すると、クライアント（エンドユーザー）が定義したジャーニーのゴールに到達したときに登録することができます。次のコードブロックは、Javascriptで`track`関数を使用してクライアントによってゴールの達成を登録する例を示しています。
 
 ```js showLineNumbers
 client.track("GOAL_ID");
 ```
 
-For further details regarding goals tracking, check the **Reporting customer events** section related to the programing language you use on the SDK documentation.
+ゴールの追跡に関する詳細については、SDKドキュメントの**顧客イベントの報告**セクションで、使用するプログラミング言語に関連するセクションをご覧ください。
 
