@@ -56,7 +56,7 @@
     "description": "The label for the doc item Pushes in sidebar docs, linking to the doc integration/pushes"
   },
   "sidebar.docs.doc.Notifications": {
-    "message": "Notifications",
+    "message": "通知",
     "description": "The label for the doc item Notifications in sidebar docs, linking to the doc integration/notifications"
   },
   "sidebar.docs.doc.Optimize with tags": {
