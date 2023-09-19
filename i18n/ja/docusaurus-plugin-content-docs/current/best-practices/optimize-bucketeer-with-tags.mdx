@@ -1,5 +1,5 @@
 ---
-title: Optimize Bucketeer with tags
+title: タグによるBucketeerの最適化
 # sidebar_position:
 slug: /best-practices/optimize-with-tags
 description: Describe the impact of using tags with feature flags and the best practices to define them.
@@ -9,9 +9,10 @@ tags: ['best-practices', 'tags']
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-The integration and utilization of Bucketeer are straightforward, giving you complete control over configuration and usage. However, one step can significantly impact server response time and costs, ultimately affecting the user experience. In this regard, we provide a brief overview of this topic, which's covered in more detail in the [Using Feature Flags](#) section.
+Bucketeerのインテグレーションと活用は簡単で、設定と利用を完全にコントロールすることができます。ただし、一歩間違えればサーバーの応答時間やコストに大きな影響を与え、最終的にユーザーエクスペリエンスに影響を与えます。そこで、[フィーチャーフラグの使用](/feature-flags)で詳しく説明するこのトピックについて、簡単に説明します。
 
-During step 3 of the [integration process](/getting-started/quickstart/integrate-bucketeer) you are required to provide the `featureTag`. To make your undertand easier, the code is replicated below:
+[インテグレーションプロセス](/getting-started/quickstart/integrate-bucketeer)のステップ 3 では、`featureTag`を指定する必要があります。簡単に理解できるように、コードを以下に示します：
+
 
 <Tabs groupId="integrate-buckteer-platform">
 <TabItem value="kt" label="Android">
@@ -79,17 +80,17 @@ not available
 </TabItem>
 </Tabs>
 
-The `featureTag` is defined when creating the feature flag and serves two purposes. Firstly, it assists in searching within the tag list on the Bucketeer dashboard. Secondly, and more crucially, the `featureTag` plays a critical role in optimizing the usage of the Bucketeer system.
+`featureTag`は、フィーチャーフラグを作成する際に定義され、2つの目的があります。第1に、Bucketeerダッシュボードのタグリスト内で検索するのに役立ちます。第2に、`featureTag`はBucketeerシステムの使用を最適化する上で重要な役割を果たします。
 
-Feature tags act as limiters when making server calls to evaluate users. Consequently, if a call does not use tags or employs a tag used by numerous flags, a large number of feature flags will be returned for evaluation. This might not pose a problem for small systems with few flags. However, as the system expands, failure to utilize tags for identifying and optimizing evaluation calls can result in excessive processing on your server and increased operational costs. Moreover, it can lead to larger response times, negatively impacting the user experience. Therefore, employing targeted and assertive tags will:
+フィーチャータグは、ユーザーを評価するためにサーバー呼び出しを行う際のリミッターとして機能します。したがって、呼び出しがタグを使用しない場合や、多数のフラグで使用されるタグを使用する場合、エバリュエーションのために大量のフィーチャーフラグが返されます。フラグが少ない小規模なシステムでは、これは問題にならないかもしれません。しかし、システムが拡張するにつれて、エバリュエーション呼び出しを識別および最適化するためにタグを使用しないと、サーバー上で過剰な処理が行われ、運用コストが増加する可能性があります。さらに、応答時間が長くなり、ユーザーエクスペリエンスに悪影響を与える可能性があります。したがって、ターゲットを絞った断定的なタグを使用することで、以下のことが可能になります：
 
-- Accelerate the evaluation process by analyzing only the necessary aspects.
-- Reduce information traffic between the server and the local application.
+- 必要な側面だけを分析することにより、エバリュエーションプロセスを加速します。
+- サーバとローカルアプリケーション間の情報トラフィックを削減します。
 
-Despite the significance and impact on performance and costs, using tags within Bucketeer is optional.
+Bucketeerでのタグの使用は、パフォーマンスやコストに多大な影響を与える重要なものですが、その使用は任意です。
 
 :::tip
 
-The Bucketeer team strongly recommends the use of `featureTag` to optimize your operation.
+Bucketeerチームは、オペレーションを最適化するために`featureTag`の使用を強く推奨します。
 
 :::

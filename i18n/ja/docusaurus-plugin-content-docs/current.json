@@ -60,7 +60,7 @@
     "description": "The label for the doc item Notifications in sidebar docs, linking to the doc integration/notifications"
   },
   "sidebar.docs.doc.Optimize with tags": {
-    "message": "Optimize with tags",
+    "message": "タグを使用して最適化する",
     "description": "The label for the doc item Optimize with tags in sidebar docs, linking to the doc best-practices/optimize-bucketeer-with-tags"
   },
   "sidebar.docs.doc.Contributing": {
