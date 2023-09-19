@@ -1,5 +1,5 @@
 ---
-title: Auto operation
+title: 自動オペレーション
 # sidebar_position:
 slug: /feature-flags/creating-feature-flags/auto-operation
 description: The Auto Operation feature handles the manipulation of feature flag configurations on your behalf. It executes specific operations automatically based on the conditions set by the user.
@@ -8,33 +8,33 @@ tags: ['guide', 'automation', 'operation', 'feature-flag']
 
 import CenteredImg from '@site/src/components/centered-img/CenteredImg';
 
-The auto operation feature handles the manipulation of feature flag configurations on your behalf. It executes specific operations automatically based on the conditions set by the user.
+自動オペレーション機能は、フィーチャーフラグ構成のオペレーションをユーザーに代わって処理します。ユーザーが設定した条件に基づいて、特定のオペレーションを自動的に実行します。
 
-To access the auto operation page on the Bucketeer dashboard, select the **Feature Flags** tab, choose the desired flag, and click on its name. Select the **Auto Ops Rules** tab at the top of the new page. You can check the active and completed operations on the Auto Ops Rules page.
+Bucketeerダッシュボードの自動オペレーションページにアクセスするには、**フィーチャーフラグ**タブを選択して目的のフラグを選択し、その名前をクリックします。新しいページの上部にある**自動オペレーションルール**タブを選択します。自動オペレーションルールページでは、アクティブなオペレーションと完了したオペレーションを確認できます。
 
-## How auto operation works
+## 自動オペレーションの仕組み
 
-The auto operation feature consists of two key elements:
+自動オペレーション機能は、2つの重要な要素で構成されています：
 
-- **Operation**: An operation refers to an action that impacts a feature flag. Each action is linked to one or more triggering conditions. When a condition is met, the associated operation's action is executed. Currently, Bucketeer supports two types of operations:
+- **オペレーション**: オペレーションは、フィーチャーフラグに影響を与えるアクションを意味します。各アクションは、1つ以上のトリガー条件に関連付けられています。条件が満たされると、関連付けられたオペレーションのアクションが実行されます。現在、Bucketeer は次の 2 種類のオペレーションをサポートしています：
 
-  - **Enable**: This operation type enables the chosen flag.
-  - **Kill Switch**: This operation type disables the chosen flag.
+  - **有効**: このオペレーションタイプは、選択されたフラグを有効にします。
+  - **キルスイッチ**: このオペレーションタイプは、選択されたフラグを無効にします。
 
-- **Condition**: A condition specifies the circumstances under which the operation is triggered. Multiple conditions can be associated with a single killing operation. On the other hand, only one condition can be related to enabling a feature. It's important to note that the corresponding operation is triggered if any conditions are satisfied.
+- **条件**: 条件は、オペレーションがトリガーされる状況を指定します。複数の条件を 1 つのキルオペレーションに関連付けることができますが、有効化オペレーションには 1 つの条件しか関連付けることができません。重要なのは、いずれかの条件が満たされると対応するオペレーションがトリガーされることです。
 
-Based on the operations and condition the auto operation works as:
+自動オペレーションは、オペレーションと条件に基づいて以下のように動作します：
 
-1. The server monitors the specified conditions.
-2. When a condition is met, the corresponding operation is executed.
-3. After enabling or disabling the associated flag, the triggered operation's status changes from active to complete.
-4. The operation is moved from the Active to the Completed panel, indicating that it has been executed.
+1. サーバは指定された条件を監視します。
+2. 条件が満たされると、対応するオペレーションが実行されます。
+3. 関連するフラグを有効または無効にした後、トリガーされたオペレーションの状態はアクティブから完了に変わります。
+4. オペレーションはアクティブパネルから完了パネルに移動され、実行済みであることが示されます。
 
-## Conditions
+## 条件
 
-The following conditions are available for defining auto operations:
+自動オペレーションの定義には以下の条件があります：
 
-1. **Schedule**: This condition evaluates whether the specified date and time have been reached. You must always use a future date and time to schedule the operation. It is useful, for example, to release a feature at a specific date and time or to turn off a beta feature after a certain period.
+1. **スケジュール**: この条件は、指定された日付と時間に達したかどうかを評価します。オペレーションをスケジュールするには、常に将来の日付と時間を使用する必要があります。例えば、特定の日付と時間に機能をリリースしたり、一定期間後にベータ機能をオフにするために使用できます。
 
 <CenteredImg
   imgURL="img/feature-flags/auto-ops-rules/schedule-condition-v2.png"
@@ -43,13 +43,13 @@ The following conditions are available for defining auto operations:
   borderWidth="1px"
 />
 
-:::info Limit of schedule conditions
+:::info スケジュール条件の制限
 
-You can only have two active operations based on schedule conditions. One will define when to enable and the other when to kill the flag.
+スケジュール条件に基づいたアクティブなオペレーションは 2 つのみです。1 つはフラグを有効にするタイミングを定義し、もう 1 つはフラグを無効にするタイミングを定義します。
 
 :::
 
-2. **Event Rate**: This condition triggers the operation based on the event rate reaching a specified threshold. The event rate is only available for killing operations. It allows you to automatically turn off a flag if it is causing a high error rate or turn it off once enough data has been collected for analysis.
+2. **イベント率**: この条件は、イベント率が指定されたしきい値に達するとオペレーションをトリガーします。イベント率は、キルオペレーションにのみ使用できます。これにより、エラー率が高い場合にフラグを自動的にオフにしたり、分析に必要なデータが十分に収集されたらフラグをオフにしたりすることができます。
 
 <CenteredImg
   imgURL="img/feature-flags/auto-ops-rules/event-rate-condition-v2.png"
@@ -58,31 +58,33 @@ You can only have two active operations based on schedule conditions. One will d
   borderWidth="1px"
 />
 
-Below, you will find a description of the configuration options for setting up the event rate condition:
+以下は、イベント率条件の設定オプションに関する説明です：
 
-- **Variation**: The specific variation observed by the target user.
-- **Goal**: The goal used to calculate the event rate. Each time the goal is reached, the counter of goal events will increase.
-- **Condition**: The comparison operator used to assess the event rate. The available options are greater than or equal to (>=) or smaller than or equal to (<=).
-- **Percentage**: The threshold for the event rate.
-- **Minimum Count**: Minimum number of occurrences required for the condition to be enabled.
+- **バリエーション**: ターゲットユーザーが観察した特定のバリエーション。
+- **ゴール**: イベント率の計算に使用されるゴールを指します。ゴールに到達するたびに、ゴールイベントのカウンタが増加します
+- **条件**: イベントレートを評価するために使用する比較演算子を指します。使用できるオプションは、以上または等しい（>=）もしくは以下または等しい（<=）です。
+- **パーセンテージ**: イベント率のしきい値を指します。
+- **最小回数**: 条件を有効にするために必要な発生回数の最小値。
 
-## How the event rate is calculated
+## イベント率の計算方法
 
-The event rate is calculated using the following formula:
+イベント率は以下の式で計算されます：
 
-**Event Rate = (Unique Counter of Goal Events) / (Unique Counter of Evaluation Events)**
+**イベント率 = (ゴールイベントのユニークカウンター) / (評価イベントのユニークカウンター)**
 
-Refer to the [Experiments](/feature-flags/testing-with-flags/experiments) and [Evaluate results](/feature-flags/creating-feature-flags/evaluate-results) sections for a better understanding of the user count of goals and evaluations.
+ゴールおよび評価のユーザーカウントをよりよく理解するために、[エクスペリメント](/feature-flags/testing-with-flags/experiments)と[結果の評価](/feature-flags/creating-feature-flags/evaluate-results)のセクションをご参照ください。
 
-## Setting up auto operation
 
-Configuring auto operations is a straightforward process. Follow these steps:
+## 自動オペレーションの設定
 
-1. Go to the Auto Ops Rules page.
-2. Click the **Add operation** button.
-3. The operation setting panel will appear. Choose the desired operation. For this example, the **Enable** option was selected.
-4. Set up the desired condition. For the **Enable** operation, only the **Schedule** is available.
-5. Click the **Create Operation** button to create the auto operation rule. The image below summarizes the configuration described in the previous steps.
+自動オペレーションの設定は簡単です。以下のステップに従ってください：
+
+1. 自動オペレーションルールのページに移動します。
+2. **オペレーションの追加**ボタンをクリックします。
+3. オペレーション設定パネルが表示されます。目的のオペレーションを選択します。この例では、**有効**オプションが選択されています。
+4. 目的の条件を設定します。**有効**オペレーションの場合は、**スケジュール**のみ使用できます。
+5. **オペレーションの作成**ボタンをクリックして、自動オペレーションルールを作成します。以下の画像は、前のステップで説明した設定をまとめたものです。
+
 
 <CenteredImg
   imgURL="img/feature-flags/auto-ops-rules/create-operation.png"
@@ -91,4 +93,4 @@ Configuring auto operations is a straightforward process. Follow these steps:
   borderWidth="1px"
 />
 
-When the scheduled time arrives, the feature flag will be automatically enabled.
+予定時刻になると、自動的にフィーチャーフラグが有効になります。
