@@ -1,5 +1,5 @@
 ---
-title: Manage variations
+title: バリエーションの管理
 # sidebar_position:
 slug: /feature-flags/creating-feature-flags/manage-variations
 description: Describe how to manage feature flag variations.
@@ -8,9 +8,9 @@ tags: ['feature-flag', 'variations']
 
 import CenteredImg from '@site/src/components/centered-img/CenteredImg';
 
-The Variations tab allows you to manage variations for your feature flag with ease. You can add, edit, or remove variations based on your requirements.
+バリエーションタブを使用すると、フィーチャーフラグのバリエーションを簡単に管理できます。必要に応じて、バリエーションを追加、編集、または削除が可能です。
 
-To access the variations page on the Bucketeer dashboard, access the **Feature Flags** tab, choose the desired flag, and click on its name. On the new page, select the **Variation** tab on the top. The image below presents an example of the **Variations** panel for a string flag with 4 variations.
+Bucketeerダッシュボードのバリエーションページにアクセスするには、**フィーチャーフラグ**タブにアクセスし、目的のフラグを選択してその名前をクリックします。新しいページで、上部の**バリエーション**タブを選択します。以下の画像は、4つのバリエーションを持つ文字列フラグの**バリエーション**パネルの例です。
 
 <CenteredImg
   imgURL="img/feature-flags/variations/manage-variations.png"
@@ -18,14 +18,14 @@ To access the variations page on the Bucketeer dashboard, access the **Feature F
   wSize="650px"
 />
 
-For boolean flags, you can modify the name and description of each variation. When dealing with multivariate flags (string, number, and JSON types), you can not only edit the value, name, and description of any variation but also add or delete variations as needed. After finishing the flag variations edition, save it and provide a comment describing your changes.
+ブール値フラグの場合、各バリエーションの名前と説明を変更できます。多変量フラグ（文字列、数値、JSONタイプ）を扱う場合は、任意のバリエーションの値、名前、説明を編集できるだけでなく、必要に応じてバリエーションを追加または削除することもできます。フラグのバリエーションの編集が完了したら、保存して、変更内容を説明するコメントを入力します。
 
 :::note
 
-You can't delete a variation if it was selected as the **Default strategy** or as the **OFF variation** on the **Targeting** tab. To be able to delete it, you will need to choose another variation as default or OFF variation first.
+**ターゲティング**タブで**デフォルト戦略**または**OFFバリエーション**として選択されているバリエーションは削除できません。削除できるようにするには、まず別のバリエーションをデフォルトまたはOFFバリエーションとして選択する必要があります。
 
 :::
 
-It's important to note that any changes made to the variations of a feature flag will affect all environments within the project. This ensures consistent behavior across the board.
+フィーチャーフラグのバリエーションに加えられた変更は、プロジェクト内のすべての環境に影響を与えることに注意することが重要です。これにより、全体的な一貫した動作が保証されます。
 
-When you delete a variation, individual targeting and custom rules associated with that variation will be removed as well. In cases where a custom rule employs a percentage rollout for the deleted variation, the rollout for that specific variation will be set to zero. This ensures that your feature flag's logic remains intact and functional.
+バリエーションを削除すると、そのバリエーションに関連付けられている個々のターゲティングとカスタムルールも削除されます。カスタムルールが削除されたバリエーションにパーセンテージロールアウトを使用している場合、その特定のバリエーションのロールアウトはゼロに設定されます。これにより、フィーチャーフラグのロジックがそのまま保持され、機能し続けることが保証されます。
