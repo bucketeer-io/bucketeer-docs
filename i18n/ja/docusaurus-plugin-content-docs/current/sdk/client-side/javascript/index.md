@@ -1,20 +1,20 @@
 ---
-title: JavaScript reference
+title: JavaScriptリファレンス
 slug: /sdk/client-side/javascript
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-This category contains topics explaining how to configure Bucketeer's JavaScript SDK.
+このカテゴリには、BucketeerのJavaScript SDKの設定方法に関する内容が含まれています。
 
-## Getting started
+## はじめに
 
-Before starting, ensure that you follow the [Getting Started](/getting-started) guide.
+始める前に、必ず[はじめに](/getting-started)ガイドに従ってください。
 
-### Installing dependency
+### 依存関係のインストール
 
-Install the dependency in your application.
+アプリケーションに依存関係をインストールします。
 
 <Tabs>
 <TabItem value="npm" label="npm">
@@ -33,9 +33,9 @@ yarn add @bucketeer/sdk
 </TabItem>
 </Tabs>
 
-### Importing client
+### クライアントのインポート
 
-Import the Bucketeer client into your application code.
+Bucketeerクライアントをアプリケーションコードにインポートします。
 
 <Tabs>
 <TabItem value="js" label="JavaScript">
@@ -47,13 +47,13 @@ import { BKTClient, getBKTClient, defineBKTConfig, defineBKTUser, initializeBKTC
 </TabItem>
 </Tabs>
 
-### Configuring client
+### クライアント構成
 
-Configure the SDK config and user configuration.
+SDK 設定とユーザー設定を構成します。
 
 :::info
 
-The **featureTag** setting is the tag that you configure when creating a Feature Flag. When it is not configured, it will evaluate all the Feature Flags in the environment. **We strongly recommend** using tags to speed up the evaluation process and reduce the cache size in the client.
+**フィーチャータグ**設定は、フィーチャーフラグを作成する際に構成するタグです。設定されていない場合は、環境内のすべてのフィーチャーフラグを評価します。エバリュエーションプロセスを高速化し、クライアントのキャッシュサイズを削減するために、タグを使用することを**強くお勧めします**。
 
 :::
 
@@ -76,28 +76,28 @@ const user = defineBKTUser({
 </TabItem>
 </Tabs>
 
-:::info Custom configuration
+:::info カスタム構成
 
-Depending on your use, you may want to change the optional configurations available.
+使用目的に応じて、オプション構成を変更することができます。
 
-- **pollingInterval** (Minimum 5 minutes. Default is 10 minutes)
-- **eventsFlushInterval** (Default is 30 seconds)
-- **eventsMaxQueueSize** (Default is 50 events)
-- **storageKeyPrefix** (Default is empty) 
-- **userAgent** (Default is `window.navigator.userAgent`)
-- **fetch** (Default is `window.fetch`)
+- **pollingInterval** (最低5分。デフォルトは10分)
+- **eventsFlushInterval** (デフォルトは30秒)
+- **eventsMaxQueueSize** (デフォルトは50イベント)
+- **storageKeyPrefix** (デフォルトは空)
+- **userAgent** (デフォルトは`window.navigator.userAgent`)
+- **fetch** (デフォルトは`window.fetch`)
 
 :::
 
 :::note
 
-The Bucketeer SDK doesn't save the user data. The Application must save and set it when initializing the client SDK.
+Bucketeer SDKはユーザーデータを保存しません。アプリケーションは、クライアントSDKを初期化する際にユーザーデータを保存して設定する必要があります。
 
 :::
 
-### Initializing client
+### クライアントの初期化
 
-Initialize the client by passing the configurations in the previous step.
+前のステップで構成を渡してクライアントを初期化します。
 
 <Tabs>
 <TabItem value="js" label="JavaScript">
@@ -112,13 +112,13 @@ const client = getBKTClient()
 
 :::note
 
-The initialize process starts polling right away the latest evaluations from Bucketeer in the background using the interval `pollingInterval` configuration. JavaScript SDK **does not support** Background fetch.
+初期化処理では、`pollingInterval`の設定により、バックグラウンドでBucketeerから最新のエバリュエーションを取得します。JavaScript SDKはBackground fetchに**対応していません**。
 
 :::
 
-If you want to use the feature flag on Splash or Main views, and the user opens your application for the first time, it may not have enough time to fetch the variations from the Bucketeer server.
+スプラッシュやメイン画面でフィーチャーフラグを使用したい場合、ユーザーが初めてアプリを開くと、Bucketeerサーバーからバリエーションを取得するのに十分な時間が取れない場合があります。
 
-For this case, we recommend using the `Promise` returned from the initialize method. The Promise rejects with `BKTException` when something goes wrong.
+このケースでは、初期化メソッドから返される`Promise`を使用することをお勧めします。何か問題が発生した場合、Promiseは`BKTException`で拒否されます。
 
 <Tabs>
 <TabItem value="js" label="JavaScript">
@@ -134,23 +134,24 @@ const client = getBKTClient()
 </TabItem>
 </Tabs>
 
-### Handling exceptions
+### 例外処理
 
-While most of the time error is handled internally, some methods throw `BKTException` when something goes wrong.  
-Those methods are:
+多くの場合、エラーは内部的に処理されますが、一部のメソッドは何か問題が発生すると `BKTException` をスローします。 
+それらのメソッドは以下の通りです：
 
 - **`initializeBKTClient()`**
 - **`BKTClient#fetchEvaluations()`**
 - **`BKTClient#flush()`**
 
-These methods return `Promise` and might rejects with `BKTException`, so you should make sure to catch the error.
+これらのメソッドは `Promise` を返しますが、`BKTException` で拒否される可能性があるため、必ずエラーを検出する必要があります。
 
-## Supported features
+## サポートされている機能
 
-### Evaluating user
+### ユーザーエバリュエーション
 
-The variation method determines whether or not a feature flag is enabled for a specific user.<br />
-To check which variation a specific user will receive, you can use the client like below.
+バリエーションメソッドは、フィーチャーフラグが特定のユーザーに対して有効であるかどうかを決定します。<br />
+特定のユーザーがどのバリエーションを受け取るかを確認するには、以下のようなクライアントを使用します。
+
 
 <Tabs>
 <TabItem value="js" label="JavaScript">
@@ -169,13 +170,13 @@ if (showNewFeature) {
 
 :::note
 
-The variation method will return the default value if the feature flag is missing in the SDK.
+SDKにフィーチャーフラグがない場合、バリエーションメソッドはデフォルト値を返します。
 
 :::
 
-### Variation types
+### バリエーションの種類
 
-The Bucketeer SDK supports the following variation types.
+Bucketeer SDKは、以下のバリエーションの種類をサポートしています。
 
 <Tabs>
 <TabItem value="js" label="JavaScript">
@@ -193,13 +194,13 @@ jsonVariation(featureId: string, defaultValue: object): Promise<object>;
 </TabItem>
 </Tabs>
 
-### Updating user evaluations
+### ユーザーエバリュエーションの更新
 
-Depending on the use case, you may need to ensure the evaluations in the SDK are up to date before requesting the variation.
+ユースケースによっては、バリエーションをリクエストする前に、SDK内のエバリュエーションが最新であることを確認する必要がある場合があります。
 
-The fetch method uses the following parameter. Make sure to wait for its completion.
+fetchメソッドは次のパラメータを使用します。完了するまで必ずお待ちください。
 
-- **Timeout** (Default is 30 seconds)
+- **タイムアウト** (デフォルトは30秒)
 
 <Tabs>
 <TabItem value="js" label="JavaScript">
@@ -213,11 +214,11 @@ await client.fetchEvaluations(timeout);
 </TabItem>
 </Tabs>
 
-### Reporting custom events
+### カスタムイベントの報告
 
-This method lets you save user actions in your application as events. You can connect these events to metrics in the experiments console UI.
+このメソッドを使用すると、アプリケーション内のユーザー操作をイベントとして保存できます。これらのイベントは、エクスペリメントコンソールUIの指標に接続できます。
 
-In addition, you can pass a double value to the goal event. These values will sum and show as <br />`Value total` on the experiments console UI. This is useful if you have a goal event for tracking how much a user spent on your application buying items, etc.
+さらに、ゴールイベントにダブル値を渡すことができます。これらの値は合計され、エクスペリメントコンソールUIの<br />`Value total`として表示されます。これは、ユーザーがアプリケーションでアイテムを購入した金額などを追跡するためのゴールイベントがある場合に便利です。
 
 <Tabs>
 <TabItem value="js" label="JavaScript">
@@ -229,9 +230,9 @@ client.track("YOUR_GOAL_ID", 10.50);
 </TabItem>
 </Tabs>
 
-### Flushing events
+### イベントのフラッシュ
 
-This method will send all pending analytics events to the Bucketeer server as soon as possible. This process is asynchronous, so it returns before it is complete.
+このメソッドは、保留中のすべての分析イベントを可能な限り早くBucketeerサーバーに送信します。このプロセスは非同期であるため、完了前に返されます。
 
 <Tabs>
 <TabItem value="js" label="JavaScript">
@@ -245,13 +246,13 @@ await client.flush();
 
 :::note
 
-In regular use, you don't need to call the flush method because the events are sent every 30 seconds in the background.
+通常の使用では、イベントはバックグラウンドで30秒ごとに送信されるため、Flushメソッド呼び出す必要はありません。
 
 :::
 
-### User attributes configuration
+### ユーザー属性の設定
 
-This feature will give you robust and granular control over what users can see on your application. You can add rules using these attributes on the console UI's feature flag's targeting tab. [See more](#).
+この機能を使用すると、ユーザーがアプリケーションで表示できるコンテンツを堅牢かつ詳細に制御できます。これらの属性を使用して、コンソールUIのフィーチャーフラグのターゲティングタブでルールを追加できます。[詳細を見る](#)
 
 <Tabs>
 <TabItem value="js" label="JavaScript">
@@ -276,9 +277,9 @@ await initializeBKTClient(config, user);
 </TabItem>
 </Tabs>
 
-### Updating user attributes
+### ユーザー属性の更新
 
-This method will update all the current user attributes. This is useful in case the user attributes update dynamically on the application after initializing the SDK.
+このメソッドは、現在のユーザー属性をすべて更新します。これは、SDKの初期化後にアプリケーションでユーザー属性が動的に更新される場合に役立ちます。
 
 <Tabs>
 <TabItem value="js" label="JavaScript">
@@ -300,13 +301,14 @@ client.updateUserAttributes(attributes);
 
 :::caution
 
-This updating method will override the current data.
+この更新メソッドは、現在のデータを上書きします。
 
 :::
 
-### Getting user information
+### ユーザー情報の取得
 
-This method will return the current user configured in the SDK. This is useful when you want to check the current user id and attributes before updating them through [updateUserAttributes](#getting-user-information).
+このメソッドは、SDKで設定されている現在のユーザーを返します。これは、[updateUserAttributes](#getting-user-information)を使用して現在のユーザーIDと属性を更新する前に確認したい場合に役立ちます。
+
 
 <Tabs>
 <TabItem value="js" label="JavaScript">
@@ -318,9 +320,9 @@ const user = client.currentUser();
 </TabItem>
 </Tabs>
 
-### Getting evaluation details
+### エバリュエーションの詳細を取得
 
-This method will return the evaluation details for a specific feature flag. This is useful if you need to know the variation reason or send this data elsewhere.
+このメソッドは、特定のフィーチャーフラグのエバリュエーションの詳細を返します。バリエーションの理由を知ったり、このデータを他の場所に送信する必要がある場合に役立ちます。
 
 <Tabs>
 <TabItem value="js" label="JavaScript">
@@ -331,17 +333,18 @@ const evaluationDetails = client.evaluationDetails("YOUR_FEATURE_FLAG_ID");
 
 :::note
 
-This method will return null if the feature flag is missing in the SDK.
+このメソッドは、SDKにフィーチャーフラグがない場合は null を返します。
 
 :::
 
 </TabItem>
 </Tabs>
 
-### Listening to evaluation updates
+### エバリュエーション更新のリスニング
 
-BKTClient can notify when the evaluation is updated.  
-The listener can detect both automatic polling and manual fetching.
+BKTClientは、エバリュエーションが更新された際に通知することができます。
+リスナーは、自動ポーリングと手動フェッチングの両方を検出できます。
+
 
 <Tabs>
 <TabItem value="js" label="JavaScript">
