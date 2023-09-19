@@ -1,35 +1,37 @@
 ---
 id: overview
-title: SDK Overview
+title: SDKの概要
 slug: /sdk
 ---
 
-In this category, you will find guides explaining the difference between **client** and **server-side** SDKs. To connect to the Bucketeer server, you will need an SDK for your programming language and an API key.
+このカテゴリーでは、**クライアント**と**サーバーサイド**のSDKの違いを説明するガイドを見つけることができます。Bucketeerサーバーに接続するには、プログラミング言語とAPIキーに対応したSDKが必要です。
 
 :::note
 
-The API Key is generated on the Bucketeer dashboard from the **API Keys** menu.
+APIキーは、Bucketeerダッシュボードの**APIキー**メニューから生成されます。
 
 :::
 
-## Choose a Bucketeer SDK
+## Bucketeer SDKの選択
 
-When integrating a Bucketeer SDK with your code, it is important to consider two factors.
+Bucketeer SDKをコードと統合する場合、次の2つの要素を考慮することが重要です。
 
-1. First, you need to assess your specific requirements to determine whether you need a server-side or client-side SDK. Typically, you will only need one SDK per application or service. However, you can use multiple SDKs if your product consists of applications or services written in multiple languages.
-2. Afterward, you need to select the programming language which will normally be used on your system.
+1. 最初に、サーバーサイドSDKが必要かクライアントサイドSDKが必要かを判断するために、特定の要件を評価する必要があります。通常、アプリケーションまたはサービスごとに1つのSDKのみが必要になります。ただし、製品が複数の言語で記述されたアプリケーションまたはサービスで構成されている場合は、複数のSDKを使用できます。
+2. その後、システムで通常使用されるプログラミング言語を選択する必要があります。
+
 
 :::tip
 
-We strongly recommend that you check our [Quickstart](/getting-started/quickstart) guide before using Bucketeer SDKs in your application.
+アプリケーションでBucketeer SDKを使用する前に、[クイックスタート](/getting-started/quickstart)ガイドをご覧いただくことを強くお勧めします。
 
 :::
 
-### Client-side SDK
+### クライアントサイドSDK
 
-Client-side SDKs are designed for single-user desktop, mobile, and embedded applications. They are intended for use in potentially less secure environments, such as personal computers or mobile devices, including mobile SDKs. These SDKs typically run on end-user devices, which makes them vulnerable to compromise by users who unpack a mobile app to examine the SDK bytecode or use developer tools in their browser to inspect internal site data. Therefore, never using a server-side SDK key in a client-side or mobile application is essential.
+クライアントサイドSDKは、シングルユーザーのデスクトップ、モバイル、および埋め込みアプリケーション向けに設計されています。パーソナルコンピュータやモバイルデバイスなどの、潜在的にセキュリティの低い環境での使用を目的としています。これらのSDKは通常、エンドユーザーデバイスで実行されるため、モバイルアプリを解凍してSDKバイトコードを調べたり、ブラウザの開発者ツールを使用して内部サイトデータを確認するユーザーによって侵害される可能性があります。したがって、クライアントサイドSDKまたはモバイルアプリケーションでサーバーサイドSDKキーを使用しないことは不可欠です。
 
-Supported SDKs for client-side:
+
+クライアントサイドのサポートされているSDK：
 
 
 <div className="row" style={{maxWidth: '500px'}}>
@@ -64,11 +66,11 @@ Supported SDKs for client-side:
 
 </div>
 
-### Server-side SDK
+### サーバーサイドSDK
 
-Server-side SDKs are designed for multi-user systems and intended for use in trusted environments, like corporate networks or web servers. They operate within server-architected applications running on your infrastructure or trusted cloud-based infrastructure. These locations are not directly accessible by end-users. The restricted access of server-based applications allows server-side SDKs to safely receive flag data and rulesets without the need to filter out sensitive information. This setup enables server-side SDKs to receive flag data including rules, and segments safely without filtering out sensitive information.
+サーバーサイドSDKは、マルチユーザーシステム向けに設計されており、企業ネットワークやWebサーバなどの信頼できる環境での使用を目的としています。インフラストラクチャまたは信頼できるクラウドベースのインフラストラクチャ上で実行されるサーバーアーキテクチャのアプリケーション内で動作します。これらの場所は、エンドユーザーから直接アクセスすることはできません。サーバーベースのアプリケーションのアクセスが制限されているため、サーバーサイドSDKは、機密情報をフィルタリングする必要なしに、フラグデータとルールセットを安全に受信できます。この設定により、サーバーサイドSDKは、ルールとセグメントを含むフラグデータを、機密情報をフィルタリングすることなく安全に受信することが可能です。
 
-Supported SDKs for server-side:
+サーバーサイドのサポートされているSDK：
 
 <div className="row" style={{maxWidth: '500px'}}>
 
