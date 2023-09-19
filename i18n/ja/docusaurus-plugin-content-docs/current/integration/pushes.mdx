@@ -1,5 +1,5 @@
 ---
-title: Pushes
+title: プッシュ
 sidebar_position: 2
 slug: /integration/pushes
 ---
@@ -8,22 +8,25 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import CenteredImg from '@site/src/components/centered-img/CenteredImg';
 
-Push notifications are utilized in Bucketeer to send silent updates to user applications through Google Firebase Cloud Messaging (FCM). **These silent notifications ensure that user applications are automatically updated in real time with the latest flag configurations**. This approach guarantees that user data remains current and allows for user-side actions upon receiving notifications.
+Bucketeerでは、Google Firebase Cloud Messaging(FCM)を通して、ユーザーアプリケーションに対してサイレントアップデートを送信するためにプッシュ通知を活用しています。** サイレント通知により、ユーザーアプリケーションは最新のフラグ設定でリアルタイムで自動的に更新されます**。この方法により、ユーザーデータが常に最新の状態に保たれ、通知を受信したユーザー側のアクションを実行することが可能になります。
 
-To configure push notifications, access the **Settings** in the left dashboard menu and navigate to the **Pushes** tab. Here, you'll find a list of previously created Pushes and the option to create new ones using the **+ Add** button.
+プッシュ通知を設定するためには、左側のダッシュボードメニューの**設定**にアクセスし、**プッシュ**タブに移動します。ここでは、以前に作成されたプッシュのリストと、**+追加**ボタンを使用して新しいプッシュ通知を作成するオプションがあります。
 
-## Create a Push
+## プッシュの作成
 
-When creating a new Push, you need to provide the following information:
+新しいプッシュを作成する際には、以下の情報を入力する必要があります：
 
-- **Name**: This identifies the push. Bucketeer recommends using descriptive names.
-- **Firebase Cloud Messaging API Key**: This key identifies the desired group of users who will receive the notification.
-- **Tags**: Add tags related to the flags you wish to monitor. Upon updating or modifying a flag with the provided tag, the push notification will be triggered. You can select one or multiple tags to trigger the push notification.
+- **名前**： これはプッシュを識別するためのものです。Bucketeerでは説明的な名前の使用を推奨しています。
 
-:::info Tag selection
-You can include multiple tags while creating a push. However, for larger user groups requiring numerous notifications, there might be a time delay or potential server overload on FCM.
+- **Firebase Cloud Messaging API キー**： このキーは、通知を受け取るユーザーのグループを識別するためのものです。
 
-Bucketeer's team suggests employing distinct FCM API Keys for each user group and associating specific tags with each group. This strategy minimizes the number of notifications after each flag modification.
+- **タグ**： モニタリングしたいフラグに関連するタグを追加します。提供されたタグを持つフラグが更新または変更されると、プッシュ通知がトリガーされます。プッシュ通知をトリガーするために、1つまたは複数のタグを選択できます。
+
+
+:::info タグの選択
+プッシュを作成する際に複数のタグを含めることが可能です。しかし、多くの通知を必要とする大規模なユーザーグループの場合、FCMの時間遅延やサーバーの過負荷の恐れがあります。
+
+Bucketeerのチームは、各ユーザーグループに個別のFCM APIキーを採用すること、そして特定のタグを各グループに関連付けることを提案しています。この戦略により、各フラグ修正後の通知数を最小限に抑えることが可能になります。
 :::
 
 <CenteredImg
@@ -33,11 +36,11 @@ Bucketeer's team suggests employing distinct FCM API Keys for each user group an
   borderWidth="1px"
 />
 
-After defining the Name, Firebase Cloud Messaging API Key, and Tags, click **Submit** to create the push.
+名前、Firebase Cloud Messaging API キー、タグの定義が完了したら、**送信** をクリックしてプッシュを作成します。
 
-## Push notifications restrictions
+## プッシュ通知の制限
 
-Push notifications function is contingent on end-user configurations to operate effectively. When end-users install applications on their devices, such as iPhones, they are prompted to grant authorization for the application to use notifications. If users authorize the application for notifications, push notifications will function as intended. On the other hand, push notifications will not operate on their applications if users do not grant authorization. Refer to the flowchart below for an overview of the push notification process.
+プッシュ通知の機能は、エンドユーザーの設定により効果的に動作します。エンドユーザーがiPhoneなどのデバイスにアプリケーションをインストールする際、そのアプリケーションが通知を使用することを許可するよう求められます。 ユーザーがアプリケーションに通知を許可した場合、プッシュ通知は意図した通りに機能します。一方、ユーザーが通知を許可しない場合、プッシュ通知はアプリケーション上で動作しません。プッシュ通知プロセスの概要に関しては、以下のフローチャートをご参照ください。
 
 <CenteredImg
   imgURL="img/integration/pushes/push_flow.svg"
@@ -45,13 +48,14 @@ Push notifications function is contingent on end-user configurations to operate 
   wSize="550px"
 />
 
-:::info Auto updates
-Even if users disable notifications, their system will automatically update every ten minutes.
+:::info 自動アップデート
+ユーザーが通知を無効にした場合でも、システムは10分ごとに自動的に更新されます。
 :::
 
-## Update user evaluation in real time
+## ユーザーエバリュエーションのリアルタイム更新
 
-To leverage push notifications, implement a function in your application. This function will receive notifications from FCM and verify if `bucketeer_feature_flag_updated` is `true`. In such cases, update flag configurations using the `fetchEvaluations` function. Below are code examples of this function. For further details, consult the **Updating user evaluations in real-time** section on [SDK](/sdk) documentation.
+プッシュ通知を活用するためには、アプリケーションに関数を実装する必要があります。この関数はFCMからの通知を受け取り、`bucketeer_feature_flag_updated`が`true`であるかどうかを確認します。その場合、`fetchEvaluations`関数を使ってフラグの設定を更新します。以下はこの関数のコード例です。詳細は[SDK](/sdk)ドキュメントの **ユーザーエバリュエーションのリアルタイム更新** セクションをご参照ください。
+
 
 <Tabs groupId="integrate-buckteer-platform">
 <TabItem value="kt" label="Kotlin">

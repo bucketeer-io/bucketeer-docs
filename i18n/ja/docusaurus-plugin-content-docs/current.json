@@ -52,7 +52,7 @@
     "description": "The label for the doc item API Keys in sidebar docs, linking to the doc feature-flags/api-keys"
   },
   "sidebar.docs.doc.Pushes": {
-    "message": "Pushes",
+    "message": "プッシュ",
     "description": "The label for the doc item Pushes in sidebar docs, linking to the doc integration/pushes"
   },
   "sidebar.docs.doc.Notifications": {
