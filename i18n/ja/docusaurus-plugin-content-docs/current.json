@@ -12,7 +12,7 @@
     "description": "The label for category Creating Feature Flags in sidebar docs"
   },
   "sidebar.docs.category.Testing With Flags": {
-    "message": "Testing With Flags",
+    "message": "フラグを使用したテスト",
     "description": "The label for category Testing With Flags in sidebar docs"
   },
   "sidebar.docs.category.Client": {
@@ -48,7 +48,7 @@
     "description": "The label for the doc item Overview in sidebar docs, linking to the doc integration/index"
   },
   "sidebar.docs.doc.API Keys": {
-    "message": "API Keys",
+    "message": "API キー",
     "description": "The label for the doc item API Keys in sidebar docs, linking to the doc feature-flags/api-keys"
   },
   "sidebar.docs.doc.Pushes": {

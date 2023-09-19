@@ -1,15 +1,18 @@
 ---
-title: Overview
+title: 概要
 # sidebar_position: 
 slug: /feature-flags/testing-with-flags
 description: This page provides an overview of the testing process. It also briefly describes the subpages and links each one.
 tags: ['experiments', 'test', 'A/B', 'goals']
 ---
 
-Testing with feature flags allows you to experiment and gather insights about your feature's performance before fully releasing it. This section covers three main subjects: Goals, Experiments, and How to Use Experiments.
+フィーチャーフラグを使用したテストにより、機能を完全にリリースする前に、その機能のパフォーマンスを検証し、洞察を得ることができます。このセクションでは、ゴール、エクスペリメント、エクスペリメントの使い方という3つの主要なトピックについて説明します。
 
-- [Goals](/feature-flags/testing-with-flags/goals): Goals in the Bucketeer system help to measure how user behaviors are affected by feature flags within experiments.
-- [Experiments](/feature-flags/testing-with-flags/experiments): Experiments are a way to test new features or changes with a subset of users before a full release. They allow you to collect data and feedback to improve the feature's effectiveness. 
-- [Experiment results](/feature-flags/testing-with-flags/experiment-results): After creating an experiment, you can access the experiment result page. It shows the experiment's current state, evaluation period, and provides components for analysis. The Bucketeer system uses Bayesian inference to suggest the best-performing variation.
+- [ゴール](/feature-flags/testing-with-flags/goals): Bucketeerシステムのゴールは、エクスペリメント内のフィーチャーフラグがユーザーの行動にどのように影響するかを測定するのに役立ちます。
 
-By utilizing goals, running experiments, and analyzing the results, you can make data-driven decisions to optimize features, improve user experience, and achieve desired business outcomes.
+- [エクスペリメント](/feature-flags/testing-with-flags/experiments): エクスペリメントは、完全にリリースする前に、サブセットのユーザーで新しい機能や変更をテストするための方法です。機能の効果を向上させるために、データとフィードバックを収集できます。
+
+- [エクスペリメント結果](/feature-flags/testing-with-flags/experiment-results): エクスペリメントを作成したら、エクスペリメント結果ページにアクセスできます。このページには、現在の状態、エバリュエーション期間、分析用のコンポーネントが表示されます。Bucketeerシステムは、ベイズ推定を使用して、最もパフォーマンスの高いバリエーションを提案します。
+
+
+ゴールの活用、エクスペリメントの実行、結果の分析により、データに基づいた意思決定を行い、機能を最適化し、ユーザーエクスペリエンスを向上させ、望ましいビジネス成果を達成できます。
