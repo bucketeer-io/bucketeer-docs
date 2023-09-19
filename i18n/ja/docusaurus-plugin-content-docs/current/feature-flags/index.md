@@ -1,28 +1,29 @@
 ---
-title: Overview
+title: 概要
 sidebar_position: 1
 slug: /feature-flags
 ---
 
-This section presents the necessary information to use Bucketeer feature flags. On this page, you find an organized overview of the content covered in this section, providing a step-by-step guide on effectively creating and utilizing flags. Below you find the links and a brief description for each section.
+このセクションでは、Bucketeer フィーチャーフラグを使用するために必要な情報を提供します。このページには、このセクションで扱う内容の概要がまとめられており、フラグを効果的に作成および使用するためのステップバイステップガイドが記載されています。以下の各セクションのリンクと簡単な説明をご覧ください。
 
-## Creating feature flags:
+## フィーチャーフラグの作成:
 
-- [Create a feature flag](../feature-flags/creating-feature-flags/create-feature-flag): Learn how to create flags and define their properties.
-- [Targeting with feature flags](../feature-flags/creating-feature-flags/targeting): Discover how to target specific users or groups with your flags based on various attributes.
-- [Manage variations](../feature-flags/creating-feature-flags/manage-variations): Understand how to manage and configure different variations of your feature flags.
-- [Auto operation](../feature-flags/creating-feature-flags/auto-operation): Automate the feature flag operation.
-- [Evaluate results](../feature-flags/creating-feature-flags/evaluate-results): Explore how to evaluate and analyze the usage of your flags.
-- [Other flag settings](../feature-flags/creating-feature-flags/settings-and-history): Explore additional settings and options for your flags.
+- [フィーチャーフラグの作成](./feature-flags/creating-feature-flags/create-feature-flag): フラグの作成方法とプロパティの定義について学ぶことができます。
+- [フィーチャーフラグによるターゲティング](./feature-flags/creating-feature-flags/targeting):さまざまな属性に基づいて特定のユーザーまたはグループを対象とする方法を見つけることができます。
+- [バリエーションの管理](./feature-flags/creating-feature-flags/manage-variations): フィーチャーフラグのさまざまなバリエーションを管理および構成する方法を理解することができます。
+- [自動オペレーション](./feature-flags/creating-feature-flags/auto-operation): フィーチャーフラグのオペレーションを自動化します。
+- [結果の評価](./feature-flags/creating-feature-flags/evaluate-results): フラグの使用状況を評価および分析する方法を知ることができます。
+- [その他のフラグ設定](./feature-flags/creating-feature-flags/settings-and-history): フラグの追加設定およびオプションを知ることができます。
 
-## API keys
 
-The [API keys](/feature-flags/api-keys) describe what they're and how they're used to authenticate and control access to the Bucketeer system.
+## APIキー
 
-## Testing with flags
+[APIキー](/feature-flags/api-keys)は、APIキーとは何か、そしてそれらがBucketeerシステムへのアクセスを認証および制御するためにどのように使用されるかを説明しています。
 
-The [Testing with flags](../feature-flags/testing-with-flags) will cover the three components used to perform tests on the Bucketeer system:
+## フラグを使用したテスト
 
-- [Goals](../feature-flags/testing-with-flags/goals): Discover how to define goals for your feature flag experiments to measure their success.
-- [Experiments](../feature-flags/testing-with-flags/experiments): Learn how to set up and run experiments using feature flags to test hypotheses and gather insights.
-- [Experiments results](../feature-flags/testing-with-flags/experiment-results): Explore best practices and techniques for effectively utilizing experiments in your development process.
+[フラグを使用したテスト](./feature-flags/testing-with-flags)は、Bucketeerシステムでテストを実行するために使用される3つのコンポーネントを説明します。
+
+- [ゴール](./feature-flags/testing-with-flags/goals): フィーチャーフラグのエクスペリメントのゴールを定義し、その成功を測定する方法を学ぶことができます。
+- [エクスペリメント](./feature-flags/testing-with-flags/experiments): 仮説の検証やインサイトの収集のために、フィーチャーフラグを使用してエクスペリメントを設定し、実行する方法を学ぶことができます。
+- [エクスペリメントの結果](./feature-flags/testing-with-flags/experiment-results): エクスペリメントを開発プロセスに効果的に活用するための最善の方法とテクニックを見つけることができます。
