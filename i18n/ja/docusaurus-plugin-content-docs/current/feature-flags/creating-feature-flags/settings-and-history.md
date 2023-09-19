@@ -1,13 +1,13 @@
 ---
-title: Settings and history
+title: 設定と履歴
 # sidebar_position: 
 slug: /feature-flags/creating-feature-flags/settings-and-history
 description: This page primarily addresses the remaining configuration aspects of feature flags, including log history and feature flag settings.
 tags: ['log','history','settings','feature-flag']
 ---
 
-When accessing the details of a feature flag, you will have access to two important pages: **History** and **Settings**.
+フィーチャーフラグの詳細にアクセスすると、**履歴**と**設定**という 2 つの重要なページにアクセスできます。
 
-The **Settings** page allows you to update various aspects of the flag, such as its name, description, and tags. Similar to other configuration tabs for feature flags, it is necessary to provide a comment explaining the changes before saving them. This ensures a record of the reasons behind each modification, helping to maintain clear and organized flag settings.
+**設定**ページでは、フラグの名前、説明、タグなど、さまざまな属性を更新できます。他のフィーチャーフラグの設定タブと同様に、変更を保存する前に変更内容を説明するコメントを入力する必要があります。これにより、各変更の理由が記録され、フラグ設定を明確かつ整理された状態に保つことができます。
 
-The **History** page provides a comprehensive report of all modifications made to the flag. Each time a user changes the flag, they are required to provide a comment explaining the modification. The History page lists all these modifications, including the changes and corresponding descriptions. You can also see the user who made each modification, providing transparency and accountability.
+**履歴**ページは、フラグに対して行われたすべての変更の包括的なレポートを提供します。ユーザーがフラグを変更するたびに、変更内容を説明するコメントを入力する必要があります。履歴ページには、これらの変更がすべて、変更内容と対応する説明とともに一覧表示されます。また、各変更を行ったユーザーを確認できるため、透明性と説明責任を提供することができます。
