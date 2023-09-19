@@ -1,5 +1,5 @@
 ---
-title: Targeting with feature flags
+title: フィーチャーフラグによるターゲティング
 # sidebar_position:
 slug: /feature-flags/creating-feature-flags/targeting
 description: Explain the targeting process and presents how to configure the feature flag targeting. The page will describe the fields and show an example.
@@ -8,44 +8,52 @@ tags: ['create', 'guide', 'feature-flag']
 
 import CenteredImg from '@site/src/components/centered-img/CenteredImg';
 
-The targeting tab in Bucketeer allows you to define which users or targets will see each variation of a flag. This powerful functionality enables you to roll out features for specific purposes like internal testing, private betas, or usability tests before conducting a broader release. Let's explore some examples.
+Bucketeerのターゲティングタブでは、各バリエーションのフラグが表示されるユーザーまたはターゲットを定義できます。この強力な機能により、内部テスト、プライベートベータ、ユーザビリティテストなどの特定の目的のために、より広範なリリースの前に機能をロールアウトすることができます。いくつかの例を見てみましょう。
 
-:::info What targets are
+:::info ターゲットとは
 
-While the Targeting tab refers to _users_, it's important to note that a user can represent any identifier that uniquely corresponds to a target. You can target users of your application, email addresses, systems, services, machines, resources, or any other entities that can be uniquely identified.
+ターゲティングタブは_ユーザー_を指しますが、ユーザーはターゲットに一意に対応する識別子を表すことができることに注意することが重要です。アプリケーションのユーザー、メールアドレス、システム、サービス、マシン、リソース、または一意に識別できる他のエンティティをターゲットにすることができます。
 
 :::
 
-To access the targeting page on the Bucketeer dashboard, access the **Feature Flags** tab, choose the desired flag, and click on is name. You will be redirected to the **Targeting** page for that flag.
+Bucketeerダッシュボードのターゲティングページにアクセスするには、**フィーチャーフラグ**タブにアクセスし、目的のフラグを選択して名前をクリックします。そのフラグの**ターゲティング**ページにリダイレクトされます。
 
-## The targeting page
+## ターゲティングページ
 
-On the **Targeting** page, you'll find a range of options to customize and control the behavior of your flags:
+**ターゲティング**ページでは、フラグの動作をカスタマイズおよび制御するためのさまざまなオプションがあります：
 
-- **Switch Button**: Use the switch button to turn ON or OFF the targeting configuration for your feature flag. This allows you to activate or deactivate the targeting rules you have defined.
-- [**Prerequisites**](/feature-flags/creating-feature-flags/targeting#prerequisites): Configure prerequisites to set up conditions for your flags. With prerequisites, you can establish dependencies between flags.
-- [**Targeting**](/feature-flags/creating-feature-flags/targeting#targeting): Define targets for each variation of your flag. Examples of targets can be specific systems such as Android, iOS, and Web.
-- [**Rule rollout percentage**](/feature-flags/creating-feature-flags/targeting#rollout-percentage): Manage the deployment risk by gradually rolling out your feature to a percentage of contexts. Start with a small portion and increase it as you gain confidence in the stability and effectiveness of your feature. This helps mitigate any potential issues that may arise during the rollout.
-- **Default strategy**: Define the default variation for your flag. This variation is served when no specific targeting rule or prerequisite is met.
-- **Off variation**: Specify the variation that is returned when the flag OFF.
+- **スイッチボタン**: スイッチボタンを使用して、フィーチャーフラグのターゲティング構成を有効または無効にします。これにより、定義したターゲティングルールをアクティブ化または非アクティブ化できます。
 
-The below image presents an example of the **Targeting** page.
+- [**前提条件**](/feature-flags/creating-feature-flags/targeting#prerequisites): 前提条件の設定を行い、フラグの条件を指定します。前提条件を使用すると、フラグ間の依存関係を確立できます。
+
+- [**ターゲティング**](/feature-flags/creating-feature-flags/targeting#targeting): フラグの各バリエーションのターゲットを定義します。ターゲットの例としては、Android、iOS、Webなどの特定のシステムが挙げられます。
+
+- [**ルールロールアウトパーセンテージ**](/feature-flags/creating-feature-flags/targeting#rollout-percentage): 機能のロールアウトに伴うリスクを管理するには、機能を徐々に、コンテキストの割合に応じてロールアウトします。最初は小規模な範囲で開始し、機能の安定性と有効性への確信が高まるにつれて範囲を拡大します。これにより、ロールアウト中に発生する可能性のある潜在的な問題を軽減できます。
+
+- **デフォルト戦略**: フラグのデフォルトバリエーションを定義します。このバリエーションは、特定のターゲティングルールまたは前提条件が満たされない場合に提供されます。
+
+- **OFFバリエーション**: フラグがOFFの時に返されるバリエーションを指定します。
+
+以下の画像は、**ターゲティング**ページの例です。
 
 <CenteredImg
   imgURL="img/feature-flags/targeting/targeting-page.png"
   alt="targeting page panel"
 />
 
-## How targeting works
+## ターゲティングの仕組み
 
-On the targeting page, you can define a series of conditions which will define which flag variation the user will receive. Since several targeting option are provide, you need to undertand the evaluation order, otherwise, the targeting strategy may not reflect your objectives. To help you to have a better undertanding, the list below show the evaluation order with description related to the possible results.
+ターゲティングページでは、ユーザーがどのフラグバリエーションを受け取るかを定義する一連の条件を定義できます。ターゲティングオプションが複数提供されているため、エバリュエーションの順序を理解しておく必要があります。そうしなければ、ターゲティング戦略が目的を反映しない可能性があります。理解を深めるために、以下にエバリュエーションの順序と、考えられる結果に関連する説明を示します。
 
-1. **Switch Button**: If the swtch in on the OFF position, users receive the OFF variation and no further evaluation is required. Otherwise, the evaluation checks if prerequisites exists.
-2. [**Prerequisites**](/feature-flags/creating-feature-flags/targeting#prerequisites): Evaluate all existing prerequisite flags, if they exists. If all flags return the selected variation, satisfying all conditions, the evaluation goes to the next stage, defined by targeting or rollout percentage. If one of prerequisites fail, returning a different variation from the one specified, the user will receive the OFF variation and no further evaluation is required.
-3. [**Targeting**](/feature-flags/creating-feature-flags/targeting#targeting): After prerequisites are satisfied, the targets are evaluated. Each user or user group will receive the variation you defined. In case the user/user group is not listed on any variation, rollout rules are evaluated if at least one exists, otherwise the user receive the default strategy variation.
-4. [**Rule rollout percentage**](/feature-flags/creating-feature-flags/targeting#rollout-percentage): In case no rule is satisfied, the user receive the default strategy variation.
+1. **スイッチボタン**: スイッチが OFF の位置にある場合、ユーザーは OFF バリエーションを受け取り、それ以上のエバリュエーションは必要ありません。それ以外の場合は、エバリュエーションは前提条件が存在するかどうかをチェックします。
 
-The fluxogram below summirizes how targeting on Bucketeer works.
+2. [**前提条件**](/feature-flags/creating-feature-flags/targeting#prerequisites): 前提条件フラグがすべて存在する場合、それらを評価します。すべてのフラグが選択されたバリエーションを返し、すべての条件を満たしている場合、エバリュエーションはターゲティングまたはロールアウトパーセンテージによって定義された次のステージに進みます。いずれかの前提条件が失敗し、指定されたバリエーションとは異なるバリエーションを返した場合、ユーザーはOFFバリエーションを受け取り、それ以上のエバリュエーションは必要ありません。
+
+3. [**ターゲティング**](/feature-flags/creating-feature-flags/targeting#targeting): 前提条件が満たされた後、ターゲットが評価されます。各ユーザーまたはユーザーグループは、定義したバリエーションを受け取ります。ユーザー/ユーザーグループがどのバリエーションにもリストされていない場合は、ロールアウトルールが評価されます（少なくとも1つ存在する場合）。存在しない場合は、ユーザーはデフォルトの戦略バリエーションを受け取ります。
+
+4. [**ルールロールアウトパーセンテージ**](/feature-flags/creating-feature-flags/targeting#rollout-percentage): ルールが満たされない場合、ユーザーはデフォルトの戦略バリエーションを受け取ります。
+
+Bucketeerでのターゲティングの仕組みをまとめたフローチャートは以下の通りです。
 
 <CenteredImg
   imgURL="img/feature-flags/targeting/targeting-fluxogram-2.svg"
@@ -53,13 +61,13 @@ The fluxogram below summirizes how targeting on Bucketeer works.
   wSize="600px"
 />
 
-### Prerequisites
+### 前提条件
 
-When a prerequisite flag is added to targeting, the current flag is only evaluated if the prerequisite flag's returned value matches the configured value. This means that the target flag is only evaluated if the prerequisite conditions are satisfied.
+前提条件フラグがターゲティングに追加されると、現在のフラグは、前提条件フラグの返された値が設定された値と一致する場合にのみ評価されます。つまり、前提条件が満たされている場合にのみ、ターゲットフラグが評価されます。
 
-If multiple flags are set as prerequisites, they are evaluated using the logical operator AND. This ensures that all prerequisite conditions are met before evaluating the target flag. If the return value from one of the prerequisite flags is not the expected value, the OFF variation in the target flag is returned. The OFF variation serves as the fallback option when the prerequisite conditions are not fulfilled.
+複数のフラグが前提条件として設定されている場合、論理演算子ANDを使用して評価されます。これにより、ターゲットフラグを評価する前に、すべての前提条件が満たされていることを確認します。前提条件フラグのいずれかからの戻り値が期待どおりの値でない場合、ターゲットフラグのOFFバリエーションが返されます。OFFバリエーションは、前提条件が満たされていない場合のフォールバックオプションとして機能します。
 
-The image below presents an example using two flags as prerequisites. Therefore, the targeting or rollout percentage evaluation will only happen if the first flag returns the **true** variation and the second returns the **a** variation. Otherwise, the Bucketeer will provide the OFF variation.
+以下の画像は、2つのフラグを前提条件として使用した例です。したがって、ターゲットまたはロールアウトルールの評価は、最初のフラグが**true**のバリエーションを返し、2番目のフラグが**a**のバリエーションを返す場合にのみ行われます。それ以外の場合は、BucketeerはOFFバリエーションを提供します。
 
 <CenteredImg
   imgURL="img/feature-flags/targeting/prerequisites.png"
@@ -67,9 +75,9 @@ The image below presents an example using two flags as prerequisites. Therefore,
   wSize="500px"
 />
 
-### Targeting
+### ターゲティング
 
-The Bucketeer targeting section allows you to define which users or groups receive each feature flag variation. Taking a boolean flag as an example, you could provide the true variation for Android users and the false variation for ios users, as shown in the image below.
+Bucketeerのターゲティングセクションでは、各フィーチャーフラグバリエーションを受け取るユーザーまたはグループを定義できます。ブール型フラグを例に取ると、以下の画像のように、Androidユーザーにはtrueバリエーションを、iOSユーザーにはfalseバリエーションを提供できます。
 
 <CenteredImg
   imgURL="img/feature-flags/targeting/targeting-boolean-example.png"
@@ -77,9 +85,9 @@ The Bucketeer targeting section allows you to define which users or groups recei
   wSize="500px"
 />
 
-In the example image above, there are two available variations. However, you can add more variations when using flag types other than boolean. All variations you define will be accessible within the targeting section.
+上記の画像の例では、使用できるバリエーションが2つあります。ただし、ブール以外のフラグの種類を使用する場合は、より多くのバリエーションを追加できます。定義したすべてのバリエーションは、ターゲティングセクション内でアクセスできるようになります。
 
-Let's consider a real-world example related to a string flag with four variations: **value-1**, **value-2**, **value-3**, and **value-4**. In the example, each variation is associated with a specific platform. This means that Android users would receive the **value-1**, Web users would receive **value-2**, iOS users would receive **value-3**, and users on other platforms would receive the **value-4** variation. The configuration for this example is presented in the image below.
+4つのバリエーションのある文字列フラグに関する実際の例を考えてみましょう： **value-1**、**value-2**、**value-3**、**value-4**です。この例では、各バリエーションは特定のプラットフォームに関連付けられています。つまり、Androidユーザーは**value-1**を受け取り、Webユーザーは**value-2**を受け取り、iOSユーザーは**value-3**を受け取り、他のプラットフォームのユーザーは**value-4**バリエーションを受け取ります。この例の構成は以下の画像に示されています。
 
 <CenteredImg
   imgURL="img/feature-flags/targeting/targeting-string-example.png"
@@ -87,17 +95,17 @@ Let's consider a real-world example related to a string flag with four variation
   wSize="500px"
 />
 
-## Rollout percentage
+## ロールアウトパーセンテージ
 
-The rollout percentage enables you to define rules to evaluate users. When the rule is satisfied, the user will receive the variation you have defined, or you can use a percentage distribution to determine which variation to return. The rules can be based on one or multiple conditions using:
+ロールアウトパーセンテージを使用すると、ユーザーを評価するためのルールを定義できます。ルールが満たされると、ユーザーは定義したバリエーションを受け取る、またはパーセンテージ分布を使用してどのバリエーションを返すかを決定できます。ルールは、次の条件を使用して、1つまたは複数の条件に基づいて作成できます。
 
-- User attributes.
-- User segments.
-- Date.
+- ユーザー属性。
+- ユーザーセグメント。
+- 日付。
 
-### User attributes
+### ユーザー属性
 
-The user attributes used by rollout percentage rules refer to the end-user attributes. You can define these attributes when initializing the SDK on the client-side. If you are using dynamic attributes you will use the `updateUserAttributes` function. For further details on how to set up attributes, check the [SDK](/sdk) content. The code block below presents an example of end-user attributes configuration when initializing the SDK using Javascript.
+ロールアウトパーセンテージのルールで使用されるユーザー属性は、エンドユーザー属性を指します。これらの属性は、クライアント側でSDKを初期化するときに定義できます。動的属性を使用している場合は、`updateUserAttributes` 関数を使用します。属性の設定の詳細については、 [SDK](/sdk) コンテンツをご参照ください。以下のコードブロックは、JavaScriptを使用してSDKを初期化する際のエンドユーザー属性構成の例です。
 
 ```js showLineNumbers
 const attributes = {
@@ -116,11 +124,11 @@ const user = defineBKTUser({
 await initializeBKTClient(config, user);
 ```
 
-When the SDK makes a request to the server, the Bucketeer system will have access to all attributes above to perform the targeting evaluation.
+SDKがサーバーにリクエストを行う際、Bucketeerシステムは上記のすべての属性にアクセスして、ターゲティングエバリュエーションを実行します。
 
-To use rollout rules based on end-users' attributes, you will select the **Compare** option after clicking on **Add rule** button. Then, you can use any existing end-user attributes to compare and assign different variations.
+エンドユーザーの属性に基づいてロールアウトルールを使用するには、**ルールの追加**ボタンをクリックした後に**比較**オプションを選択します。その後、既存のエンドユーザー属性を使用して比較し、さまざまなバリエーションを割り当てることができます。
 
-Suppose you created users using the attributes listed above the code block. For users with `app_version = 1.0.0` and `language = english`, you want to provide the **value-1** variation. On the other hand, for users with `app_version = 2.0.0`, you want to provide all variations using a percentual distribution, where 10% will receive **value-1**, where 20% will receive **value-2**, where 30% will receive **value-3**, and where 40% will receive variation **value-4**. Such targeting rule could be defined on the Bucketeer dashboard as presented by the image below.
+上記のコードブロックに記載されている属性を使用してユーザーを作成したと仮定します。 app_version = 1.0.0`かつ`language = english`のユーザーには、**value-1**バリエーションを提供したいと考えています。一方、`app_version = 2.0.0`のユーザーには、パーセンテージ分布を使用してすべてのバリエーションを提供したいと考えています。この場合、10%は**value-1**、20%は**value-2**、30%は**value-3**、40%は**value-4**のバリエーションを受け取ることになります。このようなターゲティングルールは、Bucketeerダッシュボードで以下の画像のように定義することができます。
 
 <CenteredImg
   imgURL="img/feature-flags/targeting/rollout-user-atributes.png"
@@ -128,15 +136,16 @@ Suppose you created users using the attributes listed above the code block. For 
   wSize="500px"
 />
 
-:::info Rollout percentage
-When using rollout percentage based on percentual distribution, the sum should always be equal to 100%.
+:::info ロールアウトパーセンテージ
+パーセンテージ配分に基づくロールアウトパーセンテージを使用する場合、合計は常に100%になる必要があります。
 :::
 
-If the user did not satisfy any of these rules, he would receive the default variation.
+ユーザーがこれらのルールのいずれかを満たしていない場合、そのユーザーはデフォルトのバリエーションを受け取ることになります。
 
-### User segments
+### ユーザーセグメント
 
-The user segment refers to a specific group of users that you can define within the dashboard based on their unique `id`. Each user's `id` is established when you create the user using the defineBKTUser function. To associate users with segments, you can manually assign them within the dashboard or upload .txt or .csv files. These segments can be created based on various criteria, such as email type, gender, location, and more. You can precisely target and group users for testing by creating segments. The image below presents a rollout rule where the **value-1** variation is returned if the requiring user belongs to the **Testing users** segment.
+ユーザーセグメントは、ユーザーの一意の`id`に基づいてダッシュボード内で定義できる特定のユーザーグループを指します。各ユーザーの`id`は、defineBKTUser関数を使用してユーザーを作成するときに確立されます。ユーザーをセグメントに関連付けるには、ダッシュボード内で手動で割り当てるか、.txtまたは.csvファイルをアップロードすることができます。これらのセグメントは、メールの種類、性別、場所など、さまざまな基準に基づいて作成できます。セグメントを作成することで、テスト用にユーザーを正確にターゲットおよびグループ化できます。以下の画像は、要求するユーザーが**テストユーザー**セグメントに属している場合に**value-1**バリエーションが返されるロールアウトルールを示しています。
+
 
 <CenteredImg
   imgURL="img/feature-flags/targeting/rollout-rule-segment.png"
@@ -144,9 +153,9 @@ The user segment refers to a specific group of users that you can define within 
   wSize="500px"
 />
 
-### Date
+### 日付
 
-You also can define rollout rules based on dates. Along with selecting the specific date and the desired variation or variation distribution, you need to indicate whether you expect the intended behavior to occur before or after the provided date. The example below illustrates a rollout rule where users will receive the **value-2** variation if the SDK request is made prior to **2023-08-16 18:02**.
+日付に基づいてロールアウトルールを定義することも可能です。特定の日付と目的のバリエーションまたはバリエーション分布を選択するとともに、目的の動作が指定された日付の前か後に発生することを期待するかどうかを示す必要があります。以下の例は、SDKリクエストが**2023-08-16 18:02**より前に作成された場合、ユーザーに**value-2**バリエーションが提供されるロールアウトルールを示しています。
 
 <CenteredImg
   imgURL="img/feature-flags/targeting/rollout-rule-date.png"
@@ -154,6 +163,6 @@ You also can define rollout rules based on dates. Along with selecting the speci
   wSize="500px"
 />
 
-:::info Combine conditions
-Despite presenting examples using only one type of condition, you can combine user attributes, user segments, and date conditions on your system to improve the targeting of your rollout rules.
+:::info 条件の組み合わせ
+ここでは1種類の条件のみを使用した例を示していますが、ユーザー属性、ユーザーセグメント、およびシステム上の日付条件を組み合わせることで、ロールアウトルールのターゲティングを向上させることが可能になります。
 :::
