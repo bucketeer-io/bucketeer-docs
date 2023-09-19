@@ -1,81 +1,86 @@
 ---
 id: contributing
-title: Contributing
+title: 貢献
 slug: /contribution-guide/contributing
 ---
 
-# Contribution Guide
+# 貢献ガイド
 
-We would ❤️ for you to contribute to Bucketeer and help make it better! Anyone can use, improve, and enjoy it!<br />
-If you don't find your answer here, feel free to [contact us](https://app.slack.com/client/T08PSQ7BQ/C043026BME1).
+Bucketeerをより良いサービスにするために、是非ご協力をお願いします！どなたでも利用し、改善し、お楽しみいただけます！<br />
+ここでお探しの回答が見つからない場合は、お気軽に[お問い合わせ](https://app.slack.com/client/T08PSQ7BQ/C043026BME1)ください。
 
-## Contributor License Agreement
 
-Contributions to this project must be accompanied by a Contributor License Agreement (CLA) described at [bucketeer-io/bucketeer/master/CLA.md](https://github.com/bucketeer-io/bucketeer/blob/master/CLA.md).<br />
-You (or your employer) retain the copyright to your contribution; this gives us permission to use and redistribute your contributions as part of the project.
+## 貢献者ライセンス契約
 
-You generally only need to sign a CLA once, so if you've already signed one, you probably don't need to do it again.
+このプロジェクトへの貢献には、[bucketeer-io/bucketeer/master/CLA.md](https://github.com/bucketeer-io/bucketeer/blob/master/CLA.md)に記述されている貢献者ライセンス契約(CLA)が必要です。<br />
+あなた(またはその雇用主)があなたの貢献に対する著作権を保持するものとします。これは、プロジェクトの一部としてあなたの貢献を使用し、再配布する許可を私たちに与えるものです。
 
-If you haven't signed it yet, [bucketeer-bot](https://github.com/bucketeer-bot) will guide you through signing the CLA when you send the first pull request to [bucketeer-io/bucketeer](https://github.com/bucketeer-io/bucketeer) repository.
+通常、CLAへの署名は一度だけ必要ですので、既に署名している場合は、再度署名する必要はおそらくありません。
 
-## Creating an issue
+CLAへの署名がまだの場合は、[bucketeer-io/bucketeer](https://github.com/bucketeer-io/bucketeer)リポジトリに最初のプルリクエストを送る際に、[bucketeer-bot](https://github.com/bucketeer-bot)がCLAへの署名を案内します。
 
-Please create an issue in the [bucketeer-io/bucketeer](https://github.com/bucketeer-io/bucketeer/issues) repository if you find a problem.
+## 課題の作成
 
-## Creating a pull request
+課題を見つけた場合は、[bucketeer-io/bucketeer](https://github.com/bucketeer-io/bucketeer/issues) リポジトリで課題を作成してください。
 
-Fork the repository.
 
-To find good issues for your first pull request, you can use our [help wanted issues](https://github.com/bucketeer-io/bucketeer/issues?q=is%3Aissue+is%3Aopen+label%3A"help+wanted") or our [good first issues](https://github.com/bucketeer-io/bucketeer/issues?q=is%3Aissue+is%3Aopen+label%3A"good+first+issue") as a reference.
+## プルリクエストの作成中
+
+リポジトリをフォークしてください。
+
+最初のプルリクエストに最適な課題を見つけるには、[ヘルプが必要な課題](https://github.com/bucketeer-io/bucketeer/issues?q=is%3Aissue+is%3Aopen+label%3A"help+wanted")や[最初に最適な課題](https://github.com/bucketeer-io/bucketeer/issues?q=is%3Aissue+is%3Aopen+label%3A"good+first+issue")を参考にしてください。
+
 
 :::info
 
-Please do not force push to your PR branch after asking for a review. It will force us to review the whole PR again because we don't know what has changed.
+レビュー依頼後に PRブランチに強制的にプッシュするのはやめてください。何が変更されたかわからないため、PR全体を再度レビューすることを余儀なくされます。
 
 :::
 
-## Commit message format
+## コミットメッセージの形式
 
-We are following the [Conventional Commits 1.0.0](https://www.conventionalcommits.org/en/v1.0.0) message rules.<br />
-This format leads to easier-to-read commit history and enables us to generate changelogs and follow [semantic versioning](https://semver.org).
+私たちは[Conventional Commits 1.0.0](https://www.conventionalcommits.org/en/v1.0.0)のメッセージ規約に従っています。<br />
+この形式はコミット履歴を閲覧しやすくし、変更履歴の生成や[セマンティック・バージョニング](https://semver.org)に準拠することを可能にします。
+
 
 :::tip
 
-The commit message is used for our release changelog. Please write a message that is easier to understand from the user's point of view.
+コミットメッセージは私たちのリリースの変更履歴に使用されます。ユーザーの視点からわかりやすいメッセージを書くようお願いします。
 
 :::
 
-### Types
+### タイプ
 
-Must be one of the following:
+以下のいずれかに該当する必要があります：
 
-- **build:** Changes that affect the build system or external library dependencies
-- **chore:** Other changes that don't modify src or test files
-- **ci:** Changes to the CI configuration files and scripts
-- **docs:** Documentation only changes
-- **feat:** A new or a feature update
-- **fix:** A bug fix
-- **perf:** A code change that improves performance
-- **refactor:** A code change that neither fixes a bug nor adds a feature
-- **revert:** Reverts a previous commit
-- **test:** Adding missing or correcting existing tests
+- **build:** ビルドシステムまたは外部ライブラリの依存関係に影響を与える変更
+- **chore:** srcファイルまたはテストファイルを変更しないその他の変更
+- **ci:** CI設定ファイルおよびスクリプトの変更
+- **docs:** ドキュメントのみの変更
+- **feat:** 新しい機能または既存の機能の更新
+- **fix:** バグ修正
+- **perf:** パフォーマンス向上のためのコード変更
+- **refactor:** バグ修正でも機能追加でもないコード変更
+- **revert:** 直前のコミットの取り消し
+- **test:** 不足しているテストの追加または既存のテストの修正
+
 
 :::info
 
-For BREAKING CHANGES commits, you must append a `!` after the type, which introduces a breaking API change (correlating with MAJOR in Semantic Versioning).<br />
-E.g. `feat!: new API interface 2.0`
+破壊的変更コミットの場合、APIの破壊的変更(セマンティック・バージョニングのメジャーバージョンと関連)を導入するタイプの後に `!` を追加する必要があります。<br />
+例：`feat!: new API interface 2.0`
 
 :::
 
-### Subject
+### サブジェクト
 
-The subject contains the description of the change:
+サブジェクトには変更の説明が含まれます：
 
-- Use the imperative, present tense: "change" not "changed" nor "changes"
-- Don't capitalize the first letter
-- No dot (.) at the end
+- "changed"や "changes"ではなく命令形、現在形"change"を使用する
+- 最初の文字を大文字にしない
+- 最後にドット(.)を付けない
 
-### Example
+### 例
 
 ```
 feat: add webhook feature
@@ -86,6 +91,6 @@ feat: add webhook feature
 +-------> Type: build|chore|ci|docs|feat|fix|perf|refactor|revert|test
 ```
 
-## Code reviews
+## コードレビュー
 
-All submissions, including submissions by project members, require review. We use GitHub pull requests for this purpose. Consult [GitHub Help](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests) for more information on using pull requests.
+すべての提出、プロジェクトメンバーによる提出も含め、レビューが必要となります。この目的のためにGitHubのプルリクエストを使用しています。プルリクエストの使い方については、[GitHub Help](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests) をご参照ください。

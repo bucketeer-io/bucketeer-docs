@@ -64,7 +64,7 @@
     "description": "The label for the doc item Optimize with tags in sidebar docs, linking to the doc best-practices/optimize-bucketeer-with-tags"
   },
   "sidebar.docs.doc.Contributing": {
-    "message": "Contributing",
+    "message": "貢献",
     "description": "The label for the doc item Contributing in sidebar docs, linking to the doc contribution-guide/contributing"
   }
 }
