@@ -1,5 +1,5 @@
 ---
-title: Create a feature flag
+title: フィーチャーフラグの作成
 # sidebar_position: 
 slug: /feature-flags/creating-feature-flags/create-feature-flag
 description: Presents how to create a feature flag. The page will show the feature flag tab and cover the fields required to create a feature flag.
@@ -8,13 +8,13 @@ tags: ['create','guide','feature-flag']
 
 import CenteredImg from '@site/src/components/centered-img/CenteredImg';
 
-The first step to creating feature flags on Bucketeer is to access the dashboard. If your team runs your Bucketeer systems, ask your Admin to provide the dashboard URL. After accessing the dashboard, navigate to the **Feature Flags** tab, where you will find all existing flags in the current environment. Creating a new flag adds it to the list.
+Bucketeerでフィーチャーフラグを作成する最初のステップは、ダッシュボードにアクセスすることです。チームがBucketeerシステムを運用している場合は、管理者にダッシュボードURLを提供してもらうよう依頼してください。ダッシュボードにアクセスしたら、**フィーチャーフラグ**タブに移動します。ここには、現在の環境にあるすべての既存フラグが表示されます。新しいフラグを作成すると、リストに追加されます。
 
-If you're looking for a specific flag, you can search it using its name, description, or ID. On the other hand, if you want to create a new flag, click the **+ Add**.
+特定のフラグを探している場合は、名前、説明、またはIDを使用して検索できます。一方、新しいフラグを作成したい場合は、**+ 追加**をクリックします。
 
-## Create a feature flag
+## フィーチャーフラグの作成
 
-To create the flag, you need to fulfill the fields on the creation panel, which appear after clicking the **+ Add**. The image below presents an example of the creation panel. The first three fields, **ID**, **Name**, and **Description**, are used for identification purposes. All have a length limit of 100 characters. While **Name** and **Description** are used only to identify and help find the flag after its creation, the **ID** is also used to determine the flag when integrating it into your application. In the [SDKs](/sdk) section, the **ID** is also referenced as `FLAG_ID`.
+フラグを作成するには、**+ 追加**をクリックすると表示される作成パネルの項目に入力する必要があります。以下の画像は、作成パネルの例です。最初の3つの項目、**ID**、**名前**、および**説明**は識別のために使用されます。すべて100文字の文字制限があります。**名前**と**説明**は、フラグの作成後にフラグを識別して見つけるためだけに使用されますが、**ID**はアプリケーションに統合する際にフラグを決定するためにも使用されます。[SDK](/sdk)セクションでは、**ID**は `FLAG_ID`としても参照されます。
 
 <CenteredImg
   imgURL="img/getting-started/quickstart/create-feature-flag.png"
@@ -23,17 +23,18 @@ To create the flag, you need to fulfill the fields on the creation panel, which 
   borderWidth="1px"
 />
 
-You also need to define the **Tags** related to the new flag. You can specify any number of tags. However, you need to provide at least one value. Tags have two functions on Buketeer. First, then help while searching flags on the dashboard. Second, they help filter the information the server returns after a request from an SDK. Therefore, providing more specific tags helps reduce the amount of information transferred from the server to your application, reducing response time and the amount of data transferred. For additional information regarding the optimization of Bucketeer based on the use of tags, access the [Optimize Bucketeer with tags](/best-practices/optimize-with-tags) guide. It's important to notice that during the integration and in the [SDKs](/sdk) section, tags are also referenced as `featureTag`.
+また、新しいフラグに関連する**タグ**を定義する必要があります。任意の数のタグを指定することができます。ただし、少なくとも1つの値を指定する必要があります。タグにはBucketeerで2つの機能があります。1つ目は、ダッシュボードでフラグを検索する際に役立ちます。2つ目は、SDKからのリクエスト後にサーバーが返す情報をフィルタリングするのに役立ちます。つまり、より具体的なタグを提供することで、サーバーからアプリケーションに転送される情報量を削減し、応答時間と転送されるデータ量を削減できます。タグの使用に基づいたBucketeerの最適化に関する詳細情報については、[タグによるBucketeerの最適化](/best-practices/optimize-with-tags) ガイドをご参照ください。インテグレーション中および[SDK](/sdk)セクションでは、タグは`featureTag`としても参照されることに注意することが重要です。
 
-Once you have defined the **Tags** for your flag, the next step is to select the **Flag type**. Refer to the [Feature flags types](/feature-flags/creating-feature-flags/create-feature-flag#feature-flags-types) to understand the differences among the four available types. If you choose the boolean type, only two variations will be available, `true`and `false`, with their respective predefined values. On the other hand, if you select a different type, you can add more variations by clicking **Add variation** button. Additionally, you need to provide the corresponding value for each variation. While the name and description for variations are optional, we highly recommend using them as they facilitate understanding and future review of your results.
+フラグの**タグ**を定義したら、次のステップは**フラグの種類**を選択することです。利用可能な4つの種類の違いを理解するには、[フィーチャーフラグの種類](/feature-flags/creating-feature-flags/create-feature-flag#feature-flags-types)をご参照ください。ブール型を選択すると、`true`と`false`の2つのバリエーションのみが利用可能になり、それぞれの事前定義された値が割り当てられます。一方、別のタイプを選択すると、**バリエーションの追加**ボタンをクリックしてバリエーションを追加できます。さらに、各バリエーションに対応する値を指定する必要があります。バリエーションの名前と説明は任意ですが、結果を容易に理解し、将来的に見直すことができるため、使用することを強くお勧めします。
 
-Select the default variations for the **ON** and **OFF** states to finalize the flag creation process. This is especially important to ensure which variation will be returned by the flag if no targeting is defined. Once you have defined the **ON** and **OFF** variations, click **Submit** to create the flag.
+フラグの作成プロセスを完了するには、**ON**と**OFF**の状態のデフォルトのバリエーションを選択します。これは、ターゲティングが定義されていない場合に、フラグによってどのバリエーションが返されるかを確保するために特に重要です。**ON**と**OFF**のバリエーションを定義したら、送信をクリックしてフラグを作成します。
 
-After creating the new flag, you will be redirected to the Targeting page. For further information regarding flag targeting, refer to the [Targeting with feature flags](/feature-flags/creating-feature-flags/targeting) page.
+新しいフラグの作成後、ターゲティングページにリダイレクトされます。フラグのターゲティングの詳細については、[フィーチャーフラグを使用したターゲティング](/feature-flags/creating-feature-flags/targeting)ページをご参照ください。
 
-## Manage feature flags
 
-Once you have created a flag, it will automatically appear on the **Feature Flags** page with its initial state set to **OFF**. Consequently, if an SDK request is made for this flag, the Bucketeer system will return the variation associated with the **OFF** state. To change the state, use the switch button. In addition to the state, you will also find the flag **ID** and related tags displayed on the flag card. Taking the flag card example below, its **ID** is **feature-javascript-e2e-boolean**, associated with the **javascript** and **web** tags.
+## フィーチャーフラグの管理
+
+フラグを作成すると、自動的に**フィーチャーフラグ**ページに表示され、初期状態は**OFF**に設定されます。したがって、このフラグに対してSDKリクエストが行われた場合、Bucketeerシステムは**OFF**状態に関連付けられているバリエーションを返します。状態を変更するには、スイッチボタンを使用します。状態に加えて、フラグカードにはフラグ**ID**と関連タグも表示されます。以下のフラグカードの例では、**ID**は**feature-javascript-e2e-boolean**であり、**javascript**と**web**のタグに関連付けられています。
 
 <CenteredImg
   imgURL="img/getting-started/quickstart/created-feature-flag.png"
@@ -41,19 +42,22 @@ Once you have created a flag, it will automatically appear on the **Feature Flag
   borderWidth="1px"
 />
 
-You can duplicate and archive flags as well. To perform these actions, click the three-dot button on the desired flag.
+フラグの複製およびアーカイブすることも可能です。これらの操作を実行するには、目的のフラグの三つの点のボタンをクリックします。
 
 :::tip
 
-When a flag is archived, any SDK requests related to that flag will return the default value, typically the value associated with the **OFF** state. To ensure proper functionality, we recommend removing flag evaluations from your code when archiving the flag in the Bucketeer system.
+フラグがアーカイブされると、そのフラグに関連するすべてのSDKリクエストはデフォルト値を返します。通常、デフォルト値は**OFF**状態に関連付けられた値です。適切な機能を確保するために、Bucketeerシステムでフラグをアーカイブする際に、コードからフラグのエバリュエーションを削除することをお勧めします。
 
 :::
 
-## Feature flags types
+## フィーチャーフラグの種類
 
-The Bucketeer system provides four types of flags: boolean, string, number, and JSON. Each type serves a specific purpose to accommodate different scenarios when implementing flags. Here's an overview of when and why you should use each type:
+Bucketeerシステムは、ブール型、文字列型、数値型、JSON型の4種類のフラグを提供しています。各種類は、フラグを実装する際にさまざまなシナリオに対応するために、特定の目的を果たします。以下は、各種類を使用するタイミングと理由についての概要です。
 
-- **Boolean flags** are ideal for simple on/off scenarios. They allow you to enable or disable a feature based on a binary state. Use a boolean flag to control the visibility of a beta feature in your application, such as a button, toggling it on or off for specific users or groups.
-- **String flags** are suitable when defining multiple variations or states for a feature. They provide flexibility in categorizing and managing feature variations. You could use a string flag to define your application's visual themes or layouts. Thus you can find the best performing style, for example.
-- **Number flags** are helpful when assigning numeric values to feature variations, enabling more granular control over feature behavior. They can be used to adjust the speed or intensity of an animation or to define different levels of access or permissions within a feature.
-- **JSON flags** offer the most flexibility and complexity, allowing you to define custom configurations and structures for your feature variations using JSON objects. You might employ a JSON flag to dynamically change the layout and content of a specific section in your application based on complex business, defining more than one modification related to the same flag variation.
+- **ブール型フラグ**は、シンプルなON/OFFのシナリオに最適です。バイナリ状態に基づいて機能を有効化または無効化できます。ブール型フラグを使用して、アプリケーションのボタンなどのベータ版機能の表示を制御し、特定のユーザーやグループに対してONまたはOFFを切り替えることができます。
+
+- **文字列型フラグ**は、機能に複数のバリエーションまたは状態を定義する場合に適しています。機能のバリエーションを分類および管理するための柔軟性を提供します。例えば、アプリケーションのビジュアルテーマやレイアウトを定義するために文字列型フラグを使用できます。これにより、例としてパフォーマンスが最も優れたスタイルを見つけることができます。
+
+- **数値型フラグ** 機能のバリエーションに数値を割り当てる場合に役立ち、機能の動作をより細かく制御できます。アニメーションの速度や強度を調整したり、機能内のアクセスレベルや権限の異なるレベルを定義したりするために使用できます。
+
+- **JSONフラグ** は最も柔軟性が高く、複雑であり、JSONオブジェクトを使用して機能バリエーションのカスタム構成と構造を定義できます。複雑なビジネスに基づいて特定のセクションのレイアウトおよびコンテンツを動的に変更するためにJSONフラグを使用することや、同じフラグバリエーションに関連する複数の変更を定義したりすることができます。

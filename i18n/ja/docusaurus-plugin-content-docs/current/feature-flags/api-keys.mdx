@@ -1,5 +1,5 @@
 ---
-title: API keys
+title: API キー
 # sidebar_position:
 slug: /feature-flags/api-keys
 description: Describes what API keys are, what they are used for, and how to create them.
@@ -8,19 +8,26 @@ tags: ['integration', 'feature-flag']
 
 import CenteredImg from '@site/src/components/centered-img/CenteredImg';
 
-On this page your find information about what are API Keys, how to create them and their role on Bucketeer system.
+このページでは、APIキーとは何か、APIキーの作成方法、BucketeerシステムにおけるAPIキーの役割について説明しています。
 
-## What are API Keys
+## APIキーとは
 
-When working with flags in Bucketeer, API keys are essential. They authorize and control access to the feature flag management system, providing authentication capabilities that ensure secure connections between your application and the Bucketeer management service. Each API key is associated with a specific project and environment, allowing you to identify and link your application to the desired user group. By requiring a valid API key for accessing the flag information, the security and integrity of the system is maintained, reducing the risk of unauthorized entry or manipulation with feature flag configurations.
+Bucketeerでフラグを使用する場合、APIキーは必要不可欠です。APIキーは、フィーチャーフラグ管理システムへのアクセスを認証および制御し、
+アプリケーションとBucketeer管理サービス間のセキュアな接続を保証する認証機能を提供します。各APIキーは特定のプロジェクトと環境に関連
+付けられているため、アプリケーションを目的のユーザーグループに識別および関連付けることができます。フラグ情報にアクセスするには有効な
+APIキーが必要であるため、システムのセキュリティと整合性が維持され、不正なアクセスやフィーチャーフラグ設定の操作のリスクが軽減されます。
 
-When setting up the SDK on your application, you must include a valid API key. This key is necessary for the server to recognize that the request is valid when the SDK performs a server request. If you provide an invalid API key during configuration, the server will deny the request. For more information on configuring the SDK, refer to the [SDK's documentation](../sdk).
+アプリケーションでSDKを設定するには、有効なAPIキーを含める必要があります。このキーは、SDKがサーバーリクエストを実行する際に、サーバ
+ーがリクエストが有効であることを認識するために必要です。設定中に無効なAPIキーを提供すると、サーバーはリクエストを拒否します。SDKの構
+成の詳細については、[SDKのドキュメンテーション](../sdk)をご参照ください。
 
-## Creating an API Key
+## APIキーの作成
 
-To create an API Key, you need to be an Admin or have an environment account with the Owner role. Other members can see the APY keys but can't manage them.
+APIキーを作成するには、管理者であるか、オーナーの役割を持つ環境アカウントが必要です。他のメンバーはAPIキーを表示できますが、管理することはできません。
 
-To generate a new API key in the Bucketeer dashboard, navigate to the **API Keys** tab. This section will present a list of all currently available API keys. If you wish to create a new one, click the **+ Add** button. A side panel will appear on the right side of your screen. Enter a name for the new key, limited to one hundred characters, and finalize the process by clicking **Submit**. The new key will show up at the top of the **API Keys** list.
+Bucketeer ダッシュボード上で新しい API キーを生成するには、**APIキー**タブに移動します。このセクションには、現在使用可能なすべての
+ API キーのリストが表示されます。新しい API キーを作成するには、**+ 追加**ボタンをクリックします。画面の右側にサイドパネルが表示さ
+ れます。新しいキーの名前を入力し（最大100文字）、その後、**送信**をクリックします。新しいキーは、**APIキー**リストの一番上に表示されます。
 
 <CenteredImg
   imgURL="img/feature-flags/api-keys/create-api-key.png"
@@ -28,8 +35,13 @@ To generate a new API key in the Bucketeer dashboard, navigate to the **API Keys
   wSize="100%"
 />
 
-The Bucketeer team advises giving each API key a meaningful name based on its associated feature or project to make it easy to manage. Avoid using randomly generated names as they can cause confusion and make it difficult to identify where the API key is being used.
+Bucketeer チームは、各API キーに関連付けられた機能またはプロジェクトに基づいて分かりやすい名前を付けることを推奨しています。
+これにより、管理が容易になります。ランダムに生成された名前を使用すると混乱を招き、API キーがどこで使用されているのかを識別す
+ることが難しくなるため避けてください。
 
-## Manage your API Keys
+## APIキーの管理
 
-Once an API key is created, it becomes immediately available for use and is set to the **ON** state. In addition, it grants access to all feature flags within the current environment. The Bucketeer dashboard does not offer a direct option to delete API keys. However, if a key is no longer required, you can toggle its state to **OFF** using the available switch button in the **API Keys** tab. This action will result in denying all SDK requests using that specific key.
+API キーが作成されると、すぐに使用可能になり、**ON **状態に設定されます。また、現在の環境内のすべてのフィーチャーフラグへのア
+クセスが許可されます。Bucketeer ダッシュボードには、API キーを削除するための直接的なオプションはありません。ただし、APIキーが
+不要になった場合は、**APIキー**タブにあるスイッチボタンを使用して状態を**OFF**に切り替えることができます。このアクションにより、
+その特定のキーを使用したすべての SDK リクエストが拒否されます。
