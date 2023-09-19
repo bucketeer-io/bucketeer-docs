@@ -1,26 +1,27 @@
 ---
-title: Android reference
+title: Androidリファレンス
 slug: /sdk/client-side/android
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-This category contains topics explaining how to configure Bucketeer's Android SDK.
+このカテゴリには、BucketeerのAndroid SDKの設定方法に関する内容が含まれています。
 
-:::info Compatibility
+:::info 互換性
 
-The Bucketeer SDK is compatible with Android SDK versions 21 and higher (Android 5.0, Lollipop).
+Bucketeer SDKは、Androidバージョン21以降に対応しています(Android 5.0, Lollipop)。
 
 :::
 
-## Getting started
+## はじめに
 
-Before starting, ensure that you follow the [Getting Started](/getting-started) guide.
+始める前に、必ず[はじめに](/getting-started)ガイドに従ってください。
 
-### Implementing dependency
 
-Implement the dependency in your Gradle file. Please refer to the [SDK releases page](https://github.com/bucketeer-io/android-client-sdk/releases) to find the latest version.
+### 依存関係の実装
+
+依存関係をGradleファイルに実装します。最新バージョンについては、[SDKリリースページ](https://github.com/bucketeer-io/android-client-sdk/releases)をご参照ください。
 
 <Tabs>
 <TabItem value="gradle" label="Gradle">
@@ -34,9 +35,9 @@ dependencies {
 </TabItem>
 </Tabs>
 
-### Importing client
+### クライアントのインポート
 
-Import the Bucketeer client into your application code.
+Bucketeerクライアントをアプリケーションコードにインポートします。
 
 <Tabs>
 <TabItem value="kt" label="Kotlin">
@@ -48,17 +49,17 @@ import io.bucketeer.sdk.android.*
 </TabItem>
 </Tabs>
 
-### Configuring client
+### クライアント構成
 
-Configure the SDK config and user configuration.
+SDK 設定とユーザー設定を構成します。
 
 :::note
 
-The **featureTag** setting is the tag that you configure when creating a Feature Flag.
+**フィーチャータグ**設定は、フィーチャーフラグを作成する際に構成するタグです。
 
 :::
 
-All the settings in the example below are required.
+以下の例の設定はすべて必須となっています。
 
 <Tabs>
 <TabItem value="kt" label="Kotlin">
@@ -78,26 +79,26 @@ val user = BKTUser.builder()
 </TabItem>
 </Tabs>
 
-:::info Custom configuration
+:::info カスタム構成
 
-Depending on your use, you may want to change the optional configurations available in the **BKTConfig.Builder**.
+使用目的に応じて、**BKTConfig.Builder**で使用できるオプション構成を変更することができます。
 
-- **pollingInterval** (Minimum 60 seconds. Default is 10 minutes)
-- **backgroundPollingInterval** (Minimum 20 minutes. Default is 1 hour)
-- **eventsFlushInterval** (Minimum 60 seconds. Default is 60 seconds)
-- **eventsMaxQueueSize** (Default is 50 events)
+- **pollingInterval** (最低60秒。デフォルトは10分)
+- **backgroundPollingInterval** (最低20分。デフォルトは1時間)
+- **eventsFlushInterval** (最低60秒。デフォルトは60秒)
+- **eventsMaxQueueSize** (デフォルトは50イベント)
 
 :::
 
 :::note
 
-The Bucketeer SDK doesn't save the user data. The Application must save and set it when initializing the client SDK.
+Bucketeer SDKはユーザーデータを保存しません。アプリケーションは、クライアントSDKを初期化する際にユーザーデータを保存して設定する必要があります。
 
 :::
 
-### Initializing client
+### クライアントの初期化
 
-Initialize the client by passing the configurations in the previous step.
+前のステップで構成を渡してクライアントを初期化します。
 
 <Tabs>
 <TabItem value="kt" label="Kotlin">
@@ -112,13 +113,13 @@ val client = BKTClient.getInstance()
 
 :::note
 
-The initialize process starts polling right away the latest evaluations from Bucketeer in the background using the interval `pollingInterval` configuration while the application is in the **foreground state**. When the application changes to the **background state**, it will use the `backgroundPollingInterval` configuration.
+初期化処理は、アプリケーションが**フォアグラウンド状態**にある間、`pollingInterval`設定のインターバルを使用して、バックグラウンドでBucketeerから最新のエバリュエーションをすぐにポーリングし始めます。アプリケーションが**バックグラウンド状態**に変わると、`backgroundPollingInterval`設定を使用します。
 
 :::
 
-If you want to use the feature flag on Splash or Main views, and the user opens your application for the first time, it may not have enough time to fetch the variations from the Bucketeer server.
+スプラッシュやメイン画面でフィーチャーフラグを使用したい場合、ユーザーが初めてアプリを開くと、Bucketeerサーバーからバリエーションを取得するのに十分な時間が取れない場合があります。
 
-For this case, we recommend using the `Future<BKTException?>` returned from the initialize method.
+このケースでは、initializeメソッドから返される`Future<BKTException?>`を使用することをお勧めします。
 
 <Tabs>
 <TabItem value="kt" label="Kotlin">
@@ -152,12 +153,13 @@ viewLifecycleOwner.lifecycleScope.launch {
 </TabItem>
 </Tabs>
 
-## Supported features
+## サポートされている機能
 
-### Evaluating user
+### ユーザーエバリュエーション
 
-The variation method determines whether or not a feature flag is enabled for a specific user.<br />
-To check which variation a specific user will receive, you can use the client like below.
+バリエーションメソッドは、フィーチャーフラグが特定のユーザーに対して有効であるかどうかを決定します。<br />
+特定のユーザーがどのバリエーションを受け取るかを確認するには、以下のようなクライアントを使用します。
+
 
 <Tabs>
 <TabItem value="kt" label="Kotlin">
@@ -173,16 +175,16 @@ if (showNewFeature) {
 
 :::note
 
-The variation method will return the default value if the feature flag is missing in the SDK.
+SDKにフィーチャーフラグがない場合、バリエーションメソッドはデフォルト値を返します。
 
 :::
 
 </TabItem>
 </Tabs>
 
-### Variation types
+### 変更種別
 
-The Bucketeer SDK supports the following variation types.
+Bucketeer SDKは、以下の変更種別をサポートしています。
 
 <Tabs>
 <TabItem value="kt" label="Kotlin">
@@ -202,13 +204,13 @@ fun jsonVariation(featureId: String, defaultValue: JSONObject): JSONObject
 </TabItem>
 </Tabs>
 
-### Updating user evaluations
+### ユーザーエバリュエーションの更新
 
-Depending on the use case, you may need to ensure the evaluations in the SDK are up to date before requesting the variation.
+ユースケースによっては、バリエーションをリクエストする前に、SDK内のエバリュエーションが最新であることを確認する必要がある場合があります。
 
-The fetch method uses the following parameter and returns a `Future<BKTExeptIon?>`.
+fetchメソッドは次のパラメータを使用し`Future<BKTExeptIon?>`を返します。
 
-- **Timeout** (Default is 30 seconds)
+- **タイムアウト** (デフォルトは30秒)
 
 <Tabs>
 <TabItem value="kt" label="Kotlin">
@@ -236,25 +238,26 @@ if (error == null) {
 
 :::caution
 
-Depending on the client network, it could take a few seconds until the SDK fetches the data from the server, so use this carefully.
+クライアントのネットワークによっては、SDKがサーバーからデータをフェッチするまでに数秒かかる場合がありますので、注意してください。
 
-You don't need to call this method manually in regular use because the SDK is polling the latest variations in the background.
+SDKはバックグラウンドで最新のバリエーションをポーリングしているので、通常の使用ではこのメソッドを手動で呼び出す必要はありません。
 
 :::
 
-### Updating user evaluations in real-time
+### ユーザーエバリュエーションのリアルタイム更新
 
-The Bucketeer SDK supports FCM ([Firebase Cloud Messaging](https://firebase.google.com/docs/cloud-messaging)).<br />
-Every time you change a feature flag on the admin console, Bucketeer will send notifications using the FCM API to notify the client so that you can update the evaluations in real-time.
+Bucketeer SDKはFCM ([Firebase Cloud Messaging](https://firebase.google.com/docs/cloud-messaging))をサポートしています。<br />
+管理コンソールでフィーチャーフラグを変更するたびに、BucketeerはFCM APIを使用してクライアントに通知を送信し、エバリュエーションをリアルタイムで更新可能にします。
+
 
 :::note
 
-1. You need to register your FCM API Key on the admin console. Check the [Pushes](/integration/pushes) section to learn how to do it.
-2. This feature may not work if the user has the notification disabled.
+1. 管理コンソールでFCM APIキーを登録する必要があります。登録方法は、[プッシュ](/integration/pushes)セクションをご参照ください。
+2. ユーザーが通知を無効にしている場合、この機能は動作しない場合があります。
 
 :::
 
-Assuming you already have the FCM implementation in your application.
+アプリケーションにFCM実装が既にあると仮定します。
 
 <Tabs>
 <TabItem value="kt" label="Kotlin">
@@ -287,11 +290,11 @@ override fun onMessageReceived(remoteMessage: RemoteMessage?) {
 </TabItem>
 </Tabs>
 
-### Reporting custom events
+### カスタムイベントの報告
 
-This method lets you save user actions in your application as events. You can connect these events to metrics in the experiments console UI.
+このメソッドを使用すると、アプリケーション内のユーザー操作をイベントとして保存できます。これらのイベントは、エクスペリメントコンソールUIの指標に接続できます。
 
-In addition, you can pass a double value to the goal event. These values will sum and show as <br />`Value total` on the experiments console UI. This is useful if you have a goal event for tracking how much a user spent on your application buying items, etc.
+さらに、ゴールイベントにダブル値を渡すことができます。これらの値は合計され、エクスペリメントコンソールUIの<br />`Value total`として表示されます。これは、ユーザーがアプリケーションでアイテムを購入した金額などを追跡するためのゴールイベントがある場合に役立ちます。
 
 <Tabs>
 <TabItem value="kt" label="Kotlin">
@@ -303,9 +306,9 @@ client.track("YOUR_GOAL_ID", 10.50)
 </TabItem>
 </Tabs>
 
-### Flushing events
+### イベントのフラッシュ
 
-This method will send all pending analytics events to the Bucketeer server as soon as possible. This process is asynchronous, but the method returns `Future<BKTExeptIon?>` if you want to wait for its completion before doing something else.
+このメソッドは、保留中のすべての分析イベントを可能な限り早くBucketeerサーバーに送信します。このプロセスは非同期ですが、何か他のことをする前に完了を待つ必要がある場合は、メソッドは`Future<BKTExeptIon?>`を返します。
 
 <Tabs>
 <TabItem value="kt" label="Kotlin">
@@ -319,13 +322,13 @@ val future = client.flush()
 
 :::note
 
-In regular use, you don't need to call the flush method because the events are sent every 30 seconds in the background.
+通常の使用では、イベントはバックグラウンドで30秒ごとに送信されるため、flushメソッド呼び出す必要はありません。
 
 :::
 
-### User attributes configuration
+### ユーザー属性の設定
 
-This feature will give you robust and granular control over what users can see on your application. You can add rules using these attributes on the console UI's feature flag's targeting tab. [See more](#).
+この機能を使用すると、ユーザーがアプリケーションで表示できるコンテンツを堅牢かつ詳細に制御できます。これらの属性を使用して、コンソールUIのフィーチャーフラグのターゲティングタブでルールを追加できます。[詳細を見る](#)
 
 <Tabs>
 <TabItem value="kt" label="Kotlin">
@@ -351,9 +354,9 @@ val client = BKTClient.getInstance()
 </TabItem>
 </Tabs>
 
-### Updating user attributes
+### ユーザー属性の更新
 
-This method will update all the current user attributes. This is useful in case the user attributes update dynamically on the application after initializing the SDK.
+このメソッドは、現在のユーザー属性をすべて更新します。これは、SDKの初期化後にアプリケーションでユーザー属性が動的に更新される場合に役立ちます。
 
 <Tabs>
 <TabItem value="kt" label="Kotlin">
@@ -376,13 +379,14 @@ client.updateUserAttributes(attributes)
 
 :::caution
 
-This updating method will override the current data.
+この更新メソッドは、現在のデータを上書きします。
 
 :::
 
-### Getting user information
+### ユーザー情報の取得
 
-This method will return the current user configured in the SDK. This is useful when you want to check the current user id and attributes before updating them through [updateUserAttributes](#updating-user-attributes).
+
+このメソッドは、SDKで設定されている現在のユーザーを返します。これは、[updateUserAttributes](#updating-user-attributes)を使用して現在のユーザーIDと属性を更新する前に確認したい場合に役立ちます。
 
 <Tabs>
 <TabItem value="kt" label="Kotlin">
@@ -394,10 +398,11 @@ val user = client.currentUser()
 </TabItem>
 </Tabs>
 
-### Getting evaluation details
+### エバリュエーションの詳細を取得
 
-This method will return the evaluation details for a specific feature flag. It is useful if you need to know the variation reason or send this data elsewhere.
-It will return null if the feature flag is missing in the SDK.
+このメソッドは、特定のフィーチャーフラグのエバリュエーションの詳細を返します。これは、バリエーションの理由を知ったり、このデータを他の場所に送信する必要がある場合に役立ちます。
+SDKにフィーチャーフラグがない場合はnullを返します。
+
 
 <Tabs>
 <TabItem value="kt" label="Kotlin">
@@ -408,7 +413,7 @@ val evaluationDetails = client.evaluationDetails("YOUR_FEATURE_FLAG_ID")
 
 :::caution
 
-Do not call this method without calling the [Evaluating user method](#evaluating-user). The Evaluating user method must always be called because it generates analytics events that will be sent to the server.
+[ユーザーエバリュエーションメソッド](#evaluating-user)を呼び出さずにこのメソッドを呼び出さないでください。ユーザーエバリュエーションメソッドは、サーバーに送信される分析イベントを生成するため常に呼び出す必要があります。
 
 :::
 
@@ -416,10 +421,11 @@ Do not call this method without calling the [Evaluating user method](#evaluating
 </Tabs>
 
 
-### Listening to evaluation updates
+### エバリュエーション更新のリスニング
 
-BKTClient can notify when the evaluation is updated.  
-The listener can detect both automatic polling and manual fetching.
+BKTClientは、エバリュエーションが更新された際に通知することができます。
+リスナーは、自動ポーリングと手動フェッチングの両方を検出できます。
+
 
 <Tabs>
 <TabItem value="kt" label="Kotlin">

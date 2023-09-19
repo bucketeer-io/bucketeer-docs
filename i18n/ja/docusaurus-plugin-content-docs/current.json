@@ -16,11 +16,11 @@
     "description": "The label for category Testing With Flags in sidebar docs"
   },
   "sidebar.docs.category.Client": {
-    "message": "Client",
+    "message": "クライアント",
     "description": "The label for category Client in sidebar docs"
   },
   "sidebar.docs.category.Server": {
-    "message": "Server",
+    "message": "サーバー",
     "description": "The label for category Server in sidebar docs"
   },
   "sidebar.docs.category.Documentation Style": {
