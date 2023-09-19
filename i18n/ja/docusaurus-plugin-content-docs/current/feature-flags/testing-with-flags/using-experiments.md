@@ -1,5 +1,5 @@
 ---
-title: Experiment results
+title: エクスペリメントの結果
 # sidebar_position: 
 slug: /feature-flags/testing-with-flags/experiment-results
 description: Describes the experiments tab on the feature flag and how to link feature flags to experiments.
@@ -8,13 +8,13 @@ tags: ['experiments', 'feature-flag', 'test']
 
 import CenteredImg from '@site/src/components/centered-img/CenteredImg';
 
-After you create an experiment, it automatically becomes available on the dashboard **Experiments** tab. Experiments may present one of the following states:
+エクスペリメントを作成すると、自動的にダッシュボードの**エクスペリメント**タブに表示されます。エクスペリメントには、以下のいずれかの状態が示されます：
 
-- **Waiting**: The defined start date still needs to be reached. The experiment result will not present any results.
-- **Running**: The experiment is acquiring data regarding user behavior according to the listed goals. You already have data on the experiment result page. 
-- **Finished**: The experiment has reached its end date and has been successfully completed. You can find the final results on the result page.
+- **待機中**: 定義された開始日に達していない状態を指します。エクスペリメント結果は表示されません。
+- **実行中**: エクスペリメントは、リストに記載されたゴールに従ってユーザーの行動に関するデータを収集しています。エクスペリメント結果ページには、既にデータが記載されています。 
+- **完了**: エクスペリメントが終了日に達し、正常に完了している状態を指します。最終結果は結果ページに記載されています
 
-Independent of the experiment status, you can always access their results by clicking the **Result** button. The below image presents an example of a list of experiments.
+エクスペリメントの状態に関わらず、**結果**tボタンをクリックすればいつでもエクスペリメントの結果にアクセスすることができます。以下の画像は、エクスペリメントのリストの一例を示しています。
 
 <CenteredImg
   imgURL="img/feature-flags/using-experiments/experiments-list.png"
@@ -22,24 +22,27 @@ Independent of the experiment status, you can always access their results by cli
   wSize="550px"
 />
 
-When you access the flag details you also can check experiment results by selecting the **Experiment** tab.
+フラグの詳細にアクセスすると、**エクスペリメント**タブを選択してエクスペリメント結果を確認することもできます。
 
-## Analise the experiment results
+## エクスペリメント結果の分析
 
-When you navigate to the experiment result page, you will immediately find information about the experiment's current state and evaluation period at the top. For instance, the example below showcases a **Stopped** experiment.
+エクスペリメント結果ページに移動すると、すぐにエクスペリメントの現在の状態とエバリュエーション期間に関する情報が上部に表示されます。例えば、次の例は**停止中*のエクスペリメントを示しています。
 
 <CenteredImg
   imgURL="img/feature-flags/using-experiments/stopped-experiment.png"
   alt="Stopped experiment."
 />
 
-Following the experiment status, you will encounter the following components:
+エクスペリメントの状態に応じて、以下のコンポーネントが表示されます：
 
-- **Goal selector**: This feature allows you to choose from all the goals associated with the experiment. 
-- **Variation data table**: A comprehensive table displays data for all variations within the selected goal. This table presents relevant metrics and insights regarding the performance of each variation, allowing you to compare and evaluate their effectiveness.
-- **Variation data history chart**: It provides the historical data visualization for the selected goal and its associated variations. This graph showcases the performance trends and patterns over time, enabling you to observe data changes. The chart can present data related to all the columns available in the table.
+- **ゴールセレクター**: この機能を使用すると、エクスペリメントに関連付けられているすべてのゴールから選択することができます。
 
-An example dataset from an experiment is shown in the image below, considering **Goal-1** as the focus. The graph showcases the Conversion Rate data for all four existing variations, allowing you to assess and compare their performance.
+- **バリエーションデータテーブル**: 選択したゴール内のすべてのバリエーションのデータを包括的に表示するテーブル（表）です。このテーブルには、各バリエーションのパフォーマンスに関する関連する指標と洞察が示されており、それらの効果を比較および評価することができます。
+
+- **バリエーションデータ履歴チャート**: 選択したゴールとその関連するバリエーションの履歴データを可視化します。このグラフは、時間の経過に伴うパフォーマンスの傾向とパターンを示し、データの変化を観察することができます。このグラフは、テーブルで利用可能なすべての列に関連するデータを表示できます。
+
+
+以下の画像は、エクスペリメントの例のデータセットを示しており、**ゴール-1**に焦点を当てています。グラフは、4つの既存のバリエーションすべてのコンバージョン率データを示しており、それらのパフォーマンスを評価および比較することができます。
 
 <CenteredImg
   imgURL="img/feature-flags/using-experiments/experiments-1.png"
@@ -47,30 +50,40 @@ An example dataset from an experiment is shown in the image below, considering *
   borderWidth="1px"
 />
 
-### Table data
+### テーブルデータ
 
-The variation data table in the experiment results provides valuable information for analysis. It includes the following columns:
+エクスペリメント結果のバリエーションデータテーブルは、分析に役立つ貴重な情報を提供します。それには以下の列が含まれています：
 
-- **Evaluation user**: This column represents the number of unique users who received the variation from the server after an SDK request. It indicates the actual count of users who were assigned to a specific feature flag variation.
-- **Goal total**: Displays the total number of goal events fired by the client. It accounts for all occurrences of the goal event, including multiple triggers by the same user.
-- **Goal user**: Indicates the number of unique users who fired the goal event. Unlike the goal total, this count does not increase when the same user triggers the goal event multiple times. It represents the distinct count of users who achieved the goal.
-- **Conversion rate**: The conversion rate column is calculated by dividing the number of unique users who fired the goal event by the number of unique users for whom a variation was returned. It provides insights into the percentage of users who successfully completed the goal based on the assigned variation.
-- **Value total**: The value total column represents the total number of values assigned to a goal event. This column may have different values for each variation. For example, it can measure how much a user spends based on each variation. In cases where the goal is to check if the user performed a desired task (e.g., clicking a button), this column may contain only nullable values.
-- **Value/User**: The value/user column calculates the average values assigned to the goal event per user. It is calculated as the sum of the numbers assigned to the goal event divided by the number of unique users who fired the goal event.
+- **エバリュエーションユーザー**: この列は、SDKリクエスト後にサーバーからバリエーションを受け取ったユニークユーザー数を表します。これは、特定のフィーチャーフラグバリエーションに割り当てられたユーザーの実際の数を示しています。
 
-### Best variation based on the Bayesian inference
+- **ゴール合計**: クライアントによって発生したゴールイベントの総数を表示します。同じユーザーによる複数回のトリガーを含む、ゴールイベントのすべての発生をカウントします。
 
-At the bottom of the screen, the Bucketeer system provides suggestions regarding the best-performing variation in the experiment. To determine the best variation, Bucketeer leverages [Bayesian inference](https://en.wikipedia.org/wiki/Bayesian_inference). This approach allows for making predictions about the top-performing variation without requiring an in-depth understanding of data science.
+- **ゴールユーザー**: ゴールイベントを達成したユニークユーザー数を示します。ゴール合計とは異なり、このカウントは同じユーザーがゴールイベントを複数回トリガーしても増加しません。ゴールを達成したユーザーの個別のカウントを表します。
 
-Using Bayesian inference enables Bucketeer to update the probability of selecting the best variation as new data is acquired. It compares the performance of each variation to a baseline, typically a control group or reference point established when creating the experiment.
+- **コンバージョン率**: コンバージョン率の列は、ゴールイベントを発生させたユニークユーザー数を、バリエーションが返されたユニークユーザー数で割って計算されます。割り当てられたバリエーションに基づいて、ゴールを正常に完了したユーザーの割合に関する洞察を提供します。
 
-In the experiment results, you will find additional information in the existing table that aids in the selection of the best-performing variation:
+- **合計値**: 合計値の列は、ゴールイベントに割り当てられた値の合計を表します。この列は、変動ごとに異なる値を持つ場合があります。例えば、各バリエーションに基づいてユーザーが費やした金額を測定することができます。ゴールがユーザーが特定のタスクを実行したかどうかを確認することである場合 (例: ボタンをクリックする)、この列には NULL 値のみが含まれる場合があります。
 
-- **Improvement**: This metric quantifies the improvement achieved by each variation compared to the baseline. It is calculated by comparing the range of values observed for a variation with the range of values observed for the baseline. A higher improvement value indicates a more favorable performance compared to the baseline.
-- **Probability to beat baseline**: This estimated likelihood represents the probability of a variation surpassing the performance of the baseline. It helps gauge the potential for a variation to outperform the baseline. It provides insights into the relative effectiveness of each variation.
-- **Probability to be best**: This metric indicates the probability of a variation being the top-performing option. It represents the possibility of a variation outperforming all other variations and being presumed as the most successful one.
+- **値/ユーザー**: 値/ユーザーの列は、ユーザーごとのゴールイベントに割り当てられた値の平均を計算します。これは、ゴールイベントに割り当てられた値の合計を、ゴールイベントを発火したユニークユーザーの数で割った値です。
 
-The image below illustrates an example of the results obtained through Bayesian inference, continuing from the previous set of results presente previously.
+
+### ベイズ推定に基づく最善なバリエーション
+
+画面の下部には、Bucketeerシステムが、エクスペリメントで最もパフォーマンスの高いバリエーションに関する提案を提供します。最善なバリエーションを決定するために、Bucketeerは[ベイズ推定](https://en.wikipedia.org/wiki/Bayesian_inference)を活用しています。このアプローチにより、データサイエンスの深い理解を必要とせずに、上位のパフォーマンスを発揮するバリエーションに関する予測を行うことができます。
+
+ベイズ推定を使用することで、Bucketeerは、新しいデータが取得されるたびに、最善なバリエーションを選択する確率を更新できます。Bucketeerは、各バリエーションのパフォーマンスをベースラインと比較します。ベースラインは、通常、エクスペリメントの作成時に設定されたコントロールグループまたは基準点です。
+
+エクスペリメント結果には、既存のテーブルに追加情報が記載されているため、最もパフォーマンスの高いバリエーションの選択に役立ちます。:
+
+
+- **改善率**: この指標は、各バリエーションがベースラインと比較して達成した改善を定量化します。これは、バリエーションで観測された値の範囲とベースラインで観測された値の範囲を比較することで計算されます。改善率が高いほど、ベースラインと比較してより良好なパフォーマンスを示していることを示します。
+
+- **ベースラインを上回る確率**: この推定尤度は、バリエーションがベースラインのパフォーマンスを上回る確率を表します。これは、バリエーションがベースラインを上回る可能性を評価するのに役立ちます。また、各バリエーションの相対的な有効性に関する洞察を提供します。
+
+- **最善である確率**: この指標は、バリエーションが最もパフォーマンスの高いオプションである確立を示します。これは、バリエーションが他のすべてのバリエーションを上回り、最も成功したバリエーションである可能性を表します。
+
+
+以下の画像は、前回提供された一連の結果から続くベイズ推定を使用して取得された結果の例を示しています。
 
 <CenteredImg
   imgURL="img/feature-flags/using-experiments/experiments-2.png"
@@ -78,8 +91,8 @@ The image below illustrates an example of the results obtained through Bayesian 
   borderWidth="1px"
 />
 
-:::tip How select the best variation?
-The Bucketeer team suggests selecting the best variation with a minimum 95% confidence level in both probability to beat baseline and probability to be best.
+:::tip 最善なバリエーションを選ぶ方法とは？
+Bucketeerチームは、ベースラインを上回る確率と最善である確率の両方が最低95％の信頼水準を満たすバリエーションを選択することを推奨しています。
 :::
 
-Based on the Bucketeer recommendation, the current test should continue to acquire more data before selecting the best variation. If no variation reaches the recommended confidence value, the test should keep running.
+Bucketeer の推奨値に基づいて、現在のテストは、最善のバリエーションを選択する前に、より多くのデータの取得を継続する必要があります。推奨される信頼値に達するバリエーションがない場合、テストは実行され続けます。
