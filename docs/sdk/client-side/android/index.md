@@ -408,7 +408,7 @@ val evaluationDetails = client.evaluationDetails("YOUR_FEATURE_FLAG_ID")
 
 :::caution
 
-Do not call this method without calling the [Evaluating user method](#evaluating-user). The Evaluating user method must always be called because it generates analytics events that will be sent to the server.
+Do not call this method without calling the [Evaluating user method](android#evaluating-user). The Evaluating user method must always be called because it generates analytics events that will be sent to the server.
 
 :::
 

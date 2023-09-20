@@ -480,7 +480,7 @@ let evaluationDetails = client.evaluationDetails(featureId: "YOUR_FEATURE_FLAG_I
 
 :::caution
 
-Do not call this method without calling the [Evaluating user method](#evaluating-user). The Evaluating user method must always be called because it generates analytics events that will be sent to the server.
+Do not call this method without calling the [Evaluating user method](ios#evaluating-user). The Evaluating user method must always be called because it generates analytics events that will be sent to the server.
 
 :::
 
