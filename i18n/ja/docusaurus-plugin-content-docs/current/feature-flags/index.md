@@ -16,10 +16,6 @@ slug: /feature-flags
 - [その他のフラグ設定](./feature-flags/creating-feature-flags/settings-and-history): フラグの追加設定およびオプションを知ることができます。
 
 
-## APIキー
-
-[APIキー](/feature-flags/api-keys)は、APIキーとは何か、そしてそれらがBucketeerシステムへのアクセスを認証および制御するためにどのように使用されるかを説明しています。
-
 ## フラグを使用したテスト
 
 [フラグを使用したテスト](./feature-flags/testing-with-flags)は、Bucketeerシステムでテストを実行するために使用される3つのコンポーネントを説明します。

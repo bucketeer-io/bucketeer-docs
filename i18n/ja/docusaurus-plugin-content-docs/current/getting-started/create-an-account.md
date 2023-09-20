@@ -7,7 +7,7 @@ tags: ['guide', 'account', 'create']
 
 import CenteredImg from '@site/src/components/centered-img/CenteredImg';
 
-Bucketeerは、さまざまな環境に関連するデータを管理および追跡するためのツールです。Bucketeerを使用するには、アカウントが必要となります。Bucketeerで利用できるアカウントの種類の詳細については、[Bucketeerアカウントの種類](./best-practice/account-types)をご参照ください。新しいチームメンバーの場合は、プロジェクト管理者にアカウントを作成してもらうように依頼してください。
+Bucketeerは、さまざまな環境に関連するデータを管理および追跡するためのツールです。Bucketeerを使用するには、アカウントが必要となります。Bucketeerで利用できるアカウントの種類の詳細については、[Bucketeerアカウントの種類](./configuration/account-types)をご参照ください。新しいチームメンバーの場合は、プロジェクト管理者にアカウントを作成してもらうように依頼してください。
 
 
 以下のステップは、管理者としてアカウントを作成する方法を示しています。
