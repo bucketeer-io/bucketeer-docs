@@ -393,7 +393,7 @@ client.flush()
 
 ### ユーザー属性の設定
 
-この機能を使用すると、ユーザーがアプリケーションで表示できるコンテンツを堅牢かつ詳細に制御できます。これらの属性を使用して、コンソールUIのフィーチャーフラグのターゲティングタブでルールを追加できます。[詳細を見る](#)
+この機能を使用すると、ユーザーがアプリケーションで表示できるコンテンツを堅牢かつ詳細に制御できます。これらの属性を使用して、コンソールUIのフィーチャーフラグのターゲティングタブでルールを追加できます。[詳細を見る](/feature-flags/creating-feature-flags/targeting#ユーザー属性)
 
 <Tabs>
 <TabItem value="swift" label="Swift">
@@ -458,7 +458,7 @@ client.updateUserAttributes(attributes: attributes)
 
 ### ユーザー情報の取得
 
-このメソッドは、SDKで設定されている現在のユーザーを返します。これは、[updateUserAttributes](#getting-user-information)を使用して現在のユーザーIDと属性を更新する前に確認したい場合に役立ちます。
+このメソッドは、SDKで設定されている現在のユーザーを返します。これは、[updateUserAttributes](ios#ユーザー属性の更新)を使用して現在のユーザーIDと属性を更新する前に確認したい場合に役立ちます。
 
 
 <Tabs>
