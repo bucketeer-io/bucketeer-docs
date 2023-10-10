@@ -124,7 +124,6 @@ For this case, we recommend using the `Promise` returned from the initialize met
 <TabItem value="js" label="JavaScript">
 
 ```js showLineNumbers
-// The callback will return without waiting until the fetching variation process finishes
 const timeout = 1000 // Default is 5 seconds
 
 await initializeBKTClient(config, user, timeout);

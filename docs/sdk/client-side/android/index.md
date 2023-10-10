@@ -120,11 +120,16 @@ If you want to use the feature flag on Splash or Main views, and the user opens 
 
 For this case, we recommend using the `Future<BKTException?>` returned from the initialize method.
 
+:::note
+
+Be aware that if an error is returned in the initialize process, it is regarding the fetch evaluation timeout error, not the initialize process itself.
+
+:::
+
 <Tabs>
 <TabItem value="kt" label="Kotlin">
 
 ```kotlin showLineNumbers
-// The callback will return without waiting until the fetching variation process finishes
 val timeout = 1000 // Default is 5 seconds
 
 viewLifecycleOwner.lifecycleScope.launch {
@@ -144,7 +149,7 @@ viewLifecycleOwner.lifecycleScope.launch {
         // The code to run when the feature is off
     }
   } else {
-    // Handle error
+    // Handle the error when there is no cache or the cache is not updated
   }
 }
 ```
