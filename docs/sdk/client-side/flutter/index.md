@@ -116,7 +116,6 @@ For this case, we recommend using the `timeout` option in the initialize method.
 <TabItem value="dart" label="Dart">
 
 ```dart showLineNumbers
-// It will unlock without waiting until the fetching variation process finishes
 int timeout = 1000;
 
 final client = await BKTClient.initialize(config, user, timeout);

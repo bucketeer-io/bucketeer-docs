@@ -188,11 +188,16 @@ If you want to use the feature flag on Splash or Main views, and the user opens 
 
 For this case, we recommend using the callback in the initialize method.
 
+:::note
+
+Be aware that if an error is returned in the initialize process, it is regarding the fetch evaluation timeout error, not the initialize process itself.
+
+:::
+
 <Tabs>
 <TabItem value="swift" label="Swift">
 
 ```swift showLineNumbers
-// The callback will return without waiting until the fetching variation process finishes
 let timeout: Int64 = 2000 // Default is 5 seconds
 
 BKTClient.initialize(
@@ -200,17 +205,17 @@ BKTClient.initialize(
   user: user,
   timeoutMillis: timeout
 ) { error in
-    guard error == nil else {
-      // The code to run when there is an error while initializing the SDK
-      return
-    }
-    let client = BKTClient.shared
-    let showNewFeature = client.boolVariation(featureId: "YOUR_FEATURE_FLAG_ID", defaultValue: false)
-    if (showNewFeature) {
-        // The Application code to show the new feature
-    } else {
-        // The code to run when the feature is off
-    }
+  guard error == nil else {
+    // The code to run when there is an error while initializing the SDK
+    return
+  }
+  let client = BKTClient.shared
+  let showNewFeature = client.boolVariation(featureId: "YOUR_FEATURE_FLAG_ID", defaultValue: false)
+  if (showNewFeature) {
+      // The Application code to show the new feature
+  } else {
+    // Handle the error when there is no cache or the cache is not updated
+  }
 }
 ```
 
