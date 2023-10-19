@@ -200,7 +200,7 @@ struct ExampleSwiftUIApp: App {
 
 </Tabs>
 
-**8.** If needed, change the background polling default interval by adding the `backgroundPollingInterval` setting in the **BKTConfig** as follows:
+**7.** If needed, change the background polling default interval by adding the `backgroundPollingInterval` setting in the **BKTConfig** as follows:
 
 ```swift showLineNumbers
 do {
@@ -217,7 +217,7 @@ do {
 }
 ```
 
-**9.** Pleaes check the iOS documentation for more details ([iOS Documentation](https://developer.apple.com/documentation/uikit/app_and_environment/scenes/preparing_your_ui_to_run_in_the_background/using_background_tasks_to_update_your_app)).<br />
+**8.** Pleaes check the iOS documentation for more details ([iOS Documentation](https://developer.apple.com/documentation/uikit/app_and_environment/scenes/preparing_your_ui_to_run_in_the_background/using_background_tasks_to_update_your_app)).<br />
 
 ### Initializing client
 
