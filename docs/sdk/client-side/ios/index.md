@@ -140,10 +140,10 @@ This feature is optional, but it can be used by configuring the Background Mode 
 The default setting is **1 hour** and a minimum of **20 minutes** for the `backgroundPollingInterval`, and **1 minute** for the `eventsFlushInterval` settings.
 
 #### Configuration
-**1.** Open XCode project setting.<br />
-**2.** Select the your app target.<br />
+**1.** Open the XCode project setting.<br />
+**2.** Select your app target.<br />
 **3.** Select the `Signing & Capabilities` settings tab.<br />
-**4.** Enable the `Background processing` option on the `Background Modes` section.<br />
+**4.** Enable the `Background processing` option in the `Background Modes` section.<br />
 **5.** Register the identifier by adding the `Permitted background task scheduler identifiers` option in the **Info.plist**, and set the following task ids as the values.
 
 -  **io.bucketeer.background.fetch.evaluations** (Background task to fetch the latest evaluations from the server).
@@ -166,7 +166,7 @@ do {
 }
 ```
 
-**7.** Checking the iOS documentation for more details ([iOS Documentation](https://developer.apple.com/documentation/uikit/app_and_environment/scenes/preparing_your_ui_to_run_in_the_background/using_background_tasks_to_update_your_app)).<br />
+**7.** Pleaes check the iOS documentation for more details ([iOS Documentation](https://developer.apple.com/documentation/uikit/app_and_environment/scenes/preparing_your_ui_to_run_in_the_background/using_background_tasks_to_update_your_app)).<br />
 
 ### Initializing client
 
