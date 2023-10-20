@@ -53,7 +53,8 @@ Configure the SDK config and user configuration.
 
 :::info
 
-The **featureTag** setting is the tag that you configure when creating a Feature Flag. When it is not configured, it will evaluate all the Feature Flags in the environment. **We strongly recommend** using tags to speed up the evaluation process and reduce the cache size in the client.
+The **featureTag** setting is the tag you configure when creating a Feature Flag. It will evaluate all the Feature Flags in the environment when it is not configured.<br />
+**We strongly recommend** using tags to speed up the evaluation process and reduce the cache size in the client.
 
 :::
 

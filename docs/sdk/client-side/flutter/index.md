@@ -47,7 +47,7 @@ Configure the SDK config and user configuration.
 
 :::note
 
-The **featureTag** setting is the tag that you configure when creating a Feature Flag.
+The **featureTag** setting is the tag you configure when creating a Feature Flag.
 
 :::
 
@@ -59,12 +59,14 @@ All the settings in the example below are required.
 ```dart showLineNumbers
 final config = BKTConfigBuilder()
   .apiKey("YOUR_API_KEY")
-  .apiURL("YOUR_API_URL")
+  .apiEndpoint("YOUR_API_URL")
   .featureTag("YOUR_FEATURE_TAG")
+  .appVersion("YOUR_APP_VERSION")
   .build();
 
 final user = BKTUserBuilder
   .id("USER_ID")
+  .customAttributes(YOUR_USER_ATTRIBUTES) // optional Map<String, String>
   .build();
 ```
 
@@ -73,11 +75,11 @@ final user = BKTUserBuilder
 
 :::info Custom configuration
 
-Depending on your use, you may want to change the optional configurations available in the **BKTConfig.Builder**.
+Depending on your use, you may want to change the optional configurations available in the **BKTConfigBuilder**.
 
-- **pollingInterval** (Minimum 5 minutes. Default is 10 minutes)
+- **pollingInterval** (Minimum 60 seconds. Default is 10 minutes)
 - **backgroundPollingInterval** (Minimum 20 minutes. Default is 1 hour)
-- **eventsFlushInterval** (Default is 30 seconds)
+- **eventsFlushInterval** (Minimum 60 seconds. Default is 60 seconds)
 - **eventsMaxQueueSize** (Default is 50 events)
 
 :::
@@ -96,7 +98,8 @@ Initialize the client by passing the configurations in the previous step.
 <TabItem value="dart" label="Dart">
 
 ```dart showLineNumbers
-final client = await BKTClient.initialize(config, user);
+await BKTClient.initialize(config: config, user: user);
+final client = BKTClient.instance;
 ```
 
 </TabItem>
@@ -104,7 +107,7 @@ final client = await BKTClient.initialize(config, user);
 
 :::note
 
-The initialize process starts polling right away the latest evaluations from Bucketeer in the background using the interval `pollingInterval` configuration while the application is in the **foreground state**. When the application changes to the **background state**, it will use the `backgroundPollingInterval` configuration.
+The initialize process immediately starts polling the latest evaluations from Bucketeer in the background using the interval `pollingInterval` configuration while the application is in the **foreground state**. When the application changes to the **background state**, it will use the `backgroundPollingInterval` configuration.
 
 :::
 
@@ -116,9 +119,11 @@ For this case, we recommend using the `timeout` option in the initialize method.
 <TabItem value="dart" label="Dart">
 
 ```dart showLineNumbers
+/// It will unlock without waiting until the fetching variation process finishes
 int timeout = 1000;
 
-final client = await BKTClient.initialize(config, user, timeout);
+await BKTClient.initialize(config: config, user: user, timeoutMillis: timeout);
+final client = BKTClient.instance;
 ```
 
 </TabItem>
@@ -137,9 +142,9 @@ To check which variation a specific user will receive, you can use the client li
 ```dart showLineNumbers
 final showNewFeature = await client.boolVariation("YOUR_FEATURE_FLAG_ID", false);
 if (showNewFeature) {
-    // The Application code to show the new feature
+    /// The Application code to show the new feature
 } else {
-    // The code to run if the feature is off
+    /// The code to run if the feature is off
 }
 ```
 
@@ -160,15 +165,15 @@ The Bucketeer SDK supports the following variation types.
 <TabItem value="dart" label="Dart">
 
 ```dart showLineNumbers
-static Future<bool> boolVariation(String featureId, bool defaultValue);
+Future<bool> boolVariation(String featureId, { required bool defaultValue });
 
-static Future<String> stringVariation(String featureId, String defaultValue);
+Future<String> stringVariation(String featureId, { required String defaultValue });
 
-static Future<int> intVariation(String featureId, int defaultValue);
+Future<int> intVariation(String featureId, { required int defaultValue });
 
-static Future<double> doubleVariation(String featureId, double defaultValue);
+Future<double> doubleVariation(String featureId, { required double defaultValue });
 
-static Future<Map<String, dynamic>> jsonVariation(String featureId, LDValue defaultValue);
+Future<Map<String, dynamic>> jsonVariation(String featureId, { required Map<String, dynamic> defaultValue });
 ```
 
 </TabItem>
@@ -186,18 +191,19 @@ The fetch method uses the following parameter. Make sure to wait for its complet
 <TabItem value="dart" label="Dart">
 
 ```dart showLineNumbers
+/// It will unlock without waiting until the fetching variation process finishes
 int timeout = 5000;
 
-final result = await client.fetchEvaluations(timeout);
+final result = await client.fetchEvaluations(timeoutMillis: timeout);
 if (result.isSuccess) {
-  final showNewFeature = await client.boolVariation("YOUR_FEATURE_FLAG_ID", false);
+  final showNewFeature = await client.boolVariation("YOUR_FEATURE_FLAG_ID", defaultValue: false);
   if (showNewFeature) {
-      // The Application code to show the new feature
+      /// The Application code to show the new feature
   } else {
-      // The code to run if the feature is off
+      /// The code to run if the feature is off
   }
 } else {
-   // The code to run if the feature is off
+   /// The code to run if the feature is off
 }
 ```
 
@@ -230,7 +236,24 @@ Assuming you already have the FCM implementation in your application.
 <TabItem value="dart" label="Dart">
 
 ```dart showLineNumbers
-// TODO
+FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
+  final isFeatureFlagUpdated = message.data["bucketeer_feature_flag_updated"]
+    if (isFeatureFlagUpdated) {
+      int timeout = 1000;
+
+      final result = await client.fetchEvaluations(timeoutMillis: timeout);
+      if (result.isSuccess) {
+        final showNewFeature = await client.boolVariation("YOUR_FEATURE_FLAG_ID", defaultValue: false);
+        if (showNewFeature) {
+            /// The Application code to show the new feature
+        } else {
+            /// The code to run if the feature is off
+        }
+      } else {
+        /// The code to run if the feature is off
+      }
+    }
+});
 ```
 
 </TabItem>
@@ -246,7 +269,7 @@ In addition, you can pass a double value to the goal event. These values will su
 <TabItem value="dart" label="Dart">
 
 ```dart showLineNumbers
-await client.track("YOUR_GOAL_ID", 10.50);
+await client.track("YOUR_GOAL_ID", value: 10.50);
 ```
 
 </TabItem>
@@ -254,7 +277,7 @@ await client.track("YOUR_GOAL_ID", 10.50);
 
 ### Flushing events
 
-This method will send all pending analytics events to the Bucketeer server as soon as possible. This process is asynchronous, so it returns before it is complete.
+This method will send all pending analytics events to the Bucketeer server immediately. This process is asynchronous, so it returns before it is complete.
 
 <Tabs>
 <TabItem value="dart" label="Dart">
@@ -293,7 +316,7 @@ final user = BKTUserBuilder()
   .customAttributes(attributes)
   .build();
 
-final client = await BKTClient.initialize(config, user);
+await BKTClient.initialize(config: config, user: user);
 ```
 
 </TabItem>
@@ -361,3 +384,92 @@ This method will return null if the feature flag is missing in the SDK.
 
 </TabItem>
 </Tabs>
+
+
+### Listening to evaluation updates
+
+BKTClient can notify when the evaluation is updated.
+The listener can detect both automatic polling and manual fetching.
+
+<Tabs>
+<TabItem value="dart" label="Dart">
+
+```dart showLineNumbers
+class EvaluationUpdateListenerImpl implements BKTEvaluationUpdateListener {
+  @override
+  void onUpdate() {
+    final client = BKTClient.instance;
+    final showNewFeature = client.boolVariation("YOUR_FEATURE_FLAG_ID", defaultValue: false);
+    if (showNewFeature) {
+      /// The Application code to show the new feature
+    } else {
+      /// The code to run when the feature is off
+    }
+  }
+}
+
+final client = BKTClient.instance;
+
+final listener = EvaluationUpdateListenerImpl();
+/// The returned key value is used to remove the listener
+final key = client.addEvaluationUpdateListener(listener);
+
+/// Remove a listener associated with the key
+client.removeEvaluationUpdateListener(key: key)
+
+/// Remove all listeners
+client.clearEvaluationUpdateListeners()
+```
+
+</TabItem>
+</Tabs>
+
+### Background mode
+
+For Android, the background mode works without any configuration by default.<br />
+For iOS, this feature is optional, but it can be used by configuring the background mode in the Xcode project.<br />
+The default setting is **1 hour** and a minimum of **20 minutes** for the `backgroundPollingInterval`, and **1 minute** for the `eventsFlushInterval` settings.
+
+#### Configuration for iOS
+**1.** Open the iOS folder using Xcode IDE to open the file `Runner.xcworkspace`.<br />
+**2.** Open the XCode project setting.<br />
+**3.** Select the `Runner` target.<br />
+**4.** Select the `Signing & Capabilities` settings tab.<br />
+**5.** Enable the `Background processing` option in the `Background Modes` section.<br />
+**6.** Register the identifier by adding the `Permitted background task scheduler identifiers` option in the **Info.plist**, and set the following task IDs as the values.
+
+-  **io.bucketeer.background.fetch.evaluations** (Background task to fetch the latest evaluations from the server).
+-  **io.bucketeer.background.flush.events** (Background task to flush events generated by the client).
+
+**7.** Open the `AppDelegate.swift` and add the following code to the `didFinishLaunchingWithOptions` function.
+
+```swift showLineNumbers
+import UIKit
+import Bucketeer
+
+class AppDelegate: UIResponder, UIApplicationDelegate {
+
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        // Add the code to enable background tasks
+        if #available(iOS 13.0, tvOS 13.0, *) {
+            BKTBackgroundTask.enable()
+        }
+        // Your app logic code
+        return true
+    }
+```
+
+**8.** If needed, change the background polling default interval by adding the `backgroundPollingInterval` setting in the **BKTConfigBuilder** as follows:
+
+```dart showLineNumbers
+final config = BKTConfigBuilder()
+  .apiKey("YOUR_API_KEY")
+  .apiEndpoint("YOUR_API_URL")
+  .featureTag("YOUR_FEATURE_TAG")
+  .appVersion("YOUR_APP_VERSION").
+  .eventsFlushInterval(60) // 1 minute
+  .backgroundPollingInterval(1800)
+  .build(); // 30 minutes
+```
+
+**9.** Please check the [iOS Documentation](https://developer.apple.com/documentation/uikit/app_and_environment/scenes/preparing_your_ui_to_run_in_the_background/using_background_tasks_to_update_your_app) for more details.
