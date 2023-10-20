@@ -54,7 +54,7 @@ Configure the SDK config and user configuration.
 
 :::note
 
-The **featureTag** setting is the tag that you configure when creating a Feature Flag.
+The **featureTag** setting is the tag you configure when creating a Feature Flag.
 
 :::
 
@@ -112,7 +112,8 @@ val client = BKTClient.getInstance()
 
 :::note
 
-The initialize process starts polling right away the latest evaluations from Bucketeer in the background using the interval `pollingInterval` configuration while the application is in the **foreground state**. When the application changes to the **background state**, it will use the `backgroundPollingInterval` configuration.
+The initialize process immediately starts polling the latest evaluations from Bucketeer in the background using the interval `pollingInterval` configuration while the application is in the **foreground state**.
+When the application changes to the **background state**, it will use the `backgroundPollingInterval` configuration.
 
 :::
 
@@ -162,7 +163,7 @@ viewLifecycleOwner.lifecycleScope.launch {
 ### Evaluating user
 
 The variation method determines whether or not a feature flag is enabled for a specific user.<br />
-To check which variation a specific user will receive, you can use the client like below.
+You can use the client like the one below to check which variation a specific user will receive.
 
 <Tabs>
 <TabItem value="kt" label="Kotlin">
@@ -310,7 +311,7 @@ client.track("YOUR_GOAL_ID", 10.50)
 
 ### Flushing events
 
-This method will send all pending analytics events to the Bucketeer server as soon as possible. This process is asynchronous, but the method returns `Future<BKTExeptIon?>` if you want to wait for its completion before doing something else.
+This method will send all pending analytics events to the Bucketeer server immediately. This process is asynchronous, but the method returns `Future<BKTExeptIon?>` if you want to wait for its completion before doing something else.
 
 <Tabs>
 <TabItem value="kt" label="Kotlin">
