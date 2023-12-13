@@ -1,0 +1,91 @@
+---
+title: Rollout
+# sidebar_position:
+slug: /feature-flags/creating-feature-flags/auto-operation/rollout
+description: 'The rollout features'
+tags: ['guide', 'automation', 'rollout', 'feature-flag']
+---
+
+import CenteredImg from '@site/src/components/centered-img/CenteredImg';
+
+The rollout solution is designed to progressively deliver new features for your users. It automates the release process, gradually providing the flag variation you choose to a larger percentage of your users to ensure it performs as expected. You can use this approach to detect problems earlier and reduce the impact of any issue.
+
+When you choose to use the rollout option, you are selecting an enabling operation from the [Auto Operation](/feature-flags/creating-feature-flags/auto-operation/auto-operation). That means that you will choose the flag variation that more users will receive as time goes on and the rollout approaches its end.
+
+## Rollout requirements and restriction
+
+You need to fulfill some requirements to use the rollout feature. Otherwise, you will not be able to set it. The list below summarizes the restrictions related to the rollout creation:
+
+- The rollout only works for flags with two variations. If you try to use it with a flag with more variations, you will receive an error message when submitting it.
+- You are not able to add a rollout to a flag with [Prerequisites](/feature-flags/creating-feature-flags/targeting#prerequisites), [Targets](/feature-flags/creating-feature-flags/targeting#targeting), or [Rules](/feature-flags/creating-feature-flags/targeting#rollout-percentage).
+- To add a rollout, the feature flag must be active.
+
+No restrictions apply to the flag type. This means you can use the rollout feature with all [feature flag types](/feature-flags/creating-feature-flags/create-feature-flag#feature-flags-types).
+
+## How rollout works
+
+The rollout feature is designed to work with two variation flags. It allows you to progressively make an existing variation available for a larger user group until it is available for all users. 
+
+To understand how the rollout feature works, let's consider a boolean flag with `true` and `false` variations, which defines if new content is available to users. Currently, the `false` variation is the [off variation](/feature-flags/creating-feature-flags/targeting#the-targeting-page), which means users cannot see the new content. However, the content is ready to launch, and you want to make it available to all users in a span of 10 days. For this scenario, you can use the rollout feature to roll out the `true` variation progressively at 10% daily. On the first day of the rollout, 10% of your users will see the new content, and by the second day, 20% will see it, and so on. After 10 days, the rollout will be complete, and all users will have access to the new content. The image below summarizes the rollout process.
+
+<CenteredImg
+  imgURL="img/feature-flags/auto-ops-rules/rollout.png"
+  alt="Rollout example"
+  wSize="550px"
+  borderWidth="1px"
+/>
+
+## Configuring a rollout
+
+To add a rollout to a feature flag, you need to follow the steps below:
+
+1. Go to the **Auto Operation** page.
+2. Click the **+ Add** button.
+3. The operation setting panel will appear. Choose the **Enable** operation.
+4. Select **Progreesive Rollout**.
+5. Set up the rollout.
+6. Click **Submit**. 
+
+The rollout provides two main options when setting it up:
+
+- **Template**: With this option, you define the percentual increment and the frequency of the rollout. The weight of each phase and the execution time are automatically defined until the rollout reaches 100%.
+- **Manual**: In this case, you are responsible for defining each rollout phase's percentual weight and release time.
+
+### Template rollout
+
+If you choose to use the Template rollout, you need to define the following configurations before submitting it:
+
+- **Variation**: Choose the variation to roll out. You should not choose the same variation selected as [off variation](/feature-flags/creating-feature-flags/targeting#the-targeting-page). Otherwise, you will receive an error message.
+- **Start Date**: The rollout starting date and time. 
+- **Increment**: The percentual increment to be used at each rollout release phase. This option will define, as a result, the total number of rollout releases. If you choose 10%, 10 stages are required to reach the total rollout.
+- **Frequency**: The frequency of each rollout phase (hourly, daily, weekly) will be released. The first phase will depend on the **Start Date** value you selected, and the remaining phases will rely on this starting point. 
+
+Notice that when using the Template rollout, all phases increment the percentage of users accessing the new variation by the same amount, defined by the **Increment** parameter. The image below summarizes an example of a configuration using the Template configuration.
+
+<CenteredImg
+  imgURL="img/feature-flags/auto-ops-rules/template-rollout.png"
+  alt="Template rollout"
+  wSize="400px"
+  borderWidth="1px"
+/>
+
+### Manual rollout
+
+When using the Manual rollout, the configurations required to submit the rollout differ from those used on the Template rollout. In this case, you need to set the following parameters:
+
+- **Variation**: Choose the variation to roll out. You should not choose the same variation selected as [off variation](/feature-flags/creating-feature-flags/targeting#the-targeting-page). Otherwise, you will receive an error message.
+- **Weight**: The percentual value of users receiving the selected variation at the selected date. 
+- **Execute at**: The date and time when the rollout phase will be released, updating the percentage of users accessing the selected variation.
+
+Using the Manual rollout, you do not need to follow an incremental rule for each rollout phase. The only restriction is that each new rollout phase must have a higher weight than the previous one. 
+
+Another important point related to the Manual option is that you don't need to reach 100% to submit the rollout. Supose the last entry to the Manual configuration is 90%. In this case, the rollout will be concluded, and only 90% of your users will have access to the new variation. The remaining 10% will continue receiving the [off variation](/feature-flags/creating-feature-flags/targeting#the-targeting-page), the same as before the rollout.
+
+The image below summarizes an example of a configuration using the Manual configuration.
+
+<CenteredImg
+  imgURL="img/feature-flags/auto-ops-rules/manual-rollout.png"
+  alt="Template rollout"
+  wSize="400px"
+  borderWidth="1px"
+/>
