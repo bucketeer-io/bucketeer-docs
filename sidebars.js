@@ -104,7 +104,17 @@ const sidebars = {
         'feature-flags/creating-feature-flags/create-feature-flag',
         'feature-flags/creating-feature-flags/targeting',
         'feature-flags/creating-feature-flags/manage-variations',
-        'feature-flags/creating-feature-flags/auto-operation',
+        {
+          type: 'category',
+          label: 'Auto operation',
+          link: {
+            type: 'doc',
+            id: 'feature-flags/creating-feature-flags/auto-operation/auto-operation',
+          },
+          items: [
+            'feature-flags/creating-feature-flags/auto-operation/rollout',
+          ],
+        },
         'feature-flags/creating-feature-flags/evaluate-results',
         'feature-flags/creating-feature-flags/settings-and-history'
       ],
