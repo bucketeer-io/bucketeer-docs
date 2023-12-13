@@ -10,7 +10,7 @@ import CenteredImg from '@site/src/components/centered-img/CenteredImg';
 
 The auto operation feature handles the manipulation of feature flag configurations on your behalf. It executes specific operations automatically based on the conditions set by the user.
 
-To access the auto operation page on the Bucketeer dashboard, select the **Feature Flags** tab, choose the desired flag, and click on its name. Select the **Auto Ops Rules** tab at the top of the new page. You can check the active and completed operations on the Auto Ops Rules page.
+To access the auto operation page on the Bucketeer dashboard, select the **Feature Flags** tab, choose the desired flag, and click on its name. Select the **Auto Operation** tab at the top of the new page. You can check the active and completed operations on the Auto Operation page.
 
 ## How auto operation works
 
@@ -18,10 +18,10 @@ The auto operation feature consists of two key elements:
 
 - **Operation**: An operation refers to an action that impacts a feature flag. Each action is linked to one or more triggering conditions. When a condition is met, the associated operation's action is executed. Currently, Bucketeer supports two types of operations:
 
-  - **Enable**: This operation type enables the chosen flag.
-  - **Kill Switch**: This operation type disables the chosen flag.
+  - **Enable**: Enables the chosen flag when the condition is met. You can release using the **Schedule** or **[Progressive Rollout](/feature-flags/creating-feature-flags/auto-operation/rollout)** options.
+  - **Kill Switch**: Disables the chosen flag when the condition is met.
 
-- **Condition**: A condition specifies the circumstances under which the operation is triggered. Multiple conditions can be associated with a single killing operation. On the other hand, only one condition can be related to enabling a feature. It's important to note that the corresponding operation is triggered if any conditions are satisfied.
+- **Condition**: A condition specifies the circumstances under which the operation is triggered. Multiple conditions can be associated with a single killing operation. On the other hand, only one condition can be related to enabling a feature. Similarly, each rollout phase is linked to a condition. It's important to note that the corresponding operation is triggered if any conditions are satisfied.
 
 Based on the operations and condition the auto operation works as:
 
@@ -49,7 +49,9 @@ You can only have two active operations based on schedule conditions. One will d
 
 :::
 
-2. **Event Rate**: This condition triggers the operation based on the event rate reaching a specified threshold. The event rate is only available for killing operations. It allows you to automatically turn off a flag if it is causing a high error rate or turn it off once enough data has been collected for analysis.
+2. **Progressive Rollout**: Progressively increase the percentage of users receiving a flag variation. This condition is only available for enablingoperations. For further information, access the **[Rollout](/feature-flags/creating-feature-flags/auto-operation/rollout)** page.
+
+3. **Event Rate**: This condition triggers the operation based on the event rate reaching a specified threshold. The event rate is only available for killing operations. It allows you to automatically turn off a flag if it is causing a high error rate or turn it off once enough data has been collected for analysis.
 
 <CenteredImg
   imgURL="img/feature-flags/auto-ops-rules/event-rate-condition-v2.png"
@@ -78,14 +80,17 @@ Refer to the [Experiments](/feature-flags/testing-with-flags/experiments) and [E
 
 Configuring auto operations is a straightforward process. Follow these steps:
 
-1. Go to the Auto Ops Rules page.
-2. Click the **Add operation** button.
+1. Go to the **Auto Operation** page.
+2. Click the **+ Add** button.
 3. The operation setting panel will appear. Choose the desired operation. For this example, the **Enable** option was selected.
-4. Set up the desired condition. For the **Enable** operation, only the **Schedule** is available.
-5. Click the **Create Operation** button to create the auto operation rule. The image below summarizes the configuration described in the previous steps.
+4. Set up the desired condition. In this case the **Schedule** option was selected.
+5. Choose the date for enabling the feature flag. 
+6. Click **Submit**. When the scheduled time arrives, the feature flag will be automatically enabled.
+
+The image below summarizes the configuration described in the previous steps.
 
 <CenteredImg
-  imgURL="img/feature-flags/auto-ops-rules/create-operation.png"
+  imgURL="img/feature-flags/auto-ops-rules/schedule-condition-v2.png"
   alt="Event rate panel"
   wSize="400px"
   borderWidth="1px"
