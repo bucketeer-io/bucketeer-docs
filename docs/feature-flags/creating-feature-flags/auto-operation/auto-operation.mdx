@@ -51,7 +51,7 @@ You can only have two active operations based on schedule conditions. One will d
 
 2. **Progressive Rollout**: Progressively increase the percentage of users receiving a flag variation. This condition is only available for enablingoperations. For further information, access the **[Rollout](/feature-flags/creating-feature-flags/auto-operation/rollout)** page.
 
-3. **Event Rate**: This condition triggers the operation based on the event rate reaching a specified threshold. The event rate is only available for killing operations. It allows you to automatically turn off a flag if it is causing a high error rate or turn it off once enough data has been collected for analysis.
+3. **Event Rate**: This condition triggers the operation based on the event rate reaching a specified threshold. The event rate is only available for killing operations. It allows you to automatically turn off a flag if it is causing a high error rate or turn it off once enough data has been collected for analysis. Also, you can use it to disable a flag that has been visited for xxx times. Each time a user visits the flag, you can send that event, allowing the system to turn it off for you when it reaches the threshold.
 
 <CenteredImg
   imgURL="img/feature-flags/auto-ops-rules/event-rate-condition-v2.png"
