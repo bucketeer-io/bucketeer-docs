@@ -1,0 +1,55 @@
+---
+title: Event rate
+# sidebar_position:
+slug: /feature-flags/creating-feature-flags/auto-operation/event-rate
+description: 'Check how the event rate features works in Bucketeer'
+tags: ['guide', 'automation', 'event rate', 'feature-flag']
+---
+
+import CenteredImg from '@site/src/components/centered-img/CenteredImg';
+
+The event rate condition is designed to turn off flags based on the usage rate. Some popular usage cases for these conditions are:
+
+- Kill automatically flags causing high error rates.
+- Turn off a flag you use to collect data for analysis. Therefore, the event rate condition can turn the flag off when enough data is collected.
+- Disable a flag that has been visited a certain number of times. Each time a user visits the flag, you can send that event, allowing the system to turn it off for you when it reaches the threshold.
+
+## How the event rate works
+
+The event rate condition triggers the operation when the frequency of a particular event reaches a specific threshold. For instance, whenever a user visits a flag, you can send an event through the SDK to track that visit. The Bucketeer system then receives these events and keeps track of the frequency of each flag variation. Thus, the system can evaluate the event rate and determine if it needs to turn off a particular flag.
+
+To set up the event rate condition, you need to define the following configurations:
+
+- **Variation**: The specific variation observed by the target user. The event rate will be calculated using the events called using this variation.
+- **Goal**: The goal used to calculate the event rate. The counter of goal events will increase each time the goal is reached.
+- **Condition**: The comparison operator used to assess the event rate. The available options are greater than or equal to (>=) or smaller than or equal to (<=). 
+- **Percentage**: The threshold for the event rate.
+- **Minimum Count**: Minimum number of occurrences required for the condition to be enabled. This option ensures that the event rate is not triggered before a certain number of events happen, avoiding a false positive.
+
+## How the event rate is calculated
+
+Bucketeer system uses the following formula to calculate the event rate:
+
+**Event Rate = (Unique Counter of Goal Events) / (Unique Counter of Evaluation Events)**
+
+Refer to the [Experiments](/feature-flags/testing-with-flags/experiments) and [Evaluate results](/feature-flags/creating-feature-flags/evaluate-results) sections for a better understanding of the user count of goals and evaluations.
+
+## Setting up auto operation with event rate
+
+To add an event rate condition to a feature flag, you need to follow the steps below:
+
+1. Go to the **Auto Operation** page.
+2. Click the **+ Add** button.
+3. The operation setting panel will appear. Choose the **Kill Switch** option.
+4. Select **Event Rate**.
+5. Set up the conditions. Define the variation, goal, condition, threshold, and minimum count.
+6. Click **Submit**. 
+
+The image below presents an example of event rate configuration. The current configuration's objective is to turn off the feature flag in case of a high error rate above 5%. A minimum count of 500 is used to avoid misleading turn-offs.
+
+<CenteredImg
+  imgURL="img/feature-flags/auto-ops-rules/event-rate-condition-v3.png"
+  alt="Create event rate condition"
+  wSize="400px"
+  borderWidth="1px"
+/>
