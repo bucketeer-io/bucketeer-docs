@@ -19,7 +19,7 @@ The auto operation feature consists of two key elements:
 - **Operation**: An operation refers to an action that impacts a feature flag. Each action is linked to one or more triggering conditions. When a condition is met, the associated operation's action is executed. Currently, Bucketeer supports two types of operations:
 
   - **Enable**: Enables the chosen flag when the condition is met. You can release using the **Schedule** or **[Progressive Rollout](/feature-flags/creating-feature-flags/auto-operation/rollout)** options.
-  - **Kill Switch**: Disables the chosen flag when the condition is met.
+  - **Kill Switch**: Disables the chosen flag when the condition is met. You can disable it using the **Schedule** or **Event rate**.
 
 - **Condition**: A condition specifies the circumstances under which the operation is triggered. Multiple conditions can be associated with a single killing operation. On the other hand, only one condition can be related to enabling a feature. Similarly, each rollout phase is linked to a condition. It's important to note that the corresponding operation is triggered if any conditions are satisfied.
 
