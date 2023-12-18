@@ -112,7 +112,9 @@ const sidebars = {
             id: 'feature-flags/creating-feature-flags/auto-operation/auto-operation',
           },
           items: [
+            'feature-flags/creating-feature-flags/auto-operation/schedule',
             'feature-flags/creating-feature-flags/auto-operation/rollout',
+            'feature-flags/creating-feature-flags/auto-operation/event-rate',
           ],
         },
         'feature-flags/creating-feature-flags/evaluate-results',

@@ -18,8 +18,8 @@ The auto operation feature consists of two key elements:
 
 - **Operation**: An operation refers to an action that impacts a feature flag. Each action is linked to one or more triggering conditions. When a condition is met, the associated operation's action is executed. Currently, Bucketeer supports two types of operations:
 
-  - **Enable**: Enables the chosen flag when the condition is met. You can release using the **Schedule** or **[Progressive Rollout](/feature-flags/creating-feature-flags/auto-operation/rollout)** options.
-  - **Kill Switch**: Disables the chosen flag when the condition is met. You can disable it using the **Schedule** or **Event rate**.
+  - **Enable**: Enables the chosen flag when the condition is met. You can release using the **[schedule](/feature-flags/creating-feature-flags/auto-operation/schedule)** or **[progressive rollout](/feature-flags/creating-feature-flags/auto-operation/rollout)** options.
+  - **Kill Switch**: Disables the chosen flag when the condition is met. You can disable it using the **[schedule](/feature-flags/creating-feature-flags/auto-operation/schedule)** or **[event rate](/feature-flags/creating-feature-flags/auto-operation/event-rate)**.
 
 - **Condition**: A condition specifies the circumstances under which the operation is triggered. Multiple conditions can be associated with a single killing operation. On the other hand, only one condition can be related to enabling a feature. Similarly, each rollout phase is linked to a condition. It's important to note that the corresponding operation is triggered if any conditions are satisfied.
 
@@ -32,68 +32,9 @@ Based on the operations and condition the auto operation works as:
 
 ## Conditions
 
-The following conditions are available for defining auto operations:
+As mentioned, a condition must be fulfilled to trigger an auto operation. Currently, Bucketeer provides three condition options, which you can use to configure auto operations in your application:
 
-1. **Schedule**: This condition evaluates whether the specified date and time have been reached. You must always use a future date and time to schedule the operation. It is useful, for example, to release a feature at a specific date and time or to turn off a beta feature after a certain period.
+- [Schedule](/feature-flags/creating-feature-flags/auto-operation/schedule):: Specify the date and time to enable or kill a flag.
+- [Progressive rollout](/feature-flags/creating-feature-flags/auto-operation/rollout): Determine a strategy to release a feature flag variation progressively.
+- [Event rate](/feature-flags/creating-feature-flags/auto-operation/event-rate): Define conditions to kill a flag based on the rate of a particular event.
 
-<CenteredImg
-  imgURL="img/feature-flags/auto-ops-rules/schedule-condition-v2.png"
-  alt="Event rate panel"
-  wSize="400px"
-  borderWidth="1px"
-/>
-
-:::info Limit of schedule conditions
-
-You can only have two active operations based on schedule conditions. One will define when to enable and the other when to kill the flag.
-
-:::
-
-2. **Progressive Rollout**: Progressively increase the percentage of users receiving a flag variation. This condition is only available for enablingoperations. For further information, access the **[Rollout](/feature-flags/creating-feature-flags/auto-operation/rollout)** page.
-
-3. **Event Rate**: This condition triggers the operation based on the event rate reaching a specified threshold. The event rate is only available for killing operations. It allows you to automatically turn off a flag if it is causing a high error rate or turn it off once enough data has been collected for analysis. Also, you can use it to disable a flag that has been visited for xxx times. Each time a user visits the flag, you can send that event, allowing the system to turn it off for you when it reaches the threshold.
-
-<CenteredImg
-  imgURL="img/feature-flags/auto-ops-rules/event-rate-condition-v2.png"
-  alt="Event rate panel"
-  wSize="400px"
-  borderWidth="1px"
-/>
-
-Below, you will find a description of the configuration options for setting up the event rate condition:
-
-- **Variation**: The specific variation observed by the target user.
-- **Goal**: The goal used to calculate the event rate. Each time the goal is reached, the counter of goal events will increase.
-- **Condition**: The comparison operator used to assess the event rate. The available options are greater than or equal to (>=) or smaller than or equal to (<=).
-- **Percentage**: The threshold for the event rate.
-- **Minimum Count**: Minimum number of occurrences required for the condition to be enabled.
-
-## How the event rate is calculated
-
-The event rate is calculated using the following formula:
-
-**Event Rate = (Unique Counter of Goal Events) / (Unique Counter of Evaluation Events)**
-
-Refer to the [Experiments](/feature-flags/testing-with-flags/experiments) and [Evaluate results](/feature-flags/creating-feature-flags/evaluate-results) sections for a better understanding of the user count of goals and evaluations.
-
-## Setting up auto operation
-
-Configuring auto operations is a straightforward process. Follow these steps:
-
-1. Go to the **Auto Operation** page.
-2. Click the **+ Add** button.
-3. The operation setting panel will appear. Choose the desired operation. For this example, the **Enable** option was selected.
-4. Set up the desired condition. In this case the **Schedule** option was selected.
-5. Choose the date for enabling the feature flag. 
-6. Click **Submit**. When the scheduled time arrives, the feature flag will be automatically enabled.
-
-The image below summarizes the configuration described in the previous steps.
-
-<CenteredImg
-  imgURL="img/feature-flags/auto-ops-rules/schedule-condition-v2.png"
-  alt="Event rate panel"
-  wSize="400px"
-  borderWidth="1px"
-/>
-
-When the scheduled time arrives, the feature flag will be automatically enabled.
