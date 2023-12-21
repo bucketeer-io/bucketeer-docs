@@ -105,7 +105,7 @@ Initialize the client by passing the configurations in the previous step.
 
 ```js showLineNumbers
 await initializeBKTClient(config, user);
-const client = getBKTClient()
+const client = getBKTClient();
 ```
 
 </TabItem>
@@ -126,9 +126,20 @@ For this case, we recommend using the `Promise` returned from the initialize met
 
 ```js showLineNumbers
 const timeout = 1000 // Default is 5 seconds
-
-await initializeBKTClient(config, user, timeout);
-const client = getBKTClient()
+const initialFetchPromise = initializeBKTClient(config, user, timeout);
+initialFetchPromise
+  .then(() => {
+    const client = getBKTClient();
+    const showNewFeature = client?.booleanVariation('YOUR_FEATURE_FLAG_ID', false);
+    if (showNewFeature) {
+        // The Application code to show the new feature
+    } else {
+        // The code to run when the feature is off
+    }
+  })
+  .catch((error) => {
+    // Handle the error
+  });
 ```
 
 </TabItem>
@@ -143,7 +154,7 @@ Those methods are:
 - **`BKTClient#fetchEvaluations()`**
 - **`BKTClient#flush()`**
 
-These methods return `Promise` and might rejects with `BKTException`, so you should make sure to catch the error.
+These methods return `Promise` and might reject with `BKTException``, so you should make sure to catch the error.
 
 ## Supported features
 
@@ -156,7 +167,7 @@ To check which variation a specific user will receive, you can use the client li
 <TabItem value="js" label="JavaScript">
 
 ```js showLineNumbers
-const showNewFeature = client.boolVariation('YOUR_FEATURE_FLAG_ID', false);
+const showNewFeature = client?.booleanVariation('YOUR_FEATURE_FLAG_ID', false);
 if (showNewFeature) {
     // The Application code to show the new feature
 } else {
@@ -181,7 +192,7 @@ The Bucketeer SDK supports the following variation types.
 <TabItem value="js" label="JavaScript">
 
 ```js showLineNumbers
-boolVariation(featureId: string, defaultValue: boolean): Promise<boolean>;
+booleanVariation(featureId: string, defaultValue: boolean): Promise<boolean>;
 
 stringVariation(featureId: string, defaultValue: string): Promise<string>;
 
@@ -205,9 +216,9 @@ The fetch method uses the following parameter. Make sure to wait for its complet
 <TabItem value="js" label="JavaScript">
 
 ```js showLineNumbers
-val timeout = 5000
+const timeout = 5000;
 
-await client.fetchEvaluations(timeout);
+await client?.fetchEvaluations(timeout);
 ```
 
 </TabItem>
@@ -223,7 +234,7 @@ In addition, you can pass a double value to the goal event. These values will su
 <TabItem value="js" label="JavaScript">
 
 ```js showLineNumbers
-client.track("YOUR_GOAL_ID", 10.50);
+client?.track("YOUR_GOAL_ID", 10.50);
 ```
 
 </TabItem>
@@ -237,7 +248,7 @@ This method will send all pending analytics events to the Bucketeer server as so
 <TabItem value="js" label="JavaScript">
 
 ```js showLineNumbers
-await client.flush();
+await client?.flush();
 ```
 
 </TabItem>
@@ -290,9 +301,9 @@ const attributes = {
   device_model: 'pixel-5',
   language: 'english',
   genre: 'female'
-}
+};
 
-client.updateUserAttributes(attributes);
+client?.updateUserAttributes(attributes);
 ```
 
 </TabItem>
@@ -312,7 +323,7 @@ This method will return the current user configured in the SDK. This is useful w
 <TabItem value="js" label="JavaScript">
 
 ```js showLineNumbers
-const user = client.currentUser();
+const user = client?.currentUser();
 ```
 
 </TabItem>
@@ -326,7 +337,7 @@ This method will return the evaluation details for a specific feature flag. This
 <TabItem value="js" label="JavaScript">
 
 ```js showLineNumbers
-const evaluationDetails = client.evaluationDetails("YOUR_FEATURE_FLAG_ID");
+const evaluationDetails = client?.evaluationDetails("YOUR_FEATURE_FLAG_ID");
 ```
 
 :::note
@@ -348,20 +359,20 @@ The listener can detect both automatic polling and manual fetching.
 
 ```js showLineNumbers
 // Returned value is used when you want to remove listener
-val key = client.addEvaluationUpdateListener(() => {
-  val showNewFeature = client.booleanVariation("YOUR_FEATURE_FLAG_ID", false)
+const key = client?.addEvaluationUpdateListener(() => {
+  const showNewFeature = client?.booleanVariation("YOUR_FEATURE_FLAG_ID", false)
   if (showNewFeature) {
       // The Application code to show the new feature
   } else {
       // The code to run when the feature is off
   }
-})
+});
 
 // Remove a listener associated with the key
-client.removeEvaluationUpdateListener(key)
+client?.removeEvaluationUpdateListener(key);
 
 // Remove all listeners
-client.clearEvaluationUpdateListeners()
+client?.clearEvaluationUpdateListeners();
 ```
 
 </TabItem>
