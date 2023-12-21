@@ -20,14 +20,14 @@ Install the dependency in your application.
 <TabItem value="npm" label="npm">
 
 ```sh showLineNumbers
-npm install @bucketeer/sdk
+npm install @bucketeer/js-client-sdk
 ```
 
 </TabItem>
 <TabItem value="yarn" label="Yarn">
 
 ```sh showLineNumbers
-yarn add @bucketeer/sdk
+yarn add @bucketeer/js-client-sdk
 ```
 
 </TabItem>
@@ -41,7 +41,7 @@ Import the Bucketeer client into your application code.
 <TabItem value="js" label="JavaScript">
 
 ```js showLineNumbers
-import { BKTClient, getBKTClient, defineBKTConfig, defineBKTUser, initializeBKTClient } from '@bucketeer/sdk';
+import { BKTClient, getBKTClient, defineBKTConfig, defineBKTUser, initializeBKTClient } from '@bucketeer/js-client-sdk';
 ```
 
 </TabItem>
