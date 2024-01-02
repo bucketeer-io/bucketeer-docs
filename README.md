@@ -31,8 +31,8 @@ This command generates static content into the `build` directory and can be serv
 GitHub Actions will deploy it automatically to Firebase Hosting.
 
 
-### Run project for different languages
+### Run project locally in different languages
 
 ```
-npm run start -- --locale fr
+npm run start -- --locale ja
 ```
