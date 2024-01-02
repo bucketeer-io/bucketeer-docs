@@ -104,10 +104,28 @@ const sidebars = {
         'feature-flags/creating-feature-flags/create-feature-flag',
         'feature-flags/creating-feature-flags/targeting',
         'feature-flags/creating-feature-flags/manage-variations',
-        'feature-flags/creating-feature-flags/auto-operation',
+        {
+          type: 'category',
+          label: 'Auto operation',
+          link: {
+            type: 'doc',
+            id: 'feature-flags/creating-feature-flags/auto-operation/auto-operation',
+          },
+          items: [
+            'feature-flags/creating-feature-flags/auto-operation/schedule',
+            'feature-flags/creating-feature-flags/auto-operation/rollout',
+            'feature-flags/creating-feature-flags/auto-operation/event-rate',
+          ],
+        },
         'feature-flags/creating-feature-flags/evaluate-results',
         'feature-flags/creating-feature-flags/settings-and-history'
       ],
+    },
+    {
+      type: 'doc',
+      id: 'feature-flags/api-keys',
+      label: 'API Keys',
+      className: 'sidebar-api-keys',
     },
     {
       type: 'category',
@@ -126,31 +144,6 @@ const sidebars = {
     //   label: 'Feature Flags Integration',
     //   className: 'sidebar-feature-flags-integration',
     // },
-    {
-      type: 'html',
-      value: "<span class='sidebar-title'>CONFIGURATION</span>",
-      defaultStyle: true,
-    },
-    {
-      type: 'doc',
-      id: 'configuration/configuration',
-      label: 'Overview',
-      className: 'sidebar-overview',
-    },
-    {
-      type: 'doc',
-      id: 'configuration/api-keys',
-      label: 'API Keys',
-      className: 'sidebar-api-keys',
-    },
-    {
-      type: 'doc',
-      id: 'configuration/account-types',
-      label: 'Account Types',
-      // className: 'sidebar-account-type',
-      className: 'sidebar-account',
-    },
-
     {
       type: 'html',
       value: "<span class='sidebar-title'>SDKS</span>",
