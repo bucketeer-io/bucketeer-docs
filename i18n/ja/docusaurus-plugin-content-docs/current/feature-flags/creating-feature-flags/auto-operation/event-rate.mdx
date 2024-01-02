@@ -1,51 +1,54 @@
 ---
-title: Event rate
-# sidebar_position:
+title: イベント率
 slug: /feature-flags/creating-feature-flags/auto-operation/event-rate
-description: 'Check how the event rate features works in Bucketeer'
-tags: ['guide', 'automation', 'event rate', 'feature-flag']
+description: Bucketeer でのイベントレート機能の動作を確認してください
+tags:
+  - guide
+  - automation
+  - event rate
+  - feature-flag
 ---
 
 import CenteredImg from '@site/src/components/centered-img/CenteredImg';
 
-The event rate condition is designed to turn off flags based on the usage rate. Some popular usage cases for these conditions are:
+イベントレート条件は、使用率に基づいてフラグをオフにするように設計されています。 これらの条件の一般的な使用例は次のとおりです。
 
-- Kill automatically flags causing high error rates.
-- Turn off a flag you use to collect data for analysis. Therefore, the event rate condition can turn the flag off when enough data is collected.
-- Disable a flag that has been visited a certain number of times. Each time a user visits the flag, you can send that event, allowing the system to turn it off for you when it reaches the threshold.
+-   高いエラー率を引き起こすフラグを自動的に消去します。
+-   分析のためにデータを収集するために使用するフラグをオフにします。 したがって、十分なデータが収集されると、イベントレートの状態がフラグをオフにすることができます。
+-   一定回数訪れたフラグを無効にします。 ユーザーがフラグを訪れるたびに、そのイベントを送信できます。 それがしきい値に達したときにシステムを止めることができます
 
-## How the event rate works
+## イベントレートの仕組み
 
-The event rate condition triggers the operation when the frequency of a particular event reaches a specific threshold. For instance, whenever a user visits a flag, you can send an event through the SDK to track that visit. The Bucketeer system then receives these events and keeps track of the frequency of each flag variation. Thus, the system can evaluate the event rate and determine if it needs to turn off a particular flag.
+イベントレート条件は、特定のイベントの頻度が特定のしきい値に達すると操作をトリガーします。 たとえば、ユーザーがフラグを訪れるたびに、SDK経由でイベントを送信して、その訪問を追跡できます。 Bucketeer システムは、これらのイベントを受信し、各フラグのバリエーションの頻度を追跡します。 したがって、システムはイベントレートを評価し、特定のフラグをオフにする必要があるかどうかを判断できます。
 
-To set up the event rate condition, you need to define the following configurations:
+イベントレート条件を設定するには、次の構成を定義する必要があります。
 
-- **Variation**: The specific variation observed by the target user. The event rate will be calculated using the events called using this variation.
-- **Goal**: The goal used to calculate the event rate. The counter of goal events will increase each time the goal is reached.
-- **Condition**: The comparison operator used to assess the event rate. The available options are greater than or equal to (>=) or smaller than or equal to (<=). 
-- **Percentage**: The threshold for the event rate.
-- **Minimum Count**: Minimum number of occurrences required for the condition to be enabled. This option ensures that the event rate is not triggered before a certain number of events happen, avoiding a false positive.
+-   **バリエーション**: ターゲットユーザーが観察した特定のバリエーション。 イベントレートは、このバリエーションを使用して呼び出されるイベントを使用して計算されます。
+-   **ゴール**: イベント率の計算に使用されるゴールを指します。 ゴールに到達する度にゴールイベントのカウンターが増えます。
+-   **条件**: イベントレートを評価するために使用する比較演算子を指します。使用できるオプションは、以上または等しい（>=）もしくは以下または等しい（\<=）です。 使用可能なオプションは(>=) 以上または(\<=) 以下です。 
+-   **パーセンテージ**: イベント率のしきい値を指します。
+-   **最小回数**: 条件を有効にするために必要な発生回数の最小値。 このオプションを使用すると、一定数のイベントが発生する前にイベントレートがトリガーされず、誤検知を回避できます。
 
-## How the event rate is calculated
+## イベント率の計算方法
 
-Bucketeer system uses the following formula to calculate the event rate:
+Bucketeer システムは、イベントレートを計算するために次の数式を使用します:
 
-**Event Rate = (Unique Counter of Goal Events) / (Unique Counter of Evaluation Events)**
+**イベント率 = (ゴールイベントのユニークカウンター) / (評価イベントのユニークカウンター)**
 
-Refer to the [Experiments](/feature-flags/testing-with-flags/experiments) and [Evaluate results](/feature-flags/creating-feature-flags/evaluate-results) sections for a better understanding of the user count of goals and evaluations.
+ゴールおよび評価のユーザーカウントをよりよく理解するために、[エクスペリメント](/feature-flags/testing-with-flags/experiments)と[結果の評価](/feature-flags/creating-feature-flags/evaluate-results)のセクションをご参照ください。
 
-## Setting up auto operation with event rate
+## イベントレートで自動操作を設定する
 
-To add an event rate condition to a feature flag, you need to follow the steps below:
+イベントレートの条件をフィーチャーフラグに追加するには、以下の手順に従う必要があります。
 
-1. Go to the **Auto Operation** page.
-2. Click the **+ Add** button.
-3. The operation setting panel will appear. Choose the **Kill Switch** option.
-4. Select **Event Rate**.
-5. Set up the conditions. Define the variation, goal, condition, threshold, and minimum count.
-6. Click **Submit**. 
+1.  **自動操作** ページに移動します。
+2.  "参加"ボタンを押下します。
+3.  オペレーション設定パネルが表示されます。 **キルスイッチ** オプションを選択します。
+4.  **イベントレート**を選択します。
+5.  条件を設定します。 バリエーション、目標、状態、しきい値、最小カウントを定義します。
+6.  **提出**をクリックします。 
 
-The image below presents an example of event rate configuration. The current configuration's objective is to turn off the feature flag in case of a high error rate above 5%. A minimum count of 500 is used to avoid misleading turn-offs.
+以下の画像は、正しい統合の例を示しています。 現在の設定の目的は、エラー率が5%を超える場合にフィーチャーフラグをオフにすることです。 誤解を招くターンオフを避けるために、500の最小カウントが使用されます。
 
 <CenteredImg
   imgURL="img/feature-flags/auto-ops-rules/event-rate-condition-v3.png"
