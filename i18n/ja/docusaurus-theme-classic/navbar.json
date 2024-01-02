@@ -4,19 +4,19 @@
     "description": "The alt text of navbar logo"
   },
   "item.label.Home": {
-    "message": "Home",
+    "message": "ホーム",
     "description": "Navbar item with label Home"
   },
   "item.label.Getting Started": {
-    "message": "Getting Started",
+    "message": "はじめに",
     "description": "Navbar item with label Getting Started"
   },
   "item.label.SDKs": {
-    "message": "SDKs",
+    "message": "SDK",
     "description": "Navbar item with label SDKs"
   },
   "item.label.Contributing": {
-    "message": "Contributing",
+    "message": "貢献",
     "description": "Navbar item with label Contributing"
   }
 }

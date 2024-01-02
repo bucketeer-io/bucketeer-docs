@@ -66,5 +66,9 @@
   "sidebar.docs.doc.Contributing": {
     "message": "貢献",
     "description": "The label for the doc item Contributing in sidebar docs, linking to the doc contribution-guide/contributing"
+  },
+  "sidebar.docs.category.Auto operation": {
+    "message": "自動オペレーション",
+    "description": "The label for category Auto operation in sidebar docs"
   }
 }
