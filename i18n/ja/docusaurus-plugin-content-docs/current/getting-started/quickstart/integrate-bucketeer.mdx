@@ -1,0 +1,319 @@
+---
+title: Bucketeerへの統合
+sidebar_position: 1
+slug: /getting-started/quickstart/integrate-bucketeer
+description: Describes the steps to integrate the user application with Bucketeer.
+tags: ['guide', 'integration', 'sdk']
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import CenteredImg from '@site/src/components/centered-img/CenteredImg';
+
+Bucketeerをアプリケーションと統合するのは、すべてのSDKで同じで、簡単なプロセスです。
+Bucketeerには複数のSDKがあり、詳細については[SDK]ページをご参照ください。
+Bucketeerをアプリケーションに統合するには、以下のステップに従います：
+
+1. **Bucketeer SDKのインストール**: プロジェクトの依存関係マネージャーを使用して、
+Bucketeer SDKをアプリケーションにインストールまたは実装します。これにより、Bucketeer SDKとその機能にアクセスできます。
+
+<Tabs groupId="integrate-buckteer-platform">
+<TabItem value="kt" label="Android">
+
+```groovy showLineNumbers
+dependencies {
+  implementation 'io.bucketeer:android-client-sdk:LATEST_VERSION'
+}
+```
+
+</TabItem>
+<TabItem value="dart" label="Flutter">
+
+```yaml showLineNumbers
+dependencies:
+  bucketeer_flutter_client_sdk: LATEST_VERSION
+```
+
+</TabItem>
+<TabItem value="swift" label="iOS">
+
+```swift showLineNumbers
+use_frameworks!
+
+target 'YOUR_TARGET_NAME' do
+  pod 'Bucketeer', 'LATEST_VERSION'
+end
+```
+
+</TabItem>
+<TabItem value="js" label="JavaScript (npm)">
+
+```sh showLineNumbers
+npm install @bucketeer/sdk
+```
+
+</TabItem>
+<TabItem value="js-yarn" label="JavaScript (yarn)">
+
+```sh showLineNumbers
+yarn add @bucketeer/sdk
+```
+
+</TabItem>
+<TabItem value="go" label="Go">
+
+```sh showLineNumbers
+comming soon
+```
+
+</TabItem>
+<TabItem value="node-js" label="Node JS">
+
+```sh showLineNumbers
+comming soon
+```
+
+</TabItem>
+</Tabs>
+
+2. **Bucketeerクライアントのインポート**: お使いのアプリケーションのコードで、Bucketeer SDK と Bucketeer サービスとの通信を可能にする主要なインターフェイスである Bucketeer クライアントをインポートします。各 SDK ガイドでは、このステップと前のステップについて詳しく説明しています。詳細については、[SDK](/sdk)ページをご参照ください。
+
+<Tabs groupId="integrate-buckteer-platform">
+<TabItem value="kt" label="Android">
+
+```kotlin showLineNumbers
+import io.bucketeer.sdk.android.*
+```
+
+</TabItem>
+<TabItem value="dart" label="Flutter">
+
+```dart showLineNumbers
+import 'package:bucketeer_flutter_client_sdk/bucketeer_flutter_client_sdk.dart';
+```
+
+</TabItem>
+<TabItem value="swift" label="iOS">
+
+```swift showLineNumbers
+import Bucketeer
+```
+
+</TabItem>
+<TabItem value="js" label="JavaScript">
+
+```js showLineNumbers
+import {
+  BKTClient,
+  getBKTClient,
+  defineBKTConfig,
+  defineBKTUser,
+  initializeBKTClient,
+} from '@bucketeer/sdk';
+```
+
+</TabItem>
+<TabItem value="go" label="Go">
+
+```sh showLineNumbers
+comming soon
+```
+
+</TabItem>
+<TabItem value="node-js" label="Node JS">
+
+```sh showLineNumbers
+comming soon
+```
+
+</TabItem>
+</Tabs>
+
+3. **Bucketeerクライアントの設定と初期化**: 環境の認証情報を提供して Bucketeer クライアントを構成し、
+初期化関数を呼び出します。認証情報は、プロジェクトと環境を一意に識別し、アプリケーションが Bucketeer 
+に接続することを許可します。以下では、それぞれの必要情報についての説明をご覧いただけます：
+
+   - **APIキー**: これは、Bucketeerへのアクセスを許可する一意のキーです。まだ作成していない場合は、[APIキーの作成](/getting-started/quickstart/create-an-api-key) ガイドのステップに従ってAPIキーを作成できます。
+   - **API URL**: 管理者は、ユーザーアカウントの作成時にAPI URLを提供します。これは、アプリケーションがBucketeerのAPIに接続するためのエンドポイントです。
+   - **ユーザーID**: これは、Bucketeerと統合されたアプリケーションを使用するエンドユーザーのIDを指します。ユーザーIDはエンドユーザーに対応しており、管理コンソールやダッシュボードにアクセスするユーザーには対応していないことに注意してください。
+   - **フィーチャータグ**: Bucketeerでフィーチャーフラグを作成する際に、それに関連付けられたタグを定義します。このタグは、Bucketeer内で特定のフラグを識別するのに役立ちます。
+
+
+<Tabs groupId="integrate-buckteer-platform">
+<TabItem value="kt" label="Android">
+
+```kotlin showLineNumbers
+// Configure the SDK
+val config = BKTConfig.builder()
+  .apiKey("YOUR_API_KEY")
+  .apiEndpoint("YOUR_API_ENDPOINT")
+  .featureTag("YOUR_FEATURE_TAG")
+  .build()
+
+val user = BKTUser.builder()
+  .id("USER_ID")
+  .build()
+
+// Initialize the client
+BKTClient.initialize(this.application, config, user)
+val client = BKTClient.getInstance()
+```
+
+</TabItem>
+<TabItem value="dart" label="Flutter">
+
+```dart showLineNumbers
+// Configure the SDK
+final config = BKTConfigBuilder()
+  .apiKey("YOUR_API_KEY")
+  .apiURL("YOUR_API_URL")
+  .featureTag("YOUR_FEATURE_TAG")
+  .build();
+
+final user = BKTUserBuilder
+  .id("USER_ID")
+  .build();
+
+// Initialize the client
+final client = await BKTClient.initialize(config, user);
+```
+
+</TabItem>
+<TabItem value="swift" label="iOS">
+
+```swift showLineNumbers
+// Configure the SDK
+let config = BKTConfig(
+  apiKey: "YOUR_API_KEY",
+  apiURL: "YOUR_API_URL",
+  featureTag: "YOUR_FEATURE_TAG"
+)
+
+let user = BKTUser(id: "USER_ID")
+
+// Initialize the client
+BKTClient.initialize(config: config, user: user)
+```
+
+</TabItem>
+<TabItem value="js" label="JavaScript">
+
+```js showLineNumbers
+// Configure the SDK
+const config = defineBKTConfig({
+  apiKey: 'YOUR_API_KEY',
+  apiEndpoint: 'YOUR_API_URL',
+  featureTag: 'YOUR_FEATURE_TAG',
+  appVersion: 'YOUR_APP_VERSION',
+});
+
+const user = defineBKTUser({
+  id: 'USER_ID',
+});
+
+// Initialize the client
+await initializeBKTClient(config, user);
+const client = getBKTClient();
+```
+
+</TabItem>
+<TabItem value="go" label="Go">
+
+```sh showLineNumbers
+comming soon
+```
+
+</TabItem>
+<TabItem value="node-js" label="Node JS">
+
+```sh showLineNumbers
+comming soon
+```
+
+</TabItem>
+</Tabs>
+
+4. **フィーチャーフラグバリエーションの割り当て**: バリエーションメソッドを使用すると、特定のユーザーに対して
+フラグを有効にするか無効にするかを制御できます。`FLAG_ID`を使用することで、フラグの様々なバリエーションを異な
+るユーザーに関連付けることができます。まだ作成していない場合は、[最初のフィーチャーフラグを作成]ガイドをご覧
+ください。SDKがサーバーにクエリを実行する度に、イベントが生成されます。フラグ呼び出しとバリエーションは、
+サーバーにリアルタイムで保存されます。
+
+<Tabs groupId="integrate-buckteer-platform">
+<TabItem value="kt" label="Android">
+
+```kotlin showLineNumbers
+val showNewFeature = client.booleanVariation("YOUR_FEATURE_FLAG_ID", false)
+if (showNewFeature) {
+    // The Application code to show the new feature
+} else {
+    // The code to run when the feature is off
+}
+```
+
+</TabItem>
+<TabItem value="dart" label="Flutter">
+
+```dart showLineNumbers
+final showNewFeature = await client.boolVariation("YOUR_FEATURE_FLAG_ID", false);
+if (showNewFeature) {
+    // The Application code to show the new feature
+} else {
+    // The code to run if the feature is off
+}
+```
+
+</TabItem>
+<TabItem value="swift" label="iOS">
+
+```swift showLineNumbers
+let client = BKTClient.get()!
+let showNewFeature = client.boolVariation(featureID: "YOUR_FEATURE_FLAG_ID", defaultValue: false)
+if (showNewFeature) {
+    // The Application code to show the new feature
+} else {
+    // The code to run when the feature is off
+}
+```
+
+</TabItem>
+<TabItem value="js" label="JavaScript">
+
+```js showLineNumbers
+const showNewFeature = client.boolVariation('YOUR_FEATURE_FLAG_ID', false);
+if (showNewFeature) {
+  // The Application code to show the new feature
+} else {
+  // The code to run when the feature is off
+}
+```
+
+</TabItem>
+<TabItem value="go" label="Go">
+
+```sh showLineNumbers
+comming soon
+```
+
+</TabItem>
+<TabItem value="node-js" label="Node JS">
+
+```sh showLineNumbers
+comming soon
+```
+
+</TabItem>
+</Tabs>
+
+5. **イベントの確認**: 各フラグには、その使用状況を追跡できるエバリュエーションページがあります。使用状況データを確認するには、ダッシュボードにアクセスし、**フィーチャーフラグ**に進み、目的のフラグを選択して**エバリュエーション**タブに切り替えます。このページに記録されたデータが存在する場合、統合は成功しています。それ以外の場合は、前のステップを見直し、作成したフラグを使用してテストを実行したことを確認してください。以下の画像は、正しい統合の例を示しています。
+
+<CenteredImg
+  imgURL="img/getting-started/quickstart/evaluation-panel-24h.png"
+  alt="Evaluation panel 24h"
+  wSize="100%"
+/>
+
+これらのステップに従うことで、Bucketeerをアプリケーションに正常に統合し、その強力なフィーチャーフラグ
+管理機能を活用することができます。Bucketeerシステムに関連する問題が発生した場合や、ご意見がある場合は、
+[Bucketeerチームまでお問い合わせください](https://app.slack.com/client/T08PSQ7BQ/C043026BME1)。
+また、統合に関連する問題については、管理者にお問い合わせいただくか、もう一度ドキュメントをご参照ください。

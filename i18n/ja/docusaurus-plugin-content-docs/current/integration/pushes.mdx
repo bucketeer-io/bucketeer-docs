@@ -1,0 +1,119 @@
+---
+title: プッシュ
+sidebar_position: 2
+slug: /integration/pushes
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import CenteredImg from '@site/src/components/centered-img/CenteredImg';
+
+Bucketeerでは、Google Firebase Cloud Messaging(FCM)を通して、ユーザーアプリケーションに対してサイレントアップデートを送信するためにプッシュ通知を活用しています。** サイレント通知により、ユーザーアプリケーションは最新のフラグ設定でリアルタイムで自動的に更新されます**。この方法により、ユーザーデータが常に最新の状態に保たれ、通知を受信したユーザー側のアクションを実行することが可能になります。
+
+プッシュ通知を設定するためには、左側のダッシュボードメニューの**設定**にアクセスし、**プッシュ**タブに移動します。ここでは、以前に作成されたプッシュのリストと、**+追加**ボタンを使用して新しいプッシュ通知を作成するオプションがあります。
+
+## プッシュの作成
+
+新しいプッシュを作成する際には、以下の情報を入力する必要があります：
+
+- **名前**： これはプッシュを識別するためのものです。Bucketeerでは説明的な名前の使用を推奨しています。
+
+- **Firebase Cloud Messaging API キー**： このキーは、通知を受け取るユーザーのグループを識別するためのものです。
+
+- **タグ**： モニタリングしたいフラグに関連するタグを追加します。提供されたタグを持つフラグが更新または変更されると、プッシュ通知がトリガーされます。プッシュ通知をトリガーするために、1つまたは複数のタグを選択できます。
+
+
+:::info タグの選択
+プッシュを作成する際に複数のタグを含めることが可能です。しかし、多くの通知を必要とする大規模なユーザーグループの場合、FCMの時間遅延やサーバーの過負荷の恐れがあります。
+
+Bucketeerのチームは、各ユーザーグループに個別のFCM APIキーを採用すること、そして特定のタグを各グループに関連付けることを提案しています。この戦略により、各フラグ修正後の通知数を最小限に抑えることが可能になります。
+:::
+
+<CenteredImg
+  imgURL="img/integration/pushes/create-push.png"
+  alt="Create push"
+  wSize="350px"
+  borderWidth="1px"
+/>
+
+名前、Firebase Cloud Messaging API キー、タグの定義が完了したら、**送信** をクリックしてプッシュを作成します。
+
+## プッシュ通知の制限
+
+プッシュ通知の機能は、エンドユーザーの設定により効果的に動作します。エンドユーザーがiPhoneなどのデバイスにアプリケーションをインストールする際、そのアプリケーションが通知を使用することを許可するよう求められます。 ユーザーがアプリケーションに通知を許可した場合、プッシュ通知は意図した通りに機能します。一方、ユーザーが通知を許可しない場合、プッシュ通知はアプリケーション上で動作しません。プッシュ通知プロセスの概要に関しては、以下のフローチャートをご参照ください。
+
+<CenteredImg
+  imgURL="img/integration/pushes/push_flow.svg"
+  alt="Create push"
+  wSize="550px"
+/>
+
+:::info 自動アップデート
+ユーザーが通知を無効にした場合でも、システムは10分ごとに自動的に更新されます。
+:::
+
+## ユーザーエバリュエーションのリアルタイム更新
+
+プッシュ通知を活用するためには、アプリケーションに関数を実装する必要があります。この関数はFCMからの通知を受け取り、`bucketeer_feature_flag_updated`が`true`であるかどうかを確認します。その場合、`fetchEvaluations`関数を使ってフラグの設定を更新します。以下はこの関数のコード例です。詳細は[SDK](/sdk)ドキュメントの **ユーザーエバリュエーションのリアルタイム更新** セクションをご参照ください。
+
+
+<Tabs groupId="integrate-buckteer-platform">
+<TabItem value="kt" label="Kotlin">
+
+```kotlin showLineNumbers
+override fun onMessageReceived(remoteMessage: RemoteMessage?) {
+  remoteMessage?.data?.also { data ->
+    val isFeatureFlagUpdated = data["bucketeer_feature_flag_updated"]
+    if (isFeatureFlagUpdated) {
+      // The callback will return without waiting until the fetching variation process finishes
+      val timeout = 1000 // Default is 5 seconds
+
+      val future = client.fetchEvaluations(timeout)
+      val error = future.get()
+      if (error == null) {
+        val showNewFeature = client.booleanVariation("YOUR_FEATURE_FLAG_ID", false)
+        if (showNewFeature) {
+            // The Application code to show the new feature
+        } else {
+            // The code to run when the feature is off
+        }
+      } else {
+        // Handle the error
+      }
+    }
+  }
+}
+```
+
+</TabItem>
+<TabItem value="dart" label="Dart">
+
+```dart showLineNumbers
+// TODO
+```
+
+</TabItem>
+<TabItem value="swift" label="Swift">
+
+```swift showLineNumbers
+// Receiving notification in background
+func application(
+  _ application: UIApplication,
+  didReceiveRemoteNotification userInfo: [AnyHashable: Any]
+) async -> UIBackgroundFetchResult {
+  let flag = userInfo["bucketeer_feature_flag_updated"] as? String
+  if flag == "true" {
+    let client = BKTClient.shared
+    let showNewFeature = client.boolVariation(featureId: "YOUR_FEATURE_FLAG_ID", defaultValue: false)
+    if (showNewFeature) {
+        // The Application code to show the new feature
+    } else {
+        // The code to run when the feature is off
+    }
+  }
+  return UIBackgroundFetchResult.newData
+}
+```
+
+</TabItem>
+</Tabs>

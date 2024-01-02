@@ -1,0 +1,43 @@
+---
+title: 最初のフラグを作成
+slug: /getting-started/quickstart/create-your-first-flag
+description: This page guides the user on how to create a API key to be used with a feature flag.
+tags: ['guide', 'feature-flag', 'create']
+---
+
+import CenteredImg from '@site/src/components/centered-img/CenteredImg';
+
+Bucketeerダッシュボードでフィーチャーフラグを作成するには、**フィーチャーフラグ**タブにアクセスします。
+このページには、現在の環境で利用可能なすべての既存のフラグが表示されます。新しいフラグを追加するには、
+**+追加**をクリックします。サイドパネルが画面の右側に表示されます。
+
+フィーチャーフラグを作成するには、サイドパネルのフィールドから以下の情報を提供する必要があります：
+
+- **ID**: この一意の識別子は、アプリケーションにフラグを追加するときにフラグを識別するために使用されます。コード例では、IDは`FLAG_ID`としても参照されます。最大文字数は100文字です。
+- **名前**: フィーチャーフラグを簡単に識別できるように、説明的な名前（最大100文字）を付けてください。
+- **説明**: フラグの目的や使用方法について簡単な説明を加えてください。文字数は100文字以内で簡潔に書いてください。
+- **タグ** (必須): フィーチャーフラグにタグを追加することで、Bucketeerダッシュボードのタグリスト内での検索やサーバーからリクエスト後に返される情報のフィルタリングに役立ちます。
+- **フラグタイプ**: 作成するフラグタイプを指定します。ブール型、文字列型、数値型、JSON型のいずれかです。ブール型フラグは2つのバリエーション（trueとfalse）のみを許可しますが、他のフラグタイプは任意の数のバリエーション（少なくとも2つ）を持つことができます。バリエーションを追加するには、**バリエーションの追加**ボタンを使用します。
+- **バリエーションデータ**: バリエーションごとに、対応する値を指定します。ブール型フラグの場合、バリエーションは「true」と「false」として事前に定義されています。他のフラグタイプの場合、バリエーションごとに値を定義する必要があります。バリエーションの名前と説明は任意ですが、後で確認しやすくするためにお勧めします。
+- **ON／OFFのバリエーション**: フィーチャーフラグがONまたはOFFになった場合に、どちらのバリエーションを返すかをそれぞれ指定します。
+
+以下の画像は、フラグ作成に使用するデータの例です。
+
+<CenteredImg
+  imgURL="img/getting-started/quickstart/create-feature-flag.png"
+  alt="create feature flag panel"
+  wSize="400px"
+  borderWidth="1px"
+/>
+
+フラグを作成すると、**フィーチャーフラグ**ページに表示され、次の図のように**OFF**状態になります。**ON**
+にするには、トグルを使用します。さらに、フラグを統合する際に使用するID (`FLAG_ID`)と、作成時に定義したタ
+グにアクセスできます。以下の例では、`FLAG_ID`は**feature-javascript-e2e-boolean**であり、**javascript**と**web**タグが使用されています。
+
+<CenteredImg
+  imgURL="img/getting-started/quickstart/created-feature-flag.png"
+  alt="created feature flag"
+  borderWidth="1px"
+/>
+
+APIキーと`FLAG_ID`があれば、次のステップに進み、お使いのアプリケーションに[Bucketeerを統合する](/getting-started/quickstart/integrate-bucketeer)ことができます。

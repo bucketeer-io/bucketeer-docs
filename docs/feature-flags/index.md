@@ -15,10 +15,6 @@ This section presents the necessary information to use Bucketeer feature flags. 
 - [Evaluate results](../feature-flags/creating-feature-flags/evaluate-results): Explore how to evaluate and analyze the usage of your flags.
 - [Other flag settings](../feature-flags/creating-feature-flags/settings-and-history): Explore additional settings and options for your flags.
 
-## API keys
-
-The [API keys](/feature-flags/api-keys) describe what they're and how they're used to authenticate and control access to the Bucketeer system.
-
 ## Testing with flags
 
 The [Testing with flags](../feature-flags/testing-with-flags) will cover the three components used to perform tests on the Bucketeer system:

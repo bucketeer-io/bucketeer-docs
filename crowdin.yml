@@ -1,0 +1,10 @@
+project_id: '619760'
+api_token: 71920d310ddf281a4d742dbeae5fba47c3f3c577bbd243c98f2dbfd917dd166e11aa6bcf4235b4e8
+preserve_hierarchy: true
+files:
+  # JSON translation files
+  - source: /i18n/en/**/*
+    translation: /i18n/%two_letters_code%/**/%original_file_name%
+  # Docs Markdown files
+  - source: /docs/**/*
+    translation: /i18n/%two_letters_code%/docusaurus-plugin-content-docs/current/**/%original_file_name%
