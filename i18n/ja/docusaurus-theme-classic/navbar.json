@@ -1,0 +1,22 @@
+{
+  "logo.alt": {
+    "message": "Feature Flag and A/B Testing Managment platform",
+    "description": "The alt text of navbar logo"
+  },
+  "item.label.Home": {
+    "message": "ホーム",
+    "description": "Navbar item with label Home"
+  },
+  "item.label.Getting Started": {
+    "message": "はじめに",
+    "description": "Navbar item with label Getting Started"
+  },
+  "item.label.SDKs": {
+    "message": "SDK",
+    "description": "Navbar item with label SDKs"
+  },
+  "item.label.Contributing": {
+    "message": "貢献",
+    "description": "Navbar item with label Contributing"
+  }
+}

@@ -297,7 +297,7 @@ In regular use, you don't need to call the flush method because the events are s
 
 ### User attributes configuration
 
-This feature will give you robust and granular control over what users can see on your application. You can add rules using these attributes on the console UI's feature flag's targeting tab. [See more](#).
+This feature will give you robust and granular control over what users can see on your application. You can add rules using these attributes on the console UI's feature flag's targeting tab. [See more](/feature-flags/creating-feature-flags/targeting#user-attributes).
 
 <Tabs>
 <TabItem value="dart" label="Dart">
@@ -353,7 +353,7 @@ This updating method will override the current data.
 
 ### Getting user information
 
-This method will return the current user configured in the SDK. This is useful when you want to check the current user id and attributes before updating them through [updateUserAttributes](#getting-user-information).
+This method will return the current user configured in the SDK. This is useful when you want to check the current user id and attributes before updating them through [updateUserAttributes](flutter#updating-user-attributes).
 
 <Tabs>
 <TabItem value="dart" label="Dart">

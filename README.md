@@ -29,3 +29,10 @@ This command generates static content into the `build` directory and can be serv
 ### Deployment
 
 GitHub Actions will deploy it automatically to Firebase Hosting.
+
+
+### Run project locally in different languages
+
+```
+npm run start -- --locale ja
+```
