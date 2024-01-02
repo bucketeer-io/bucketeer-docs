@@ -110,12 +110,6 @@ const sidebars = {
       ],
     },
     {
-      type: 'doc',
-      id: 'feature-flags/api-keys',
-      label: 'API Keys',
-      className: 'sidebar-api-keys',
-    },
-    {
       type: 'category',
       label: 'Testing With Flags',
       className: 'sidebar-testing-with-flags',
@@ -132,6 +126,31 @@ const sidebars = {
     //   label: 'Feature Flags Integration',
     //   className: 'sidebar-feature-flags-integration',
     // },
+    {
+      type: 'html',
+      value: "<span class='sidebar-title'>CONFIGURATION</span>",
+      defaultStyle: true,
+    },
+    {
+      type: 'doc',
+      id: 'configuration/configuration',
+      label: 'Overview',
+      className: 'sidebar-overview',
+    },
+    {
+      type: 'doc',
+      id: 'configuration/api-keys',
+      label: 'API Keys',
+      className: 'sidebar-api-keys',
+    },
+    {
+      type: 'doc',
+      id: 'configuration/account-types',
+      label: 'Account Types',
+      // className: 'sidebar-account-type',
+      className: 'sidebar-account',
+    },
+
     {
       type: 'html',
       value: "<span class='sidebar-title'>SDKS</span>",

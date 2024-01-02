@@ -33,6 +33,14 @@ const config = {
   i18n: {
     defaultLocale: 'en',
     locales: [ 'en', 'ja' ],
+    localeConfigs: {
+      en: {
+        label: 'English',
+      },
+      ja: {
+        label: 'Japanese',
+      },
+    },
   },
 
   presets: [
@@ -134,6 +142,11 @@ const config = {
             position: 'right',
             className: 'header-slack-link',
             'aria-label': 'Bucketeer Slack - Join the conversation',
+          },
+          {
+            type: 'localeDropdown',
+            position: 'right',
+            className: 'language_dropdown'
           },
         ],
       },

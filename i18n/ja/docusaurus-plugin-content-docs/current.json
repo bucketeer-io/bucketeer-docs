@@ -1,0 +1,70 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.docs.category.Quickstart": {
+    "message": "クイックスタート",
+    "description": "The label for category Quickstart in sidebar docs"
+  },
+  "sidebar.docs.category.Creating Feature Flags": {
+    "message": "フィーチャーフラグの作成",
+    "description": "The label for category Creating Feature Flags in sidebar docs"
+  },
+  "sidebar.docs.category.Testing With Flags": {
+    "message": "フラグを使用したテスト",
+    "description": "The label for category Testing With Flags in sidebar docs"
+  },
+  "sidebar.docs.category.Client": {
+    "message": "クライアント",
+    "description": "The label for category Client in sidebar docs"
+  },
+  "sidebar.docs.category.Server": {
+    "message": "サーバー",
+    "description": "The label for category Server in sidebar docs"
+  },
+  "sidebar.docs.category.Documentation Style": {
+    "message": "Documentation Style",
+    "description": "The label for category Documentation Style in sidebar docs"
+  },
+  "sidebar.docs.doc.Bucketeer Docs": {
+    "message": "Bucketeer ドキュメント",
+    "description": "The label for the doc item Bucketeer Docs in sidebar docs, linking to the doc bucketeer-docs"
+  },
+  "sidebar.docs.doc.Introduction": {
+    "message": "概要",
+    "description": "The label for the doc item Introduction in sidebar docs, linking to the doc getting-started/introduction"
+  },
+  "sidebar.docs.doc.Create an account": {
+    "message": "アカウントの作成",
+    "description": "The label for the doc item Create an account in sidebar docs, linking to the doc getting-started/create-an-account"
+  },
+  "sidebar.docs.doc.Bucketeer Vocabulary": {
+    "message": "Bucketeer用語",
+    "description": "The label for the doc item Bucketeer Vocabulary in sidebar docs, linking to the doc getting-started/bucketeer-vocabulary"
+  },
+  "sidebar.docs.doc.Overview": {
+    "message": "概要",
+    "description": "The label for the doc item Overview in sidebar docs, linking to the doc integration/index"
+  },
+  "sidebar.docs.doc.API Keys": {
+    "message": "API キー",
+    "description": "The label for the doc item API Keys in sidebar docs, linking to the doc feature-flags/api-keys"
+  },
+  "sidebar.docs.doc.Pushes": {
+    "message": "プッシュ",
+    "description": "The label for the doc item Pushes in sidebar docs, linking to the doc integration/pushes"
+  },
+  "sidebar.docs.doc.Notifications": {
+    "message": "通知",
+    "description": "The label for the doc item Notifications in sidebar docs, linking to the doc integration/notifications"
+  },
+  "sidebar.docs.doc.Optimize with tags": {
+    "message": "タグを使用して最適化する",
+    "description": "The label for the doc item Optimize with tags in sidebar docs, linking to the doc best-practices/optimize-bucketeer-with-tags"
+  },
+  "sidebar.docs.doc.Contributing": {
+    "message": "貢献",
+    "description": "The label for the doc item Contributing in sidebar docs, linking to the doc contribution-guide/contributing"
+  }
+}

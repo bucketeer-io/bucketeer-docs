@@ -1,0 +1,36 @@
+---
+title: APIキーの作成
+slug: /getting-started/quickstart/create-an-api-key
+description: This page guides the user on how to create a API key to be used with a feature flag.
+tags: ['quickstart', 'api-key']
+---
+
+import CenteredImg from '@site/src/components/centered-img/CenteredImg';
+
+
+フィーチャーフラグを使用するには、まずBucketeerのダッシュボード上でAPIキーを作成します。クライアントSDKはサーバ
+ーAPIにアクセスするためにAPIキーを必要とします。これらのキーは認証および承認のために非常に重要です。
+
+これにより、プロジェクトと環境が識別され、アプリケーションが適切なフラグ設定を取得できるようになります。さらに、
+不正アクセスを防止し、フィーチャーフラグシステムの整合性を保つことで、セキュリティを向上させます。
+
+APIキーの作成には、サイドバーから **APIキー** にアクセスしてください。このページには既存のAPIキーがすべて表示さ
+れます。新しいAPIキーの追加には、**+追加**をクリックします。サイドパネルで新しいAPIキーの名前を入力し、**送信**
+をクリックします。APIキー名の文字数は100文字までとなっています。
+
+:::tip
+
+Bucketeerチームは、使用されるシステムに応じてAPIキーを名付けることを推奨しています。これにより、各プロジェクト
+で使用されるAPIキーの識別が容易になります。例えば、フラグをAndroidシステムで使用する場合は、APIキーに**android**という名前を付けます。
+
+:::
+
+<CenteredImg
+  imgURL="img/getting-started/quickstart/create-api-key.png"
+  alt="Account dashboard tab"
+  wSize="100%"
+/>
+
+API キーの作成が完了すると **API キー** ページに表示され、状態が **ON**、つまり使用可能な状態になります。
+そして、次のステップに進み、[最初のフィーチャーフラグを作成]することが可能になります。なお、APIキーの使い方
+について詳しく知りたい場合は、[APIキー](/configuration/api-keys)ページをご覧ください。
