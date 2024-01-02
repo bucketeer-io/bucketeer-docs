@@ -1,39 +1,42 @@
 ---
-title: Schedule
-# sidebar_position:
+title: スケジュール
 slug: /feature-flags/creating-feature-flags/auto-operation/schedule
-description: 'Check how the schedule features works in bucketeer. Use it to release or remove a flag variation.'
-tags: ['guide', 'automation', 'schedule', 'feature-flag']
+description: スケジュール機能が Bucketer でどのように機能するかを確認してください。 フラグのバリエーションを解放または削除するために使用します。
+tags:
+  - guide
+  - automation
+  - schedule
+  - feature-flag
 ---
 
 import CenteredImg from '@site/src/components/centered-img/CenteredImg';
 
-The schedule solution is designed to deliver or remove a feature at a specific date and time. Therefore, you can use it to release a new feature for holidays or special promotions, for example. The same solution can be used to remove the temporary feature after the holidays or to turn off a beta feature after a certain period.
+スケジュールソリューションは、特定の日時に機能を提供または削除するように設計されています。 したがって、休日や特別なプロモーションなどの新しい機能をリリースするために使用できます。 同じソリューションを使用して、休暇後に一時的な機能を削除したり、一定期間後にベータ機能をオフにしたりできます。
 
-## How the schedule works
+## スケジュールの仕組み
 
-When you use the Bucketeer auto operation with the schedule condition, you will manage your flags based on the date and time you define. When the Bucketeer receives the SDK request, the schedule condition evaluates whether the specified date and time have been reached. If so, the operation of enabling or killing a flag variation is executed. 
+スケジュール条件付きでBucketeerの自動操作を使用する場合、指定した日時に基づいてフラグを管理します。 Bucketeer が SDK リクエストを受け取ると、スケジュール条件は指定された日時に達したかどうかを評価します。 その場合、フラグのバリエーションを有効または無効にする操作が実行されます。 
 
-:::info Schedule requisites and restrictions
+:::info 要件と制限をスケジュールする
 
-To use the schedule condition, you always need to use a future date and time to schedule the operation.  
+スケジュールの条件を使用するには、常に将来の日付と時刻を使用して操作をスケジュールする必要があります。  
 
-You can only have two active operations based on schedule conditions. One will define when to enable and the other when to kill the flag. However, you aren't required to use both operations. You can use only the enable option, for example.
+スケジュール条件に基づいたアクティブなオペレーションは 2 つのみです。 1 つはフラグを有効にするタイミングを定義し、もう 1 つはフラグを無効にするタイミングを定義します。 ただし、両方の操作を使用する必要はありません。 たとえば、有効にするオプションのみを使用できます。
 
 :::
 
-## Setting up auto operation with schedule
+## スケジュールによる自動操作の設定
 
-To release or kill a feature flag using the schedule option, you need to follow the steps below:
+スケジュールオプションを使用して機能フラグを解除または解除するには、以下の手順に従う必要があります。
 
-1. Go to the **Auto Operation** page.
-2. Click the **+ Add** button.
-3. The operation setting panel will appear. Choose the **Enable** operation to release or **Kill Switch** to remove a flag.
-4. Select **Schedule**.
-5. Set up the date and time. Remember, you need to select a future date and time.
-6. Click **Submit**. 
+1.  **自動操作** ページに移動します。
+2.  "参加"ボタンを押下します。
+3.  操作設定パネルが表示されます。 **有効化**を選択してリリースします。またはフラグを削除するには**キルスイッチ**を選択してください。
+4.  **スケジュール** を選択します。
+5.  日付と時刻を設定します。 将来の日付と時刻を選択する必要があることを覚えておいてください。
+6.  **提出**をクリックします。 
 
-The image below presents an example of schedule configuration for enabling a feature flag.
+以下の画像は、機能フラグを有効にするためのスケジュール設定の例です。
 
 <CenteredImg
   imgURL="img/feature-flags/auto-ops-rules/schedule-condition-v3.png"
