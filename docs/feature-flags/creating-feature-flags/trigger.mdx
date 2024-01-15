@@ -51,17 +51,23 @@ When you create a trigger, you will receive a Trigger URL. It's important to cop
 
 :::
 
-The Trigger URL includes the authentication token, so all you need to do to activate the trigger is to perform a POST request using the Trigger URL. You must keep the Trigger URL safe and secure, as anyone with access to it can modify the state of your system flag.
+The Trigger URL includes the authentication token, so all you need to do to activate the trigger is to perform a POST request using the Trigger URL. You must keep the Trigger URL safe and secure, as it contains sensitive information. Anyone with access to the Trigger URL can modify the state of your system flag.
 
 :::warning Trigger URL linkage
 
-In the event of a Trigger URL leak, the Bucketeer team recommends you immediately reset or delete the trigger. Otherwise, anyone with the Trigger URL can modify the state of your application.
+In the event of a Trigger URL leak, the Bucketeer team strongly recommends that you immediately reset or delete the trigger. Otherwise, anyone with the Trigger URL can modify the state of your application.
 
 :::
 
 ### Usage recomendations
 
 When using Bucketeer, it's important to note that triggers don't receive any information from the Webhook request body. In simpler terms, all you need to do to execute a trigger is perform a POST request to the Trigger URL you received when creating the trigger. As a result, Bucketeer is unable to identify the source of the POST request. Therefore, if you're using different tools to manage the flag remotely, it's recommended that you create a distinct trigger for each tool. Doing this lets you easily identify the source of a flag turn-off.
+
+:::note Future releases
+
+Bucketeer has in its roadmap the objective to accept payloads in the Webhook body to enable you to provide additional information regarding the request source. Stay tuned for future releases.
+
+:::
 
 ## Manage triggers
 
