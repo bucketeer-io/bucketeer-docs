@@ -97,4 +97,18 @@ After creating a trigger, you can perform four actions on it through the Buckete
 - **Reset**: Create a new Trigger URL. POST requests using the old Trigger URL will not change the flag state. When you Reset the trigger, the Bucketeer system will provide a new Trigger URL. You should copy and save the Trigger URL to use in your application. 
 - **Delete**: Remove the trigger.
 
+:::info Reset operation
 
+Resetting a trigger does not restart Triggered Times and Last Triggered information.
+
+A new field shows up on the trigger card, informing the date of the last reset.
+
+:::
+
+## Test a trigger
+
+You can make a POST request using the Trigger URL to test a trigger. The code block below presents an example of the code used to perform a request using `curl`:
+
+```curl
+https://dev.bucketeer.jp/webhook/MTQyMDY5OTI0ODc2MQw4yPzGndlkezFEsZE_uPnA
+``` 
