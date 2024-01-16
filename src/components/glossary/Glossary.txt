@@ -1,0 +1,47 @@
+import React, { useState, useRef, useEffect } from 'react';
+import style from './style.css'
+
+export default function Glossary({ word, content }) {
+  const [isPopupVisible, setPopupVisible] = useState(false);
+  const [spaceAtLeft, setSpaceAtLeft] = useState(0);
+  const wordRef = useRef(null);
+
+  const getScreenPosition = () => {
+    const wordRect = wordRef.current.getBoundingClientRect();
+    return {
+      left: wordRect.left,
+    }
+  }
+
+  const handleHover = () => {
+    setPopupVisible(true);
+    const { left } = getScreenPosition();
+    setSpaceAtLeft(left - 30);
+  }
+
+  return (
+    <span className="glossary" ref={wordRef}>
+      <span
+        className="glossary-word"
+        onMouseEnter={handleHover}
+        onMouseLeave={() => setPopupVisible(false)}
+      >
+        {word}
+      </span>
+      {isPopupVisible && (
+        <div
+          // onMouseLeave={() => setPopupVisible(false)}
+          // onMouseEnter={() => setPopupVisible(true)}
+          onClick={() => window.location='how-visual-kpi-works'}
+          className="popup top-arrow"
+          style={{
+            // top: `${spaceAtTop}px`,
+            left: `${spaceAtLeft}px`,
+          }}
+        >
+          {content}
+        </div>
+      )}
+    </span>
+  );
+}
