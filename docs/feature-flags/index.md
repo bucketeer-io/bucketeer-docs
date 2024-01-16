@@ -20,10 +20,6 @@ This section presents the necessary information to use Bucketeer feature flags. 
 
 The [API keys](/feature-flags/api-keys) describe what they're and how they're used to authenticate and control access to the Bucketeer system.
 
-## Testing with flags
+## Audit logs
 
-The [Testing with flags](../feature-flags/testing-with-flags) will cover the three components used to perform tests on the Bucketeer system:
-
-- [Goals](../feature-flags/testing-with-flags/goals): Discover how to define goals for your feature flag experiments to measure their success.
-- [Experiments](../feature-flags/testing-with-flags/experiments): Learn how to set up and run experiments using feature flags to test hypotheses and gather insights.
-- [Experiments results](../feature-flags/testing-with-flags/experiment-results): Explore best practices and techniques for effectively utilizing experiments in your development process.
+The [Audit logs](/feature-flags/audit-logs) presents how you can inspect the modifications and changes performed in your system. Use this feature to inspect and track the source of problems in your system.

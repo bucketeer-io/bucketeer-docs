@@ -41,9 +41,12 @@ const sidebars = {
     {
       type: 'category',
       label: "Quickstart",
+      link: {
+        type: 'doc',
+        id: 'getting-started/quickstart/index',
+      },
       className: 'sidebar-quickstart',
       items: [
-        'getting-started/quickstart/index',
         'getting-started/quickstart/create-an-api-key',
         'getting-started/quickstart/create-your-first-flag',
         'getting-started/quickstart/integrate-bucketeer'
@@ -117,14 +120,28 @@ const sidebars = {
       className: 'sidebar-api-keys',
     },
     {
+      type: 'doc',
+      id: 'feature-flags/audit-logs',
+      label: 'Audit Logs',
+    },
+    
+    {
+      type: 'html',
+      value: "<span class='sidebar-title'>Experimentation</span>",
+      defaultStyle: true,
+    },
+    {
       type: 'category',
       label: 'Testing With Flags',
       className: 'sidebar-testing-with-flags',
+      link: {
+        type: 'doc',
+        id: 'experimentation/index',
+      },
       items: [
-        'feature-flags/testing-with-flags/index',
-        'feature-flags/testing-with-flags/goals',
-        'feature-flags/testing-with-flags/experiments',
-        'feature-flags/testing-with-flags/using-experiments',
+        'experimentation/goals',
+        'experimentation/experiments',
+        'experimentation/using-experiments',
       ],
     },
     // {
@@ -170,28 +187,20 @@ const sidebars = {
       defaultStyle: true,
     },
     {
-      type: 'doc',
-      id: 'integration/index',
-      label: 'Overview',
-      className: 'sidebar-overview',
+      type: 'category',
+      label: 'Tools',
+      link: {
+        type: 'doc',
+        id: 'integration/index',
+      },
+      className: 'sidebar-overview',      
+      items: [
+        'integration/pushes',
+        'integration/notifications',
+      ],
     },
-    {
-      type: 'doc',
-      id: 'integration/pushes',
-      label: 'Pushes',
-      className: 'sidebar-fcm',
-    },
-    {
-      type: 'doc',
-      id: 'integration/notifications',
-      label: 'Notifications',
-      className: 'sidebar-slack',
-    },
-    {
-      type: 'doc',
-      id: 'integration/audit-logs',
-      label: 'Audit Logs',
-    },
+    
+
     {
       type: 'html',
       value: "<span class='sidebar-title'>Best practices</span>",
@@ -217,9 +226,12 @@ const sidebars = {
     {
       type: 'category',
       label: 'Documentation Style',
+      link: {
+        type: 'doc',
+        id: 'contribution-guide/documentation-style/index',
+      },
       className: 'sidebar-documentation-style-guide',
       items: [
-        'contribution-guide/documentation-style/index',
         'contribution-guide/documentation-style/consistency',
         'contribution-guide/documentation-style/voice-and-tone',
         'contribution-guide/documentation-style/formatting-and-organization',
