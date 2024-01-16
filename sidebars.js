@@ -188,6 +188,11 @@ const sidebars = {
       className: 'sidebar-slack',
     },
     {
+      type: 'doc',
+      id: 'integration/audit-logs',
+      label: 'Audit Logs',
+    },
+    {
       type: 'html',
       value: "<span class='sidebar-title'>Best practices</span>",
       defaultStyle: true,
