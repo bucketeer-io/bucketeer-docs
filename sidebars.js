@@ -123,6 +123,7 @@ const sidebars = {
       type: 'doc',
       id: 'feature-flags/audit-logs',
       label: 'Audit Logs',
+      className: 'sidebar-audit-logs',
     },
     
     {

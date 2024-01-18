@@ -6,9 +6,15 @@ description: Use the flag triggers to automatically turn feature flags on or off
 tags: ['log', 'audit-logs']
 ---
 
+import CenteredImg from '@site/src/components/centered-img/CenteredImg';
+
 The Audit Logs feature stores all log history from the current Environment. You can use the logs to identify problems, or who performed modification in your project flags. 
 
 To check the logs, access the **Audit Logs** page from the sidebar menu. To check logs from other environments, you first need to change to the desired environment and then access the Audit Logs page.
+
+<CenteredImg
+  imgURL="img/feature-flags/audit-logs/overview.png"
+/>
 
 ## Filtering logs
 
@@ -18,6 +24,11 @@ To make it easier to inspect and find problems source, the Bucketeer system prov
 
 - **Email**: User email who perform the changed that originated the log, such as changing a flag variation, for example.
 - **Date**: Specify a date range when the logs were created.
+
+<CenteredImg
+  imgURL="img/feature-flags/audit-logs/date.png"
+/>
+
 - **Entity**: Select the type of entity related to the log source. You can use this option to filter logs related only to changes in Goals, for example. The complete list is presented next:
     - Feature Flag
     - Goal
@@ -29,6 +40,10 @@ To make it easier to inspect and find problems source, the Bucketeer system prov
     - Progressive Rollout
     - Push
     - Subscription
+
+<CenteredImg
+  imgURL="img/feature-flags/audit-logs/action.png"
+/>
 
 ### Actions
 
