@@ -39,7 +39,7 @@ The creation of triggers is a straightforward process. Follow the steps below:
 5. Provide a description for the trigger. It's optional. However, the Bucketter team recommends always providing clear descriptions for easy maintenance.
 6. Click **Submit**.
 
-A new trigger will be displayed as in the image below, providing the **Trigger URL**. You should copy and save the Trigger URL to use in your application. 
+A new trigger will be displayed as in the image below, providing the **Trigger URL**. You must copy and store the Trigger URL to use in your application. 
 
 <CenteredImg
   imgURL="img/feature-flags/trigger/flag-trigger.png"
@@ -83,6 +83,7 @@ Each trigger presents the following information:
 - **Trigger URL**: Part of the Trigger URL. As mentioned before, you only have access to the complete trigger URL at the time of trigger creation.
 - **Triggered Times**: Inform the number of times the trigger was used and the associated action was performed. 
 - **Last Triggered**: Inform the date and time the trigger was last used.
+- **Last update**: Inform you about the last time the trigger was updated. This field updates in case of triggers, reset URL, disable/enable, and description update events.   
 
 :::info Triggered execution
 
@@ -96,7 +97,7 @@ After creating a trigger, you can perform four actions on it through the Buckete
 
 - **Edit**: Use this option to update the trigger description. 
 - **Disable**: Deactivate the trigger without removing or changing the Trigger URL. Despite receiving a POST request, the Bucketeer system will not execute the trigger action when disabled.
-- **Reset**: Create a new Trigger URL. POST requests using the old Trigger URL will not change the flag state. When you Reset the trigger, the Bucketeer system will provide a new Trigger URL. You should copy and save the Trigger URL to use in your application. 
+- **Reset**: Create a new Trigger URL. POST requests using the old Trigger URL will not change the flag state. When you Reset the trigger, the Bucketeer system will provide a new Trigger URL. You should copy and store the Trigger URL to use in your application. 
 - **Delete**: Remove the trigger.
 
 :::info Reset operation
