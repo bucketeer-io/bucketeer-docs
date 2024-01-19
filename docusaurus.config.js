@@ -107,6 +107,12 @@ const config = {
             activeBasePath: "contribution-guide/",
           },
           {
+            to: 'changelog',
+            label: 'Changelog',
+            position: 'left',
+            activeBasePath: "/changelog",
+          },
+          {
             type: 'search',
             position: 'right',
           },

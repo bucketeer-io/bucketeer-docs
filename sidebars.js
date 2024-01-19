@@ -245,6 +245,14 @@ const sidebars = {
       ],
     },
   ],
+  changelog: [
+    {
+      type: 'doc',
+      id: 'changelog/changelog',
+      label: 'Bucketeer Changelog',
+      className: 'sidebar-overview',
+    },
+  ]
 }
 
 module.exports = sidebars;
