@@ -108,6 +108,7 @@
 
   --ifm-menu-color-background-hover: rgba(145, 33, 194, 0.05);
   --ifm-menu-color-background-active: rgba(145, 33, 194, 0.05);
+  --docusaurus-details-decoration-color: #5d3597;
 }
 
 .markdown h1 {
@@ -969,4 +970,9 @@ table {
 details {
   border: 1px solid #573792 !important;
   background: #ffffff !important;
+  --docusaurus-details-decoration-color: #573792 !important;
+}
+
+.alert a {
+  text-decoration-color: #573792 !important;
 }
