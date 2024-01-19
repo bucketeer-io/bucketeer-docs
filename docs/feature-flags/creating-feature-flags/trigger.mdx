@@ -30,9 +30,9 @@ CI/CD pipelines can also take advantage of flag triggers. You can use triggers w
 
 ## Create a triggers
 
-The creation of triggers is a straightforward process. Follow the steps below:
+Creating a trigger is a straightforward process. Follow the steps below:
 
-1. Access **Triggers** tab.
+1. Access the **Triggers** tab.
 2. Click **+ Add Trigger**.
 3. Select the **Type**. Currently, only the **Webhook** type is available.
 4. Choose the **Action** the trigger will perform. You can choose between turning the flag ON or OFF.
@@ -97,14 +97,14 @@ After creating a trigger, you can perform four actions on it through the Buckete
 
 - **Edit**: Use this option to update the trigger description. 
 - **Disable**: Deactivate the trigger without removing or changing the Trigger URL. Despite receiving a POST request, the Bucketeer system will not execute the trigger action when disabled.
-- **Reset**: Create a new Trigger URL. POST requests using the old Trigger URL will not change the flag state. When you Reset the trigger, the Bucketeer system will provide a new Trigger URL. You should copy and store the Trigger URL to use in your application. 
+- **Reset**: Create a new Trigger URL. POST requests using the old Trigger URL will not change the flag state. When you reset the trigger, the Bucketeer system will provide a new Trigger URL. You should copy and store the Trigger URL to use in your application. 
 - **Delete**: Remove the trigger.
 
 :::info Reset operation
 
 Resetting a trigger doesn't reset Triggered Times and Last Triggered information.
 
-If you reset a trigger, the reset date will be displayed on the trigger card. This way you can quickly check if a trigger was reseted before and when it was done.
+If you reset a trigger, the reset date will be displayed on the trigger card. This way, you can quickly check if a trigger was reset before and when it was done.
 
 :::
 
@@ -113,5 +113,5 @@ If you reset a trigger, the reset date will be displayed on the trigger card. Th
 You can make a POST request using the Trigger URL to test a trigger. The code block below presents an example of the code used to perform a request using `curl`:
 
 ```curl
-https://dev.bucketeer.jp/webhook/MTQyMDY5OTI0ODc2MQw4yPzGndlkezFEsZE_uPnA
+curl -X POST https://api.bucketeer.io/webhook/MTQyMDY5OTI0ODc2MQw4yPzGndlkezFEsZE_uPnA
 ``` 
