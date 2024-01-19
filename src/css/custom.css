@@ -978,3 +978,8 @@ details {
 .alert a {
   text-decoration-color: #573792 !important;
 }
+
+details div div {
+  border: none !important;
+  border-top: 1px solid #ddd7e9 !important;
+}
