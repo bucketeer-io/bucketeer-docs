@@ -108,6 +108,7 @@
 
   --ifm-menu-color-background-hover: rgba(145, 33, 194, 0.05);
   --ifm-menu-color-background-active: rgba(145, 33, 194, 0.05);
+  --docusaurus-details-decoration-color: #5d3597;
 }
 
 .markdown h1 {
@@ -345,6 +346,10 @@ code {
 
 .menu__list .menu__list {
   padding-left: 0;
+}
+
+.menu__link .menu__link--active {
+  background-color: #573792;
 }
 
 .menu__list-item-collapsible:hover .menu__link {
@@ -646,6 +651,53 @@ code {
   position: relative;
 }
 
+
+.navbar__items:not(.navbar__items--right)
+  .navbar__link:hover:not(.navbar__link--active):before {
+  content: '■';
+  position: absolute;
+  top: 11px;
+  margin-left: -18px;
+  color: #e439ac;
+  transform: rotate(45deg);
+  font-size: 12px;
+  line-height: 11px;
+}
+
+.navbar__link--active {
+  position: relative;
+  z-index: 1;
+}
+
+.navbar__link--active:before {
+  content: '';
+  position: absolute;
+  top: -19px;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  background-color: #684b9d;
+  z-index: -1;
+}
+
+
+
+/*.menu__link--active.menu__link--sublist {
+  background-color: #573792;
+  color: #FFF;
+}*/
+
+.navbar__items:not(.navbar__items--right) .navbar__link {
+  padding-left: 35px;
+  padding-right: 35px;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.navbar__link:hover {
+  position: relative;
+}
+
 .navbar__items:not(.navbar__items--right)
   .navbar__link:hover:not(.navbar__link--active):before {
   content: '■';
@@ -678,11 +730,6 @@ code {
   background-color: #573792;
   color: #fff;
 }
-
-/*.menu__link--active.menu__link--sublist {
-  background-color: #573792;
-  color: #FFF;
-}*/
 
 .sidebar-title {
   display: block;
@@ -921,6 +968,18 @@ table {
 
 /*-------------------------------- Details configuration ------------------------------  */
 details {
-  border: 1px solid #573792 !important;
+  border: none !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
   background: #ffffff !important;
+  --docusaurus-details-decoration-color: #573792 !important;
+}
+
+.alert a {
+  text-decoration-color: #573792 !important;
+}
+
+details div div {
+  border: none !important;
+  border-top: 1px solid #ddd7e9 !important;
 }
