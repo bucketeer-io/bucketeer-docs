@@ -1,0 +1,161 @@
+---
+title: Bucketeer Docs
+sidebar_position: 1
+slug: /
+description: Describes what the Bucketeer is and its solution. In addition, the page also provides an overview of the main sections covered in the documentation.
+tags: ['home', 'guide', 'presentation', 'overview', 'contact']
+---
+
+import Button from '@site/src/components/button/Button';
+import ButtonShelf from '@site/src/components/button-shelf/ButtonShelf';
+
+# Welcome to Bucketeer docs
+
+Welcome to the Bucketeer documentation site, your comprehensive resource for everything related to the Bucketeer platform, integrations, and SDKs. You will find all the information you need to utilize the Bucketeer solution effectively here. Utilize the convenient navigation buttons below to access the desired sections quickly. Furthermore, this page will provide an in-depth overview of Bucketeer, highlighting its key features and capabilities.
+
+<ButtonShelf>
+  <Button
+    redirect="../getting-started"
+    title="Getting Started"
+    info="Provides a quickstart guide on how to use the Bucketeer solution, covering flag creating and integration to your system."
+  />
+  <Button
+    redirect="../feature-flags"
+    title="Feature Flgs"
+    info="Explain how to create and manage feature flags and execute tests using them."
+  />
+  <Button
+    redirect="../sdk"
+    title="SDK"
+    info="Describes in detail how to integrate the Bucketeer SDK into your system, including server and client applications."
+  />
+  <Button
+    redirect="../contribution-guide/contributing"
+    title="Contribution Guide"
+    info="Presents the process of contributing to the Bucketeer system and includes a style guide for those creating the documentation."
+  />
+</ButtonShelf>
+
+:::info
+
+Due to the renewal of the admin console, we are also renewing the documentation website.
+
+We will update it weekly. Stay tuned!
+
+:::
+
+## What is Bucketeer
+
+Bucketeer is a feature management platform that enables organizations to optimize software development by providing powerful tools. It offers feature flags for controlled feature releases, allowing easy experimentation, A/B testing, and targeted user segmentation. The platform supports beta testing programs, facilitates dynamic configuration changes, and enables dark launches and rolling out releases to specific user groups. With Bucketeer, teams can efficiently manage feature lifecycles, gather valuable user feedback, and make data-driven decisions to enhance the overall user experience.
+
+## What you can do with the Bucketeer solution
+
+<details>
+  <summary><strong>A/B Testing</strong></summary>
+  <p>
+    Bucketeer offers a powerful A/B testing solution beyond superficial changes, allowing teams to test substantial functionality. With the feature management platform, organizations can establish goals and effectively measure the impact of different features.
+  <p>
+  </p>
+    Check how to create <a href="./feature-flags/testing-with-flags/experiments">A/B tests</a> on Bucketeer.
+  </p>
+</details>
+
+<details>
+  <summary><strong>User Targeting</strong></summary>
+  <p>
+    Unlock the potential of highly customized metadata to achieve precise and effective user targeting. By utilizing attributes such as region, age, or email, you can create segments or groups tailored to specific criteria. This level of granularity provides complete control over determining who sees what, empowering you to deliver personalized experiences.
+  </p>
+  <p>
+    Explore how <a href="./feature-flags/creating-feature-flags/targeting">targeting works</a> within Bucketeer.
+  </p>
+</details>
+
+<details>
+  <summary><strong>Prerequisites</strong></summary>
+  <p>
+    Use prerequisites to establish dependencies between flags and improve user targeting. Define the conditions or dependencies between flags, which will determine whether a flag should be evaluated or which variation should be provided to the end user.
+  </p>
+  <p>
+    Learn more about <a href="./feature-flags/creating-feature-flags/targeting#prerequisites">Bucketeer prerequisites functionality</a>.
+  </p>
+</details>
+
+<details>
+  <summary><strong>Kill Switch</strong></summary>
+  <p>
+    No need to revert code to undo a feature release—Bucketeer allows anyone to deactivate any feature at any time instantly. Leveraging feature flags as a kill switch is a common practice for mitigating risks associated with feature releases. With this functionality, product and marketing teams can participate in feature testing and releases without heavy reliance on engineering support. Whether you're conducting tests in production, implementing a canary launch, or preparing to retire a feature, rest easy knowing that it's as simple as flipping a switch.
+  </p>
+  <p>
+    Check how <a href="./feature-flags/creating-feature-flags/auto-operation#how-auto-operation-works">kill switch</a> works on Bucketeer.
+  </p>
+</details>
+
+<details>
+  <summary><strong>Beta Testing</strong></summary>
+  <p>
+    Bucketeer's feature management platform is widely used for efficiently managing beta testing programs at scale. Creating specific groups based on targeting rules allows you to include entire groups or segments in tests as needed. The feedback from beta groups is invaluable, enabling you to validate new features and identify and address bugs before rolling them out to your entire user base.
+  </p>
+  <p>
+    Explore how to use <a href="./feature-flags/creating-feature-flags/targeting#targeting">user groups</a> when targeting with Bucketeer.
+  </p>
+</details>
+
+<details>
+  <summary><strong>Dynamic Configuration</strong></summary>
+  <p>
+    Making changes to configurations for already released products can be a daunting task. However, using feature flags, you can easily configure your application through a user-friendly interface. Instead of relying solely on engineers, anyone from the business team can turn features on or off for the end user. When your application uses feature flags, anyone with the appropriate access level can manage feature releases or modify the application in real time.
+  </p>
+  
+</details>
+
+<details>
+  <summary><strong>Dark Launch</strong></summary>
+  <p>
+    With Bucketeer, you can introduce new features to the production environment without impacting anything by keeping the feature flags off. When the time is right, you can easily enable these features, ensuring a smooth transition.
+  </p>
+</details>
+
+<details>
+  <summary><strong>Rolling Out Releases</strong></summary>
+  <p>
+    Effortlessly roll out new features to a subset of users, such as a dedicated beta tester group, and gather valuable feedback and bug reports from real-world usage scenarios. This allows you to refine and optimize features based on user experiences before launching them to a broader audience.
+  </p>
+  <p>
+    Learn how to create <a href="./feature-flags/creating-feature-flags/targeting#rollout-percentage">roll out releases</a> on Bucketeer.
+  </p>
+</details>
+
+<details>
+  <summary><strong>Trigger Flags Remotly</strong></summary>
+  <p>
+    The ongoing integration of CI/CD and monitoring solutions highlights the growing need for automation in maintaining your application in real time. Utilizing triggers allows you to manage the status of feature flags efficiently and seamlessly integrate them with external solutions like Application Performance Monitoring (APM). By leveraging triggers provided by Bucketter, you can guarantee a prompt and real-time response to any feature-related issues within your system.
+  </p>
+  <p>
+    Learn how to create and use <a href="./feature-flags/creating-feature-flags/triggers">triggers</a> on Bucketeer.
+  </p>
+</details>
+
+<details>
+  <summary><strong>Trunk Base Development</strong></summary>
+  <p>
+    By turning off feature flags and merging feature branches more frequently, teams can reduce the number of work-in-progress branches. This approach alleviates reviewers' stress and apprehension regarding "big bang releases."
+  </p>
+</details>
+
+<details>
+  <summary><strong>Stealth Features</strong></summary>
+  <p>
+    Over time, older features may conflict with new ones or become obsolete. Bucketeer's platform provides visibility into which features are still in use and who is using them, enabling teams to effectively manage their code base by determining what should be retained.
+  </p>
+</details>
+
+<details>
+  <summary><strong>Audit Log</strong></summary>
+  <p>
+    Bucketeer's feature management platform aids teams in troubleshooting and resolving issues in real-time. With feature flags implemented within their applications, teams can utilize Bucketeer's audit log to identify changes that led to incidents, allowing for prompt resolution and continuous improvement.
+  </p>
+</details>
+
+## Contact the Bucketeer team
+
+If you don't find your answer here, feel free to [contact us](https://app.slack.com/client/T08PSQ7BQ/C043026BME1).

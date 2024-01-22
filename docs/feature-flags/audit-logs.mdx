@@ -1,0 +1,645 @@
+---
+title: Audit Logs
+# sidebar_position:
+slug: /feature-flags/audit-logs
+description: Use the flag triggers to automatically turn feature flags on or off by calling a URL using the POST method.
+tags: ['log', 'audit-logs']
+---
+
+import CenteredImg from '@site/src/components/centered-img/CenteredImg';
+
+The Audit Logs feature stores all log history from the current Environment. You can use the logs to identify problems or who performed modifications in your project flags. 
+
+To check the logs, access the **Audit Logs** page from the sidebar menu. To check logs from other environments, you first need to change to the desired environment and then access the Audit Logs page.
+
+<CenteredImg
+  imgURL="img/feature-flags/audit-logs/overview.png"
+/>
+
+## Filtering logs
+
+By default, the Audit Logs displays the most recent entries. However, you can use the **Sort** button at the top right corner to switch to the **Oldest** first if you need.
+
+Bucketeer system provides several filters you can use to find desired logs, making it easier to inspect and find problem sources. The complete filter options are listed below:
+
+- **Email**: User email who performed the change, such as modifying a flag variation.
+- **Date**: Specify a date range when the logs were created.
+
+<CenteredImg
+  imgURL="img/feature-flags/audit-logs/date.png"
+/>
+
+- **Entity**: Select the type of entity related to the log source. You can use this option to filter logs related only to changes in Goals, for example. The complete list is presented next:
+    - Feature Flag
+    - Goal
+    - Experiment
+    - User Segment
+    - Account
+    - API Key
+    - Auto Operation
+    - Progressive Rollout
+    - Push
+    - Subscription
+
+<CenteredImg
+  imgURL="img/feature-flags/audit-logs/action.png"
+/>
+
+### Actions
+
+Several actions can create a log in Bucketeer. The toggle below contains a table listing all possible actions to generate new logs.
+
+<details >
+  <summary className="bucketeer-details">Check the complete list of actions that generate logs in Bucketter.   </summary>
+  <div>
+    <table>
+      <thead>
+        <tr>
+          <th>Log Source</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>UNKNOWN</td>
+          <td>Log source with an unspecified or unknown cause.</td>
+        </tr>
+        <tr>
+          <td>FEATURE_CREATED</td>
+          <td>A feature has been created.</td>
+        </tr>
+        <tr>
+          <td>FEATURE_RENAMED</td>
+          <td>The name of a feature has been changed.</td>
+        </tr>
+        <tr>
+          <td>FEATURE_ENABLED</td>
+          <td>A feature has been enabled.</td>
+        </tr>
+        <tr>
+          <td>FEATURE_DISABLED</td>
+          <td>A feature has been disabled.</td>
+        </tr>
+        <tr>
+          <td>FEATURE_DELETED</td>
+          <td>A feature has been deleted.</td>
+        </tr>
+        <tr>
+          <td>FEATURE_DESCRIPTION_CHANGED</td>
+          <td>The description of a feature has been changed.</td>
+        </tr>
+        <tr>
+          <td>FEATURE_VARIATION_ADDED</td>
+          <td>A variation has been added to a feature.</td>
+        </tr>
+        <tr>
+          <td>FEATURE_VARIATION_REMOVED</td>
+          <td>A variation has been removed from a feature.</td>
+        </tr>
+        <tr>
+          <td>FEATURE_OFF_VARIATION_CHANGED</td>
+          <td>The off-variation of a feature has been changed.</td>
+        </tr>
+        <tr>
+          <td>VARIATION_VALUE_CHANGED</td>
+          <td>The value of a variation has been changed.</td>
+        </tr>
+        <tr>
+          <td>VARIATION_NAME_CHANGED</td>
+          <td>The name of a variation has been changed.</td>
+        </tr>
+        <tr>
+          <td>VARIATION_DESCRIPTION_CHANGED</td>
+          <td>The description of a variation has been changed.</td>
+        </tr>
+        <tr>
+          <td>VARIATION_USER_ADDED</td>
+          <td>A user has been added to a variation.</td>
+        </tr>
+        <tr>
+          <td>VARIATION_USER_REMOVED</td>
+          <td>A user has been removed from a variation.</td>
+        </tr>
+        <tr>
+          <td>FEATURE_RULE_ADDED</td>
+          <td>A rule has been added to a feature.</td>
+        </tr>
+        <tr>
+          <td>FEATURE_RULE_STRATEGY_CHANGED</td>
+          <td>The strategy of a feature rule has been changed.</td>
+        </tr>
+        <tr>
+          <td>FEATURE_RULE_DELETED</td>
+          <td>A rule has been deleted from a feature.</td>
+        </tr>
+        <tr>
+          <td>RULE_CLAUSE_ADDED</td>
+          <td>A clause has been added to a rule.</td>
+        </tr>
+        <tr>
+          <td>RULE_CLAUSE_DELETED</td>
+          <td>A clause has been deleted from a rule.</td>
+        </tr>
+        <tr>
+          <td>RULE_FIXED_STRATEGY_CHANGED</td>
+          <td>The fixed strategy of a rule has been changed.</td>
+        </tr>
+        <tr>
+          <td>RULE_ROLLOUT_STRATEGY_CHANGED</td>
+          <td>The rollout strategy of a rule has been changed.</td>
+        </tr>
+        <tr>
+          <td>CLAUSE_ATTRIBUTE_CHANGED</td>
+          <td>The attribute of a clause has been changed.</td>
+        </tr>
+        <tr>
+          <td>CLAUSE_OPERATOR_CHANGED</td>
+          <td>The operator of a clause has been changed.</td>
+        </tr>
+        <tr>
+          <td>CLAUSE_VALUE_ADDED</td>
+          <td>A value has been added to a clause.</td>
+        </tr>
+        <tr>
+          <td>CLAUSE_VALUE_REMOVED</td>
+          <td>A value has been removed from a clause.</td>
+        </tr>
+        <tr>
+          <td>FEATURE_DEFAULT_STRATEGY_CHANGED</td>
+          <td>The default strategy of a feature has been changed.</td>
+        </tr>
+        <tr>
+          <td>FEATURE_TAG_ADDED</td>
+          <td>A tag has been added to a feature.</td>
+        </tr>
+        <tr>
+          <td>FEATURE_TAG_REMOVED</td>
+          <td>A tag has been removed from a feature.</td>
+        </tr>
+        <tr>
+          <td>FEATURE_VERSION_INCREMENTED</td>
+          <td>The version of a feature has been incremented.</td>
+        </tr>
+        <tr>
+          <td>FEATURE_ARCHIVED</td>
+          <td>A feature has been archived.</td>
+        </tr>
+        <tr>
+          <td>FEATURE_CLONED</td>
+          <td>A feature has been cloned.</td>
+        </tr>
+        <tr>
+          <td>FEATURE_UNARCHIVED</td>
+          <td>A feature has been unarchived.</td>
+        </tr>
+        <tr>
+          <td>SAMPLING_SEED_RESET</td>
+          <td>The sampling seed has been reset.</td>
+        </tr>
+        <tr>
+          <td>PREREQUISITE_ADDED</td>
+          <td>A prerequisite has been added.</td>
+        </tr>
+        <tr>
+          <td>PREREQUISITE_REMOVED</td>
+          <td>A prerequisite has been removed.</td>
+        </tr>
+        <tr>
+          <td>PREREQUISITE_VARIATION_CHANGED</td>
+          <td>The variation of a prerequisite has been changed.</td>
+        </tr>
+        <tr>
+          <td>GOAL_CREATED</td>
+          <td>A goal has been created.</td>
+        </tr>
+        <tr>
+          <td>GOAL_RENAMED</td>
+          <td>The name of a goal has been changed.</td>
+        </tr>
+        <tr>
+          <td>GOAL_DESCRIPTION_CHANGED</td>
+          <td>The description of a goal has been changed.</td>
+        </tr>
+        <tr>
+          <td>GOAL_DELETED</td>
+          <td>A goal has been deleted.</td>
+        </tr>
+        <tr>
+          <td>GOAL_ARCHIVED</td>
+          <td>A goal has been archived.</td>
+        </tr>
+        <tr>
+          <td>EXPERIMENT_CREATED</td>
+          <td>An experiment has been created.</td>
+        </tr>
+        <tr>
+          <td>EXPERIMENT_STOPPED</td>
+          <td>An experiment has been stopped.</td>
+        </tr>
+        <tr>
+          <td>EXPERIMENT_START_AT_CHANGED</td>
+          <td>The start time of an experiment has been changed.</td>
+        </tr>
+        <tr>
+          <td>EXPERIMENT_STOP_AT_CHANGED</td>
+          <td>The stop time of an experiment has been changed.</td>
+        </tr>
+        <tr>
+          <td>EXPERIMENT_DELETED</td>
+          <td>An experiment has been deleted.</td>
+        </tr>
+        <tr>
+          <td>EXPERIMENT_PERIOD_CHANGED</td>
+          <td>The period of an experiment has been changed.</td>
+        </tr>
+        <tr>
+          <td>EXPERIMENT_NAME_CHANGED</td>
+          <td>The name of an experiment has been changed.</td>
+        </tr>
+        <tr>
+          <td>EXPERIMENT_DESCRIPTION_CHANGED</td>
+          <td>The description of an experiment has been changed.</td>
+        </tr>
+        <tr>
+          <td>EXPERIMENT_STARTED</td>
+          <td>An experiment has started.</td>
+        </tr>
+        <tr>
+          <td>EXPERIMENT_FINISHED</td>
+          <td>An experiment has finished.</td>
+        </tr>
+        <tr>
+          <td>EXPERIMENT_ARCHIVED</td>
+          <td>An experiment has been archived.</td>
+        </tr>
+        <tr>
+          <td>ACCOUNT_CREATED</td>
+          <td>An account has been created.</td>
+        </tr>
+        <tr>
+          <td>ACCOUNT_ROLE_CHANGED</td>
+          <td>The role of an account has been changed.</td>
+        </tr>
+        <tr>
+          <td>ACCOUNT_ENABLED</td>
+          <td>An account has been enabled.</td>
+        </tr>
+        <tr>
+          <td>ACCOUNT_DISABLED</td>
+          <td>An account has been disabled.</td>
+        </tr>
+        <tr>
+          <td>ACCOUNT_DELETED</td>
+          <td>An account has been deleted.</td>
+        </tr>
+        <tr>
+          <td>APIKEY_CREATED</td>
+          <td>An API key has been created.</td>
+        </tr>
+        <tr>
+          <td>APIKEY_NAME_CHANGED</td>
+          <td>The name of an API key has been changed.</td>
+        </tr>
+        <tr>
+          <td>APIKEY_ENABLED</td>
+          <td>An API key has been enabled.</td>
+        </tr>
+        <tr>
+          <td>APIKEY_DISABLED</td>
+          <td>An API key has been disabled.</td>
+        </tr>
+        <tr>
+          <td>SEGMENT_CREATED</td>
+          <td>A segment has been created.</td>
+        </tr>
+        <tr>
+          <td>SEGMENT_DELETED</td>
+          <td>A segment has been deleted.</td>
+        </tr>
+        <tr>
+          <td>SEGMENT_NAME_CHANGED</td>
+          <td>The name of a segment has been changed.</td>
+        </tr>
+        <tr>
+          <td>SEGMENT_DESCRIPTION_CHANGED</td>
+          <td>The description of a segment has been changed.</td>
+        </tr>
+        <tr>
+          <td>SEGMENT_RULE_ADDED</td>
+          <td>A rule has been added to a segment.</td>
+        </tr>
+        <tr>
+          <td>SEGMENT_RULE_DELETED</td>
+          <td>A rule has been deleted from a segment.</td>
+        </tr>
+        <tr>
+          <td>SEGMENT_RULE_CLAUSE_ADDED</td>
+          <td>A clause has been added to a rule in a segment.</td>
+        </tr>
+        <tr>
+          <td>SEGMENT_RULE_CLAUSE_DELETED</td>
+          <td>A clause has been deleted from a rule in a segment.</td>
+        </tr>
+        <tr>
+          <td>SEGMENT_CLAUSE_ATTRIBUTE_CHANGED</td>
+          <td>The attribute of a clause in a segment has been changed.</td>
+        </tr>
+        <tr>
+          <td>SEGMENT_CLAUSE_OPERATOR_CHANGED</td>
+          <td>The operator of a clause in a segment has been changed.</td>
+        </tr>
+        <tr>
+          <td>SEGMENT_CLAUSE_VALUE_ADDED</td>
+          <td>A value has been added to a clause in a segment.</td>
+        </tr>
+        <tr>
+          <td>SEGMENT_CLAUSE_VALUE_REMOVED</td>
+          <td>A value has been removed from a clause in a segment.</td>
+        </tr>
+        <tr>
+          <td>SEGMENT_USER_ADDED</td>
+          <td>A user has been added to a segment.</td>
+        </tr>
+        <tr>
+          <td>SEGMENT_USER_DELETED</td>
+          <td>A user has been deleted from a segment.</td>
+        </tr>
+        <tr>
+          <td>SEGMENT_BULK_UPLOAD_USERS</td>
+          <td>Users have been bulk uploaded to a segment.</td>
+        </tr>
+        <tr>
+          <td>SEGMENT_BULK_UPLOAD_USERS_STATUS_CHANGED</td>
+          <td>The status of a bulk upload of users to a segment has been changed.</td>
+        </tr>
+        <tr>
+          <td>ENVIRONMENT_CREATED</td>
+          <td>An environment has been created.</td>
+        </tr>
+        <tr>
+          <td>ENVIRONMENT_RENAMED</td>
+          <td>The name of an environment has been changed.</td>
+        </tr>
+        <tr>
+          <td>ENVIRONMENT_DESCRIPTION_CHANGED</td>
+          <td>The description of an environment has been changed.</td>
+        </tr>
+        <tr>
+          <td>ENVIRONMENT_DELETED</td>
+          <td>An environment has been deleted.</td>
+        </tr>
+        <tr>
+          <td>ADMIN_ACCOUNT_CREATED</td>
+          <td>An admin account has been created.</td>
+        </tr>
+        <tr>
+          <td>ADMIN_ACCOUNT_ENABLED</td>
+          <td>An admin account has been enabled.</td>
+        </tr>
+        <tr>
+          <td>ADMIN_ACCOUNT_DISABLED</td>
+          <td>An admin account has been disabled.</td>
+        </tr>
+        <tr>
+          <td>AUTOOPS_RULE_CREATED</td>
+          <td>An auto operation rule has been created.</td>
+        </tr>
+        <tr>
+          <td>AUTOOPS_RULE_DELETED</td>
+          <td>An auto operation rule has been deleted.</td>
+        </tr>
+        <tr>
+          <td>AUTOOPS_RULE_OPS_TYPE_CHANGED</td>
+          <td>The operations type of an auto operation rule has been changed.</td>
+        </tr>
+        <tr>
+          <td>AUTOOPS_RULE_CLAUSE_DELETED</td>
+          <td>A clause has been deleted from an auto operation rule.</td>
+        </tr>
+        <tr>
+          <td>AUTOOPS_RULE_TRIGGERED_AT_CHANGED</td>
+          <td>The triggered-at time of an auto operation rule has been changed.</td>
+        </tr>
+        <tr>
+          <td>OPS_EVENT_RATE_CLAUSE_ADDED</td>
+          <td>A clause related to event rate has been added to an auto operation rule.</td>
+        </tr>
+        <tr>
+          <td>OPS_EVENT_RATE_CLAUSE_CHANGED</td>
+          <td>A clause related to event rate has been changed in an auto operation rule.</td>
+        </tr>
+        <tr>
+          <td>DATETIME_CLAUSE_ADDED</td>
+          <td>A datetime clause has been added to an auto operation rule.</td>
+        </tr>
+        <tr>
+          <td>DATETIME_CLAUSE_CHANGED</td>
+          <td>A datetime clause has been changed in an auto operation rule.</td>
+        </tr>
+        <tr>
+          <td>PUSH_CREATED</td>
+          <td>A push notification has been created.</td>
+        </tr>
+        <tr>
+          <td>PUSH_DELETED</td>
+          <td>A push notification has been deleted.</td>
+        </tr>
+        <tr>
+          <td>PUSH_TAGS_ADDED</td>
+          <td>Tags have been added to a push notification.</td>
+        </tr>
+        <tr>
+          <td>PUSH_TAGS_DELETED</td>
+          <td>Tags have been deleted from a push notification.</td>
+        </tr>
+        <tr>
+          <td>PUSH_RENAMED</td>
+          <td>A push notification has been renamed.</td>
+        </tr>
+        <tr>
+          <td>SUBSCRIPTION_CREATED</td>
+          <td>A subscription has been created.</td>
+        </tr>
+        <tr>
+          <td>SUBSCRIPTION_DELETED</td>
+          <td>A subscription has been deleted.</td>
+        </tr>
+        <tr>
+          <td>SUBSCRIPTION_ENABLED</td>
+          <td>A subscription has been enabled.</td>
+        </tr>
+        <tr>
+          <td>SUBSCRIPTION_DISABLED</td>
+          <td>A subscription has been disabled.</td>
+        </tr>
+        <tr>
+          <td>SUBSCRIPTION_SOURCE_TYPE_ADDED</td>
+          <td>A source type has been added to a subscription.</td>
+        </tr>
+        <tr>
+          <td>SUBSCRIPTION_SOURCE_TYPE_DELETED</td>
+          <td>A source type has been deleted from a subscription.</td>
+        </tr>
+        <tr>
+          <td>SUBSCRIPTION_RENAMED</td>
+          <td>A subscription has been renamed.</td>
+        </tr>
+        <tr>
+          <td>ADMIN_SUBSCRIPTION_CREATED</td>
+          <td>An admin subscription has been created.</td>
+        </tr>
+        <tr>
+          <td>ADMIN_SUBSCRIPTION_DELETED</td>
+          <td>An admin subscription has been deleted.</td>
+        </tr>
+        <tr>
+          <td>ADMIN_SUBSCRIPTION_ENABLED</td>
+          <td>An admin subscription has been enabled.</td>
+        </tr>
+        <tr>
+          <td>ADMIN_SUBSCRIPTION_DISABLED</td>
+          <td>An admin subscription has been disabled.</td>
+        </tr>
+        <tr>
+          <td>ADMIN_SUBSCRIPTION_SOURCE_TYPE_ADDED</td>
+          <td>A source type has been added to an admin subscription.</td>
+        </tr>
+        <tr>
+          <td>ADMIN_SUBSCRIPTION_SOURCE_TYPE_DELETED</td>
+          <td>A source type has been deleted from an admin subscription.</td>
+        </tr>
+        <tr>
+          <td>ADMIN_SUBSCRIPTION_RENAMED</td>
+          <td>An admin subscription has been renamed.</td>
+        </tr>
+        <tr>
+          <td>PROJECT_CREATED</td>
+          <td>A project has been created.</td>
+        </tr>
+        <tr>
+          <td>PROJECT_DESCRIPTION_CHANGED</td>
+          <td>The description of a project has been changed.</td>
+        </tr>
+        <tr>
+          <td>PROJECT_ENABLED</td>
+          <td>A project has been enabled.</td>
+        </tr>
+        <tr>
+          <td>PROJECT_DISABLED</td>
+          <td>A project has been disabled.</td>
+        </tr>
+        <tr>
+          <td>PROJECT_TRIAL_CREATED</td>
+          <td>A trial for a project has been created.</td>
+        </tr>
+        <tr>
+          <td>PROJECT_TRIAL_CONVERTED</td>
+          <td>A trial for a project has been converted to a full subscription.</td>
+        </tr>
+        <tr>
+          <td>PROJECT_RENAMED</td>
+          <td>The name of a project has been changed.</td>
+        </tr>
+        <tr>
+          <td>WEBHOOK_CREATED</td>
+          <td>A webhook has been created.</td>
+        </tr>
+        <tr>
+          <td>WEBHOOK_DELETED</td>
+          <td>A webhook has been deleted.</td>
+        </tr>
+        <tr>
+          <td>WEBHOOK_NAME_CHANGED</td>
+          <td>The name of a webhook has been changed.</td>
+        </tr>
+        <tr>
+          <td>WEBHOOK_DESCRIPTION_CHANGED</td>
+          <td>The description of a webhook has been changed.</td>
+        </tr>
+        <tr>
+          <td>WEBHOOK_CLAUSE_ADDED</td>
+          <td>A clause has been added to a webhook.</td>
+        </tr>
+        <tr>
+          <td>WEBHOOK_CLAUSE_CHANGED</td>
+          <td>A clause has been changed in a webhook.</td>
+        </tr>
+        <tr>
+          <td>PROGRESSIVE_ROLLOUT_CREATED</td>
+          <td>A progressive rollout has been created.</td>
+        </tr>
+        <tr>
+          <td>PROGRESSIVE_ROLLOUT_DELETED</td>
+          <td>A progressive rollout has been deleted.</td>
+        </tr>
+        <tr>
+          <td>PROGRESSIVE_ROLLOUT_SCHEDULE_TRIGGERED_AT_CHANGED</td>
+          <td>The scheduled trigger time of a progressive rollout has been changed.</td>
+        </tr>
+        <tr>
+          <td>ORGANIZATION_CREATED</td>
+          <td>An organization has been created.</td>
+        </tr>
+        <tr>
+          <td>ORGANIZATION_NAME_CHANGED</td>
+          <td>The name of an organization has been changed.</td>
+        </tr>
+        <tr>
+          <td>ORGANIZATION_DESCRIPTION_CHANGED</td>
+          <td>The description of an organization has been changed.</td>
+        </tr>
+        <tr>
+          <td>ORGANIZATION_ENABLED</td>
+          <td>An organization has been enabled.</td>
+        </tr>
+        <tr>
+          <td>ORGANIZATION_DISABLED</td>
+          <td>An organization has been disabled.</td>
+        </tr>
+        <tr>
+          <td>ORGANIZATION_ARCHIVED</td>
+          <td>An organization has been archived.</td>
+        </tr>
+        <tr>
+          <td>ORGANIZATION_UNARCHIVED</td>
+          <td>An organization has been unarchived.</td>
+        </tr>
+        <tr>
+          <td>ORGANIZATION_TRIAL_CONVERTED</td>
+          <td>An organization's trial has been converted to a full subscription.</td>
+        </tr>
+        <tr>
+          <td>FLAG_TRIGGER_CREATED</td>
+          <td>A flag trigger has been created.</td>
+        </tr>
+        <tr>
+          <td>FLAG_TRIGGER_RESET</td>
+          <td>A flag trigger has been reset.</td>
+        </tr>
+        <tr>
+          <td>FLAG_TRIGGER_DESCRIPTION_CHANGED</td>
+          <td>The description of a flag trigger has been changed.</td>
+        </tr>
+        <tr>
+          <td>FLAG_TRIGGER_DISABLED</td>
+          <td>A flag trigger has been disabled.</td>
+        </tr>
+        <tr>
+          <td>FLAG_TRIGGER_ENABLED</td>
+          <td>A flag trigger has been enabled.</td>
+        </tr>
+        <tr>
+          <td>FLAG_TRIGGER_DELETED</td>
+          <td>A flag trigger has been deleted.</td>
+        </tr>
+        <tr>
+          <td>FLAG_TRIGGER_USAGE_UPDATED</td>
+          <td>The usage information of a flag trigger has been updated.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</details>
+
+
+
