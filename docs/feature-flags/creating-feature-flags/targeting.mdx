@@ -29,6 +29,12 @@ On the **Targeting** page, you'll find a range of options to customize and contr
 - **Default strategy**: Define the default variation for your flag. This variation is served when no specific targeting rule or prerequisite is met.
 - **Off variation**: Specify the variation that is returned when the flag OFF.
 
+:::info Restriction to change the default strategy 
+
+If you have a [progressive rollout](/feature-flags/creating-feature-flags/auto-operation/progressive-rollout) running on the console, you'll not be able to change the flag default strategy.
+
+:::
+
 The below image presents an example of the **Targeting** page.
 
 <CenteredImg
@@ -91,9 +97,21 @@ Let's consider a real-world example related to a string flag with four variation
 
 The rollout percentage enables you to define rules to evaluate users. When the rule is satisfied, the user will receive the variation you have defined, or you can use a percentage distribution to determine which variation to return. The rules can be based on one or multiple conditions using:
 
-- User attributes.
-- User segments.
-- Date.
+- [User attributes](/feature-flags/creating-feature-flags/targeting#user-attributes)
+- [User segments](/feature-flags/creating-feature-flags/targeting#user-segments)
+- [Date](/feature-flags/creating-feature-flags/targeting#date)
+
+:::info Combine the default strategy with the rollout percentage
+
+In addition to selecting a specific variation as the default strategy, you can use the rollout percentage feature when defining the flag's default strategy.
+
+<CenteredImg
+  imgURL="img/feature-flags/targeting/rollout-combined-with-default-strategy.png"
+  alt="Combine the default strategy with the rollout percentage"
+  wSize="450px"
+/>
+
+:::
 
 ### User attributes
 
