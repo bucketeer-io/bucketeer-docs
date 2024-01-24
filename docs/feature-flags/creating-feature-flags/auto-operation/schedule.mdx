@@ -8,17 +8,17 @@ tags: ['guide', 'automation', 'schedule', 'feature-flag']
 
 import CenteredImg from '@site/src/components/centered-img/CenteredImg';
 
-The schedule solution is designed to deliver or remove a feature at a specific date and time. Therefore, you can use it to release a new feature for holidays or special promotions, for example. The same solution can be used to remove the temporary feature after the holidays or to turn off a beta feature after a certain period.
+The Schedule solution is designed to deliver or remove a feature at a specific date and time. Therefore, you can use it to release a new feature for holidays or special promotions, for example. The same solution can be used to remove the temporary feature after the holidays or to turn off a beta feature after a certain period.
 
 ## How the schedule works
 
-When you use the Bucketeer auto operation with the schedule condition, you will manage your flags based on the date and time you define. When the Bucketeer receives the SDK request, the schedule condition evaluates whether the specified date and time have been reached. If so, the operation of enabling or killing a flag variation is executed. 
+When using the Bucketeer Auto Operation along with the Schedule condition, you can manage your flags based on the specific date and time you define. Once the Bucketeer receives the SDK request, the schedule condition evaluates whether the specified date and time have been reached. If it has, the operation to enable or kill a flag variation is executed.
 
 :::info Schedule requisites and restrictions
 
 To use the schedule condition, you always need to use a future date and time to schedule the operation.  
 
-You can only have two active operations based on schedule conditions. One will define when to enable and the other when to kill the flag. However, you aren't required to use both operations. You can use only the enable option, for example.
+You can only have two active operations based on schedule conditions. One will define when to enable and the other when to kill the flag. However, you aren't required to use both operations. For example, you can use only the enable option.
 
 :::
 
