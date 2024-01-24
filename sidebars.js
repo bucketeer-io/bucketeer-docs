@@ -109,7 +109,7 @@ const sidebars = {
         'feature-flags/creating-feature-flags/manage-variations',
         {
           type: 'category',
-          label: 'Auto operation',
+          label: 'Auto Operation',
           link: {
             type: 'doc',
             id: 'feature-flags/creating-feature-flags/auto-operation/auto-operation',

@@ -1,5 +1,5 @@
 ---
-title: Auto operation
+title: Auto Operation
 # sidebar_position:
 slug: /feature-flags/creating-feature-flags/auto-operation
 description: The Auto Operation feature handles the manipulation of feature flag configurations on your behalf. It executes specific operations automatically based on the conditions set by the user.
@@ -8,33 +8,33 @@ tags: ['guide', 'automation', 'operation', 'feature-flag']
 
 import CenteredImg from '@site/src/components/centered-img/CenteredImg';
 
-The auto operation feature handles the manipulation of feature flag configurations on your behalf. It executes specific operations automatically based on the conditions set by the user.
+The Auto Operation feature handles the manipulation of feature flag configurations on your behalf. It executes specific operations automatically based on the conditions you have set.
 
-To access the auto operation page go to the Feature Flag detail page and click on the **Auto Operation** tab. You can check the active and completed operations.
+On the Feature Flag details page, select the **Auto Operation** tab at the top to check the active and completed operations or to configure new ones.
 
 ## How auto operation works
 
 The auto operation feature consists of two key elements:
 
-- **Operation**: An operation refers to an action that impacts a feature flag. Each action is linked to one or more triggering conditions. When a condition is met, the associated operation's action is executed. Currently, Bucketeer supports two types of operations:
+- **Operation**: An action triggered by one or more conditions. When the condition is met, the action related to the operation is executed. Currently, Bucketeer supports two types of operations:
 
   - **Enable**: Enables the chosen flag when the condition is met. You can release using the **[schedule](/feature-flags/creating-feature-flags/auto-operation/schedule)** or **[progressive rollout](/feature-flags/creating-feature-flags/auto-operation/rollout)** options.
   - **Kill Switch**: Disables the chosen flag when the condition is met. You can disable it using the **[schedule](/feature-flags/creating-feature-flags/auto-operation/schedule)** or **[event rate](/feature-flags/creating-feature-flags/auto-operation/event-rate)**.
 
-- **Condition**: A condition specifies the circumstances under which the operation is triggered. Multiple conditions can be associated with a single killing operation. On the other hand, only one condition can be related to enabling a feature. Similarly, each rollout phase is linked to a condition. It's important to note that the corresponding operation is triggered if any conditions are satisfied.
+- **Condition**: A condition specifies the circumstances under which the operation is triggered. Multiple conditions can be associated with a single killing operation. On the other hand, only one condition can be related to enabling a feature flag. Similarly, each rollout phase is linked to a condition. It's important to note that the corresponding operation is triggered if any conditions are satisfied.
 
-Based on the operations and condition the auto operation works as:
+Based on the operations and conditions, the auto operation works as follows:
 
 1. The server monitors the specified conditions.
 2. When a condition is met, the corresponding operation is executed.
-3. After enabling or disabling the associated flag, the triggered operation's status changes from active to complete.
-4. The operation is moved from the Active to the Completed panel, indicating that it has been executed.
+3. The triggered operation's status changes from **Active** to **Complete** after turning the associated flag ON or OFF.
+4. The operation is moved from the **Active** to the *Completed* panel, indicating that it has been executed.
 
 ## Conditions
 
 As mentioned, a condition must be fulfilled to trigger an auto operation. Currently, Bucketeer provides three condition options, which you can use to configure auto operations in your application:
 
-- [Schedule](/feature-flags/creating-feature-flags/auto-operation/schedule):: Specify the date and time to enable or kill a flag.
-- [Progressive rollout](/feature-flags/creating-feature-flags/auto-operation/rollout): Determine a strategy to release a feature flag variation progressively.
+- [Schedule](/feature-flags/creating-feature-flags/auto-operation/schedule): Specify the date and time to enable or kill a flag.
+- [Progressive rollout](/feature-flags/creating-feature-flags/auto-operation/rollout): Determine a strategy to progressively release a feature flag variation.
 - [Event rate](/feature-flags/creating-feature-flags/auto-operation/event-rate): Define conditions to kill a flag based on the rate of a particular event.
 
