@@ -35,7 +35,7 @@ const sidebars = {
     {
       type: 'doc',
       id: 'getting-started/create-an-account',
-      label: 'Create an account',
+      label: 'Create an Account',
       className: 'sidebar-account',
     },
     {
@@ -133,7 +133,7 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: 'Testing With Flags',
+      label: 'Testing with Flags',
       className: 'sidebar-testing-with-flags',
       link: {
         type: 'doc',
@@ -210,7 +210,7 @@ const sidebars = {
     {
       type: 'doc',
       id: 'best-practices/optimize-bucketeer-with-tags',
-      label: 'Optimize with tags',
+      label: 'Optimize with Tags',
       className: 'sidebar-contributing',
     },
     {
@@ -251,6 +251,16 @@ const sidebars = {
       id: 'changelog/changelog',
       label: 'Bucketeer Changelog',
       className: 'sidebar-overview',
+    },
+    {
+      type: 'category',
+      label: 'Client',
+      className: 'sidebar-client',
+      items: [
+        'changelog/client-side/android',
+        'changelog/client-side/ios',
+        'changelog/client-side/javascript',
+      ],
     },
   ]
 }
