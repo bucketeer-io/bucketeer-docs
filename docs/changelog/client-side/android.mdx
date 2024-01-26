@@ -1,0 +1,117 @@
+---
+title: Android
+slug: /changlog/client-side/android
+toc_max_heading_level: 2
+---
+
+import Divider from '@site/src/components/divider/Divider';
+
+<div style={{display:"none"}}>It's used only for automating the addition of new reseales notes</div>
+
+## [2.1.3](https://github.com/bucketeer-io/android-client-sdk/compare/v2.1.2...v2.1.3) 
+**(2023-10-17)**
+
+### Build System
+- **deps:** update plugin publish to v0.25.3 ([#84](https://github.com/bucketeer-io/android-client-sdk/issues/84)) ([df9f747](https://github.com/bucketeer-io/android-client-sdk/commit/df9f74760fd182735237f7d6c45cebe9d3444117))
+- **deps:** update actions/checkout action to v4 ([#98](https://github.com/bucketeer-io/android-client-sdk/issues/98)) ([a3a6700](https://github.com/bucketeer-io/android-client-sdk/commit/a3a6700a6160659685b7e901e9b062cf5f8b368d))
+- **deps:** update actions/setup-java action to v3.13.0 ([#102](https://github.com/bucketeer-io/android-client-sdk/issues/102)) ([9fb41a7](https://github.com/bucketeer-io/android-client-sdk/commit/9fb41a7819bf145addb96f7c301531f01b0dbfb4))
+
+### Miscellaneous
+- add sdk version to the network requests ([#99](https://github.com/bucketeer-io/android-client-sdk/issues/99)) ([6c6fa90](https://github.com/bucketeer-io/android-client-sdk/commit/6c6fa90b8df78800a45ffeb3db990ba72f7aac38))
+- add the current timeout setting in the TimeoutErrorMetricsEvent ([#91](https://github.com/bucketeer-io/android-client-sdk/issues/91)) ([cd0fbde](https://github.com/bucketeer-io/android-client-sdk/commit/cd0fbde4d5697ad981fa9a1dd0cca6bd54872e00))
+- change timeout type from float to double ([#114](https://github.com/bucketeer-io/android-client-sdk/issues/114)) ([b8054d7](https://github.com/bucketeer-io/android-client-sdk/commit/b8054d7134b3f597c1b45d9da726dd615ee46092))
+
+### Bug Fixes
+- latency seconds field in metrics event ([#90](https://github.com/bucketeer-io/android-client-sdk/issues/90)) ([ff43158](https://github.com/bucketeer-io/android-client-sdk/commit/ff43158ee84541a4184d1787023214bb047d0b75))
+
+### Performance Improvements
+- improve the network traffic and response time ([#88](https://github.com/bucketeer-io/android-client-sdk/issues/88)) ([ee154b4](https://github.com/bucketeer-io/android-client-sdk/commit/ee154b49f3e9cea7d71cf12bdf5c5982b7fd5131))
+
+### Refactoring
+- evaluation data layer ([#89](https://github.com/bucketeer-io/android-client-sdk/issues/89)) ([6f110d3](https://github.com/bucketeer-io/android-client-sdk/commit/6f110d36f323137f4a9956980c39646f6df6df76))
+
+<Divider/>
+
+
+## [2.1.2](https://github.com/bucketeer-io/android-client-sdk/compare/v2.1.1...v2.1.2) 
+**(2023-07-12)**
+
+### Bug Fixes
+- json data expection while converting reason type ([#79](https://github.com/bucketeer-io/android-client-sdk/issues/79)) ([dc4aba9](https://github.com/bucketeer-io/android-client-sdk/commit/dc4aba9a4c0671bc990f211f5bdbb1a209c118d6))
+
+<Divider/>
+
+## [2.1.1](https://github.com/bucketeer-io/android-client-sdk/compare/v2.1.0...v2.1.1) 
+**(2023-07-03)**
+
+### Miscellaneous
+- add variation name property to BKTEvaluation ([#73](https://github.com/bucketeer-io/android-client-sdk/issues/73)) ([87f7e07](https://github.com/bucketeer-io/android-client-sdk/commit/87f7e07e14a13dd40ac5d8fe9a39685912a8eedb))
+
+### Build System
+- **deps:** update androidxlifecycle to v2.6.1 ([#78](https://github.com/bucketeer-io/android-client-sdk/issues/78)) ([d1fc03a](https://github.com/bucketeer-io/android-client-sdk/commit/d1fc03adf09ad482ff07ecf9ef1e662e48fcb479))
+- **deps:** update dependency gradle to v7.6.2 ([#75](https://github.com/bucketeer-io/android-client-sdk/issues/75)) ([1d3d6a9](https://github.com/bucketeer-io/android-client-sdk/commit/1d3d6a97f58eef5157e8c1c2b118deed4b6f756a))
+- **deps:** update plugin kotlinter to v3.15.0 ([#77](https://github.com/bucketeer-io/android-client-sdk/issues/77)) ([60ef581](https://github.com/bucketeer-io/android-client-sdk/commit/60ef581f85c664cea660b7deb2619f1816558b47))
+- **deps:** update plugin publish to v0.25.2 ([#72](https://github.com/bucketeer-io/android-client-sdk/issues/72)) ([58e33cb](https://github.com/bucketeer-io/android-client-sdk/commit/58e33cb6bc8b94b30bec91c7bb8a61023a9bee8e))
+
+<Divider/>
+
+## [2.1.0](https://github.com/bucketeer-io/android-client-sdk/compare/v2.0.0...v2.1.0)
+**(2023-06-13)**
+
+### Features
+- add metadata ([#35](https://github.com/bucketeer-io/android-client-sdk/issues/35)) ([8769920](https://github.com/bucketeer-io/android-client-sdk/commit/8769920d0c2bf4be34f37fadc1fcc152d3140846))
+- add new metrics ([#64](https://github.com/bucketeer-io/android-client-sdk/issues/64)) ([61c574b](https://github.com/bucketeer-io/android-client-sdk/commit/61c574bce617577f18ca3656a73b4f9c1ebbb674))
+- send sdk_version ([#33](https://github.com/bucketeer-io/android-client-sdk/issues/33)) ([f7fd846](https://github.com/bucketeer-io/android-client-sdk/commit/f7fd846b4821bb93564969a3117cef060a371306))
+
+### Miscellaneous
+- change not to duplicate the same metric events ([#68](https://github.com/bucketeer-io/android-client-sdk/issues/68)) ([82f89f7](https://github.com/bucketeer-io/android-client-sdk/commit/82f89f7cebca9972a5e76b25308722f65f9680c7))
+- change the APIs request/response format ([#63](https://github.com/bucketeer-io/android-client-sdk/issues/63)) ([3fca036](https://github.com/bucketeer-io/android-client-sdk/commit/3fca0362e03e0fd6f49f7b811ce461a64946bc8d))
+- force to re-evaluate the user when the custom attributes change ([#59](https://github.com/bucketeer-io/android-client-sdk/issues/59)) ([73508d1](https://github.com/bucketeer-io/android-client-sdk/commit/73508d1642da3c6db052f66a7471032aad56c269))
+- set default value for track interface ([#62](https://github.com/bucketeer-io/android-client-sdk/issues/62)) ([5544bbf](https://github.com/bucketeer-io/android-client-sdk/commit/5544bbfb5dd127a8d2058f5112734543270b2156))
+
+### Build System
+- **deps:** update agp to v7.3.1 ([#26](https://github.com/bucketeer-io/android-client-sdk/issues/26)) ([30c70a5](https://github.com/bucketeer-io/android-client-sdk/commit/30c70a5efde54ebdc8b3652fd5c7a9592b7d707b))
+- **deps:** update kotlin and AGP version ([#70](https://github.com/bucketeer-io/android-client-sdk/issues/70)) ([7b09892](https://github.com/bucketeer-io/android-client-sdk/commit/7b0989223acee12ba69402395411139fdd73f044))
+- **deps:** update actions/setup-java action to v3.11.0 ([#61](https://github.com/bucketeer-io/android-client-sdk/issues/61)) ([e6616a3](https://github.com/bucketeer-io/android-client-sdk/commit/e6616a36e83d5165496920da434853d734a6d8aa))
+- **deps:** update actions/setup-java action to v3.6.0 ([#29](https://github.com/bucketeer-io/android-client-sdk/issues/29)) ([7ba510a](https://github.com/bucketeer-io/android-client-sdk/commit/7ba510ae1c8a4126dab95185317cde14383baeb8))
+- **deps:** update actions/setup-java action to v3.9.0 ([#38](https://github.com/bucketeer-io/android-client-sdk/issues/38)) ([47b226d](https://github.com/bucketeer-io/android-client-sdk/commit/47b226d74859d162b2fa3447c15653705b89bb53))
+- **deps:** update amannn/action-semantic-pull-request action to v5 ([#31](https://github.com/bucketeer-io/android-client-sdk/issues/31)) ([69d45eb](https://github.com/bucketeer-io/android-client-sdk/commit/69d45ebcb7e6888800e3a3e1e294d1385e32a128))
+- **deps:** update dependency androidx.test.ext:junit to v1.5.0 ([#54](
+
+<Divider/>
+
+## [2.0.0](https://github.com/bucketeer-io/android-client-sdk/releases/tag/v2.0.0) 
+
+**(2022-10-04)**
+
+This version brings the **BREAKING CHANGES**.
+
+- Removed the gRPC dependency
+- Improved SDK metrics
+- Changed SDK initialization process
+- Changed the get variation interfaces (`booleanVariation`, `stringVariation`, etc.)
+- Added `flush` interface to manually send events in the DB to the server if needed
+- Added `addEvaluationUpdateListener` interface so the user can listen when the evaluations change in the DB
+- Added background polling (The SDK will continue polling the latest data from the server even if in the background)
+- Now the SDK flushes events when the app enters the background
+
+See [the documentation](https://docs.bucketeer.io/sdk/client-side/android) for the 2.0.0 version.
+
+### Features
+- evaluation update listener ([#5](https://github.com/bucketeer-io/android-client-sdk/issues/5)) ([28c137c](https://github.com/bucketeer-io/android-client-sdk/commit/28c137c184053405c759c7e30c912cf27e9fc119))
+
+### Bug Fixes
+- **deps:** update dependency androidx.appcompat:appcompat to v1.5.1 ([#21](https://github.com/bucketeer-io/android-client-sdk/issues/21)) ([0d69b07](https://github.com/bucketeer-io/android-client-sdk/commit/0d69b0765c56059bdd809bb6a9f171a8ce4fa3ef))
+
+### Miscellaneous
+- change renovate to check for update monthly ([#22](https://github.com/bucketeer-io/android-client-sdk/issues/22)) ([dcd5a8e](https://github.com/bucketeer-io/android-client-sdk/commit/dcd5a8e37d693f17eedf83858d86ca825c1976b8))
+- **deps:** add renovate.json ([#4](https://github.com/bucketeer-io/android-client-sdk/issues/4)) ([9a92fba](https://github.com/bucketeer-io/android-client-sdk/commit/9a92fba6c9a6f103589ebd9188958a62455c0298))
+- **deps:** update actions/setup-java action to v3.5.1 ([#15](https://github.com/bucketeer-io/android-client-sdk/issues/15)) ([83ca4d5](https://github.com/bucketeer-io/android-client-sdk/commit/83ca4d5cac652f39af2a15c6b26fd956c4af5d73))
+- **deps:** update agp to v7.3.0 ([#19](https://github.com/bucketeer-io/android-client-sdk/issues/19)) ([e3085ca](https://github.com/bucketeer-io/android-client-sdk/commit/e3085caa30cfc6a376ac878e4d5967461f9b5552))
+- **deps:** update dependency gradle to v7.5.1 ([#20](https://github.com/bucketeer-io/android-client-sdk/issues/20)) ([70a92cf](https://github.com/bucketeer-io/android-client-sdk/commit/70a92cfd4f15eba00b8d4197e317eed343334471))
+- **deps:** update kotlin to v1.7.20 ([#16](https://github.com/bucketeer-io/android-client-sdk/issues/16)) ([5226188](https://github.com/bucketeer-io/android-client-sdk/commit/522618823b3196568a44c24caf5914264d064f80))
+- **deps:** update plugin ksp to v1.7.20-1.0.6 ([#18](https://github.com/bucketeer-io/android-client-sdk/issues/18)) ([a4eb543](https://github.com/bucketeer-io/android-client-sdk/commit/a4eb543f45722b681084036504ef69ae1a1aa649))
+- remove unused dependencies ([#9](https://github.com/bucketeer-io/android-client-sdk/issues/9)) ([3dc4361](https://github.com/bucketeer-io/android-client-sdk/commit/3dc4361839dad1e7ce61c814cd4cf88dd12ce364))
+- rename endpoint config to apiEndpoint ([#14](https://github.com/bucketeer-io/android-client-sdk/issues/14)) ([0bf267a](https://github.com/bucketeer-io/android-client-sdk/commit/0bf267a3468a67a2fc48536e64748166903a8203))
+- rename to setUserAttributes interface to updateUserAttributes ([#13](https://github.com/bucketeer-io/android-client-sdk/issues/13)) ([b6c05e4](https://github.com/bucketeer-io/android-client-sdk/commit/b6c05e4d5d065eec905f242addb1a1ed3543a256))
+- update POM urls ([#24](https://github.com/bucketeer-io/android-client-sdk/issues/24)) ([06fd0d9](https://github.com/bucketeer-io/android-client-sdk/commit/06fd0d91595e26581b9522a8ac04ae5b970a4b03))
