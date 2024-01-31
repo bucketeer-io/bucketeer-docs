@@ -19,7 +19,7 @@ const sidebars = {
       type: 'doc',
       id: 'bucketeer-docs',
       label: 'Bucketeer Docs',
-      className: 'sidebar-bucketeer-docs',
+      className: 'sidebar-create-bucketeers-account',
     },
     {
       type: 'html',
@@ -253,6 +253,12 @@ const sidebars = {
       className: 'sidebar-overview',
     },
     {
+      type: 'doc',
+      id: 'changelog/core',
+      label: 'Core',
+      className: '.sidebar-bucketeer-docs',
+    },
+    {
       type: 'category',
       label: 'Client',
       className: 'sidebar-client',
@@ -260,6 +266,14 @@ const sidebars = {
         'changelog/client-side/android',
         'changelog/client-side/ios',
         'changelog/client-side/javascript',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Server',
+      className: 'sidebar-server',
+      items: [
+        'changelog/server-side/node-js'
       ],
     },
   ]
