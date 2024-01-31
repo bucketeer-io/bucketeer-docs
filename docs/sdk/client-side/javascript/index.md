@@ -1,5 +1,5 @@
 ---
-title: JavaScript reference
+title: JavaScript
 slug: /sdk/client-side/javascript
 ---
 
@@ -7,6 +7,12 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 This category contains topics explaining how to configure Bucketeer's JavaScript SDK.
+
+:::tip JavaScript SDK Version (Stable)
+
+Bucketeer JavaScript SDK has reached the production stage, offering you a stable and reliable experience.
+
+:::
 
 ## Getting started
 

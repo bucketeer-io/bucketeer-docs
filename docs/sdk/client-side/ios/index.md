@@ -1,5 +1,5 @@
 ---
-title: iOS reference
+title: iOS
 slug: /sdk/client-side/ios
 ---
 
@@ -7,6 +7,12 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 This category contains topics explaining how to configure Bucketeer's iOS SDK.
+
+:::tip iOS SDK Version (Stable)
+
+Bucketeer iOS SDK has reached the production stage, offering you a stable and reliable experience.
+
+:::
 
 :::info Compatibility
 

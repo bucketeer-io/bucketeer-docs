@@ -1,5 +1,5 @@
 ---
-title: Android reference
+title: Android
 slug: /sdk/client-side/android
 ---
 
@@ -7,6 +7,12 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 This category contains topics explaining how to configure Bucketeer's Android SDK.
+
+:::tip Android SDK Version (Stable)
+
+Bucketeer Android SDK has reached the production stage, offering you a stable and reliable experience.
+
+:::
 
 :::info Compatibility
 
