@@ -942,6 +942,12 @@ code {
 
 /*-------------------------------- Tables configuration ------------------------------  */
 
+.center-table {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
 table thead th {
   background-color: #ddd7e9;
   border: none;
