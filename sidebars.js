@@ -194,13 +194,25 @@ const sidebars = {
         type: 'doc',
         id: 'integration/index',
       },
-      className: 'sidebar-overview',      
+      className: 'sidebar-overview',
       items: [
         'integration/pushes',
         'integration/notifications',
       ],
     },
-    
+
+
+    {
+      type: 'html',
+      value: "<span class='sidebar-title'>Reference</span>",
+      defaultStyle: true,
+    },
+    {
+      type: 'doc',
+      id: 'reference/feature-status',
+      label: 'Feature Status',
+      className: 'reference',
+    },
 
     {
       type: 'html',
