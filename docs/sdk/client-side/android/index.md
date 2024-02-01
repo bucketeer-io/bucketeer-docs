@@ -59,7 +59,7 @@ import io.bucketeer.sdk.android.*
 
 Configure the SDK config and user configuration.
 
-:::note
+:::info
 
 The **featureTag** setting is the tag you configure when creating a Feature Flag. It will evaluate all the Feature Flags in the environment when it is not configured.
 
