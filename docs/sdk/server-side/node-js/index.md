@@ -193,7 +193,7 @@ client.track(
 
 ### Finalize client
 
-This method will send all pending analytics events to the Bucketeer server as soon as possible and stop workers. The application should call destroy before the application stops otherwise, the remaining events can be lost.
+This method will send all pending analytics events to the Bucketeer server as soon as possible and stop the workers. The application should call this before the application stops. Otherwise, the remaining events can be lost.
 
 <Tabs>
 <TabItem value="js" label="JavaScript">
