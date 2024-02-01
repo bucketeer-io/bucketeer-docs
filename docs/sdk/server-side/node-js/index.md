@@ -170,7 +170,7 @@ getJsonVariation(user: User, featureId: string, defaultValue: object): Promise<o
 
 ### Reporting custom events
 
-This method lets you save user actions in your application as events. You can connect these events to metrics in the experiments console UI.
+This method lets you save user actions in your application as events. You can connect these events to metrics in the experiments or in the kill switch (auto operation) on the console UI.
 
 In addition, you can pass a number value to the goal event. These values will sum and show as <br />`Value total` on the experiments console UI. This is useful if you have a goal event for tracking how much a user spent on your application buying items, etc.
 
