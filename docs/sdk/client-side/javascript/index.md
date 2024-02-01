@@ -60,10 +60,13 @@ Configure the SDK config and user configuration.
 
 :::info
 
-The **featureTag** setting is the tag you configure when creating a Feature Flag. It will evaluate all the Feature Flags in the environment when it is not configured.<br />
+The **featureTag** setting is the tag you configure when creating a Feature Flag. It will evaluate all the Feature Flags in the environment when it is not configured.
+
 **We strongly recommend** using tags to speed up the evaluation process and reduce the cache size in the client.
 
 :::
+
+All the settings in the example below are required.
 
 <Tabs>
 <TabItem value="js" label="JavaScript">
@@ -91,7 +94,7 @@ Depending on your use, you may want to change the optional configurations availa
 - **pollingInterval** (Minimum 5 minutes. Default is 10 minutes)
 - **eventsFlushInterval** (Default is 30 seconds)
 - **eventsMaxQueueSize** (Default is 50 events)
-- **storageKeyPrefix** (Default is empty) 
+- **storageKeyPrefix** (Default is empty)
 - **userAgent** (Default is `window.navigator.userAgent`)
 - **fetch** (Default is `window.fetch`)
 
