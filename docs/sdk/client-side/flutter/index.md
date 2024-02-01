@@ -116,22 +116,17 @@ final client = BKTClient.instance;
 
 :::info Default timeout
 
-By default, Bucketeer SDK will uses a 30s timeout to fetch data from the server.
+The initialize process default timeout is 5 seconds.
 
 :::
 
-If you want to use the feature flag on Splash or Main views, and the user opens your application for the first time, it may not have enough time to fetch the variations from the Bucketeer server. For this case, we recommend using the `timeout` option in the initialize method. It will block until the SDK receives the latest user variations.
+If you want to use the feature flag on Splash or Main views, the SDK cache may be old or not exist and may not have enough time to fetch the variations from the Bucketeer server. For this case, we recommend using the `timeout` option in the initialize method. It will block until the SDK receives the latest user variations.
 
 :::caution Initialization Timeout error
 
-During the initialization process, errors **are not** related to the initialization itself. Instead, they arise from timeout overflows, indicating the data variations from the server weren't received. It's important to note that the initialization process proceeds as usual, even if such errors occur. Therefore, receiving an error message does not indicate a failure in the initialization process itself.
-
-Even if a timeout error occurs and the SDK fails to fetch data variations during the initialization, the [polling](flutter#polling) feature will attempt to retrieve variation data from the server at regular intervals.
+During the initialization process, errors **are not** related to the initialization itself. Instead, they arise from a timeout request, indicating the variations data from the server weren't received. Therefore, the SDK will work as usual and update the variations in the next [polling](flutter#polling) request.
 
 :::
-
-The following code block illustrates how to use the timeout functionality. In the event of a timeout error, you can present the off variation content to your users or use any other strategy to handle the error when there is no cache or the cache is not updated.
-Otherwise, if the system receives the variation data before the timeout overflow, you can provide the appropriate content to users based on the flag retrieved from the server.
 
 <Tabs>
 <TabItem value="dart" label="Dart">
@@ -158,13 +153,14 @@ if (result.isSuccess) {
 
 #### Polling
 
-The initialize process immediately starts polling the latest evaluations from Bucketeer in the background using the interval `pollingInterval` configuration while the application is in the **foreground state**. When the application changes to the **background state**, it will use the `backgroundPollingInterval` configuration.
+The initialize process immediately starts polling the latest evaluations from the Bucketeer server in the background using the interval `pollingInterval` configuration while the application is in the **foreground state**.
+When the application changes to the **background state**, it will use the `backgroundPollingInterval` configuration.
 
 #### Polling retry behavior
 
-The Bucketeer SDK regularly polls the latest evaluations from Buckteer based on the pollingInterval parameter. By default, the `pollingInterval` is set to 10 minutes, but you can adjust it to suit your needs.
+The Bucketeer SDK regularly polls the latest evaluations from the server based on the pollingInterval parameter. By default, the `pollingInterval` is set to 10 minutes, but you can adjust it to suit your needs.
 
-If a polling request fails, the SDK initiates a retry procedure. The SDK attempts a new polling request every minute up to 5 times. If all five retry attempts fail, the SDK sends a new polling request once the `pollingInterval` time elapses. The table below illustrates this scenario:
+If a polling request fails, the SDK initiates a retry procedure. The SDK attempts a new polling request every minute up to 5 times. If all five retry attempts fail, the SDK sends a new polling request once the `pollingInterval` time elapses. The table below shows this scenario:
 
 <div className="center-table">
 <table>
@@ -215,7 +211,7 @@ If a polling request fails, the SDK initiates a retry procedure. The SDK attempt
 </table>
 </div>
 
-The polling counter, which uses the `pollingInterval` information, resets in case of a successful retry. The table below exemplifies the described scenario.
+The polling counter, which uses the `pollingInterval` information, resets in case of a successful retry. The table below shows the described scenario.
 <div className="center-table">
 <table>
 <thead>
