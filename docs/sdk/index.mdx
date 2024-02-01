@@ -68,34 +68,9 @@ Supported SDKs for client-side:
 
 </div>
 
-### Server-side SDK
+#### Client available features
 
-Server-side SDKs are designed for multi-user systems and intended for use in trusted environments, like corporate networks or web servers. They operate within server-architected applications running on your infrastructure or trusted cloud-based infrastructure. These locations are not directly accessible by end-users. The restricted access of server-based applications allows server-side SDKs to safely receive flag data and rulesets without the need to filter out sensitive information. This setup enables server-side SDKs to receive flag data including rules, and segments safely without filtering out sensitive information.
-
-Supported SDKs for server-side:
-
-<div className="row" style={{maxWidth: '500px'}}>
-
-  <div className="col--3 text--center">
-    <a href="/sdk/server-side/go" className="brand-link">
-      <i className="golang-icon brand-icon"></i>
-      <span>Go</span>
-    </a>
-  </div>
-
-  <div className="col--3 text--center">
-    <a href="/sdk/server-side/node-js" className="brand-link">
-      <i className="nodejs-icon brand-icon"></i>
-      <span>Node.js</span>
-    </a>
-  </div>
-
-</div>
-
-
-## Features available
-
-The table below illustrates all features available in each one of the available SKDs from Bucketeer.
+The table below illustrates all features available in each one of the available Client SDKs.
 
 <div className="center-table">
   <table>
@@ -106,8 +81,6 @@ The table below illustrates all features available in each one of the available 
         <th><a href="/sdk/client-side/ios">iOS</a></th>
         <th><a href="/sdk/client-side/flutter">Flutter</a></th>
         <th><a href="/sdk/client-side/javascript">Javascript</a></th>
-        <th><a href="/sdk/server-side/go">Go</a></th>
-        <th><a href="/sdk/server-side/node-js">Node Js</a></th>
       </tr>
     </thead>
     <tbody>
@@ -190,7 +163,7 @@ The table below illustrates all features available in each one of the available 
       </tr>
       <tr>
         <td>Background mode</td>
-        <td><UncheckSVG/></td>
+        <td><CheckSVG/></td>
         <td><CheckSVG/></td>
         <td><CheckSVG/></td>
         <td><UncheckSVG/></td>
@@ -199,3 +172,76 @@ The table below illustrates all features available in each one of the available 
   </table>
 </div>
 
+
+
+### Server-side SDK
+
+Server-side SDKs are designed for multi-user systems and intended for use in trusted environments, like corporate networks or web servers. They operate within server-architected applications running on your infrastructure or trusted cloud-based infrastructure. These locations are not directly accessible by end-users. The restricted access of server-based applications allows server-side SDKs to safely receive flag data and rulesets without the need to filter out sensitive information. This setup enables server-side SDKs to receive flag data including rules, and segments safely without filtering out sensitive information.
+
+Supported SDKs for server-side:
+
+<div className="row" style={{maxWidth: '500px'}}>
+
+  <div className="col--3 text--center">
+    <a href="/sdk#server-side-sdk" className="brand-link">
+      <i className="golang-icon brand-icon"></i>
+      <span>Go</span>
+    </a>
+  </div>
+
+  <div className="col--3 text--center">
+    <a href="/sdk#server-side-sdk" className="brand-link">
+      <i className="nodejs-icon brand-icon"></i>
+      <span>Node.js</span>
+    </a>
+  </div>
+
+</div>
+
+#### Server available features
+
+The table below illustrates all features available in each one of the available Server SDKs.
+
+<div className="center-table">
+  <table>
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th>Go</th>
+        <th>Node Js</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Evaluating user</td>
+        <td><CheckSVG/></td>
+        <td><CheckSVG/></td>
+      </tr>
+      <tr>
+        <td>Variation types</td>
+        <td><CheckSVG/></td>
+        <td><CheckSVG/></td>
+      </tr>
+      <tr>
+        <td>Reporting custom events</td>
+        <td><CheckSVG/></td>
+        <td><CheckSVG/></td>
+      </tr>
+      <tr>
+        <td>Destroy (same as Flushing events in the client SDK)</td>
+        <td><CheckSVG/></td>
+        <td><CheckSVG/></td>
+      </tr>
+      <tr>
+        <td>Clone</td>
+        <td><CheckSVG/></td>
+        <td><UncheckSVG/></td>
+      </tr>
+      <tr>
+        <td>User attributes configuration</td>
+        <td><CheckSVG/></td>
+        <td><CheckSVG/></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
