@@ -173,7 +173,7 @@ const sidebars = {
         'sdk/client-side/javascript/index',
       ],
     },
-    {
+    /*{
       type: 'category',
       label: 'Server',
       className: 'sidebar-server',
@@ -181,7 +181,7 @@ const sidebars = {
         'sdk/server-side/go/index',
         'sdk/server-side/node-js/index',
       ],
-    },
+    },*/
     {
       type: 'html',
       value: "<span class='sidebar-title'>Integration</span>",
