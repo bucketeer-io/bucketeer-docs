@@ -217,6 +217,16 @@ import { User } from '@bucketeer/node-server-sdk';
 
 const user = User({
   id: 'USER_ID',
+  data: {
+    app_version: '1.0.0',
+    os_version: '11.0.0',
+    device_model: 'pixel-5',
+    language: 'english',
+    genre: 'female'
+  },
+});
+const showNewFeature = await client.getBoolVariation(user, 'YOUR_FEATURE_FLAG_ID', false);
+  id: 'USER_ID',
 	data: {
 		app_version: '1.0.0',
 		os_version: '11.0.0',
