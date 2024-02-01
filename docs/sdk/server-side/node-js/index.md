@@ -147,7 +147,7 @@ if (showNewFeature) {
 
 :::note
 
-The variation method will return the default value if the feature flag is missing in the SDK.
+The variation method will return the default value if the feature flag doesn't exist, or is archived, or if the request fails.
 
 :::
 
