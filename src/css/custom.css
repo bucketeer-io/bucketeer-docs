@@ -941,21 +941,25 @@ code {
 }
 
 /*-------------------------------- Tables configuration ------------------------------  */
+.center-table {
+  display: flex;
+  justify-content: center;
+}
 
-.center-table table {
+.sdk-table table {
   box-sizing: border-box;
   width: 100% !important;
   table-layout: fixed;
 }
 
-.center-table table th {
+.sdk-table table th {
   min-width: 100px;
   width: 100%;
   table-layout: auto;
 }
 
 @media screen and (max-width: 1050px) {
-  .center-table table th {
+  .sdk-table table th {
     min-width: 0;
   }
 }
