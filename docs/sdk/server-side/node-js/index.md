@@ -191,7 +191,7 @@ client.track(
 </TabItem>
 </Tabs>
 
-### Finalize client
+### Destroy client
 
 This method will send all pending analytics events to the Bucketeer server as soon as possible and stop the workers. The application should call this before the application stops. Otherwise, the remaining events can be lost.
 
