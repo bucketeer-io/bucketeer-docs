@@ -94,24 +94,6 @@ const client = initialize(config);
 </TabItem>
 </Tabs>
 
-If you want to use the feature flag on Splash or Main views, and the user opens your application for the first time, it may not have enough time to fetch the variations from the Bucketeer server.
-
-For this case, we recommend using the `Promise` returned from the initialize method. The Promise rejects with `BKTException` when something goes wrong.
-
-<Tabs>
-<TabItem value="js" label="JavaScript">
-
-```js showLineNumbers
-const flag = await client.getBoolVariation(
-	{ id: 'uid', data: {} }, // user info
-	'YOUR_FEATURE_FLAG_ID', // feature id
-	false, // default value
-);
-```
-
-</TabItem>
-</Tabs>
-
 ## Supported features
 
 ### Evaluating user
