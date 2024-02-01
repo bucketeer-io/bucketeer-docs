@@ -1,5 +1,5 @@
 ---
-title: Flutter (Beta)
+title: Flutter
 slug: /sdk/client-side/flutter
 toc_max_heading_level: 4
 ---
@@ -11,9 +11,9 @@ This category contains topics explaining how to configure Bucketeer's Flutter SD
 
 :::caution Flutter SDK Version (Beta)
 
-The Bucketeer Flutter is currently in its Beta stage.
+The Flutter JS SDK is currently in its Beta stage.
 
-If you encounter any issues or have suggestions for improvement, [contact Bucketeer team](https://app.slack.com/client/T08PSQ7BQ/C043026BME1).
+If you find any issues or have suggestions for improvement, feel free to open an [issue](https://github.com/bucketeer-io/flutter-client-sdk/issues).
 
 :::
 
