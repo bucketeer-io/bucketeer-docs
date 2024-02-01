@@ -178,7 +178,14 @@ In addition, you can pass a number value to the goal event. These values will su
 <TabItem value="js" label="JavaScript">
 
 ```js showLineNumbers
-client.track({ id: 'uid', data: {} }, "YOUR_GOAL_ID", 10.50);
+client.track(
+  user: {
+    id: 'USER_ID', 
+    data: {}, // The user attributes are optional
+  },
+  goalId: 'YOUR_GOAL_ID', 
+  value: 10.50,
+);
 ```
 
 </TabItem>
