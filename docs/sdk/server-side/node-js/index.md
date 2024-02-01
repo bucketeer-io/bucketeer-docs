@@ -70,7 +70,7 @@ const config = {
 
 Depending on your use, you may want to change the optional configurations available.
 
-- **pollingIntervalForRegisterEvents** (Default is 1 minutes)
+- **pollingIntervalForRegisterEvents** (Default is 1 minute)
 - **logger** (Default is `logger.DefaultLogger`)
 
 :::
