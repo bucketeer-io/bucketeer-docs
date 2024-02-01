@@ -165,7 +165,7 @@ Once initialization is finished, all the requests in the SDK use a timeout of 30
 
 :::
 
-If you want to use the feature flag on Splash or Main views, the SDK cache may be old or not exist and may not have enough time to fetch the variations from the Bucketeer server. For this case, we recommend using the callback in the initialize method. In addition, you can define a custom timeout.
+If you want to use the feature flag on Splash or Main views, the SDK cache may be old or not exist and may not have enough time to fetch the variations from the Bucketeer server. In this case, we recommend using the callback in the initialize method. In addition, you can define a custom timeout.
 
 :::caution Initialization Timeout error
 

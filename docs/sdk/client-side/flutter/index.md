@@ -124,7 +124,7 @@ Once initialization is finished, all the requests in the SDK use a timeout of 30
 
 :::
 
-If you want to use the feature flag on Splash or Main views, the SDK cache may be old or not exist and may not have enough time to fetch the variations from the Bucketeer server. For this case, we recommend using the `timeout` option in the initialize method. It will block until the SDK receives the latest user variations.
+If you want to use the feature flag on Splash or Main views, the SDK cache may be old or not exist and may not have enough time to fetch the variations from the Bucketeer server. In this case, we recommend using `await` in the initialize method. In addition, you can define a custom timeout.
 
 :::caution Initialization Timeout error
 
@@ -139,16 +139,17 @@ During the initialization process, errors **are not** related to the initializat
 /// It will unlock without waiting until the fetching variation process finishes
 int timeout = 5000;
 
-await BKTClient.initialize(config: config, user: user, timeoutMillis: timeout);
+final result = await BKTClient.initialize(config: config, user: user, timeoutMillis: timeout);
+
 if (result.isSuccess) {
   final client = BKTClient.instance;
   if (showNewFeature) {
-      /// The Application code to show the new feature
+    /// The Application code to show the new feature
   } else {
-      /// The code to run if the feature is off
+    /// The code to run if the feature is off
   }
 } else {
-   /// Handle the error when there is no cache or the cache is not updated
+  /// Handle the error when there is no cache or the cache is not updated
 }
 ```
 
