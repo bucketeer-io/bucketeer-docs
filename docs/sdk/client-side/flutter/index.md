@@ -118,6 +118,8 @@ final client = BKTClient.instance;
 
 The initialize process default timeout is 5 seconds.
 
+Once initialization is finished, all the requests in the SDK use a timeout of 30 seconds.
+
 :::
 
 If you want to use the feature flag on Splash or Main views, the SDK cache may be old or not exist and may not have enough time to fetch the variations from the Bucketeer server. For this case, we recommend using the `timeout` option in the initialize method. It will block until the SDK receives the latest user variations.
