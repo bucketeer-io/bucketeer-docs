@@ -118,7 +118,19 @@ To check which variation a specific user will receive, you can use the client li
 <TabItem value="js" label="JavaScript">
 
 ```js showLineNumbers
-const showNewFeature = client.getBoolVariation(
+const showNewFeature = await client.getBoolVariation(
+  user: User({
+    id: 'USER_ID',
+    data: {}, // The user attributes are optional
+  }),
+  featureId: 'YOUR_FEATURE_FLAG_ID',
+  defaultValue: false
+);
+if (showNewFeature) {
+  // The Application code to show the new feature
+} else {
+  // The code to run when the feature is off
+}
 	{ id: 'uid', data: {} },
 	'YOUR_FEATURE_FLAG_ID',
 	false,
