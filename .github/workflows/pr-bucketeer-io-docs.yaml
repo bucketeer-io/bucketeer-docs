@@ -20,10 +20,3 @@ jobs:
       - name: Yarn Build
         run: |
           yarn build
-      - name: Deploy
-        uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: ${{ secrets.GITHUB_TOKEN }}
-          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_BUCKETEER_IO }}
-          expires: 14d
-          projectId: ${{ secrets.FIREBASE_HOSTING_PROJECT_ID }}
