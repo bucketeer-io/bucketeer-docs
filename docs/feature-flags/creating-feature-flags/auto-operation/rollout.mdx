@@ -8,11 +8,13 @@ tags: ['guide', 'automation', 'rollout', 'progressive rollout']
 
 import CenteredImg from '@site/src/components/centered-img/CenteredImg';
 
-The Progressive Rollout solution automates the release process of new features to your users by gradually providing the flag variation you choose as the [default strategy](/feature-flags/creating-feature-flags/targeting) to a larger percentage of your users. This approach helps you detect problems early on and reduce the impact. 
+The Progressive Rollout solution automates the release process of new features to your users by gradually providing the flag variation you choose as the [default strategy](/feature-flags/creating-feature-flags/targeting) to a larger percentage of your users. This approach helps you detect problems early on and reduce the impact.
 
 ## How rollout works
 
-You need to set two variation flags to use the rollout feature. For example, consider that you have a boolean flag with two variations: `true` and `false`. This flag determines whether new content is available to users or not. Currently, the `false` variation is the [OFF variation](/feature-flags/creating-feature-flags/targeting#the-targeting-page), meaning users can't see the new content. However, you want to make the content available to all users within ten days. In this case, you can use the rollout feature to progressively roll out the `true` variation to 10% of your users daily. 
+The flag must have **two variations** to use the rollout feature. For example, consider that you have a boolean flag with two variations: `true` and `false`. This flag determines whether new content is available to users or not. 
+
+Currently, the `false` variation is the [OFF variation](/feature-flags/creating-feature-flags/targeting#the-targeting-page), meaning users can't see the new content. However, you want to make the content available to all users within ten days. In this case, you can use the rollout feature to progressively roll out the `true` variation to 10% of your users daily. 
 
 On the first day of the rollout, 10% of your users will see the new content. On the second day, 20% will see it, and so on. After ten days, the rollout will be complete, and all users will have access to the new content. The image below summarizes the rollout process described.
 
@@ -27,24 +29,26 @@ On the first day of the rollout, 10% of your users will see the new content. On 
 
 To add a rollout to a feature flag, you need to follow the steps below:
 
-1. Go to the **Auto Operation** page.
+1. Go to the **Auto Operation** tab on the feature Flag page details.
 2. Click the **+ Add** button.
-3. The operation setting panel will appear. Choose the **Enable** operation.
-4. Select **Progreesive Rollout**.
-5. Set up the rollout.
-6. Click **Submit**. 
+3. Choose the **Enable** operation and select **Progressive Rollout**.
+4. Configure the rollout and submit.
 
 :::caution Number of variations
 
-The progressive rollout only works for flags with two variations. 
+The progressive rollout only works for flags with **two variations**. 
 
 :::
 
 :::caution Disabled Flag behaviour
 
-If a progressive rollout is created for a disabled flag, the progressive rollout automatically enables the flags as soon as it starts. The progressive rollout can only enable a flag once, when it starts.
+If the flag is disabled when a progressive rollout is created, the progressive rollout automatically enables the flag as soon as it starts. The progressive rollout can only enable a flag once when it starts.
 
-If a flag with an active progressive rollout is turned OFF, the system will automatically stop the progressive rollout. 
+Please remember that the progressive rollout will be stopped in the following actions:
+
+- If you disable the flag manually.
+- If a Schedule is configured to disable the flag.
+- If the Kill Switch is configured and matches the conditions to disable the flag.
 :::
 
 The rollout provides two main options when setting it up:
@@ -56,7 +60,7 @@ The rollout provides two main options when setting it up:
 
 If you choose to use the Template rollout, you need to define the following configurations before submitting it:
 
-- **Variation**: Choose the variation to roll out. You should not choose the same variation selected as [OFF variation](/feature-flags/creating-feature-flags/targeting#the-targeting-page). Otherwise, you will receive an error message.
+- **Variation**: Choose the variation to roll out. You should not choose the same variation selected as [OFF variation](/feature-flags/creating-feature-flags/targeting#the-targeting-page). Otherwise, it could affect what the end users see.
 - **Start Date**: The rollout starting date and time. 
 - **Increment**: The percentual increment used at each rollout release phase. This option will define, as a result, the total number of rollout releases. If you choose 10%, ten stages are required to reach the total rollout.
 - **Frequency**: The frequency of each rollout phase (hourly, daily, weekly) will be released. The first phase will depend on the **Start Date** value you selected, and the remaining phases will rely on this starting point. 
@@ -78,7 +82,7 @@ When using the Manual rollout, the configurations required to submit the rollout
 - **Weight**: The percentual value of users receiving the selected variation at the selected date. 
 - **Execute at**: The date and time when the rollout phase will be released, updating the percentage of users accessing the selected variation.
 
-Using the Manual rollout, you do not need to follow an incremental rule for each rollout phase. The only restriction is that each new rollout phase must have a higher weight than the previous one. 
+Using the Manual rollout, you do not need to follow an incremental rule for each rollout phase. The only restriction is that each new rollout phase must have a higher **weight** than the previous one and more than **5 minutes** between the rollouts. 
 
 Another important point related to the Manual option is that you don't need to reach 100% to submit the rollout. Suppose the last entry to the Manual configuration is 90%. In this case, the rollout will be concluded, and only 90% of your users will have access to the new variation. The remaining 10% will continue receiving the [OFF variation](/feature-flags/creating-feature-flags/targeting#the-targeting-page), the same as before the rollout.
 
@@ -95,7 +99,7 @@ The image below summarizes an example of a configuration using the Manual config
 
 You can combine the usage of available [auto operations](/feature-flags/creating-feature-flags/auto-operation) from Bucketeer. For example, you can define a progressive rollout, a [schedule](/feature-flags/creating-feature-flags/auto-operation/schedule), and a [event rate](/feature-flags/creating-feature-flags/auto-operation/event-rate) conditions for the same flag. 
 
-It's vital to notice that executing a Kill Switch, triggered by schedule or event rate conditions, has higher priority than the progressive rollout. Therefore, if your flag has a running progressive rollout and a Kill Switch operation is triggered, the system will stop the progressive rollout. The progressive rollout will be moved to the **Finished** tab, where you can check the rollout evolution before being stopped.
+It's vital to note that turning off a flag by schedule or event rate conditions has a higher priority than the progressive rollout. Therefore, if your flag has a running progressive rollout and an Auto Operation is triggered, the system will stop the progressive rollout. The progressive rollout will be moved to the **Finished** tab, where you can check the last rollout state or use it as a reference for future rollouts.
 
 ## Restrictions and rules
 
@@ -103,9 +107,9 @@ Creating and using progressive rollout features come with certain restrictions t
 
 ### Restrictions when creating a rollout
 
-The progressive rollout is designed to work exclusively with flags having two variations. If you try to use it with a flag with more variations, you'll receive an error message during the progressive rollout creation process.
+The progressive rollout is designed to work exclusively with flags having two variations. 
 
-If you create a progressive rollout and the flag default strategy uses a [rollout percentage](/feature-flags/creating-feature-flags/targeting#rollout-percentage), the existing rollout rules will be removed. The default strategy will be reset according to the settings defined during the progressive rollout creation.
+If you create a progressive rollout and the flag default strategy uses a [rollout percentage](/feature-flags/creating-feature-flags/targeting#rollout-percentage), the existing rollout rules will be overridden. The default strategy will be reset according to the settings defined during the progressive rollout creation.
 
 :::info Flag type
 
@@ -122,16 +126,16 @@ If you need to update a flag that has a running progressive rollout associated w
 
 :::info Updating a rollout
 
-Editing a running progressive rollout is not supported in Bucketeer. You can remove or stop the rollout.
+Updating a running progressive rollout is not supported in Bucketeer. You can delete or stop the rollout.
 
-If you remove the rollout, no historical data will be stored. Only logs will report the operations related to that rollout.
+If you delete the rollout, no historical data will be stored. Only logs will be reported on the operations related to that rollout on the Audit Logs page.
 
-When you stop the rollout, it's shut, moving it to the finished tab, where you can inspect the rollout level it reached, for example.
+When you stop the rollout, it will move to the finished tab, where you can check the last rollout state or use it as a reference for future rollouts.
 
 :::
 
-### Operational rules
+### Other Auto Operations
 
-Progressive rollouts can be created for flags, whether they're enabled or disabled. If a progressive rollout is created for a disabled flag, the progressive rollout will automatically enable the flags as soon as it starts.
+Progressive rollouts can be created for flags, whether they're enabled or disabled. 
 
-If a flag with an active progressive rollout is turned OFF, the system will automatically stop the progressive rollout. If the flag is turned OFF by either manual intervention or by the Bucketeer system, the default strategy percentage will retain the last progressive rollout update value. Consequently, if the flag is turned back on in the future, the default strategy percentage will be the last updated value from the deleted progressive rollout.
+If either manual intervention or Auto Operations turn OFF a flag, the default strategy percentage will remain the last progressive rollout update value. Consequently, if the flag is turned back on in the future, the default strategy percentage will be the last updated value when the progressive rollout is stopped.
