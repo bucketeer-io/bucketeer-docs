@@ -9,6 +9,13 @@ import TabItem from '@theme/TabItem';
 
 This category contains topics explaining how to configure Bucketeer's Node.js SDK.
 
+:::caution
+
+Node JS SDK Version (Alpha) The Node JS SDK is currently in its Alpha stage.
+If you find any issues or have suggestions for improvement, feel free to open an [issue](https://github.com/bucketeer-io/node-server-sdk/issues).
+
+:::
+
 ## Getting started
 
 Before starting, ensure that you follow the [Getting Started](/getting-started) guide.
@@ -118,15 +125,6 @@ if (showNewFeature) {
 } else {
   // The code to run when the feature is off
 }
-	{ id: 'uid', data: {} },
-	'YOUR_FEATURE_FLAG_ID',
-	false,
-);
-if (showNewFeature) {
-    // The Application code to show the new feature
-} else {
-    // The code to run when the feature is off
-}
 ```
 
 </TabItem>
@@ -213,16 +211,6 @@ const user = User({
   },
 });
 const showNewFeature = await client.getBoolVariation(user, 'YOUR_FEATURE_FLAG_ID', false);
-  id: 'USER_ID',
-	data: {
-		app_version: '1.0.0',
-		os_version: '11.0.0',
-		device_model: 'pixel-5',
-		language: 'english',
-		genre: 'female'
-}
-});
-const flag = await client.getBoolVariation(user, 'YOUR_FEATURE_FLAG_ID', false);
 ```
 
 </TabItem>
