@@ -34,15 +34,15 @@ To add a rollout to a feature flag, you need to follow the steps below:
 3. Choose the **Enable** operation and select **Progressive Rollout**.
 4. Configure the rollout and submit.
 
-:::caution Number of variations
+:::caution Restrictions
 
-The progressive rollout only works for flags with **two variations**. 
+The progressive rollout only works for flags with **two variations** and no **running experiment**. 
 
 :::
 
-:::caution Disabled Flag behaviour
+:::info Disabled Flag behavior
 
-If the flag is disabled when a progressive rollout is created, the progressive rollout automatically enables the flag as soon as it starts. The progressive rollout can only enable a flag once when it starts.
+If the flag is disabled when a progressive rollout is created, the progressive rollout automatically enables the flag as soon as it starts. 
 
 Please remember that the progressive rollout will be stopped in the following actions:
 
@@ -103,11 +103,11 @@ It's vital to note that turning off a flag by schedule or event rate conditions 
 
 ## Restrictions and rules
 
-Creating and using progressive rollout features come with certain restrictions to ensure smooth implementation and usage.
+Creating and using progressive rollout features have certain restrictions to ensure smooth implementation and usage.
 
 ### Restrictions when creating a rollout
 
-The progressive rollout is designed to work exclusively with flags having two variations. 
+The progressive rollout is designed to work exclusively with flags having two variations and no running experiment.
 
 If you create a progressive rollout and the flag default strategy uses a [rollout percentage](/feature-flags/creating-feature-flags/targeting#rollout-percentage), the existing rollout rules will be overridden. The default strategy will be reset according to the settings defined during the progressive rollout creation.
 
