@@ -1,5 +1,5 @@
 ---
-title: Node JS reference
+title: Node JS
 sidebar_position: 1
 slug: /sdk/server-side/node-js
 ---

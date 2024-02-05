@@ -1,12 +1,19 @@
 ---
-title: JavaScript reference
+title: JavaScript
 slug: /sdk/client-side/javascript
+toc_max_heading_level: 4
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 This category contains topics explaining how to configure Bucketeer's JavaScript SDK.
+
+:::tip JavaScript SDK Version (Stable)
+
+Bucketeer JavaScript SDK has reached the production stage, offering you a stable and reliable experience.
+
+:::
 
 ## Getting started
 
@@ -53,10 +60,13 @@ Configure the SDK config and user configuration.
 
 :::info
 
-The **featureTag** setting is the tag you configure when creating a Feature Flag. It will evaluate all the Feature Flags in the environment when it is not configured.<br />
+The **featureTag** setting is the tag you configure when creating a Feature Flag. It will evaluate all the Feature Flags in the environment when it is not configured.
+
 **We strongly recommend** using tags to speed up the evaluation process and reduce the cache size in the client.
 
 :::
+
+All the settings in the example below are required.
 
 <Tabs>
 <TabItem value="js" label="JavaScript">
@@ -84,7 +94,7 @@ Depending on your use, you may want to change the optional configurations availa
 - **pollingInterval** (Minimum 5 minutes. Default is 10 minutes)
 - **eventsFlushInterval** (Default is 30 seconds)
 - **eventsMaxQueueSize** (Default is 50 events)
-- **storageKeyPrefix** (Default is empty) 
+- **storageKeyPrefix** (Default is empty)
 - **userAgent** (Default is `window.navigator.userAgent`)
 - **fetch** (Default is `window.fetch`)
 
@@ -111,15 +121,20 @@ const client = getBKTClient();
 </TabItem>
 </Tabs>
 
-:::note
+:::info Default timeout
 
-The initialize process starts polling right away the latest evaluations from Bucketeer in the background using the interval `pollingInterval` configuration. JavaScript SDK **does not support** Background fetch.
+The initialize process default timeout is **5 seconds**.<br />
+Once initialization is finished, all the requests in the SDK use a timeout of **30 seconds**.
 
 :::
 
-If you want to use the feature flag on Splash or Main views, and the user opens your application for the first time, it may not have enough time to fetch the variations from the Bucketeer server.
+If you want to use the feature flag on Splash or Main views, the SDK cache may be old or not exist and may not have enough time to fetch the variations from the Bucketeer server. In this case, we recommend using the `Promise` returned from the initialize method. The Promise rejects with `BKTException` when something goes wrong.
 
-For this case, we recommend using the `Promise` returned from the initialize method. The Promise rejects with `BKTException` when something goes wrong.
+:::caution Initialization Timeout error
+
+During the initialization process, errors **are not** related to the initialization itself. Instead, they arise from a timeout request, indicating the variations data from the server weren't received. Therefore, the SDK will work as usual and update the variations in the next [polling](javascript#polling) request.
+
+:::
 
 <Tabs>
 <TabItem value="js" label="JavaScript">
@@ -138,12 +153,102 @@ initialFetchPromise
     }
   })
   .catch((error) => {
-    // Handle the error
+    // Handle the error when there is no cache or the cache is not updated
   });
 ```
 
 </TabItem>
 </Tabs>
+
+#### Polling
+
+The initialize process starts polling right away the latest evaluations from the Bucketeer server in the background using the interval `pollingInterval` configuration. JavaScript SDK **does not support** Background fetch.
+
+#### Polling retry behavior
+
+The Bucketeer SDK regularly polls the latest evaluations from the server based on the pollingInterval parameter. By default, the `pollingInterval` is set to 10 minutes, but you can adjust it to suit your needs.
+
+If a polling request fails, the SDK initiates a retry procedure. The SDK attempts a new polling request every minute up to 5 times. If all five retry attempts fail, the SDK sends a new polling request once the `pollingInterval` time elapses. The table below shows this scenario:
+
+<div className="center-table">
+<table>
+<thead>
+  <tr>
+    <th>Polling Time</th>
+    <th>Retry Time</th>
+    <th>Request Status</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>10:00</td>
+    <td>-</td>
+    <td>Fail</td>
+  </tr>
+  <tr>
+    <td>- </td>
+    <td>10:01</td>
+    <td>Fail</td>
+  </tr>
+  <tr>
+    <td>- </td>
+    <td>10:02</td>
+    <td>Fail</td>
+  </tr>
+  <tr>
+    <td>- </td>
+    <td>10:03</td>
+    <td>Fail</td>
+  </tr>
+  <tr>
+    <td>-</td>
+    <td>10:04</td>
+    <td>Fail</td>
+  </tr>
+  <tr>
+    <td>-</td>
+    <td>10:05</td>
+    <td>Fail</td>
+  </tr>
+  <tr>
+    <td>10:10</td>
+    <td>-</td>
+    <td>Successful</td>
+  </tr>
+</tbody>
+</table>
+</div>
+
+The polling counter, which uses the `pollingInterval` information, resets in case of a successful retry. The table below shows the described scenario.
+
+<div className="center-table">
+<table>
+<thead>
+  <tr>
+    <th>Polling Time</th>
+    <th>Retry Time</th>
+    <th>Request status</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>10:00</td>
+    <td>-</td>
+    <td>Fail</td>
+  </tr>
+  <tr>
+    <td>- </td>
+    <td>10:01</td>
+    <td>Successful</td>
+  </tr>
+  <tr>
+    <td>10:11</td>
+    <td>-</td>
+    <td>Successful</td>
+  </tr>
+</tbody>
+</table>
+</div>
 
 ### Handling exceptions
 
