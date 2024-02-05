@@ -1,5 +1,5 @@
 ---
-title: Go reference
+title: Go
 sidebar_position: 1
 slug: /sdk/server-side/go
 ---

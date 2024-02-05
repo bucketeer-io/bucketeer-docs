@@ -1,12 +1,19 @@
 ---
-title: Android reference
+title: Android
 slug: /sdk/client-side/android
+toc_max_heading_level: 4
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 This category contains topics explaining how to configure Bucketeer's Android SDK.
+
+:::tip Android SDK Version (Stable)
+
+Bucketeer Android SDK has reached the production stage, offering you a stable and reliable experience.
+
+:::
 
 :::info Compatibility
 
@@ -52,9 +59,11 @@ import io.bucketeer.sdk.android.*
 
 Configure the SDK config and user configuration.
 
-:::note
+:::info
 
-The **featureTag** setting is the tag you configure when creating a Feature Flag.
+The **featureTag** setting is the tag you configure when creating a Feature Flag. It will evaluate all the Feature Flags in the environment when it is not configured.
+
+**We strongly recommend** using tags to speed up the evaluation process and reduce the cache size in the client.
 
 :::
 
@@ -110,20 +119,18 @@ val client = BKTClient.getInstance()
 </TabItem>
 </Tabs>
 
-:::note
+:::info Default timeout
 
-The initialize process immediately starts polling the latest evaluations from Bucketeer in the background using the interval `pollingInterval` configuration while the application is in the **foreground state**.
-When the application changes to the **background state**, it will use the `backgroundPollingInterval` configuration.
+The initialize process default timeout is **5 seconds**.<br />
+Once initialization is finished, all the requests in the SDK use a timeout of **30 seconds**.
 
 :::
 
-If you want to use the feature flag on Splash or Main views, and the user opens your application for the first time, it may not have enough time to fetch the variations from the Bucketeer server.
+If you want to use the feature flag on Splash or Main views, the SDK cache may be old or not exist and may not have enough time to fetch the variations from the Bucketeer server. In this case, we recommend using the `Future<BKTException?>` returned from the initialize method. In addition, you can define a custom timeout.
 
-For this case, we recommend using the `Future<BKTException?>` returned from the initialize method.
+:::caution Initialization Timeout error
 
-:::note
-
-Be aware that if an error is returned in the initialize process, it is regarding the fetch evaluation timeout error, not the initialize process itself.
+During the initialization process, errors **are not** related to the initialization itself. Instead, they arise from a timeout request, indicating the variations data from the server weren't received. Therefore, the SDK will work as usual and update the variations in the next [polling](android#polling) request.
 
 :::
 
@@ -157,6 +164,96 @@ viewLifecycleOwner.lifecycleScope.launch {
 
 </TabItem>
 </Tabs>
+
+#### Polling
+
+The initialize process immediately starts polling the latest evaluations from the Bucketeer server in the background using the interval `pollingInterval` configuration while the application is in the **foreground state**.
+When the application changes to the **background state**, it will use the `backgroundPollingInterval` configuration.
+
+#### Polling retry behavior
+
+The Bucketeer SDK regularly polls the latest evaluations from the server based on the pollingInterval parameter. By default, the `pollingInterval` is set to 10 minutes, but you can adjust it to suit your needs.
+
+If a polling request fails, the SDK initiates a retry procedure. The SDK attempts a new polling request every minute up to 5 times. If all five retry attempts fail, the SDK sends a new polling request once the `pollingInterval` time elapses. The table below shows this scenario:
+
+<div className="center-table">
+<table>
+<thead>
+  <tr>
+    <th>Polling Time</th>
+    <th>Retry Time</th>
+    <th>Request Status</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>10:00</td>
+    <td>-</td>
+    <td>Fail</td>
+  </tr>
+  <tr>
+    <td>- </td>
+    <td>10:01</td>
+    <td>Fail</td>
+  </tr>
+  <tr>
+    <td>- </td>
+    <td>10:02</td>
+    <td>Fail</td>
+  </tr>
+  <tr>
+    <td>- </td>
+    <td>10:03</td>
+    <td>Fail</td>
+  </tr>
+  <tr>
+    <td>-</td>
+    <td>10:04</td>
+    <td>Fail</td>
+  </tr>
+  <tr>
+    <td>-</td>
+    <td>10:05</td>
+    <td>Fail</td>
+  </tr>
+  <tr>
+    <td>10:10</td>
+    <td>-</td>
+    <td>Successful</td>
+  </tr>
+</tbody>
+</table>
+</div>
+
+The polling counter, which uses the `pollingInterval` information, resets in case of a successful retry. The table below shows the described scenario.
+<div className="center-table">
+<table>
+<thead>
+  <tr>
+    <th>Polling Time</th>
+    <th>Retry Time</th>
+    <th>Request status</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>10:00</td>
+    <td>-</td>
+    <td>Fail</td>
+  </tr>
+  <tr>
+    <td>- </td>
+    <td>10:01</td>
+    <td>Successful</td>
+  </tr>
+  <tr>
+    <td>10:11</td>
+    <td>-</td>
+    <td>Successful</td>
+  </tr>
+</tbody>
+</table>
+</div>
 
 ## Supported features
 
