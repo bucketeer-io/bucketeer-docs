@@ -256,25 +256,52 @@ const sidebars = {
       type: 'doc',
       id: 'changelog/core',
       label: 'Core',
-      className: '.sidebar-bucketeer-docs',
+      className: 'sidebar-core',
     },
     {
+      type: 'html',
+      value: "<span class='sidebar-title'>Client</span>",
+      defaultStyle: true,
+    },
+    {
+      type: 'doc',
+      id: 'changelog/client-side/android',
+      label: 'Android',
+      className: 'sidebar-android',
+    },
+    {
+      type: 'doc',
+      id: 'changelog/client-side/ios',
+      label: 'iOS',
+      className: 'sidebar-ios',
+    },
+    {
+      type: 'doc',
+      id: 'changelog/client-side/javascript',
+      label: 'JavaScript',
+      className: 'sidebar-javascript',
+    },
+    /*{
       type: 'category',
       label: 'Client',
-      className: 'sidebar-client',
+      collapsible: false,
+      className: 'sidebar-client changelog-sidebar-category',
       items: [
         'changelog/client-side/android',
         'changelog/client-side/ios',
         'changelog/client-side/javascript',
       ],
+    },*/
+    {
+      type: 'html',
+      value: "<span class='sidebar-title'>Server</span>",
+      defaultStyle: true,
     },
     {
-      type: 'category',
-      label: 'Server',
-      className: 'sidebar-server',
-      items: [
-        'changelog/server-side/node-js'
-      ],
+      type: 'doc',
+      id: 'changelog/server-side/node-js',
+      label: 'Node JS',
+      className: 'sidebar-nodejs',
     },
   ]
 }
