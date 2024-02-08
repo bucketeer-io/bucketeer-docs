@@ -249,7 +249,7 @@ const sidebars = {
     {
       type: 'doc',
       id: 'changelog/changelog',
-      label: 'Bucketeer Changelog',
+      label: 'Overview',
       className: 'sidebar-overview',
     },
     {
