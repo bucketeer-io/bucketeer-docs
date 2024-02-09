@@ -101,10 +101,10 @@ const config = {
             activeBaseRegex: "/sdk",
           },
           {
-            to: 'contribution-guide/contributing',
-            label: 'Contributing',
+            to: 'changelog',
+            label: 'Changelog',
             position: 'left',
-            activeBasePath: "contribution-guide/",
+            activeBasePath: "/changelog",
           },
           {
             type: 'search',

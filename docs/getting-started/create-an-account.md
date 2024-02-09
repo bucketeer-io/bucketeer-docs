@@ -1,5 +1,5 @@
 ---
-title: Create an account
+title: Create an Account
 slug: /getting-started/create-an-account
 description: This page guides the Admin on how to create a Bucketeer account.
 tags: ['guide', 'account', 'create']
