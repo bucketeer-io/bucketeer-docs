@@ -43,6 +43,18 @@ Once you have created a flag, it will automatically appear on the **Feature Flag
 
 You can duplicate and archive flags as well. To perform these actions, click the three-dot button on the desired flag.
 
+:::info Feature flag status
+
+Feature flags may have one of the following three statuses:
+
+- **New**: A recently created flag that received no request.
+- **Receiving requests**: It's an active flag that the last request was received less than a week ago.
+- **Inactive**: If the flag hasn't received any request for over a week, it will be marked as **Inactive**. It's essential to note that ON and OFF flags may have Inactive status.
+
+The flag status helps identify the lifecycle stage of your flag, indicating if it's time to archive it. Access the feature flag lifecycle page to learn more about the best practices for the flag's usage.
+
+:::
+
 :::tip
 
 When a flag is archived, any SDK requests related to that flag will return the default value, typically the value associated with the **OFF** state. To ensure proper functionality, we recommend removing flag evaluations from your code when archiving the flag in the Bucketeer system.
