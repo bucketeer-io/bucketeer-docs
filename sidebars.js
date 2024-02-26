@@ -214,6 +214,11 @@ const sidebars = {
       className: 'sidebar-contributing',
     },
     {
+      type: 'doc',
+      id: 'best-practices/lifecycle',
+      className: 'sidebar-contributing',
+    },
+    {
       type: 'html',
       value: "<span class='sidebar-title'>Contribution</span>",
       defaultStyle: true,
