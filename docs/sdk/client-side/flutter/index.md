@@ -482,14 +482,31 @@ final user = await client.currentUser();
 
 ### Getting evaluation details
 
-This method will return the evaluation details for a specific feature flag. This is useful if you need to know the variation reason or send this data elsewhere.
+This method will return the **evaluation details** for a specific feature flag or will return **null** if the feature flag is missing in the SDK's cache.
 
-<Tabs>
-<TabItem value="dart" label="Dart">
+This is useful if you use another A/B Test solution with Bucketeer and need to know the variation name, reason, and other information.
 
-```dart showLineNumbers
-final evaluationDetails = await client.evaluationDetails("YOUR_FEATURE_FLAG_ID");
-```
+<details>
+  <summary><strong>Evaluation details</strong></summary>
+  <Tabs>
+  <TabItem value="dart" label="Dart">
+
+  ```dart showLineNumbers
+  class BKTEvaluation {
+    final String id;
+    final String featureId;
+    final int featureVersion;
+    final String userId;
+    final String variationId;
+    final String variationName;
+    final String variationValue;
+    final String reason;
+  }
+  ```
+
+  </TabItem>
+  </Tabs>
+</details>
 
 :::caution
 
@@ -497,11 +514,12 @@ Do not call this method without calling the [Evaluating user method](#evaluating
 
 :::
 
-:::note
+<Tabs>
+<TabItem value="dart" label="Dart">
 
-This method will return null if the feature flag is missing in the SDK's cache.
-
-:::
+```dart showLineNumbers
+final evaluationDetails = await client.evaluationDetails("YOUR_FEATURE_FLAG_ID");
+```
 
 </TabItem>
 </Tabs>
