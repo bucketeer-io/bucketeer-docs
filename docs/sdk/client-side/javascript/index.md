@@ -445,6 +445,12 @@ This method will return the evaluation details for a specific feature flag. This
 const evaluationDetails = client?.evaluationDetails("YOUR_FEATURE_FLAG_ID");
 ```
 
+:::caution
+
+Do not call this method without calling the [Evaluating user method](#evaluating-user). The Evaluating user method must always be called because it generates analytics events that will be sent to the server.
+
+:::
+
 :::note
 
 This method will return null if the feature flag is missing in the SDK.
