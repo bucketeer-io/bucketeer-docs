@@ -453,7 +453,7 @@ Do not call this method without calling the [Evaluating user method](#evaluating
 
 :::note
 
-This method will return null if the feature flag is missing in the SDK.
+This method will return null if the feature flag is missing in the SDK's cache.
 
 :::
 
