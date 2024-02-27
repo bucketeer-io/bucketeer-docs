@@ -436,14 +436,37 @@ const user = client?.currentUser();
 
 ### Getting evaluation details
 
-This method will return the evaluation details for a specific feature flag. This is useful if you need to know the variation reason or send this data elsewhere.
+This method will return the **evaluation details** for a specific feature flag or will return **null** if the feature flag is missing in the SDK's cache.
 
-<Tabs>
-<TabItem value="js" label="JavaScript">
+This is useful if you use another A/B Test solution with Bucketeer and need to know the variation name, reason, and other information.
 
-```js showLineNumbers
-const evaluationDetails = client?.evaluationDetails("YOUR_FEATURE_FLAG_ID");
-```
+<details>
+  <summary><strong>Evaluation details</strong></summary>
+  <Tabs>
+  <TabItem value="js" label="JavaScript">
+
+  ```js showLineNumbers
+  export interface BKTEvaluation {
+    readonly id: string
+    readonly featureId: string
+    readonly featureVersion: number
+    readonly userId: string
+    readonly variationId: string
+    readonly variationName: string
+    readonly variationValue: string
+    readonly reason:
+      | 'TARGET'
+      | 'RULE'
+      | 'DEFAULT'
+      | 'CLIENT'
+      | 'OFF_VARIATION'
+      | 'PREREQUISITE'
+  }
+  ```
+
+  </TabItem>
+  </Tabs>
+</details>
 
 :::caution
 
@@ -451,11 +474,12 @@ Do not call this method without calling the [Evaluating user method](#evaluating
 
 :::
 
-:::note
+<Tabs>
+<TabItem value="js" label="JavaScript">
 
-This method will return null if the feature flag is missing in the SDK's cache.
-
-:::
+```js showLineNumbers
+const evaluationDetails = client?.evaluationDetails("YOUR_FEATURE_FLAG_ID");
+```
 
 </TabItem>
 </Tabs>

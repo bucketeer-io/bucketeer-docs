@@ -544,15 +544,30 @@ let user = client.currentUser()
 
 ### Getting evaluation details
 
-This method will return the evaluation details for a specific feature flag. This is useful if you need to know the variation reason or send this data to your own analysis database.
-It will return null if the feature flag is missing in the SDK.
+This method will return the **evaluation details** for a specific feature flag or will return **nil** if the feature flag is missing in the SDK's cache.
 
-<Tabs>
-<TabItem value="swift" label="Swift">
+This is useful if you use another A/B Test solution with Bucketeer and need to know the variation name, reason, and other information.
 
-```swift showLineNumbers
-let evaluationDetails = client.evaluationDetails(featureId: "YOUR_FEATURE_FLAG_ID")
-```
+<details>
+  <summary><strong>Evaluation details</strong></summary>
+  <Tabs>
+  <TabItem value="swift" label="Swift">
+
+  ```swift showLineNumbers
+  public struct Evaluation {
+      public let id: String
+      public let featureID: String
+      public let featureVersion: Int
+      public let userID: String
+      public let variationID: String
+      public let variationValue: String
+      public let reason: Int
+  }
+  ```
+
+  </TabItem>
+  </Tabs>
+</details>
 
 :::caution
 
@@ -560,11 +575,12 @@ Do not call this method without calling the [Evaluating user method](#evaluating
 
 :::
 
-:::note
+<Tabs>
+<TabItem value="swift" label="Swift">
 
-This method will return nil if the feature flag is missing in the SDK's cache.
-
-:::
+```swift showLineNumbers
+let evaluationDetails = client.evaluationDetails(featureId: "YOUR_FEATURE_FLAG_ID")
+```
 
 </TabItem>
 </Tabs>

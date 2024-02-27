@@ -499,15 +499,31 @@ val user = client.currentUser()
 
 ### Getting evaluation details
 
-This method will return the evaluation details for a specific feature flag. It is useful if you need to know the variation reason or send this data elsewhere.
-It will return null if the feature flag is missing in the SDK.
+This method will return the **evaluation details** for a specific feature flag or will return **null** if the feature flag is missing in the SDK's cache.
 
-<Tabs>
-<TabItem value="kt" label="Kotlin">
+This is useful if you use another A/B Test solution with Bucketeer and need to know the variation name, reason, and other information.
 
-```kotlin showLineNumbers
-val evaluationDetails = client.evaluationDetails("YOUR_FEATURE_FLAG_ID")
-```
+<details>
+  <summary><strong>Evaluation details</strong></summary>
+  <Tabs>
+  <TabItem value="kt" label="Kotlin">
+
+  ```kotlin showLineNumbers
+  data class BKTEvaluation(
+    var id: String,
+    val featureId: String,
+    val featureVersion: Int,
+    val userId: String,
+    val variationId: String,
+    val variationName: String,
+    val variationValue: String,
+    val reason: Reason,
+  )
+  ```
+
+  </TabItem>
+  </Tabs>
+</details>
 
 :::caution
 
@@ -515,11 +531,12 @@ Do not call this method without calling the [Evaluating user method](#evaluating
 
 :::
 
-:::note
+<Tabs>
+<TabItem value="kt" label="Kotlin">
 
-This method will return null if the feature flag is missing in the SDK's cache.
-
-:::
+```kotlin showLineNumbers
+val evaluationDetails = client.evaluationDetails("YOUR_FEATURE_FLAG_ID")
+```
 
 </TabItem>
 </Tabs>
