@@ -560,6 +560,12 @@ Do not call this method without calling the [Evaluating user method](#evaluating
 
 :::
 
+:::note
+
+This method will return nil if the feature flag is missing in the SDK's cache.
+
+:::
+
 </TabItem>
 </Tabs>
 
