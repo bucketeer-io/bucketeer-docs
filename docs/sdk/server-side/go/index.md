@@ -19,6 +19,20 @@ Bucketeer Go SDK has reached the production stage, offering you a stable and rel
 
 Before starting, ensure that you follow the [Getting Started](/getting-started) guide.
 
+### Installing dependency
+
+Install the latest version of the client using the following command.
+
+<Tabs>
+<TabItem value="go" label="Go">
+
+```go showLineNumbers
+go get github.com/bucketeer-io/go-server-sdk
+```
+
+</TabItem>
+</Tabs>
+
 ### Importing SDK
 
 Import the Bucketeer SDK into your application code.
