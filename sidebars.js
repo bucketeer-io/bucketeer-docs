@@ -137,7 +137,7 @@ const sidebars = {
       label: 'Audit Logs',
       className: 'sidebar-audit-logs',
     },
-    
+
     {
       type: 'html',
       value: "<span class='sidebar-title'>Experimentation</span>",
@@ -206,13 +206,13 @@ const sidebars = {
         type: 'doc',
         id: 'integration/index',
       },
-      className: 'sidebar-overview',      
+      className: 'sidebar-overview',
       items: [
         'integration/pushes',
         'integration/notifications',
       ],
     },
-    
+
 
     {
       type: 'html',
@@ -313,6 +313,12 @@ const sidebars = {
       type: 'html',
       value: "<span class='sidebar-title'>Server</span>",
       defaultStyle: true,
+    },
+    {
+      type: 'doc',
+      id: 'changelog/server-side/go',
+      label: 'Go',
+      className: 'sidebar-go',
     },
     {
       type: 'doc',
