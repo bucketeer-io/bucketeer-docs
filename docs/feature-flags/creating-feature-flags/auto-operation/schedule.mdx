@@ -1,0 +1,43 @@
+---
+title: Schedule
+# sidebar_position:
+slug: /feature-flags/creating-feature-flags/auto-operation/schedule
+description: 'Check how the schedule features works in bucketeer. Use it to release or remove a flag variation.'
+tags: ['guide', 'automation', 'schedule', 'feature-flag']
+---
+
+import CenteredImg from '@site/src/components/centered-img/CenteredImg';
+
+The Schedule solution is designed to deliver or remove a feature at a specific date and time. Therefore, you can use it to release a new feature for holidays or special promotions, for example. The same solution can be used to remove the temporary feature after the holidays or to turn off a beta feature after a certain period.
+
+## How the schedule works
+
+When using the Bucketeer Auto Operation along with the Schedule condition, you can manage your flags based on the specific date and time you define. Once the Bucketeer receives the SDK request, the schedule condition evaluates whether the specified date and time have been reached. If it has, the operation to enable or kill a flag variation is executed.
+
+:::info Schedule requisites and restrictions
+
+To use the schedule condition, you always need to use a future date and time to schedule the operation.  
+
+You can only have two active operations based on schedule conditions. One will define when to enable and the other when to kill the flag. However, you aren't required to use both operations. For example, you can use only the enable option.
+
+:::
+
+## Setting up auto operation with schedule
+
+To release or kill a feature flag using the schedule option, you need to follow the steps below:
+
+1. Go to the **Auto Operation** page.
+2. Click the **+ Add** button.
+3. The operation setting panel will appear. Choose the **Enable** operation to release or **Kill Switch** to remove a flag.
+4. Select **Schedule**.
+5. Set up the date and time. Remember, you need to select a future date and time.
+6. Click **Submit**. 
+
+The image below presents an example of schedule configuration for enabling a feature flag.
+
+<CenteredImg
+  imgURL="img/feature-flags/auto-ops-rules/schedule-condition-v3.png"
+  alt="Create an enable operation using schedule"
+  wSize="400px"
+  borderWidth="1px"
+/>
