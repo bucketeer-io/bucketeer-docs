@@ -57,7 +57,7 @@ jobs:
           DOC_TITLE: ${{ github.event.inputs.doc_title }}
           DOC_SLUG: ${{ github.event.inputs.doc_slug }}
           CHANGELOG_URL: ${{ github.event.inputs.changelog_url }}
-        run: ./hack/create-changelog.sh
+        run: ./hack/update-changelog.sh
 
       - name: Create the pull request
         id: create-docs-pull-request
