@@ -15,7 +15,7 @@ echo "CHANGELOG_URL = $CHANGELOG_URL"
 echo "PWD = $PWD"
 
 # Download the CHANGELOG.md
-curl -o $CHANGELOG_TEMP_FILE $CHANGELOG_URL
+curl -f -o $CHANGELOG_TEMP_FILE $CHANGELOG_URL
 
 # Remove the first line (The H1 # CHANGELOG)
 sed -i'' -e '1d' $CHANGELOG_TEMP_FILE
