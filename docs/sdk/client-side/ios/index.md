@@ -459,7 +459,7 @@ client.flush()
 
 :::note
 
-In regular use, you don't need to call the flush method because the events are sent every 30 seconds in the background.
+In regular use, you don't need to call the flush method because the events are sent every **60 seconds** in the background.
 
 :::
 
@@ -701,3 +701,24 @@ do {
 ```
 
 **8.** Please check the [iOS Documentation](https://developer.apple.com/documentation/uikit/app_and_environment/scenes/preparing_your_ui_to_run_in_the_background/using_background_tasks_to_update_your_app) for more details.
+
+### Destroying client
+
+There are cases you might want to switch the user ID or reduce resources when the application is in the background.<br />
+For those cases, you can call the destroy interface, which will clear the client instance.
+
+<Tabs>
+<TabItem value="swift" label="Swift">
+
+```swift showLineNumbers
+client.destroy()
+```
+
+</TabItem>
+</Tabs>
+
+:::note
+
+If you want to switch the user ID, please call the [flush](#flushing-events) interface so that all the pending events can be sent before clearing the client instance, then call the [initialize](#initializing-client) interface with the new user information.
+
+:::

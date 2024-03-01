@@ -361,7 +361,7 @@ await client?.flush();
 
 :::note
 
-In regular use, you don't need to call the flush method because the events are sent every 30 seconds in the background.
+In regular use, you don't need to call the flush method because the events are sent every **30 seconds** in the background.
 
 :::
 
@@ -512,3 +512,26 @@ client?.clearEvaluationUpdateListeners();
 
 </TabItem>
 </Tabs>
+
+### Destroying client
+
+There are cases you might want to switch the user ID or reduce resources when the application is in the background.<br />
+For those cases, you can call the destroy function, which will clear the client instance.
+
+<Tabs>
+<TabItem value="js" label="JavaScript">
+
+```js showLineNumbers
+import { destroyBKTClient } from '@bucketeer/js-client-sdk';
+
+destroyBKTClient();
+```
+
+</TabItem>
+</Tabs>
+
+:::note
+
+If you want to switch the user ID, please call the [flush](#flushing-events) interface so that all the pending events can be sent before clearing the client instance, then call the [initialize](#initializing-client) interface with the new user information.
+
+:::
