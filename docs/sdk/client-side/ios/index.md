@@ -717,7 +717,7 @@ client.destroy()
 </TabItem>
 </Tabs>
 
-:::note
+:::tip
 
 If you want to switch the user ID, please call the [flush](#flushing-events) interface so that all the pending events can be sent before clearing the client instance, then call the [initialize](#initializing-client) interface with the new user information.
 
