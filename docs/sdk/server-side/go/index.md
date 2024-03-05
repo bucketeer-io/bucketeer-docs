@@ -136,10 +136,15 @@ The Bucketeer SDK supports the following variation types.
 
 ```go showLineNumbers
 BoolVariation(ctx context.Context, user *user.User, featureID string, defaultValue bool) bool
+
 IntVariation(ctx context.Context, user *user.User, featureID string, defaultValue int) int
+
 Int64Variation(ctx context.Context, user *user.User, featureID string, defaultValue int64) int64
+
 Float64Variation(ctx context.Context, user *user.User, featureID string, defaultValue float64) float64
+
 StringVariation(ctx context.Context, user *user.User, featureID, defaultValue string) string
+
 JSONVariation(ctx context.Context, user *user.User, featureID string, dst interface{})
 ```
 

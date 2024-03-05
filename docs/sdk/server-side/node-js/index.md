@@ -145,8 +145,11 @@ The Bucketeer SDK supports the following variation types.
 
 ```js showLineNumbers
 getStringVariation(user: User, featureId: string, defaultValue: string): Promise<string>;
+
 getBoolVariation(user: User, featureId: string, defaultValue: boolean): Promise<boolean>;
+
 getNumberVariation(user: User, featureId: string, defaultValue: number): Promise<number>;
+
 getJsonVariation(user: User, featureId: string, defaultValue: object): Promise<object>;
 ```
 
