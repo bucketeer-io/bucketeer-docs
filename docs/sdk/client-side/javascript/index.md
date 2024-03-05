@@ -486,7 +486,7 @@ const evaluationDetails = client?.evaluationDetails("YOUR_FEATURE_FLAG_ID");
 
 ### Listening to evaluation updates
 
-BKTClient can notify when the evaluation is updated.  
+The SDK can notify when the evaluation is updated.
 The listener can detect both automatic polling and manual fetching.
 
 <Tabs>

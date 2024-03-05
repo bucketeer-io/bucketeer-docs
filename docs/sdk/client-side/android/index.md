@@ -544,8 +544,14 @@ val evaluationDetails = client.evaluationDetails("YOUR_FEATURE_FLAG_ID")
 
 ### Listening to evaluation updates
 
-BKTClient can notify when the evaluation is updated.  
+The SDK can notify when the evaluation is updated.
 The listener can detect both automatic polling and manual fetching.
+
+:::info
+
+The listener callback is called on the main thread.
+
+:::
 
 <Tabs>
 <TabItem value="kt" label="Kotlin">
