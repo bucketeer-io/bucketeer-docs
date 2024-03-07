@@ -110,14 +110,17 @@ All the settings in the example below are required.
 ```swift showLineNumbers
 do {
   // SDK configuration
-  let config = try BKTConfig(
-    apiKey: "YOUR_API_KEY",
-    apiEndpoint: "YOUR_API_ENDPOINT",
-    featureTag: "YOUR_FEATURE_TAG",
-    appVersion: Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
-  )
+  let config = try BKTConfig.Builder()
+    .with(apiKey: "YOUR_API_KEY")
+    .with(apiEndpoint: "YOUR_API_ENDPOINT")
+    .with(featureTag: "YOUR_FEATURE_TAG")
+    .with(appVersion: Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String)
+    .build()
   // User configuration
-  let user = try BKTUser(id: "USER_ID")
+  let user = try BKTUser.Builder()
+    .with(id: "USER_ID")
+    .with(attributes: [:]) // The user attributes are optional
+    .build()
 } catch {
   // Error handling
 }
@@ -172,7 +175,6 @@ During the initialization process, errors **are not** related to the initializat
 
 :::
 
-
 <Tabs>
 <TabItem value="swift" label="Swift">
 
@@ -200,7 +202,6 @@ BKTClient.initialize(
 
 </TabItem>
 </Tabs>
-
 
 #### Polling
 
@@ -472,13 +473,6 @@ This feature will give you robust and granular control over what users can see o
 
 ```swift showLineNumbers
 do {
-  // SDK configuration
-  let config = try BKTConfig(
-    apiKey: "YOUR_API_KEY",
-    apiEndpoint: "YOUR_API_ENDPOINT",
-    featureTag: "ios",
-    appVersion: Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
-  )
   // User attributes configuration
   let attributes = [
     "app_version": "1.0.0",
@@ -487,8 +481,11 @@ do {
     "language": "english",
     "genre": "female"
   ]
+  let user = try BKTUser.Builder()
+  .with(id: "USER_ID")
+  .with(attributes: attributes)
+  .build()
 
-  let user = try BKTUser(id: "USER_ID", attributes: attributes)
   BKTClient.initialize(config: config, user: user)
   let client = BKTClient.shared
 } catch {
@@ -553,17 +550,17 @@ This is useful if you use another A/B Test solution with Bucketeer and need to k
   <Tabs>
   <TabItem value="swift" label="Swift">
 
-  ```swift showLineNumbers
-  public struct Evaluation {
-      public let id: String
-      public let featureID: String
-      public let featureVersion: Int
-      public let userID: String
-      public let variationID: String
-      public let variationValue: String
-      public let reason: Int
-  }
-  ```
+```swift showLineNumbers
+public struct Evaluation {
+  public let id: String
+  public let featureID: String
+  public let featureVersion: Int
+  public let userID: String
+  public let variationID: String
+  public let variationValue: String
+  public let reason: Int
+}
+```
 
   </TabItem>
   </Tabs>
@@ -601,6 +598,7 @@ The listener callback is called on the main thread.
 
 ```swift showLineNumbers
 class EvaluationUpdateListenerImpl: EvaluationUpdateListener {
+  // The listener callback is called on the main thread
   func onUpdate() {
     let client = BKTClient.shared
     let showNewFeature = client.boolVariation(featureId: "YOUR_FEATURE_FLAG_ID", defaultValue: false)
@@ -611,6 +609,7 @@ class EvaluationUpdateListenerImpl: EvaluationUpdateListener {
     }
   }
 }
+
 let listener = EvaluationUpdateListenerImpl()
 // The returned key value is used to remove the listener
 let key = client.addEvaluationUpdateListener(listener: listener)
@@ -651,16 +650,15 @@ import UIKit
 import Bucketeer
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Add the code to enable background tasks
-        if #available(iOS 13.0, tvOS 13.0, *) {
-            BKTBackgroundTask.enable()
-        }
-        // Your app logic code
-
-        return true
+  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    // Add the code to enable background tasks
+    if #available(iOS 13.0, tvOS 13.0, *) {
+        BKTBackgroundTask.enable()
     }
+    // Your app logic code
+    return true
+  }
+}
 ```
 
 </TabItem>
@@ -675,18 +673,16 @@ import Bucketeer
 
 @main
 struct ExampleSwiftUIApp: App {
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
-        // Add the code to enable background tasks
-        .enableBKTBackgroundTask()
+  var body: some Scene {
+    WindowGroup {
+      ContentView()
     }
+    // Add the code to enable background tasks
+    .enableBKTBackgroundTask()
+  }
 }
-
 ```
 </TabItem>
-
 </Tabs>
 
 **7.** If needed, change the background polling default interval by adding the `backgroundPollingInterval` setting in the **BKTConfig** as follows:
@@ -694,13 +690,13 @@ struct ExampleSwiftUIApp: App {
 ```swift showLineNumbers
 do {
   // SDK configuration
-  let config = try BKTConfig(
-    apiKey: "YOUR_API_KEY",
-    apiEndpoint: "YOUR_API_ENDPOINT",
-    featureTag: "YOUR_FEATURE_TAG",
-    appVersion: Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String,
-    backgroundPollingInterval: 1800 // 30 minutes
-  )
+  let config = try BKTConfig.Builder()
+    .with(apiKey: "YOUR_API_KEY")
+    .with(apiEndpoint: "YOUR_API_ENDPOINT")
+    .with(featureTag: "YOUR_FEATURE_TAG")
+    .with(appVersion: Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String)
+    .with(backgroundPollingInterval: 1800) // 30 minutes
+    .build()
 } catch {
   // Error handling
 }

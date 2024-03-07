@@ -1,5 +1,5 @@
 ---
-title: Node JS
+title: Node.js
 sidebar_position: 1
 slug: /sdk/server-side/node-js
 ---
@@ -11,7 +11,7 @@ This category contains topics explaining how to configure Bucketeer's Node.js SD
 
 :::caution
 
-Node JS SDK Version (Alpha) The Node JS SDK is currently in its Alpha stage.
+The Node.js SDK is currently in its Alpha stage.
 If you find any issues or have suggestions for improvement, feel free to open an [issue](https://github.com/bucketeer-io/node-server-sdk/issues).
 
 :::

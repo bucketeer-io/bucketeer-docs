@@ -559,6 +559,7 @@ The listener callback is called on the main thread.
 ```kotlin showLineNumbers
 // Returned value is used when you want to remove listener
 val key = client.addEvaluationUpdateListener {
+  // The listener callback is called on the main thread
   val showNewFeature = client.booleanVariation("YOUR_FEATURE_FLAG_ID", false)
   if (showNewFeature) {
       // The Application code to show the new feature
