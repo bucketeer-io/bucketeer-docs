@@ -126,7 +126,7 @@ Once initialization is finished, all the requests in the SDK use a timeout of **
 
 If you want to use the feature flag on Splash or Main views, the SDK cache may be old or not exist and may not have enough time to fetch the variations from the Bucketeer server. In this case, we recommend using `await` in the initialize method. In addition, you can define a custom timeout.
 
-:::caution Initialization Timeout error
+:::info Initialization Timeout error
 
 During the initialization process, errors **are not** related to the initialization itself. Instead, they arise from a timeout request, indicating the variations data from the server weren't received. Therefore, the SDK will work as usual and update the variations in the next [polling](flutter#polling) request.
 

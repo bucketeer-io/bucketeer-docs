@@ -169,9 +169,11 @@ Once initialization is finished, all the requests in the SDK use a timeout of **
 
 If you want to use the feature flag on Splash or Main views, the SDK cache may be old or not exist and may not have enough time to fetch the variations from the Bucketeer server. In this case, we recommend using the callback in the initialize method. In addition, you can define a custom timeout.
 
-:::caution Initialization Timeout error
+:::info Initialization Timeout error
 
 During the initialization process, errors **are not** related to the initialization itself. Instead, they arise from a timeout request, indicating the variations data from the server weren't received. Therefore, the SDK will work as usual and update the variations in the next [polling](ios#polling) request.
+
+The completion callback is called on the **main thread**.
 
 :::
 
@@ -186,6 +188,7 @@ BKTClient.initialize(
   user: user,
   timeoutMillis: timeout
 ) { error in
+  // The completion callback is called on the main thread
   guard error == nil else {
     // Handle the error when there is no cache or the cache is not updated
     return
@@ -351,7 +354,7 @@ Depending on the use case, you may need to ensure the evaluations in the SDK are
 
 The fetch method uses the following parameters.
 
-- **Completion callback**
+- **Completion callback** (The callback is returned on the main thread)
 - **Timeout** (Default is 30 seconds)
 
 <Tabs>
@@ -362,6 +365,7 @@ let timeout: Int64 = 5000
 let client = BKTClient.shared
 
 client.fetchEvaluations(timeoutMillis: timeout) { error in
+  // The completion callback is called on the main thread
   guard error == nil else {
     // The code to run when there is an error while initializing the SDK
     return
@@ -448,11 +452,19 @@ client.track(goalId: "YOUR_GOAL_ID", value: 10.50)
 
 This method will send all pending analytics events to the Bucketeer server immediately. This process is asynchronous, so it returns before it is complete.
 
+If you need to check the result, you can use the completion callback, returned on the **main thread**.
+
 <Tabs>
 <TabItem value="swift" label="Swift">
 
 ```swift showLineNumbers
-client.flush()
+client.flush { error in
+  // The completion callback is called on the main thread
+    guard error == nil else {
+    // Error handling
+    return
+  }
+}
 ```
 
 </TabItem>
@@ -665,7 +677,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 <TabItem value="SwiftUI" label="SwiftUI">
 
-Open the your `App.swift` file and add the following code.
+Open your `App.`swift` file and add the following code.
 
 ```swift showLineNumbers
 import SwiftUI
@@ -713,7 +725,11 @@ For those cases, you can call the destroy interface, which will clear the client
 <TabItem value="swift" label="Swift">
 
 ```swift showLineNumbers
-client.destroy()
+do {
+  try BKTClient.destroy()
+} catch {
+  // Error handling
+}
 ```
 
 </TabItem>
