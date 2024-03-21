@@ -25,6 +25,12 @@ The Bucketeer SDK is compatible with Android SDK versions 21 and higher (Android
 
 Before starting, ensure that you follow the [Getting Started](/getting-started) guide.
 
+:::info Using ProGuard or R8
+
+The **aar artifact** will automatically include the configuration. If you don't use ProGuard or R8, you must include the configuration from [proguard-rules.pro](https://github.com/bucketeer-io/android-client-sdk/blob/main/bucketeer/proguard-rules.pro) into your proguard file.
+
+:::
+
 ### Implementing dependency
 
 Implement the dependency in your Gradle file. Please refer to the [SDK releases page](https://github.com/bucketeer-io/android-client-sdk/releases) to find the latest version.
