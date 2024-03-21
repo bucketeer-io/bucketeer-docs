@@ -133,10 +133,10 @@ do {
 
 Depending on your use, you may want to change the optional configurations available in the **BKTConfig**.
 
-- **pollingInterval** (Minimum 60 seconds. Default is 10 minutes)
-- **backgroundPollingInterval** (Minimum 20 minutes. Default is 1 hour)
-- **eventsFlushInterval** (Minimum 60 seconds. Default is 60 seconds)
-- **eventsMaxQueueSize** (Default is 50 events)
+- **pollingInterval** - Minimum 60 seconds. Default is 10 minutes (In Milliseconds)
+- **backgroundPollingInterval** - Minimum 20 minutes. Default is 1 hour (In Milliseconds)
+- **eventsFlushInterval** - Minimum 60 seconds. Default is 60 seconds (In Milliseconds)
+- **eventsMaxQueueSize** - Default is 50 events
 
 :::
 
@@ -181,7 +181,7 @@ The completion callback is called on the **main thread**.
 <TabItem value="swift" label="Swift">
 
 ```swift showLineNumbers
-let timeout: Int64 = 2000 // Default is 5 seconds
+let timeout: Int64 = 2000 // Default is 5 seconds (In milliseconds)
 
 BKTClient.initialize(
   config: config,
@@ -354,14 +354,14 @@ Depending on the use case, you may need to ensure the evaluations in the SDK are
 
 The fetch method uses the following parameters.
 
-- **Completion callback** (The callback is returned on the main thread)
-- **Timeout** (Default is 30 seconds)
+- **Completion callback** - The callback is returned on the main thread
+- **Timeout** - Default is 30 seconds (In milliseconds)
 
 <Tabs>
 <TabItem value="swift" label="Swift">
 
 ```swift showLineNumbers
-let timeout: Int64 = 5000
+let timeout: Int64 = 5000 // Optional. Default is 30 seconds (In milliseconds)
 let client = BKTClient.shared
 
 client.fetchEvaluations(timeoutMillis: timeout) { error in

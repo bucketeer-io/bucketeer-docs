@@ -97,10 +97,10 @@ val user = BKTUser.builder()
 
 Depending on your use, you may want to change the optional configurations available in the **BKTConfig.Builder**.
 
-- **pollingInterval** (Minimum 60 seconds. Default is 10 minutes)
-- **backgroundPollingInterval** (Minimum 20 minutes. Default is 1 hour)
-- **eventsFlushInterval** (Minimum 60 seconds. Default is 60 seconds)
-- **eventsMaxQueueSize** (Default is 50 events)
+- **pollingInterval** - Minimum 60 seconds. Default is 10 minutes (In Milliseconds)
+- **backgroundPollingInterval** - Minimum 20 minutes. Default is 1 hour (In Milliseconds)
+- **eventsFlushInterval** - Minimum 60 seconds. Default is 60 seconds (In Milliseconds)
+- **eventsMaxQueueSize** - Default is 50 events
 
 :::
 
@@ -144,7 +144,7 @@ During the initialization process, errors **are not** related to the initializat
 <TabItem value="kt" label="Kotlin">
 
 ```kotlin showLineNumbers
-val timeout = 1000 // Default is 5 seconds
+val timeout = 2000 // Default is 5 seconds (In milliseconds)
 
 viewLifecycleOwner.lifecycleScope.launch {
   val future = BKTClient.initialize(this.application, config, user, timeout)
@@ -317,13 +317,13 @@ Depending on the use case, you may need to ensure the evaluations in the SDK are
 
 The fetch method uses the following parameter and returns a `Future<BKTExeptIon?>`.
 
-- **Timeout** (Default is 30 seconds)
+- **Timeout** - Default is 30 seconds (In milliseconds)
 
 <Tabs>
 <TabItem value="kt" label="Kotlin">
 
 ```kotlin showLineNumbers
-val timeout = 5000
+val timeout = 5000 // Optional. Default is 30 seconds (In milliseconds)
 val future = client.fetchEvaluations(timeout)
 
 // Future is blocking, avoid waiting it on the main thread.

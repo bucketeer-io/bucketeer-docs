@@ -91,13 +91,12 @@ const user = defineBKTUser({
 
 Depending on your use, you may want to change the optional configurations available.
 
-- **pollingInterval** (Minimum 5 minutes. Default is 10 minutes)
-- **eventsFlushInterval** (Default is 30 seconds)
-- **eventsMaxQueueSize** (Default is 50 events)
-- **storageKeyPrefix** (Default is empty)
-- **userAgent** (Default is `window.navigator.userAgent`)
-- **fetch** (Default is `window.fetch`)
-
+- **pollingInterval** - Minimum 60 seconds. Default is 10 minutes (In Milliseconds)
+- **eventsFlushInterval** - Minimum 60 seconds. Default is 60 seconds (In Milliseconds)
+- **eventsMaxQueueSize** - Default is 50 events
+- **storageKeyPrefix** - Default is empty
+- **userAgent** - Default is `window.navigator.userAgent`
+- **fetch** - Default is `window.fetch`
 :::
 
 :::note
@@ -140,7 +139,7 @@ During the initialization process, errors **are not** related to the initializat
 <TabItem value="js" label="JavaScript">
 
 ```js showLineNumbers
-const timeout = 1000 // Default is 5 seconds
+const timeout = 2000 // Default is 5 seconds (In milliseconds)
 const initialFetchPromise = initializeBKTClient(config, user, timeout);
 initialFetchPromise
   .then(() => {
@@ -315,13 +314,13 @@ Depending on the use case, you may need to ensure the evaluations in the SDK are
 
 The fetch method uses the following parameter. Make sure to wait for its completion.
 
-- **Timeout** (Default is 30 seconds)
+- **Timeout** - Default is 30 seconds (In milliseconds)
 
 <Tabs>
 <TabItem value="js" label="JavaScript">
 
 ```js showLineNumbers
-const timeout = 5000;
+const timeout = 5000; // Optional. Default is 30 seconds (In milliseconds)
 
 await client?.fetchEvaluations(timeout);
 ```

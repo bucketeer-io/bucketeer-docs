@@ -89,10 +89,10 @@ final user = BKTUserBuilder
 
 Depending on your use, you may want to change the optional configurations available in the **BKTConfigBuilder**.
 
-- **pollingInterval** (Minimum 60 seconds. Default is 10 minutes)
-- **backgroundPollingInterval** (Minimum 20 minutes. Default is 1 hour)
-- **eventsFlushInterval** (Minimum 60 seconds. Default is 60 seconds)
-- **eventsMaxQueueSize** (Default is 50 events)
+- **pollingInterval** - Minimum 60 seconds. Default is 10 minutes (In Milliseconds)
+- **backgroundPollingInterval** - Minimum 20 minutes. Default is 1 hour (In Milliseconds)
+- **eventsFlushInterval** - Minimum 60 seconds. Default is 60 seconds (In Milliseconds)
+- **eventsMaxQueueSize** - Default is 50 events
 
 :::
 
@@ -137,7 +137,7 @@ During the initialization process, errors **are not** related to the initializat
 
 ```dart showLineNumbers
 /// It will unlock without waiting until the fetching variation process finishes
-const int timeout = 5000;
+const int timeout = 2000; // Default is 5 seconds (In milliseconds)
 final result = await BKTClient.initialize(config: config, user: user, timeoutMillis: timeout);
 if (result.isSuccess) {
   const client = BKTClient.instance;
@@ -300,14 +300,14 @@ Depending on the use case, you may need to ensure the evaluations in the SDK are
 
 The fetch method uses the following parameter. Make sure to wait for its completion.
 
-- **Timeout** (Default is 30 seconds)
+- **Timeout** - Default is 30 seconds (In milliseconds)
 
 <Tabs>
 <TabItem value="dart" label="Dart">
 
 ```dart showLineNumbers
 /// It will unlock without waiting until the fetching variation process finishes
-int timeout = 5000;
+int timeout = 5000; // Optional. Default is 30 seconds (In milliseconds)
 
 final result = await client.fetchEvaluations(timeoutMillis: timeout);
 if (result.isSuccess) {
