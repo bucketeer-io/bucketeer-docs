@@ -92,7 +92,7 @@ const user = defineBKTUser({
 Depending on your use, you may want to change the optional configurations available.
 
 - **pollingInterval** - Minimum 60 seconds. Default is 10 minutes (In Milliseconds)
-- **eventsFlushInterval** - Minimum 60 seconds. Default is 60 seconds (In Milliseconds)
+- **eventsFlushInterval** - Default is 30 seconds (In Milliseconds)
 - **eventsMaxQueueSize** - Default is 50 events
 - **storageKeyPrefix** - Default is empty
 - **userAgent** - Default is `window.navigator.userAgent`
