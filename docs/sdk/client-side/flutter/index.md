@@ -78,7 +78,7 @@ final config = BKTConfigBuilder()
 
 final user = BKTUserBuilder
   .id("USER_ID")
-  .customAttributes(YOUR_USER_ATTRIBUTES) // optional Map<String, String>
+  .customAttributes(YOUR_USER_ATTRIBUTES) /// optional Map<String, String>
   .build();
 ```
 
@@ -136,7 +136,7 @@ During the initialization process, errors **are not** related to the initializat
 
 ```dart showLineNumbers
 /// It will unlock without waiting until the fetching variation process finishes
-const int timeout = 2000; // Default is 5 seconds (In milliseconds)
+const int timeout = 2000; /// Default is 5 seconds (In milliseconds)
 final result = await BKTClient.initialize(config: config, user: user, timeoutMillis: timeout);
 if (result.isSuccess) {
   const client = BKTClient.instance;
@@ -308,7 +308,7 @@ The fetch method uses the following parameter. Make sure to wait for its complet
 
 ```dart showLineNumbers
 /// It will unlock without waiting until the fetching variation process finishes
-int timeout = 5000; // Optional. Default is 30 seconds (In milliseconds)
+int timeout = 5000; /// Optional. Default is 30 seconds (In milliseconds)
 
 final result = await client.fetchEvaluations(timeoutMillis: timeout);
 if (result.isSuccess) {
@@ -537,7 +537,7 @@ Do not call this method without calling the [Evaluating user method](#evaluating
 ```dart showLineNumbers
 final evaluationDetails = await client.evaluationDetails("YOUR_FEATURE_FLAG_ID");
 if (evaluationDetails != null) {
-  // access the evaluation details
+  /// access the evaluation details
 }
 ```
 
@@ -609,11 +609,11 @@ import Bucketeer
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Add the code to enable background tasks
+        /// Add the code to enable background tasks
         if #available(iOS 13.0, tvOS 13.0, *) {
             BKTBackgroundTask.enable()
         }
-        // Your app logic code
+        /// Your app logic code
         return true
     }
 ```
@@ -626,9 +626,9 @@ final config = BKTConfigBuilder()
   .apiEndpoint("YOUR_API_URL")
   .featureTag("YOUR_FEATURE_TAG")
   .appVersion("YOUR_APP_VERSION").
-  .eventsFlushInterval(60) // 1 minute
+  .eventsFlushInterval(60) /// 1 minute
   .backgroundPollingInterval(1800)
-  .build(); // 30 minutes
+  .build(); /// 30 minutes
 ```
 
 **9.** Please check the [iOS Documentation](https://developer.apple.com/documentation/uikit/app_and_environment/scenes/preparing_your_ui_to_run_in_the_background/using_background_tasks_to_update_your_app) for more details.
