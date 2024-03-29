@@ -111,7 +111,6 @@ Initialize the client by passing the configurations in the previous step.
 
 ```dart showLineNumbers
 await BKTClient.initialize(config: config, user: user);
-final client = BKTClient.instance;
 ```
 
 </TabItem>
@@ -146,6 +145,8 @@ if (result.isSuccess) {
   } else {
     /// The code to run if the feature is off
   }
+} else if (result.asFailure.exception is BKTTimeoutException) {
+  /// During the initialization process, errors **are not** related to the initialization itself
 } else {
   /// Handle the error when there is no cache or the cache is not updated
 }
@@ -384,7 +385,12 @@ In addition, you can pass a double value to the goal event. These values will su
 <TabItem value="dart" label="Dart">
 
 ```dart showLineNumbers
-await client.track("YOUR_GOAL_ID", value: 10.50);
+final result = await client.track("YOUR_GOAL_ID", value: 10.50);
+if (result.isSuccess) {
+  /// The Application code to run after track custom event
+} else {
+  /// Handle the error
+}
 ```
 
 </TabItem>
@@ -454,7 +460,12 @@ final attributes = {
   'country': 'japan'
 };
 
-await client.updateUserAttributes(attributes);
+final result = await client.updateUserAttributes(attributes);
+if (result.isSuccess) {
+  /// The Application code to run after update the user attributes
+} else {
+   /// Handle the error
+}
 ```
 
 </TabItem>
@@ -474,7 +485,13 @@ This method will return the current user configured in the SDK. This is useful w
 <TabItem value="dart" label="Dart">
 
 ```dart showLineNumbers
-final user = await client.currentUser();
+final userResult = await client.currentUser();
+if (userResult.isSuccess) {
+  final user = userResult.asSuccess.data;
+  /// The Application code to run after get the user
+} else {
+  /// Handle the error
+}
 ```
 
 </TabItem>
@@ -519,6 +536,9 @@ Do not call this method without calling the [Evaluating user method](#evaluating
 
 ```dart showLineNumbers
 final evaluationDetails = await client.evaluationDetails("YOUR_FEATURE_FLAG_ID");
+if (evaluationDetails != null) {
+  // access the evaluation details
+}
 ```
 
 </TabItem>
