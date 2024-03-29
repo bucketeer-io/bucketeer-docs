@@ -609,11 +609,11 @@ import Bucketeer
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        /// Add the code to enable background tasks
+        // Add the code to enable background tasks
         if #available(iOS 13.0, tvOS 13.0, *) {
             BKTBackgroundTask.enable()
         }
-        /// Your app logic code
+        // Your app logic code
         return true
     }
 ```
