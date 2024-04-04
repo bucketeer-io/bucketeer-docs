@@ -137,18 +137,24 @@ During the initialization process, errors **are not** related to the initializat
 ```dart showLineNumbers
 /// It will unlock without waiting until the fetching variation process finishes
 const int timeout = 2000; /// Default is 5 seconds (In milliseconds)
-final result = await BKTClient.initialize(config: config, user: user, timeoutMillis: timeout);
+final result = await BKTClient.initialize(
+    config: config, user: user, timeoutMillis: timeout);
 if (result.isSuccess) {
   const client = BKTClient.instance;
+  final showNewFeature = await client
+      .boolVariation("YOUR_FEATURE_FLAG_ID", defaultValue: false);
   if (showNewFeature) {
     /// The Application code to show the new feature
   } else {
     /// The code to run if the feature is off
   }
-} else if (result.asFailure.exception is BKTTimeoutException) {
-  /// During the initialization process, errors **are not** related to the initialization itself
 } else {
   /// Handle the error when there is no cache or the cache is not updated
+  if (result.asFailure.exception is BKTTimeoutException) {
+    /// Handle timeout error
+  } else {
+    /// Anything else
+  }
 }
 ```
 
@@ -162,7 +168,7 @@ When the application changes to the **background state**, it will use the `backg
 
 #### Polling retry behavior
 
-The Bucketeer SDK regularly polls the latest evaluations from the server based on the pollingInterval parameter. By default, the `pollingInterval` is set to 10 minutes, but you can adjust it to suit your needs.
+The Bucketeer SDK regularly polls the latest evaluations from the server based on the `pollingInterval` parameter. By default, the `pollingInterval` is set to 10 minutes, but you can adjust it to suit your needs.
 
 If a polling request fails, the SDK initiates a retry procedure. The SDK attempts a new polling request every minute up to 5 times. If all five retry attempts fail, the SDK sends a new polling request once the `pollingInterval` time elapses. The table below shows this scenario:
 
@@ -256,11 +262,12 @@ To check which variation a specific user will receive, you can use the client li
 <TabItem value="dart" label="Dart">
 
 ```dart showLineNumbers
-final showNewFeature = await client.boolVariation("YOUR_FEATURE_FLAG_ID", false);
+final showNewFeature =
+    await client.boolVariation("YOUR_FEATURE_FLAG_ID", false);
 if (showNewFeature) {
-    /// The Application code to show the new feature
+  /// The Application code to show the new feature
 } else {
-    /// The code to run if the feature is off
+  /// The code to run if the feature is off
 }
 ```
 
@@ -269,7 +276,7 @@ if (showNewFeature) {
 
 :::caution
 
-In case of the feature flag is missing in the SDK, it will return the default value.
+In case the feature flag is missing in the SDK, it will return the default value.
 
 :::
 
@@ -312,14 +319,20 @@ int timeout = 5000; /// Optional. Default is 30 seconds (In milliseconds)
 
 final result = await client.fetchEvaluations(timeoutMillis: timeout);
 if (result.isSuccess) {
-  final showNewFeature = await client.boolVariation("YOUR_FEATURE_FLAG_ID", defaultValue: false);
+  final showNewFeature = await client
+      .boolVariation("YOUR_FEATURE_FLAG_ID", defaultValue: false);
   if (showNewFeature) {
-      /// The Application code to show the new feature
+    /// The Application code to show the new feature
   } else {
-      /// The code to run if the feature is off
+    /// The code to run if the feature is off
   }
 } else {
-   /// Handle the error when there is no cache or the cache is not updated
+  /// Handle the error when the cache is not updated
+  if (result.asFailure.exception is BKTTimeoutException) {
+    /// Handle timeout error
+  } else {
+    /// Anything else
+  }
 }
 ```
 
@@ -356,17 +369,23 @@ FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
   final isFeatureFlagUpdated = message.data["bucketeer_feature_flag_updated"]
     if (isFeatureFlagUpdated) {
       int timeout = 1000;
-
+      const client = BKTClient.instance;
       final result = await client.fetchEvaluations(timeoutMillis: timeout);
       if (result.isSuccess) {
-        final showNewFeature = await client.boolVariation("YOUR_FEATURE_FLAG_ID", defaultValue: false);
+        final showNewFeature = await client
+            .boolVariation("YOUR_FEATURE_FLAG_ID", defaultValue: false);
         if (showNewFeature) {
-            /// The Application code to show the new feature
+          /// The Application code to show the new feature
         } else {
-            /// The code to run if the feature is off
+          /// The code to run if the feature is off
         }
       } else {
-        /// The code to run if the feature is off
+        /// Handle the error when the cache is not updated
+        if (result.asFailure.exception is BKTTimeoutException) {
+          /// Handle timeout error
+        } else {
+          /// Anything else
+        }
       }
     }
 });
@@ -404,7 +423,7 @@ This method will send all pending analytics events to the Bucketeer server immed
 <TabItem value="dart" label="Dart">
 
 ```dart showLineNumbers
-client.flush();
+await client.flush();
 ```
 
 </TabItem>
@@ -536,9 +555,6 @@ Do not call this method without calling the [Evaluating user method](#evaluating
 
 ```dart showLineNumbers
 final evaluationDetails = await client.evaluationDetails("YOUR_FEATURE_FLAG_ID");
-if (evaluationDetails != null) {
-  /// access the evaluation details
-}
 ```
 
 </TabItem>
@@ -556,9 +572,10 @@ The listener can detect both automatic polling and manual fetching.
 ```dart showLineNumbers
 class EvaluationUpdateListenerImpl implements BKTEvaluationUpdateListener {
   @override
-  void onUpdate() {
-    final client = BKTClient.instance;
-    final showNewFeature = client.boolVariation("YOUR_FEATURE_FLAG_ID", defaultValue: false);
+  void onUpdate() async {
+    const client = BKTClient.instance;
+    final showNewFeature =
+        await client.boolVariation("YOUR_FEATURE_FLAG_ID", defaultValue: false);
     if (showNewFeature) {
       /// The Application code to show the new feature
     } else {
@@ -567,17 +584,14 @@ class EvaluationUpdateListenerImpl implements BKTEvaluationUpdateListener {
   }
 }
 
-final client = BKTClient.instance;
-
 final listener = EvaluationUpdateListenerImpl();
+const client = BKTClient.instance;
 /// The returned key value is used to remove the listener
-final key = client.addEvaluationUpdateListener(listener);
-
+final key = await client.addEvaluationUpdateListener(listener);
 /// Remove a listener associated with the key
-client.removeEvaluationUpdateListener(key: key)
-
+client.removeEvaluationUpdateListener(key);
 /// Remove all listeners
-client.clearEvaluationUpdateListeners()
+client.clearEvaluationUpdateListeners();
 ```
 
 </TabItem>
@@ -642,7 +656,7 @@ For those cases, you can call the destroy interface, which will clear the client
 <TabItem value="dart" label="Dart">
 
 ```dart showLineNumbers
-client.destroy()
+await client.destroy()
 ```
 
 </TabItem>
