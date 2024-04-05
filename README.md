@@ -26,6 +26,8 @@ $ yarn build
 
 This command generates static content into the `build` directory and can be served using any content hosting service.
 
+Run `yarn serve` to check the built HTML files locally.
+
 ### Deployment
 
 GitHub Actions will deploy it automatically to Firebase Hosting.
