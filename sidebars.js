@@ -298,6 +298,12 @@ const sidebars = {
       label: 'JavaScript',
       className: 'sidebar-javascript',
     },
+    {
+      type: 'doc',
+      id: 'changelog/client-side/flutter',
+      label: 'Flutter',
+      className: 'sidebar-flutter',
+    },
     /*{
       type: 'category',
       label: 'Client',
