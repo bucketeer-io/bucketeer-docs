@@ -73,6 +73,10 @@ The image below presents an example using two flags as prerequisites. Therefore,
   wSize="500px"
 />
 
+:::info Performance impact
+When defining rollout rules based on other feature flags, consider the impact of performance on your system. If a flag to be evaluated has many dependencies, evaluating one flag may also evaluate many other flags, potentially affecting the performance of evaluation duration and the client's network load.
+:::
+
 ### Targeting
 
 The Bucketeer targeting section allows you to define which users or groups receive each feature flag variation. Taking a boolean flag as an example, you could provide the `true` variation for Android users and the `false` variation for iOS users, as shown in the image below.
@@ -182,6 +186,22 @@ For example, consider you created a rollout rule using the **Date** condition fo
   alt="rollout rule definition based on date"
   wSize="500px"
 />
+
+### Feature flag
+
+You also can define rollout rules based on other feature flags. The **Feature flag** option is similar to the [Prerequisites](/feature-flags/creating-feature-flags/targeting#prerequisites), meaning the condition is based on other feature flags' evaluations. The rule's condition is satisfied if the user is evaluated with the expected variation on the feature flag.
+
+For example, consider that you created a rollout rule using the **Feature flag** condition based on the `true` variation of the foo feature flag.
+
+<CenteredImg
+  imgURL="img/feature-flags/targeting/rollout-rule-feature-flag.png"
+  alt="rollout rule definition based on feature flag"
+  wSize="500px"
+/>
+
+:::info Performance impact
+When defining rollout rules based on other feature flags, consider the impact of performance on your system. If a flag to be evaluated has many dependencies, evaluating one flag may also evaluate many other flags, potentially affecting the performance of evaluation duration and the client's network load.
+:::
 
 :::info Combine conditions
 Despite presenting examples using only one type of condition, you can combine user attributes, user segments, and date conditions on your system to improve the targeting of your rollout rules.
