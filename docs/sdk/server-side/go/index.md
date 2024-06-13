@@ -52,7 +52,10 @@ import (
 
 ### Initializing client
 
-Initializing the client.
+The SDK supports local and remote evaluations.
+
+- [Local evaluation](#evaluating-users-within-sdk-locally): Evaluates end users within SDK locally
+- [Remote evaluation](#remote-evaluation): Evaluate end users on the server
 
 :::info
 
@@ -60,6 +63,30 @@ The **tag** setting is the tag you configure when creating a Feature Flag. It wi
 **We strongly recommend** using tags to speed up the evaluation process and reduce the response latency.
 
 :::
+
+#### Custom configuration
+
+:::info Custom configuration
+
+Depending on your use, you may want to change the optional configurations available.
+
+- **eventQueueCapacity** (Default is 100)
+- **numEventFlushWorkers** (Default is 50)
+- **eventFlushInterval** (Default is 1 minute)
+- **eventFlushSize** (Default is 100)
+- **enableDebugLog** (Default is false)
+- **errorLogger** (Default is `log.DefaultErrorLogger`)
+- **enableLocalEvaluation** (Default is false)
+- **cachePollingInterval** (Default is 1 minute)
+
+For more information, please check the Option implementation [here](https://github.com/bucketeer-io/go-server-sdk/blob/master/pkg/bucketeer/option.go).
+
+:::
+
+#### Remote evaluation
+
+To evaluate users on the server side you must create an API Key using the `Client SDK` role.
+
 <Tabs>
 <TabItem value="go" label="Go">
 
@@ -80,20 +107,47 @@ if err != nil {
 </TabItem>
 </Tabs>
 
-:::info Custom configuration
+Once the SDK is configured, please check this [section](#evaluating-user) to learn how to get the variation for a user.
 
-Depending on your use, you may want to change the optional configurations available.
+#### Evaluating users within SDK locally
 
-- **eventQueueCapacity** (Default is 100)
-- **numEventFlushWorkers** (Default is 50)
-- **eventFlushInterval** (Default is 1 minute)
-- **eventFlushSize** (Default is 100)
-- **enableDebugLog** (Default is false)
-- **errorLogger** (Default is `log.DefaultErrorLogger`)
+By evaluating users locally you can improve response time significantly.<br />
+To evaluate them you must create an API Key using the `Server SDK` role.
 
-For more information, please check the Option implementation [here](https://github.com/bucketeer-io/go-server-sdk/blob/master/pkg/bucketeer/option.go).
+The SDK will poll the Feature Flags and Segment Users from the server, and cache them in memory.
+
+:::caution
+
+The Server SDK API Key has access to all Feature Flags and Segment Users in the environment.<br />
+Keep in mind that it might contain sensitive information, so be careful when sharing the key with others.
 
 :::
+
+When initializing the SDK you must enable the local evaluation setting.
+
+<Tabs>
+<TabItem value="go" label="Go">
+
+```go showLineNumbers
+ctx, cancel := context.WithTimeout(context.Background(), timeout)
+defer cancel()
+client, err := bucketeer.NewSDK(
+  ctx,
+  bucketeer.WithAPIKey("YOUR_API_KEY"),
+  bucketeer.WithHost("YOUR_API_ENDPOINT"),
+  bucketeer.WithTag("YOUR_FEATURE_TAG"),
+  bucketeer.WithEnableLocalEvaluation(true), // <--- Enable the local evaluation
+  bucketeer.WithCachePollingInterval(10*time.Minute), // <--- Change the default interval if needed
+)
+if err != nil {
+  log.Fatalf("Failed initialize the new client: %v", err)
+}
+```
+
+Once the SDK is configured, please check this [section](#evaluating-user) to learn how to get the variation for a user.
+
+</TabItem>
+</Tabs>
 
 ## Supported features
 
