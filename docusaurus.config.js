@@ -25,6 +25,19 @@ const config = {
   ],
   plugins: [
     require.resolve('docusaurus-plugin-image-zoom'),
+    [
+      '@scalar/docusaurus',
+      {
+        label: 'API Reference',
+        route: '/api',
+        configuration: {
+          spec: {
+            // Put the URL to your OpenAPI document here:
+            url: 'https://raw.githubusercontent.com/bucketeer-io/bucketeer/main/api-description/service.swagger.json'
+          },
+        },
+      },
+    ],
   ],
 
   title: 'Bucketeer Docs',
