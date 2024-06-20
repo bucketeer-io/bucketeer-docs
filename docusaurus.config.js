@@ -7,14 +7,23 @@ const darkTheme = themes.dracula;
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-
-  plugins: [
+  themes: [
     [
-      require.resolve('@cmfcmf/docusaurus-search-local'),
-      {
+      require.resolve("@easyops-cn/docusaurus-search-local"),
+      ({
+        // ... Your options.
+        // `hashed` is recommended as long-term-cache of index file is possible.
+        hashed: true,
+        searchResultContextMaxLength: 100,
         indexBlog: false,
-      },
+        // For Docs using Chinese, The `language` is recommended to set to:
+        // ```
+        language: ["en"],
+        // ```
+      }),
     ],
+  ],
+  plugins: [
     require.resolve('docusaurus-plugin-image-zoom'),
   ],
 
@@ -33,7 +42,7 @@ const config = {
   // to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'en',
-    locales: [ 'en', 'ja' ],
+    locales: [ 'en' ],
   },
 
   presets: [
