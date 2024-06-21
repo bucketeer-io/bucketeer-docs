@@ -198,7 +198,7 @@ BKTClient.initialize(
   if (showNewFeature) {
     // The Application code to show the new feature
   } else {
-    // The code to run when the feature is off
+    // The code to run when the feature is off 
   }
 }
 ```
