@@ -341,7 +341,7 @@ const sidebars = {
         type: "generated-index",
         title: "API",
         description: "test",
-        slug: "/category/api"
+        slug: "/api"
       },
       // @ts-ignore
       items: require("./docs/api/sidebar.js")

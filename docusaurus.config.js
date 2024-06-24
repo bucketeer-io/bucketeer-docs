@@ -120,6 +120,12 @@ const config = {
             activeBaseRegex: "/sdk",
           },
           {
+            to: 'api',
+            label: 'API Reference',
+            position: 'left',
+            activeBaseRegex: "/api",
+          },
+          {
             to: 'changelog',
             label: 'Changelog',
             position: 'left',
