@@ -332,6 +332,20 @@ const sidebars = {
       label: 'Node JS',
       className: 'sidebar-nodejs',
     },
+  ],
+  openApiSidebar: [
+    {
+      type: "category",
+      label: "API",
+      link: {
+        type: "generated-index",
+        title: "API",
+        description: "test",
+        slug: "/category/api"
+      },
+      // @ts-ignore
+      items: require("./docs/api/sidebar.js")
+    }
   ]
 }
 

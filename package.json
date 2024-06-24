@@ -20,9 +20,11 @@
     "@docusaurus/preset-classic": "^2.4.1",
     "@mdx-js/react": "^1.6.22",
     "clsx": "^1.1.1",
+    "docusaurus-plugin-openapi-docs": "2.1.0",
+    "docusaurus-theme-openapi-docs": "2.1.0",
     "docusaurus-plugin-image-zoom": "^1.0.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "^2.4.1"
