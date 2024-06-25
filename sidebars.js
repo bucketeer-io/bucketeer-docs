@@ -210,6 +210,7 @@ const sidebars = {
       items: [
         'integration/pushes',
         'integration/notifications',
+        'integration/http-api',
       ],
     },
 
