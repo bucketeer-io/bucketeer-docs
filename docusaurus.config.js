@@ -15,8 +15,25 @@ const config = {
       },
     ],
     require.resolve('docusaurus-plugin-image-zoom'),
+    [
+      "docusaurus-plugin-openapi-docs",
+      {
+        id: "openapi",
+        docsPluginId: "classic", // e.g. "classic" or the plugin-content-docs id
+        config: {
+          petstore: { // "petstore" is considered the <id> that you will reference in the CLI
+            specPath: "examples/openapi.json",
+            outputDir: "docs/api",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+              categoryLinkSource: "tag",
+            },
+          }
+        }
+      },
+    ]
   ],
-
+  themes: ["docusaurus-theme-openapi-docs"],
   title: 'Bucketeer Docs',
   tagline: 'Feature Flag and A/B Testing Managment platform',
   url: 'https://docs.bucketeer.io',
@@ -46,6 +63,8 @@ const config = {
           editUrl:
             'https://github.com/bucketeer-io/bucketeer-docs/tree/master',
           showLastUpdateTime: true,
+          docLayoutComponent: "@theme/DocPage",
+          docItemComponent: "@theme/ApiItem"
         },
         blog: false,
         theme: {
@@ -99,6 +118,12 @@ const config = {
             label: 'SDKs',
             position: 'left',
             activeBaseRegex: "/sdk",
+          },
+          {
+            to: 'api',
+            label: 'API Reference',
+            position: 'left',
+            activeBaseRegex: "/api",
           },
           {
             to: 'changelog',
