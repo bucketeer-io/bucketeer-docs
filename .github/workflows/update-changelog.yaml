@@ -61,7 +61,7 @@ jobs:
 
       - name: Create the pull request
         id: create-docs-pull-request
-        uses: peter-evans/create-pull-request@b1ddad2c994a25fbc81a28b3ec0e368bb2021c50 # v6.0.0
+        uses: peter-evans/create-pull-request@c5a7806660adbe173f04e3e038b0ccdcd758773c # v6.1.0
         with:
           token: ${{ secrets.ACTIONS_PAT }}
           committer: bucketeer-bot <bucketeer-bot@users.noreply.github.com>
@@ -75,7 +75,7 @@ jobs:
 
       - name: Merge the pull request
         id: automerge
-        uses: pascalgn/automerge-action@58724c982461efbb7865b3762d7bff0d4756f57a # v0.16.2
+        uses: pascalgn/automerge-action@d1203c0bf94a827b991e5de69d662e9163304fa0 # v0.16.3
         env:
           GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_PAT }}
           PULL_REQUEST: ${{ steps.create-docs-pull-request.outputs.pull-request-number }}
