@@ -25,7 +25,8 @@
     "react-dom": "^18.0.0"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "^2.4.1"
+    "@docusaurus/module-type-aliases": "^2.4.1",
+    "node": "18"
   },
   "browserslist": {
     "production": [
