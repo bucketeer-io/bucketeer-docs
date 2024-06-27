@@ -13,9 +13,6 @@
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids"
   },
-  "engines": {
-    "node": ">=18"
-  },
   "dependencies": {
     "@cmfcmf/docusaurus-search-local": "^1.2.0",
     "@docusaurus/core": "^3.0.0",
@@ -41,5 +38,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "engines": {
+    "node": ">=18.18"
   }
 }
