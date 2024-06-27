@@ -8,13 +8,13 @@ This section presents the necessary information to use Bucketeer feature flags. 
 
 ## Creating feature flags:
 
-- [Create a feature flag](../feature-flags/creating-feature-flags/create-feature-flag): Learn how to create flags and define their properties.
-- [Targeting with feature flags](../feature-flags/creating-feature-flags/targeting): Discover how to target specific users or groups with your flags based on various attributes.
-- [Manage variations](../feature-flags/creating-feature-flags/manage-variations): Understand how to manage and configure different variations of your feature flags.
-- [Trigger flags](../feature-flags/creating-feature-flags/trigger.mdx): Use Webhooks to remotely manage flags by turning them ON or OFF.
-- [Auto operation](../feature-flags/creating-feature-flags/auto-operation): Automate the feature flag operation.
-- [Evaluate results](../feature-flags/creating-feature-flags/evaluate-results): Explore how to evaluate and analyze the usage of your flags.
-- [Other flag settings](../feature-flags/creating-feature-flags/settings-and-history): Explore additional settings and options for your flags.
+- [Create a feature flag](/feature-flags/creating-feature-flags/create-feature-flag): Learn how to create flags and define their properties.
+- [Targeting with feature flags](/feature-flags/creating-feature-flags/targeting): Discover how to target specific users or groups with your flags based on various attributes.
+- [Manage variations](/feature-flags/creating-feature-flags/manage-variations): Understand how to manage and configure different variations of your feature flags.
+- [Trigger flags](/feature-flags/creating-feature-flags/trigger.mdx): Use Webhooks to remotely manage flags by turning them ON or OFF.
+- [Auto operation](/feature-flags/creating-feature-flags/auto-operation): Automate the feature flag operation.
+- [Evaluate results](/feature-flags/creating-feature-flags/evaluate-results): Explore how to evaluate and analyze the usage of your flags.
+- [Other flag settings](/feature-flags/creating-feature-flags/settings-and-history): Explore additional settings and options for your flags.
 
 ## API keys
 
