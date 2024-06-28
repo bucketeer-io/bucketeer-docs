@@ -3,11 +3,14 @@
 
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+const { webpackPlugin } = require('./plugins/webpack-plugin.cjs');
+
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
 
   plugins: [
+    webpackPlugin,
     [
       require.resolve('@cmfcmf/docusaurus-search-local'),
       {
@@ -105,6 +108,11 @@ const config = {
             label: 'Changelog',
             position: 'left',
             activeBasePath: "/changelog",
+          },
+          {
+            to: 'apireference',
+            label: 'API Reference',
+            position: 'left',
           },
           {
             type: 'search',
