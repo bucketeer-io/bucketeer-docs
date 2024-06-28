@@ -208,7 +208,7 @@ BKTClient.initialize(
 
 #### Polling
 
-The initialize process immediately starts polling the latest evaluations from the Bucketeer server in the background using the interval `pollingInterval` configuration while the application is in the **foreground state**. When the application changes to the **background state**, it will use the `backgroundPollingInterval` configuration when the [Background fetch](/sdk/client-side/ios#background-fetch) is configured.
+The initialize process immediately starts polling the latest evaluations from the Bucketeer server in the background using the interval `pollingInterval` configuration while the application is in the **foreground state**. When the application changes to the **background state**, it will use the `backgroundPollingInterval` configuration when the [Background fetch](/sdk/client-side/ios#background-mode) is configured.
 
 #### Polling retry behavior
 
