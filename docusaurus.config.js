@@ -33,7 +33,7 @@ const config = {
         configuration: {
           spec: {
             // Put the URL to your OpenAPI document here:
-            url: 'https://raw.githubusercontent.com/bucketeer-io/bucketeer/main/api-description/service.swagger.json'
+            url: 'https://raw.githubusercontent.com/bucketeer-io/bucketeer/main/api-description/openapi.yaml'
           },
         },
       },
