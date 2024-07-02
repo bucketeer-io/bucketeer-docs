@@ -37,7 +37,7 @@ const config = {
         label: 'API Reference',
         route: '/api',
         configuration: {
-          theme: 'deepSpace',
+          theme: 'default',
           hideModels: true,
           spec: {
             // Put the URL to your OpenAPI document here:
