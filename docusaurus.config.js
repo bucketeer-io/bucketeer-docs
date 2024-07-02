@@ -1,20 +1,44 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const lightCodeTheme = require('prism-react-renderer').themes.github
-const darkCodeTheme= require('prism-react-renderer').themes.dracula
+const {themes} = require('prism-react-renderer');
+const lightTheme = themes.github;
+const darkTheme = themes.dracula;
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-
-  plugins: [
+  themes: [
     [
-      require.resolve('@cmfcmf/docusaurus-search-local'),
+      require.resolve("@easyops-cn/docusaurus-search-local"),
+      ({
+        // ... Your options.
+        // `hashed` is recommended as long-term-cache of index file is possible.
+        hashed: true,
+        searchResultContextMaxLength: 100
+        // For Docs using Chinese, The `language` is recommended to set to:
+        // ```
+        // language: ["en", "zh"],
+        // ```
+      }),
+    ],
+  ],
+  plugins: [
+    require.resolve('docusaurus-plugin-image-zoom'),
+    [
+      '@scalar/docusaurus',
       {
-        indexBlog: false,
+        label: 'API Reference',
+        route: '/api',
+        configuration: {
+          theme: 'default',
+          hideModels: true,
+          spec: {
+            // Put the URL to your OpenAPI document here:
+            url: 'https://raw.githubusercontent.com/bucketeer-io/bucketeer/003d33b7214c06305cefc00ce62cc0c1be1f754d/api-description/apidocs.swagger.yaml'
+          },
+        },
       },
     ],
-    require.resolve('docusaurus-plugin-image-zoom'),
   ],
 
   title: 'Bucketeer Docs',
@@ -32,7 +56,7 @@ const config = {
   // to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'en',
-    locales: [ 'en', 'ja' ],
+    locales: [ 'en' ],
   },
 
   presets: [
@@ -138,10 +162,7 @@ const config = {
         ],
       },
       prism: {
-        // theme: darkCodeTheme,
-        theme: lightCodeTheme,
-        // theme: require("prism-react-renderer/themes/vsDark"),
-        // theme: require("prism-react-renderer/themes/shadesOfPurple"),
+        theme: lightTheme,
         additionalLanguages: [
           'groovy',
           'kotlin',
