@@ -24,6 +24,12 @@ const config = {
     ],
   ],
   plugins: [
+    [
+      require.resolve("@cmfcmf/docusaurus-search-local"),
+      {
+        indexBlog: false,
+      },
+    ],
     require.resolve('docusaurus-plugin-image-zoom'),
     [
       '@scalar/docusaurus',
@@ -31,9 +37,11 @@ const config = {
         label: 'API Reference',
         route: '/api',
         configuration: {
+          theme: 'deepSpace',
+          hideModels: true,
           spec: {
             // Put the URL to your OpenAPI document here:
-            url: 'https://raw.githubusercontent.com/bucketeer-io/bucketeer/main/api-description/openapi.yaml'
+            url: 'https://raw.githubusercontent.com/bucketeer-io/bucketeer/003d33b7214c06305cefc00ce62cc0c1be1f754d/api-description/apidocs.swagger.yaml'
           },
         },
       },
