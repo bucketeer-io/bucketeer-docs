@@ -14,22 +14,15 @@ const config = {
         // ... Your options.
         // `hashed` is recommended as long-term-cache of index file is possible.
         hashed: true,
-        searchResultContextMaxLength: 100,
-        indexBlog: false,
+        searchResultContextMaxLength: 100
         // For Docs using Chinese, The `language` is recommended to set to:
         // ```
-        language: ["en"],
+        // language: ["en", "zh"],
         // ```
       }),
     ],
   ],
   plugins: [
-    [
-      require.resolve("@cmfcmf/docusaurus-search-local"),
-      {
-        indexBlog: false,
-      },
-    ],
     require.resolve('docusaurus-plugin-image-zoom'),
     [
       '@scalar/docusaurus',
