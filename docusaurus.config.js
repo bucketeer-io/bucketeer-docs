@@ -7,22 +7,9 @@ const darkTheme = themes.dracula;
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  themes: [
-    [
-      require.resolve("@easyops-cn/docusaurus-search-local"),
-      ({
-        // ... Your options.
-        // `hashed` is recommended as long-term-cache of index file is possible.
-        hashed: true,
-        searchResultContextMaxLength: 100
-        // For Docs using Chinese, The `language` is recommended to set to:
-        // ```
-        // language: ["en", "zh"],
-        // ```
-      }),
-    ],
-  ],
+  themes: [],
   plugins: [
+    require.resolve('docusaurus-lunr-search'),
     require.resolve('docusaurus-plugin-image-zoom'),
     [
       '@scalar/docusaurus',
@@ -30,7 +17,6 @@ const config = {
         label: 'API Reference',
         route: '/api',
         configuration: {
-          theme: 'default',
           hideModels: true,
           spec: {
             // Put the URL to your OpenAPI document here:
