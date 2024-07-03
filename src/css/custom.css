@@ -1133,3 +1133,23 @@ details .tabs__item--active {
   transition: background var(--ifm-transition-fast)
     var(--ifm-transition-timing-default);*/
 }
+
+.algolia-autocomplete .algolia-docsearch-suggestion--category-header {
+  background-color: #9b77cf !important;
+}
+
+mark {
+  background-color: #9b77cf !important;
+}
+
+.algolia-autocomplete .algolia-docsearch-suggestion--category-header {
+  background-color: #9b77cf !important;
+}
+
+.algolia-autocomplete .algolia-docsearch-suggestion--no-results {
+  background-color: #9b77cf !important;
+}
+
+.algolia-autocomplete .ds-cursor .algolia-docsearch-suggestion--wrapper {
+  box-shadow: inset -2px 0 0 #9b77cf !important;
+}
