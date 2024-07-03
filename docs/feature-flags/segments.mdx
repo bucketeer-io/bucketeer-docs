@@ -11,7 +11,7 @@ import CenteredImg from '@site/src/components/centered-img/CenteredImg';
 Segments in Bucketeer enable you to create user groups based on users' unique `id`. You define the user `id` when creating the user through the `defineBKTUser` function. User segments allow you to create specific user targets to manage all users for a single feature flag variation or test beta features on a small number of users.
 
 :::note Use Case
-You can use segments to target specific user groups, such as making a new feature available to them. For example, when adding a new feature for QA testing, create a segment with all QA team members' ids and specify the new feature variation for them.
+You can use segments to target specific user groups and make a new feature only available to them. For example, before releasing a new feature, it may need to be tested by the QA team. In such a situation, you can create a segment with all QA team members' ids and make the new feature available for them.
 :::
 
 ## Creating a Segment
@@ -26,8 +26,8 @@ To create a Segment on Bucketeer:
 4. Click on **Submit**.
 
 <CenteredImg
-  imgURL="img/feature-flags/segments/segment-creation.png"
-  wSize="370px"
+ imgURL="img/feature-flags/segments/segment-creation.png"
+ wSize="370px"
 />
 
 :::info Segments with empty user list
@@ -39,14 +39,14 @@ After submitting, the Segment will be available instantaneously with a **Not in 
 After submission, the segment will be available instantly with a *Not in use** status. You will see a **UPLOADING** message indicating that the user list is being uploaded to the server. This process may take a few seconds to complete. It is recommended to avoid using the segment to test a Rollout process until the upload is complete since the server may not target users correctly once it does not have access to the user list.
 
 <CenteredImg
-  imgURL="img/feature-flags/segments/segment-uploading.png"
+ imgURL="img/feature-flags/segments/segment-uploading.png"
 
 />
 
 The user list will be available on the server after a few seconds. Reload the **User Segments** page to see the number of users within the segment instead of the **UPLOADING** message.
 
 <CenteredImg
-  imgURL="img/feature-flags/segments/segment-ready-to-use.png"
+ imgURL="img/feature-flags/segments/segment-ready-to-use.png"
 />
 
 ## Editing a Segment
