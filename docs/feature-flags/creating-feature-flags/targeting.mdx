@@ -158,7 +158,9 @@ If the user did not satisfy any of these rules, he would receive the default var
 
 ### User segments
 
-The user segment refers to a specific group of users that you can define within the dashboard based on their unique `id`. Each user's `id` is established when you create the user using the defineBKTUser function. To associate users with segments, you can manually assign them within the dashboard or upload .txt or .csv files. These segments can be created based on various criteria, such as email type, gender, location, and more. You can precisely target and group users for testing by creating segments. The image below presents a rollout rule where the **value-1** variation is returned if the requiring user belongs to the **Testing users** segment.
+A user segment is a specific group of users defined within the dashboard based on their unique `id`. Each user's `id` is set when you create the user using the `defineBKTUser` function. Users can be associated with segments manually within the dashboard or by uploading **.txt** or **.csv** files. Access the [Segments](/feature-flags/segments) page to learn how to create and manage segments.
+
+You can create segments based on various criteria, such as email type, gender, location, and more. This allows you to precisely target and group users for testing purposes.  The image below shows a rollout rule where the **value-1** variation is returned if the requesting user belongs to the **Testing users** segment.
 
 <CenteredImg
   imgURL="img/feature-flags/targeting/rollout-rule-segment.png"
