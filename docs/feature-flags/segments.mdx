@@ -1,0 +1,78 @@
+---
+title: User Segments
+# sidebar_position:
+slug: /feature-flags/segments
+description: Learn how to create and manage user segments in Bucketeer.
+tags: ['integration', 'feature-flag','segments', 'user segments']
+---
+
+import CenteredImg from '@site/src/components/centered-img/CenteredImg';
+
+Segments in Bucketeer enable you to create user groups based on users' unique `id`. You define the user `id` when creating the user through the `defineBKTUser` function. User segments allow you to create specific user targets to manage all users for a single feature flag variation or test beta features on a small number of users.
+
+:::note Use Case
+You can use segments to target specific user groups, such as making a new feature available to them. For example, when adding a new feature for QA testing, create a segment with all QA team members' ids and specify the new feature variation for them.
+:::
+
+## Creating a Segment
+
+To create a Segment on Bucketeer:
+
+1. Access the Bucketeer dashboard.
+2. Navigate to the **User Segments** tab, where you will see all existing segments in the current environment. Creating a new segment adds it to the list.
+3. Click on **+ Add**.
+4. Add a **Name** and **Description** for the new segment.
+3. Add a list of users to be included in the new segment. This step is optional. You can upload a **csv** or **txt** file with the user's `id` separated with commas. Alternatively, select **Enter user IDs** and manually type the user `ids`.
+4. Click on **Submit**.
+
+<CenteredImg
+  imgURL="img/feature-flags/segments/segment-creation.png"
+  wSize="370px"
+/>
+
+:::info Segments with empty user list
+You are not required to add the user list when initially creating the segment. If you need to include a segment in your rollout strategy but do not know the users who should be in the segment, you can create an empty segment and add users later.
+:::
+
+After submitting, the Segment will be available instantaneously with a **Not in use** status. However, you will see a message **UPLOADING**, which informs you that the user list is been uploaded to the server, which process may take some seconds to complete. While the upload is not complete, the Segment usage in a Rollout process, for example, is not recommended. 
+
+After submission, the segment will be available instantly with a *Not in use** status. You will see a **UPLOADING** message indicating that the user list is being uploaded to the server. This process may take a few seconds to complete. It is recommended to avoid using the segment to test a Rollout process until the upload is complete since the server may not target users correctly once it does not have access to the user list.
+
+<CenteredImg
+  imgURL="img/feature-flags/segments/segment-uploading.png"
+
+/>
+
+The user list will be available on the server after a few seconds. Reload the **User Segments** page to see the number of users within the segment instead of the **UPLOADING** message.
+
+<CenteredImg
+  imgURL="img/feature-flags/segments/segment-ready-to-use.png"
+/>
+
+## Editing a Segment
+
+To edit a segment:
+
+1. Access the **User Segments** tab.
+2. Find and click on the desired segment's name.
+
+A lateral menu will appear, allowing you to update the **Name**, **Description**, and user list. Note that previously added users `id`s will not be displayed because Bucketeer does not allow editing the existing user list through the dashboard. You need to provide a new list each time you edit the segment, either by uploading a file or adding `id`s manually.
+
+:::tip Update the existing users list
+To add new `id`s to an existing segment:
+
+1. Download the existing list by clicking on the option button (three dots) and selecting **Download user list**.
+2. Edit the list locally on your machine.
+3. Upload the updated list to the same segment.
+:::
+
+## Deleting a Segment
+
+To delete a segment:
+
+1. Access the **User Segments** tab.
+2. Find the desired segment, click the option button (three dots), and select **Delete segment**.
+
+:::warning In use segments
+You cannot delete a segment with an **In use** status. If you try to delete it, the Bucketeer dashboard will present all feature flags currently using the segment. Before deleting, you must remove it from all feature flags. 
+:::
