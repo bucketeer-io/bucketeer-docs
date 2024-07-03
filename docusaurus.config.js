@@ -8,11 +8,11 @@ const darkCodeTheme= require('prism-react-renderer').themes.dracula
 const config = {
 
   plugins: [
-    [
-      require.resolve('@cmfcmf/docusaurus-search-local'),
-      {
-        indexBlog: false,
-      },
+    [ 
+      require.resolve('docusaurus-lunr-search'), {
+        maxHits: '7',
+        languages: ['en']
+      }
     ],
     require.resolve('docusaurus-plugin-image-zoom'),
   ],
