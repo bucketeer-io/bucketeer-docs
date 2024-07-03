@@ -11,7 +11,7 @@ This category contains topics explaining how to configure Bucketeer's Node.js SD
 
 :::caution
 
-The Node.js SDK is currently in its Alpha stage.
+The Node.js SDK is currently in its Beta stage.
 If you find any issues or have suggestions for improvement, feel free to open an [issue](https://github.com/bucketeer-io/node-server-sdk/issues).
 
 :::
