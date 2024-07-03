@@ -10,11 +10,13 @@ import CenteredImg from '@site/src/components/centered-img/CenteredImg';
 
 Segments in Bucketeer enable you to create user groups based on users' unique `id`. You define the user `id` when creating the user through the `defineBKTUser` function. User segments allow you to create specific user targets to manage all users for a single feature flag variation or test beta features on a small number of users.
 
-:::note Use Case
-You can use segments to target specific user groups and make a new feature only available to them. For example, before releasing a new feature, it may need to be tested by the QA team. In such a situation, you can create a segment with all QA team members' ids and make the new feature available for them.
-:::
+## Segments use case
 
-## Creating a Segment
+You can use segments to target specific user groups and make a new feature only available to them. For example, before releasing a new feature, it may need to be tested by the QA team. In such a situation, you can create a segment with all QA team members' ids and make the new feature available for them.
+
+Access the [Targeting with feature flags](/feature-flags/creating-feature-flags/targeting#user-segments) page to learn how to use segments to target users.
+
+## Creating segments
 
 To create a Segment on Bucketeer:
 
@@ -49,24 +51,28 @@ The user list will be available on the server after a few seconds. Reload the **
  imgURL="img/feature-flags/segments/segment-ready-to-use.png"
 />
 
-## Editing a Segment
+## Editing segments
 
 To edit a segment:
 
 1. Access the **User Segments** tab.
 2. Find and click on the desired segment's name.
 
-A lateral menu will appear, allowing you to update the **Name**, **Description**, and user list. Note that previously added users `id`s will not be displayed because Bucketeer does not allow editing the existing user list through the dashboard. You need to provide a new list each time you edit the segment, either by uploading a file or adding `id`s manually.
+:::warning 
+You cannot edit segments that have the **In use** status. To avoid affecting tests that are being executed, Bucketeer blocks the edition of segments that are in use by feature flags.
 
-:::tip Update the existing users list
-To add new `id`s to an existing segment:
+You must remove the segment from all feature flags before editing it.
+:::
+
+A lateral menu will appear, allowing you to update the **Name**, **Description**, and user list. Note that previously added users `ids` will not be displayed because Bucketeer does not allow editing the existing user list through the dashboard. You need to provide a new list each time you edit the segment, either by uploading a file or adding `ids` manually.
+
+To update the existing user list, adding new `ids` to an existing segment, you can follow the steps below:
 
 1. Download the existing list by clicking on the option button (three dots) and selecting **Download user list**.
 2. Edit the list locally on your machine.
 3. Upload the updated list to the same segment.
-:::
 
-## Deleting a Segment
+## Deleting segments
 
 To delete a segment:
 
