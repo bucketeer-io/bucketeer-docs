@@ -5,7 +5,7 @@ tags: ['contribution', 'documentation']
 ---
 
 
-This section covers a range of elements that contribute to your content's overall structure and presentation. By following these guidelines, you'll ensure your content is well-organized, visually appealing, and consistent.
+This section covers a range of elements that contribute to your content's overall structure and presentation. By following these guidelines, you will ensure your content is well-organized, visually appealing, and consistent.
 
 ## Date and time
 
