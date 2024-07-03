@@ -4,7 +4,7 @@ import "./Stoplight.css";
 
 function Stoplight({ apiDescriptionUrl }) {
   return (
-    <div className="stoplight">
+    <div>
       <API 
         apiDescriptionUrl={apiDescriptionUrl} 
         router="hash" 
