@@ -2,17 +2,17 @@
 // Note: type annotations allow type checking and IDEs autocompletion
 
 const lightCodeTheme = require('prism-react-renderer').themes.github
-const darkCodeTheme= require('prism-react-renderer').themes.dracula
+const darkCodeTheme = require('prism-react-renderer').themes.dracula
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
 
   plugins: [
     [
-      require.resolve('@cmfcmf/docusaurus-search-local'),
-      {
-        indexBlog: false,
-      },
+      require.resolve('docusaurus-lunr-search'), {
+        maxHits: '7',
+        languages: ['en']
+      }
     ],
     require.resolve('docusaurus-plugin-image-zoom'),
   ],
@@ -32,7 +32,7 @@ const config = {
   // to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'en',
-    locales: [ 'en', 'ja' ],
+    locales: ['en', 'ja'],
   },
 
   presets: [
