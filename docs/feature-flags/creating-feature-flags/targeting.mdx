@@ -158,10 +158,11 @@ If the user did not satisfy any of these rules, he would receive the default var
 
 ### User segments
 
-A user segment is a specific group of users defined within the dashboard based on their unique `id`. Each user's `id` is set when you create the user using the `defineBKTUser` function. Users can be associated with segments manually within the dashboard or by uploading **.txt** or **.csv** files. 
+A user segment enables you to create user groups based on the unique ID of end users defined when initializing the Bucketeer SDK.<br />
+It allows you to create specific user targets to manage all users for a single feature flag variation or beta tests on a small number of users.
 
 :::info Create segments
-You need to create segments before using them in rollout rules. Access the [Segments](/feature-flags/segments) page to learn how to create and manage segments.
+You can learn more about creating, managing, and using cases by accessing the [Segments](/feature-flags/segments) page.
 :::
 
 You can create segments based on various criteria, such as email type, gender, location, and more. This allows you to precisely target and group users for testing purposes.  The image below shows a rollout rule where the **value-1** variation is returned if the requesting user belongs to the **Testing users** segment.
