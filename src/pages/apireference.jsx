@@ -17,7 +17,7 @@ export default function Api() {
       <BrowserOnly>
         {() => (
           <Suspense fallback={Fallback}>
-            <LazyStoplight apiDescriptionUrl="https://raw.githubusercontent.com/bucketeer-io/bucketeer/main/api-description/openapi.yaml" />
+            <LazyStoplight apiDescriptionUrl="https://raw.githubusercontent.com/bucketeer-io/bucketeer/main/api-description/apidocs.swagger.yaml" />
           </Suspense>
         )}
       </BrowserOnly>
