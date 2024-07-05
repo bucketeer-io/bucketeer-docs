@@ -1,0 +1,88 @@
+---
+title: User Segments
+# sidebar_position:
+slug: /feature-flags/segments
+description: Learn how to create and manage user segments in Bucketeer.
+tags: ['user-segments', 'segments', 'targeting', 'feature-flag']
+---
+
+import CenteredImg from '@site/src/components/centered-img/CenteredImg';
+
+Segments enable you to create user groups based on the unique ID of end users defined when initializing the Bucketeer SDK.<br />
+It allows you to create specific user targets to manage all users for a single feature flag variation or beta tests on a small number of users.
+
+## Use case
+
+You can use segments to target specific user groups and make a new feature only available to them.<br />
+For example, before releasing a new feature, the QA team may need to test it. In such a situation, you can create a segment with all QA team members' IDs and make the new feature only available to them.
+
+Access the [Targeting with feature flags](/feature-flags/creating-feature-flags/targeting#user-segments) page to learn how to use segments to target users.
+
+## Creating segments
+
+To create a Segment on Bucketeer:
+
+1. Navigate to the **User Segments** menu and click on **+ Add**.
+2. Add a **Name** and **Description** for the new segment.
+3. Add a list of users to be included in the new segment. This step is optional. You can upload a **CSV** or **Txt** file with the user's ID separated with commas. Alternatively, select **Enter user IDs** and manually type the user IDs.
+4. Click on **Submit**.
+
+<CenteredImg
+ imgURL="img/feature-flags/segments/segment-creation.png"
+ wSize="370px"
+/>
+
+:::info Segments with empty user list
+You are not required to add the user list when initially creating the segment. If you need to include a segment in your targeting rule strategy but need to know the users who should be in the segment, you can create an empty segment and add users later.
+:::
+
+After submitting, the segment will be available with a `Not in use` status. However, you will see a message `UPLOADING` under the segment's name on the list page, which informs you that the user list is uploading to the server in the background.<br />
+This process may take up to 1 minute to complete, depending on the amount of user IDs.
+
+<CenteredImg
+ imgURL="img/feature-flags/segments/segment-uploading.png"
+/>
+
+
+:::info
+Please wait until the upload finishes before using the segment in your targeting rule strategy. Reload the list page to check if the uploading is finished.
+:::
+
+<CenteredImg
+ imgURL="img/feature-flags/segments/segment-ready-to-use.png"
+/>
+
+## Editing segments
+
+To edit a segment:
+
+1. Navigate to the **User Segments** menu.
+2. Find and click on the desired segment's name.
+
+:::info
+You cannot edit segments that have the `In use` status. To avoid affecting running Experiments, Bucketeer turns off the edition of segments used by feature flags.<br />
+You must remove the segment from all feature flags before editing it.
+:::
+
+You can update the **Name**, **Description**, and user list. Note that the previously added user list is not showing due to the size of the ID list.
+
+:::warning
+By updating the user ID list, you will override the current list in the database. If you want to add or remove users from the list, please download the list and edit it on your PC before submitting it.
+:::
+
+### Downloading an existing user list
+
+1. Download the existing list by clicking on the action menu (three dots) on the list page and selecting **Download user list**.
+2. Edit the list locally on your PC.
+3. Upload the updated list to the same segment.
+
+## Deleting segments
+
+To delete a segment:
+
+1. Navigate to the **User Segments** menu.
+2. Find the desired segment, click the action button (three dots) on the list page, and select **Delete segment**.
+
+:::warning In use segments
+You cannot delete a segment with an `In use` status. If you try to delete it, the Bucketeer will show all feature flags currently using the segment. Before deleting, you must remove it from all feature flags.
+:::
