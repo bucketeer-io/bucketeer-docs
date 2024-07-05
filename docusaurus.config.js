@@ -25,7 +25,7 @@ const config = {
           hideModels: true,
           spec: {
             // Put the URL to your OpenAPI document here:
-            url: 'https://raw.githubusercontent.com/bucketeer-io/bucketeer/003d33b7214c06305cefc00ce62cc0c1be1f754d/api-description/apidocs.swagger.yaml'
+            url: 'https://raw.githubusercontent.com/bucketeer-io/bucketeer/main/api-description/apidocs.swagger.yaml'
           },
         },
       },
