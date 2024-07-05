@@ -636,6 +636,15 @@ code {
   background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"%3E%3Crect width="256" height="256" fill="none"/%3E%3Cpath d="M96,192a32,32,0,0,0,64,0" fill="%23FFFFFF" stroke="%23FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/%3E%3Cpath d="M56,104a72,72,0,0,1,144,0c0,35.82,8.3,64.6,14.9,76A8,8,0,0,1,208,192H48a8,8,0,0,1-6.88-12C47.71,168.6,56,139.81,56,104Z" fill="none" stroke="%23FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/%3E%3C/svg%3E');
 }
 
+.sidebar-segments > .menu__link:before,
+.sidebar-segments .menu__list-item-collapsible .menu__link:before {
+  background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"%3E%3Crect width="256" height="256" fill="none"/%3E%3Cpath d="M164.47,195.63a8,8,0,0,1-6.7,12.37H10.23a8,8,0,0,1-6.7-12.37,95.83,95.83,0,0,1,47.22-37.71,60,60,0,1,1,66.5,0A95.83,95.83,0,0,1,164.47,195.63Zm87.91-.15a95.87,95.87,0,0,0-47.13-37.56A60,60,0,0,0,144.7,54.59a4,4,0,0,0-1.33,6A75.83,75.83,0,0,1,147,150.53a4,4,0,0,0,1.07,5.53,112.32,112.32,0,0,1,29.85,30.83,23.92,23.92,0,0,1,3.65,16.47,4,4,0,0,0,3.95,4.64h60.3a8,8,0,0,0,7.73-5.93A8.22,8.22,0,0,0,252.38,195.48Z" fill="none" stroke="%23795FA8" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/%3E%3C/svg%3E');
+}
+
+.sidebar-segments > .menu__link--active:before {
+  background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"%3E%3Crect width="256" height="256" fill="none"/%3E%3Cpath d="M164.47,195.63a8,8,0,0,1-6.7,12.37H10.23a8,8,0,0,1-6.7-12.37,95.83,95.83,0,0,1,47.22-37.71,60,60,0,1,1,66.5,0A95.83,95.83,0,0,1,164.47,195.63Zm87.91-.15a95.87,95.87,0,0,0-47.13-37.56A60,60,0,0,0,144.7,54.59a4,4,0,0,0-1.33,6A75.83,75.83,0,0,1,147,150.53a4,4,0,0,0,1.07,5.53,112.32,112.32,0,0,1,29.85,30.83,23.92,23.92,0,0,1,3.65,16.47,4,4,0,0,0,3.95,4.64h60.3a8,8,0,0,0,7.73-5.93A8.22,8.22,0,0,0,252.38,195.48Z" fill="none" stroke="%23FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/%3E%3C/svg%3E');
+}
+
 .sidebar-bucketeer-logo > .menu__link:before,
 .sidebar-bucketeer-logo .menu__list-item-collapsible .menu__link:before {
   background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"%3E%3Crect width="256" height="256" fill="none"/%3E%3Cpath d="M96,192a32,32,0,0,0,64,0" fill="%23FFFFFF" stroke="%23FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/%3E%3Cpath d="M56,104a72,72,0,0,1,144,0c0,35.82,8.3,64.6,14.9,76A8,8,0,0,1,208,192H48a8,8,0,0,1-6.88-12C47.71,168.6,56,139.81,56,104Z" fill="none" stroke="%23FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/%3E%3C/svg%3E');
@@ -1132,4 +1141,70 @@ details .tabs__item--active {
   display: flex;
   transition: background var(--ifm-transition-fast)
     var(--ifm-transition-timing-default);*/
+}
+
+/* Search Bar */
+
+.algolia-autocomplete .algolia-docsearch-suggestion--no-results,
+.algolia-autocomplete .algolia-docsearch-suggestion--category-header,
+.algolia-autocomplete
+  .algolia-docsearch-suggestion--no-results
+  .algolia-docsearch-suggestion--text {
+  color: #7462a3 !important;
+  background-color: #efecf5 !important;
+}
+
+.algolia-autocomplete .ds-cursor .algolia-docsearch-suggestion--wrapper {
+  box-shadow: inset -2px 0 0 #efecf5 !important;
+  color: #7462a3 !important;
+  background-color: #f9f9f9 !important;
+}
+
+.algolia-autocomplete .ds-cursor .algolia-docsearch-suggestion--wrapper:hover {
+  background-color: #f9f9f9 !important;
+}
+
+.algolia-autocomplete .algolia-docsearch-suggestion--title {
+  font-weight: bold;
+  color: #555 !important;
+}
+
+.algolia-autocomplete .algolia-docsearch-suggestion--text {
+  font-size: 0.8rem;
+  color: #555 !important;
+}
+
+.algolia-autocomplete
+  .algolia-docsearch-suggestion--title
+  .algolia-docsearch-suggestion--highlight {
+    background: #ffdd80 !important;
+    color: #555 !important;
+}
+
+.algolia-autocomplete
+  .algolia-docsearch-suggestion--text
+  .algolia-docsearch-suggestion--highlight {
+    background: #ffdd80 !important;
+    color: #555 !important;
+    box-shadow: inset 0 -2px 0 0 #7462a3 !important;
+}
+
+.algolia-autocomplete
+  .algolia-docsearch-suggestion--text
+  .algolia-docsearch-suggestion--highlight {
+  box-shadow: inset 0 -2px 0 0 #7462a3 !important;
+}
+
+.algolia-autocomplete
+  .algolia-docsearch-suggestion
+  .algolia-docsearch-suggestion--content.algolia-docsearch-suggestion--no-results
+  .algolia-docsearch-suggestion--text:after {
+    content: "😔";
+}
+
+.algolia-autocomplete .ds-dropdown-menu:before {
+  background: #efecf5 !important;
+  border-radius: 2px !important;
+  border-right: 1px solid #efecf5 !important;
+  border-top: 1px solid #efecf5 !important;
 }

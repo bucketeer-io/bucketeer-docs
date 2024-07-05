@@ -9,7 +9,12 @@ const darkTheme = themes.dracula;
 const config = {
   themes: [],
   plugins: [
-    require.resolve('docusaurus-lunr-search'),
+    [ 
+      require.resolve('docusaurus-lunr-search'), {
+        maxHits: '7',
+        languages: ['en']
+      }
+    ],
     require.resolve('docusaurus-plugin-image-zoom'),
     [
       '@scalar/docusaurus',

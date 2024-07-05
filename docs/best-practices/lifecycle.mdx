@@ -84,7 +84,7 @@ The flag lifecycle shows how feature flags are used across different development
 
 ### Temporary Flags
 
-Typically, you'll use temporary flags for the following purposes:
+Typically, you will use temporary flags for the following purposes:
 
 - **Feature rollouts**: Used to decouple feature deployment from release. Once the feature is fully deployed and tested, the flag is removed from the code and archived on the dashboard.
 - **Experimentation**: Used for A/B testing and multivariate experiments. Once the experiment finishes, the flag is removed from the code and archived on the dashboard.
@@ -100,7 +100,7 @@ Other applications may require flags to be used longer, sometimes for the same a
 
 A typical scenario of a permanent flag is related to mobile apps prompting users to update their version. Such a request is usually used in situations like the release of unfinished features or if your app is frequently crashing. By incorporating a permanent boolean flag within the app's code, developers can control when the update prompt appears. Once set to true, the flag triggers a pop-up requesting the app update. 
 
-Another example of a permanent flag is reusing it to run multiple tests. While repurposing a flag isn't ideal and might seem like it loses its original purpose, in some cases, it's better than constantly asking users to update the app. Plus, it saves time by bypassing the slow application review process in the Google and Apple Store.
+Another example of a permanent flag is reusing it to run multiple tests. While repurposing a flag is not ideal and might seem like it loses its original purpose, in some cases, it's better than constantly asking users to update the app. Plus, it saves time by bypassing the slow application review process in the Google and Apple Store.
 
 The reuse of flags is adopted because when working with client applications, you can't define when your user updates the application. As a result, you can only sometimes rely on feature flags from the last release. Therefore, you can have a fixed flag in your application to execute common actions such as:
 
