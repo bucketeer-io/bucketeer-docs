@@ -12,96 +12,93 @@
 }
 
 .elements-container {
-  --ifm-link-color: currentColor !important;
-  --ifm-link-decoration: none !important;
+  --ifm-link-color: currentColor;
+  --ifm-link-decoration: none;
 
-  flex-grow: 1 !important;
-  height: 100% !important;
+  flex-grow: 1;
+  height: 100%;
 }
 
 .elements-container svg[data-icon='bullseye'] {
-  display: none !important;
+  display: none;
 }
 
 .elements-container.stacked {
-  padding: 2rem 1rem !important;
+  padding: 2rem 1rem;
 }
 
 .ElementsTableOfContentsItem div {
   border-right: 2px solid transparent !important;
-  border-radius: 4px 0 0 4px !important;
+  border-radius: 4px 0 0 4px;
 }
 
 .ElementsTableOfContentsItem .sl-bg-primary-tint {
   border-color: theme('colors.primary.100') !important;
 }
-
 html[data-theme='dark'] .elements-container {
   --color-canvas-200: var(--docs-color-background-200) !important;
   --ifm-pre-background: #1e1e1e;
 }
-
 html[data-theme='dark'] .TryItPanel {
   --color-canvas-100: var(--docs-color-background-100) !important;
   --color-canvas-200: var(--docs-color-background-200) !important;
 }
-
 html[data-theme='dark']
   .elements-container
   :is(.token.string, .token.function, .token.property) {
-  @apply !text-primary-100 !important;
+  @apply !text-primary-100;
 }
 
 /* Hides title in elements */
 .sl-elements-api > div:first-child > div:first-child > div:first-child {
-  @apply hidden !important;
+  @apply hidden;
 }
 
 html[data-theme='dark']
   .elements-container
   :is(.token.punctuation, .token.operator) {
-  color: #fff !important !important;
+  color: #fff !important;
 }
 
 html[data-theme='dark'] .elements-container :is(.token.boolean, .token.number) {
-  color: #fff !important !important;
+  color: #fff !important;
 }
 
 .JsonSchemaViewer > div:first-child {
   --color-canvas-pure: var(--docs-color-background-200);
-  z-index: 0 !important;
-  border-radius: 4px !important;
+  z-index: 0;
+  border-radius: 4px;
   padding: 0 12px !important;
 }
 
 /* Makes the API documentation take up entire space of `.main-wrapper` */
 .api-reference.main-wrapper {
-  flex: 1 0 0 !important;
+  flex: 1 0 0;
 }
 
 .api-reference .header {
-  position: sticky !important;
-  top: var(--ifm-navbar-height) !important;
-  background-color: var(--docs-color-background) !important;
+  position: sticky;
+  top: var(--ifm-navbar-height);
+  background-color: var(--docs-color-background);
 
-  display: flex !important;
-  align-items: center !important;
-  height: var(--ifm-navbar-height) !important;
+  display: flex;
+  align-items: center;
+  height: var(--ifm-navbar-height);
 
-  justify-content: space-between !important;
-  padding: 0 1.25rem !important;
-  border-bottom: 1px solid var(--docs-color-border) !important;
-  z-index: 30 !important;
+  justify-content: space-between;
+  padding: 0 1.25rem;
+  border-bottom: 1px solid var(--docs-color-border);
+  z-index: 30;
 }
 
 .api-reference .aside {
-  display: flex !important;
-  align-items: center !important;
-  gap: 1rem !important;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 .api-reference .header h2 {
-  font-size: 1.25rem !important;
-  font-weight: 600 !important;
-  margin: 0 !important;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
 }

@@ -128,6 +128,14 @@
   font-weight: var(--font-weight-medium);
 }
 
+.markdown ul {
+  list-style: disc;
+}
+
+.markdown ol {
+  list-style: decimal;
+}
+
 .hash-link:before {
   content: '' !important;
   width: 24px;
@@ -758,6 +766,7 @@ code {
   letter-spacing: 1px;
 }
 
+/*---- Remove prism-code modifications to avoid conflicts with Elements Api Reference component -----*/
 /*
 .prism-code .token-line > span:nth-child(1) {
   background-color: transparent;
@@ -1180,16 +1189,16 @@ details .tabs__item--active {
 .algolia-autocomplete
   .algolia-docsearch-suggestion--title
   .algolia-docsearch-suggestion--highlight {
-    background: #ffdd80 !important;
-    color: #555 !important;
+  background: #ffdd80 !important;
+  color: #555 !important;
 }
 
 .algolia-autocomplete
   .algolia-docsearch-suggestion--text
   .algolia-docsearch-suggestion--highlight {
-    background: #ffdd80 !important;
-    color: #555 !important;
-    box-shadow: inset 0 -2px 0 0 #7462a3 !important;
+  background: #ffdd80 !important;
+  color: #555 !important;
+  box-shadow: inset 0 -2px 0 0 #7462a3 !important;
 }
 
 .algolia-autocomplete
@@ -1202,7 +1211,7 @@ details .tabs__item--active {
   .algolia-docsearch-suggestion
   .algolia-docsearch-suggestion--content.algolia-docsearch-suggestion--no-results
   .algolia-docsearch-suggestion--text:after {
-    content: "😔";
+  content: '😔';
 }
 
 .algolia-autocomplete .ds-dropdown-menu:before {
