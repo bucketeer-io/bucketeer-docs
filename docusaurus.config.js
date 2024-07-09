@@ -12,7 +12,12 @@ const config = {
 
   plugins: [
     webpackPlugin,
-    require.resolve('docusaurus-lunr-search'),
+    [ 
+      require.resolve('docusaurus-lunr-search'), {
+        maxHits: '7',
+        languages: ['en']
+      }
+    ],
     require.resolve('docusaurus-plugin-image-zoom'),
   ],
 
@@ -31,7 +36,7 @@ const config = {
   // to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'en',
-    locales: [ 'en', 'ja' ],
+    locales: ['en', 'ja'],
   },
 
   presets: [
