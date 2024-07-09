@@ -19,7 +19,7 @@ const sidebars = {
       type: 'doc',
       id: 'bucketeer-docs',
       label: 'Bucketeer Docs',
-      className: 'sidebar-create-bucketeers-account',
+      className: 'sidebar-core',
     },
     {
       type: 'html',
@@ -136,6 +136,12 @@ const sidebars = {
       id: 'feature-flags/audit-logs',
       label: 'Audit Logs',
       className: 'sidebar-audit-logs',
+    },
+    {
+      type: 'doc',
+      id: 'feature-flags/segments',
+      label: 'Segments',
+      className: 'sidebar-segments',
     },
 
     {

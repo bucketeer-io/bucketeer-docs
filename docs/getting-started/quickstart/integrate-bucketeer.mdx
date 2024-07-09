@@ -43,31 +43,32 @@ end
 ```
 
 </TabItem>
-<TabItem value="js" label="JavaScript (npm)">
+<TabItem value="js" label="JavaScript">
 
-```sh showLineNumbers
+```js showLineNumbers
+// For Npm
 npm install @bucketeer/sdk
-```
 
-</TabItem>
-<TabItem value="js-yarn" label="JavaScript (yarn)">
-
-```sh showLineNumbers
+// For yarn
 yarn add @bucketeer/sdk
 ```
 
 </TabItem>
 <TabItem value="go" label="Go">
 
-```sh showLineNumbers
-comming soon
+```go showLineNumbers
+go get github.com/bucketeer-io/go-server-sdk
 ```
 
 </TabItem>
 <TabItem value="node-js" label="Node JS">
 
-```sh showLineNumbers
-comming soon
+```js showLineNumbers
+// For Npm
+npm install @bucketeer/node-server-sdk
+
+// For yarn
+yarn add @bucketeer/node-server-sdk
 ```
 
 </TabItem>
@@ -112,15 +113,18 @@ import {
 </TabItem>
 <TabItem value="go" label="Go">
 
-```sh showLineNumbers
-comming soon
+```go showLineNumbers
+import (
+	"github.com/bucketeer-io/go-server-sdk/pkg/bucketeer"
+	"github.com/bucketeer-io/go-server-sdk/pkg/bucketeer/user"
+)
 ```
 
 </TabItem>
 <TabItem value="node-js" label="Node JS">
 
-```sh showLineNumbers
-comming soon
+```js showLineNumbers
+import { initialize } from '@bucketeer/node-server-sdk';
 ```
 
 </TabItem>
@@ -213,15 +217,30 @@ const client = getBKTClient();
 </TabItem>
 <TabItem value="go" label="Go">
 
-```sh showLineNumbers
-comming soon
+```go showLineNumbers
+ctx, cancel := context.WithTimeout(context.Background(), timeout)
+defer cancel()
+client, err := bucketeer.NewSDK(
+  ctx,
+  bucketeer.WithAPIKey("YOUR_API_KEY"),
+  bucketeer.WithHost("YOUR_API_ENDPOINT"),
+  bucketeer.WithTag("YOUR_FEATURE_TAG"),
+)
+if err != nil {
+  log.Fatalf("Failed initialize the new client: %v", err)
+}
 ```
 
 </TabItem>
 <TabItem value="node-js" label="Node JS">
 
-```sh showLineNumbers
-comming soon
+```js showLineNumbers
+const config = {
+  host: 'YOUR_API_URL',
+  token: 'YOUR_API_KEY',
+  tag: 'YOUR_TAG',
+};
+const client = initialize(config);
 ```
 
 </TabItem>
@@ -281,15 +300,36 @@ if (showNewFeature) {
 </TabItem>
 <TabItem value="go" label="Go">
 
-```sh showLineNumbers
-comming soon
+```go showLineNumbers
+user := user.NewUser(
+  "END_USER_ID",
+  nil, // The user attributes are optional
+)
+showNewFeature := client.BoolVariation(ctx, user, "YOUR_FEATURE_FLAG_ID", false)
+if (showNewFeature) {
+  // The Application code to show the new feature
+} else {
+  // The code to run when the feature is off
+}
 ```
 
 </TabItem>
 <TabItem value="node-js" label="Node JS">
 
-```sh showLineNumbers
-comming soon
+```js showLineNumbers
+const showNewFeature = await client.getBoolVariation(
+  user: User({
+    id: 'USER_ID',
+    data: {}, // The user attributes are optional
+  }),
+  featureId: 'YOUR_FEATURE_FLAG_ID',
+  defaultValue: false
+);
+if (showNewFeature) {
+  // The Application code to show the new feature
+} else {
+  // The code to run when the feature is off
+}
 ```
 
 </TabItem>
