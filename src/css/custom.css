@@ -749,6 +749,7 @@ code {
   letter-spacing: 1px;
 }
 
+/*
 .prism-code .token-line > span:nth-child(1) {
   background-color: transparent;
   margin-left: 10px !important;
@@ -799,6 +800,8 @@ code {
   text-align: right;
   width: 1.9rem;
 }
+
+*/
 
 .aa-DetachedSearchButton {
   background-color: rgba(255, 255, 255, 1);

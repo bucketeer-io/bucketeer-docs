@@ -12,24 +12,24 @@
 }
 
 .elements-container {
-  --ifm-link-color: currentColor;
-  --ifm-link-decoration: none;
+  --ifm-link-color: currentColor !important;
+  --ifm-link-decoration: none !important;
 
-  flex-grow: 1;
-  height: 100%;
+  flex-grow: 1 !important;
+  height: 100% !important;
 }
 
 .elements-container svg[data-icon='bullseye'] {
-  display: none;
+  display: none !important;
 }
 
 .elements-container.stacked {
-  padding: 2rem 1rem;
+  padding: 2rem 1rem !important;
 }
 
 .ElementsTableOfContentsItem div {
   border-right: 2px solid transparent !important;
-  border-radius: 4px 0 0 4px;
+  border-radius: 4px 0 0 4px !important;
 }
 
 .ElementsTableOfContentsItem .sl-bg-primary-tint {
@@ -49,59 +49,59 @@ html[data-theme='dark'] .TryItPanel {
 html[data-theme='dark']
   .elements-container
   :is(.token.string, .token.function, .token.property) {
-  @apply !text-primary-100;
+  @apply !text-primary-100 !important;
 }
 
 /* Hides title in elements */
 .sl-elements-api > div:first-child > div:first-child > div:first-child {
-  @apply hidden;
+  @apply hidden !important;
 }
 
 html[data-theme='dark']
   .elements-container
   :is(.token.punctuation, .token.operator) {
-  color: #fff !important;
+  color: #fff !important !important;
 }
 
 html[data-theme='dark'] .elements-container :is(.token.boolean, .token.number) {
-  color: #fff !important;
+  color: #fff !important !important;
 }
 
 .JsonSchemaViewer > div:first-child {
   --color-canvas-pure: var(--docs-color-background-200);
-  z-index: 0;
-  border-radius: 4px;
+  z-index: 0 !important;
+  border-radius: 4px !important;
   padding: 0 12px !important;
 }
 
 /* Makes the API documentation take up entire space of `.main-wrapper` */
 .api-reference.main-wrapper {
-  flex: 1 0 0;
+  flex: 1 0 0 !important;
 }
 
 .api-reference .header {
-  position: sticky;
-  top: var(--ifm-navbar-height);
-  background-color: var(--docs-color-background);
+  position: sticky !important;
+  top: var(--ifm-navbar-height) !important;
+  background-color: var(--docs-color-background) !important;
 
-  display: flex;
-  align-items: center;
-  height: var(--ifm-navbar-height);
+  display: flex !important;
+  align-items: center !important;
+  height: var(--ifm-navbar-height) !important;
 
-  justify-content: space-between;
-  padding: 0 1.25rem;
-  border-bottom: 1px solid var(--docs-color-border);
-  z-index: 30;
+  justify-content: space-between !important;
+  padding: 0 1.25rem !important;
+  border-bottom: 1px solid var(--docs-color-border) !important;
+  z-index: 30 !important;
 }
 
 .api-reference .aside {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+  display: flex !important;
+  align-items: center !important;
+  gap: 1rem !important;
 }
 
 .api-reference .header h2 {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin: 0;
+  font-size: 1.25rem !important;
+  font-weight: 600 !important;
+  margin: 0 !important;
 }
