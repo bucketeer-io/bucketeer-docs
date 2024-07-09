@@ -767,25 +767,25 @@ code {
 }
 
 /*---- Remove prism-code modifications to avoid conflicts with Elements Api Reference component -----*/
-/*
-.prism-code .token-line > span:nth-child(1) {
+
+.markdown .prism-code .token-line > span:nth-child(1) {
   background-color: transparent;
   margin-left: 10px !important;
   display: none;
 }
-.prism-code .token-line > span.token.plain {
+.markdown .prism-code .token-line > span.token.plain {
   display: inline-block;
 }
 
-.prism-code .token-line > span:nth-child(2) {
+.markdown .prism-code .token-line > span:nth-child(2) {
   margin-left: 15px !important;
 }
 
-.prism-code {
+.markdown .prism-code {
   background: linear-gradient(90deg, #573792 2.5rem, #efecf5 0);
 }
 
-.prism-code .token-line:before {
+.markdown .prism-code .token-line:before {
   background: #573792;
   color: var(--ifm-color-gray-700);
   content: counter(a);
@@ -800,13 +800,13 @@ code {
   width: 1.9rem;
 }
 
-.prism-code .token-line {
+.markdown .prism-code .token-line {
   counter-increment: a;
   position: relative;
   font-family: 'FiraCode';
 }
 
-.prism-code .token-line:before {
+.markdown .prism-code .token-line:before {
   background: #573792;
   color: #fff;
   content: counter(a);
@@ -818,8 +818,6 @@ code {
   text-align: right;
   width: 1.9rem;
 }
-
-*/
 
 .aa-DetachedSearchButton {
   background-color: rgba(255, 255, 255, 1);
