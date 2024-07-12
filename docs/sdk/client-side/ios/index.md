@@ -198,7 +198,7 @@ BKTClient.initialize(
   if (showNewFeature) {
     // The Application code to show the new feature
   } else {
-    // The code to run when the feature is off
+    // The code to run when the feature is off 
   }
 }
 ```
@@ -212,7 +212,7 @@ The initialize process immediately starts polling the latest evaluations from th
 
 #### Polling retry behavior
 
-The Bucketeer SDK regularly polls the latest evaluations from the server based on the pollingInterval parameter. By default, the `pollingInterval` is set to 10 minutes, but you can adjust it to suit your needs.
+The Bucketeer SDK regularly polls the latest evaluations from the server based on the `pollingInterval` parameter. By default, the `pollingInterval` is set to 10 minutes, but you can adjust it to suit your needs.
 
 If a polling request fails, the SDK initiates a retry procedure. The SDK attempts a new polling request every minute up to 5 times. If all five retry attempts fail, the SDK sends a new polling request once the `pollingInterval` time elapses. The table below shows this scenario:
 
