@@ -19,7 +19,7 @@
     "@docusaurus/preset-classic": "^3.4.0",
     "@easyops-cn/docusaurus-search-local": "^0.44.2",
     "@mdx-js/react": "^3.0.1",
-    "@scalar/docusaurus": "0.4.39",
+    "@scalar/docusaurus": "0.4.49",
     "clsx": "^2.1.1",
     "docusaurus-lunr-search": "^3.4.0",
     "docusaurus-plugin-image-zoom": "^2.0.0",
