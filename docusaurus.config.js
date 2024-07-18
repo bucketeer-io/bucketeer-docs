@@ -1,12 +1,13 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const lightCodeTheme = require('prism-react-renderer').themes.github
-const darkCodeTheme = require('prism-react-renderer').themes.dracula
+const {themes} = require('prism-react-renderer');
+const lightTheme = themes.github;
+const darkTheme = themes.dracula;
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-
+  themes: [],
   plugins: [
     [ 
       require.resolve('docusaurus-lunr-search'), {
@@ -15,6 +16,20 @@ const config = {
       }
     ],
     require.resolve('docusaurus-plugin-image-zoom'),
+    [
+      '@scalar/docusaurus',
+      {
+        label: 'API Reference',
+        route: '/api',
+        configuration: {
+          hideModels: true,
+          spec: {
+            // Put the URL to your OpenAPI document here:
+            url: 'https://raw.githubusercontent.com/bucketeer-io/bucketeer/main/api-description/apidocs.swagger.yaml'
+          },
+        },
+      },
+    ],
   ],
 
   title: 'Bucketeer Docs',
@@ -32,7 +47,7 @@ const config = {
   // to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'en',
-    locales: ['en', 'ja'],
+    locales: [ 'en' ],
   },
 
   presets: [
@@ -138,10 +153,7 @@ const config = {
         ],
       },
       prism: {
-        // theme: darkCodeTheme,
-        theme: lightCodeTheme,
-        // theme: require("prism-react-renderer/themes/vsDark"),
-        // theme: require("prism-react-renderer/themes/shadesOfPurple"),
+        theme: lightTheme,
         additionalLanguages: [
           'groovy',
           'kotlin',
