@@ -38,18 +38,43 @@ Refer to the [Experiments](/feature-flags/testing-with-flags/experiments) and [E
 
 To add an event rate condition to a feature flag, you need to follow the steps below:
 
-1. Go to the **Auto Operation** page.
-2. Click the **+ Add** button.
-3. The operation setting panel will appear. Choose the **Kill Switch** option.
-4. Select **Event Rate**.
-5. Set up the conditions. Define the variation, goal, condition, threshold, and minimum count.
-6. Click **Submit**. 
+1. Go to the **Auto Operation** tab on the feature Flag page details.
+2. Click the **+ New Operation** and select **Event Rate**.
+3. Set up the conditions. Define the variation, goal, condition, threshold, and minimum count.
+4. Click **Submit**. 
 
 The image below presents an example of event rate configuration. The current configuration's objective is to turn off the feature flag in case of a high error rate above 5%. A minimum count of 500 is used to avoid misleading turn-offs.
 
 <CenteredImg
-  imgURL="img/feature-flags/auto-ops-rules/event-rate-condition-v3.png"
+  imgURL="img/feature-flags/auto-ops-rules/event-rate-condition-v4.png"
   alt="Create event rate condition"
   wSize="400px"
   borderWidth="1px"
 />
+
+## Managing event rates
+
+After creating an event rate, it becomes active and is available in the Auto Operation panel. You can identify it by the **Event Rate** tag or the **Kill Switch Operation** type. The event rate progress information visually displays the current event rate percentage and includes:
+
+- The associated goal.
+- The minimum goal count.
+- The total goal count events.
+- The current event rate value.
+
+The following image shows an example of progress information for a running event rate:
+
+<CenteredImg
+  imgURL="img/feature-flags/auto-ops-rules/event-rate-condition-panel.png"
+  alt="Event rate progress information"
+  borderWidth="1px"
+/>
+
+While active, you can edit, stop, or delete the event rate:
+
+- **Edit Kill Switch**: Allows you to change the variation, goal, condition, threshold, and minimum count associated with the event rate.
+- **Stop Kill Switch**: Stops the event rate and moves it to the Finished tab.
+- **Delete Kill Switch**: Stops and removes the event rate information from the server. Use this option carefully. Only logs related to that event rate will be reported on the Audit Logs page.
+
+## Event rate lifecycle
+
+When you create an event rate, it will be active and available in the **Active** tab of the Auto Operation panel. The event rate (kill switch operation) continuously monitors the flag operation, counting every condition defined at its creation. When the threshold is reached, it will kill the flag, turning it off. Afterward, the event rate moves to the **Finished** tab.
