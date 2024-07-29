@@ -2,42 +2,84 @@
 title: Schedule
 # sidebar_position:
 slug: /feature-flags/creating-feature-flags/auto-operation/schedule
-description: 'Check how the schedule features works in bucketeer. Use it to release or remove a flag variation.'
+description: 'Learn how the schedule feature works in Bucketeer. Use it to release or remove a flag variation.'
 tags: ['guide', 'automation', 'schedule', 'feature-flag']
 ---
 
 import CenteredImg from '@site/src/components/centered-img/CenteredImg';
 
-The Schedule solution is designed to deliver or remove a feature at a specific date and time. Therefore, you can use it to release a new feature for holidays or special promotions, for example. The same solution can be used to remove the temporary feature after the holidays or to turn off a beta feature after a certain period.
+The Schedule feature allows you to deliver or remove a feature at a specific date and time. This is useful for releasing new features during holidays or special promotions and removing temporary features afterwards.
 
 ## How the schedule works
 
-When using the Bucketeer Auto Operation along with the Schedule condition, you can manage your flags based on the specific date and time you define. Once the Bucketeer receives the SDK request, the schedule condition evaluates whether the specified date and time have been reached. If it has, the operation to enable or kill a flag variation is executed.
+When using Bucketeer Auto Operation with the Schedule condition, you can manage your flags based on specific dates and times. Once Bucketeer receives the SDK request, the schedule condition checks if the specified date and time have been reached. If they have, the operation to enable or disable a flag variation is executed.
 
-:::info Schedule requisites and restrictions
+:::info Schedule requisites 
 
-To use the schedule condition, you always need to use a future date and time to schedule the operation.  
-
-You can only have two active operations based on schedule conditions. One will define when to enable and the other when to kill the flag. However, you aren't required to use both operations. For example, you can use only the enable option.
+To use the schedule condition, you must always select a future date and time to schedule the operation.
 
 :::
 
+The schedule feature supports multi-scheduling, allowing you to create a chain of scheduled operations. This makes it easier to visualize and configure the flag schedule. For example, you can enable the flag (turn it On) on weekends and disable it (turn it Off) on weekdays.
+
 ## Setting up auto operation with schedule
 
-To release or kill a feature flag using the schedule option, you need to follow the steps below:
+To enable or disable a feature flag using the schedule option, follow these steps:
 
 1. Go to the **Auto Operation** page.
-2. Click the **+ Add** button.
-3. The operation setting panel will appear. Choose the **Enable** operation to release or **Kill Switch** to remove a flag.
-4. Select **Schedule**.
-5. Set up the date and time. Remember, you need to select a future date and time.
-6. Click **Submit**. 
+2. Click the **+ New Operation** button and select **Schedule**.
+3. The **Create Operation** panel will appear, displaying the current flag state (On or Off). 
+4. Under **Schedule**, select the operation's final flag state (On or Off) and set up the date and time. Remember, you need to choose a future date and time.
+5. (Optional) Add more schedules using the **+ Add Schedule** button. 
+6. After adding all the schedules, click **Submit**. 
 
-The image below presents an example of schedule configuration for enabling a feature flag.
+:::info Multi-schedule
+
+Bucketeer does not restrict the flag state selection when using multi-schedule. You can add multiple schedule operations in a row to enable the flag, and Bucketeer will not show any warnings. Ensure you are selecting the correct states when creating a schedule.
+
+:::
+
+The image below shows an example of a multi-schedule configuration. Notice that two On operations were used in sequence without errors or warnings.
 
 <CenteredImg
-  imgURL="img/feature-flags/auto-ops-rules/schedule-condition-v3.png"
-  alt="Create an enable operation using schedule"
+  imgURL="img/feature-flags/auto-ops-rules/schedule-condition-v4.png"
+  alt="Create a schedule operation"
   wSize="400px"
+  borderWidth="1px"
+/>
+
+## Managing schedules
+
+After creating a schedule, it will be active and available in the Auto Operation panel. Each schedule displays the created date and all associated operations, with the respective flag state and date and time for each schedule. The following image shows the progress information for the schedule created in the previous section:
+
+<CenteredImg
+  imgURL="img/feature-flags/auto-ops-rules/schedule-operation.png"
+  alt="Schedule operation progress information"
+  borderWidth="1px"
+/>
+
+While active, you can edit, stop, or delete the schedule:
+
+- **Edit Schedule**: Change each operation's status or date and time. After submitting the modifications, the schedule remains active, displaying the last update date and time.
+- **Stop Schedule**: Stops the schedule, preventing future scheduled operations from being performed. The schedule is finished.
+- **Delete Schedule**: Stops and removes the schedule information from the server. Use this option carefully. 
+
+## Schedule lifecycle
+
+When you create a schedule, it will be active and available in the **Active** tab in the Auto Operation panel.  
+
+When the first scheduled operation is executed, the flag state is changed, and the schedule progress information is updated. Instead of showing the creation date and time, it displays the last flag state update date and time. The same happens for multi-schedule after each operation.  
+
+<CenteredImg
+  imgURL="img/feature-flags/auto-ops-rules/schedule-operation-3.png"
+  alt="Schedule operation updated"
+  borderWidth="1px"
+/>
+
+After performing all operations, the schedule moves to the **Finished** tab. In the Finished tab, you can view operation details, listing all operations performed throughout the schedule lifecycle, or delete the schedule. 
+
+<CenteredImg
+  imgURL="img/feature-flags/auto-ops-rules/schedule-operation-2.png"
+  alt="Schedule operation finished"
   borderWidth="1px"
 />
