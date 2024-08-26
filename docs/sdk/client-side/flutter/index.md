@@ -389,7 +389,7 @@ void subscribeToTopic() {
 
 FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
   final isFeatureFlagUpdated = message.data["bucketeer_feature_flag_updated"]
-    if (isFeatureFlagUpdated) {
+    if (isFeatureFlagUpdated "true") {
       int timeout = 1000;
       const client = BKTClient.instance;
       final result = await client.fetchEvaluations(timeoutMillis: timeout);

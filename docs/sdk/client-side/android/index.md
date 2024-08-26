@@ -396,7 +396,7 @@ private fun subscribeToTopic() {
 override fun onMessageReceived(remoteMessage: RemoteMessage?) {
   remoteMessage?.data?.also { data ->
     val isFeatureFlagUpdated = data["bucketeer_feature_flag_updated"]
-    if (isFeatureFlagUpdated) {
+    if (isFeatureFlagUpdated == "true") {
       // The callback will return without waiting until the fetching variation process finishes
       val timeout = 1000 // Default is 5 seconds
 
