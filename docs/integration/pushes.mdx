@@ -41,9 +41,15 @@ After defining the Name, FCM Service Account, and the Tags, click on **Submit** 
 
 ## Push notifications restrictions
 
-Push notifications function is contingent on end-user configurations to operate effectively. When end-users install applications on their devices, such as iPhones, they are prompted to grant authorization for the application to use notifications.
+To Bucketeer send silent notifications, it depends on whether users have granted permission and how the platform manages background tasks. Here's a breakdown for both Android and iOS:
 
-If users grant the notification permission, the FCM integration will work as intended. Refer to the flowchart below for an overview of the push notification process.
+### Android
+
+Silent notifications can be sent without explicit user permission, but background task limitations and restrictions may apply.
+
+### iOS
+
+Users must grant the **Background App Refresh** permission to receive silent notifications.
 
 <CenteredImg
   imgURL="img/integration/pushes/push_flow.svg"
