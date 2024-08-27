@@ -49,13 +49,27 @@ Silent notifications can be sent without explicit user permission, but backgroun
 
 ### iOS
 
-Users must grant the **Background App Refresh** permission to receive silent notifications.
+Users must grant the **Background App Refresh** permission to receive silent notifications. Refer to the flowchart below for an overview of the push notification process.
 
-<CenteredImg
-  imgURL="img/integration/pushes/push_flow.svg"
-  alt="Create push"
-  wSize="550px"
-/>
+<div style={{ textAlign: 'center' }}>
+```mermaid
+%%{ init: { 'flowchart': { 'curve': 'bumpY' } } }%%
+graph TD;
+    a(A flag has been updated)-->b(Bucketeer server sends the
+     notification via FCM V1 API);
+    style a fill:#5d3597,color:#ffffff,stroke-width:0px;
+    style b fill:#ffffff,stroke:#5d3597, stroke-width:3px;
+    b-->c1(Is the Background App
+     Fetch enabled?);
+    style c1 fill:#ffffff,stroke:#5d3597, stroke-width:3px;
+    c1--Yes-->c2(Receive the notification)
+    style c2 fill:#5d3597,color:#ffffff,stroke-width:0px;
+    c1--No -->c3(Nothing happens)
+    style c3 fill:#5d3597,color:#ffffff,stroke-width:0px;
+    linkStyle 2 stroke:green,color:green, background:black;
+    linkStyle 3 stroke:red,color:red, background:black;
+```
+</div>
 
 :::info Auto cache updates
 Even if the user doesn't receive notifications, the client SDK will continue polling the latest cache from the server in the background.
