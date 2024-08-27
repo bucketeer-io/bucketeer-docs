@@ -349,14 +349,24 @@ You don't need to call this method manually in regular use because the SDK is po
 
 ### Updating user evaluations in real-time
 
-The Bucketeer SDK supports FCM ([Firebase Cloud Messaging](https://firebase.google.com/docs/cloud-messaging)).<br />
-Every time you change a feature flag on the admin console, Bucketeer will send notifications using the FCM API to notify the client so that you can update the evaluations in real-time.
+Bucketeer SDK supports FCM ([Firebase Cloud Messaging](https://firebase.google.com/docs/cloud-messaging)).<br />
+Every time you change a feature flag on the admin console, Bucketeer will send a silent notification using the FCM V1 API to notify the client so that you can update the evaluations in real-time.
 
-:::note
+:::info Before using
+1. You need to register your FCM Service Account on the admin console. Check the [Pushes](/integration/pushes) section to learn how to do it.
+2. This feature may not work if the end-user has the notification disabled.
+:::
 
-1. You need to register your FCM API Key on the admin console. Check the [Pushes](/integration/pushes) section to learn how to do it.
-2. This feature may not work if the user has the notification disabled.
+:::info Subscription Topic
+When using the FCM integration, your applications must subscribe to Bucketeer's topic, so they can receive notifications.<br />
 
+The topic varies depending on the feature flag tag.<br />
+E.g.: **bucketeer-\<YOUR_FEATURE_FLAG_TAG\>**
+
+The tag in the topic is the same tag used when initializing the client SDK.<br />
+If you have a flag using the `flutter` tag, the topic will be **bucketeer-flutter**.
+
+**Please be aware that the tag is case-sensitive.**
 :::
 
 Assuming you already have the FCM implementation in your application.
@@ -365,9 +375,21 @@ Assuming you already have the FCM implementation in your application.
 <TabItem value="dart" label="Dart">
 
 ```dart showLineNumbers
+/// In order to receive notifications you must subscribe to the topic
+void subscribeToTopic() {
+  String tag = "flutter";
+  String topic = "bucketeer-$tag";
+
+  FirebaseMessaging.instance.subscribeToTopic(topic).then((_) {
+    debugPrint("Subscribed successfully to $topic topic");
+  }).catchError((error) {
+    debugPrint("Failed to subscribed to $topic topic. Error: $error");
+  });
+}
+
 FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
   final isFeatureFlagUpdated = message.data["bucketeer_feature_flag_updated"]
-    if (isFeatureFlagUpdated) {
+    if (isFeatureFlagUpdated "true") {
       int timeout = 1000;
       const client = BKTClient.instance;
       final result = await client.fetchEvaluations(timeoutMillis: timeout);

@@ -30,13 +30,14 @@ On the first day of the rollout, 10% of your users will see the new content. On 
 To add a rollout to a feature flag, you need to follow the steps below:
 
 1. Go to the **Auto Operation** tab on the feature Flag page details.
-2. Click the **+ Add** button.
-3. Choose the **Enable** operation and select **Progressive Rollout**.
-4. Configure the rollout and submit.
+2. Click the **+ New Operation** and select **Progressive Rollout**.
+3. Configure the rollout and click **Submit**. Check the [Template rollout](#template-rollout) or [Manual rollout](#manual-rollout) sections to learn how to configure the rollout.
 
 :::caution Restrictions
 
 The progressive rollout only works for flags with **two variations** and no **running experiment**. 
+
+You can have only one active rollout out for each feature flag.
 
 :::
 
@@ -44,11 +45,11 @@ The progressive rollout only works for flags with **two variations** and no **ru
 
 If the flag is disabled when a progressive rollout is created, the progressive rollout automatically enables the flag as soon as it starts. 
 
-Please remember that the progressive rollout will be stopped in the following actions:
+Please remember that the progressive rollout will be stopped in the following scenarios:
 
 - If you disable the flag manually.
 - If a Schedule is configured to disable the flag.
-- If the Kill Switch is configured and matches the conditions to disable the flag.
+- If a Kill Switch is configured and matches the conditions to disable the flag.
 :::
 
 The rollout provides two main options when setting it up:
@@ -68,9 +69,9 @@ If you choose to use the Template rollout, you need to define the following conf
 Notice that when using the Template rollout, all phases increment the percentage of users accessing the new variation by the same amount, defined by the **Increment** parameter. The image below summarizes an example of a configuration using the Template configuration.
 
 <CenteredImg
-  imgURL="img/feature-flags/auto-ops-rules/template-rollout.png"
+  imgURL="img/feature-flags/auto-ops-rules/template-rollout-v2.png"
   alt="Template rollout"
-  wSize="400px"
+  wSize="380px"
   borderWidth="1px"
 />
 
@@ -89,9 +90,47 @@ Another important point related to the Manual option is that you don't need to r
 The image below summarizes an example of a configuration using the Manual configuration.
 
 <CenteredImg
-  imgURL="img/feature-flags/auto-ops-rules/manual-rollout.png"
+  imgURL="img/feature-flags/auto-ops-rules/manual-rollout-v2.png"
   alt="Template rollout"
-  wSize="400px"
+  wSize="380px"
+  borderWidth="1px"
+/>
+
+## Managing rollouts
+
+After creating a rollout, it becomes active and is available in the Auto Operation panel. You can identify the rollout by the **Progressive Rollout** tag or the **Enable Operation** type. The rollout progress information displays all rollout phases, including the respective dates, times, and the total percentage released at each phase. The progress information also includes:
+
+- **Increment**: The percentage increment used at each rollout release phase (only available for Template rollouts).
+- **Start Date**: The date when the progressive rollout will start.
+- **Variation**: The flag variation being released.
+- **Frequency**: The frequency of each rollout phase (hourly, daily, weekly), (only available for Template rollouts).
+
+The following image shows an example of progress information for a progressive rollout:
+
+<CenteredImg
+  imgURL="img/feature-flags/auto-ops-rules/template-rollout-panel-template.png"
+  alt="Progressive rollout progress information"
+  borderWidth="1px"
+/>
+
+:::info Updating a Rollout
+
+Updating or editing a progressive rollout is not supported in Bucketeer. You can only delete or stop the rollout.
+
+:::
+
+While active, you can stop or delete the rollout:
+
+- **Stop Progressive Rollout**: Stops the rollout, moving it to the finished tab, where you can check the last rollout state or use it as a reference for future rollouts.
+- **Delete Rollout**: Stops and removes the rollout information from the server. Use this option carefully. Only logs will be reported on the operations related to that rollout on the Audit Logs page. 
+
+## Roullout lifecycle
+
+When you create a rollout, it will be active and available in the **Active** tab of the Auto Operation panel. The first rollout stage (0%) displays the date and time of its creation. As each stage is reached, the progress information panel updates, providing clear visual information about the current rollout progress. After all rollout stages are completed, the rollout moves to the **Finished** tab. The following image presents an example of progress information for a running rollout.
+
+<CenteredImg
+  imgURL="img/feature-flags/auto-ops-rules/running-rollout.png"
+  alt="Running rollout example"
   borderWidth="1px"
 />
 
@@ -123,16 +162,6 @@ If you need to update a flag that has a running progressive rollout associated w
 
 - The default strategy on the [Targeting](/feature-flags/creating-feature-flags/targeting) tab can't be modified.
 - You're not able to add or remove variations to the flag. However, you can edit the values, names, and descriptions of the existing variations.
-
-:::info Updating a rollout
-
-Updating a running progressive rollout is not supported in Bucketeer. You can delete or stop the rollout.
-
-If you delete the rollout, no historical data will be stored. Only logs will be reported on the operations related to that rollout on the Audit Logs page.
-
-When you stop the rollout, it will move to the finished tab, where you can check the last rollout state or use it as a reference for future rollouts.
-
-:::
 
 ### Other Auto Operations
 
