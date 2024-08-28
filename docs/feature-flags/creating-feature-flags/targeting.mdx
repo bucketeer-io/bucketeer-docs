@@ -53,11 +53,57 @@ On the targeting page, you can define a series of conditions defining which flag
 
 The below flowchart summarizes how targeting on Bucketeer works.
 
-<CenteredImg
-  imgURL="img/feature-flags/targeting/targeting-flowchart-2.svg"
-  alt="targeting flowchart panel"
-  wSize="600px"
-/>
+<div style={{ textAlign: 'center' }}>
+```mermaid
+graph TD;
+    A(Start) --> B(Is the Switch Button OFF?)
+    B -- Yes --> C(OFF variation)
+    B -- No --> D(Are there prerequisites?)
+    D -- Yes --> E(Have the prerequisites been satisfied?)
+    D -- No --> F(Are there targeting rules?)
+    E -- No --> C2(OFF variation)
+    E -- Yes --> F
+    F -- No --> H(Are there rollout percentage rules?)
+    F -- Yes --> G(Are any of the targeting rules satisfied?)
+    G -- Yes --> I(Return the corresponding variation)
+    G -- No --> H
+    H -- No --> K(Default strategy)
+    H -- Yes --> J(Are any of the rollout percentage rules satisfied?)
+    J -- No --> K
+    J -- Yes --> I2(Return the corresponding variation)
+
+    %% Styling the nodes
+    style A fill:#5d3597,color:#ffffff,stroke-width:0px;
+    style B fill:#ffffff,stroke:#5d3597,stroke-width:2px;
+    style C fill:#5d3597,color:#ffffff,stroke-width:0px;
+    style C2 fill:#5d3597,color:#ffffff,stroke-width:0px;
+    style D fill:#ffffff,stroke:#5d3597,stroke-width:2px;
+    style E fill:#ffffff,stroke:#5d3597,stroke-width:2px;
+    style F fill:#ffffff,stroke:#5d3597,stroke-width:2px;
+    style G fill:#ffffff,stroke:#5d3597,stroke-width:2px;
+    style H fill:#ffffff,stroke:#5d3597,stroke-width:2px;
+    style I fill:#5d3597,color:#ffffff,stroke-width:0px;
+    style I2 fill:#5d3597,color:#ffffff,stroke-width:0px;
+    style J fill:#ffffff,stroke:#5d3597,stroke-width:2px;
+    style K fill:#5d3597,color:#ffffff,stroke-width:0px;
+
+    %% Styling the links
+    linkStyle 1 stroke:green,stroke-width:2px,color:green;
+    linkStyle 2 stroke:red,stroke-width:2px,color:red;
+    linkStyle 3 stroke:green,stroke-width:2px,color:green;
+    linkStyle 4 stroke:red,stroke-width:2px,color:red;
+    linkStyle 6 stroke:green,stroke-width:2px,color:green;
+    linkStyle 5 stroke:red,stroke-width:2px,color:red;
+    linkStyle 8 stroke:green,stroke-width:2px,color:green;
+    linkStyle 7 stroke:red,stroke-width:2px,color:red;
+    linkStyle 9 stroke:green,stroke-width:2px,color:green;
+    linkStyle 10 stroke:red,stroke-width:2px,color:red;
+    linkStyle 11 stroke:red,stroke-width:2px,color:red;
+    linkStyle 12 stroke:green,stroke-width:2px,color:green;
+    linkStyle 14 stroke:green,stroke-width:2px,color:green;
+    linkStyle 13 stroke:red,stroke-width:2px,color:red;
+```
+</div>
 
 ### Prerequisites
 
