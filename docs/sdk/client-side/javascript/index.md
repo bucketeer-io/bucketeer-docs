@@ -382,7 +382,7 @@ const attributes = {
 
 const user = defineBKTUser({
   id: 'USER_ID',
-  attributes: attributes
+  customAttributes: attributes
 });
 
 await initializeBKTClient(config, user);
