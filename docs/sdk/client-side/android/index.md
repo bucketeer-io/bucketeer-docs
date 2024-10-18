@@ -293,6 +293,12 @@ The variation method will return the default value if the feature flag is missin
 
 The Bucketeer SDK supports the following variation types.
 
+:::caution Deprecated
+
+The `jsonVariation` interface is deprecated. Please use the `objectVariation` instead.
+
+:::
+
 <Tabs>
 <TabItem value="kt" label="Kotlin">
 
@@ -305,7 +311,103 @@ fun intVariation(featureId: String, defaultValue: Int): Int
 
 fun doubleVariation(featureId: String, defaultValue: Double): Double
 
-fun jsonVariation(featureId: String, defaultValue: JSONObject): JSONObject
+fun objectVariation(featureId: String, defaultValue: BKTValue): BKTValue
+```
+
+</TabItem>
+</Tabs>
+
+### Getting evaluation details
+
+The following methods will return the **evaluation details** for a specific feature flag. If the feature flag is missing in the SDK's cache, the variable `reason` value will be `CLIENT`, which means the default value was returned.
+
+This is useful if you use another A/B Test solution with Bucketeer and need to know the variation name, reason, and other information.
+
+:::caution Deprecated
+
+The `evaluationDetails` interface is deprecated. Please use the following [interfaces](#interface).
+
+:::
+
+
+#### Interface
+
+<Tabs>
+<TabItem value="kt" label="Kotlin">
+
+```kotlin showLineNumbers
+fun boolVariationDetails(
+  featureId: String,
+  defaultValue: Boolean,
+): BKTEvaluationDetails<Boolean>
+
+fun stringVariationDetails(
+  featureId: String,
+  defaultValue: String,
+): BKTEvaluationDetails<String>
+
+fun intVariationDetails(
+  featureId: String,
+  defaultValue: Int,
+): BKTEvaluationDetails<Int>
+
+fun doubleVariationDetails(
+  featureId: String,
+  defaultValue: Double,
+): BKTEvaluationDetails<Double>
+
+fun objectVariationDetails(
+  featureId: String,
+  defaultValue: BKTValue,
+): BKTEvaluationDetails<BKTValue>
+```
+
+</TabItem>
+</Tabs>
+
+#### Object
+
+<Tabs>
+<TabItem value="kt" label="Kotlin">
+
+```kotlin showLineNumbers
+data class BKTEvaluationDetails<T>(
+  val featureId: String,
+  val featureVersion: Int,
+  val userId: String,
+  val variationId: String,
+  val variationName: String,
+  val variationValue: T,
+  val reason: Reason,
+) {
+  enum class Reason {
+    TARGET, // Evaluated using an Individual targeting
+    RULE, // Evaluated using a custom Rule targeting
+    DEFAULT, // Evaluated using the Default Strategy
+    CLIENT, // The flag is missing in the cache. The default value was returned
+    OFF_VARIATION, // Evaluated using the Off Variation
+    PREREQUISITE, // Evaluated using a Prerequiste targeting
+
+    ;
+  }
+}
+```
+
+</TabItem>
+</Tabs>
+
+#### Usage
+
+<Tabs>
+<TabItem value="kt" label="Kotlin">
+
+```kotlin showLineNumbers
+val showNewFeature = client.boolVariationDetails("YOUR_FEATURE_FLAG_ID", false)
+if (showNewFeature.variationValue) {
+    // The Application code to show the new feature
+} else {
+    // The code to run when the feature is off
+}
 ```
 
 </TabItem>
@@ -522,50 +624,6 @@ This method will return the current user configured in the SDK. This is useful w
 
 ```kotlin showLineNumbers
 val user = client.currentUser()
-```
-
-</TabItem>
-</Tabs>
-
-### Getting evaluation details
-
-This method will return the **evaluation details** for a specific feature flag or will return **null** if the feature flag is missing in the SDK's cache.
-
-This is useful if you use another A/B Test solution with Bucketeer and need to know the variation name, reason, and other information.
-
-<details>
-  <summary><strong>Evaluation details</strong></summary>
-  <Tabs>
-  <TabItem value="kt" label="Kotlin">
-
-  ```kotlin showLineNumbers
-  data class BKTEvaluation(
-    var id: String,
-    val featureId: String,
-    val featureVersion: Int,
-    val userId: String,
-    val variationId: String,
-    val variationName: String,
-    val variationValue: String,
-    val reason: Reason,
-  )
-  ```
-
-  </TabItem>
-  </Tabs>
-</details>
-
-:::caution
-
-Do not call this method without calling the [Evaluating user method](#evaluating-user). The Evaluating user method must always be called because it generates analytics events that will be sent to the server.
-
-:::
-
-<Tabs>
-<TabItem value="kt" label="Kotlin">
-
-```kotlin showLineNumbers
-val evaluationDetails = client.evaluationDetails("YOUR_FEATURE_FLAG_ID")
 ```
 
 </TabItem>
