@@ -379,17 +379,17 @@ data class BKTEvaluationDetails<T>(
   val variationName: String,
   val variationValue: T,
   val reason: Reason,
-)
+) {
+  enum class Reason {
+    TARGET, // Evaluated using an Individual targeting
+    RULE, // Evaluated using a custom Rule targeting
+    DEFAULT, // Evaluated using the Default Strategy
+    CLIENT, // The flag is missing in the cache. The default value was returned
+    OFF_VARIATION, // Evaluated using the Off Variation
+    PREREQUISITE, // Evaluated using a Prerequiste targeting
 
-enum class Reason {
-  TARGET, // Evaluated using an Individual targeting
-  RULE, // Evaluated using a custom Rule targeting
-  DEFAULT, // Evaluated using the Default Strategy
-  CLIENT, // The flag is missing in the cache. The default value was returned
-  OFF_VARIATION, // Evaluated using the Off Variation
-  PREREQUISITE, // Evaluated using a Prerequiste targeting
-
-  ;
+    ;
+  }
 }
 ```
 
