@@ -111,6 +111,10 @@
   --docusaurus-details-decoration-color: #5d3597;
 }
 
+#__docusaurus {
+  background-color: #ffffff;
+}
+
 .markdown h1 {
   --ifm-h1-font-size: 2.125rem !important;
 }
