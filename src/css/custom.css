@@ -1244,6 +1244,10 @@ html[data-theme='light'] body .t-doc__sidebar {
     --scalar-sidebar-item-hover-background: #ddd7e9 !important;
 }
 
+html:has(.dark-mode) {
+  --scalar-background-1: #FFF !important;
+}
+
 .sidebar-heading-link-title {
 	font-size: 15px;
 	font-weight: 400;
