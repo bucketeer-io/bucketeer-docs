@@ -330,6 +330,12 @@ The variation method will return the default value if the feature flag is missin
 
 The Bucketeer SDK supports the following variation types.
 
+:::caution Deprecated
+
+The `jsonVariation` interface is deprecated. Please use the `objectVariation` instead.
+
+:::
+
 <Tabs>
 <TabItem value="swift" label="Swift">
 
@@ -342,7 +348,7 @@ func intVariation(featureId: String, defaultValue: Int) -> Int
 
 func doubleVariation(featureId: String, defaultValue: Double) -> Double
 
-func jsonVariation(featureId: String, defaultValue: [String: AnyHashable]) -> [String: AnyHashable]
+func objectVariation(featureId: String, defaultValue: BKTValue) -> BKTValue 
 ```
 
 </TabItem>
@@ -577,45 +583,130 @@ let user = client.currentUser()
 
 ### Getting evaluation details
 
-This method will return the **evaluation details** for a specific feature flag or will return **nil** if the feature flag is missing in the SDK's cache.
+The following methods will return the **evaluation details** for a specific feature flag. If the feature flag is missing in the SDK's cache, the variable `reason` value will be `CLIENT`, which means the default value was returned.
 
 This is useful if you use another A/B Test solution with Bucketeer and need to know the variation name, reason, and other information.
 
-<details>
-  <summary><strong>Evaluation details</strong></summary>
-  <Tabs>
-  <TabItem value="swift" label="Swift">
+:::caution Deprecated
 
-```swift showLineNumbers
-public struct Evaluation {
-  public let id: String
-  public let featureID: String
-  public let featureVersion: Int
-  public let userID: String
-  public let variationID: String
-  public let variationValue: String
-  public let reason: Int
-}
-```
-
-  </TabItem>
-  </Tabs>
-</details>
-
-:::caution
-
-Do not call this method without calling the [Evaluating user method](#evaluating-user). The Evaluating user method must always be called because it generates analytics events that will be sent to the server.
+The `evaluationDetails` interface is deprecated. Please use the following [interfaces](#interfaces).
 
 :::
 
+#### Interfaces
+
 <Tabs>
-<TabItem value="swift" label="Swift">
+  <TabItem value="swift" label="Swift">
 
-```swift showLineNumbers
-let evaluationDetails = client.evaluationDetails(featureId: "YOUR_FEATURE_FLAG_ID")
-```
+  ```swift showLineNumbers
+    public func boolVariationDetails(
+        featureId: String, 
+        defaultValue: Bool
+    ) -> BKTEvaluationDetails<Bool>
 
-</TabItem>
+    public func stringVariationDetails(
+        featureId: String, 
+        defaultValue: String
+    ) -> BKTEvaluationDetails<String>
+
+    public func intVariationDetails(
+        featureId: String, 
+        defaultValue: Int
+    ) -> BKTEvaluationDetails<Int>
+
+    public func doubleVariationDetails(
+        featureId: String, 
+        defaultValue: Double
+    ) -> BKTEvaluationDetails<Double>
+
+    public func objectVariationDetails(
+        featureId: String, 
+        defaultValue: BKTValue
+    ) -> BKTEvaluationDetails<BKTValue>
+  ```
+
+  </TabItem>
+</Tabs>
+
+#### Object
+
+<Tabs>
+  <TabItem value="swift" label="Swift">
+
+  ```swift showLineNumbers
+    public struct BKTEvaluationDetails<T> {
+        public let featureId: String         // The ID of the feature flag
+        public let featureVersion: Int       // The version of the feature flag
+        public let userId: String            // The ID of the user being evaluated
+        public let variationId: String       // The ID of the assigned variation
+        public let variationName: String     // The name of the assigned variation
+        public let variationValue: T         // The value of the assigned variation
+        public let reason: Reason            // The reason for the evaluation
+
+        /// Enum representing the possible reasons for the evaluation result
+        public enum Reason: String {
+            case target = "TARGET"           // Evaluated using individual targeting
+            case rule = "RULE"               // Evaluated using a custom rule
+            case `default` = "DEFAULT"       // Evaluated using the default strategy
+            case client = "CLIENT"           // The flag is missing in the cache. Default value returned
+            case offVariation = "OFF_VARIATION" // Evaluated using the off variation
+            case prerequisite = "PREREQUISITE" // Evaluated using a prerequisite targeting
+
+            static func fromString(value: String) -> Reason {
+                return Reason(rawValue: value.uppercased()) ?? .default
+            }
+        }
+
+        /// Factory method for creating a default instance
+        public static func newDefaultInstance(featureId: String, userId: String, defaultValue: T) -> BKTEvaluationDetails<T> {
+            return BKTEvaluationDetails(
+                featureId: featureId,
+                featureVersion: 0,
+                userId: userId,
+                variationId: "",
+                variationName: "",
+                variationValue: defaultValue,
+                reason: .client
+            )
+        }
+    }
+
+  ```
+
+  </TabItem>
+</Tabs>
+
+#### Usage
+
+<Tabs>
+  <TabItem value="swift" label="Swift">
+
+  ```swift showLineNumbers
+import Foundation
+
+do {
+    // Access the shared instance of BKTClient
+    let client = try BKTClient.shared
+
+    // Retrieve evaluation details for a boolean feature flag
+    let showNewFeature = client.boolVariationDetails(featureId: "YOUR_FEATURE_FLAG_ID", defaultValue: false)
+
+    // Check the variation value and execute code accordingly
+    if showNewFeature.variationValue {
+        // The application code to show the new feature
+        print("The new feature is enabled.")
+    } else {
+        // The code to run when the feature is off
+        print("The new feature is disabled.")
+    }
+} catch {
+    // Handle errors, such as when the client is not initialized
+    print("Failed to access the BKTClient: \(error)")
+}
+
+  ```
+
+  </TabItem>
 </Tabs>
 
 ### Listening to evaluation updates
