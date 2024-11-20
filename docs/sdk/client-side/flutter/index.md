@@ -284,6 +284,12 @@ In case the feature flag is missing in the SDK, it will return the default value
 
 The Bucketeer SDK supports the following variation types.
 
+:::caution Deprecated
+
+The `jsonVariation` interface is deprecated. Please use the `objectVariation` instead.
+
+:::
+
 <Tabs>
 <TabItem value="dart" label="Dart">
 
@@ -296,7 +302,8 @@ Future<int> intVariation(String featureId, { required int defaultValue });
 
 Future<double> doubleVariation(String featureId, { required double defaultValue });
 
-Future<Map<String, dynamic>> jsonVariation(String featureId, { required Map<String, dynamic> defaultValue });
+Future<BKTValue> objectVariation(String featureId, {
+required BKTValue defaultValue })
 ```
 
 </TabItem>
