@@ -547,48 +547,131 @@ if (userResult.isSuccess) {
 
 ### Getting evaluation details
 
-This method will return the **evaluation details** for a specific feature flag or will return **null** if the feature flag is missing in the SDK's cache.
+The following methods will return the **evaluation details** for a specific feature flag. If the feature flag is missing in the SDK's cache, the variable `reason` value will be `CLIENT`, which means the default value was returned.
 
 This is useful if you use another A/B Test solution with Bucketeer and need to know the variation name, reason, and other information.
 
-<details>
-  <summary><strong>Evaluation details</strong></summary>
-  <Tabs>
-  <TabItem value="dart" label="Dart">
+:::caution Deprecated
 
-  ```dart showLineNumbers
-  class BKTEvaluation {
-    final String id;
-    final String featureId;
-    final int featureVersion;
-    final String userId;
-    final String variationId;
-    final String variationName;
-    final String variationValue;
-    final String reason;
-  }
-  ```
-
-  </TabItem>
-  </Tabs>
-</details>
-
-:::caution
-
-Do not call this method without calling the [Evaluating user method](#evaluating-user). The Evaluating user method must always be called because it generates analytics events that will be sent to the server.
+The `evaluationDetails` is deprecated. Please use the following [interfaces](#interface).
 
 :::
 
+#### Interfaces
+
 <Tabs>
-<TabItem value="dart" label="Dart">
+  <TabItem value="dart" label="Dart">
 
-```dart showLineNumbers
-final evaluationDetails = await client.evaluationDetails("YOUR_FEATURE_FLAG_ID");
-```
+    ```dart showLineNumbers
+    Future<BKTEvaluationDetails<bool>> boolVariationDetails(
+      String featureId, {
+      required bool defaultValue,
+    });
 
-</TabItem>
+    Future<BKTEvaluationDetails<String>> stringVariationDetails(
+      String featureId, {
+      required String defaultValue,
+    });
+
+    Future<BKTEvaluationDetails<int>> intVariationDetails(
+      String featureId, {
+      required int defaultValue,
+    });
+
+    Future<BKTEvaluationDetails<double>> doubleVariationDetails(
+      String featureId, {
+      required double defaultValue,
+    });
+
+    Future<BKTEvaluationDetails<BKTValue>> objectVariationDetails(
+      String featureId, {
+      required BKTValue defaultValue,
+    });
+    ```
+  </TabItem>
 </Tabs>
 
+#### Object
+
+<Tabs>
+  <TabItem value="dart" label="Dart">
+
+    ```dart showLineNumbers
+    /// Represents the evaluation details for a feature flag variation.
+    class BKTEvaluationDetails<T> {
+      final String featureId; // The ID of the feature flag.
+      final int featureVersion; // The version of the feature flag.
+      final String userId; // The ID of the user being evaluated.
+      final String variationId; // The ID of the variation assigned.
+      final String variationName; // The name of the variation assigned.
+      final T variationValue; // The value of the variation assigned.
+      final Reason reason; // The reason for the evaluation.
+
+      BKTEvaluationDetails({
+        required this.featureId,
+        required this.featureVersion,
+        required this.userId,
+        required this.variationId,
+        required this.variationName,
+        required this.variationValue,
+        required this.reason,
+      });
+
+      /// Enum representing the possible reasons for the evaluation result.
+      enum Reason {
+        TARGET, // Evaluated using an Individual targeting.
+        RULE, // Evaluated using a custom Rule targeting.
+        DEFAULT, // Evaluated using the Default Strategy.
+        CLIENT, // The flag is missing in the cache. The default value was returned.
+        OFF_VARIATION, // Evaluated using the Off Variation.
+        PREREQUISITE, // Evaluated using a Prerequisite targeting.
+      }
+
+      /// Factory method to create an instance from a JSON object.
+      factory BKTEvaluationDetails.fromJson(Map<String, dynamic> json) {
+        return BKTEvaluationDetails<T>(
+          featureId: json['featureId'] as String,
+          featureVersion: json['featureVersion'] as int,
+          userId: json['userId'] as String,
+          variationId: json['variationId'] as String,
+          variationName: json['variationName'] as String,
+          variationValue: json['variationValue'] as T,
+          reason: Reason.values.firstWhere((e) => e.toString() == 'Reason.${json['reason']}'),
+        );
+      }
+    }
+
+    ```
+  </TabItem>
+</Tabs>
+
+#### Usage
+
+<Tabs>
+  <TabItem value="dart" label="Dart">
+
+    ```dart showLineNumbers
+    void main() async {
+      final client = BKTClient.instance;
+
+      // Retrieve evaluation details for a boolean feature flag
+      final showNewFeature = await client.boolVariationDetails(
+        "YOUR_FEATURE_FLAG_ID",
+        defaultValue: false,
+      );
+
+      // Check the variation value and execute code accordingly
+      if (showNewFeature.variationValue) {
+        // Application code to show the new feature
+        print("The new feature is enabled.");
+      } else {
+        // Code to run when the feature is off
+        print("The new feature is disabled.");
+      }
+    }    
+    ```
+  </TabItem>
+</Tabs>
 
 ### Listening to evaluation updates
 
