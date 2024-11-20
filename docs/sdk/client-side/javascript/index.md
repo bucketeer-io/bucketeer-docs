@@ -292,6 +292,12 @@ The variation method will return the default value if the feature flag is missin
 
 The Bucketeer SDK supports the following variation types.
 
+:::caution Deprecated
+
+The `jsonVariation` interface is deprecated. Please use the `objectVariation` instead.
+
+:::
+
 <Tabs>
 <TabItem value="js" label="JavaScript">
 
@@ -302,7 +308,8 @@ stringVariation(featureId: string, defaultValue: string): Promise<string>;
 
 numberVariation(featureId: string, defaultValue: number): Promise<number>;
 
-jsonVariation(featureId: string, defaultValue: object): Promise<object>;
+// The returned value will be either a BKTJsonObject or a BKTJsonArray. If no result is found, it will return the provided `defaultValue`, which can be of any type within `BKTValue`.
+objectVariation(featureId: string, defaultValue: BKTValue):Promise<object>;
 ```
 
 </TabItem>
@@ -435,52 +442,110 @@ const user = client?.currentUser();
 
 ### Getting evaluation details
 
-This method will return the **evaluation details** for a specific feature flag or will return **null** if the feature flag is missing in the SDK's cache.
+The following methods will return the **evaluation details** for a specific feature flag. If the feature flag is missing in the SDK's cache, the variable `reason` value will be `CLIENT`, which means the default value was returned.
 
 This is useful if you use another A/B Test solution with Bucketeer and need to know the variation name, reason, and other information.
 
-<details>
-  <summary><strong>Evaluation details</strong></summary>
-  <Tabs>
-  <TabItem value="js" label="JavaScript">
 
-  ```js showLineNumbers
-  export interface BKTEvaluation {
-    readonly id: string
-    readonly featureId: string
-    readonly featureVersion: number
-    readonly userId: string
-    readonly variationId: string
-    readonly variationName: string
-    readonly variationValue: string
-    readonly reason:
-      | 'TARGET'
-      | 'RULE'
-      | 'DEFAULT'
-      | 'CLIENT'
-      | 'OFF_VARIATION'
-      | 'PREREQUISITE'
-  }
-  ```
+:::caution Deprecated
 
-  </TabItem>
-  </Tabs>
-</details>
-
-:::caution
-
-Do not call this method without calling the [Evaluating user method](#evaluating-user). The Evaluating user method must always be called because it generates analytics events that will be sent to the server.
+The `evaluationDetails` interface is deprecated. Please use the following [interfaces](#interfaces).
 
 :::
 
+#### Interfaces
+
 <Tabs>
-<TabItem value="js" label="JavaScript">
+  <TabItem value="js" label="JavaScript">
 
-```js showLineNumbers
-const evaluationDetails = client?.evaluationDetails("YOUR_FEATURE_FLAG_ID");
-```
+  ```js showLineNumbers
+    interface BKTClient {
+      booleanVariationDetails(
+        featureId: string,
+        defaultValue: boolean
+      ): BKTEvaluationDetails<boolean>;
 
-</TabItem>
+      stringVariationDetails(
+        featureId: string,
+        defaultValue: string
+      ): BKTEvaluationDetails<string>;
+
+      numberVariationDetails(
+        featureId: string,
+        defaultValue: number
+      ): BKTEvaluationDetails<number>;
+
+      objectVariationDetails(
+        featureId: string,
+        defaultValue: BKTValue
+      ): BKTEvaluationDetails<BKTValue>;
+    }
+
+  ```
+  </TabItem>
+</Tabs>
+
+#### Object
+
+<Tabs>
+  <TabItem value="js" label="JavaScript">
+
+  ```js showLineNumbers
+    /**
+     * Represents the details of a feature flag evaluation.
+     */
+    export interface BKTEvaluationDetails<T> {
+      featureId: string; // The ID of the feature flag.
+      featureVersion: number; // The version of the feature flag.
+      userId: string; // The ID of the user being evaluated.
+      variationId: string; // The ID of the assigned variation.
+      variationName: string; // The name of the assigned variation.
+      variationValue: T; // The value of the assigned variation.
+      reason: Reason; // The reason for the evaluation.
+    }
+
+    /**
+     * Enum representing the possible reasons for an evaluation result.
+     */
+    export type Reason =
+      | "TARGET" // Evaluated using individual targeting.
+      | "RULE" // Evaluated using a custom rule.
+      | "DEFAULT" // Evaluated using the default strategy.
+      | "CLIENT" // The flag is missing in the cache; the default value was returned.
+      | "OFF_VARIATION" // Evaluated using the off variation.
+      | "PREREQUISITE"; // Evaluated using a prerequisite.
+
+  ```
+  </TabItem>
+</Tabs>
+
+#### Usage
+
+<Tabs>
+  <TabItem value="js" label="JavaScript">
+
+  ```js showLineNumbers
+    // Assuming BKTClient is already initialized
+    const client = getBKTClient();
+
+    if (client) {
+      // Retrieve evaluation details for a boolean feature flag
+      const showNewFeature = client.booleanVariationDetails("YOUR_FEATURE_FLAG_ID", false);
+
+      // Check the variation value and execute code accordingly
+      if (showNewFeature.variationValue) {
+        // The application code to show the new feature
+        console.log("The new feature is enabled.");
+      } else {
+        // The code to run when the feature is off
+        console.log("The new feature is disabled.");
+      }
+    } else {
+      console.error("BKTClient is not initialized.");
+    }
+
+  ```
+  </TabItem>
 </Tabs>
 
 ### Listening to evaluation updates
