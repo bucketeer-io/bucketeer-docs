@@ -183,6 +183,12 @@ The variation method will return the default value if the feature flag doesn't e
 
 ### Variation types
 
+:::caution Deprecated
+
+The `JSONVariation` interface is deprecated. Please use the `ObjectVariation` instead.
+
+:::
+
 The Bucketeer SDK supports the following variation types.
 
 <Tabs>
@@ -199,7 +205,7 @@ Float64Variation(ctx context.Context, user *user.User, featureID string, default
 
 StringVariation(ctx context.Context, user *user.User, featureID, defaultValue string) string
 
-JSONVariation(ctx context.Context, user *user.User, featureID string, dst interface{})
+ObjectVariation(ctx context.Context, user *user.User, featureID string, defaultValue interface{}) interface{}
 ```
 
 </TabItem>
