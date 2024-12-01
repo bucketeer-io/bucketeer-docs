@@ -14,13 +14,13 @@
     "write-heading-ids": "docusaurus write-heading-ids"
   },
   "dependencies": {
-    "@docusaurus/core": "^3.5.2",
-    "@docusaurus/plugin-google-gtag": "^3.5.2",
-    "@docusaurus/preset-classic": "^3.5.2",
-    "@docusaurus/theme-mermaid": "^3.5.2",
-    "@easyops-cn/docusaurus-search-local": "^0.45.0",
+    "@docusaurus/core": "^3.6.3",
+    "@docusaurus/plugin-google-gtag": "^3.6.3",
+    "@docusaurus/preset-classic": "^3.6.3",
+    "@docusaurus/theme-mermaid": "^3.6.3",
+    "@easyops-cn/docusaurus-search-local": "^0.46.1",
     "@mdx-js/react": "^3.1.0",
-    "@scalar/docusaurus": "0.4.132",
+    "@scalar/docusaurus": "0.4.150",
     "clsx": "^2.1.1",
     "docusaurus-lunr-search": "^3.5.0",
     "docusaurus-plugin-image-zoom": "^2.0.0",
@@ -31,7 +31,7 @@
   "devDependencies": {
     "@docusaurus/module-type-aliases": "^3.5.2",
     "@docusaurus/types": "^3.5.2",
-    "node": "22"
+    "node": "23"
   },
   "browserslist": {
     "production": [
