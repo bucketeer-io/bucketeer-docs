@@ -309,7 +309,7 @@ stringVariation(featureId: string, defaultValue: string): Promise<string>;
 numberVariation(featureId: string, defaultValue: number): Promise<number>;
 
 // The returned value will be either a BKTJsonObject or a BKTJsonArray. If no result is found, it will return the provided `defaultValue`, which can be of any type within `BKTValue`.
-objectVariation(featureId: string, defaultValue: BKTValue):Promise<object>;
+objectVariation(featureId: string, defaultValue: BKTValue):Promise<BKTValue>;
 ```
 
 </TabItem>
