@@ -384,7 +384,7 @@ class BKTEvaluationDetails<T extends Object> {
 ```dart showLineNumbers
 final client = BKTClient.instance;
 final showNewFeature =
-    await client.boolVariationDetails("YOUR_FEATURE_FLAG_ID", defaultValue: false);
+  await client.boolVariationDetails("YOUR_FEATURE_FLAG_ID", defaultValue: false);
 if (showNewFeature.variationValue) {
   /// The Application code to show the new feature
 } else {
