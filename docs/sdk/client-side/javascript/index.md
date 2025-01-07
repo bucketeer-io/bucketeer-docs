@@ -366,23 +366,21 @@ interface BKTClient {
   <TabItem value="js" label="JavaScript">
 
 ```js showLineNumbers
-export interface BKTEvaluationDetails<T> {
-  featureId: string; // The ID of the feature flag.
-  featureVersion: number; // The version of the feature flag.
-  userId: string; // The ID of the user being evaluated.
-  variationId: string; // The ID of the assigned variation.
-  variationName: string; // The name of the assigned variation.
-  variationValue: T; // The value of the assigned variation.
-  reason: Reason; // The reason for the evaluation.
+export interface BKTEvaluationDetails<T extends BKTValue> {
+  readonly featureId: string; // The ID of the feature flag.
+  readonly featureVersion: number; // The version of the feature flag.
+  readonly userId: string; // The ID of the user being evaluated.
+  readonly variationId: string; // The ID of the assigned variation.
+  readonly variationName: string; // The name of the assigned variation.
+  readonly variationValue: T; // The value of the assigned variation.
+  readonly reason: 
+    | 'TARGET' // Evaluated using individual targeting.
+    | 'RULE' // Evaluated using a custom rule.
+    | 'DEFAULT' // Evaluated using the default strategy.
+    | 'CLIENT' // The flag is missing in the cache; the default value was returned.
+    | 'OFF_VARIATION' // Evaluated using the off variation.
+    | 'PREREQUISITE'; // Evaluated using a prerequisite.
 }
-
-export type Reason =
-  | "TARGET" // Evaluated using individual targeting.
-  | "RULE" // Evaluated using a custom rule.
-  | "DEFAULT" // Evaluated using the default strategy.
-  | "CLIENT" // The flag is missing in the cache; the default value was returned.
-  | "OFF_VARIATION" // Evaluated using the off variation.
-  | "PREREQUISITE"; // Evaluated using a prerequisite.
 ```
 
   </TabItem>
