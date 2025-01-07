@@ -154,7 +154,7 @@ Initialize the client by passing the configurations in the previous step.
 <TabItem value="swift" label="Swift">
 
 ```swift showLineNumbers
-BKTClient.initialize(config: config, user: user)
+try BKTClient.initialize(config: config, user: user)
 ```
 
 </TabItem>
@@ -183,23 +183,27 @@ The completion callback is called on the **main thread**.
 ```swift showLineNumbers
 let timeout: Int64 = 2000 // Default is 5 seconds (In milliseconds)
 
-BKTClient.initialize(
-  config: config,
-  user: user,
-  timeoutMillis: timeout
-) { error in
-  // The completion callback is called on the main thread
-  guard error == nil else {
-    // Handle the error when there is no cache or the cache is not updated
-    return
+do {
+  try BKTClient.initialize(
+    config: config,
+    user: user,
+    timeoutMillis: timeout
+  ) { error in
+    // The completion callback is called on the main thread
+    guard error == nil else {
+      // Handle the error when there is no cache or the cache is not updated
+      return
+    }
+    let client = try? BKTClient.shared
+    let showNewFeature = client?.boolVariation(featureId: "YOUR_FEATURE_FLAG_ID", defaultValue: false) ?? false
+    if (showNewFeature) {
+      // The Application code to show the new feature
+    } else {
+      // The code to run when the feature is off 
+    }
   }
-  let client = BKTClient.shared
-  let showNewFeature = client.boolVariation(featureId: "YOUR_FEATURE_FLAG_ID", defaultValue: false)
-  if (showNewFeature) {
-    // The Application code to show the new feature
-  } else {
-    // The code to run when the feature is off 
-  }
+} catch {
+  // Error handling
 }
 ```
 
@@ -308,8 +312,8 @@ To check which variation a specific user will receive, you can use the client li
 <TabItem value="swift" label="Swift">
 
 ```swift showLineNumbers
-let client = BKTClient.shared
-let showNewFeature = client.boolVariation(featureId: "YOUR_FEATURE_FLAG_ID", defaultValue: false)
+let client = try? BKTClient.shared
+let showNewFeature = client?.boolVariation(featureId: "YOUR_FEATURE_FLAG_ID", defaultValue: false) ?? false
 if (showNewFeature) {
     // The Application code to show the new feature
 } else {
@@ -440,17 +444,12 @@ public struct BKTEvaluationDetails<T: Equatable>: Equatable {
   <TabItem value="swift" label="Swift">
 
 ```swift showLineNumbers
-do {
-  let client = try BKTClient.shared
-  let showNewFeature = client.boolVariationDetails(featureId: "YOUR_FEATURE_FLAG_ID", defaultValue: false)
-  if showNewFeature.variationValue {
-      // The Application code to show the new feature
-  } else {
-      // The code to run when the feature is off
-  }
-} catch {
-  print("An error occurred: \(error)")
-  // Handle the error appropriately
+let client = try? BKTClient.shared
+let showNewFeature = client?.boolVariationDetails(featureId: "YOUR_FEATURE_FLAG_ID", defaultValue: false) ?? false
+if showNewFeature.variationValue {
+    // The Application code to show the new feature
+} else {
+    // The code to run when the feature is off
 }
 ```
 
@@ -471,15 +470,15 @@ The fetch method uses the following parameters.
 
 ```swift showLineNumbers
 let timeout: Int64 = 5000 // Optional. Default is 30 seconds (In milliseconds)
-let client = BKTClient.shared
+let client = try? BKTClient.shared
 
-client.fetchEvaluations(timeoutMillis: timeout) { error in
+client?.fetchEvaluations(timeoutMillis: timeout) { error in
   // The completion callback is called on the main thread
   guard error == nil else {
     // The code to run when there is an error while initializing the SDK
     return
   }
-  let showNewFeature = client.boolVariation(featureId: "YOUR_FEATURE_FLAG_ID", defaultValue: false)
+  let showNewFeature = client?.boolVariation(featureId: "YOUR_FEATURE_FLAG_ID", defaultValue: false) ?? false
   if (showNewFeature) {
       // The Application code to show the new feature
   } else {
@@ -527,18 +526,17 @@ Assuming you already have the FCM implementation in your application, the follow
 <TabItem value="swift" label="Swift">
 
 ```swift showLineNumbers
-```swift showLineNumbers
 // In order to receive notifications you must subscribe to the topic
 func subscribeToTopic() {
-    let tag = "ios"  // The same tag used when initializing the client SDK
-    let topic = "bucketeer-\(tag)"
-    Messaging.messaging().subscribe(toTopic: topic) { error in
-        if let error = error {
-            print("Failed to subscribed to \(topic) topic. Error: \(error)")
-        } else {
-            print("Subscribed successfully to \(topic) topic")
-        }
+  let tag = "ios"  // The same tag used when initializing the client SDK
+  let topic = "bucketeer-\(tag)"
+  Messaging.messaging().subscribe(toTopic: topic) { error in
+    if let error = error {
+      print("Failed to subscribed to \(topic) topic. Error: \(error)")
+    } else {
+      print("Subscribed successfully to \(topic) topic")
     }
+  }
 }
 
 // Receiving notification in background
@@ -548,8 +546,8 @@ func application(
 ) async -> UIBackgroundFetchResult {
   let flag = userInfo["bucketeer_feature_flag_updated"] as? String
   if flag == "true" {
-    let client = BKTClient.shared
-    let showNewFeature = client.boolVariation(featureId: "YOUR_FEATURE_FLAG_ID", defaultValue: false)
+    let client = try? BKTClient.shared
+    let showNewFeature = client?.boolVariation(featureId: "YOUR_FEATURE_FLAG_ID", defaultValue: false) ?? false
     if (showNewFeature) {
         // The Application code to show the new feature
     } else {
@@ -575,7 +573,8 @@ The default track value is 0.0.
 <TabItem value="swift" label="Swift">
 
 ```swift showLineNumbers
-client.track(goalId: "YOUR_GOAL_ID", value: 10.50)
+let client = try? BKTClient.shared
+client?.track(goalId: "YOUR_GOAL_ID", value: 10.50)
 ```
 
 </TabItem>
@@ -591,7 +590,8 @@ If you need to check the result, you can use the completion callback, returned o
 <TabItem value="swift" label="Swift">
 
 ```swift showLineNumbers
-client.flush { error in
+let client = try? BKTClient.shared
+client?.flush { error in
   // The completion callback is called on the main thread
     guard error == nil else {
     // Error handling
@@ -631,8 +631,8 @@ do {
   .with(attributes: attributes)
   .build()
 
-  BKTClient.initialize(config: config, user: user)
-  let client = BKTClient.shared
+  try BKTClient.initialize(config: config, user: user)
+  let client = try BKTClient.shared
 } catch {
   // Error handling
 }
@@ -658,7 +658,8 @@ let attributes = [
   "country": "japan"
 ]
 
-client.updateUserAttributes(attributes: attributes)
+let client = try? BKTClient.shared
+try? client?.updateUserAttributes(attributes: attributes)
 ```
 
 </TabItem>
@@ -678,7 +679,8 @@ This method will return the current user configured in the SDK. This is useful w
 <TabItem value="swift" label="Swift">
 
 ```swift showLineNumbers
-let user = client.currentUser()
+let client = try? BKTClient.shared
+let user = client?.currentUser()
 ```
 
 </TabItem>
@@ -702,8 +704,8 @@ The listener callback is called on the main thread.
 class EvaluationUpdateListenerImpl: EvaluationUpdateListener {
   // The listener callback is called on the main thread
   func onUpdate() {
-    let client = BKTClient.shared
-    let showNewFeature = client.boolVariation(featureId: "YOUR_FEATURE_FLAG_ID", defaultValue: false)
+    let client = try? BKTClient.shared
+    let showNewFeature = client?.boolVariation(featureId: "YOUR_FEATURE_FLAG_ID", defaultValue: false) ?? false
     if (showNewFeature) {
       // The Application code to show the new feature
     } else {
@@ -712,15 +714,17 @@ class EvaluationUpdateListenerImpl: EvaluationUpdateListener {
   }
 }
 
-let listener = EvaluationUpdateListenerImpl()
-// The returned key value is used to remove the listener
-let key = client.addEvaluationUpdateListener(listener: listener)
+if let client = try? BKTClient.shared {
+  let listener = EvaluationUpdateListenerImpl()
+  // The returned key value is used to remove the listener
+  let key = client.addEvaluationUpdateListener(listener: listener)
 
-// Remove a listener associated with the key
-client.removeEvaluationUpdateListener(key: key)
+  // Remove a listener associated with the key
+  client.removeEvaluationUpdateListener(key: key)
 
-// Remove all listeners
-client.clearEvaluationUpdateListeners()
+  // Remove all listeners
+  client.clearEvaluationUpdateListeners()
+}
 ```
 
 </TabItem>
