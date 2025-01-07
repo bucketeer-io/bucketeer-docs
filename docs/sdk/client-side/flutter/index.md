@@ -284,6 +284,12 @@ In case the feature flag is missing in the SDK, it will return the default value
 
 The Bucketeer SDK supports the following variation types.
 
+:::caution Deprecated
+
+The `jsonVariation` interface is deprecated. Please use the `objectVariation` instead.
+
+:::
+
 <Tabs>
 <TabItem value="dart" label="Dart">
 
@@ -296,10 +302,96 @@ Future<int> intVariation(String featureId, { required int defaultValue });
 
 Future<double> doubleVariation(String featureId, { required double defaultValue });
 
-Future<Map<String, dynamic>> jsonVariation(String featureId, { required Map<String, dynamic> defaultValue });
+Future<BKTValue> objectVariation(String featureId, {
+required BKTValue defaultValue })
 ```
 
 </TabItem>
+</Tabs>
+
+### Getting evaluation details
+
+The following methods will return the **evaluation details** for a specific feature flag. If the feature flag is missing in the SDK's cache, the variable `reason` value will be `CLIENT`, which means the default value was returned.
+
+This is useful if you use another A/B Test solution with Bucketeer and need to know the variation name, reason, and other information.
+
+:::caution Deprecated
+
+The `evaluationDetails` is deprecated. Please use the following [interfaces](#interface).
+
+:::
+
+#### Interfaces
+
+<Tabs>
+  <TabItem value="dart" label="Dart">
+
+```dart showLineNumbers
+Future<BKTEvaluationDetails<bool>> boolVariationDetails(
+  String featureId, {
+  required bool defaultValue,
+});
+
+Future<BKTEvaluationDetails<String>> stringVariationDetails(
+  String featureId, {
+  required String defaultValue,
+});
+
+Future<BKTEvaluationDetails<int>> intVariationDetails(
+  String featureId, {
+  required int defaultValue,
+});
+
+Future<BKTEvaluationDetails<double>> doubleVariationDetails(
+  String featureId, {
+  required double defaultValue,
+});
+
+Future<BKTEvaluationDetails<BKTValue>> objectVariationDetails(
+  String featureId, {
+  required BKTValue defaultValue,
+});
+```
+
+  </TabItem>
+</Tabs>
+
+#### Object
+
+<Tabs>
+  <TabItem value="dart" label="Dart">
+
+```dart showLineNumbers
+@immutable
+class BKTEvaluationDetails<T extends Object> {
+  final String featureId;     // The ID of the feature flag.
+  final int featureVersion;   // The version of the feature flag.
+  final String userId;        // The ID of the user being evaluated.
+  final String variationId;   // The ID of the variation assigned.
+  final String variationName; // The name of the variation assigned.
+  final T variationValue;     // The value of the variation assigned.
+  final String reason;        // The reason for the evaluation.
+}
+```
+  </TabItem>
+</Tabs>
+
+#### Usage
+
+<Tabs>
+  <TabItem value="dart" label="Dart">
+
+```dart showLineNumbers
+final client = BKTClient.instance;
+final showNewFeature =
+  await client.boolVariationDetails("YOUR_FEATURE_FLAG_ID", defaultValue: false);
+if (showNewFeature.variationValue) {
+  /// The Application code to show the new feature
+} else {
+  /// The code to run when the feature is off
+}
+```
+  </TabItem>
 </Tabs>
 
 ### Updating user evaluations
@@ -537,51 +629,6 @@ if (userResult.isSuccess) {
 
 </TabItem>
 </Tabs>
-
-### Getting evaluation details
-
-This method will return the **evaluation details** for a specific feature flag or will return **null** if the feature flag is missing in the SDK's cache.
-
-This is useful if you use another A/B Test solution with Bucketeer and need to know the variation name, reason, and other information.
-
-<details>
-  <summary><strong>Evaluation details</strong></summary>
-  <Tabs>
-  <TabItem value="dart" label="Dart">
-
-  ```dart showLineNumbers
-  class BKTEvaluation {
-    final String id;
-    final String featureId;
-    final int featureVersion;
-    final String userId;
-    final String variationId;
-    final String variationName;
-    final String variationValue;
-    final String reason;
-  }
-  ```
-
-  </TabItem>
-  </Tabs>
-</details>
-
-:::caution
-
-Do not call this method without calling the [Evaluating user method](#evaluating-user). The Evaluating user method must always be called because it generates analytics events that will be sent to the server.
-
-:::
-
-<Tabs>
-<TabItem value="dart" label="Dart">
-
-```dart showLineNumbers
-final evaluationDetails = await client.evaluationDetails("YOUR_FEATURE_FLAG_ID");
-```
-
-</TabItem>
-</Tabs>
-
 
 ### Listening to evaluation updates
 

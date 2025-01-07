@@ -330,6 +330,12 @@ The variation method will return the default value if the feature flag is missin
 
 The Bucketeer SDK supports the following variation types.
 
+:::caution Deprecated
+
+The `jsonVariation` interface is deprecated. Please use the `objectVariation` instead.
+
+:::
+
 <Tabs>
 <TabItem value="swift" label="Swift">
 
@@ -342,10 +348,113 @@ func intVariation(featureId: String, defaultValue: Int) -> Int
 
 func doubleVariation(featureId: String, defaultValue: Double) -> Double
 
-func jsonVariation(featureId: String, defaultValue: [String: AnyHashable]) -> [String: AnyHashable]
+func objectVariation(featureId: String, defaultValue: BKTValue) -> BKTValue 
 ```
 
 </TabItem>
+</Tabs>
+
+### Getting evaluation details
+
+The following methods will return the **evaluation details** for a specific feature flag. If the feature flag is missing in the SDK's cache, the variable `reason` value will be `CLIENT`, which means the default value was returned.
+
+This is useful if you use another A/B Test solution with Bucketeer and need to know the variation name, reason, and other information.
+
+:::caution Deprecated
+
+The `evaluationDetails` interface is deprecated. Please use the following [interfaces](#interfaces).
+
+:::
+
+#### Interfaces
+
+<Tabs>
+  <TabItem value="swift" label="Swift">
+
+```swift showLineNumbers
+func boolVariationDetails(
+  featureId: String, 
+  defaultValue: Bool
+) -> BKTEvaluationDetails<Bool>
+
+func stringVariationDetails(
+  featureId: String, 
+  defaultValue: String
+) -> BKTEvaluationDetails<String>
+
+func intVariationDetails(
+  featureId: String, 
+  defaultValue: Int
+) -> BKTEvaluationDetails<Int>
+
+func doubleVariationDetails(
+  featureId: String, 
+  defaultValue: Double
+) -> BKTEvaluationDetails<Double>
+
+func objectVariationDetails(
+  featureId: String, 
+  defaultValue: BKTValue
+) -> BKTEvaluationDetails<BKTValue>
+```
+
+  </TabItem>
+</Tabs>
+
+#### Object
+
+<Tabs>
+  <TabItem value="swift" label="Swift">
+
+```swift showLineNumbers
+public struct BKTEvaluationDetails<T: Equatable>: Equatable {
+  public let featureId: String          // The ID of the feature flag
+  public let featureVersion: Int        // The version of the feature flag
+  public let userId: String             // The ID of the user being evaluated
+  public let variationId: String        // The ID of the assigned variation
+  public let variationName: String      // The name of the assigned variation
+  public let variationValue: T          // The value of the assigned variation
+  public let reason: Reason             // The reason for the evaluation
+
+  public enum Reason: String, Codable, Hashable {
+    case target = "TARGET"              // Evaluated using individual targeting
+    case rule = "RULE"                  // Evaluated using a custom rule
+    case `default` = "DEFAULT"          // Evaluated using the default strategy
+    case client = "CLIENT"              // The flag is missing in the cache. Default value returned
+    case offVariation = "OFF_VARIATION" // Evaluated using the off variation
+    case prerequisite = "PREREQUISITE"  // Evaluated using a prerequisite targeting
+
+    public static func fromString(value: String) -> Reason {
+      return Reason(rawValue: value) ?? .client
+    }
+  }
+}
+```
+
+  </TabItem>
+</Tabs>
+
+#### Usage
+
+<Tabs>
+  <TabItem value="swift" label="Swift">
+
+```swift showLineNumbers
+do {
+  let client = try BKTClient.shared
+  let showNewFeature = client.boolVariationDetails(featureId: "YOUR_FEATURE_FLAG_ID", defaultValue: false)
+  if showNewFeature.variationValue {
+      // The Application code to show the new feature
+  } else {
+      // The code to run when the feature is off
+  }
+} catch {
+  print("An error occurred: \(error)")
+  // Handle the error appropriately
+}
+```
+
+  </TabItem>
 </Tabs>
 
 ### Updating user evaluations
@@ -570,49 +679,6 @@ This method will return the current user configured in the SDK. This is useful w
 
 ```swift showLineNumbers
 let user = client.currentUser()
-```
-
-</TabItem>
-</Tabs>
-
-### Getting evaluation details
-
-This method will return the **evaluation details** for a specific feature flag or will return **nil** if the feature flag is missing in the SDK's cache.
-
-This is useful if you use another A/B Test solution with Bucketeer and need to know the variation name, reason, and other information.
-
-<details>
-  <summary><strong>Evaluation details</strong></summary>
-  <Tabs>
-  <TabItem value="swift" label="Swift">
-
-```swift showLineNumbers
-public struct Evaluation {
-  public let id: String
-  public let featureID: String
-  public let featureVersion: Int
-  public let userID: String
-  public let variationID: String
-  public let variationValue: String
-  public let reason: Int
-}
-```
-
-  </TabItem>
-  </Tabs>
-</details>
-
-:::caution
-
-Do not call this method without calling the [Evaluating user method](#evaluating-user). The Evaluating user method must always be called because it generates analytics events that will be sent to the server.
-
-:::
-
-<Tabs>
-<TabItem value="swift" label="Swift">
-
-```swift showLineNumbers
-let evaluationDetails = client.evaluationDetails(featureId: "YOUR_FEATURE_FLAG_ID")
 ```
 
 </TabItem>
