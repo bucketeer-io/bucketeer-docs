@@ -529,15 +529,15 @@ Assuming you already have the FCM implementation in your application, the follow
 ```swift showLineNumbers
 // In order to receive notifications you must subscribe to the topic
 func subscribeToTopic() {
-    let tag = "ios"  // The same tag used when initializing the client SDK
-    let topic = "bucketeer-\(tag)"
-    Messaging.messaging().subscribe(toTopic: topic) { error in
-        if let error = error {
-            print("Failed to subscribed to \(topic) topic. Error: \(error)")
-        } else {
-            print("Subscribed successfully to \(topic) topic")
-        }
+  let tag = "ios"  // The same tag used when initializing the client SDK
+  let topic = "bucketeer-\(tag)"
+  Messaging.messaging().subscribe(toTopic: topic) { error in
+    if let error = error {
+      print("Failed to subscribed to \(topic) topic. Error: \(error)")
+    } else {
+      print("Subscribed successfully to \(topic) topic")
     }
+  }
 }
 
 // Receiving notification in background
