@@ -407,27 +407,27 @@ func objectVariationDetails(
   <TabItem value="swift" label="Swift">
 
 ```swift showLineNumbers
-public struct BKTEvaluationDetails<T> {
-  public let featureId: String          // The ID of the feature flag
-  public let featureVersion: Int        // The version of the feature flag
-  public let userId: String             // The ID of the user being evaluated
-  public let variationId: String        // The ID of the assigned variation
-  public let variationName: String      // The name of the assigned variation
-  public let variationValue: T          // The value of the assigned variation
-  public let reason: Reason             // The reason for the evaluation
+public struct BKTEvaluationDetails<T: Equatable>: Equatable {
+    public let featureId: String          // The ID of the feature flag
+    public let featureVersion: Int        // The version of the feature flag
+    public let userId: String             // The ID of the user being evaluated
+    public let variationId: String        // The ID of the assigned variation
+    public let variationName: String      // The name of the assigned variation
+    public let variationValue: T          // The value of the assigned variation
+    public let reason: Reason             // The reason for the evaluation
 
-  public enum Reason: String {
-    case target = "TARGET"              // Evaluated using individual targeting
-    case rule = "RULE"                  // Evaluated using a custom rule
-    case `default` = "DEFAULT"          // Evaluated using the default strategy
-    case client = "CLIENT"              // The flag is missing in the cache. Default value returned
-    case offVariation = "OFF_VARIATION" // Evaluated using the off variation
-    case prerequisite = "PREREQUISITE"  // Evaluated using a prerequisite targeting
+    public enum Reason: String, Codable, Hashable {
+        case target = "TARGET"              // Evaluated using individual targeting
+        case rule = "RULE"                  // Evaluated using a custom rule
+        case `default` = "DEFAULT"          // Evaluated using the default strategy
+        case client = "CLIENT"              // The flag is missing in the cache. Default value returned
+        case offVariation = "OFF_VARIATION" // Evaluated using the off variation
+        case prerequisite = "PREREQUISITE"  // Evaluated using a prerequisite targeting
 
-    static func fromString(value: String) -> Reason {
-        return Reason(rawValue: value.uppercased()) ?? .default
+        public static func fromString(value: String) -> Reason {
+            return Reason(rawValue: value) ?? .client
+        }
     }
-  }
 }
 ```
 
