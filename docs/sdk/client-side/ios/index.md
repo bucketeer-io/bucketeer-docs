@@ -184,7 +184,7 @@ The completion callback is called on the **main thread**.
 let timeout: Int64 = 2000 // Default is 5 seconds (In milliseconds)
 
 do {
-  BKTClient.initialize(
+  try BKTClient.initialize(
     config: config,
     user: user,
     timeoutMillis: timeout
