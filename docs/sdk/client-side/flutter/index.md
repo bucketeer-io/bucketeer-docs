@@ -382,7 +382,7 @@ class BKTEvaluationDetails<T extends Object> {
   <TabItem value="dart" label="Dart">
 
 ```dart showLineNumbers
-const client = BKTClient.instance;
+final client = BKTClient.instance;
 final showNewFeature =
     await client.boolVariationDetails("YOUR_FEATURE_FLAG_ID", defaultValue: false);
 if (showNewFeature.variationValue) {
