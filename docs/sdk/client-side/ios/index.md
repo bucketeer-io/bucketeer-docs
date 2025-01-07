@@ -526,7 +526,6 @@ Assuming you already have the FCM implementation in your application, the follow
 <TabItem value="swift" label="Swift">
 
 ```swift showLineNumbers
-```swift showLineNumbers
 // In order to receive notifications you must subscribe to the topic
 func subscribeToTopic() {
   let tag = "ios"  // The same tag used when initializing the client SDK
