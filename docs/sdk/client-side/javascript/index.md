@@ -335,25 +335,25 @@ The `evaluationDetails` interface is deprecated. Please use the following [inter
 
 ```js showLineNumbers
 interface BKTClient {
-  booleanVariationDetails(
+  booleanVariationDetails: (
     featureId: string,
     defaultValue: boolean
-  ): BKTEvaluationDetails<boolean>;
+  ) => BKTEvaluationDetails<boolean>;
 
-  stringVariationDetails(
+  stringVariationDetails: (
     featureId: string,
     defaultValue: string
-  ): BKTEvaluationDetails<string>;
+  ) => BKTEvaluationDetails<string>;
 
-  numberVariationDetails(
+  numberVariationDetails: (
     featureId: string,
     defaultValue: number
-  ): BKTEvaluationDetails<number>;
+  ) => BKTEvaluationDetails<number>;
 
-  objectVariationDetails(
+  objectVariationDetails: (
     featureId: string,
     defaultValue: BKTValue
-  ): BKTEvaluationDetails<BKTValue>;
+  ) => BKTEvaluationDetails<BKTValue>;
 }
   ```
 
