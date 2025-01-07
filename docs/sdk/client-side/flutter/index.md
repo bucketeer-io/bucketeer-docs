@@ -362,23 +362,15 @@ Future<BKTEvaluationDetails<BKTValue>> objectVariationDetails(
   <TabItem value="dart" label="Dart">
 
 ```dart showLineNumbers
-class BKTEvaluationDetails<T> {
+@immutable
+class BKTEvaluationDetails<T extends Object> {
   final String featureId;     // The ID of the feature flag.
   final int featureVersion;   // The version of the feature flag.
   final String userId;        // The ID of the user being evaluated.
   final String variationId;   // The ID of the variation assigned.
   final String variationName; // The name of the variation assigned.
   final T variationValue;     // The value of the variation assigned.
-  final Reason reason;        // The reason for the evaluation.
-
-  enum Reason {
-    TARGET,                   // Evaluated using an Individual targeting.
-    RULE,                     // Evaluated using a custom Rule targeting.
-    DEFAULT,                  // Evaluated using the Default Strategy.
-    CLIENT,                   // The flag is missing in the cache. The default value was returned.
-    OFF_VARIATION,            // Evaluated using the Off Variation.
-    PREREQUISITE,             // Evaluated using a Prerequisite targeting.
-  }
+  final String reason;        // The reason for the evaluation.
 }
 ```
   </TabItem>
