@@ -440,12 +440,17 @@ public struct BKTEvaluationDetails<T: Equatable>: Equatable {
   <TabItem value="swift" label="Swift">
 
 ```swift showLineNumbers
-let client = BKTClient.shared
-let showNewFeature = client.boolVariationDetails(featureId: "YOUR_FEATURE_FLAG_ID", defaultValue: false)
-if (showNewFeature.variationValue) {
-    // The Application code to show the new feature
-} else {
-    // The code to run when the feature is off
+do {
+    let client = try BKTClient.shared
+    let showNewFeature = client.boolVariationDetails(featureId: "YOUR_FEATURE_FLAG_ID", defaultValue: false)
+    if showNewFeature.variationValue {
+        // The Application code to show the new feature
+    } else {
+        // The code to run when the feature is off
+    }
+} catch {
+    print("An error occurred: \(error)")
+    // Handle the error appropriately
 }
 ```
 
