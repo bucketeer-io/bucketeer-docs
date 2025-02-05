@@ -148,6 +148,9 @@ When initializing the SDK you must enable the local evaluation setting.
   const client = initialize(config);
 ```
 
+</TabItem>
+</Tabs>
+
 Once the SDK is configured, please check this [section](#evaluating-user) to learn how to get the variation for a user.
 
 
