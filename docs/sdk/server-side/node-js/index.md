@@ -140,9 +140,9 @@ When initializing the SDK you must enable the local evaluation setting.
 
 ```js showLineNumbers
   const config = {
-    host: HOST,
-    token: TOKEN,
-    tag: FEATURE_TAG,
+    host: 'YOUR_API_ENDPOINT',
+    token:'YOUR_API_KEY',
+    tag: 'YOUR_FEATURE_TAG',
     enableLocalEvaluation: true, // <--- Enable the local evaluation
     cachePollingInterval: 10 * 60000, // <--- Change the default interval if needed
   }
