@@ -143,7 +143,8 @@ When initializing the SDK you must enable the local evaluation setting.
     host: HOST,
     token: TOKEN,
     tag: FEATURE_TAG,
-    enableLocalEvaluation: true,
+    enableLocalEvaluation: true, // <--- Enable the local evaluation
+    cachePollingInterval: 10 * 60000, // <--- Change the default interval if needed
   }
   const client = initialize(config);
 ```
