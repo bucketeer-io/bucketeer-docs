@@ -59,8 +59,8 @@ import { initialize } from '@bucketeer/node-server-sdk';
 
 The SDK supports local and remote evaluations.
 
-- [Local evaluation](#evaluating-users-within-sdk-locally): Evaluates end users within SDK locally
-- [Remote evaluation](#remote-evaluation): Evaluate end users on the server
+- [Local evaluation](#evaluating-users-within-sdk-locally): Evaluates end users within SDK locally.
+- [Remote evaluation](#remote-evaluation): Evaluate end users on the server.
 
 Configure the SDK config and user configuration.
 :::info
