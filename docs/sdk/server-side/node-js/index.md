@@ -107,9 +107,9 @@ To evaluate users on the server side you must create an API Key using the `Clien
 
 ```js showLineNumbers
   const config = {
-    host: HOST,
-    token: TOKEN,
-    tag: FEATURE_TAG,
+    host: 'YOUR_API_ENDPOINT',
+    token:'YOUR_API_KEY',
+    tag: 'YOUR_FEATURE_TAG',
   }
   const client = initialize(config);
 ```
