@@ -55,7 +55,12 @@ import { initialize } from '@bucketeer/node-server-sdk';
 </TabItem>
 </Tabs>
 
-### Configuring client
+### Initializing client
+
+The SDK supports local and remote evaluations.
+
+- [Local evaluation](#evaluating-users-within-sdk-locally): Evaluates end users within SDK locally
+- [Remote evaluation](#remote-evaluation): Evaluate end users on the server
 
 Configure the SDK config and user configuration.
 :::info
@@ -78,28 +83,73 @@ const config = {
 </TabItem>
 </Tabs>
 
+#### Custom configuration
+
 :::info Custom configuration
 
 Depending on your use, you may want to change the optional configurations available.
 
-- **pollingIntervalForRegisterEvents** (Default is 1 minute)
+- **pollingIntervalForRegisterEvents** (Default is 1 minute - specify in milliseconds)
 - **logger** (Default is `logger.DefaultLogger`)
+- **enableLocalEvaluation** (Default is false)
+- **cachePollingInterval** (Default is 1 minute - specify in milliseconds)
+
+For more information, please check the Option implementation [here](https://github.com/bucketeer-io/node-server-sdk/blob/master/src/config.ts).
 
 :::
 
-### Initializing client
+#### Remote evaluation
 
-Initialize the client by passing the configurations in the previous step.
+To evaluate users on the server side you must create an API Key using the `Client SDK` role.
 
 <Tabs>
 <TabItem value="js" label="JavaScript">
 
 ```js showLineNumbers
-const client = initialize(config);
+  const config = {
+    host: HOST,
+    token: TOKEN,
+    tag: FEATURE_TAG,
+  }
+  const client = initialize(config);
 ```
 
 </TabItem>
 </Tabs>
+
+Once the SDK is configured, please check this [section](#evaluating-user) to learn how to get the variation for a user.
+
+#### Evaluating users within SDK locally
+
+By evaluating users locally you can improve response time significantly.<br />
+To evaluate them you must create an API Key using the `Server SDK` role.
+
+The SDK will poll the Feature Flags and Segment Users from the server, and cache them in memory.
+
+:::caution
+
+The Server SDK API Key has access to all Feature Flags and Segment Users in the environment.<br />
+Keep in mind that it might contain sensitive information, so be careful when sharing the key with others.
+
+:::
+
+When initializing the SDK you must enable the local evaluation setting.
+
+<Tabs>
+<TabItem value="js" label="JavaScript">
+
+```js showLineNumbers
+  const config = {
+    host: HOST,
+    token: TOKEN,
+    tag: FEATURE_TAG,
+    enableLocalEvaluation: true,
+  }
+  const client = initialize(config);
+```
+
+Once the SDK is configured, please check this [section](#evaluating-user) to learn how to get the variation for a user.
+
 
 ## Supported features
 
