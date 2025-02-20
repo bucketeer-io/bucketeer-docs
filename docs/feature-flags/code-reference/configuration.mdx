@@ -1,0 +1,270 @@
+---
+title: Configuration and Usage
+slug: /feature-flags/code-reference/configuration
+description: Learn how to configure and use CodeReference.
+tags: ['feature-flag', 'code-reference']
+---
+
+CodeReference anables you to scan your codebase for feature flag references and reports them to the Bucketeer Dashboard. You can configure it using command-line flags, environment variables, or YAML files, and optimize performance by excluding files. 
+
+## Running the CodeReference
+The following arguments are required to run CodeReference:  
+
+| Option | Description |  
+|--------|-------------|  
+| `--api-key` | Bucketeer API key with write-level access. You can add multiple API keys if you want to scan for feature flags from more than one environment.  |  
+| `--dir` | Path to an existing checkout of the Git repository. The currently checked-out branch will be scanned. |  
+| `--base-uri` | Bucketeer API service URI. |  
+
+
+:::info API keys and environments
+CodeReference operates by scanning source code to identify feature flags, but its results are determined by the API Key used during execution. In Bucketeer, each API Key is associated with a specific environment, meaning that CodeReference will only report feature flags found in the environment linked to the provided API Key.
+:::
+
+:::info Using API keys for multiple environments
+If a Feature Flag exists in multiple environments, but you run CodeReference with an API Key from only one environment, it will only report occurrences from that environment. To scan and retrieve flags from multiple environments, you must:
+1. Get the API Key for each environment in Bucketeer.
+2. Provide all API keys when running CodeReference.
+:::
+
+The foloowing code snippet shows a basic example of how to run CodeReference:  
+
+```bash
+bucketeer-find-code-refs \
+  --apiKey=$YOUR_BUCKETEER_API_KEY \
+  --baseUri=$YOUR_BUCKETEER_BASE_URI \
+  --repoName=$YOUR_REPOSITORY_NAME \
+  --dir="/path/to/git/repo"
+```
+
+After running this command, CodeReference will scan the specified Git repository (`--dir`) for feature flag references, authenticate with the Bucketeer API using the provided key (`--apiKey`), and communicate with the Bucketeer service (`--baseUri`). The detected feature flags, along with their file paths and line numbers, will be associated with the given repository name (`--repoName`) and sent to the Bucketeer backend. The results will then be available in the Bucketeer dashboard, where users can review flagged locations, filter by repository or branch, and manage feature flag usage.
+
+:::tip **Additional Examples**  
+See the [Examples](#examples) section for advanced CodeReference configurations.  
+:::
+
+:::tip
+When defining the configurations, you can choose to [ignore files](#ignoring-files-and-directories). Use this option to improve performance, avoiding CodeReference scan all files from your repository.
+:::
+
+### Available options
+
+The following table lists all available options you can use when running the CodeReference.
+
+| Option | Description |
+|------|-------------|
+| `--allowTags` | Enables storing references for tags. The tag will be listed as a branch. |
+| `--apiKey <string>` | Specifies the Bucketeer API key with write-level access. Can be provided multiple times for different environments. |
+| `-U, --baseUri <string>` | Defines the Bucketeer API service base URI. |
+| `-b, --branch <string>` | Specifies the branch to scan. If not provided, the branch name is auto-detected. Required for CI/CD environments with detached HEAD states. |
+| `--commitUrlTemplate <string>` | If provided, Bucketeer generates links to commits in the VCS provider. Example: `https://github.com/bucketeer/bucketeer-find-code-refs/commit/${sha}`. Supports `branchName` and `sha` as template variables. If omitted, links are generated based on `repoUrl` and `repoType`. |
+| `-C, --contextLines <int>` | Defines the number of surrounding lines to send with feature flag references. Allowed values: `0` (only the flag line), `> 0` (context lines above and below), `< 0` (no source code sent). Max: `5`. Default: `2`. |
+| `--debug` | Enables verbose logging for debugging purposes. |
+| `-B, --defaultBranch <string>` | Sets the default branch in the Bucketeer UI. If not provided, defaults to `"main"`. |
+| `-d, --dir <string>` | Specifies the path to an existing checkout of the repository to scan. |
+| `--dryRun` | Runs the scanner without sending results to Bucketeer. Combine with `--outDir` to output results as a CSV file. |
+| `-h, --help` | Displays help information for `bucketeer-find-code-refs`. |
+| `-i, --ignoreServiceErrors` | Allows the scanner to continue running with exit code `0` even if the Bucketeer API is unreachable or returns an error. |
+| `-o, --outDir <string>` | Outputs scan results as a CSV file in the specified directory. |
+| `--prune` | Deletes branches in Bucketeer that are not found in the remote repository. Default: `true`. |
+| `-r, --repoName <string>` | Sets the repository name to be displayed in Bucketeer. Repository names must contain only letters, numbers, `.`, `_`, or `-`. Case insensitive. |
+| `-T, --repoType <string>` | Specifies the repository hosting service. Valid values: `bitbucket`, `custom`, `github`, `gitlab`. Default: `"custom"`. |
+| `-u, --repoUrl <string>` | Specifies the URL of the repository. If `repoType` is not `"custom"`, Bucketeer generates links to the source code automatically. |
+| `-R, --revision <string>` | Defines the repository revision when scanning non-git codebases. If set, version detection and branch garbage collection are disabled. Requires `--branch`. |
+| `--subdirectory <string>` | Specifies a subdirectory containing the `.bucketeer/coderefs.yaml` configuration file. Code references will only run in this subdirectory, allowing multiple configurations in monorepos. |
+| `-s, --updateSequenceId <int>` | An integer that represents the version of code reference updates. If not set, updates always apply. If set, updates occur only if the provided `updateSequenceId` is greater than the existing one. Default: `-1`. |
+| `--userAgent <string>` | (Internal) Identifies the platform where the scanner is running. |
+| `-v, --version` | Displays the version of `bucketeer-find-code-refs`. |
+
+
+## Environment variables and YAML for configuration
+
+CodeReference can be configured using:  
+1. **Command-line flags** (highest priority) described befo.  
+2. **Environment variables**  
+3. **YAML configuration files**  
+
+:::info 
+If an option is defined in multiple locations, the priority is:  
+1. Flags.
+2. Environment variables.
+3. YAML file.  
+::: 
+
+### Using environment variables
+
+All command-line flags are available as environment variables using the upper snake case format, prefixed with `BUCKETEER_`. For example, instead of passing `--apiKey` in the command line, you can set it as an environment variable:  
+
+```sh
+export BUCKETEER_APIKEY="myTestToken"
+```
+
+To specify multiple API keys, use comma-separated values:  
+
+```sh
+export BUCKETEER_APIKEY="key1,key2,key3"
+```
+
+Then, run CodeReference without specifying `--apiKey` explicitly:
+
+```sh
+bucketeer-find-code-refs \
+  --baseUri=$YOUR_BUCKETEER_BASE_URI \
+  --repoName=$YOUR_REPOSITORY_NAME \
+  --dir="/path/to/git/repo"
+```
+
+This approach improves security by preventing API keys from appearing in command history and simplifies repeated executions.
+
+### Using YAML for configuration
+
+
+Instead of passing options through command-line flags, you can use a **YAML configuration file** to define settings in a structured and reusable format. This approach makes it easier to manage configurations, especially in projects with multiple repositories or complex setups.  
+
+The configuration file should be saved at:  
+
+```sh
+${dir}/.bucketeer/coderefs.yaml
+```
+
+To translate command-line options into YAML, use the same option names as keys. For example, instead of passing `--contextLines 3` in the CLI, define it in the YAML file as follows:  
+
+```yaml
+contextLines: 3
+debug: true
+outDir: "./reports"
+dryRun: false
+repoOwner: "company"
+repoName: "project"
+repoType: "github"
+```
+
+:::warning Required arguments
+Required arguments, such as `apiKey` and `dir`, must be provided via command-line flags or environment variables and cannot be set in YAML.  
+:::
+
+Beyond standard options, the YAML file also supports advanced configurations. For example, you can customize how feature flag keys are detected in the source code. By default, CodeReference only detects flags enclosed in single quotes (`'`), double quotes (`"`), or backticks (`` ` ``). To change this behavior and define custom delimiters, use:  
+
+```yaml
+delimiters:
+  disableDefaults: true  # Disables default delimiters.
+  additional:
+    - "<"
+    - ">"
+```
+
+## Ignoring files and directories
+
+By default, CodeReference excludes:  
+
+- Dotfiles
+- Patterns in `.gitignore` and `.ignore`
+
+:::info Exception
+
+The `.github` directory is not ignored, since flags may be referenced in GitHub Actions.  
+
+To skip scanning the `.github` directory, you need to manually add it to one of the ignore files.
+
+:::
+
+To exclude specific files or directories from being scanned, create a `.ldignore` file in the root of your Git repository. 
+
+The `.ldignore` file follows the same syntax as `.gitignore`. For details, refer to the [Git ignore pattern format](https://git-scm.com/docs/gitignore#_pattern_format).  
+
+The following code snippet shows an example of a `.ldignore` file.
+
+```txt title=".ldignore"
+node_modules/
+build/
+*.log
+```
+
+By adding the above file to your repository, it will prevent CodeReference from scanning:  
+- The `node_modules/` and `build/` directories.
+- Any files ending with `.log` format.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Examples
+
+This section provides examples of common configurations when running CodeReference.  
+
+### Configuration with multiple API keys
+
+This setup allows you to specify multiple API keys (`--apiKey`), which is useful when scanning feature flags from multiple environments within the same scan. Each API key, from a different environment, is provided separately as a command-line argument. 
+
+```sh
+bucketeer-find-code-refs \
+  --apiKey="$YOUR_BUCKETEER_API_KEY1" \
+  --apiKey="$YOUR_BUCKETEER_API_KEY2" \
+  --baseUri=$YOUR_BUCKETEER_BASE_URI \
+  --repoName=$YOUR_REPOSITORY_NAME \
+  --dir="/path/to/git/repo"
+```
+
+### Using environment variables with multiple API keys
+
+Instead of specifying multiple API keys in the command line, this approach stores them in an environment variable (`BUCKETEER_APIKEY`). This method enhances security and simplifies repeated executions by avoiding the need to pass API keys explicitly in the command.  
+
+```sh
+export BUCKETEER_APIKEY="key1,key2,key3"
+bucketeer-find-code-refs \
+  --baseUri=$YOUR_BUCKETEER_BASE_URI \
+  --repoName=$YOUR_REPOSITORY_NAME \
+  --dir="/path/to/git/repo"
+```
+
+### Configuration with context lines
+
+This configuration includes context lines (`--contextLines`), which determine how many lines of surrounding code are sent with each feature flag reference. Setting this to a positive value (up to 5) provides additional context, while a value of `0` sends only the lines containing feature flags. You you set a negative value, no code is shared with Bucketeer.   
+
+```sh
+bucketeer-find-code-refs \
+  --apiKey="$YOUR_BUCKETEER_API_KEY" \
+  --baseUri="$YOUR_BUCKETEER_BASE_URI" \
+  --repoName="$YOUR_REPOSITORY_NAME" \
+  --dir="/path/to/git/repo" \
+  --contextLines=3  # Maximum of 5. If < 0, no source code is sent to Bucketeer.
+```
+
+### Configuration with repository metadata  
+
+This setup improves repository tracking by explicitly defining the repository type (`--repoType`) and URL (`--repoUrl`). This enables Bucketeer to generate direct links to source code files and commits, making it easier to navigate flagged feature flags in platforms like GitHub, GitLab, or Bitbucket. 
+
+```sh
+bucketeer-find-code-refs \
+  --apiKey="$YOUR_BUCKETEER_API_KEY" \
+  --baseUri="$YOUR_BUCKETEER_BASE_URI" \
+  --repoName="$YOUR_REPOSITORY_NAME" \
+  --dir="/path/to/git/repo" \
+  --contextLines=3 \
+  --repoType="github" \
+  --repoUrl="$YOUR_REPOSITORY_URL"  # Example: https://github.com/org/repo
+```
+
+### Scanning non-Git repositories
+
+For codebases that do not use Git, this configuration manually specifies a repository revision (`--revision`) and branch (`--branch`). This ensures that Bucketeer can still track feature flag usage even in non-Git environments, where version metadata is not automatically detected.  
+
+```sh
+bucketeer-find-code-refs \
+  --apiKey=$YOUR_BUCKETEER_API_KEY \
+  --baseUri=$YOUR_BUCKETEER_BASE_URI \
+  --repoName=$YOUR_REPOSITORY_NAME \
+  --dir="/path/to/git/repo" \
+  --revision="REPO_REVISION_STRING" \
+  --branch="dev"
+```

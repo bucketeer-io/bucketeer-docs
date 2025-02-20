@@ -143,6 +143,20 @@ const sidebars = {
       label: 'Segments',
       className: 'sidebar-segments',
     },
+    {
+      type: 'category',
+      label: "CodeReference",
+      link: {
+        type: 'doc',
+        id: 'feature-flags/code-reference/index',
+      },
+      className: 'sidebar-testing-with-flags',
+      items: [
+        'feature-flags/code-reference/configuration',
+        'feature-flags/code-reference/scan-results'
+      ],
+    },
+
 
     {
       type: 'html',
