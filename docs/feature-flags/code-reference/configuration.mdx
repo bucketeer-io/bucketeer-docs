@@ -1,33 +1,47 @@
 ---
-title: Configuration and Usage
+title: Configuration and usage
 slug: /feature-flags/code-reference/configuration
-description: Learn how to configure and use CodeReference.
+description: Learn how to configure and use Code References.
 tags: ['feature-flag', 'code-reference']
 ---
 
-CodeReference anables you to scan your codebase for feature flag references and reports them to the Bucketeer Dashboard. You can configure it using command-line flags, environment variables, or YAML files, and optimize performance by excluding files. 
+import CenteredImg from '@site/src/components/centered-img/CenteredImg';
 
-## Running the CodeReference
-The following arguments are required to run CodeReference:  
+Code References anables you to scan your codebase for feature flag references and reports them to the Bucketeer Dashboard. You can configure it using command-line flags, environment variables, or YAML files, and optimize performance by excluding files. 
+
+## Running Code Reference
+The following arguments are required to run Code References:  
 
 | Option | Description |  
 |--------|-------------|  
-| `--api-key` | Bucketeer API key with write-level access. You can add multiple API keys if you want to scan for feature flags from more than one environment.  |  
+| `--api-key` | Bucketeer [API key](/feature-flags/api-keys) with write-level access. If the API key does not have the necessary access level, the scanning result will not be available on the dashboard. You can add multiple API keys if you want to scan for feature flags from more than one environment.  |  
 | `--dir` | Path to an existing checkout of the Git repository. The currently checked-out branch will be scanned. |  
 | `--base-uri` | Bucketeer API service URI. |  
 
+:::info Permission 
+The API key must have one of the following permission levels to enable Code References to function properly:
+
+- **Public API(Read and Write)**
+- **Public API(Admin)**
+
+<CenteredImg
+  imgURL="img/feature-flags/codereference/api-key.png"
+/>
+
+Access the [API keys](/feature-flags/api-keys)  for additional information.
+:::
 
 :::info API keys and environments
-CodeReference operates by scanning source code to identify feature flags, but its results are determined by the API Key used during execution. In Bucketeer, each API Key is associated with a specific environment, meaning that CodeReference will only report feature flags found in the environment linked to the provided API Key.
+Code References operates by scanning source code to identify feature flags. However, its results are determined by the API Key used during execution. In Bucketeer, each API Key is associated with a specific environment, meaning Code References will only report feature flags in the environment linked to the provided API Key.
 :::
 
 :::info Using API keys for multiple environments
-If a Feature Flag exists in multiple environments, but you run CodeReference with an API Key from only one environment, it will only report occurrences from that environment. To scan and retrieve flags from multiple environments, you must:
+If a Feature Flag exists in multiple environments, but you run Code References with an API Key from only one environment, it will only report occurrences from that environment. To scan and retrieve flags from multiple environments, you must:
 1. Get the API Key for each environment in Bucketeer.
-2. Provide all API keys when running CodeReference.
+2. Provide all API keys when running Code References.
 :::
 
-The foloowing code snippet shows a basic example of how to run CodeReference:  
+The following code snippet shows a basic example of how to run Code References:  
 
 ```bash
 bucketeer-find-code-refs \
@@ -37,19 +51,19 @@ bucketeer-find-code-refs \
   --dir="/path/to/git/repo"
 ```
 
-After running this command, CodeReference will scan the specified Git repository (`--dir`) for feature flag references, authenticate with the Bucketeer API using the provided key (`--apiKey`), and communicate with the Bucketeer service (`--baseUri`). The detected feature flags, along with their file paths and line numbers, will be associated with the given repository name (`--repoName`) and sent to the Bucketeer backend. The results will then be available in the Bucketeer dashboard, where users can review flagged locations, filter by repository or branch, and manage feature flag usage.
+After running this command, Code References will scan the specified Git repository (`--dir`) for feature flag references, authenticate with the Bucketeer API using the provided key (`--apiKey`), and communicate with the Bucketeer service (`--baseUri`). The detected feature flags, along with their file paths and line numbers, will be associated with the given repository name (`--repoName`) and sent to the Bucketeer backend. The results will then be available in the Bucketeer dashboard, where users can review flagged locations, filter by repository or branch, and manage feature flag usage.
 
 :::tip **Additional Examples**  
-See the [Examples](#examples) section for advanced CodeReference configurations.  
+See the [Examples](#examples) section for advanced Code References configurations.  
 :::
 
 :::tip
-When defining the configurations, you can choose to [ignore files](#ignoring-files-and-directories). Use this option to improve performance, avoiding CodeReference scan all files from your repository.
+When defining the configurations, you can choose to [ignore files](#ignoring-files-and-directories). Use this option to improve performance, avoiding Code References scan all files from your repository.
 :::
 
 ### Available options
 
-The following table lists all available options you can use when running the CodeReference.
+The following table lists all available options for running the Code References.
 
 | Option | Description |
 |------|-------------|
@@ -79,8 +93,8 @@ The following table lists all available options you can use when running the Cod
 
 ## Environment variables and YAML for configuration
 
-CodeReference can be configured using:  
-1. **Command-line flags** (highest priority) described befo.  
+Code References can be configured using:  
+1. **Command-line flags** (highest priority) described before.  
 2. **Environment variables**  
 3. **YAML configuration files**  
 
@@ -105,7 +119,7 @@ To specify multiple API keys, use comma-separated values:
 export BUCKETEER_APIKEY="key1,key2,key3"
 ```
 
-Then, run CodeReference without specifying `--apiKey` explicitly:
+Then, run Code References without specifying `--apiKey` explicitly:
 
 ```sh
 bucketeer-find-code-refs \
@@ -143,7 +157,7 @@ repoType: "github"
 Required arguments, such as `apiKey` and `dir`, must be provided via command-line flags or environment variables and cannot be set in YAML.  
 :::
 
-Beyond standard options, the YAML file also supports advanced configurations. For example, you can customize how feature flag keys are detected in the source code. By default, CodeReference only detects flags enclosed in single quotes (`'`), double quotes (`"`), or backticks (`` ` ``). To change this behavior and define custom delimiters, use:  
+Beyond standard options, the YAML file also supports advanced configurations. For example, you can customize how feature flag keys are detected in the source code. By default, Code References only detects flags enclosed in single quotes (`'`), double quotes (`"`), or backticks (`` ` ``). To change this behavior and define custom delimiters, use:  
 
 ```yaml
 delimiters:
@@ -155,7 +169,7 @@ delimiters:
 
 ## Ignoring files and directories
 
-By default, CodeReference excludes:  
+By default, Code References excludes:  
 
 - Dotfiles
 - Patterns in `.gitignore` and `.ignore`
@@ -164,7 +178,7 @@ By default, CodeReference excludes:
 
 The `.github` directory is not ignored, since flags may be referenced in GitHub Actions.  
 
-To skip scanning the `.github` directory, you need to manually add it to one of the ignore files.
+To skip scanning the `.github` directory, you need to manually add it to the `.ldignore` ignore file.
 
 :::
 
@@ -180,7 +194,7 @@ build/
 *.log
 ```
 
-By adding the above file to your repository, it will prevent CodeReference from scanning:  
+By adding the above file to your repository, it will prevent Code References from scanning:  
 - The `node_modules/` and `build/` directories.
 - Any files ending with `.log` format.
 
@@ -200,11 +214,11 @@ By adding the above file to your repository, it will prevent CodeReference from 
 
 ## Examples
 
-This section provides examples of common configurations when running CodeReference.  
+This section provides examples of common configurations when running Code References.  
 
 ### Configuration with multiple API keys
 
-This setup allows you to specify multiple API keys (`--apiKey`), which is useful when scanning feature flags from multiple environments within the same scan. Each API key, from a different environment, is provided separately as a command-line argument. 
+This setup allows you to specify multiple API keys (`--apiKey`), which is useful when scanning feature flags from multiple environments within the same scan. Each API key from a different environment is provided separately as a command-line argument. 
 
 ```sh
 bucketeer-find-code-refs \
@@ -217,7 +231,7 @@ bucketeer-find-code-refs \
 
 ### Using environment variables with multiple API keys
 
-Instead of specifying multiple API keys in the command line, this approach stores them in an environment variable (`BUCKETEER_APIKEY`). This method enhances security and simplifies repeated executions by avoiding the need to pass API keys explicitly in the command.  
+This approach stores multiple API keys in an environment variable (`BUCKETEER_APIKEY`) instead of specifying them explicitly in the command line. This enhances security and simplifies repeated executions by avoiding the need to pass API keys explicitly in the command.  
 
 ```sh
 export BUCKETEER_APIKEY="key1,key2,key3"
