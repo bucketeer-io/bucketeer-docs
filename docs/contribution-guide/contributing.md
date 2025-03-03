@@ -9,15 +9,6 @@ slug: /contribution-guide/contributing
 We would ❤️ for you to contribute to Bucketeer and help make it better! Anyone can use, improve, and enjoy it!<br />
 If you don't find your answer here, feel free to [contact us](https://app.slack.com/client/T08PSQ7BQ/C043026BME1).
 
-## Contributor License Agreement
-
-Contributions to this project must be accompanied by a Contributor License Agreement (CLA) described at [bucketeer-io/bucketeer/master/CLA.md](https://github.com/bucketeer-io/bucketeer/blob/master/CLA.md).<br />
-You (or your employer) retain the copyright to your contribution; this gives us permission to use and redistribute your contributions as part of the project.
-
-You generally only need to sign a CLA once, so if you've already signed one, you probably don't need to do it again.
-
-If you haven't signed it yet, [bucketeer-bot](https://github.com/bucketeer-bot) will guide you through signing the CLA when you send the first pull request to [bucketeer-io/bucketeer](https://github.com/bucketeer-io/bucketeer) repository.
-
 ## Creating an issue
 
 Please create an issue in the [bucketeer-io/bucketeer](https://github.com/bucketeer-io/bucketeer/issues) repository if you find a problem.
