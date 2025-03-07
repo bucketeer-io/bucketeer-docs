@@ -2,64 +2,62 @@
 title: Scan results
 slug: /feature-flags/code-reference/scan-results
 description: Learn how to access the results from Code References.
-tags: ['scan-results', 'feature-flag', 'code-reference']
+tags: ['code-scan-results', 'feature-flag', 'code-references', 'stale-flags']
 ---
 
 import CenteredImg from '@site/src/components/centered-img/CenteredImg';
 
-After configuring and running Code References in your repository, the dashboard will display all detected feature flag references.  
+After configuring and running Code References in your repository, the dashboard will display all detected feature flag references.
 
 :::info 
 
-Before accessing the scan results, it's important to note that **code references are only available for feature flags in environments linked to the API keys used when running Code References**.  
+Before accessing the scan results, it's important to note that **code references are only available for feature flags in environments linked to the API keys used when running Code References**.
 
 Even if a feature flag exists in your codebase, it will not appear in the scan results unless its environment matches one of the API keys provided during execution.
 :::
 
-## Accessing scan results  
+## Accessing scan results
 
-To view the scan results and identify where each feature flag is used in your codebase:  
+To view the scan results and identify where each feature flag is used in your codebase:
 
 1. Open the dashboard.
-2. Select the environment associated with the API key used when running Code References.  
-3. Select a feature flag and navigate to the **Code Refs** page.  
+2. Select the environment associated with the API key used when running Code References.
+3. Select a feature flag and navigate to the **Code Refs** page.
 
-:::note **Number of References**  
+:::note **Number of References**
 
-If a feature flag has references in your code, the Code Refs link in the navigation bar will automatically display the number of detected references.  
+If a feature flag has references in your code, the Code Refs link in the navigation bar will automatically display the number of detected references.
 
 For example, if a feature flag appears 5 times in your codebase, the navigation link will be shown as **Code Refs (5)**, making it easy to identify flags in use.
 
 As you apply filters to the Code Refs, the displayed reference count updates dynamically to reflect the number of feature flag references matching the selected filters.
 
-:::  
+:::
 
-### Viewing reference details  
+### Viewing reference details
 
-On the Code Refs page, you will see all existing references to the selected feature flag, including:  
+On the Code Refs page, you will see all existing references to the selected feature flag, including:
 
-- Hosting platform: Where the repository is hosted (GitHub, GitLab, or Bitbucket).  
-- File name: The name of the file containing the feature flag.  
-- Highlighted code line: The exact line where the feature flag appears.  
-- Context lines: The surrounding lines of code (based on the `--contextLines` setting).  
-- File path: The repository location of the file.  
-- Line number: The precise line number of the reference.  
-- Direct repository link: A link to view the flagged code in your repository.  
+- Hosting platform: Where the repository is hosted (GitHub, GitLab, or Bitbucket).
+- File name: The name of the file containing the feature flag.
+- Highlighted code line: The exact line where the feature flag appears.
+- Context lines: The surrounding lines of code (based on the `--contextLines` setting).
+- File path: The repository location of the file.
+- Line number: The precise line number of the reference.
+- Direct repository link: A link to view the flagged code in your repository.
 
 <CenteredImg
   imgURL="img/feature-flags/codereference/scan-result.png"
 />
 
-### Filtering results  
+### Filtering results
 
-To refine the scan results, Bucketeer provides **three filtering options**:  
+To refine the scan results, Bucketeer provides **three filtering options**:
 
-- **By repository**: View feature flag references within a specific repository.  
-- **By branch**: Narrow results to a specific branch in the repository.  
-- **By file extension**: Filter results based on file types (e.g., `.js`, `.py`, `.java`).  
+- **By repository**: View feature flag references within a specific repository.
+- **By branch**: Narrow results to a specific branch in the repository.
+- **By file extension**: Filter results based on file types (e.g., `.js`, `.py`, `.java`).
 
 <CenteredImg
   imgURL="img/feature-flags/codereference/scan-result-filtering.png"
 />
-
-

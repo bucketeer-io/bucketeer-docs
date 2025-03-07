@@ -2,23 +2,26 @@
 title: Configuration and usage
 slug: /feature-flags/code-reference/configuration
 description: Learn how to configure and use Code References.
-tags: ['feature-flag', 'code-reference']
+tags: ['feature-flag', 'code-references','stale-flags']
 ---
 
 import CenteredImg from '@site/src/components/centered-img/CenteredImg';
 
-Code References anables you to scan your codebase for feature flag references and reports them to the Bucketeer Dashboard. You can configure it using command-line flags, environment variables, or YAML files, and optimize performance by excluding files. 
+Code References is a CLI tool that allows you to scan your codebase for feature flag references and report them to the Bucketeer backend.
+It can help find stale feature flags more accurately and direct developers to the exact lines of code that need to be removed.<br />
+You can configure it using command-line flags, environment variables, or YAML files and optimize performance by excluding files.
 
-## Running Code Reference
-The following arguments are required to run Code References:  
+## Running Code References
 
-| Option | Description |  
-|--------|-------------|  
-| `--api-key` | Bucketeer [API key](/feature-flags/api-keys) with write-level access. If the API key does not have the necessary access level, the scanning result will not be available on the dashboard. You can add multiple API keys if you want to scan for feature flags from more than one environment.  |  
-| `--dir` | Path to an existing checkout of the Git repository. The currently checked-out branch will be scanned. |  
-| `--base-uri` | Bucketeer API service URI. |  
+The following arguments are required to run Code References:
 
-:::info Permission 
+| Option | Description |
+|-------------|-------------|
+| `--api-key` | Bucketeer [API key](/feature-flags/api-keys) with write-level access. If the API key does not have the necessary access level, the scanning result will not be available on the dashboard. You can add multiple API keys if you want to scan for feature flags from more than one environment.  |
+| `--api-endpoint` | Bucketeer API endpoint. E.g. https://ENDPOINT |
+| `--dir` | Path to an existing checkout of the Git repository. The currently checked-out branch will be scanned. |
+
+:::info Permission
 The API key must have one of the following permission levels to enable Code References to function properly:
 
 - **Public API(Read and Write)**
@@ -28,7 +31,7 @@ The API key must have one of the following permission levels to enable Code Refe
   imgURL="img/feature-flags/codereference/api-key.png"
 />
 
-Access the [API keys](/feature-flags/api-keys)  for additional information.
+Access the [API keys](/feature-flags/api-keys) for additional information.
 :::
 
 :::info API keys and environments
@@ -41,20 +44,30 @@ If a Feature Flag exists in multiple environments, but you run Code References w
 2. Provide all API keys when running Code References.
 :::
 
-The following code snippet shows a basic example of how to run Code References:  
+The following code snippet shows a basic example of how to run Code References.<br />
+You can set multiple API keys using commas or by passing the `--apiKey` multiple times.
 
 ```bash
 bucketeer-find-code-refs \
-  --apiKey=$YOUR_BUCKETEER_API_KEY \
-  --baseUri=$YOUR_BUCKETEER_BASE_URI \
+  --apiKey="$YOUR_BUCKETEER_API_KEY_1,$YOUR_BUCKETEER_API_KEY_2" \
+  --apiEndpoint=$YOUR_BUCKETEER_API_ENDPOINT \
+  --repoName=$YOUR_REPOSITORY_NAME \
+  --dir="/path/to/git/repo"
+
+# Or
+
+bucketeer-find-code-refs \
+  --apiKey="$YOUR_BUCKETEER_API_KEY1" \
+  --apiKey="$YOUR_BUCKETEER_API_KEY2" \
+  --apiEndpoint=$YOUR_BUCKETEER_API_ENDPOINT \
   --repoName=$YOUR_REPOSITORY_NAME \
   --dir="/path/to/git/repo"
 ```
 
-After running this command, Code References will scan the specified Git repository (`--dir`) for feature flag references, authenticate with the Bucketeer API using the provided key (`--apiKey`), and communicate with the Bucketeer service (`--baseUri`). The detected feature flags, along with their file paths and line numbers, will be associated with the given repository name (`--repoName`) and sent to the Bucketeer backend. The results will then be available in the Bucketeer dashboard, where users can review flagged locations, filter by repository or branch, and manage feature flag usage.
+After running this command, Code References will scan the specified Git repository (`--dir`) for feature flag references, authenticate with the Bucketeer API using the provided key (`--apiKey`), and communicate with the Bucketeer service (`--apiEndpoint`). The detected feature flags, along with their file paths and line numbers, will be associated with the given repository name (`--repoName`) and sent to the Bucketeer backend. The results will then be available in the Bucketeer dashboard, where users can review flagged locations, filter by repository or branch, and manage feature flag usage.
 
-:::tip **Additional Examples**  
-See the [Examples](#examples) section for advanced Code References configurations.  
+:::tip **Additional Examples**
+See the [Examples](#examples) section for advanced Code References configurations.
 :::
 
 :::tip
@@ -68,8 +81,8 @@ The following table lists all available options for running the Code References.
 | Option | Description |
 |------|-------------|
 | `--allowTags` | Enables storing references for tags. The tag will be listed as a branch. |
-| `--apiKey <string>` | Specifies the Bucketeer API key with write-level access. Can be provided multiple times for different environments. |
-| `-U, --baseUri <string>` | Defines the Bucketeer API service base URI. |
+| `--apiKey <string>` | Specifies the Bucketeer API key with write-level access. It can be provided multiple times for different environments. |
+| `-U, --apiEndpoint <string>` | Defines the Bucketeer API service base URI. |
 | `-b, --branch <string>` | Specifies the branch to scan. If not provided, the branch name is auto-detected. Required for CI/CD environments with detached HEAD states. |
 | `--commitUrlTemplate <string>` | If provided, Bucketeer generates links to commits in the VCS provider. Example: `https://github.com/bucketeer/bucketeer-find-code-refs/commit/${sha}`. Supports `branchName` and `sha` as template variables. If omitted, links are generated based on `repoUrl` and `repoType`. |
 | `-C, --contextLines <int>` | Defines the number of surrounding lines to send with feature flag references. Allowed values: `0` (only the flag line), `> 0` (context lines above and below), `< 0` (no source code sent). Max: `5`. Default: `2`. |
@@ -93,37 +106,33 @@ The following table lists all available options for running the Code References.
 
 ## Environment variables and YAML for configuration
 
-Code References can be configured using:  
-1. **Command-line flags** (highest priority) described before.  
-2. **Environment variables**  
-3. **YAML configuration files**  
+Code References can be configured using:
+1. **Command-line flags** (highest priority) described before.
+2. **Environment variables**
+3. **YAML configuration files**
 
 :::info 
 If an option is defined in multiple locations, the priority is:  
 1. Flags.
 2. Environment variables.
-3. YAML file.  
+3. YAML file.
 ::: 
 
 ### Using environment variables
 
-All command-line flags are available as environment variables using the upper snake case format, prefixed with `BUCKETEER_`. For example, instead of passing `--apiKey` in the command line, you can set it as an environment variable:  
+All command-line flags are available as environment variables using the upper snake case format, prefixed with `BUCKETEER_`. For example, instead of passing `--apiKey` in the command line, you can set it as an environment variable:
 
 ```sh
-export BUCKETEER_APIKEY="myTestToken"
-```
-
-To specify multiple API keys, use comma-separated values:  
-
-```sh
-export BUCKETEER_APIKEY="key1,key2,key3"
+export BUCKETEER_APIKEY="<YOUR_BUCKETEER_API_KEY>"
+# Or use comma-separated for multiple API keys
+export BUCKETEER_APIKEY="<YOUR_BUCKETEER_API_KEY_1>,<YOUR_BUCKETEER_API_KEY_2>"
 ```
 
 Then, run Code References without specifying `--apiKey` explicitly:
 
 ```sh
 bucketeer-find-code-refs \
-  --baseUri=$YOUR_BUCKETEER_BASE_URI \
+  --apiEndpoint=$YOUR_BUCKETEER_API_ENDPOINT \
   --repoName=$YOUR_REPOSITORY_NAME \
   --dir="/path/to/git/repo"
 ```
@@ -133,15 +142,15 @@ This approach improves security by preventing API keys from appearing in command
 ### Using YAML for configuration
 
 
-Instead of passing options through command-line flags, you can use a **YAML configuration file** to define settings in a structured and reusable format. This approach makes it easier to manage configurations, especially in projects with multiple repositories or complex setups.  
+Instead of passing options through command-line flags, you can use a **YAML configuration file** to define settings in a structured and reusable format. This approach makes it easier to manage configurations, especially in projects with multiple repositories or complex setups.
 
-The configuration file should be saved at:  
+The configuration file should be saved at:
 
 ```sh
 ${dir}/.bucketeer/coderefs.yaml
 ```
 
-To translate command-line options into YAML, use the same option names as keys. For example, instead of passing `--contextLines 3` in the CLI, define it in the YAML file as follows:  
+To translate command-line options into YAML, use the same option names as keys. For example, instead of passing `--contextLines 3` in the CLI, define it in the YAML file as follows:
 
 ```yaml
 contextLines: 3
@@ -154,14 +163,14 @@ repoType: "github"
 ```
 
 :::warning Required arguments
-Required arguments, such as `apiKey` and `dir`, must be provided via command-line flags or environment variables and cannot be set in YAML.  
+Required arguments, such as `apiKey` and `dir`, must be provided via command-line flags or environment variables and cannot be set in YAML.
 :::
 
 Beyond standard options, the YAML file also supports advanced configurations. For example, you can customize how feature flag keys are detected in the source code. By default, Code References only detects flags enclosed in single quotes (`'`), double quotes (`"`), or backticks (`` ` ``). To change this behavior and define custom delimiters, use:  
 
 ```yaml
 delimiters:
-  disableDefaults: true  # Disables default delimiters.
+  disableDefaults: true # Disables default delimiters.
   additional:
     - "<"
     - ">"
@@ -169,14 +178,14 @@ delimiters:
 
 ## Ignoring files and directories
 
-By default, Code References excludes:  
+By default, Code References excludes:
 
 - Dotfiles
 - Patterns in `.gitignore` and `.ignore`
 
 :::info Exception
 
-The `.github` directory is not ignored, since flags may be referenced in GitHub Actions.  
+The `.github` directory is not ignored since flags may be referenced in GitHub Actions.
 
 To skip scanning the `.github` directory, you need to manually add it to the `.ldignore` ignore file.
 
@@ -194,23 +203,9 @@ build/
 *.log
 ```
 
-By adding the above file to your repository, it will prevent Code References from scanning:  
+By adding the above file to your repository, it will prevent Code References from scanning:
 - The `node_modules/` and `build/` directories.
 - Any files ending with `.log` format.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ## Examples
 
@@ -224,7 +219,7 @@ This setup allows you to specify multiple API keys (`--apiKey`), which is useful
 bucketeer-find-code-refs \
   --apiKey="$YOUR_BUCKETEER_API_KEY1" \
   --apiKey="$YOUR_BUCKETEER_API_KEY2" \
-  --baseUri=$YOUR_BUCKETEER_BASE_URI \
+  --apiEndpoint=$YOUR_BUCKETEER_API_ENDPOINT \
   --repoName=$YOUR_REPOSITORY_NAME \
   --dir="/path/to/git/repo"
 ```
@@ -236,7 +231,7 @@ This approach stores multiple API keys in an environment variable (`BUCKETEER_AP
 ```sh
 export BUCKETEER_APIKEY="key1,key2,key3"
 bucketeer-find-code-refs \
-  --baseUri=$YOUR_BUCKETEER_BASE_URI \
+  --apiEndpoint=$YOUR_BUCKETEER_API_ENDPOINT \
   --repoName=$YOUR_REPOSITORY_NAME \
   --dir="/path/to/git/repo"
 ```
@@ -248,7 +243,7 @@ This configuration includes context lines (`--contextLines`), which determine ho
 ```sh
 bucketeer-find-code-refs \
   --apiKey="$YOUR_BUCKETEER_API_KEY" \
-  --baseUri="$YOUR_BUCKETEER_BASE_URI" \
+  --apiEndpoint="$YOUR_BUCKETEER_API_ENDPOINT" \
   --repoName="$YOUR_REPOSITORY_NAME" \
   --dir="/path/to/git/repo" \
   --contextLines=3  # Maximum of 5. If < 0, no source code is sent to Bucketeer.
@@ -261,12 +256,12 @@ This setup improves repository tracking by explicitly defining the repository ty
 ```sh
 bucketeer-find-code-refs \
   --apiKey="$YOUR_BUCKETEER_API_KEY" \
-  --baseUri="$YOUR_BUCKETEER_BASE_URI" \
+  --apiEndpoint="$YOUR_BUCKETEER_API_ENDPOINT" \
   --repoName="$YOUR_REPOSITORY_NAME" \
   --dir="/path/to/git/repo" \
   --contextLines=3 \
   --repoType="github" \
-  --repoUrl="$YOUR_REPOSITORY_URL"  # Example: https://github.com/org/repo
+  --repoUrl="$YOUR_REPOSITORY_URL" # Example: https://github.com/org/repo
 ```
 
 ### Scanning non-Git repositories
@@ -276,7 +271,7 @@ For codebases that do not use Git, this configuration manually specifies a repos
 ```sh
 bucketeer-find-code-refs \
   --apiKey=$YOUR_BUCKETEER_API_KEY \
-  --baseUri=$YOUR_BUCKETEER_BASE_URI \
+  --apiEndpoint=$YOUR_BUCKETEER_API_ENDPOINT \
   --repoName=$YOUR_REPOSITORY_NAME \
   --dir="/path/to/git/repo" \
   --revision="REPO_REVISION_STRING" \
