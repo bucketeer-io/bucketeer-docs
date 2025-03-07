@@ -1,0 +1,38 @@
+---
+title: Code References
+# sidebar_position:
+slug: /feature-flags/code-reference
+description: Learn how to use the Code References feature to find the existing feature flags in your code base.
+tags: ['feature-flag', 'code-references','stale-flags']
+---
+
+import CenteredImg from '@site/src/components/centered-img/CenteredImg';
+import Button from '@site/src/components/button/Button';
+import ButtonShelf from '@site/src/components/button-shelf/ButtonShelf';
+
+Code References is a CLI tool that scans source code repositories to detect where feature flags are used. The Code References analyzes the codebase and sends the results to the Bucketeer dashboard, providing your teams with precise information into where the feature flag are used in your code. Code References helps maintain clean, efficient code by identifying stale or unused feature flags and directing developers to the exact locations where they need to take action.
+
+<CenteredImg
+  imgURL="img/feature-flags/codereference/scan-result.png"
+/>
+
+By using Code References, you can:
+
+- Automate the detection of feature flags across your codebase.  
+- Integration with CI/CD pipelines to scan repositories regularly.  
+- Use it with GitHub, GitLab, and Bitbucket repositories.  
+- Configuration uses command-line flags, environment variables, and YAML configuration.  
+- Improve your codebase code hygiene, reducing technical debt by identifying obsolete or inactive flags.  
+
+<ButtonShelf>
+  <Button
+    redirect="/feature-flags/code-reference/configuration"
+    title="Configure and Use"
+    info="Learn how to configure and use Code References."
+  />
+  <Button
+    redirect="/feature-flags/code-reference/scan-results"
+    title="Access Scan Results"
+    info="Learn how to access the scan results from Code References."
+  />
+</ButtonShelf>
