@@ -205,6 +205,117 @@ JSONVariation(ctx context.Context, user *user.User, featureID string, dst interf
 </TabItem>
 </Tabs>
 
+### Getting evaluation details
+
+The following methods will return the **evaluation details** for a specific feature flag. If the feature flag is missing in the SDK's cache, the variable `reason` value will be `CLIENT`, which means the default value was returned.
+
+This is useful if you use another A/B Test solution with Bucketeer and need to know the variation name, reason, and other information.
+
+#### Interfaces
+
+<Tabs>
+<TabItem value="go" label="Go">
+
+```go showLineNumbers
+type SDK interface {
+    BoolVariationDetails(
+      ctx context.Context,
+      user *user.User,
+      featureID string,
+      defaultValue bool) model.BKTEvaluationDetails[bool]
+
+    IntVariationDetails(
+      ctx context.Context,
+      user *user.User,
+      featureID string,
+      defaultValue int) model.BKTEvaluationDetails[int]
+
+    Int64VariationDetails(
+      ctx context.Context,
+      user *user.User,
+      featureID string,
+      defaultValue int64) model.BKTEvaluationDetails[int64]
+
+    Float64VariationDetails(
+      ctx context.Context,
+      user *user.User,
+      featureID string,
+      defaultValue float64) model.BKTEvaluationDetails[float64]
+
+    StringVariationDetails(
+      ctx context.Context,
+      user *user.User,
+      featureID,
+      defaultValue string) model.BKTEvaluationDetails[string]
+
+    ObjectVariationDetails(
+      ctx context.Context,
+      user *user.User,
+      featureID string,
+      defaultValue interface{}) model.BKTEvaluationDetails[interface{}]
+}
+```
+
+</TabItem>
+</Tabs>
+
+#### Object
+
+<Tabs>
+<TabItem value="go" label="Go">
+
+```go showLineNumbers
+type BKTEvaluationDetails[T EvaluationValue] struct {
+    FeatureID      string           // The ID of the feature flag.
+    FeatureVersion int32            // The version of the feature flag.
+    UserID         string           // The ID of the user being evaluated.
+    VariationID    string           // The ID of the assigned variation.
+    VariationName  string           // The name of the assigned variation.
+    VariationValue T                // The value of the assigned variation.
+    Reason         EvaluationReason // The reason for the evaluation result.
+}
+
+// EvaluationValue defines the allowed types for variation values
+type EvaluationValue interface {
+    int | int64 | float64 | string | bool | interface{}
+}
+
+type EvaluationReason string
+
+const (
+    EvaluationReasonTarget       EvaluationReason = "TARGET"        // Evaluated using individual targeting.
+    EvaluationReasonRule         EvaluationReason = "RULE"          // Evaluated using a custom rule.
+    EvaluationReasonDefault      EvaluationReason = "DEFAULT"       // Evaluated using the default strategy.
+    EvaluationReasonClient       EvaluationReason = "CLIENT"        // The flag is missing in the cache; the default value was returned.
+    EvaluationReasonOffVariation EvaluationReason = "OFF_VARIATION" // Evaluated using the off variation.
+    EvaluationReasonPrerequisite EvaluationReason = "PREREQUISITE"  // Evaluated using a prerequisite.
+)
+```
+
+</TabItem>
+</Tabs>
+
+#### Usage
+
+<Tabs>
+<TabItem value="go" label="Go">
+
+```go showLineNumbers
+user := user.NewUser(
+  "END_USER_ID",
+  nil, // The user attributes are optional
+)
+details := client.BoolVariationDetails(ctx, user, "YOUR_FEATURE_FLAG_ID", false)
+if details.VariationValue {
+  // The Application code to show the new feature
+} else {
+  // The code to run when the feature is off
+}
+```
+
+</TabItem>
+</Tabs>
+
 ### Reporting custom events
 
 This method lets you save user actions in your application as events. You can connect these events to metrics in the experiments or in the kill switch (auto operation) on the console UI.
