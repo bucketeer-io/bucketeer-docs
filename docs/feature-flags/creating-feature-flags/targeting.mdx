@@ -188,6 +188,17 @@ When the SDK makes a request to the server, the Bucketeer system will have acces
 
 To use rollout rules based on end-user attributes, you will select the **Compare** option after clicking on the **Add rule** button. Then, you can use any existing end-user attributes to compare and assign different variations.
 
+:::info SemVer in Targeting Rules
+Bucketeer supports semantic versioning (SemVer) for attributes like `app_version`. You can use SemVer in targeting rules to control feature rollout based on application versions.
+:::
+
+:::caution SDK Version Format Differences
+- **Node.js SDK**: Supports both formats (`1.2.3` and `v1.2.3`) and can compare between them.
+- **Go SDK**: Requires consistent format - both values must use the same format (either both with `v` prefix or both without).
+
+For reliable results, we recommend using the same version format consistently across your application.
+:::
+
 Suppose you created users using the attributes listed above the code block. For users with `app_version = 1.0.0` and `language = english`, you want to provide the **value-1** variation. On the other hand, for users with `app_version = 2.0.0`, you want to deliver all variations using a percentual distribution, where 10% will receive **value-1**, where 20% will receive **value-2**, where 30% will receive **value-3**, and where 40% will receive variation **value-4**. Such targeting rule could be defined on the Bucketeer dashboard as presented by the image below.
 
 <CenteredImg
