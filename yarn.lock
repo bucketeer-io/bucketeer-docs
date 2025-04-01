@@ -2224,10 +2224,10 @@
     cssesc "^3.0.0"
     immediate "^3.2.3"
 
-"@easyops-cn/docusaurus-search-local@^0.48.5":
-  version "0.48.5"
-  resolved "https://registry.yarnpkg.com/@easyops-cn/docusaurus-search-local/-/docusaurus-search-local-0.48.5.tgz#32a3e18ca515e37042d2dc4c343352e6585afae2"
-  integrity sha512-d+wnmJy/rBrQolCrLqfwvjjHL8w7zpl4OsFAm3HHOLIzQQKKSllIP4M9w4jCbHRZietfm95A5wyvJMvlynVC2w==
+"@easyops-cn/docusaurus-search-local@^0.49.2":
+  version "0.49.2"
+  resolved "https://registry.yarnpkg.com/@easyops-cn/docusaurus-search-local/-/docusaurus-search-local-0.49.2.tgz#20c2b0ab3f58222b7e88335121b467c0e85259a2"
+  integrity sha512-ytXxbtpJ2gVECWrsdc6Wx7bPanueLQ95lLdR9n/tHKEPBm5d1v/vAsx487iUGVXYwzeEO8W/BQJ66Fcdvpq6xg==
   dependencies:
     "@docusaurus/plugin-content-docs" "^2 || ^3"
     "@docusaurus/theme-translations" "^2 || ^3"
@@ -2742,27 +2742,27 @@
   resolved "https://registry.yarnpkg.com/@replit/codemirror-css-color-picker/-/codemirror-css-color-picker-6.3.0.tgz#069835261d2b7b7ff5cb5f3ce354253d6e7e1100"
   integrity sha512-19biDANghUm7Fz7L1SNMIhK48tagaWuCOHj4oPPxc7hxPGkTVY2lU/jVZ8tsbTKQPVG7BO2CBDzs7CBwb20t4A==
 
-"@scalar/api-client@2.2.53":
-  version "2.2.53"
-  resolved "https://registry.yarnpkg.com/@scalar/api-client/-/api-client-2.2.53.tgz#9b792b8d764b5d2208581e8f07edda81776634b9"
-  integrity sha512-09NuJjDCbYA/gz4TizWeAxXa3vhwZddquTkFwTrHFfMzSfkLkTNHOIdT01V26BtZCs4pghxtebRORxefQiah9A==
+"@scalar/api-client@2.3.10":
+  version "2.3.10"
+  resolved "https://registry.yarnpkg.com/@scalar/api-client/-/api-client-2.3.10.tgz#ff31b017a587f52527d9f9c82742db5551281fdb"
+  integrity sha512-MNPR8eqKrOnUgcFAgQ9TVvTREAs4pVD2HT1CwRElCLOypjj4cE8sGWB5P/ruYWWgD8CwFu40C48v2P+QOkUTkA==
   dependencies:
     "@headlessui/tailwindcss" "^0.2.0"
     "@headlessui/vue" "^1.7.20"
-    "@scalar/components" "0.13.27"
+    "@scalar/components" "0.13.41"
     "@scalar/draggable" "0.1.11"
     "@scalar/icons" "0.1.3"
-    "@scalar/import" "0.2.29"
-    "@scalar/oas-utils" "0.2.109"
+    "@scalar/import" "0.3.7"
+    "@scalar/oas-utils" "0.2.124"
     "@scalar/object-utils" "1.1.13"
-    "@scalar/openapi-parser" "0.10.9"
+    "@scalar/openapi-parser" "0.10.12"
     "@scalar/openapi-types" "0.1.9"
-    "@scalar/postman-to-openapi" "0.1.32"
-    "@scalar/snippetz" "0.2.15"
-    "@scalar/themes" "0.9.70"
-    "@scalar/types" "0.0.36"
-    "@scalar/use-codemirror" "0.11.72"
-    "@scalar/use-hooks" "0.1.24"
+    "@scalar/postman-to-openapi" "0.1.47"
+    "@scalar/snippetz" "0.2.18"
+    "@scalar/themes" "0.9.82"
+    "@scalar/types" "0.1.4"
+    "@scalar/use-codemirror" "0.11.86"
+    "@scalar/use-hooks" "0.1.36"
     "@scalar/use-toasts" "0.7.9"
     "@scalar/use-tooltip" "1.0.6"
     "@vueuse/core" "^10.10.0"
@@ -2770,52 +2770,56 @@
     focus-trap "^7"
     fuse.js "^7.0.0"
     microdiff "^1.4.0"
-    nanoid "^5.0.9"
+    nanoid "^5.1.5"
     pretty-bytes "^6.1.1"
     pretty-ms "^8.0.0"
     shell-quote "^1.8.1"
+    type-fest "^4.20.0"
     vue "^3.5.12"
     vue-router "^4.3.0"
     whatwg-mimetype "^4.0.0"
     yaml "^2.4.5"
     zod "^3.23.8"
 
-"@scalar/api-reference-react@0.4.33":
-  version "0.4.33"
-  resolved "https://registry.yarnpkg.com/@scalar/api-reference-react/-/api-reference-react-0.4.33.tgz#1ae3a9f6c7b189c875d362c5ff9d0b30c66224d5"
-  integrity sha512-AhT7ifQbv9+TAGiCTT0ydECXOXvTuQU9uURfvpu+5u1sODcuIkxQWjQIAEGPDuKLCHEIz7m3OVTZFDyLzq+Qsw==
+"@scalar/api-reference-react@0.6.7":
+  version "0.6.7"
+  resolved "https://registry.yarnpkg.com/@scalar/api-reference-react/-/api-reference-react-0.6.7.tgz#c7e7df58e7f39789d51f7559083f8b570182125e"
+  integrity sha512-4nioz/F+nrafAtfxETdUoE6TJ935Ok6LyZIEu/FksZ7opYGVZcoL1+1pvPQPWKIjD4sh1mH6N+5K0V7Ezu2zww==
   dependencies:
-    "@scalar/api-reference" "1.25.124"
+    "@scalar/api-reference" "1.28.10"
+    "@scalar/types" "0.1.4"
 
-"@scalar/api-reference@1.25.124":
-  version "1.25.124"
-  resolved "https://registry.yarnpkg.com/@scalar/api-reference/-/api-reference-1.25.124.tgz#2d7a122327c99e2027c0831e4345b600c6a14443"
-  integrity sha512-FETW/QVAL/S0p1y+eUdoy4EOrBqmmhIdGipBrn14ixMB30hSSekxNcKCabje7f0w48xX/pauqemEc3geAen/+Q==
+"@scalar/api-reference@1.28.10":
+  version "1.28.10"
+  resolved "https://registry.yarnpkg.com/@scalar/api-reference/-/api-reference-1.28.10.tgz#ba9759e08851992937acba64d88345a7a4f70ab9"
+  integrity sha512-I8YG811dVPYi8bEPG/aMCklf/EtGMpnOdMawh5lgiF/ug6lZsKBx0vW0O++l4ToLHoliC5bK3SRRDDW4JSzWhg==
   dependencies:
     "@floating-ui/vue" "^1.0.2"
     "@headlessui/vue" "^1.7.20"
-    "@scalar/api-client" "2.2.53"
-    "@scalar/code-highlight" "0.0.23"
-    "@scalar/components" "0.13.27"
-    "@scalar/oas-utils" "0.2.109"
-    "@scalar/openapi-parser" "0.10.9"
+    "@scalar/api-client" "2.3.10"
+    "@scalar/code-highlight" "0.0.25"
+    "@scalar/components" "0.13.41"
+    "@scalar/oas-utils" "0.2.124"
+    "@scalar/openapi-parser" "0.10.12"
     "@scalar/openapi-types" "0.1.9"
-    "@scalar/snippetz" "0.2.15"
-    "@scalar/themes" "0.9.70"
-    "@scalar/types" "0.0.36"
-    "@scalar/use-hooks" "0.1.24"
+    "@scalar/snippetz" "0.2.18"
+    "@scalar/themes" "0.9.82"
+    "@scalar/types" "0.1.4"
+    "@scalar/use-hooks" "0.1.36"
     "@scalar/use-toasts" "0.7.9"
     "@unhead/vue" "^1.11.11"
     "@vueuse/core" "^10.10.0"
+    flatted "^3.3.1"
     fuse.js "^7.0.0"
     github-slugger "^2.0.0"
-    nanoid "^5.0.9"
+    nanoid "^5.1.5"
     vue "^3.5.12"
+    zod "^3.23.8"
 
-"@scalar/code-highlight@0.0.23":
-  version "0.0.23"
-  resolved "https://registry.yarnpkg.com/@scalar/code-highlight/-/code-highlight-0.0.23.tgz#4d193878ee042967285240625f7697857c010d5c"
-  integrity sha512-hDHoUgjq/8ntXzmD1hbO3nvem1ny+qcWRH7L2nOflwkXhXaDM1aOPNp9zyeCxLoWwC9db4wLFP3QW+eYS0OTiQ==
+"@scalar/code-highlight@0.0.25":
+  version "0.0.25"
+  resolved "https://registry.yarnpkg.com/@scalar/code-highlight/-/code-highlight-0.0.25.tgz#3fc0dc4371025d0bb52d1426cc407116b22484da"
+  integrity sha512-rmiXaAoL3Zl+OycIO1CMj8apaeAU/p41EmCpHTxInZiFVW0++iClce2fun1lK6qjTMZneR6UwE4qBKiUUVLCpg==
   dependencies:
     hast-util-to-text "^4.0.2"
     highlight.js "^11.9.0"
@@ -2835,32 +2839,33 @@
     unified "^11.0.4"
     unist-util-visit "^5.0.0"
 
-"@scalar/components@0.13.27":
-  version "0.13.27"
-  resolved "https://registry.yarnpkg.com/@scalar/components/-/components-0.13.27.tgz#704a24342d3fc4da236c935b42c3f9c3e7d5e872"
-  integrity sha512-BgTUSfd358MXeJNbAxt5NoQksHqqlLb+Lcz89IrwxAypJURG+qgUxB0079D792vPdCcVxmcXoinyPT5TX3LM7A==
+"@scalar/components@0.13.41":
+  version "0.13.41"
+  resolved "https://registry.yarnpkg.com/@scalar/components/-/components-0.13.41.tgz#cfaba8902d28e3c3a7137e3fede43970463fc57e"
+  integrity sha512-IZls6aG6tYNpYgxBGBstq3jxYyoMrWyC9KeC7WtYZkVImjzHjrewHen26KZ6DxgFEnLalG7jsPhyqeLl/mJ+Yw==
   dependencies:
     "@floating-ui/utils" "^0.2.2"
     "@floating-ui/vue" "^1.0.2"
     "@headlessui/vue" "^1.7.20"
-    "@scalar/code-highlight" "0.0.23"
-    "@scalar/themes" "0.9.70"
-    "@scalar/use-hooks" "0.1.24"
+    "@scalar/code-highlight" "0.0.25"
+    "@scalar/themes" "0.9.82"
+    "@scalar/use-hooks" "0.1.36"
     "@scalar/use-toasts" "0.7.9"
     "@vueuse/core" "^10.10.0"
     cva "1.0.0-beta.2"
-    nanoid "^5.0.9"
+    nanoid "^5.1.5"
     pretty-bytes "^6.1.1"
     radix-vue "^1.9.3"
     tailwind-merge "^2.5.5"
     vue "^3.5.12"
 
-"@scalar/docusaurus@0.4.202":
-  version "0.4.202"
-  resolved "https://registry.yarnpkg.com/@scalar/docusaurus/-/docusaurus-0.4.202.tgz#ad3b2aec9699a04194152395fa76872f1a2e30b2"
-  integrity sha512-98k0vscA/Rg4NZidtjdaMVfXyGn8Q6e5clBkyauNEDJ/rqGJnXvfEslL9lXI7LmwNCkQ3668YRvsQr1JkQViEQ==
+"@scalar/docusaurus@0.5.10":
+  version "0.5.10"
+  resolved "https://registry.yarnpkg.com/@scalar/docusaurus/-/docusaurus-0.5.10.tgz#5457359e04c44281b45f69e0e56e6f072a25d748"
+  integrity sha512-CsKtdteiFFIfHWLqi4diu4VTrto2trDaKbq/MhyVnd5tZ+f1pI7wSqcnuR2y+GYhcSRvRQGaXS26Xi+gKXF2HQ==
   dependencies:
-    "@scalar/api-reference-react" "0.4.33"
+    "@scalar/api-reference-react" "0.6.7"
+    "@scalar/types" "0.1.4"
 
 "@scalar/draggable@0.1.11":
   version "0.1.11"
@@ -2876,28 +2881,29 @@
   dependencies:
     vue "^3.5.12"
 
-"@scalar/import@0.2.29":
-  version "0.2.29"
-  resolved "https://registry.yarnpkg.com/@scalar/import/-/import-0.2.29.tgz#7283f8191a0d1c63e51d73530be5870c6b24784e"
-  integrity sha512-q6pMNq6Aa446PM3rCqOMWv+dICpTpOmpI5v1Ex49z9+lCXQjmXA6xYRkO8+HWBcfOdk+KGFJJYuTKSkKF6C3cQ==
+"@scalar/import@0.3.7":
+  version "0.3.7"
+  resolved "https://registry.yarnpkg.com/@scalar/import/-/import-0.3.7.tgz#949ccf0d91bc8cd756e4abac5553725b37026b24"
+  integrity sha512-rrc1/kmNIMgt+IIH/kozLIGMeZDgO6YZ1AG6GxLiSTmAqtq7uSpNq5DuIk7ZkqUrsi09jBpukG8YSlMzFpmZyw==
   dependencies:
-    "@scalar/oas-utils" "0.2.109"
-    "@scalar/openapi-parser" "0.10.9"
+    "@scalar/oas-utils" "0.2.124"
+    "@scalar/openapi-parser" "0.10.12"
     yaml "^2.4.5"
 
-"@scalar/oas-utils@0.2.109":
-  version "0.2.109"
-  resolved "https://registry.yarnpkg.com/@scalar/oas-utils/-/oas-utils-0.2.109.tgz#6985e9ac5816695dee189a91bff54ba535c0038e"
-  integrity sha512-aQLIbYDwN2csUTfbyDcVE7F725Gs4UTnNMffLS0bPXXJWLz4mEizEzkUj7eMGn27kJORJj+OqGxSSyDhZpNhRA==
+"@scalar/oas-utils@0.2.124":
+  version "0.2.124"
+  resolved "https://registry.yarnpkg.com/@scalar/oas-utils/-/oas-utils-0.2.124.tgz#b97ac5cdb492e2604cfd489e2ec6d19e2b56a418"
+  integrity sha512-+eIFoN0G03a75EB4Zc8PAXwS6G4+jd2MoPwv1j3PnzTxDstDU0XE5V3FdbL3/3m9TqRxZ2ECTv8zibXdOVcmWQ==
   dependencies:
     "@hyperjump/json-schema" "^1.9.6"
     "@scalar/object-utils" "1.1.13"
     "@scalar/openapi-types" "0.1.9"
-    "@scalar/themes" "0.9.70"
-    "@scalar/types" "0.0.36"
+    "@scalar/themes" "0.9.82"
+    "@scalar/types" "0.1.4"
     flatted "^3.3.1"
     microdiff "^1.4.0"
-    nanoid "^5.0.9"
+    nanoid "^5.1.5"
+    type-fest "^4.20.0"
     yaml "^2.4.5"
     zod "^3.23.8"
 
@@ -2910,10 +2916,10 @@
     just-clone "^6.2.0"
     ts-deepmerge "^7.0.1"
 
-"@scalar/openapi-parser@0.10.9":
-  version "0.10.9"
-  resolved "https://registry.yarnpkg.com/@scalar/openapi-parser/-/openapi-parser-0.10.9.tgz#35d29bd6b9c00b7147a1cdf4f77c307de6bdca2b"
-  integrity sha512-wsKZtL4B3Fmbv24B1zzeWdsEr6F60fLmToOFLA1b9QGQ6TAtIvLgKQWQ65eh5Vfx93nQb/iekamfErqHRHtEhA==
+"@scalar/openapi-parser@0.10.12":
+  version "0.10.12"
+  resolved "https://registry.yarnpkg.com/@scalar/openapi-parser/-/openapi-parser-0.10.12.tgz#ff7fcb6f5b849a1a335f4309caf2ca793e772b3d"
+  integrity sha512-FNCWLVpJWLCKkA5Sxl8A+B0uMgmWX7xgoBPph4o38COAB2VXRrjM/YF1ArkDv2f93lwsUP0drrTF59yD/oFMdw==
   dependencies:
     ajv "^8.17.1"
     ajv-draft-04 "^1.0.0"
@@ -2927,40 +2933,43 @@
   resolved "https://registry.yarnpkg.com/@scalar/openapi-types/-/openapi-types-0.1.9.tgz#e2c5144f7b31ab831f914b1daa0f34b50e47b106"
   integrity sha512-HQQudOSQBU7ewzfnBW9LhDmBE2XOJgSfwrh5PlUB7zJup/kaRkBGNgV2wMjNz9Af/uztiU/xNrO179FysmUT+g==
 
-"@scalar/postman-to-openapi@0.1.32":
-  version "0.1.32"
-  resolved "https://registry.yarnpkg.com/@scalar/postman-to-openapi/-/postman-to-openapi-0.1.32.tgz#058ad6d44af7c86e53a4ba0069d7134d0b3695e1"
-  integrity sha512-oZ2jRAxhUXKTIwsBgnfGxOlkIw1kr4DUTLWzTwc2v3rbBCkSzpuzb8NSqq3pBF1xE8+1ViIkoIjZGXeeyYOM9A==
+"@scalar/postman-to-openapi@0.1.47":
+  version "0.1.47"
+  resolved "https://registry.yarnpkg.com/@scalar/postman-to-openapi/-/postman-to-openapi-0.1.47.tgz#99720a2848d27a6482999c698cdbd9b501aab3d4"
+  integrity sha512-XDyif8Qxy1ZKo0fBuAAUknXWknjz+BdPBxdtTmRkI6i0apz0M5qD1WFlGEiFrOyXIogMN7e6PTB7t6p077LSJA==
   dependencies:
-    "@scalar/oas-utils" "0.2.109"
+    "@scalar/oas-utils" "0.2.124"
     "@scalar/openapi-types" "0.1.9"
 
-"@scalar/snippetz@0.2.15":
-  version "0.2.15"
-  resolved "https://registry.yarnpkg.com/@scalar/snippetz/-/snippetz-0.2.15.tgz#133dc4efe896ead439fef0c057f4ba11b0725e18"
-  integrity sha512-2Tq+Ot09dz7ioKNUXW5z6eBqZdMLaYUw5eDONpdvmBP4yZ8hrFKpq0YV54lnMQALQebSi/DPLsnsWgo+DTkfbw==
+"@scalar/snippetz@0.2.18":
+  version "0.2.18"
+  resolved "https://registry.yarnpkg.com/@scalar/snippetz/-/snippetz-0.2.18.tgz#170a99c11618d941b5ba16f7c512aa49c4f18b46"
+  integrity sha512-Ym83dt89zRaGDbPCXZ9q+KU0FBKPyHfs2ALZ7cvjIoPDA9NLM4r5W+l/11TPk3oRN3tUoRTNBVVCENVqnH9icQ==
   dependencies:
     stringify-object "^5.0.0"
 
-"@scalar/themes@0.9.70":
-  version "0.9.70"
-  resolved "https://registry.yarnpkg.com/@scalar/themes/-/themes-0.9.70.tgz#c0229ec04bdb412cd5af3abe08a8b005d7b25e3a"
-  integrity sha512-9orX967NcgytbMEIVTMtKbeAyba5SBdOAXw2e5DK07f2Z4sub95h94gLiqhWqRLngwpwK2XZy19vZT/BbVjgZA==
+"@scalar/themes@0.9.82":
+  version "0.9.82"
+  resolved "https://registry.yarnpkg.com/@scalar/themes/-/themes-0.9.82.tgz#c90c6c96205fb2cb1b54b7d398ef292cd0972e23"
+  integrity sha512-VbzDVyF6yQMeqsr9nj+twyMXmO5k0AEmL6Zsjf3alzOAMuiN4ee5Hcssd7XE44cnUrHiwm1i578bU6949N+7lQ==
   dependencies:
-    "@scalar/types" "0.0.36"
+    "@scalar/types" "0.1.4"
 
-"@scalar/types@0.0.36":
-  version "0.0.36"
-  resolved "https://registry.yarnpkg.com/@scalar/types/-/types-0.0.36.tgz#6304b750dde630d92c75660526ca2480667a2a74"
-  integrity sha512-Mfv9IptUoGqDJC40xg9nfI9/3brov59tKw2lq8tPpbmXItyG9EplckHPRUf2bYKGOOQPfySUATpEgHqOBiJt7g==
+"@scalar/types@0.1.4":
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/@scalar/types/-/types-0.1.4.tgz#6b4cea83827da51d59d7621b148db2ec4b1f3395"
+  integrity sha512-IAxpfrfdYfliLJR6WbuC8hxUwBUOeVsGuZxQE+zP8JDtdoHmgT6aNxCqMnGZ1ft6dvJ4jvzVR6qCWrq6Kg25oA==
   dependencies:
     "@scalar/openapi-types" "0.1.9"
     "@unhead/schema" "^1.11.11"
+    nanoid "^5.1.5"
+    type-fest "^4.20.0"
+    zod "^3.23.8"
 
-"@scalar/use-codemirror@0.11.72":
-  version "0.11.72"
-  resolved "https://registry.yarnpkg.com/@scalar/use-codemirror/-/use-codemirror-0.11.72.tgz#66140449fb062dfc1e98b857c257d84a118ed915"
-  integrity sha512-UFcxy0zm+Gidnh4tB64lc69id9jABJEeqExn9LyISqqPT56R8U4gdBmvNnDk2wST3dCSQwL9vTzLOKzioS0a9g==
+"@scalar/use-codemirror@0.11.86":
+  version "0.11.86"
+  resolved "https://registry.yarnpkg.com/@scalar/use-codemirror/-/use-codemirror-0.11.86.tgz#fa1c256c18e47267bd0311cb374649473cd5eabc"
+  integrity sha512-mzzPTFYMoqsqV51wqld7JowOOt6Ga3VSlxspME4gupKSXJZbhrWA4qqaLhjHrk7xAnD40+EiBtFBSf559oC1XA==
   dependencies:
     "@codemirror/autocomplete" "^6.18.3"
     "@codemirror/commands" "^6.7.1"
@@ -2977,17 +2986,17 @@
     "@lezer/highlight" "^1.2.1"
     "@lezer/lr" "^1.4.2"
     "@replit/codemirror-css-color-picker" "^6.3.0"
-    "@scalar/components" "0.13.27"
+    "@scalar/components" "0.13.41"
     codemirror "^6.0.0"
     style-mod "^4.1.2"
     vue "^3.5.12"
 
-"@scalar/use-hooks@0.1.24":
-  version "0.1.24"
-  resolved "https://registry.yarnpkg.com/@scalar/use-hooks/-/use-hooks-0.1.24.tgz#efa558d40643948e6585c08ba5a244945980a112"
-  integrity sha512-E1jC1jkRN/NmvKJT9a2aHkeC+8zhWZW7SHPJx3bA8Dgu/nO4wYDZdf9UlunHXC2H8DtCPQ1LrxyeVP0Vv5x/yg==
+"@scalar/use-hooks@0.1.36":
+  version "0.1.36"
+  resolved "https://registry.yarnpkg.com/@scalar/use-hooks/-/use-hooks-0.1.36.tgz#e5add3813023ed4e21b2150d27b375ebc3e73122"
+  integrity sha512-0LRLtbbdbWiX0JBgaGayGoFZPXV8EheMprMcHmOFhEwJQCnsPt6IBj4l6KAUjh/jnGEI2XjObORUhuBhqxKCVw==
   dependencies:
-    "@scalar/themes" "0.9.70"
+    "@scalar/themes" "0.9.82"
     "@scalar/use-toasts" "0.7.9"
     "@vueuse/core" "^10.10.0"
     vue "^3.5.12"
@@ -8744,6 +8753,11 @@ nanoid@^5.0.9:
   resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-5.1.2.tgz#b87c6cb6941d127a23b24dffc4659bba48b219d7"
   integrity sha512-b+CiXQCNMUGe0Ri64S9SXFcP9hogjAJ2Rd6GdVxhPLRm7mhGaM7VgOvCAJ1ZshfHbqVDI3uqTI5C8/GaKuLI7g==
 
+nanoid@^5.1.5:
+  version "5.1.5"
+  resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-5.1.5.tgz#f7597f9d9054eb4da9548cdd53ca70f1790e87de"
+  integrity sha512-Ir/+ZpE9fDsNH0hQ3C68uyThDXzYcim2EqcZ8zn8Chtt1iylPT9xXJB0kPCnqzgcEGikO9RxSrh63MsmVCU7Fw==
+
 negotiator@0.6.3:
   version "0.6.3"
   resolved "https://registry.npmjs.org/negotiator/-/negotiator-0.6.3.tgz"
@@ -8793,9 +8807,9 @@ node-releases@^2.0.19:
   integrity sha512-xxOWJsBKtzAq7DY0J+DTzuz58K8e7sJbdgwkbMWQe8UYB6ekmsQ45q0M/tJDsGaZmbC+l7n57UV8Hl5tHxO9uw==
 
 node@23:
-  version "23.9.0"
-  resolved "https://registry.yarnpkg.com/node/-/node-23.9.0.tgz#79e02faca7e2d8a2566918571e0b09d043585121"
-  integrity sha512-G1UAqOInNxL2HkLV0i3ZEgnNsSsWsf4tlpMpR44s7jYPEH8sCXObnxgyphibOiHdyheRkUzE9lRJXJ/4n0/KdA==
+  version "23.10.0"
+  resolved "https://registry.yarnpkg.com/node/-/node-23.10.0.tgz#1944a6535a501b7785b73d7ad34727f17075e32d"
+  integrity sha512-ZHGFyslrbG1/o/aJCA0f5+Es4gReiPudSo1zIquDEDrHWKg4F0/g+ONDXOlaabgys4Xxs5AdVb7steIPi/dw1g==
   dependencies:
     node-bin-setup "^1.0.0"
 
@@ -9994,12 +10008,12 @@ react-dev-utils@^12.0.1:
     strip-ansi "^6.0.1"
     text-table "^0.2.0"
 
-react-dom@^19.0.0:
-  version "19.0.0"
-  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-19.0.0.tgz#43446f1f01c65a4cd7f7588083e686a6726cfb57"
-  integrity sha512-4GV5sHFG0e/0AD4X+ySy6UJd3jVl1iNsNHdpad0qhABJ11twS3TTBnseqsKurKcsNqCEFeGL3uLpVChpIO3QfQ==
+react-dom@^19.1.0:
+  version "19.1.0"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-19.1.0.tgz#133558deca37fa1d682708df8904b25186793623"
+  integrity sha512-Xs1hdnE+DyKgeHJeJznQmYMIBG3TKIHJJT95Q58nHLSrElKlGQqDTR2HQ9fx5CN/Gk6Vh/kupBTDLU11/nDk/g==
   dependencies:
-    scheduler "^0.25.0"
+    scheduler "^0.26.0"
 
 react-error-overlay@^6.0.11:
   version "6.0.11"
@@ -10081,10 +10095,10 @@ react-router@5.3.4, react-router@^5.3.4:
     tiny-invariant "^1.0.2"
     tiny-warning "^1.0.0"
 
-react@^19.0.0:
-  version "19.0.0"
-  resolved "https://registry.yarnpkg.com/react/-/react-19.0.0.tgz#6e1969251b9f108870aa4bff37a0ce9ddfaaabdd"
-  integrity sha512-V8AVnmPIICiWpGfm6GLzCR/W5FXLchHop40W4nXBmdlEceh16rCN8O8LNWm5bh5XUX91fh7KpA+W0TgMKmgTpQ==
+react@^19.1.0:
+  version "19.1.0"
+  resolved "https://registry.yarnpkg.com/react/-/react-19.1.0.tgz#926864b6c48da7627f004795d6cce50e90793b75"
+  integrity sha512-FS+XFBNvn3GTAWq26joslQgWNoFu08F4kl0J4CgdNKADkdSGXQyTCnKteIAJy96Br6YbpEU1LSzV5dYtjMkMDg==
 
 readable-stream@^2.0.1:
   version "2.3.8"
@@ -10531,10 +10545,10 @@ sax@^1.2.4:
   resolved "https://registry.npmjs.org/sax/-/sax-1.4.1.tgz"
   integrity sha512-+aWOz7yVScEGoKNd4PA10LZ8sk0A/z5+nXQG5giUO5rprX9jgYsTdov9qCchZiPIZezbZH+jRut8nPodFAX4Jg==
 
-scheduler@^0.25.0:
-  version "0.25.0"
-  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.25.0.tgz#336cd9768e8cceebf52d3c80e3dcf5de23e7e015"
-  integrity sha512-xFVuu11jh+xcO7JOAGJNOXld8/TcEHK/4CituBUeUb5hqxJLj9YuemAEuvm9gQ/+pgXYfbQuqAkiYu+u7YEsNA==
+scheduler@^0.26.0:
+  version "0.26.0"
+  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.26.0.tgz#4ce8a8c2a2095f13ea11bf9a445be50c555d6337"
+  integrity sha512-NlHwttCI/l5gCPR3D1nNXtWABUmBwvZpEQiD4IXSbIDq8BzLIK/7Ir5gTFSGZDUu37K5cMNp0hFtzO38sC7gWA==
 
 schema-utils@2.7.0:
   version "2.7.0"
@@ -11203,6 +11217,11 @@ type-fest@^2.13.0, type-fest@^2.5.0:
   version "2.19.0"
   resolved "https://registry.npmjs.org/type-fest/-/type-fest-2.19.0.tgz"
   integrity sha512-RAH822pAdBgcNMAfWnCBU3CFZcfZ/i1eZjwFU/dsLKumyuuP3niueg2UAukXYF0E2AAoc82ZSSf9J0WQBinzHA==
+
+type-fest@^4.20.0:
+  version "4.38.0"
+  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-4.38.0.tgz#659fa14d1a71c2811400aa3b5272627e0c1e6b96"
+  integrity sha512-2dBz5D5ycHIoliLYLi0Q2V7KRaDlH0uWIvmk7TYlAg5slqwiPv1ezJdZm1QEM0xgk29oYWMCbIG7E6gHpvChlg==
 
 type-is@~1.6.18:
   version "1.6.18"
