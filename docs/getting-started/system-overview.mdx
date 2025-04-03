@@ -1,0 +1,53 @@
+---
+title: System overview
+slug: /getting-started/system-overview
+description: This page introduces an overall system overview of Bucketeer.
+tags: ['system-overview', 'architecture', 'overview']
+---
+
+import CenteredImg from '@site/src/components/centered-img/CenteredImg';
+
+Bucketeer is a scalable and efficient feature flag and experimentation platform designed to enhance developer productivity by enabling real-time feature management.
+
+## Bucketeer overview architecture
+
+<CenteredImg
+    imgURL="img/getting-started/bucketeer-system-overview.png"
+    alt="Bucketeer architecture"
+    wSize="100%"
+/>
+
+### Client and Server SDKs
+
+The Bucketeer SDKs, available for various platforms (Go, Node.js, iOS, Android, JavaScript, and Flutter), serve as the primary interface for applications and servers to interact with the Bucketeer backend. These SDKs retrieve user evaluation and feature flag data while incorporating a caching layer to minimize latency and improve performance.
+
+- **Caching Layers:** use in-memory cache for higher latency and local evaluation
+
+### Gateway Communication
+
+SDKs and the Admin Console communicate with the Bucketeer backend via the Envoy API Gateway and Envoy Web Gateway using HTTPS protocol.
+
+- **Protocol Details:**
+Envoy is used as a sidecar container, requests are routed from the Envoy gateway are transcode to gRPC before reaching the core Bucketeer gRPC API server for faster and more efficient data exchange. Envoy is also used for fault tolerance as we apply circuit breaker.
+
+### Core Bucketeer Backend
+
+The Bucketeer API server handles the main business logic and provides interfaces to control other components. Various backend tasks, including managing feature flag data, performing user evaluations, user targeting, experimentation and many other are implemented here.
+
+### Batch Servers and Stan Model
+
+Batch servers run essential jobs that are triggered via APIs for caching, sending notifications, calculating experiment data using the [Stan](https://mc-stan.org/) model, and data retention,…
+
+### Event Publishing and Processing
+
+Google Pub/Sub is used for event streaming. This system is integral for streaming audit logs, user evaluation based on feature flag usage, goal data, user segment data,…
+
+**Subscribers** pull messages and then process and save data into the storage layer.
+
+### Storage and Cache
+
+Bucketeer implements a storage layer using these stacks:
+
+- **MySQL:** Stores feature flag, experiment, goal, notification and many other data with related configurations.
+- **Redis:** High-performance cache to support low-latency reads.
+- **BigQuery:** Serves as a data warehouse for storing and analyzing user evaluation events.
