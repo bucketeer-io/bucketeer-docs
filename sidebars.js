@@ -34,6 +34,12 @@ const sidebars = {
     },
     {
       type: 'doc',
+      id: 'getting-started/system-overview',
+      label: 'System Overview',
+      className: 'sidebar-server',
+    },
+    {
+      type: 'doc',
       id: 'getting-started/create-an-account',
       label: 'Create an Account',
       className: 'sidebar-account',
