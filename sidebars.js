@@ -36,7 +36,7 @@ const sidebars = {
       type: 'doc',
       id: 'getting-started/system-overview',
       label: 'System Overview',
-      className: 'sidebar-testing-with-flags',
+      className: 'sidebar-server',
     },
     {
       type: 'doc',
