@@ -473,6 +473,8 @@ The tag in the topic is the same tag used when initializing the client SDK.<br /
 If you have a flag using the `android` tag, the topic will be **bucketeer-android**.
 
 **Please be aware that the tag is case-sensitive.**
+
+**No Tags:** If you're not using tags, subscribe to the topic: **bucketeer-default**
 :::
 
 Assuming you already have the FCM implementation in your application.
