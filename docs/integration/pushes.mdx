@@ -14,7 +14,7 @@ These silent notifications let your applications know when a flag changes in rea
 
 ## Create a Push
 
-To create a push notification, access the **Settings** menu on the left sidebar, navigate to the **Pushes** tab, and click on the **+ Add** button.
+To create a push notification, access the **Settings** menu on the left sidebar, navigate to the **Pushes** tab, and click on the **+ Add** button.
 
 - **Name**: This identifies the push. Bucketeer recommends using descriptive names.
 - **Firebase Cloud Messaging Service Account**: This allows the Bucketeer to request the OAuth Access Token, which is needed to send notifications.
@@ -87,6 +87,8 @@ Bucketeer will send the notification including the data **\{"bucketeer_feature_f
 :::info Subscription Topic
 The tag in the topic is the same tag used when initializing the client SDK.<br />
 If you have a flag using the `android` tag, the topic will be **bucketeer-android**.
+
+If you're not using tags (both the feature flag and push have no tags), you should subscribe to the default topic: **bucketeer-default**
 :::
 
 <Tabs groupId="integrate-buckteer-platform">
@@ -102,6 +104,20 @@ private fun subscribeToTopic() {
       var msg = "Subscribed successfully"
       if (!task.isSuccessful) {
         msg = "Failed to subscribe"
+      }
+      Log.d(TAG, msg)
+    }
+}
+
+// For no-tags scenario, subscribe to the default topic
+private fun subscribeToDefaultTopic() {
+  val topic = "bucketeer-default"
+  Firebase.messaging
+    .subscribeToTopic(topic)
+    .addOnCompleteListener { task ->
+      var msg = "Subscribed successfully to $topic"
+      if (!task.isSuccessful) {
+        msg = "Failed to subscribe to $topic"
       }
       Log.d(TAG, msg)
     }
@@ -149,6 +165,18 @@ func subscribeToTopic() {
     }
 }
 
+// For no-tags scenario, subscribe to the default topic
+func subscribeToDefaultTopic() {
+    let topic = "bucketeer-default"
+    Messaging.messaging().subscribe(toTopic: topic) { error in
+        if let error = error {
+            print("Failed to subscribed to \(topic) topic. Error: \(error)")
+        } else {
+            print("Subscribed successfully to \(topic) topic")
+        }
+    }
+}
+
 // Receiving notification in background
 func application(
   _ application: UIApplication,
@@ -177,6 +205,17 @@ func application(
 void subscribeToTopic() {
   String tag = "flutter";
   String topic = "bucketeer-$tag";
+
+  FirebaseMessaging.instance.subscribeToTopic(topic).then((_) {
+    debugPrint("Subscribed successfully to $topic topic");
+  }).catchError((error) {
+    debugPrint("Failed to subscribed to $topic topic. Error: $error");
+  });
+}
+
+/// For no-tags scenario, subscribe to the default topic
+void subscribeToDefaultTopic() {
+  String topic = "bucketeer-default";
 
   FirebaseMessaging.instance.subscribeToTopic(topic).then((_) {
     debugPrint("Subscribed successfully to $topic topic");
