@@ -7,7 +7,7 @@ toc_max_heading_level: 4
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-The Bucketeer React SDK provides React hooks and context for seamless feature flag integration in React applications.
+This category contains topics explaining how to configure Bucketeer's React SDK.
 
 :::warning React SDK Version (Beta)
 
@@ -21,7 +21,6 @@ Bucketeer React SDK is a beta version. Breaking changes may be introduced before
 - 🔧 TypeScript support with full type safety
 - ⚡ Real-time feature flag updates
 - 🎯 Multiple variation types (boolean, string, number, object)
-- 🧪 User attribute management
 
 ## Requirements
 
@@ -53,12 +52,12 @@ yarn add @bucketeer/react-client-sdk
 
 ## Setup
 
-### 1. Initialize the Client
+### 1. Configure and Initialize Client
 
-Configure and initialize the Bucketeer client in your app's root component:
+First, import the necessary components and configure the SDK:
 
 <Tabs>
-<TabItem value="jsx" label="App.jsx">
+<TabItem value="jsx" label="Importing">
 
 ```jsx showLineNumbers
 import React, { useEffect, useState } from 'react';
@@ -70,7 +69,17 @@ import {
   getBKTClient,
   destroyBKTClient,
 } from '@bucketeer/react-client-sdk';
+```
 
+</TabItem>
+</Tabs>
+
+Configure the SDK and user settings:
+
+<Tabs>
+<TabItem value="jsx" label="Configuration">
+
+```jsx showLineNumbers
 const config = defineBKTConfigForReact({
   apiKey: 'YOUR_API_KEY',
   apiEndpoint: 'YOUR_API_ENDPOINT',
@@ -85,7 +94,23 @@ const user = defineBKTUser({
     version: '1.0.0',
   },
 });
+```
 
+</TabItem>
+</Tabs>
+
+:::warning Important
+
+Use `defineBKTConfigForReact` instead of `defineBKTConfig` when working with React SDK. This ensures proper React-specific configuration.
+
+:::
+
+Initialize the client in your root component:
+
+<Tabs>
+<TabItem value="jsx" label="Initialization">
+
+```jsx showLineNumbers
 export default function App() {
   const [client, setClient] = useState(null);
 
@@ -126,6 +151,90 @@ export default function App() {
 </TabItem>
 </Tabs>
 
+:::info Default timeout
+
+The initialize process default timeout is **5 seconds**.<br />
+Once initialization is finished, all the requests in the SDK use a timeout of **30 seconds**.
+
+:::
+
+#### Custom timeout
+
+You can customize the initialization timeout if needed:
+
+<Tabs>
+<TabItem value="jsx" label="Custom Timeout">
+
+```jsx showLineNumbers
+const timeout = 2000; // Custom timeout: 2 seconds (in milliseconds)
+const initialFetchPromise = initializeBKTClient(config, user, timeout);
+
+initialFetchPromise
+  .then(() => {
+    const client = getBKTClient();
+    setClient(client);
+    console.log('Bucketeer client initialized successfully');
+  })
+  .catch((error) => {
+    if (error.name === 'TimeoutException') {
+      // Client is still usable despite timeout
+      const client = getBKTClient();
+      setClient(client);
+      console.warn('Initialization timed out, but client is ready');
+    } else {
+      console.error('Failed to initialize:', error);
+    }
+  });
+```
+
+</TabItem>
+</Tabs>
+
+:::info Initialization Timeout Error
+
+During the initialization process, timeout errors are **not** related to the initialization itself. They arise from a timeout request, indicating the variations data from the server weren't received. The SDK will work as usual and update the variations in the next polling request.
+
+:::
+
+### 2. Setup BucketeerProvider
+
+The `BucketeerProvider` is a React Context Provider that makes the Bucketeer client available to all child components through React hooks.
+
+<Tabs>
+<TabItem value="jsx" label="Provider Setup">
+
+```jsx showLineNumbers
+import { BucketeerProvider } from '@bucketeer/react-client-sdk';
+
+// Wrap your app with BucketeerProvider
+function App() {
+  const [client, setClient] = useState(null);
+  
+  // ... initialization code ...
+
+  return (
+    <BucketeerProvider client={client}>
+      <Header />
+      <MainContent />
+      <Footer />
+    </BucketeerProvider>
+  );
+}
+```
+
+</TabItem>
+</Tabs>
+
+The `BucketeerProvider` provides:
+- **client**: The initialized Bucketeer client instance
+- **lastUpdated**: Timestamp of the last evaluation update (for advanced use cases)
+
+:::note
+
+All Bucketeer hooks (`useBooleanVariation`, `useStringVariation`, etc.) must be used within components that are wrapped by `BucketeerProvider`.
+
+:::
+
 :::info Configuration Options
 
 The **featureTag** setting filters which feature flags to evaluate. We strongly recommend using tags to improve performance and reduce cache size.
@@ -138,7 +247,7 @@ Optional configurations:
 
 :::
 
-### 2. Use Feature Flag Hooks
+### 3. Use Feature Flag Hooks
 
 Use the provided hooks to access feature flags in your components:
 
