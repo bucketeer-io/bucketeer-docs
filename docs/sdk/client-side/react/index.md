@@ -123,7 +123,9 @@ export default function App() {
           const bktClient = getBKTClient();
           setClient(bktClient);
         } else {
-          console.error('Failed to initialize:', error);
+          console.error('Failed to initialize Bucketeer:', error);
+          // Keep client as null - app will use default values
+          setClient(null);
         }
       }
     };
@@ -132,13 +134,13 @@ export default function App() {
     return () => destroyBKTClient();
   }, []);
 
-  if (!client) {
-    return <div>Loading Bucketeer...</div>;
-  }
-
   return (
     <BucketeerProvider client={client}>
-      <YourAppContent />
+      {!client ? (
+        <div>Loading Bucketeer...</div>
+      ) : (
+        <YourAppContent />
+      )}
     </BucketeerProvider>
   );
 }
@@ -224,6 +226,12 @@ function App() {
 The `BucketeerProvider` provides:
 - **client**: The initialized Bucketeer client instance
 - **lastUpdated**: Timestamp of the last evaluation update (for advanced use cases)
+
+:::info Graceful Degradation
+
+If Bucketeer initialization fails, you can pass `client={null}` to `BucketeerProvider`. All hooks will automatically return their default values, allowing your app to continue working normally without feature flags.
+
+:::
 
 :::note
 

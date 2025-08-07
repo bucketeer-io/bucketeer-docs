@@ -157,7 +157,8 @@ export default function App() {
           setClient(bktClient);
         } else {
           console.error('Failed to initialize:', error);
-          return;
+          // Keep client as null - app will use default values
+          setClient(null);
         }
       }
     };
@@ -166,13 +167,13 @@ export default function App() {
     return () => destroyBKTClient();
   }, []);
 
-  if (!client) {
-    return <LoadingComponent />; // Your loading component
-  }
-
   return (
     <BucketeerProvider client={client}>
-      <YourAppContent />
+      {!client ? (
+        <LoadingComponent /> // Your loading component
+      ) : (
+        <YourAppContent />
+      )}
     </BucketeerProvider>
   );
 }
@@ -228,6 +229,12 @@ function MyScreen() {
 ## API Reference
 
 This SDK re-exports all APIs from the [React SDK](/sdk/client-side/react) and [JavaScript SDK](/sdk/client-side/javascript). All hooks, components, and methods work identically.
+
+:::info Graceful Degradation
+
+If Bucketeer initialization fails, you can pass `client={null}` to `BucketeerProvider`. All hooks will automatically return their default values, allowing your app to continue working normally without feature flags.
+
+:::
 
 ## Best Practices
 
