@@ -19,8 +19,7 @@ Bucketeer React SDK is a beta version. Breaking changes may be introduced before
 
 - 🚀 React Context and Hooks for easy integration
 - 🔧 TypeScript support with full type safety
-- ⚡ Real-time feature flag updates
-- 🎯 Multiple variation types (boolean, string, number, object)
+- 🔄 Automatic re-rendering on flag changes
 
 ## Requirements
 
