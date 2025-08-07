@@ -294,36 +294,36 @@ function MyComponent() {
 
 ### Variation Hooks
 
-These hooks return the current value of a feature flag:
+These hooks return the current value of a feature flag and automatically re-render your component when the flag value changes.
 
-- `useBooleanVariation(flagId, defaultValue)` - Returns boolean
-- `useStringVariation(flagId, defaultValue)` - Returns string  
-- `useNumberVariation(flagId, defaultValue)` - Returns number
-- `useObjectVariation(flagId, defaultValue)` - Returns object/array
+#### useBooleanVariation
 
-### Evaluation Details Hooks
+**Signature:** `useBooleanVariation(flagId, defaultValue)`
 
-These hooks return both the value and detailed evaluation information:
+Returns a boolean feature flag value.
 
-- `useBooleanVariationDetails(flagId, defaultValue)`
-- `useStringVariationDetails(flagId, defaultValue)`  
-- `useNumberVariationDetails(flagId, defaultValue)`
-- `useObjectVariationDetails(flagId, defaultValue)`
+**Parameters:**
+- `flagId` (string) - The feature flag identifier
+- `defaultValue` (boolean) - Default value if flag is not available
+
+**Returns:** `boolean`
 
 <Tabs>
 <TabItem value="jsx" label="Example">
 
 ```jsx showLineNumbers
-import { useBooleanVariationDetails } from '@bucketeer/react-client-sdk';
+import { useBooleanVariation } from '@bucketeer/react-client-sdk';
 
-function AdvancedComponent() {
-  const featureDetails = useBooleanVariationDetails('advanced-feature', false);
+function FeatureComponent() {
+  const showNewUI = useBooleanVariation('new-ui-enabled', false);
   
   return (
     <div>
-      <p>Feature enabled: {featureDetails.variationValue}</p>
-      <p>Variation: {featureDetails.variationName}</p>
-      <p>Reason: {featureDetails.reason}</p>
+      {showNewUI ? (
+        <NewUserInterface />
+      ) : (
+        <LegacyUserInterface />
+      )}
     </div>
   );
 }
@@ -331,6 +331,222 @@ function AdvancedComponent() {
 
 </TabItem>
 </Tabs>
+
+#### useStringVariation
+
+**Signature:** `useStringVariation(flagId, defaultValue)`
+
+Returns a string feature flag value.
+
+**Parameters:**
+- `flagId` (string) - The feature flag identifier
+- `defaultValue` (string) - Default value if flag is not available
+
+**Returns:** `string`
+
+<Tabs>
+<TabItem value="jsx" label="Example">
+
+```jsx showLineNumbers
+import { useStringVariation } from '@bucketeer/react-client-sdk';
+
+function ThemeComponent() {
+  const theme = useStringVariation('app-theme', 'light');
+  
+  return (
+    <div className={`theme-${theme}`}>
+      <h1>Current theme: {theme}</h1>
+      {/* Your themed content */}
+    </div>
+  );
+}
+```
+
+</TabItem>
+</Tabs>
+
+#### useNumberVariation
+
+**Signature:** `useNumberVariation(flagId, defaultValue)`
+
+Returns a number feature flag value.
+
+**Parameters:**
+- `flagId` (string) - The feature flag identifier
+- `defaultValue` (number) - Default value if flag is not available
+
+**Returns:** `number`
+
+<Tabs>
+<TabItem value="jsx" label="Example">
+
+```jsx showLineNumbers
+import { useNumberVariation } from '@bucketeer/react-client-sdk';
+
+function ProductList() {
+  const itemsPerPage = useNumberVariation('items-per-page', 20);
+  const maxPrice = useNumberVariation('max-price-filter', 1000);
+  
+  return (
+    <div>
+      <p>Showing {itemsPerPage} items per page</p>
+      <p>Max price filter: ${maxPrice}</p>
+      {/* Product listing logic */}
+    </div>
+  );
+}
+```
+
+</TabItem>
+</Tabs>
+
+#### useObjectVariation
+
+**Signature:** `useObjectVariation(flagId, defaultValue)`
+
+Returns a JSON/object feature flag value with type safety.
+
+**Parameters:**
+- `flagId` (string) - The feature flag identifier
+- `defaultValue` (T) - Default value if flag is not available
+
+**Returns:** `T` (the type must extend `BKTValue`)
+
+<Tabs>
+<TabItem value="jsx" label="Example">
+
+```jsx showLineNumbers
+import { useObjectVariation } from '@bucketeer/react-client-sdk';
+
+function ConfigComponent() {
+  const apiConfig = useObjectVariation('api-config', {
+    timeout: 5000,
+    retries: 3,
+    baseUrl: 'https://api.example.com'
+  });
+  
+  const features = useObjectVariation('enabled-features', [
+    'chat', 'notifications', 'analytics'
+  ]);
+  
+  return (
+    <div>
+      <p>API Timeout: {apiConfig.timeout}ms</p>
+      <p>Retries: {apiConfig.retries}</p>
+      <p>Enabled features: {features.join(', ')}</p>
+    </div>
+  );
+}
+```
+
+</TabItem>
+</Tabs>
+
+### Evaluation Details Hooks
+
+These hooks return both the feature flag value and detailed evaluation information, useful for debugging or analytics.
+
+#### useBooleanVariationDetails
+
+**Signature:** `useBooleanVariationDetails(flagId, defaultValue)`
+
+Returns a boolean feature flag value with detailed evaluation information.
+
+**Parameters:**
+- `flagId` (string) - The feature flag identifier
+- `defaultValue` (boolean) - Default value if flag is not available
+
+**Returns:** `BKTEvaluationDetails<boolean>`
+
+#### useStringVariationDetails
+
+**Signature:** `useStringVariationDetails(flagId, defaultValue)`
+
+Returns a string feature flag value with detailed evaluation information.
+
+**Parameters:**
+- `flagId` (string) - The feature flag identifier
+- `defaultValue` (string) - Default value if flag is not available
+
+**Returns:** `BKTEvaluationDetails<string>`
+
+#### useNumberVariationDetails
+
+**Signature:** `useNumberVariationDetails(flagId, defaultValue)`
+
+Returns a number feature flag value with detailed evaluation information.
+
+**Parameters:**
+- `flagId` (string) - The feature flag identifier
+- `defaultValue` (number) - Default value if flag is not available
+
+**Returns:** `BKTEvaluationDetails<number>`
+
+#### useObjectVariationDetails
+
+**Signature:** `useObjectVariationDetails(flagId, defaultValue)`
+
+Returns a JSON/object feature flag value with detailed evaluation information.
+
+**Parameters:**
+- `flagId` (string) - The feature flag identifier
+- `defaultValue` (T) - Default value if flag is not available
+
+**Returns:** `BKTEvaluationDetails<T>`
+
+<Tabs>
+<TabItem value="jsx" label="Detailed Evaluation Example">
+
+```jsx showLineNumbers
+import { useBooleanVariationDetails } from '@bucketeer/react-client-sdk';
+
+function AdvancedComponent() {
+  const featureDetails = useBooleanVariationDetails('advanced-feature', false);
+  
+  // Log evaluation details for debugging
+  console.log('Feature evaluation:', {
+    featureId: featureDetails.featureId,
+    variationId: featureDetails.variationId,
+    variationName: featureDetails.variationName,
+    reason: featureDetails.reason,
+    userId: featureDetails.userId
+  });
+  
+  return (
+    <div>
+      <p>Feature enabled: {featureDetails.variationValue}</p>
+      <p>Variation: {featureDetails.variationName}</p>
+      <p>Evaluation reason: {featureDetails.reason}</p>
+      
+      {featureDetails.variationValue && <AdvancedFeature />}
+      
+      {/* Show debug info in development */}
+      {process.env.NODE_ENV === 'development' && (
+        <details>
+          <summary>Debug Info</summary>
+          <pre>{JSON.stringify(featureDetails, null, 2)}</pre>
+        </details>
+      )}
+    </div>
+  );
+}
+```
+
+</TabItem>
+</Tabs>
+
+#### Evaluation Details Object
+
+The `BKTEvaluationDetails<T>` object contains detailed information about feature flag evaluation. For complete details about this interface, see the [JavaScript SDK Evaluation Details documentation](/sdk/client-side/javascript#object).
+
+:::note Hook Behavior
+
+- All hooks automatically **re-render** your component when flag values change
+- Hooks **must** be used within components wrapped by `BucketeerProvider`
+- If a flag is not found, hooks return the provided `defaultValue`
+- Hooks are **reactive** - they respond to polling updates and manual fetches
+
+:::
 
 ## Advanced Usage
 
