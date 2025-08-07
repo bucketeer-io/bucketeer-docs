@@ -85,10 +85,10 @@ Auto-linking does not work with transitive dependencies, so you must install Asy
 
 ### 1. Configure and Initialize Client
 
-Import and configure the SDK (note the React Native specific config function):
+First, import the necessary components and configure the SDK:
 
 <Tabs>
-<TabItem value="tsx" label="App.tsx">
+<TabItem value="tsx" label="Importing">
 
 ```tsx showLineNumbers
 import React, { useEffect, useState } from 'react';
@@ -101,22 +101,45 @@ import {
   destroyBKTClient,
   type BKTClient,
 } from '@bucketeer/react-native-client-sdk';
+```
 
+</TabItem>
+</Tabs>
+
+Configure the SDK and user settings:
+
+<Tabs>
+<TabItem value="tsx" label="Configuration">
+
+```tsx showLineNumbers
 const config = defineBKTConfigForReactNative({
   apiKey: 'YOUR_API_KEY',
   apiEndpoint: 'YOUR_API_ENDPOINT',
   appVersion: '1.0.0',
-  featureTag: 'mobile', // Recommended for mobile apps
+  featureTag: 'mobile', // Optional but recommended
 });
 
 const user = defineBKTUser({
-  id: 'user-123',
-  customAttributes: {
-    platform: 'react-native',
-    version: '1.0.0',
-  },
+  id: 'USER_ID',
+  customAttributes: {},
 });
+```
 
+</TabItem>
+</Tabs>
+
+:::warning Important
+
+Use `defineBKTConfigForReactNative` instead of `defineBKTConfigForReact` when working with React Native. This ensures proper React Native-specific configuration including AsyncStorage integration.
+
+:::
+
+Initialize the client in your root component:
+
+<Tabs>
+<TabItem value="tsx" label="Initialization">
+
+```tsx showLineNumbers
 export default function App() {
   const [client, setClient] = useState<BKTClient | null>(null);
 
@@ -157,12 +180,6 @@ export default function App() {
 
 </TabItem>
 </Tabs>
-
-:::warning Important
-
-Use `defineBKTConfigForReactNative` instead of `defineBKTConfigForReact` when working with React Native. This ensures proper React Native-specific configuration including AsyncStorage integration.
-
-:::
 
 ### 2. Use Feature Flag Hooks
 

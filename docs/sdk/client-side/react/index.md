@@ -87,11 +87,8 @@ const config = defineBKTConfigForReact({
 });
 
 const user = defineBKTUser({
-  id: 'user-123',
-  customAttributes: {
-    platform: 'web',
-    version: '1.0.0',
-  },
+  id: 'USER_ID',
+  customAttributes: {},
 });
 ```
 
