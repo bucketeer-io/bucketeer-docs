@@ -296,9 +296,13 @@ function MyComponent() {
 
 These hooks return the current value of a feature flag and automatically re-render your component when the flag value changes.
 
+---
+
 #### useBooleanVariation
 
-**Signature:** `useBooleanVariation(flagId, defaultValue)`
+```typescript
+useBooleanVariation(flagId: string, defaultValue: boolean): boolean
+```
 
 Returns a boolean feature flag value.
 
@@ -332,9 +336,13 @@ function FeatureComponent() {
 </TabItem>
 </Tabs>
 
+---
+
 #### useStringVariation
 
-**Signature:** `useStringVariation(flagId, defaultValue)`
+```typescript
+useStringVariation(flagId: string, defaultValue: string): string
+```
 
 Returns a string feature flag value.
 
@@ -365,9 +373,13 @@ function ThemeComponent() {
 </TabItem>
 </Tabs>
 
+---
+
 #### useNumberVariation
 
-**Signature:** `useNumberVariation(flagId, defaultValue)`
+```typescript
+useNumberVariation(flagId: string, defaultValue: number): number
+```
 
 Returns a number feature flag value.
 
@@ -400,9 +412,13 @@ function ProductList() {
 </TabItem>
 </Tabs>
 
+---
+
 #### useObjectVariation
 
-**Signature:** `useObjectVariation(flagId, defaultValue)`
+```typescript
+useObjectVariation<T>(flagId: string, defaultValue: T): T
+```
 
 Returns a JSON/object feature flag value with type safety.
 
@@ -442,13 +458,19 @@ function ConfigComponent() {
 </TabItem>
 </Tabs>
 
+---
+
 ### Evaluation Details Hooks
 
 These hooks return both the feature flag value and detailed evaluation information, useful for debugging or analytics.
 
+---
+
 #### useBooleanVariationDetails
 
-**Signature:** `useBooleanVariationDetails(flagId, defaultValue)`
+```typescript
+useBooleanVariationDetails(flagId: string, defaultValue: boolean): BKTEvaluationDetails<boolean>
+```
 
 Returns a boolean feature flag value with detailed evaluation information.
 
@@ -458,9 +480,13 @@ Returns a boolean feature flag value with detailed evaluation information.
 
 **Returns:** `BKTEvaluationDetails<boolean>`
 
+---
+
 #### useStringVariationDetails
 
-**Signature:** `useStringVariationDetails(flagId, defaultValue)`
+```typescript
+useStringVariationDetails(flagId: string, defaultValue: string): BKTEvaluationDetails<string>
+```
 
 Returns a string feature flag value with detailed evaluation information.
 
@@ -470,9 +496,13 @@ Returns a string feature flag value with detailed evaluation information.
 
 **Returns:** `BKTEvaluationDetails<string>`
 
+---
+
 #### useNumberVariationDetails
 
-**Signature:** `useNumberVariationDetails(flagId, defaultValue)`
+```typescript
+useNumberVariationDetails(flagId: string, defaultValue: number): BKTEvaluationDetails<number>
+```
 
 Returns a number feature flag value with detailed evaluation information.
 
@@ -482,9 +512,13 @@ Returns a number feature flag value with detailed evaluation information.
 
 **Returns:** `BKTEvaluationDetails<number>`
 
+---
+
 #### useObjectVariationDetails
 
-**Signature:** `useObjectVariationDetails(flagId, defaultValue)`
+```typescript
+useObjectVariationDetails<T>(flagId: string, defaultValue: T): BKTEvaluationDetails<T>
+```
 
 Returns a JSON/object feature flag value with detailed evaluation information.
 
@@ -534,6 +568,8 @@ function AdvancedComponent() {
 
 </TabItem>
 </Tabs>
+
+---
 
 #### Evaluation Details Object
 
@@ -648,18 +684,21 @@ function RefreshButton() {
 4. **Use TypeScript** for better type safety with the provided types
 5. **Avoid frequent manual fetches** - let automatic polling handle updates
 
-## TypeScript Support
+## Re-exported from JavaScript SDK
 
-The React SDK provides full TypeScript support with exported types:
+The React SDK re-exports all functionality from the JavaScript SDK, allowing you to use any JavaScript SDK features directly:
 
-```typescript
-import type {
-  BKTClient,
-  BKTUser,
-  BKTConfig,
-  BKTEvaluationDetails,
-  BKTValue,
-} from '@bucketeer/react-client-sdk';
-```
+This means you can access all JavaScript SDK functionality without needing to install the JavaScript SDK separately. You can use features like:
+
+- Direct client methods (`client.booleanVariation()`, `client.track()`, etc.)
+- Advanced configuration options
+- Error handling utilities
+- All TypeScript types and interfaces
+
+:::tip
+
+When using React components, prefer the React hooks (ie: `useBooleanVariation`) over direct client methods for better integration with React's rendering cycle. Use direct client methods only when necessary (e.g., in event handlers or outside React components).
+
+:::
 
 For complete API reference and advanced features, see the [JavaScript SDK documentation](/sdk/client-side/javascript).
