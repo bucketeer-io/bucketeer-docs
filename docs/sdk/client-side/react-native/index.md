@@ -142,6 +142,7 @@ Initialize the client in your root component:
 ```tsx showLineNumbers
 export default function App() {
   const [client, setClient] = useState<BKTClient | null>(null);
+  const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
     const init = async () => {
@@ -160,6 +161,8 @@ export default function App() {
           // Keep client as null - app will use default values
           setClient(null);
         }
+      } finally {
+        setIsInitialized(true);
       }
     };
 
@@ -167,13 +170,13 @@ export default function App() {
     return () => destroyBKTClient();
   }, []);
 
+  if (!isInitialized) {
+    return <LoadingComponent />; // Your loading component
+  }
+
   return (
     <BucketeerProvider client={client}>
-      {!client ? (
-        <LoadingComponent /> // Your loading component
-      ) : (
-        <YourAppContent />
-      )}
+      <YourAppContent />
     </BucketeerProvider>
   );
 }

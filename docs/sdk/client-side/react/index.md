@@ -109,6 +109,7 @@ Initialize the client in your root component:
 ```jsx showLineNumbers
 export default function App() {
   const [client, setClient] = useState(null);
+  const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
     const init = async () => {
@@ -127,6 +128,8 @@ export default function App() {
           // Keep client as null - app will use default values
           setClient(null);
         }
+      } finally {
+        setIsInitialized(true);
       }
     };
 
@@ -134,13 +137,13 @@ export default function App() {
     return () => destroyBKTClient();
   }, []);
 
+  if (!isInitialized) {
+    return <div>Loading Bucketeer...</div>;
+  }
+
   return (
     <BucketeerProvider client={client}>
-      {!client ? (
-        <div>Loading Bucketeer...</div>
-      ) : (
-        <YourAppContent />
-      )}
+      <YourAppContent />
     </BucketeerProvider>
   );
 }
