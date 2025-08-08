@@ -96,7 +96,7 @@ Depending on your use, you may want to change the optional configurations availa
 - **eventsMaxQueueSize** - Default is 50 events
 - **storageKeyPrefix** - Default is empty
 - **userAgent** - Default is `window.navigator.userAgent`
-- **fetch** - Default is `window.fetch`
+- **fetch** - Default is `globalThis.fetch`
 :::
 
 :::note

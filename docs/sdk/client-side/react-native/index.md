@@ -157,7 +157,7 @@ Depending on your use, you may want to change the optional configurations availa
 - **eventsMaxQueueSize** - Default is 50 events
 - **storageKeyPrefix** - Default is empty
 - **userAgent** - Default is `window.navigator.userAgent`
-- **fetch** - Default is `window.fetch`
+- **fetch** - Default is `globalThis.fetch`
 
 :::
 
@@ -771,84 +771,6 @@ If you want to switch the user ID, please call the [flush](#flushing-events) int
 
 :::
 
-### React Native Specific Features
-
-#### App State Management
-
-Handle app state changes to optimize SDK behavior:
-
-<Tabs>
-<TabItem value="tsx" label="AppStateHandler.tsx">
-
-```tsx showLineNumbers
-import { useEffect, useContext } from 'react';
-import { AppState } from 'react-native';
-import { BucketeerContext } from '@bucketeer/react-native-client-sdk';
-
-function AppStateHandler() {
-  const { client } = useContext(BucketeerContext);
-
-  useEffect(() => {
-    const handleAppStateChange = (nextAppState: string) => {
-      if (nextAppState === 'active') {
-        // App came to foreground - refresh evaluations
-        client?.fetchEvaluations();
-      } else if (nextAppState === 'background') {
-        // App went to background - flush pending events
-        client?.flush();
-      }
-    };
-
-    const subscription = AppState.addEventListener('change', handleAppStateChange);
-    return () => subscription?.remove();
-  }, [client]);
-
-  return null;
-}
-```
-
-</TabItem>
-</Tabs>
-
-#### Network State Management
-
-Handle network connectivity changes:
-
-<Tabs>
-<TabItem value="tsx" label="NetworkHandler.tsx">
-
-```tsx showLineNumbers
-import { useEffect, useContext } from 'react';
-import NetInfo from '@react-native-netinfo/netinfo';
-import { BucketeerContext } from '@bucketeer/react-native-client-sdk';
-
-function NetworkHandler() {
-  const { client } = useContext(BucketeerContext);
-
-  useEffect(() => {
-    const unsubscribe = NetInfo.addEventListener(state => {
-      if (state.isConnected && state.isInternetReachable) {
-        // Network restored - refresh evaluations
-        client?.fetchEvaluations();
-      }
-    });
-
-    return unsubscribe;
-  }, [client]);
-
-  return null;
-}
-```
-
-</TabItem>
-</Tabs>
-
-:::info Graceful Degradation
-
-If Bucketeer initialization fails, you can pass `client={null}` to `BucketeerProvider`. All hooks will automatically return their default values, allowing your app to continue working normally without feature flags.
-
-:::
-
 ## Re-exported from React SDK
 
 The React Native SDK re-exports all functionality from the [React SDK](/sdk/client-side/react) and [JavaScript SDK](/sdk/client-side/javascript), allowing you to use any React SDK features directly:
@@ -856,6 +778,7 @@ The React Native SDK re-exports all functionality from the [React SDK](/sdk/clie
 This means you can access all React SDK functionality without needing to install the React SDK separately. You can use features like:
 
 - All React hooks (`useBooleanVariation`, `useStringVariation`, etc.)
+- Direct access to the Bucketeer client instance (by `getBKTClient()`) without `useContext`
 - Direct client methods (`client.booleanVariation()`, `client.track()`, etc.)
 - Advanced configuration options
 - Error handling utilities

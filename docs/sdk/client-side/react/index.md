@@ -267,7 +267,7 @@ Depending on your use, you may want to change the optional configurations availa
 - **eventsMaxQueueSize** - Default is 50 events
 - **storageKeyPrefix** - Default is empty
 - **userAgent** - Default is `window.navigator.userAgent`
-- **fetch** - Default is `window.fetch`
+- **fetch** - Default is `globalThis.fetch`
 
 :::
 
@@ -776,7 +776,6 @@ export interface BKTEvaluationDetails<T extends BKTValue> {
 - All hooks automatically **re-render** your component when flag values change
 - Hooks **must** be used within components wrapped by `BucketeerProvider`
 - If a flag is not found, hooks return the provided `defaultValue`
-- Hooks are **reactive** - they respond to polling updates and manual fetches
 
 :::
 
@@ -1064,7 +1063,7 @@ If you want to switch the user ID, please call the [flush](#flushing-events) int
 The React SDK re-exports all functionality from the JavaScript SDK, allowing you to use any JavaScript SDK features directly:
 
 This means you can access all JavaScript SDK functionality without needing to install the JavaScript SDK separately. You can use features like:
-
+- Direct access to the Bucketeer client instance (by `getBKTClient()`) without `useContext`
 - Direct client methods (`client.booleanVariation()`, `client.track()`, etc.)
 - Advanced configuration options
 - Error handling utilities
