@@ -30,7 +30,11 @@ Before starting, ensure that you follow the [Getting Started](/getting-started) 
 - ⚠️ May work: React 18.0.0 - 18.1.x (not officially supported)
 - ❌ Not supported: React 19.0.0 and above
 
-## Installation
+## Getting started
+
+### Installing dependency
+
+Install the dependency in your application.
 
 <Tabs>
 <TabItem value="npm" label="npm">
@@ -49,11 +53,9 @@ yarn add @bucketeer/react-client-sdk
 </TabItem>
 </Tabs>
 
-## Setup
+### Importing client
 
-### 1. Configure and Initialize Client
-
-First, import the necessary components and configure the SDK:
+Import the necessary components and configure the SDK:
 
 <Tabs>
 <TabItem value="jsx" label="Importing">
@@ -73,7 +75,19 @@ import {
 </TabItem>
 </Tabs>
 
-Configure the SDK and user settings:
+### Configuring client
+
+Configure the SDK config and user configuration.
+
+:::info
+
+The **featureTag** setting is the tag you configure when creating a Feature Flag. It will evaluate all the Feature Flags in the environment when it is not configured.
+
+**We strongly recommend** using tags to speed up the evaluation process and reduce the cache size in the client.
+
+:::
+
+All the settings in the example below are required.
 
 <Tabs>
 <TabItem value="jsx" label="Configuration">
@@ -97,9 +111,11 @@ const user = defineBKTUser({
 
 :::warning Important
 
-Use `defineBKTConfigForReact` instead of `defineBKTConfig` when working with React SDK. This ensures proper React-specific configuration.
+Use `defineBKTConfigForReact` instead of `defineBKTConfig` when working with React SDK. This function includes React-specific optimizations and ensures proper integration with React's rendering cycle.
 
 :::
+
+### Initializing client
 
 Initialize the client in your root component:
 
@@ -154,7 +170,7 @@ export default function App() {
 
 :::info Default timeout
 
-The initialize process default timeout is **5 seconds**.<br />
+The initialization process has a default timeout of **5 seconds**.<br />
 Once initialization is finished, all the requests in the SDK use a timeout of **30 seconds**.
 
 :::
@@ -167,7 +183,7 @@ You can customize the initialization timeout if needed:
 <TabItem value="jsx" label="Custom Timeout">
 
 ```jsx showLineNumbers
-const timeout = 2000; // Custom timeout: 2 seconds (in milliseconds)
+const timeout = 2000; // Default is 5 seconds (In milliseconds)
 const initialFetchPromise = initializeBKTClient(config, user, timeout);
 
 initialFetchPromise
@@ -183,7 +199,7 @@ initialFetchPromise
       setClient(client);
       console.warn('Initialization timed out, but client is ready');
     } else {
-      console.error('Failed to initialize:', error);
+      console.error('Failed to initialize with BKTException:', error);
     }
   });
 ```
@@ -197,7 +213,7 @@ During the initialization process, timeout errors are **not** related to the ini
 
 :::
 
-### 2. Setup BucketeerProvider
+### Setup BucketeerProvider
 
 The `BucketeerProvider` is a React Context Provider that makes the Bucketeer client available to all child components through React hooks.
 
@@ -242,15 +258,22 @@ All Bucketeer hooks (`useBooleanVariation`, `useStringVariation`, etc.) must be 
 
 :::
 
-:::info Configuration Options
+:::info Custom configuration
 
-The **featureTag** setting filters which feature flags to evaluate. We strongly recommend using tags to improve performance and reduce cache size.
+Depending on your use, you may want to change the optional configurations available.
 
-Optional configurations:
-- **pollingInterval** - Default is 10 minutes (minimum 60 seconds)
-- **eventsFlushInterval** - Default is 30 seconds  
+- **pollingInterval** - Minimum 60 seconds. Default is 10 minutes (In Milliseconds)
+- **eventsFlushInterval** - Default is 30 seconds (In Milliseconds)
 - **eventsMaxQueueSize** - Default is 50 events
 - **storageKeyPrefix** - Default is empty
+- **userAgent** - Default is `window.navigator.userAgent`
+- **fetch** - Default is `window.fetch`
+
+:::
+
+:::note
+
+The Bucketeer SDK doesn't save the user data. The Application must save and set it when initializing the client SDK.
 
 :::
 
@@ -296,6 +319,148 @@ function MyComponent() {
 
 </TabItem>
 </Tabs>
+
+### Evaluating user
+
+The variation hooks determine whether or not a feature flag is enabled for a specific user.<br />
+To check which variation a specific user will receive, you can use the hooks like below.
+
+```jsx showLineNumbers
+const showNewFeature = useBooleanVariation('YOUR_FEATURE_FLAG_ID', false);
+if (showNewFeature) {
+    // The Application code to show the new feature
+} else {
+    // The code to run when the feature is off
+}
+```
+
+:::note
+
+The variation hooks will return the default value if the feature flag is missing in the SDK.
+
+:::
+
+### Variation types
+
+The Bucketeer SDK supports the following variation types.
+
+:::caution Deprecated
+
+The `jsonVariation` interface is deprecated. Please use the `objectVariation` instead.
+
+:::
+
+```typescript showLineNumbers
+useBooleanVariation(featureId: string, defaultValue: boolean): boolean;
+
+useStringVariation(featureId: string, defaultValue: string): string;
+
+useNumberVariation(featureId: string, defaultValue: number): number;
+
+// The returned value will be either a BKTJsonObject or a BKTJsonArray. If no result is found, it will return the provided `defaultValue`, which can be of any type within `BKTValue`.
+useObjectVariation(featureId: string, defaultValue: BKTValue): BKTValue;
+```
+
+#### Polling
+
+The initialization process starts polling the latest evaluations from the Bucketeer server in the background using the interval `pollingInterval` configuration. React SDK **does not support** Background fetch.
+
+#### Polling retry behavior
+
+The Bucketeer SDK regularly polls the latest evaluations from the server based on the pollingInterval parameter. By default, the `pollingInterval` is set to 10 minutes, but you can adjust it to suit your needs.
+
+If a polling request fails, the SDK initiates a retry procedure. The SDK attempts a new polling request every minute up to 5 times. If all five retry attempts fail, the SDK sends a new polling request once the `pollingInterval` time elapses. The table below shows this scenario:
+
+<div className="center-table">
+<table>
+<thead>
+  <tr>
+    <th>Polling Time</th>
+    <th>Retry Time</th>
+    <th>Request Status</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>10:00</td>
+    <td>-</td>
+    <td>Fail</td>
+  </tr>
+  <tr>
+    <td>- </td>
+    <td>10:01</td>
+    <td>Fail</td>
+  </tr>
+  <tr>
+    <td>- </td>
+    <td>10:02</td>
+    <td>Fail</td>
+  </tr>
+  <tr>
+    <td>- </td>
+    <td>10:03</td>
+    <td>Fail</td>
+  </tr>
+  <tr>
+    <td>-</td>
+    <td>10:04</td>
+    <td>Fail</td>
+  </tr>
+  <tr>
+    <td>-</td>
+    <td>10:05</td>
+    <td>Fail</td>
+  </tr>
+  <tr>
+    <td>10:10</td>
+    <td>-</td>
+    <td>Successful</td>
+  </tr>
+</tbody>
+</table>
+</div>
+
+The polling counter, which uses the `pollingInterval` information, resets in case of a successful retry. The table below shows the described scenario.
+
+<div className="center-table">
+<table>
+<thead>
+  <tr>
+    <th>Polling Time</th>
+    <th>Retry Time</th>
+    <th>Request status</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>10:00</td>
+    <td>-</td>
+    <td>Fail</td>
+  </tr>
+  <tr>
+    <td>- </td>
+    <td>10:01</td>
+    <td>Successful</td>
+  </tr>
+  <tr>
+    <td>10:11</td>
+    <td>-</td>
+    <td>Successful</td>
+  </tr>
+</tbody>
+</table>
+</div>
+
+### Handling exceptions
+
+While most of the time error is handled internally, some methods throw `BKTException` when something goes wrong.  
+Those methods are:
+
+- **`initializeBKTClient()`**
+- **`BKTClient#fetchEvaluations()`**
+- **`BKTClient#flush()`**
+
+These methods return `Promise` and might reject with `BKTException`, so you should make sure to catch the error.
 
 ## Hook Reference
 
@@ -580,7 +745,31 @@ function AdvancedComponent() {
 
 #### Evaluation Details Object
 
-The `BKTEvaluationDetails<T>` object contains detailed information about feature flag evaluation. For complete details about this interface, see the [JavaScript SDK Evaluation Details documentation](/sdk/client-side/javascript#object).
+The `BKTEvaluationDetails<T>` object contains detailed information about feature flag evaluation:
+
+<Tabs>
+<TabItem value="jsx" label="Interface">
+
+```typescript showLineNumbers
+export interface BKTEvaluationDetails<T extends BKTValue> {
+  readonly featureId: string;       // The ID of the feature flag.
+  readonly featureVersion: number;  // The version of the feature flag.
+  readonly userId: string;          // The ID of the user being evaluated.
+  readonly variationId: string;     // The ID of the assigned variation.
+  readonly variationName: string;   // The name of the assigned variation.
+  readonly variationValue: T;       // The value of the assigned variation.
+  readonly reason:
+    | 'TARGET'        // Evaluated using individual targeting.
+    | 'RULE'          // Evaluated using a custom rule.
+    | 'DEFAULT'       // Evaluated using the default strategy.
+    | 'CLIENT'        // The flag is missing in the cache; the default value was returned.
+    | 'OFF_VARIATION' // Evaluated using the off variation.
+    | 'PREREQUISITE'; // Evaluated using a prerequisite.
+}
+```
+
+</TabItem>
+</Tabs>
 
 :::note Hook Behavior
 
@@ -591,7 +780,7 @@ The `BKTEvaluationDetails<T>` object contains detailed information about feature
 
 :::
 
-## Advanced Usage
+## Supported features
 
 ### Updating User Attributes
 
@@ -623,7 +812,7 @@ function UserProfile() {
 </TabItem>
 </Tabs>
 
-### Tracking Events
+### Reporting custom events
 
 <Tabs>
 <TabItem value="jsx" label="EventTracking.jsx">
@@ -651,7 +840,7 @@ function PurchaseButton() {
 </TabItem>
 </Tabs>
 
-### Manual Evaluation Updates
+### Updating user evaluations
 
 <Tabs>
 <TabItem value="jsx" label="RefreshButton.jsx">
@@ -668,7 +857,7 @@ function RefreshButton() {
       await client.fetchEvaluations(5000); // 5 second timeout
       console.log('Evaluations updated');
     } catch (error) {
-      console.error('Failed to update:', error);
+      console.error('Failed to update with BKTException:', error);
     }
   };
 
@@ -683,12 +872,191 @@ function RefreshButton() {
 </TabItem>
 </Tabs>
 
+### Flushing events
+
+This method will send all pending analytics events to the Bucketeer server as soon as possible. This process is asynchronous, so it returns before it is complete.
+
+<Tabs>
+<TabItem value="jsx" label="FlushEvents.jsx">
+
+```jsx showLineNumbers
+import { useContext } from 'react';
+import { BucketeerContext } from '@bucketeer/react-client-sdk';
+
+function FlushButton() {
+  const { client } = useContext(BucketeerContext);
+
+  const handleFlush = async () => {
+    try {
+      await client?.flush();
+      console.log('Events flushed successfully');
+    } catch (error) {
+      console.error('Failed to flush events with BKTException:', error);
+    }
+  };
+
+  return (
+    <button onClick={handleFlush}>
+      Flush Events
+    </button>
+  );
+}
+```
+
+</TabItem>
+</Tabs>
+
+:::note
+
+In regular use, you don't need to call the flush method because the events are sent every **30 seconds** in the background.
+
+:::
+
+### User attributes configuration
+
+This feature will give you robust and granular control over what users can see on your application. You can add rules using these attributes on the console UI's feature flag's targeting tab.
+
+<Tabs>
+<TabItem value="jsx" label="UserConfiguration.jsx">
+
+```jsx showLineNumbers
+import { defineBKTUser, defineBKTConfigForReact, initializeBKTClient } from '@bucketeer/react-client-sdk';
+
+const attributes = {
+  app_version: '1.0.0',
+  os_version: '11.0.0',
+  device_model: 'pixel-5',
+  language: 'english',
+  genre: 'female'
+};
+
+const user = defineBKTUser({
+  id: 'USER_ID',
+  customAttributes: attributes
+});
+
+const config = defineBKTConfigForReact({
+  apiKey: 'YOUR_API_KEY',
+  apiEndpoint: 'YOUR_API_ENDPOINT',
+  appVersion: '1.0.0',
+  featureTag: 'web',
+});
+
+await initializeBKTClient(config, user);
+```
+
+</TabItem>
+</Tabs>
+
+### Getting user information
+
+This method will return the current user configured in the SDK. This is useful when you want to check the current user id and attributes before updating them through [updateUserAttributes](#updating-user-attributes).
+
+<Tabs>
+<TabItem value="jsx" label="GetUserInfo.jsx">
+
+```jsx showLineNumbers
+import { useContext } from 'react';
+import { BucketeerContext } from '@bucketeer/react-client-sdk';
+
+function UserInfo() {
+  const { client } = useContext(BucketeerContext);
+
+  const handleGetUser = () => {
+    const user = client?.currentUser();
+    console.log('Current user:', user);
+  };
+
+  return (
+    <button onClick={handleGetUser}>
+      Get User Info
+    </button>
+  );
+}
+```
+
+</TabItem>
+</Tabs>
+
+### Listening to evaluation updates
+
+The SDK can notify when the evaluation is updated.
+The listener can detect both automatic polling and manual fetching.
+
+<Tabs>
+<TabItem value="jsx" label="EvaluationListener.jsx">
+
+```jsx showLineNumbers
+import { useContext, useEffect } from 'react';
+import { BucketeerContext } from '@bucketeer/react-client-sdk';
+
+function EvaluationListener() {
+  const { client } = useContext(BucketeerContext);
+
+  useEffect(() => {
+    if (!client) return;
+
+    // Add listener - returned value is used when you want to remove listener
+    const key = client.addEvaluationUpdateListener(() => {
+      const showNewFeature = client.booleanVariation("YOUR_FEATURE_FLAG_ID", false);
+      if (showNewFeature) {
+        // The Application code to show the new feature
+      } else {
+        // The code to run when the feature is off
+      }
+    });
+
+    // Cleanup: Remove listener on component unmount
+    return () => {
+      client.removeEvaluationUpdateListener(key);
+      // Or remove all listeners: client.clearEvaluationUpdateListeners();
+    };
+  }, [client]);
+
+  return <div>Listening for evaluation updates...</div>;
+}
+```
+
+</TabItem>
+</Tabs>
+
+### Destroying client
+
+There are cases you might want to switch the user ID or reduce resources when the application is in the background.<br />
+For those cases, you can call the destroy function, which will clear the client instance.
+
+<Tabs>
+<TabItem value="jsx" label="DestroyClient.jsx">
+
+```jsx showLineNumbers
+import { useEffect } from 'react';
+import { destroyBKTClient } from '@bucketeer/react-client-sdk';
+
+function App() {
+  useEffect(() => {
+    // Cleanup on component unmount
+    return () => destroyBKTClient();
+  }, []);
+
+  // Your app content...
+}
+```
+
+</TabItem>
+</Tabs>
+
+:::tip
+
+If you want to switch the user ID, please call the [flush](#flushing-events) interface before calling the destroy, so that all the pending events can be sent before clearing the client instance, then call the [initialize](#initializing-client) interface with the new user information.
+
+:::
+
 ## Best Practices
 
 1. **Use feature tags** to improve performance by filtering relevant flags
 2. **Handle initialization timeouts** gracefully - the client may still work
 3. **Update user attributes** when user context changes (login, plan changes, etc.)
-4. **Use TypeScript** for better type safety with the provided types
+4. **Use TypeScript** for better type safety with the provided types (see [Re-exported from JavaScript SDK](#re-exported-from-javascript-sdk) section)
 5. **Avoid frequent manual fetches** - let automatic polling handle updates
 
 ## Re-exported from JavaScript SDK
