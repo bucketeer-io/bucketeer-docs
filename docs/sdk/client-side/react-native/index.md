@@ -775,7 +775,7 @@ If you want to switch the user ID, please call the [flush](#flushing-events) int
 
 The React Native SDK re-exports all functionality from the [React SDK](/sdk/client-side/react) and [JavaScript SDK](/sdk/client-side/javascript), allowing you to use any React SDK features directly:
 
-This means you can access all React SDK functionality without needing to install the React SDK separately. You can use features like:
+This means you can access all React SDK and JavaScript SDK functionality without needing to install the React SDK and JavaScript SDK separately. You can use features like:
 
 - All React hooks (`useBooleanVariation`, `useStringVariation`, etc.)
 - Direct access to the Bucketeer client instance (by `getBKTClient()`) without `useContext`
