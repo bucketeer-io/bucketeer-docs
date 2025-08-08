@@ -209,6 +209,8 @@ const sidebars = {
         'sdk/client-side/ios/index',
         'sdk/client-side/flutter/index',
         'sdk/client-side/javascript/index',
+        'sdk/client-side/react/index',
+        'sdk/client-side/react-native/index',
       ],
     },
     {
