@@ -45,6 +45,12 @@ const sidebars = {
       className: 'sidebar-account',
     },
     {
+      type: 'doc',
+      id: 'getting-started/bucketeer-dashboard',
+      label: 'Bucketeer Dashboard',
+      className: 'sidebar-bucketeer-dashboard',
+    },
+    {
       type: 'category',
       label: "Quickstart",
       link: {
