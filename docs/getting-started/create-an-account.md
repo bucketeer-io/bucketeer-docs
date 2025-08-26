@@ -11,9 +11,9 @@ Bucketeer allows you to manage and track data related to different environments.
 
 The following steps show how to create an account as an Admin.
 
-1. Select the target environment from the select menu on the top left.
-2. Navigate to the **Accounts** page from the sidebar menu.
-3. Click **+ Add** button to add a new account.
+1. Click on the gear icon on the sidebar menu.
+2. Select **Members**.
+3. Click **+ Invite Member** button to add a new account.
 
 <CenteredImg
   imgURL='img/getting-started/create-bucketeer-account-1.png'
@@ -22,7 +22,20 @@ The following steps show how to create an account as an Admin.
 />
 
 4. Enter the new member's email and define their role.
-5. Click **Submit** to create the account.
+
+    :::info Teams
+    You can create teams and assign members to it.
+    
+    Use teams to group members, making it easier when listing them on the list page.
+    ::::
+
+    :::info Role Member
+
+     When you assign the role Member to a new account, the owner can only access information related to the Environment you choose. These users are unable to create or update organization settings, projects, environments, API keys, or members.
+    ::::
+
+
+5. Click **Invite Member** to create the account.
 
 <CenteredImg 
   imgURL='img/getting-started/create-bucketeer-account-2.png'
