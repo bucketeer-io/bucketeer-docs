@@ -12,7 +12,7 @@ The Schedule feature allows you to deliver or remove a feature at a specific dat
 
 ## How the schedule works
 
-When using Bucketeer Auto Operation with the Schedule condition, you can manage your flags based on specific dates and times. Once Bucketeer receives the SDK request, the schedule condition checks if the specified date and time have been reached. If they have, the operation to enable or disable a flag variation is executed.
+When using Bucketeer Operation with the Schedule condition, you can manage your flags based on specific dates and times. Once Bucketeer receives the SDK request, the schedule condition checks if the specified date and time have been reached. If they have, the operation to enable or disable a flag variation is executed.
 
 :::info Schedule requisites 
 
@@ -22,16 +22,16 @@ To use the schedule condition, you must always select a future date and time to 
 
 The schedule feature supports multi-scheduling, allowing you to create a chain of scheduled operations. This makes it easier to visualize and configure the flag schedule. For example, you can enable the flag (turn it On) on weekends and disable it (turn it Off) on weekdays.
 
-## Setting up auto operation with schedule
+## Setting up operation with schedule
 
 To enable or disable a feature flag using the schedule option, follow these steps:
 
-1. Go to the **Auto Operation** page.
+1. Go to the **Operation** page.
 2. Click the **+ New Operation** button and select **Schedule**.
-3. The **Create Operation** panel will appear, displaying the current flag state (On or Off). 
+3. The **New Operation** panel will appear, displaying the current flag state (On or Off). 
 4. Under **Schedule**, select the operation's final flag state (On or Off) and set up the date and time. Remember, you need to choose a future date and time.
 5. (Optional) Add more schedules using the **+ Add Schedule** button. 
-6. After adding all the schedules, click **Submit**. 
+6. After adding all the schedules, click **Create Operation**. 
 
 :::info Multi-schedule
 
@@ -42,7 +42,7 @@ Bucketeer does not restrict the flag state selection when using multi-schedule. 
 The image below shows an example of a multi-schedule configuration. Notice that two On operations were used in sequence without errors or warnings.
 
 <CenteredImg
-  imgURL="img/feature-flags/auto-ops-rules/schedule-condition-v4.png"
+  imgURL="img/feature-flags/auto-ops-rules/schedule-condition-v5.png"
   alt="Create a schedule operation"
   wSize="400px"
   borderWidth="1px"
@@ -50,7 +50,7 @@ The image below shows an example of a multi-schedule configuration. Notice that 
 
 ## Managing schedules
 
-After creating a schedule, it will be active and available in the Auto Operation panel. Each schedule displays the created date and all associated operations, with the respective flag state and date and time for each schedule. The following image shows the progress information for the schedule created in the previous section:
+After creating a schedule, it will be active and available in the Operation panel. Each schedule displays the created date and all associated operations, with the respective flag state and date and time for each schedule. The following image shows the progress information for the schedule created in the previous section:
 
 <CenteredImg
   imgURL="img/feature-flags/auto-ops-rules/schedule-operation.png"
@@ -66,7 +66,7 @@ While active, you can edit, stop, or delete the schedule:
 
 ## Schedule lifecycle
 
-When you create a schedule, it will be active and available in the **Active** tab in the Auto Operation panel.  
+When you create a schedule, it will be active and available in the **Active** tab in the Operation panel.  
 
 When the first scheduled operation is executed, the flag state is changed, and the schedule progress information is updated. Instead of showing the creation date and time, it displays the last flag state update date and time. The same happens for multi-schedule after each operation.  
 

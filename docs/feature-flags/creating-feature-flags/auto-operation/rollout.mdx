@@ -29,9 +29,9 @@ On the first day of the rollout, 10% of your users will see the new content. On 
 
 To add a rollout to a feature flag, you need to follow the steps below:
 
-1. Go to the **Auto Operation** tab on the feature Flag page details.
+1. Go to the **Operation** tab on the feature Flag page details.
 2. Click the **+ New Operation** and select **Progressive Rollout**.
-3. Configure the rollout and click **Submit**. Check the [Template rollout](#template-rollout) or [Manual rollout](#manual-rollout) sections to learn how to configure the rollout.
+3. Configure the rollout and click **Create Operation**. Check the [Template rollout](#template-rollout) or [Manual rollout](#manual-rollout) sections to learn how to configure the rollout.
 
 :::caution Restrictions
 
@@ -61,7 +61,7 @@ The rollout provides two main options when setting it up:
 
 If you choose to use the Template rollout, you need to define the following configurations before submitting it:
 
-- **Variation**: Choose the variation to roll out. You should not choose the same variation selected as [OFF variation](/feature-flags/creating-feature-flags/targeting#the-targeting-page). Otherwise, it could affect what the end users see.
+- **Flag Variation**: Choose the variation to roll out. You should not choose the same variation selected as [OFF variation](/feature-flags/creating-feature-flags/targeting#the-targeting-page). Otherwise, it could affect what the end users see.
 - **Start Date**: The rollout starting date and time. 
 - **Increment**: The percentual increment used at each rollout release phase. This option will define, as a result, the total number of rollout releases. If you choose 10%, ten stages are required to reach the total rollout.
 - **Frequency**: The frequency of each rollout phase (hourly, daily, weekly) will be released. The first phase will depend on the **Start Date** value you selected, and the remaining phases will rely on this starting point. 
@@ -98,11 +98,10 @@ The image below summarizes an example of a configuration using the Manual config
 
 ## Managing rollouts
 
-After creating a rollout, it becomes active and is available in the Auto Operation panel. You can identify the rollout by the **Progressive Rollout** tag or the **Enable Operation** type. The rollout progress information displays all rollout phases, including the respective dates, times, and the total percentage released at each phase. The progress information also includes:
+After creating a rollout, it becomes active and is available in the Operation panel. You can identify the rollout by the **Progressive Rollout** tag or the **Enable Operation** type. The rollout progress information displays all rollout phases, including the respective dates, times, and the total percentage released at each phase. The progress information also includes:
 
 - **Increment**: The percentage increment used at each rollout release phase (only available for Template rollouts).
 - **Start Date**: The date when the progressive rollout will start.
-- **Variation**: The flag variation being released.
 - **Frequency**: The frequency of each rollout phase (hourly, daily, weekly), (only available for Template rollouts).
 
 The following image shows an example of progress information for a progressive rollout:
@@ -126,7 +125,7 @@ While active, you can stop or delete the rollout:
 
 ## Roullout lifecycle
 
-When you create a rollout, it will be active and available in the **Active** tab of the Auto Operation panel. The first rollout stage (0%) displays the date and time of its creation. As each stage is reached, the progress information panel updates, providing clear visual information about the current rollout progress. After all rollout stages are completed, the rollout moves to the **Finished** tab. The following image presents an example of progress information for a running rollout.
+When you create a rollout, it will be active and available in the **Active** tab of the Operation panel. The first rollout stage (0%) displays the date and time of its creation. As each stage is reached, the progress information panel updates, providing clear visual information about the current rollout progress. After all rollout stages are completed, the rollout moves to the **Finished** tab. The following image presents an example of progress information for a running rollout.
 
 <CenteredImg
   imgURL="img/feature-flags/auto-ops-rules/running-rollout.png"
@@ -134,11 +133,11 @@ When you create a rollout, it will be active and available in the **Active** tab
   borderWidth="1px"
 />
 
-## Combining auto operations
+## Combining operations
 
-You can combine the usage of available [auto operations](/feature-flags/creating-feature-flags/auto-operation) from Bucketeer. For example, you can define a progressive rollout, a [schedule](/feature-flags/creating-feature-flags/auto-operation/schedule), and a [event rate](/feature-flags/creating-feature-flags/auto-operation/event-rate) conditions for the same flag. 
+You can combine the usage of available [operations](/feature-flags/creating-feature-flags/auto-operation) from Bucketeer. For example, you can define a progressive rollout, a [schedule](/feature-flags/creating-feature-flags/auto-operation/schedule), and a [event rate](/feature-flags/creating-feature-flags/auto-operation/event-rate) conditions for the same flag. 
 
-It's vital to note that turning off a flag by schedule or event rate conditions has a higher priority than the progressive rollout. Therefore, if your flag has a running progressive rollout and an Auto Operation is triggered, the system will stop the progressive rollout. The progressive rollout will be moved to the **Finished** tab, where you can check the last rollout state or use it as a reference for future rollouts.
+It's vital to note that turning off a flag by schedule or event rate conditions has a higher priority than the progressive rollout. Therefore, if your flag has a running progressive rollout and an operation is triggered, the system will stop the progressive rollout. The progressive rollout will be moved to the **Finished** tab, where you can check the last rollout state or use it as a reference for future rollouts.
 
 ## Restrictions and rules
 
@@ -163,8 +162,8 @@ If you need to update a flag that has a running progressive rollout associated w
 - The default strategy on the [Targeting](/feature-flags/creating-feature-flags/targeting) tab can't be modified.
 - You're not able to add or remove variations to the flag. However, you can edit the values, names, and descriptions of the existing variations.
 
-### Other Auto Operations
+### Other operations
 
 Progressive rollouts can be created for flags, whether they're enabled or disabled. 
 
-If either manual intervention or Auto Operations turn OFF a flag, the default strategy percentage will remain the last progressive rollout update value. Consequently, if the flag is turned back on in the future, the default strategy percentage will be the last updated value when the progressive rollout is stopped.
+If either manual intervention or a operation turn OFF a flag, the default strategy percentage will remain the last progressive rollout update value. Consequently, if the flag is turned back on in the future, the default strategy percentage will be the last updated value when the progressive rollout is stopped.

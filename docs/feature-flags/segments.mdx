@@ -8,21 +8,21 @@ tags: ['user-segments', 'segments', 'targeting', 'feature-flag']
 
 import CenteredImg from '@site/src/components/centered-img/CenteredImg';
 
-Segments enable you to create user groups based on the unique ID of end users defined when initializing the Bucketeer SDK.<br />
-It allows you to create specific user targets to manage all users for a single feature flag variation or beta tests on a small number of users.
+Segments enable you to create user groups based on the unique ID of end users defined when initializing the Bucketeer SDK. It allows you to create specific user targets to manage all users for a single feature flag variation or beta tests on a small number of users.
 
 ## Use case
 
-You can use segments to target specific user groups and make a new feature only available to them.<br />
-For example, before releasing a new feature, the QA team may need to test it. In such a situation, you can create a segment with all QA team members' IDs and make the new feature only available to them.
+You can use segments to target specific user groups and make a new feature only available to them. For example, before releasing a new feature, the QA team may need to test it. In such a situation, you can create a segment with all QA team members' IDs and make the new feature only available to them.
 
+:::info 
 Access the [Targeting with feature flags](/feature-flags/creating-feature-flags/targeting#user-segments) page to learn how to use segments to target users.
+:::
 
 ## Creating segments
 
 To create a Segment on Bucketeer:
 
-1. Navigate to the **User Segments** menu and click on **+ Add**.
+1. Navigate to the **User Segments** and click on **+ New User Segment**.
 2. Add a **Name** and **Description** for the new segment.
 3. Add a list of users to be included in the new segment. This step is optional. You can upload a **CSV** or **Txt** file with the user's ID separated with commas. Alternatively, select **Enter user IDs** and manually type the user IDs.
 4. Click on **Submit**.
@@ -70,18 +70,18 @@ You can update the **Name**, **Description**, and user list. Note that the prev
 By updating the user ID list, you will override the current list in the database. If you want to add or remove users from the list, please download the list and edit it on your PC before submitting it.
 :::
 
-### Downloading an existing user list
+## Downloading an existing user list
 
-1. Download the existing list by clicking on the action menu (three dots) on the list page and selecting **Download user list**.
-2. Edit the list locally on your PC.
-3. Upload the updated list to the same segment.
+After creating a User Segment, you can download the user's list. To do this, access the User Segment page, find the disired segment list and click on the action menu (three dots). After, select **Download User Segment**.
+
+With the User Segment, you can updated the list and, after, upload the updated list to the same segment, if necessary.
 
 ## Deleting segments
 
 To delete a segment:
 
 1. Navigate to the **User Segments** menu.
-2. Find the desired segment, click the action button (three dots) on the list page, and select **Delete segment**.
+2. Find the desired segment, click the action button (three dots) on the list page, and select **Delete User Segment**.
 
 :::warning In use segments
 You cannot delete a segment with an `In use` status. If you try to delete it, the Bucketeer will show all feature flags currently using the segment. Before deleting, you must remove it from all feature flags.
