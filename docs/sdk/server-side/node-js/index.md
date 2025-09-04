@@ -49,7 +49,7 @@ Import the Bucketeer SDK into your application code.
 <TabItem value="js" label="JavaScript">
 
 ```js showLineNumbers
-import { initialize } from '@bucketeer/node-server-sdk';
+import { initializeBKTClient, defineBKTConfig } from '@bucketeer/node-server-sdk';
 ```
 
 </TabItem>
@@ -73,11 +73,11 @@ The **tag** setting is the tag you configure when creating a Feature Flag. It wi
 <TabItem value="js" label="JavaScript">
 
 ```js showLineNumbers
-const config = {
-  host: 'YOUR_API_URL',
-  token: 'YOUR_API_KEY',
-  tag: 'YOUR_TAG',
-};
+const config = defineBKTConfig({
+  apiEndpoint: 'YOUR_API_URL',
+  apiKey: 'YOUR_API_KEY',
+  featureTag: 'YOUR_TAG',
+});
 ```
 
 </TabItem>
@@ -89,8 +89,9 @@ const config = {
 
 Depending on your use, you may want to change the optional configurations available.
 
-- **pollingIntervalForRegisterEvents** (Default is 1 minute - specify in milliseconds)
-- **logger** (Default is `logger.DefaultLogger`)
+- **eventsFlushInterval** (Default is 30 seconds - specify in milliseconds)
+- **eventsMaxQueueSize** (Default is 50 minute)
+- **logger** (Default is `DefaultLogger`)
 - **enableLocalEvaluation** (Default is false)
 - **cachePollingInterval** (Default is 1 minute - specify in milliseconds)
 
@@ -106,12 +107,12 @@ To evaluate users on the server side you must create an API Key using the `Clien
 <TabItem value="js" label="JavaScript">
 
 ```js showLineNumbers
-  const config = {
-    host: 'YOUR_API_ENDPOINT',
-    token:'YOUR_API_KEY',
-    tag: 'YOUR_FEATURE_TAG',
-  }
-  const client = initialize(config);
+  const config = defineBKTConfig({
+    apiEndpoint: 'YOUR_API_ENDPOINT',
+    apiKey:'YOUR_API_KEY',
+    featureTag: 'YOUR_FEATURE_TAG',
+  });
+  const client = initializeBKTClient(config);
 ```
 
 </TabItem>
@@ -139,14 +140,14 @@ When initializing the SDK you must enable the local evaluation setting.
 <TabItem value="js" label="JavaScript">
 
 ```js showLineNumbers
-  const config = {
-    host: 'YOUR_API_ENDPOINT',
-    token:'YOUR_API_KEY',
-    tag: 'YOUR_FEATURE_TAG',
+  const config = defineBKTConfig({
+    apiEndpoint: 'YOUR_API_ENDPOINT',
+    apiKey:'YOUR_API_KEY',
+    featureTag: 'YOUR_FEATURE_TAG',
     enableLocalEvaluation: true, // <--- Enable the local evaluation
     cachePollingInterval: 10 * 60000, // <--- Change the default interval if needed
-  }
-  const client = initialize(config);
+  });
+  const client = initializeBKTClient(config);
 ```
 
 </TabItem>
@@ -198,13 +199,13 @@ The Bucketeer SDK supports the following variation types.
 <TabItem value="js" label="JavaScript">
 
 ```js showLineNumbers
-getStringVariation(user: User, featureId: string, defaultValue: string): Promise<string>;
+stringVariation(user: User, featureId: string, defaultValue: string): Promise<string>;
 
-getBoolVariation(user: User, featureId: string, defaultValue: boolean): Promise<boolean>;
+booleanVariation(user: User, featureId: string, defaultValue: boolean): Promise<boolean>;
 
-getNumberVariation(user: User, featureId: string, defaultValue: number): Promise<number>;
+numberVariation(user: User, featureId: string, defaultValue: number): Promise<number>;
 
-getJsonVariation(user: User, featureId: string, defaultValue: object): Promise<object>;
+objectVariation(user: User, featureId: string, defaultValue: BKTValue): Promise<BKTValue>;
 ```
 
 </TabItem>
