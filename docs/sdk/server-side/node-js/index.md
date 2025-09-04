@@ -89,11 +89,11 @@ const config = defineBKTConfig({
 
 Depending on your use, you may want to change the optional configurations available.
 
-- **eventsFlushInterval** (Default is great than or equal 30 seconds - specify in milliseconds)
+- **eventsFlushInterval** (Default is 30 seconds - specify in milliseconds)
 - **eventsMaxQueueSize** (Default is 50)
 - **logger** (Default is `DefaultLogger`)
 - **enableLocalEvaluation** (Default is false)
-- **cachePollingInterval** (Default is great than or equal 1 minute - specify in milliseconds)
+- **cachePollingInterval** (Default is 1 minute - specify in milliseconds)
 
 For more information, please check the Option implementation [here](https://github.com/bucketeer-io/node-server-sdk/blob/master/src/config.ts).
 
