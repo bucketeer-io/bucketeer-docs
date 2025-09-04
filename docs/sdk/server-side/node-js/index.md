@@ -65,7 +65,7 @@ The SDK supports local and remote evaluations.
 Configure the SDK config and user configuration.
 :::info
 
-The **tag** setting is the tag you configure when creating a Feature Flag. It will evaluate all the Feature Flags in the environment when it is not configured.<br />
+The **featureTag** setting is the tag you configure when creating a Feature Flag. It will evaluate all the Feature Flags in the environment when it is not configured.<br />
 **We strongly recommend** using tags to speed up the evaluation process and reduce the response latency.
 
 :::
