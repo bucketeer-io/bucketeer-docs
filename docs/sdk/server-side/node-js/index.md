@@ -93,7 +93,7 @@ Depending on your use, you may want to change the optional configurations availa
 - **eventsMaxQueueSize** (Default is 50)
 - **logger** (Default is `DefaultLogger`)
 - **enableLocalEvaluation** (Default is false)
-- **cachePollingInterval** (Default great than or equal 1 minute - specify in milliseconds)
+- **cachePollingInterval** (Default is great than or equal 1 minute - specify in milliseconds)
 
 For more information, please check the Option implementation [here](https://github.com/bucketeer-io/node-server-sdk/blob/master/src/config.ts).
 
