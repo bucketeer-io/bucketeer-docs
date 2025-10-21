@@ -96,7 +96,7 @@ defer cancel()
 client, err := bucketeer.NewSDK(
   ctx,
   bucketeer.WithAPIKey("YOUR_API_KEY"),
-  bucketeer.WithHost("YOUR_API_ENDPOINT"),
+  bucketeer.WithAPIEndpoint("YOUR_API_ENDPOINT"),
   bucketeer.WithTag("YOUR_FEATURE_TAG"),
 )
 if err != nil {
@@ -134,7 +134,7 @@ defer cancel()
 client, err := bucketeer.NewSDK(
   ctx,
   bucketeer.WithAPIKey("YOUR_API_KEY"),
-  bucketeer.WithHost("YOUR_API_ENDPOINT"),
+  bucketeer.WithAPIEndpoint("YOUR_API_ENDPOINT"),
   bucketeer.WithTag("YOUR_FEATURE_TAG"),
   bucketeer.WithEnableLocalEvaluation(true), // <--- Enable the local evaluation
   bucketeer.WithCachePollingInterval(10*time.Minute), // <--- Change the default interval if needed

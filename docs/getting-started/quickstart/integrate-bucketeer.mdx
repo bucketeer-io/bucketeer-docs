@@ -223,7 +223,7 @@ defer cancel()
 client, err := bucketeer.NewSDK(
   ctx,
   bucketeer.WithAPIKey("YOUR_API_KEY"),
-  bucketeer.WithHost("YOUR_API_ENDPOINT"),
+  bucketeer.WithAPIEndpoint("YOUR_API_ENDPOINT"),
   bucketeer.WithTag("YOUR_FEATURE_TAG"),
 )
 if err != nil {
