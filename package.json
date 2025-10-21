@@ -31,7 +31,7 @@
   "devDependencies": {
     "@docusaurus/module-type-aliases": "^3.5.2",
     "@docusaurus/types": "^3.5.2",
-    "node": "25"
+    "node": "23"
   },
   "browserslist": {
     "production": [
