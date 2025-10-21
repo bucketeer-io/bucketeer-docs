@@ -30,8 +30,7 @@
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "^3.5.2",
-    "@docusaurus/types": "^3.5.2",
-    "node": "23"
+    "@docusaurus/types": "^3.5.2"
   },
   "browserslist": {
     "production": [
@@ -46,6 +45,6 @@
     ]
   },
   "engines": {
-    "node": ">=18.17.0"
+    "node": ">=20.0.0"
   }
 }
