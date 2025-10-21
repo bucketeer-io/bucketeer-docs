@@ -111,7 +111,7 @@ When a prerequisite flag is added to a targeting configuration, the target flag 
 
 If multiple flags are set as prerequisites, they are evaluated using the logical operator AND. This ensures that all prerequisite conditions are met before evaluating the target flag. In case the return value from one of the prerequisite flags is not as expected, the OFF variation in the target flag is returned. The OFF variation is used as a fallback option when the prerequisite conditions are not fulfilled.
 
-The image below presents an example using two flags as prerequisites. Therefore, the targeting or rollout percentage evaluation will only happen if the first flag returns the **true** variation and the second returns the **a** variation. Otherwise, the Bucketeer will provide the OFF variation.
+The image below presents an example using two flags as prerequisites. Therefore, the targeting or rollout percentage evaluation will only happen if the first flag returns the **True** variation and the second returns the **Control** variation. Otherwise, the Bucketeer will provide the OFF variation.
 
 <CenteredImg
   imgURL="img/feature-flags/targeting/prerequisites.png"
@@ -123,9 +123,11 @@ The image below presents an example using two flags as prerequisites. Therefore,
 When defining rollout rules based on other feature flags, consider the impact of performance on your system. If a flag to be evaluated has many dependencies, evaluating one flag may also evaluate many other flags, potentially affecting the performance of evaluation duration and the client's network load.
 :::
 
-### Targeting
+### Individual Targeting
 
-The Bucketeer targeting section allows you to define which users or groups receive each feature flag variation. Taking a boolean flag as an example, you could provide the `true` variation for Android users and the `false` variation for iOS users, as shown in the image below.
+The Bucketeer individual targeting section allows you to define which specific users will receive each feature flag variation. You provide the **User IDs** for the users who will receive the selected variation, and these users will get the assigned variation regardless of any other rules or rollout conditions.
+
+For a boolean flag example, you could provide a list of individual Android users to receive the `True` variation, and a separate list of iOS users for the `False` variation.
 
 <CenteredImg
   imgURL="img/feature-flags/targeting/targeting-boolean-example.png"
@@ -133,15 +135,6 @@ The Bucketeer targeting section allows you to define which users or groups recei
   wSize="500px"
 />
 
-In the example image above, there are two available variations. However, you can add more variations when using flag types other than boolean. All variations you define will be accessible within the targeting section.
-
-Let's consider a real-world example related to a string flag with four variations: **value-1**, **value-2**, **value-3**, and **value-4**. In the example, each variation is associated with a specific platform. This means that Android users would receive the **value-1**, Web users would receive **value-2**, iOS users would receive **value-3**, and users on other platforms would receive the **value-4** variation. The configuration for this example is presented in the image below.
-
-<CenteredImg
-  imgURL="img/feature-flags/targeting/targeting-string-example.png"
-  alt="create feature flag panel"
-  wSize="500px"
-/>
 
 ## Rollout percentage
 
@@ -186,7 +179,7 @@ await initializeBKTClient(config, user);
 
 When the SDK makes a request to the server, the Bucketeer system will have access to all attributes above to perform the targeting evaluation.
 
-To use rollout rules based on end-user attributes, you will select the **Compare** option after clicking on the **Add rule** button. Then, you can use any existing end-user attributes to compare and assign different variations.
+To use rollout rules based on end-user attributes, click **+ Add Rule** and select **Custom Rule**. To define the rules, select **Compare** for **Context kind**. Then, you can use any existing end-user attributes to compare and assign different variations.
 
 :::info SemVer in Targeting Rules
 Bucketeer supports semantic versioning (SemVer) for attributes like `app_version`. You can use SemVer in the targeting rules to control feature rollout based on application versions.
@@ -204,7 +197,6 @@ Suppose you created users using the attributes listed above the code block. For 
 <CenteredImg
   imgURL="img/feature-flags/targeting/rollout-user-atributes.png"
   alt="rollout rule definition based on attributes"
-  wSize="500px"
 />
 
 :::info Rollout percentage
@@ -222,12 +214,11 @@ It allows you to create specific user targets to manage all users for a single f
 You can learn more about creating, managing, and using cases by accessing the [Segments](/feature-flags/segments) page.
 :::
 
-You can create segments based on various criteria, such as email type, gender, location, and more. This allows you to precisely target and group users for testing purposes.  The image below shows a rollout rule where the **value-1** variation is returned if the requesting user belongs to the **Testing users** segment.
+You can create segments based on various criteria, such as email type, gender, location, and more. This allows you to precisely target and group users for testing purposes.  The image below shows a rollout rule where the **value-1** variation is returned if the requesting user belongs to the **Testing Users** segment.
 
 <CenteredImg
   imgURL="img/feature-flags/targeting/rollout-rule-segment.png"
   alt="rollout rule definition based on segment"
-  wSize="500px"
 />
 
 ### Date
@@ -242,25 +233,24 @@ Therefore, to configure the **Date** option, you will need to provide:
 
 When the SDK requests the server, the Bucketeer system will compare the date on the provided attribute with the selected date, considering the comparison option and delivering the variation you selected. 
 
-For example, consider you created a rollout rule using the **Date** condition for the `creation_date` attribute. You want to deliver the `value-2` variation in case the creation date happened `before` **2023-08-16 18:00**. The image below presents the described configuration. In this scenario, if the `creation_date` value is older than **2023-08-16 18:00**, the user will receive the `value-2` variation. 
+For example, consider you created a rollout rule using the **Date** condition for the `creation_date` attribute. You want to deliver the `value-2` variation in case the creation date happened `before` **2025/08/19 18:00**. The image below presents the described configuration. In this scenario, if the `creation_date` value is older than **2025/08/19 18:00**, the user will receive the `value-2` variation. 
 
 
 <CenteredImg
   imgURL="img/feature-flags/targeting/rollout-rule-date.png"
   alt="rollout rule definition based on date"
-  wSize="500px"
 />
 
 ### Feature flag
 
-You also can define rollout rules based on other feature flags. The **Feature flag** option is similar to the [Prerequisites](/feature-flags/creating-feature-flags/targeting#prerequisites), meaning the condition is based on other feature flags' evaluations. The rule's condition is satisfied if the user is evaluated with the expected variation on the feature flag.
+You can also define rollout rules based on other feature flags. The **Feature flag** option is similar to the [Prerequisites](/feature-flags/creating-feature-flags/targeting#prerequisites), meaning the condition is based on other feature flags' evaluations. The rule's condition is satisfied if the user is evaluated with the expected variation on the feature flag.
 
-For example, consider that you created a rollout rule using the **Feature flag** condition based on the `true` variation of the foo feature flag.
+For example, consider you created a rollout rule within the **Feature flag** context. If the flag returns the `True` variation, the user will receive the `value-4` variation. The image below shows this configuration.
 
 <CenteredImg
   imgURL="img/feature-flags/targeting/rollout-rule-feature-flag.png"
   alt="rollout rule definition based on feature flag"
-  wSize="500px"
+
 />
 
 :::info Performance impact
