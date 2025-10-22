@@ -92,8 +92,9 @@ const user = defineBKTUser({
 Depending on your use, you may want to change the optional configurations available.
 
 - **pollingInterval** - Minimum 60 seconds. Default is 10 minutes (In Milliseconds)
-- **eventsFlushInterval** - Default is 30 seconds (In Milliseconds)
+- **eventsFlushInterval** - Default is 10 seconds (In Milliseconds)
 - **eventsMaxQueueSize** - Default is 50 events
+- **enableAutoPageLifecycleFlush** - Automatically flush events when page is hidden or closed. Default is `true`
 - **storageKeyPrefix** - Default is empty
 - **userAgent** - Default is `window.navigator.userAgent`
 - **fetch** - Default is `globalThis.fetch`
@@ -455,7 +456,9 @@ await client?.flush();
 
 :::note
 
-In regular use, you don't need to call the flush method because the events are sent every **30 seconds** in the background.
+The SDK automatically flushes events every **10 seconds** in the background. Additionally, events are automatically flushed when the page is hidden or closed (using `pagehide` and `visibilitychange` events) to prevent data loss during navigation or tab switches.
+
+You can disable the automatic page lifecycle flushing by setting `enableAutoPageLifecycleFlush: false` in the SDK configuration if you prefer to manually control when events are sent.
 
 :::
 
