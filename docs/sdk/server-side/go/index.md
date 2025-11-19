@@ -78,6 +78,7 @@ Depending on your use, you may want to change the optional configurations availa
 - **errorLogger** (Default is `log.DefaultErrorLogger`)
 - **enableLocalEvaluation** (Default is false)
 - **cachePollingInterval** (Default is 1 minute)
+- **scheme** (Default is `https`) - Useful for local development when using `http`
 
 For more information, please check the Option implementation [here](https://github.com/bucketeer-io/go-server-sdk/blob/master/pkg/bucketeer/option.go).
 
@@ -138,6 +139,7 @@ client, err := bucketeer.NewSDK(
   bucketeer.WithTag("YOUR_FEATURE_TAG"),
   bucketeer.WithEnableLocalEvaluation(true), // <--- Enable the local evaluation
   bucketeer.WithCachePollingInterval(10*time.Minute), // <--- Change the default interval if needed
+  // bucketeer.WithScheme("http"), // <--- Optional: Use "http" for local development (defaults to "https")
 )
 if err != nil {
   log.Fatalf("Failed initialize the new client: %v", err)
