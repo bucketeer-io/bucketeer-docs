@@ -20,12 +20,12 @@ Access the [Targeting with feature flags](/feature-flags/creating-feature-flags/
 
 ## Creating segments
 
-To create a Segment on Bucketeer:
+To create a segment on Bucketeer, navigate to the **User Segments** page and click **+ New User Segment**. You'll configure:
 
-1. Navigate to the **User Segments** and click on **+ New User Segment**.
-2. Add a **Name** and **Description** for the new segment.
-3. Add a list of users to be included in the new segment. This step is optional. You can upload a **CSV** or **Txt** file with the user's ID separated with commas. Alternatively, select **Enter user IDs** and manually type the user IDs.
-4. Click on **Submit**.
+- **Name** and **Description** for the segment
+- **User list** (optional) - Upload a CSV or TXT file with user IDs separated by commas, or manually enter user IDs
+
+Click **Submit** to create the segment.
 
 <CenteredImg
  imgURL="img/feature-flags/segments/segment-creation.png"
@@ -59,9 +59,17 @@ To edit a segment:
 1. Navigate to the **User Segments** menu.
 2. Find and click on the desired segment's name.
 
-:::info
-You cannot edit segments that have the `In use` status. To avoid affecting running Experiments, Bucketeer turns off the edition of segments used by feature flags.<br />
-You must remove the segment from all feature flags before editing it.
+:::warning Editing Segments in Active Experiments
+
+You can update segments that are being used by feature flags, including the user list. However, if these flags are part of active experiments, changing the segment may affect result accuracy since it modifies which users are included in each variation.
+
+**Before updating a segment in use:**
+- Check which flags are using it (shown in the warning message)
+- Consider the impact on any running experiments
+- Verify that the changes won't compromise experiment validity
+
+**Note:** You cannot delete a segment while it's being used by any feature flags. Remove it from all flags first.
+
 :::
 
 You can update the **Name**, **Description**, and user list. Note that the previously added user list is not showing due to the size of the ID list.
@@ -72,7 +80,7 @@ By updating the user ID list, you will override the current list in the database
 
 ## Downloading an existing user list
 
-After creating a User Segment, you can download the user's list. To do this, access the User Segment page, find the disired segment list and click on the action menu (three dots). After, select **Download User Segment**.
+After creating a User Segment, you can download the user's list. To do this, access the User Segment page, find the desired segment list and click on the action menu (three dots). After, select **Download User Segment**.
 
 With the User Segment, you can updated the list and, after, upload the updated list to the same segment, if necessary.
 

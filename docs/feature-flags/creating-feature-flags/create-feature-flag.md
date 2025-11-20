@@ -10,7 +10,7 @@ import CenteredImg from '@site/src/components/centered-img/CenteredImg';
 
 The first step to creating feature flags on Bucketeer is to access the dashboard. If your team runs your Bucketeer systems, ask your Admin to provide the dashboard URL. After accessing the dashboard, navigate to the **Feature Flags** tab, where you will find all existing flags in the current environment. Creating a new flag adds it to the list.
 
-If you're looking for a specific flag, you can search it using its name, description, or ID. On the other hand, if you want to create a new flag, click the **+ Create Flag**.
+If you're looking for a specific flag, you can search it using its name, description, or ID. On the other hand, if you want to create a new flag, click the **+ Create Flag** button.
 
 ## Create a feature flag
 
@@ -22,13 +22,41 @@ To create the flag, you need to fulfill the fields on the creation panel, which 
   borderWidth="1px"
 />
 
-You also need to define the **Tags** related to the new flag. You can specify any number of tags. However, you need to provide at least one value. Tags have two functions on Buketeer. First, then help while searching flags on the dashboard. Second, they help filter the information the server returns after a request from an SDK. Therefore, providing more specific tags helps reduce the amount of information transferred from the server to your application, reducing response time and the amount of data transferred. For additional information regarding the optimization of Bucketeer based on the use of tags, access the [Optimize Bucketeer with tags](/best-practices/optimize-with-tags) guide. It's important to notice that during the integration and in the [SDKs](/sdk) section, tags are also referenced as `featureTag`.
+Configure the following fields to create your flag:
 
-Once you have defined the **Tags** for your flag, the next step is to select the **Flag type**. Refer to the [Feature flags types](/feature-flags/creating-feature-flags/create-feature-flag#feature-flags-types) to understand the differences among the four available types. If you choose the boolean type, only two variations will be available, `true`and `false`, with their respective predefined values. On the other hand, if you select a different type, you can add more variations by clicking **Add Variation** button. Additionally, you need to provide the corresponding value for each variation. While the name and description for variations are optional, we highly recommend using them as they facilitate understanding and future review of your results.
+### Tags
 
-Select the default variations for the **ON** and **OFF** states to finalize the flag creation process. This is especially important to ensure which variation will be returned by the flag if no targeting is defined. Once you have defined the **ON** and **OFF** variations, click **Submit** to create the flag.
+Define at least one tag for your flag. Tags serve two purposes:
+1. Search and filter flags on the dashboard
+2. Filter SDK responses to reduce data transfer
 
-After creating the new flag, you will be redirected to the Targeting page. For further information regarding flag targeting, refer to the [Targeting with feature flags](/feature-flags/creating-feature-flags/targeting) page.
+Providing more specific tags reduces the information transferred from server to application, improving response time and reducing bandwidth usage.
+
+:::note
+Tags are referenced as `featureTag` in the SDKs. Learn more: [Optimize with tags](/best-practices/optimize-with-tags).
+:::
+
+### Flag Type
+
+Select from five types: boolean, string, number, JSON, or YAML. See [Feature flags types](/feature-flags/creating-feature-flags/create-feature-flag#feature-flags-types) for guidance on which to choose.
+
+### Variations
+
+- **Boolean flags**: Automatically include `true` and `false` variations
+- **Other types**: Use **Add Variation** to create custom variations
+
+For each variation, provide:
+- **Value** (required)
+- **Name** (required)
+- **Description** (optional, recommended for documentation)
+
+### Default States
+
+Set which variation to return for:
+- **ON variation**: When the flag is enabled
+- **OFF variation**: When the flag is disabled
+
+Click **Create Flag** to finish. You'll be redirected to the Targeting page to configure [targeting rules](/feature-flags/creating-feature-flags/targeting).
 
 ## Manage feature flags
 
@@ -62,9 +90,14 @@ When a flag is archived, any SDK requests related to that flag will return the d
 
 ## Feature flags types
 
-The Bucketeer system provides four types of flags: boolean, string, number, and JSON. Each type serves a specific purpose to accommodate different scenarios when implementing flags. Here's an overview of when and why you should use each type:
+The Bucketeer system provides five types of flags: boolean, string, number, JSON, and YAML. Each type serves a specific purpose to accommodate different scenarios when implementing flags. Here's an overview of when and why you should use each type:
 
 - **Boolean flags** are ideal for simple on/off scenarios. They allow you to enable or disable a feature based on a binary state. Use a boolean flag to control the visibility of a beta feature in your application, such as a button, toggling it on or off for specific users or groups.
 - **String flags** are suitable when defining multiple variations or states for a feature. They provide flexibility in categorizing and managing feature variations. You could use a string flag to define your application's visual themes or layouts. Thus you can find the best performing style, for example.
 - **Number flags** are helpful when assigning numeric values to feature variations, enabling more granular control over feature behavior. They can be used to adjust the speed or intensity of an animation or to define different levels of access or permissions within a feature.
-- **JSON flags** offer the most flexibility and complexity, allowing you to define custom configurations and structures for your feature variations using JSON objects. You might employ a JSON flag to dynamically change the layout and content of a specific section in your application based on complex business, defining more than one modification related to the same flag variation.
+- **JSON flags** offer the most flexibility and complexity, allowing you to define custom configurations and structures for your feature variations using JSON objects. You might employ a JSON flag to dynamically change the layout and content of a specific section in your application based on complex business logic, defining more than one modification related to the same flag variation.
+- **YAML flags** provide a more readable alternative to JSON for complex configurations. YAML values are compiled into a JSON structure before user evaluation and are returned to the client SDK through the object variation interface, just like JSON flags. This allows you to write more human-friendly configuration while maintaining full compatibility with JSON flag functionality.
+
+:::info JSON and YAML Compatibility
+Both JSON and YAML flags are returned to the client SDK through the same object variation interface. YAML is compiled into JSON format during evaluation, making these types fully interchangeable from the SDK's perspective. Choose YAML when readability is important during flag configuration, or JSON when you prefer the more compact format.
+:::

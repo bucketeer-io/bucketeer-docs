@@ -8,9 +8,11 @@ tags: ['log','history','settings','feature-flag']
 
 import CenteredImg from '@site/src/components/centered-img/CenteredImg';
 
-When accessing the details of a feature flag, you will have access to two important pages: **History** and **Settings**.
+When accessing feature flag details, the **Settings** and **History** tabs provide configuration management and change tracking.
 
-The Settings page allows you to update various aspects of the flag, such as its name, description, and tags. Similar to other configuration tabs for feature flags, it is necessary to provide a comment explaining the changes before saving them. This ensures a record of the reasons behind each modification, helping to maintain clear and organized flag settings.
+## Settings
+
+Update your flag's configuration including maintainer, name, description, and tags. All changes require a comment to maintain clear documentation.
 
 <CenteredImg
   imgURL="img/feature-flags/settings-history/settings.png"
@@ -18,12 +20,24 @@ The Settings page allows you to update various aspects of the flag, such as its 
   wSize="100%"
 />
 
-In the Settigs page, you can also clone or archive the flag. Cloning creates a copy of the current flag with the same configurations as the original, while archiving removes the flag from all environments but retains its history for future reference.
+### Clone Flag
+Creates a copy of the flag with the same targeting configuration and on/off state. You select the destination environment where the cloned flag will be created.
 
-The **History** page provides a comprehensive report of all modifications made to the flag. Each time a user changes the flag, they are required to provide a comment explaining the modification. The History page lists all these modifications, including the changes and corresponding descriptions. You can also see the user who made each modification, providing transparency and accountability.
+### Archive Flag
+Archives the flag across all environments. Archived flags only appear when filtered in the flag list.
+
+## History
+
+The History tab shows a complete audit trail of all flag modifications. Each change includes:
+- The user who made the change
+- Timestamp
+- Required comment explaining the modification
+- Full JSON diff showing exactly what changed
 
 <CenteredImg
   imgURL="img/feature-flags/settings-history/history.png"
   alt="History panel"
   wSize="100%"
 />
+
+Use the **Changes** and **Snapshot** tabs to view modifications as either a diff or the complete flag state at that point in time.
