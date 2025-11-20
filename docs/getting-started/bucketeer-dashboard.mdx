@@ -18,14 +18,15 @@ The image below presents the Bucketeer dashboard sidebar, and after you find a d
   alt="Bucketeer dashboard sidebar"
 />
 
-- **(Project) Environment Selector**: use this selector to choose the desired project and environment. The modifications you make will only affect the current project/environment. Environments can be used to target specific parts of the project and make it easier to manage.
+- **Environment Selector**: use this selector to choose the desired environment. The modifications you make will only affect the current environment. Environments can be used to target specific parts of the project and make it easier to manage.
 - **Feature Flags**: this section displays all the flags within the selected project. You can choose a flag to manage its environment-specific targeting and rollout rules.
+- **Segments**: this page allows you to check all segments for the current environment. Select a segment to manage its settings.
+- **Debugger**: verify which variation of a feature flag is assigned to a specific end-user. Use it for troubleshooting targeting rules and ensuring your flag logic works as intended.
+- **Audit Logs**: access all the audit logs for the selected environment.
 - **Goals**: manage all the goals associated with your project. Select a goal to adjust its settings.
 - **Experiments**: view a list of experiments in the current environment. Select an experiment to manage its settings and view the results.
-- **Segments**: this page allows you to check all segments for the current environment. Select a segment to manage its settings.
-- **Audit Logs**: access all the audit logs for the selected environment.
-- **Accounts**: manage user accounts for the current environment. You can add or remove users and change their roles.
-- **API Keys**: check all the API Keys associated with the current environment. You can manage the settings of existing keys or add new ones.
-- **Documentation**: use this link to access the Bucketeer documentation quickly.
-- **Settings**: check and configure all the settings for the current environment. You can create notifications, pushes, and webhooks. Pushes enable real-time SDK updates. Notifications can alert you when someone adds or updates something in the admin console, and you can also monitor operational task statuses. The webhook feature allows you to control the on/off status of feature flags.
-- **Admin Settings**: this section allows you to define several admin settings. You can create and manage projects and environments, create accounts, and review notifications and audit logs.
+- **Gear icon**: this section allows you to manage several admin settings for your organization, including:
+    - Organization and project settings.
+    - Members and API keys.
+    - Available integrations, such as Slack and FCM.
+

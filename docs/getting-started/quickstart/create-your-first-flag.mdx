@@ -9,13 +9,26 @@ import CenteredImg from '@site/src/components/centered-img/CenteredImg';
 
 To create a feature flag on the Bucketeer dashboard, access the **Feature Flags** tab. You will find all existing flags available on the current environment on this page. To add a new one, click **+ Add**. A side panel will appear on the right side of the screen.
 
+## Flag Templates
+
+Bucketeer provides flag creation templates to help you get started quickly with common use cases. Choose from one of the following templates based on your needs:
+
+- **Custom**: Provides complete flexibility to configure your flag exactly as needed. Use this when your use case doesn't fit the other templates.
+- **Release**: Designed for gradual rollouts. Ideal when you want to release a feature progressively to your users in controlled phases.
+- **Kill Switch**: Allows you to quickly disable a feature in production without deploying new code. Perfect for mitigating risks during feature releases.
+- **Experiment**: Pre-configured for A/B testing scenarios. Sets up control and treatment variations to help you run experiments and make data-driven decisions.
+
+Each template provides sensible defaults while maintaining the flexibility to customize the flag according to your specific requirements.
+
+## Flag Configuration
+
 To create the feature flag, you will need to provide the following information through the side panel fields:
 
 - **ID**: This unique identifier is used to identify the flag when adding it to your application. In code examples, the ID is also referenced as `FLAG_ID`. It has a maximum length of 100 characters.
 - **Name**: Provide a descriptive name for the feature flag (up to 100 characters) to easily identify it.
 - **Description**: Add a brief explanation of the flag's purpose and usage. Keep it concise within 100 characters.
 - **Tags** (required): You can add tags to the feature flag, which help in searching within the Bucketeer dashboard's tag list and filtering server-returned information after a request.
-- **Flag type**: Specify the type of flag you want to create. It can be boolean, string, number, or JSON. Boolean flags allow only two variations (true and false), while other flag types can have any number of variations (at least two). To add more variations, use the **Add variation** button.
+- **Flag type**: Specify the type of flag you want to create. It can be boolean, string, number, JSON or YAML. Boolean flags allow only two variations (true and false), while other flag types can have any number of variations (at least two). To add more variations, use the **Add variation** button.
 - **Variation data**: For each variation, provide its corresponding value. For boolean flags, the variations are predefined as "true" and "false." For other flag types, you need to define the value for each variation. Names and descriptions for variations are optional but recommended for easier review later on.
 - **On and off variation**: Specify which variation should be returned when the feature flag is turned on or off, respectively.
 

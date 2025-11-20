@@ -11,7 +11,23 @@ To use feature flags, start by creating an API key on the Bucketeer dashboard. T
 
 They identify your project and environment, ensuring your application retrieves the correct flag configurations. Additionally, they improve security by preventing unauthorized access and maintaining the integrity of your feature flag system.
 
-To create an API key, access the **API Keys** from the sidebar. You will find all existing API keys on this page. To add a new API key, click **+ Add**. On the side panel, provide a name for the new API key and click **Submit**. The API key name has a length limit of a hundred characters.
+To create an API key, click on the **gear icon** from the sidebar menu and select **API Keys**. You will find all existing API keys on this page. To add a new API key, click **+ New API Key**. On the side panel, provide:
+
+- **Name**: provide a meaningful name for your API key. This will help you identify it later in the list of keys.
+- **Description** (optional): add a brief description to provide additional context about the key's purpose.
+- **Environment**: select the environment where the API key will be used. This ensures the key is tied to the correct project and configurations.
+- **Key Role**: choose between one of the available options. This selection determines the level of access and permissions for the API key.
+
+
+### API Key Roles
+
+| API Key Role | Description |
+| :--- | :--- |
+| **Client SDKs** | Allows all SDKs to evaluate end users using the Bucketeer server. |
+| **Server SDKs** | Allows the server SDK to evaluate end users locally. For server-side evaluation using the Bucketeer server, use a Client SDK key. |
+| **Public API (Read Only)** | Allows read-only access to data in Bucketeer. |
+| **Public API (Read and Write)** | Allows reading and writing data in Bucketeer. |
+| **Public API (Admin)** | Allows full read and write access to all data in Bucketeer, including environment settings. |
 
 :::tip
 
