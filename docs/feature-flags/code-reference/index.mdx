@@ -10,19 +10,18 @@ import CenteredImg from '@site/src/components/centered-img/CenteredImg';
 import Button from '@site/src/components/button/Button';
 import ButtonShelf from '@site/src/components/button-shelf/ButtonShelf';
 
-Code References is a CLI tool that scans source code repositories to detect where feature flags are used. The Code References analyzes the codebase and sends the results to the Bucketeer dashboard, providing your teams with precise information into where the feature flag are used in your code. Code References helps maintain clean, efficient code by identifying stale or unused feature flags and directing developers to the exact locations where they need to take action.
+Code References is a CLI tool that scans your codebase to find where feature flags are used. It helps you identify stale flags so you can archive them safely, improving SDK performance and reducing technical debt.
 
 <CenteredImg
-  imgURL="img/feature-flags/codereference/scan-result.png"
+  imgURL="img/feature-flags/codereference/scan-result-full.png"
 />
 
-By using Code References, you can:
+## Key Benefits
 
-- Automate the detection of feature flags across your codebase.  
-- Integration with CI/CD pipelines to scan repositories regularly.  
-- Use it with GitHub, GitLab, and Bitbucket repositories.  
-- Configuration uses command-line flags, environment variables, and YAML configuration.  
-- Improve your codebase and reduce technical debt by identifying and removing obsolete or inactive flags.
+- **Find stale flags** - Identify unused flags across your entire codebase
+- **Improve performance** - Reduce SDK response times and cache usage
+- **CI/CD integration** - Automate scanning in your deployment pipeline
+- **Multi-repository** - Works with GitHub, GitLab, and Bitbucket
 
 <ButtonShelf>
   <Button

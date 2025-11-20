@@ -18,18 +18,16 @@ To check the logs, access the **Audit Logs** page from the sidebar menu. To chec
 
 ## Filtering logs
 
-By default, the Audit Logs displays the most recent entries. However, you can use the **Sort** button at the top right corner to switch to the **Oldest** first if you need.
-
 Bucketeer system provides several filters you can use to find desired logs, making it easier to inspect and find problem sources. The complete filter options are listed below:
 
-- **Email**: User email who performed the change, such as modifying a flag variation.
+- **Name and Email**: User name and email who performed the change, such as modifying a flag variation. This options is available thorugh the search bar.
 - **Date**: Specify a date range when the logs were created.
 
-<CenteredImg
-  imgURL="img/feature-flags/audit-logs/date.png"
-/>
+    <CenteredImg
+      imgURL="img/feature-flags/audit-logs/date.png"
+    />
 
-- **Entity**: Select the type of entity related to the log source. You can use this option to filter logs related only to changes in Goals, for example. The complete list is presented next:
+- **Kind**: Select the type of entity related to the log source. You can use this option to filter logs related only to changes in Goals, for example. The complete list is presented next:
     - Feature Flag
     - Goal
     - Experiment
@@ -41,16 +39,13 @@ Bucketeer system provides several filters you can use to find desired logs, maki
     - Push
     - Subscription
 
-<CenteredImg
-  imgURL="img/feature-flags/audit-logs/action.png"
-/>
 
 ### Actions
 
 Several actions can create a log in Bucketeer. The toggle below contains a table listing all possible actions to generate new logs.
 
 <details >
-  <summary className="bucketeer-details">Check the complete list of actions that generate logs in Bucketter.   </summary>
+  <summary className="bucketeer-details">Check the complete list of actions that generate logs in Bucketeer.   </summary>
   <div>
     <table>
       <thead>
@@ -209,6 +204,14 @@ Several actions can create a log in Bucketeer. The toggle below contains a table
           <td>The variation of a prerequisite has been changed.</td>
         </tr>
         <tr>
+          <td>FEATURE_RULES_ORDER_CHANGED</td>
+          <td>The order of feature rules has been changed.</td>
+        </tr>
+        <tr>
+          <td>FEATURE_UPDATED</td>
+          <td>A feature has been updated.</td>
+        </tr>
+        <tr>
           <td>GOAL_CREATED</td>
           <td>A goal has been created.</td>
         </tr>
@@ -227,6 +230,10 @@ Several actions can create a log in Bucketeer. The toggle below contains a table
         <tr>
           <td>GOAL_ARCHIVED</td>
           <td>A goal has been archived.</td>
+        </tr>
+        <tr>
+          <td>GOAL_UPDATED</td>
+          <td>A goal has been updated.</td>
         </tr>
         <tr>
           <td>EXPERIMENT_CREATED</td>
@@ -541,6 +548,10 @@ Several actions can create a log in Bucketeer. The toggle below contains a table
           <td>The name of a project has been changed.</td>
         </tr>
         <tr>
+          <td>PROJECT_UPDATED</td>
+          <td>A project has been updated.</td>
+        </tr>
+        <tr>
           <td>WEBHOOK_CREATED</td>
           <td>A webhook has been created.</td>
         </tr>
@@ -577,6 +588,10 @@ Several actions can create a log in Bucketeer. The toggle below contains a table
           <td>The scheduled trigger time of a progressive rollout has been changed.</td>
         </tr>
         <tr>
+          <td>PROGRESSIVE_ROLLOUT_STOPPED</td>
+          <td>A progressive rollout has been stopped.</td>
+        </tr>
+        <tr>
           <td>ORGANIZATION_CREATED</td>
           <td>An organization has been created.</td>
         </tr>
@@ -609,6 +624,18 @@ Several actions can create a log in Bucketeer. The toggle below contains a table
           <td>An organization's trial has been converted to a full subscription.</td>
         </tr>
         <tr>
+          <td>ORGANIZATION_OWNER_EMAIL_CHANGED</td>
+          <td>The owner email of an organization has been changed.</td>
+        </tr>
+        <tr>
+          <td>ORGANIZATION_UPDATED</td>
+          <td>An organization has been updated.</td>
+        </tr>
+        <tr>
+          <td>DEMO_ORGANIZATION_CREATED</td>
+          <td>A demo organization has been created.</td>
+        </tr>
+        <tr>
           <td>FLAG_TRIGGER_CREATED</td>
           <td>A flag trigger has been created.</td>
         </tr>
@@ -635,6 +662,46 @@ Several actions can create a log in Bucketeer. The toggle below contains a table
         <tr>
           <td>FLAG_TRIGGER_USAGE_UPDATED</td>
           <td>The usage information of a flag trigger has been updated.</td>
+        </tr>
+        <tr>
+          <td>FLAG_TRIGGER_UPDATED</td>
+          <td>A flag trigger has been updated.</td>
+        </tr>
+        <tr>
+          <td>TAG_CREATED</td>
+          <td>A tag has been created.</td>
+        </tr>
+        <tr>
+          <td>TAG_DELETED</td>
+          <td>A tag has been deleted.</td>
+        </tr>
+        <tr>
+          <td>TAG_UPDATED</td>
+          <td>A tag has been updated.</td>
+        </tr>
+        <tr>
+          <td>CODE_REFERENCE_CREATED</td>
+          <td>A code reference has been created.</td>
+        </tr>
+        <tr>
+          <td>CODE_REFERENCE_UPDATED</td>
+          <td>A code reference has been updated.</td>
+        </tr>
+        <tr>
+          <td>CODE_REFERENCE_DELETED</td>
+          <td>A code reference has been deleted.</td>
+        </tr>
+        <tr>
+          <td>TEAM_CREATED</td>
+          <td>A team has been created.</td>
+        </tr>
+        <tr>
+          <td>TEAM_DELETED</td>
+          <td>A team has been deleted.</td>
+        </tr>
+        <tr>
+          <td>TEAM_UPDATED</td>
+          <td>A team has been updated.</td>
         </tr>
       </tbody>
     </table>

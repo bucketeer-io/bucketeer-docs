@@ -1,0 +1,87 @@
+---
+title: User Attributes
+slug: /feature-flags/creating-feature-flags/targeting/user-attributes
+description: Learn how to create custom targeting rules based on user attributes like app version, device type, and language.
+tags: ['targeting', 'custom-rules', 'user-attributes', 'feature-flag']
+---
+
+import CenteredImg from '@site/src/components/centered-img/CenteredImg';
+
+User attributes allow you to target users based on their characteristics like app version, device type, language, or any custom attributes you define. This is one of the most flexible targeting options in Bucketeer.
+
+## How User Attributes Work
+
+The user attributes used by targeting rules refer to the end-user attributes you define when initializing the SDK on the client side. If you use dynamic attributes, use the `updateUserAttributes` function. For further details on how to set up attributes, check the [SDK](/sdk) content.
+
+The code block below presents an example of end-user attribute configuration when initializing the SDK using Javascript:
+
+```js showLineNumbers
+const attributes = {
+  app_version: '1.0.0',
+  os_version: '11.0.0',
+  device_model: 'pixel-5',
+  language: 'english',
+  genre: 'female',
+};
+
+const user = defineBKTUser({
+  id: 'USER_ID',
+  attributes: attributes,
+});
+
+await initializeBKTClient(config, user);
+```
+
+When the SDK makes a request to the server, the Bucketeer system will have access to all attributes above to perform the targeting evaluation.
+
+## Creating Attribute-Based Rules
+
+To use targeting rules based on end-user attributes:
+
+1. Click **+ Add Rule** and select **Custom Rule**
+2. Select **Compare** for **Context kind**
+3. Use any existing end-user attributes to compare and assign different variations
+
+:::info SemVer in Targeting Rules
+Bucketeer supports semantic versioning (SemVer) for attributes like `app_version`. You can use SemVer in the targeting rules to control feature rollout based on application versions.
+:::
+
+:::caution SDK Version Format Differences
+- **Node.js SDK**: Supports both formats (`1.2.3` and `v1.2.3`) and can compare between them.
+- **Go SDK**: Requires consistent format - both values must use the same format (either both with `v` prefix or both without).
+
+For reliable results, we recommend using the same version format consistently across your application.
+:::
+
+## Example: Multi-Condition Rule
+
+Suppose you created users using the attributes listed in the code block above. You want to:
+
+- For users with `app_version = 1.0.0` AND `language = english`: provide the **value-1** variation
+- For users with `app_version = 2.0.0`: deliver all variations using percentage distribution:
+  - 10% receive **value-1**
+  - 20% receive **value-2**
+  - 30% receive **value-3**
+  - 40% receive **value-4**
+
+The image below shows how this targeting rule would be configured on the Bucketeer dashboard:
+
+<CenteredImg
+  imgURL="img/feature-flags/targeting/custom-rule-user-atributes.png"
+  alt="custom rule definition based on user attributes"
+/>
+
+:::info Rollout percentage
+When using rollout percentage based on percentage distribution, the sum should always be equal to 100%.
+:::
+
+If the user did not satisfy any of these rules, they would receive the default rule variation.
+
+## Common Use Cases
+
+- **Progressive rollout by app version** - Release features to newer app versions first
+- **Platform-specific features** - Different behavior for iOS vs Android
+- **Localization testing** - Test translations with specific language groups
+- **Device-specific optimization** - Target specific device models or OS versions
+- **User tier targeting** - Different features for free vs premium users
+

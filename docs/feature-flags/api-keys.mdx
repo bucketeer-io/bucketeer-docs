@@ -8,22 +8,36 @@ tags: ['integration', 'feature-flag']
 
 import CenteredImg from '@site/src/components/centered-img/CenteredImg';
 
-The API keys authorizes and control access to the feature flag management system, providing authentication capabilities that ensure secure connections between your application and the server.<br />
+The API keys authorizes and control access to the feature flag management system, providing authentication capabilities that ensure secure connections between your application and the server.
+
 Each API key is associated with a specific environment, allowing you to identify and link your application to the desired user group.
 
-## Creating an API Key
+## Key Roles
 
-To create an API key, you need to be an Admin or have an environment account with the Owner role. Other members can see the APY keys but can't manage them.
-
-The API key has 2 roles.
+In Bucketeer, when you create an API key, you have to select a key role. The Key Role defines the permissions and access levels associated with the API key. The available roles are:
 
 - **Client SDK:** Allows all SDKs to evaluate end users on the Bucketeer server.
-- **Server SDK:** Allows the server SDK (Golang) to evaluate end users locally within the SDK.
+- **Server SDK:** Allows server SDKs to evaluate end users locally within the SDK.
 - **Public API(Read Only):** This role allows you to read the data in Bucketeer.
 - **Public API(Read and Write):** This role allows you to read and write the data in Bucketeer.
 - **Public API(Admin):** This role allows you to read and write the data including admin settings in Bucketeer.
 
-To generate a new API key, click the **+ Add** button on the **API Keys** page.<br />
+:::info Server SDK Evaluation Options
+
+When using server SDKs, you have two evaluation options:
+
+- **Local evaluation (Server SDK key):** The SDK evaluates users locally within your application. This provides the fastest response times and reduces server load.
+- **Remote evaluation (Client SDK key):** The SDK sends evaluation requests to the Bucketeer backend. Use this if you need centralized evaluation or don't want to maintain local state.
+
+Choose the API key role that matches your evaluation strategy.
+
+:::
+
+## Creating an API Key
+
+To create an API key, you need to be an Admin or have an environment account with the Owner role. Other members can see the API keys but can't manage them.
+
+To generate a new API key, access the API Keys panel page and click the **+ New API Key** button. Then, provide a descriptive name for the key, select the Environment in which the key will be used, and choose the appropriate Key Role based on your requirements. Finally, click the **Create API Key** button to generate the API key.
 
 <CenteredImg
   imgURL="img/feature-flags/api-keys/create-api-key.png"

@@ -117,7 +117,20 @@ const sidebars = {
       className: 'sidebar-creating-feature-flags',
       items: [
         'feature-flags/creating-feature-flags/create-feature-flag',
-        'feature-flags/creating-feature-flags/targeting',
+        {
+          type: 'category',
+          label: 'Targeting',
+          link: {
+            type: 'doc',
+            id: 'feature-flags/creating-feature-flags/targeting/targeting',
+          },
+          items: [
+            'feature-flags/creating-feature-flags/targeting/user-attributes',
+            'feature-flags/creating-feature-flags/targeting/user-segments',
+            'feature-flags/creating-feature-flags/targeting/date',
+            'feature-flags/creating-feature-flags/targeting/feature-flag',
+          ],
+        },
         'feature-flags/creating-feature-flags/manage-variations',
         {
           type: 'category',

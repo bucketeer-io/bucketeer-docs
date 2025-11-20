@@ -1,0 +1,59 @@
+---
+title: Date-Based Rules
+slug: /feature-flags/creating-feature-flags/targeting/date
+description: Learn how to create targeting rules based on date and time conditions.
+tags: ['targeting', 'custom-rules', 'date', 'feature-flag']
+---
+
+import CenteredImg from '@site/src/components/centered-img/CenteredImg';
+
+Date-based rules allow you to target users based on time-related conditions. This is useful for time-limited features, grandfathering users, or creating time-based segments.
+
+## How Date-Based Rules Work
+
+The **Date** option is similar to the **Compare** option for user attributes, meaning it's also based on attributes configured in the SDK. However, the parameter must be in a timestamp format.
+
+To configure date-based targeting, you need to provide:
+
+- **The attribute** with the date information to be compared
+- **The comparison option**: either **before** or **after**
+- **The comparison date**
+
+When the SDK requests the server, the Bucketeer system will compare the date in the provided attribute with the selected date, considering the comparison option and delivering the variation you selected.
+
+## Example: Account Creation Date
+
+Consider you created a custom rule using the **Date** condition for the `creation_date` attribute. You want to deliver the `value-2` variation if the creation date happened `before` **2025/08/19 18:00**.
+
+The image below presents the described configuration:
+
+<CenteredImg
+  imgURL="img/feature-flags/targeting/custom-rule-date.png"
+  alt="Custom rule based on date"
+/>
+
+In this scenario, if the `creation_date` value is older than **2025/08/19 18:00**, the user will receive the `value-2` variation.
+
+## Common Use Cases
+
+- **Grandfathering users** - Preserve old pricing or features for existing users
+  - Example: `account_created before 2024-01-01` → Keep legacy UI
+- **Time-limited access** - Grant features based on trial or subscription dates
+  - Example: `trial_end after today` → Show premium features
+- **Progressive rollout by cohort** - Roll out features to older accounts first
+  - Example: `signup_date before 2023-06-01` → Enable new feature
+- **Sunset old features** - Disable features for new users only
+  - Example: `registration_date after 2024-12-31` → Hide deprecated feature
+- **Anniversary promotions** - Special features for long-term users
+  - Example: `member_since before 2023-01-01` → Show loyalty badge
+
+## Tips for Date-Based Rules
+
+:::tip Timestamp Format
+Ensure your SDK sends date attributes in a timestamp format that Bucketeer can parse correctly. Common formats include Unix timestamps or ISO 8601 date strings.
+:::
+
+:::caution Time Zones
+Be aware of time zone differences when setting comparison dates. Bucketeer evaluates dates in UTC unless specified otherwise in your SDK configuration.
+:::
+
