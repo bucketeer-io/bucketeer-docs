@@ -1,7 +1,7 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const {themes} = require('prism-react-renderer');
+const { themes } = require('prism-react-renderer');
 const lightTheme = themes.github;
 const darkTheme = themes.dracula;
 
@@ -12,7 +12,7 @@ const config = {
   },
   themes: ['@docusaurus/theme-mermaid'],
   plugins: [
-    [ 
+    [
       require.resolve('docusaurus-lunr-search'), {
         maxHits: '7',
         languages: ['en']
@@ -50,7 +50,7 @@ const config = {
   // to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'en',
-    locales: [ 'en' ],
+    locales: ['en'],
   },
 
   presets: [
