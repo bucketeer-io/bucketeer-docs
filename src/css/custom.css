@@ -1111,7 +1111,7 @@ code {
 }
 
 table thead th {
-  background-color: #ddd7e9;
+  background-color: #f9f4fc;
   border: none;
   text-align: left;
 }
@@ -1119,6 +1119,10 @@ table thead th {
 table tr td {
   background-color: #ffffff;
   border: none;
+}
+
+table tr td:first-child {
+  white-space: nowrap;
 }
 
 table thead,

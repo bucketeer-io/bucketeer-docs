@@ -16,11 +16,13 @@ Each API key is associated with a specific environment, allowing you to identify
 
 In Bucketeer, when you create an API key, you have to select a key role. The Key Role defines the permissions and access levels associated with the API key. The available roles are:
 
-- **Client SDK:** Allows all SDKs to evaluate end users on the Bucketeer server.
-- **Server SDK:** Allows server SDKs to evaluate end users locally within the SDK.
-- **Public API(Read Only):** This role allows you to read the data in Bucketeer.
-- **Public API(Read and Write):** This role allows you to read and write the data in Bucketeer.
-- **Public API(Admin):** This role allows you to read and write the data including admin settings in Bucketeer.
+| API Key Role | Description |
+| :--- | :--- |
+| **Client SDKs** | Allows all SDKs to evaluate end users using the Bucketeer server. |
+| **Server SDKs** | Allows the server SDK to evaluate end users locally. For server-side evaluation using the Bucketeer server, use a Client SDK key. |
+| **Public API (Read Only)** | Allows read-only access to data in Bucketeer. |
+| **Public API (Read and Write)** | Allows reading and writing data in Bucketeer. |
+| **Public API (Admin)** | Allows full read and write access to all data in Bucketeer, including environment settings. |
 
 :::info Server SDK Evaluation Options
 
