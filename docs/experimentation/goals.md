@@ -8,20 +8,35 @@ tags: ['goals']
 
 import CenteredImg from '@site/src/components/centered-img/CenteredImg';
 
-The goal feature in the Bucketeer system is designed to facilitate the organization and analysis of experiments. Goals serve as a means to group end-users' data based on specific behaviors you intend to monitor. However, the main objective of using goals is to track the user journey. By defining goals, you can effectively measure user behaviors that are influenced by your feature flags within experiments. Goals play a pivotal role in both the creation and evaluation of experiments.
+Goals in Bucketeer are used to measure user behaviors and track the user journey within experiments. By defining goals, you can measure how your feature flags influence specific user actions, such as clicking a button, completing a purchase, or reaching a page.
+
+Goals are essential for both creating and evaluating experiments.
 
 ## Create a goal
 
-To create goals in Bucketeer, begin by accessing the dashboard. Once in the dashboard, navigate to the **Goals** tab, which provides an overview of all existing goals within the current environment. 
-
-Suppose you need to locate a particular goal. In that case, Bucketeer offers a search functionality that allows you to find goals based on their name, ID, or description. On the other hand, if you wish to create a new goal, you can click the **+ Add** button.
-
-To create a goal, you must fulfill the fields in the creation panel, which becomes visible after selecting **+ Add**. It's essential to provide the goal's ID, name, and description. You will use the goal's ID to report the end-users progress on your application. The image below presents an example of the creation panel.
+To create goals in Bucketeer, navigate to the **Goals** tab on the dashboard, which provides an overview of all existing goals within the current environment.
 
 <CenteredImg
-  imgURL="img/feature-flags/goals/create-goal-v2.png"
-  alt="create goal example"
-  wSize="400px"
+  imgURL="img/experimentation/experiments/goal-list.png"
+  alt="List of goals in the dashboard"
+  wSize="650px"
+  borderWidth="1px"
+/>
+
+You can search for goals by name, ID, or description. To create a new goal, click the **+ New Goal** button.
+
+### Required Fields
+
+Provide the following information when creating a goal:
+
+- **Goal ID**: A unique identifier used to report user progress in your application
+- **Name**: A descriptive name for the goal
+- **Description**: Detailed explanation of what the goal measures and why
+
+<CenteredImg
+  imgURL="img/experimentation/experiments/goal-create.png"
+  alt="Goal creation form"
+  wSize="450px"
   borderWidth="1px"
 />
 
@@ -48,11 +63,40 @@ You can define goals for a wide range of scenarios related to your system. To im
 
 ## How to use goals
 
-To make goals data relevant, you need to report the end-user journey. You will use the reporting solutions provided by the Bucketeer SDK to achieve it. To report goal achievements, you will use the SDK `track` function, which enables you to register when a client (end-user) reaches a goal from the journey you defined. The code block below presents an example of registering the goal achievement by the client using the `track` function in Javascript.
+To track goals, use the `track` function provided by the Bucketeer SDK. This registers when a user reaches a goal in your defined journey.
+
+### Basic Goal Tracking
+
+For simple events like button clicks or page views, track the goal without a value:
 
 ```js showLineNumbers
 client.track("GOAL_ID");
 ```
 
-For further details regarding goals tracking, check the **Reporting customer events** section related to the programing language you use on the SDK documentation.
+### Goal Tracking with Values
+
+For goals that have measurable values (like revenue, time spent, or items purchased), pass a numeric value:
+
+```js showLineNumbers
+// Track a purchase with the amount spent
+client.track("purchase_completed", 49.99);
+
+// Track time spent on a page (in seconds)
+client.track("page_engagement", 120);
+
+// Track number of items added to cart
+client.track("items_added", 3);
+```
+
+The value will appear in the experiment results as:
+- **Value total**: Sum of all values across all events
+- **Value/User**: Average value per unique user
+
+This is particularly useful for measuring the impact of variations on revenue, engagement time, or other quantifiable metrics.
+
+:::tip When to use values
+Use goal values when you want to measure not just *if* users completed an action, but *how much* of something (revenue, time, quantity) resulted from that action.
+:::
+
+For further details regarding goal tracking, check the **Reporting customer events** section in the SDK documentation for your programming language.
 

@@ -1,85 +1,111 @@
 ---
 title: Experiment results
-# sidebar_position: 
 slug: /feature-flags/testing-with-flags/experiment-results
-description: Describes the experiments tab on the feature flag and how to link feature flags to experiments.
-tags: ['experiments', 'feature-flag', 'test']
+description: Learn how to analyze experiment results, understand key metrics, and make data-driven decisions using Bayesian inference.
+tags: ['experiments', 'feature-flag', 'test', 'bayesian']
 ---
 
 import CenteredImg from '@site/src/components/centered-img/CenteredImg';
 
-After you create an experiment, it automatically becomes available on the dashboard **Experiments** tab. Experiments may present one of the following states:
+After creating an experiment, it automatically becomes available on the dashboard **Experiments** tab. Experiments can have one of the following states:
 
-- **Waiting**: The defined start date still needs to be reached. The experiment result will not present any results.
-- **Running**: The experiment is acquiring data regarding user behavior according to the listed goals. You already have data on the experiment result page. 
-- **Finished**: The experiment has reached its end date and has been successfully completed. You can find the final results on the result page.
+- **Waiting**: The start date hasn't been reached yet. No data is being collected
+- **Running**: The experiment is actively collecting data about user behavior according to the defined goals
+- **Stopped**: The experiment has been manually stopped or reached its end date
 
-Independent of the experiment status, you can always access their results by clicking the **Result** button. The below image presents an example of a list of experiments.
-
-<CenteredImg
-  imgURL="img/feature-flags/using-experiments/experiments-list.png"
-  alt="List of experiments"
-  wSize="550px"
-/>
-
-When you access the flag details you also can check experiment results by selecting the **Experiment** tab.
-
-## Analise the experiment results
-
-When you navigate to the experiment result page, you will immediately find information about the experiment's current state and evaluation period at the top. For instance, the example below showcases a **Stopped** experiment.
+You can access experiment results at any time by clicking the **Result** button, regardless of the experiment's current status.
 
 <CenteredImg
-  imgURL="img/feature-flags/using-experiments/stopped-experiment.png"
-  alt="Stopped experiment."
-/>
-
-Following the experiment status, you will encounter the following components:
-
-- **Goal selector**: This feature allows you to choose from all the goals associated with the experiment. 
-- **Variation data table**: A comprehensive table displays data for all variations within the selected goal. This table presents relevant metrics and insights regarding the performance of each variation, allowing you to compare and evaluate their effectiveness.
-- **Variation data history chart**: It provides the historical data visualization for the selected goal and its associated variations. This graph showcases the performance trends and patterns over time, enabling you to observe data changes. The chart can present data related to all the columns available in the table.
-
-An example dataset from an experiment is shown in the image below, considering **Goal-1** as the focus. The graph showcases the Conversion Rate data for all four existing variations, allowing you to assess and compare their performance.
-
-<CenteredImg
-  imgURL="img/feature-flags/using-experiments/experiments-1.png"
-  alt="First portion of experiment panel"
+  imgURL="img/experimentation/experiments/experiment-list-running.png"
+  alt="List of experiments with different states"
+  wSize="650px"
   borderWidth="1px"
 />
 
-### Table data
+You can also check experiment results from the flag details page by selecting the **Experiment** tab.
 
-The variation data table in the experiment results provides valuable information for analysis. It includes the following columns:
+## Analyzing experiment results
 
-- **Evaluation user**: This column represents the number of unique users who received the variation from the server after an SDK request. It indicates the actual count of users who were assigned to a specific feature flag variation.
-- **Goal total**: Displays the total number of goal events fired by the client. It accounts for all occurrences of the goal event, including multiple triggers by the same user.
-- **Goal user**: Indicates the number of unique users who fired the goal event. Unlike the goal total, this count does not increase when the same user triggers the goal event multiple times. It represents the distinct count of users who achieved the goal.
-- **Conversion rate**: The conversion rate column is calculated by dividing the number of unique users who fired the goal event by the number of unique users for whom a variation was returned. It provides insights into the percentage of users who successfully completed the goal based on the assigned variation.
-- **Value total**: The value total column represents the total number of values assigned to a goal event. This column may have different values for each variation. For example, it can measure how much a user spends based on each variation. In cases where the goal is to check if the user performed a desired task (e.g., clicking a button), this column may contain only nullable values.
-- **Value/User**: The value/user column calculates the average values assigned to the goal event per user. It is calculated as the sum of the numbers assigned to the goal event divided by the number of unique users who fired the goal event.
+The experiment result page provides comprehensive data to help you make informed decisions:
 
-### Best variation based on the Bayesian inference
+### Page Components
 
-At the bottom of the screen, the Bucketeer system provides suggestions regarding the best-performing variation in the experiment. To determine the best variation, Bucketeer leverages [Bayesian inference](https://en.wikipedia.org/wiki/Bayesian_inference). This approach allows for making predictions about the top-performing variation without requiring an in-depth understanding of data science.
+1. **Experiment header**: Shows the current state (Waiting, Running, Stopped) and evaluation period
+2. **Goal selector**: Choose which goal to analyze if you have multiple goals
+3. **Evaluation data table**: View user and event counts for each variation
+4. **Conversion data table**: Compare performance metrics across variations using Bayesian inference
+5. **Data visualization chart**: Track trends over time for any metric
 
-Using Bayesian inference enables Bucketeer to update the probability of selecting the best variation as new data is acquired. It compares the performance of each variation to a baseline, typically a control group or reference point established when creating the experiment.
-
-In the experiment results, you will find additional information in the existing table that aids in the selection of the best-performing variation:
-
-- **Improvement**: This metric quantifies the improvement achieved by each variation compared to the baseline. It is calculated by comparing the range of values observed for a variation with the range of values observed for the baseline. A higher improvement value indicates a more favorable performance compared to the baseline.
-- **Probability to beat baseline**: This estimated likelihood represents the probability of a variation surpassing the performance of the baseline. It helps gauge the potential for a variation to outperform the baseline. It provides insights into the relative effectiveness of each variation.
-- **Probability to be best**: This metric indicates the probability of a variation being the top-performing option. It represents the possibility of a variation outperforming all other variations and being presumed as the most successful one.
-
-The image below illustrates an example of the results obtained through Bayesian inference, continuing from the previous set of results presente previously.
+### Evaluation Metrics
 
 <CenteredImg
-  imgURL="img/feature-flags/using-experiments/experiments-2.png"
-  alt="Second portion of experiment panel"
+  imgURL="img/experimentation/experiments/experiment-result-evaluation.png"
+  alt="Experiment evaluation metrics table"
   borderWidth="1px"
 />
 
-:::tip How select the best variation?
-The Bucketeer team suggests selecting the best variation with a minimum 95% confidence level in both probability to beat baseline and probability to be best.
+The evaluation table shows fundamental data for each variation:
+
+- **Evaluation user**: Number of unique users who received this variation from the server
+- **Goal total**: Total count of goal event occurrences, including multiple triggers by the same user
+- **Goal user**: Number of unique users who fired the goal event (counted once per user)
+- **Conversion rate**: Percentage of users who completed the goal (Goal user / Evaluation user)
+- **Value total**: Sum of all values assigned to goal events. Used when tracking metrics like revenue or time spent
+- **Value/User**: Average value per user (Value total / Goal user)
+
+### Conversion Rate Analysis
+
+When you have sufficient data, Bucketeer displays a confidence indicator showing which variation is winning. This banner appears at the top of the results and provides a quick summary of the experiment's outcome.
+
+<CenteredImg
+  imgURL="img/experimentation/experiments/experiment-result-converstion-rate.png"
+  alt="Experiment results showing confidence banner, conversion rate chart, and Bayesian analysis table"
+  wSize="750px"
+  borderWidth="1px"
+/>
+
+The conversion rate table uses Bayesian inference to help identify the best-performing variation:
+
+- **Conversion Rate** or **Value/User**: The primary metric being analyzed
+- **Improvement**: How much better this variation performs compared to the baseline. Calculated by comparing the range of values for the variation against the baseline range
+- **Probability to Beat Baseline**: The estimated likelihood that this variation outperforms the baseline. We recommend a minimum of 95% confidence
+- **Probability to Be Best**: The probability that this variation is the top performer among all variations. We recommend a minimum of 95% confidence
+- **Expected Loss**: The average opportunity cost of choosing this variation if it's not actually the best. A lower expected loss means less risk of missing out on better performance
+
+:::info Understanding Expected Loss
+
+Expected Loss helps you quantify the risk of choosing a variation. For example:
+- Variation A: Expected Loss 2.5% means you might miss out on 2.5% better performance by choosing this
+- Variation B: Expected Loss 0.1% means minimal risk - this is likely the best option
+
+Lower expected loss indicates higher confidence that you're making the right choice.
+
 :::
 
-Based on the Bucketeer recommendation, the current test should continue to acquire more data before selecting the best variation. If no variation reaches the recommended confidence value, the test should keep running.
+:::tip How to select the best variation
+
+The Bucketeer team recommends selecting a variation with:
+- **At least 95% Probability to Beat Baseline**
+- **At least 95% Probability to Be Best**
+- **Low Expected Loss** (ideally below 1%)
+
+If no variation meets these criteria, continue running the experiment to collect more data.
+
+:::
+
+### Data Visualization
+
+The chart at the bottom allows you to visualize any metric over time. You can:
+
+- Select which metric to display (Conversion Rate, Goal Users, Value/User, etc.)
+- Toggle variations on/off to focus your analysis
+- Observe trends and patterns throughout the experiment duration
+
+## Making Decisions
+
+Use Bayesian inference results to make data-driven decisions:
+
+1. **Clear winner**: If one variation has >95% probability on both metrics and low expected loss, it's ready to roll out
+2. **Needs more time**: If no clear winner emerges, extend the experiment or wait for more data
+3. **No significant difference**: If variations perform similarly, consider other factors (implementation complexity, maintenance cost)
+4. **Multiple goals**: Compare results across different goals to ensure the winning variation doesn't negatively impact other metrics

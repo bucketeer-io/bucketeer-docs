@@ -1,109 +1,150 @@
 ---
 title: Feature Flags Lifecycles
 slug: /best-practices/feature-flag-lifecycle
-description: Describe the feature flag lifecycle types and the best practices on how to use them.
+description: Learn about feature flag lifecycle types and best practices for managing flags throughout their lifetime.
 tags: ['best-practices', 'lifecycle']
 ---
 
 import CenteredImg from '@site/src/components/centered-img/CenteredImg';
 
-It's crucial to regularly manage your code to prevent the accumulation of outdated, unused flags in your application. This guide shows a straightforward approach using Bucketeer to determine [when to archive](/best-practices/feature-flag-lifecycle#when-archive-a-flag) and remove feature flags from your application. 
+Regular flag management prevents the accumulation of outdated, unused flags in your application. This guide shows a straightforward approach to determine when to archive and remove feature flags using Bucketeer.
 
-## When archive a flag
+## When to archive a flag
 
-In Bucketeer, a flag can have one of the following status:
+In Bucketeer, flags display traffic status to help you identify which flags are actively being used:
 
-- **New**: Recently created flags with no requests received.
-- **Receiving requests**: Active flags that have received requests within the last 7 days.
-- **Inactive**: Flags that haven't received requests for over 7 days. It's important to note that both ON and OFF flags can become inactive.
+- **Never Used**: Recently created flags that haven't received any request yet
+- **Receiving Traffic**: Flags that have received requests within the last 7 days (shown with a green indicator)
+- **No Recent Traffic**: Flags that haven't received requests for over 7 days (shown with a yellow warning indicator)
+
+Both ON and OFF flags can show "No Recent Traffic" status.
 
 <CenteredImg
-  imgURL="img/best-practices/flag-status.png"
-  alt="flag status"
+  imgURL="img/best-practices/flags-no-recent-traffic.png"
+  alt="Feature flag list showing traffic status indicators including No Recent Traffic"
+  wSize="750px"
+  borderWidth="1px"
 />
 
-You can use the flag status information as a reference to archive the flag and remove its code from your application. An inactive flag in your dashboard signals that it's no longer in use and can be archived.
+Use the flag traffic status as a reference to archive flags and remove their code from your application. A flag showing "No Recent Traffic" signals it's no longer in use and can be safely archived.
 
 ### Why archive flags?
 
-Archiving inactive flags is crucial for optimizing resource usage and improving user experience. Inactive flags that continue being sent to clients, increasing:
+Archiving flags with no recent traffic optimizes resource usage and improves user experience. Flags that continue being sent to clients increase:
 
-- The size of server repose and cache on the client. 
-- The response latency. 
+- Server response size and client cache size
+- Response latency
 
-Inactive flags mainly affect the application startup process for new users or users with no cache.
+Flags with no recent traffic primarily affect the application startup process for new users or users without cached data.
 
 :::info Flag evaluation
 
-Keep in mind that Bucketeer does not reevaluate previously evaluated flags unless specific conditions are met:
+Bucketeer does not reevaluate previously evaluated flags unless specific conditions are met:
 
-- New user access.
-- Cache clearance by existing users.
-- Application with no activities over 30 days.
+- New user access
+- Cache clearance by existing users
+- Application with no activity for over 30 days
 
 :::
 
 ### How to archive a flag
 
-The Bucketeer team recommends the following steps for inactive flags:
+Follow these steps to archive flags showing "No Recent Traffic":
 
-1. Remove the flag code from your application.
-2. Access the **Feature Flag** list page.
-3. Click the inactive flag's action button  (**...**) and select **Archive**. 
-4. Provide a comment for the update, then click **Submit**.
+1. **Remove the flag code** from your application
+2. Navigate to the **Feature Flags** list page
+3. Archive the flag using one of these methods:
+
+**Option 1: From the flag list**
+- Click the flag's action menu (**...**) and select **Archive Flag**
 
 <CenteredImg
-  imgURL="img/best-practices/archive-flag.png"
-  alt="archive flag"
+  imgURL="img/best-practices/flag-archive.png"
+  alt="Archive flag option in action menu"
+  wSize="700px"
+  borderWidth="1px"
 />
+
+**Option 2: From the flag details page**
+- Open the flag details
+- Navigate to the **Settings** tab
+- Scroll to the **Archive Flag** section
+- Click the **Archive Flag** button
+
+For more details about the Settings tab, see [Settings and History](/feature-flags/creating-feature-flags/settings-and-history#archive-flag).
+
+4. Provide a comment for the update, then click **Submit**
 
 :::note Archiving warning
 
-The Bucketeer system will warn you if the flag has received at least one request in the last 7 days.
+Bucketeer will warn you if the flag has received at least one request in the last 7 days.
 
 :::
 
 :::info Remove flag code first
 
-Archiving a flag that persists in your code will make your application use the default value defined in your code. This behavior happens for different reasons whether you use a client or server SDK:
+Archiving a flag that still exists in your code will make your application use the default value defined in your code:
 
-- **Server SDK**: Results in a not-found error from the Bucketeer server, making your code use the default values defined in your application.
-- **Client SDK**: Your application won't find the variation in its cache, making your code use the default values.
+- **Server SDK**: Returns a not-found error from the Bucketeer server, triggering default values in your application
+- **Client SDK**: Variation not found in cache, triggering default values in your application
+
+Always remove the flag code before archiving to avoid unintended behavior.
 
 :::
 
-## Flag lifecycle
+## Flag lifecycle types
 
-Feature flags are often used temporarily to reduce risks of new features during release, with a short lifecycle. Once the rollout is complete, you should remove the flag from the code and archive it on the dashboard.
+Feature flags are often used temporarily to reduce risks during feature releases. Once the rollout is complete, remove the flag from the code and archive it on the dashboard.
 
-The flag lifecycle shows how feature flags are used across different development stages, categorized into two main types.
-
-- **Temporary**: Flags are removed from the application and archived when they're no longer active.
-- **Permanent**: Flags are kept even when inactive for some time, as they're not used continuously.
-
+Flags fall into two main lifecycle categories:
 
 ### Temporary Flags
 
-Typically, you will use temporary flags for the following purposes:
+Temporary flags are removed and archived after serving their purpose:
 
-- **Feature rollouts**: Used to decouple feature deployment from release. Once the feature is fully deployed and tested, the flag is removed from the code and archived on the dashboard.
-- **Experimentation**: Used for A/B testing and multivariate experiments. Once the experiment finishes, the flag is removed from the code and archived on the dashboard.
+**Feature rollouts**
+- Used to decouple feature deployment from release
+- Once the feature is fully deployed and tested, remove the flag code and archive it
+
+**Experimentation**
+- Used for A/B testing and multivariate experiments
+- After the experiment concludes and a winner is selected, remove the flag code and archive it
 
 ### Permanent Flags
 
-Other applications may require flags to be used longer, sometimes for the same application lifetime. As a result, permanent flags have longer lifecycles and fulfill ongoing needs:
+Permanent flags have longer lifecycles and serve ongoing needs throughout the application's lifetime:
 
-- **Kill switches**: Remove or add features or entire application sections, often used during deployments or downtime. These flags remain permanent for quick action in unexpected situations.
-- **Feature management flags**: Used for controlling feature availability based on user segments or traits. These flags remain throughout the application's lifetime to manage platform features for specific user groups.
+**Kill switches**
+- Enable or disable features or entire application sections
+- Often used during deployments or service downtime
+- Remain permanent for quick action in unexpected situations
 
-#### Examples of permanent flag use cases
+**Feature management flags**
+- Control feature availability based on user segments or attributes
+- Manage platform features for specific user groups (e.g., premium vs free tier)
+- Remain throughout the application's lifetime
 
-A typical scenario of a permanent flag is related to mobile apps prompting users to update their version. Such a request is usually used in situations like the release of unfinished features or if your app is frequently crashing. By incorporating a permanent boolean flag within the app's code, developers can control when the update prompt appears. Once set to true, the flag triggers a pop-up requesting the app update. 
+## Examples of permanent flag use cases
 
-Another example of a permanent flag is reusing it to run multiple tests. While repurposing a flag is not ideal and might seem like it loses its original purpose, in some cases, it's better than constantly asking users to update the app. Plus, it saves time by bypassing the slow application review process in the Google and Apple Store.
+### Mobile app version control
 
-The reuse of flags is adopted because when working with client applications, you can't define when your user updates the application. As a result, you can only sometimes rely on feature flags from the last release. Therefore, you can have a fixed flag in your application to execute common actions such as:
+A common permanent flag scenario is prompting mobile users to update their app version. This is useful when releasing unfinished features or addressing frequent crashes.
 
-- Test algorithms.
-- Change the algorithms used in searches.
-- Change a banner's URL in your application.
+By incorporating a permanent boolean flag in the app code, developers can control when the update prompt appears. Setting the flag to true triggers a pop-up requesting the app update.
+
+### Flag reuse for multiple tests
+
+While not ideal, reusing flags for multiple tests can be practical for mobile apps. This approach:
+- Avoids constantly asking users to update the app
+- Bypasses slow app store review processes (Google Play, App Store)
+
+Flag reuse is necessary because you can't control when users update their applications. Since you can't always rely on flags from the latest release, maintaining fixed flags enables common actions:
+
+- Testing different algorithms
+- Changing search algorithms
+- Updating banner URLs in the application
+- Toggling feature sets based on runtime conditions
+
+:::tip Best practice
+While permanent flags are sometimes necessary, aim to keep most flags temporary. Regularly audit permanent flags to ensure they're still needed and properly documented.
+:::
