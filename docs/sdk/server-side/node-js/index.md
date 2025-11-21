@@ -225,10 +225,10 @@ In addition, you can pass a number value to the goal event. These values will su
 ```js showLineNumbers
 client.track(
   user: {
-    id: 'USER_ID', 
+    id: 'USER_ID',
     data: {}, // The user attributes are optional
   },
-  goalId: 'YOUR_GOAL_ID', 
+  goalId: 'YOUR_GOAL_ID',
   value: 10.50,
 );
 ```
@@ -240,11 +240,21 @@ client.track(
 
 This method will send all pending analytics events to the Bucketeer server as soon as possible and stop the workers. The application should call this before the application stops. Otherwise, the remaining events can be lost.
 
+The destroy method accepts an optional timeout parameter (default: 30 seconds). For high-traffic applications with large event queues, you may need to increase this timeout.
+
+:::warning
+After calling `destroy()`, the client instance cannot be reused. You must create a new client instance if you need to continue using the SDK.
+:::
+
 <Tabs>
 <TabItem value="js" label="JavaScript">
 
 ```js showLineNumbers
+// Basic usage with default 30-second timeout
 await client.destroy();
+
+// Custom timeout for high-traffic applications
+await client.destroy({ timeout: 60000 }); // 60 seconds
 ```
 
 </TabItem>
