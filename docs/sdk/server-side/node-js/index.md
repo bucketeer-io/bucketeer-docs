@@ -94,6 +94,7 @@ Depending on your use, you may want to change the optional configurations availa
 - **logger** (Default is `DefaultLogger`)
 - **enableLocalEvaluation** (Default is false)
 - **cachePollingInterval** (Default is 1 minute - specify in milliseconds)
+- **scheme** (Default is `https`) - Useful for local development when using `http`. If the `apiEndpoint` includes a scheme (e.g., `https://api.example.com`), the scheme from the URL will take precedence.
 
 For more information, please check the Option implementation [here](https://github.com/bucketeer-io/node-server-sdk/blob/master/src/config.ts).
 
@@ -146,6 +147,7 @@ When initializing the SDK you must enable the local evaluation setting.
     featureTag: 'YOUR_FEATURE_TAG',
     enableLocalEvaluation: true, // <--- Enable the local evaluation
     cachePollingInterval: 10 * 60000, // <--- Change the default interval if needed
+    // scheme: 'http', // <--- Optional: Use 'http' for local development (defaults to 'https')
   });
   const client = initializeBKTClient(config);
 ```
