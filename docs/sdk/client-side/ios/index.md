@@ -504,7 +504,7 @@ Bucketeer SDK supports FCM ([Firebase Cloud Messaging](https://firebase.google.c
 Every time you change a feature flag on the admin console, Bucketeer will send a silent notification using the FCM V1 API to notify the client so that you can update the evaluations in real-time.
 
 :::info Before using
-1. You need to register your FCM Service Account on the admin console. Check the [Pushes](/integration/pushes) section to learn how to do it.
+1. You need to register your FCM Service Account on the admin console. Check the [Pushes](/organization-settings/pushes) section to learn how to do it.
 2. This feature may not work if the end-user has the notification disabled.
 :::
 

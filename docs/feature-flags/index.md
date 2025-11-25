@@ -18,7 +18,7 @@ This section presents the necessary information to use Bucketeer feature flags. 
 
 ## API keys
 
-The [API keys](/feature-flags/api-keys) describe what they're and how they're used to authenticate and control access to the Bucketeer system.
+The [API keys](/organization-settings/api-keys) describe what they're and how they're used to authenticate and control access to the Bucketeer system.
 
 ## Audit logs
 
