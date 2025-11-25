@@ -1,22 +1,30 @@
 ---
-title: Tools
+title: Developer Tools
 sidebar_position: 1
-slug: /integration
+slug: /developer-tools
+description: Programmatic access to Bucketeer through HTTP API.
+tags: ['developer-tools', 'api', 'integration']
 ---
 
-This section presents the necessary information to use Bucketeer integration solutions. The integration solution on Bucketeer enables you to notify users systems or to receive notifications when some flag is created or updated on the dashboard.
-
-This section provides essential information for utilizing Bucketeer integration solutions. These solutions enable you to notify user systems or receive notifications when a flag is created or updated on the dashboard.
-
-## Pushes
-
-[Push](/integration/pushes) are real-time updates to ensure the user application stays up to date with flag modifications or updates. Bucketeer uses Firebase Cloud Messaging (FCM) to send silent push notifications automatically.
-
-## Notifications
-
-Bucketeer provide dashboard [Notifications](/integration/notifications) to alert you and your team regarding changes or events on the dashboard.
+This section provides information about developer tools for programmatic access to Bucketeer.
 
 ## HTTP API
 
-Bucketeer provide [HTTP API](/integration/http-api) to enable you to read and write data from Bucketeer programmatically.
-```
+The [HTTP API](/developer-tools/http-api) allows you to interact with Bucketeer programmatically, enabling you to read and write data from your applications, CI/CD pipelines, or custom automation tools.
+
+:::info Organization Settings vs Developer Tools
+
+**Organization Settings** (Slack notifications, FCM pushes, members, API keys) are now located in the Organization Settings section, accessible via the gear icon in the sidebar.
+
+**Developer Tools** focuses on programmatic access through HTTP APIs for developers building integrations.
+
+:::
+
+## Looking for Other Integrations?
+
+If you're looking for:
+
+- **Slack Notifications**: See [Notifications](/organization-settings/notifications)
+- **Firebase Cloud Messaging (FCM)**: See [Pushes](/organization-settings/pushes)
+- **API Keys**: See [API Keys](/organization-settings/api-keys)
+- **SDK Integration**: See [SDK Overview](/sdk)

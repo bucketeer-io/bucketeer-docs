@@ -1,0 +1,109 @@
+---
+title: Environments
+sidebar_position: 4
+slug: /organization-settings/environments
+description: Create and manage environments within your projects.
+tags: ['organization', 'environments', 'projects']
+---
+
+import CenteredImg from '@site/src/components/centered-img/CenteredImg';
+
+Environments are logical groupings within a project where you manage your feature flags, experiments, and user segments. Each environment represents a different stage of your development lifecycle, such as Development, Staging, or Production.
+
+When you create a project, Bucketeer automatically creates two default environments: **Development** and **Production**. You can create additional environments as needed for your workflow.
+
+## Accessing Environments
+
+Navigate to your project (outside of Organization Settings) and click the **Environments** tab.
+
+<CenteredImg
+  imgURL="img/organization-settings/environment-list.png"
+  alt="Environments list"
+  wSize="100%"
+/>
+
+## Creating an Environment
+
+To create a new environment:
+
+1. Navigate to your project (outside of Organization Settings)
+2. Click the **Environments** tab
+3. Click **+ Create Environment**
+4. Fill in the environment information:
+   - **Name** - A descriptive name for the environment (e.g., "Staging", "QA", "Testing")
+   - **URL Code** - A unique identifier (auto-generated from name, cannot be changed later)
+   - **Description** (Optional) - Additional context about the environment
+   - **Require Comment** (Optional) - When enabled, users must add a comment when making changes to feature flags
+5. Click **Create Environment**
+
+<CenteredImg
+  imgURL="img/organization-settings/create-environment-modal.png"
+  alt="Create environment modal"
+  wSize="400px"
+  borderWidth="1px"
+/>
+
+:::caution URL Code is Permanent
+The URL code cannot be changed after environment creation. Verify it carefully before creating the environment.
+:::
+
+## Environment Settings
+
+### Require Comment
+
+The "Require Comment" setting forces users to provide a reason when making changes to feature flags in this environment. This is useful for:
+
+- Production environments where changes need documentation
+- Compliance and audit requirements
+- Team communication and change tracking
+
+When enabled, users must enter a comment in a text field before saving any feature flag changes.
+
+## Managing Environments
+
+### Switching Between Environments
+
+Use the menu in the top left sidebar to switch between projects and environments. This menu allows you to:
+- Switch between different projects
+- Switch between environments within the current project
+
+<CenteredImg
+  imgURL="img/organization-settings/switch-environments.png"
+  alt="Switch between projects and environments"
+  wSize="50%"
+/>
+
+Each environment has its own isolated set of feature flags, experiments, goals, and user segments.
+
+### Updating an Environment
+
+To update an existing environment:
+
+1. Navigate to the environment settings
+2. Modify the **Name**, **Description**, or **Require Comment** setting
+3. Save your changes
+
+:::caution URL Code Cannot Be Changed
+The URL Code is a permanent identifier that cannot be modified after environment creation.
+:::
+
+## Environment Access Control
+
+Access to environments is controlled through member roles:
+
+- **Organization Owner/Admin** - Automatic access to all environments
+- **Member with Environment Editor role** - Can manage feature flags and settings in assigned environments
+- **Member with Environment Viewer role** - Read-only access to assigned environments
+
+Environment access is assigned when inviting or editing members. See [Members](/organization-settings/members) for more details.
+
+## Permissions
+
+Only **Organization Admin** and **Organization Owner** roles can create or modify environments.
+
+## Related Topics
+
+- [Projects](/organization-settings/projects) - Manage projects that contain environments
+- [Members](/organization-settings/members) - Assign environment access to team members
+- [Feature Flags](/feature-flags) - Create and manage feature flags in your environments
+

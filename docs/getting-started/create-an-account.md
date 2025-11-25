@@ -1,23 +1,27 @@
 ---
-title: Create an Account
-slug: /getting-started/create-an-account
-description: This page guides the Admin on how to create a Bucketeer account.
-tags: ['guide', 'account', 'create']
+title: Invite a Member
+slug: /getting-started/invite-a-member
+description: This page guides the Admin on how to invite members to your Bucketeer organization.
+tags: ['guide', 'member', 'invite']
 ---
 
 import CenteredImg from '@site/src/components/centered-img/CenteredImg';
 
-Bucketeer allows you to manage and track data related to different environments. To begin using Bucketeer, you need an account. For additional information regarding the available account types on Bucketeer, check the [Bucketeer account types](../best-practice/account-types). Ask the project administrator to create an account if you're a new team member.
+To begin using Bucketeer, team members need to be invited to your organization. Organization Admins and Owners can invite new members and assign them appropriate roles and environment access.
 
-The following steps show how to create an account as an Admin.
+If you're a new team member, ask your organization administrator to invite you.
 
-1. Click on the gear icon on the sidebar menu.
-2. Select **Members**.
-3. Click **+ Invite Member** button to add a new account.
+## Inviting a Member
+
+The following steps show how to invite a member as an Admin or Owner:
+
+1. Click on the gear icon on the bottom of the sidebar menu.
+2. Select **Members** from the Access section.
+3. Click **+ Invite Member** button.
 
 <CenteredImg
   imgURL='img/getting-started/create-bucketeer-account-1.png'
-  alt='Account navigate menu'
+  alt='Navigate to Members'
   wSize='100%'
 />
 
@@ -29,22 +33,19 @@ The following steps show how to create an account as an Admin.
     Use teams to group members, making it easier when listing them on the list page.
     :::
 
-    :::info Role Member
-
-     When you assign the role Member to a new account, the user can only access the Environment you choose. These users are unable to create or update organization settings, projects, environments, API keys, or members.
+    :::info Member Role
+     When you assign the **Member** role, the user can only access the environments you explicitly choose. These users are unable to create or update organization settings, projects, environments, or manage organization-level resources like API keys and members.
     :::
 
 
-5. Click **Invite Member** to create the account.
+5. Click **Invite Member** to send the invitation.
 
 <CenteredImg 
   imgURL='img/getting-started/create-bucketeer-account-2.png'
   wSize='400px'
-  alt='Create an account'
+  alt='Invite member form'
   borderWidth='1px'/>
 
-:::info
-
+:::info Email Invitation
 The user will receive an email invitation that includes a link to access the dashboard.
-
 :::

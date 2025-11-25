@@ -1,0 +1,44 @@
+---
+title: Settings
+sidebar_position: 2
+slug: /organization-settings/settings
+description: Configure your organization's basic information and settings.
+tags: ['organization', 'settings', 'configuration']
+---
+
+import CenteredImg from '@site/src/components/centered-img/CenteredImg';
+
+The Settings page allows you to configure your organization's basic information, including the organization name, URL code, description, and owner email.
+
+## Accessing Organization Settings
+
+1. Click the gear icon at the bottom of the left sidebar
+2. Select **Settings** from the General section
+
+<CenteredImg
+  imgURL="img/organization-settings/settings-menu.png"
+  alt="Organization settings form"
+  wSize="100%"
+/>
+
+## Updating Settings
+
+To update your organization settings:
+
+1. Navigate to **Settings** from the settings menu
+2. Modify the fields you want to update (Name, Description, or Owner Email)
+3. Click the **Submit** button
+
+:::info Permission Required
+Only users with **Organization Admin** or **Organization Owner** roles can modify organization settings.
+:::
+
+:::caution URL Code Cannot Be Changed
+The URL Code is a permanent identifier that cannot be modified after organization creation.
+:::
+
+## Related Topics
+
+- [Projects](/organization-settings/projects) - Manage projects within your organization
+- [Members](/organization-settings/members) - Invite and manage team members
+- [HTTP API](/developer-tools/http-api) - Make programmatic requests to Bucketeer

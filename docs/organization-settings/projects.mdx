@@ -1,0 +1,92 @@
+---
+title: Projects
+sidebar_position: 3
+slug: /organization-settings/projects
+description: Create and manage projects that organize your environments and feature flags.
+tags: ['organization', 'projects', 'environments']
+---
+
+import CenteredImg from '@site/src/components/centered-img/CenteredImg';
+
+Projects are the primary organizational unit in Bucketeer. Each project contains multiple environments (such as Development, Staging, and Production) where you manage your feature flags, experiments, and user segments.
+
+### Hierarchy Structure
+
+```
+Organization
+└── Project (e.g., "Mobile App")
+    ├── Development Environment
+    ├── Production Environment
+    └── [Additional Environments...]
+```
+
+## Accessing Projects
+
+1. Click the gear icon at the bottom of the left sidebar
+2. Select **Projects** from the General section
+
+<CenteredImg
+  imgURL="img/organization-settings/projects-list.png"
+  alt="Projects list"
+  wSize="100%"
+/>
+
+## Creating a Project
+
+To create a new project:
+
+1. Navigate to the **Projects** page in Organization Settings
+2. Click the **+ New Project** button
+3. Fill in the project information:
+   - **Name** - A descriptive name for your project
+   - **URL Code** - A unique identifier (auto-generated from name, cannot be changed later)
+   - **Description** (Optional) - Additional context about the project
+4. Click **Create Project**
+
+<CenteredImg
+  imgURL="img/organization-settings/create-project-modal.png"
+  alt="Create project modal"
+  wSize="400px"
+  borderWidth="1px"
+/>
+
+### Default Environments
+
+When you create a project, Bucketeer automatically creates two environments:
+
+1. **Development** - URL Code: `development`
+2. **Production** - URL Code: `production`
+
+You can create additional environments after the project is created.
+
+## Managing Projects
+
+### Updating a Project
+
+To update an existing project:
+
+1. Click on the project in the projects list
+2. Modify the **Name** or **Description** (URL Code cannot be changed)
+3. Click **Update Project**
+
+### Disabling a Project
+
+You can disable a project to temporarily prevent access:
+
+1. Click on the project to edit
+2. Toggle the project status to **Disabled**
+3. Confirm the change
+
+:::warning Disabling Projects
+When a project is disabled, all its environments become inaccessible. Feature flags in disabled projects will not be evaluated.
+:::
+
+## Permissions
+
+Only **Organization Admin** and **Organization Owner** roles can create or modify projects. Projects do not have their own permission roles - access is controlled by organization roles and environment-specific roles.
+
+## Related Topics
+
+- [Settings](/organization-settings/settings) - Configure organization details
+- [Members](/organization-settings/members) - Manage team member access and roles
+- [Feature Flags](/feature-flags) - Create and manage feature flags in your environments

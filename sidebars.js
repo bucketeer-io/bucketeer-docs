@@ -41,7 +41,7 @@ const sidebars = {
     {
       type: 'doc',
       id: 'getting-started/create-an-account',
-      label: 'Create an Account',
+      label: 'Invite a Member',
       className: 'sidebar-account',
     },
     {
@@ -152,12 +152,6 @@ const sidebars = {
     },
     {
       type: 'doc',
-      id: 'feature-flags/api-keys',
-      label: 'API Keys',
-      className: 'sidebar-api-keys',
-    },
-    {
-      type: 'doc',
       id: 'feature-flags/audit-logs',
       label: 'Audit Logs',
       className: 'sidebar-audit-logs',
@@ -202,6 +196,59 @@ const sidebars = {
         'experimentation/using-experiments',
       ],
     },
+    {
+      type: 'html',
+      value: "<span class='sidebar-title'>Organization Settings</span>",
+      defaultStyle: true,
+    },
+    {
+      type: 'doc',
+      id: 'organization-settings/index',
+      label: 'Overview',
+      className: 'sidebar-organization-settings',
+    },
+    {
+      type: 'category',
+      label: 'General',
+      className: 'sidebar-organization-general',
+      collapsible: true,
+      collapsed: false,
+      items: [
+        'organization-settings/settings',
+        'organization-settings/projects',
+        'organization-settings/environments',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Access',
+      className: 'sidebar-organization-access',
+      collapsible: true,
+      collapsed: false,
+      items: [
+        'organization-settings/members',
+        'organization-settings/api-keys',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Integration',
+      className: 'sidebar-organization-integration',
+      collapsible: true,
+      collapsed: false,
+      items: [
+        {
+          type: 'doc',
+          id: 'organization-settings/notifications',
+          label: 'Slack',
+        },
+        {
+          type: 'doc',
+          id: 'organization-settings/pushes',
+          label: 'FCM',
+        },
+      ],
+    },
     // {
     //   type: 'doc',
     //   id: 'feature-flags-integration',
@@ -243,22 +290,14 @@ const sidebars = {
     },
     {
       type: 'html',
-      value: "<span class='sidebar-title'>Integration</span>",
+      value: "<span class='sidebar-title'>Developer Tools</span>",
       defaultStyle: true,
     },
     {
-      type: 'category',
-      label: 'Tools',
-      link: {
-        type: 'doc',
-        id: 'integration/index',
-      },
-      className: 'sidebar-overview',
-      items: [
-        'integration/pushes',
-        'integration/notifications',
-        'integration/http-api',
-      ],
+      type: 'doc',
+      id: 'integration/http-api',
+      label: 'HTTP API',
+      className: 'sidebar-http-api',
     },
 
 

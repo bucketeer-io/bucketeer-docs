@@ -360,6 +360,13 @@ code {
   padding-left: 0;
 }
 
+/* Specific indentation for Organization Settings submenu items */
+.sidebar-organization-general .menu__list-item,
+.sidebar-organization-access .menu__list-item,
+.sidebar-organization-integration .menu__list-item {
+  padding-left: 1.25rem;
+}
+
 .menu__link .menu__link--active {
   background-color: #573792;
 }
