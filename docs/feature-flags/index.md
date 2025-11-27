@@ -9,16 +9,18 @@ This section presents the necessary information to use Bucketeer feature flags. 
 ## Creating feature flags:
 
 - [Create a feature flag](/feature-flags/creating-feature-flags/create-feature-flag): Learn how to create flags and define their properties.
-- [Targeting with feature flags](/feature-flags/creating-feature-flags/targeting): Discover how to target specific users or groups with your flags based on various attributes.
-- [Manage variations](/feature-flags/creating-feature-flags/manage-variations): Understand how to manage and configure different variations of your feature flags.
-- [Trigger flags](/feature-flags/creating-feature-flags/trigger.mdx): Use Webhooks to remotely manage flags by turning them ON or OFF.
-- [Auto operation](/feature-flags/creating-feature-flags/auto-operation): Automate the feature flag operation.
-- [Evaluate results](/feature-flags/creating-feature-flags/evaluate-results): Explore how to evaluate and analyze the usage of your flags.
-- [Other flag settings](/feature-flags/creating-feature-flags/settings-and-history): Explore additional settings and options for your flags.
+- [Targeting](/feature-flags/creating-feature-flags/targeting): Discover how to target specific users or groups with your flags based on various targeting rules.
+- [Evaluations](/feature-flags/creating-feature-flags/evaluations): Monitor and analyze how your flags are being evaluated and used.
+- [Variations](/feature-flags/creating-feature-flags/variations): Understand how to create and manage different variations of your feature flags.
+- [Auto Operations](/feature-flags/creating-feature-flags/auto-operation): Automate feature flag operations like progressive rollouts and scheduled changes.
+- [Triggers](/feature-flags/creating-feature-flags/triggers): Use webhooks to remotely manage flags by turning them ON or OFF.
+- [Code Reference](/feature-flags/creating-feature-flags/code-reference): Track where your feature flags are used in your codebase.
+- [History](/feature-flags/creating-feature-flags/history): View the complete audit trail of changes made to your feature flags.
+- [Settings](/feature-flags/creating-feature-flags/settings): Configure advanced settings and options for your flags.
 
-## API keys
+## User Segments
 
-The [API keys](/organization-settings/api-keys) describe what they're and how they're used to authenticate and control access to the Bucketeer system.
+The [User Segments](/feature-flags/segments) feature allows you to create reusable groups of users based on specific attributes, making it easier to target multiple flags to the same audience.
 
 ## Audit logs
 

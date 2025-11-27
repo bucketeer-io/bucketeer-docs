@@ -1,0 +1,45 @@
+---
+title: Prerequisites
+slug: /feature-flags/creating-feature-flags/targeting/prerequisites
+description: Create dependencies between feature flags to ensure coordinated feature rollouts.
+tags: ['targeting', 'prerequisites', 'feature-flag']
+---
+
+import CenteredImg from '@site/src/components/centered-img/CenteredImg';
+
+Prerequisites allow you to create dependencies between feature flags. A flag with prerequisites will only be evaluated if all prerequisite flags return their specified variations. This enables coordinated feature rollouts and complex feature dependencies.
+
+## How Prerequisites Work
+
+When a prerequisite flag is added to a targeting configuration, the target flag is only evaluated if the prerequisite flag's returned value matches the configured value. This means that the target flag is only evaluated if the prerequisite conditions are fully satisfied.
+
+If multiple flags are set as prerequisites, they are evaluated using the logical operator **AND**. This ensures that all prerequisite conditions are met before evaluating the target flag. In case the return value from one of the prerequisite flags is not as expected, the **OFF variation** in the target flag is returned.
+
+The image below presents an example using two flags as prerequisites. Therefore, the targeting or rollout percentage evaluation will only happen if the first flag returns the **True** variation and the second returns the **Control** variation. Otherwise, Bucketeer will provide the OFF variation.
+
+<CenteredImg
+  imgURL="img/feature-flags/targeting/prerequisites.png"
+  alt="prerequisites example"
+  wSize="500px"
+/>
+
+## Common Use Cases
+
+- **Progressive feature rollout** - Enable feature B only when feature A is active
+- **Feature bundling** - Combine multiple related features that depend on each other
+- **Gradual migration** - Control the order of feature activation during system transitions
+- **Safety gates** - Ensure infrastructure flags are enabled before application features
+- **Multi-phase releases** - Roll out complex features in coordinated stages
+
+## Performance Considerations
+
+:::info Performance impact
+When defining targeting rules based on other feature flags, consider the impact on performance. If a flag has many dependencies, evaluating one flag may also evaluate many other flags, potentially affecting the evaluation duration and the client's network load.
+:::
+
+:::tip Best Practices
+- Limit prerequisite chains to 2-3 levels deep
+- Use prerequisites for critical dependencies only
+- Consider using custom rules with feature flag conditions for less critical relationships
+:::
+
