@@ -14,7 +14,7 @@ This section presents the necessary information to use Bucketeer feature flags. 
 - [Variations](/feature-flags/creating-feature-flags/variations): Understand how to create and manage different variations of your feature flags.
 - [Auto Operations](/feature-flags/creating-feature-flags/auto-operation): Automate feature flag operations like progressive rollouts and scheduled changes.
 - [Triggers](/feature-flags/creating-feature-flags/triggers): Use webhooks to remotely manage flags by turning them ON or OFF.
-- [Code Reference](/feature-flags/creating-feature-flags/code-reference): Track where your feature flags are used in your codebase.
+- [Code Reference](/feature-flags/code-reference): Track where your feature flags are used in your codebase.
 - [History](/feature-flags/creating-feature-flags/history): View the complete audit trail of changes made to your feature flags.
 - [Settings](/feature-flags/creating-feature-flags/settings): Configure advanced settings and options for your flags.
 

@@ -139,24 +139,24 @@ Custom rules allow you to define conditions to evaluate users and assign them to
 
 ### Rule Types
 
-Bucketeer supports four types of custom rule conditions:
+Bucketeer supports four types of custom rule conditions, all unified under [Custom Rules](/feature-flags/creating-feature-flags/targeting/custom-rules):
 
-#### [User Attributes](/feature-flags/creating-feature-flags/targeting/user-attributes)
+#### User Attributes
 Target users based on their attributes like `app_version`, `language`, `device_model`, or any custom attributes you define. This is the most flexible targeting option.
 
 **Example use cases**: Progressive rollout by app version, platform-specific features, localization testing
 
-#### [User Segments](/feature-flags/creating-feature-flags/targeting/user-segments)
+#### User Segments
 Target predefined groups of users by their IDs. Create reusable segments like "Beta Testers", "VIP Users", or "Internal Team" and apply them across multiple flags.
 
 **Example use cases**: Beta testing, VIP features, internal testing, regional rollouts
 
-#### [Date](/feature-flags/creating-feature-flags/targeting/date)
+#### Date-Based Conditions
 Target users based on time-related conditions using timestamp attributes. Compare dates with "before" or "after" operators.
 
 **Example use cases**: Grandfathering users, time-limited access, anniversary promotions
 
-#### [Feature Flag](/feature-flags/creating-feature-flags/targeting/feature-flag)
+#### Feature Flag Dependencies
 Create dependencies between flags by using other flags as conditions. Different from prerequisites, these are evaluated within custom rules.
 
 **Example use cases**: Progressive feature rollout, feature bundling, gradual migration
