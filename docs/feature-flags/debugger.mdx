@@ -31,6 +31,10 @@ To access the Debugger, navigate to the **Debugger** page from the sidebar menu 
  alt="Debugger interface showing flag selection, user ID input, and user attributes configuration"
 />
 
+:::tip Quick access
+You can also access the Debugger directly from a flag's Targeting tab for quick testing while configuring targeting rules. See the [Quick Access from Targeting Tab](#quick-access-from-targeting-tab) section below.
+:::
+
 ### Configuring your test
 
 The Debugger allows you to configure the following parameters:
@@ -132,6 +136,14 @@ Each flag section displays the same information as the user view, but organized 
 You can easily switch between "Group By: User" and "Group By: Flag" using the dropdown menu at the top of the results section. Use the **Expand All** / **Collapse All** buttons to manage the visibility of results.
 :::
 
+## Starting fresh
+
+To start a completely new test with a clean slate, click the **Clear All Fields** button at the top of the results section. This will reset all your inputs (flags, user IDs, and attributes) and allow you to configure a new evaluation from scratch.
+
+:::info Edit vs Clear
+Use **Edit Fields** when you want to make adjustments to your current configuration, or **Clear All Fields** when you want to start completely fresh with a new test.
+:::
+
 ## Best practices
 
 When using the Debugger, consider these best practices:
@@ -142,11 +154,36 @@ When using the Debugger, consider these best practices:
 4. **Verify multiple scenarios**: Test with different combinations of attributes to ensure your flags behave correctly under various conditions
 5. **Document results**: Use the Debugger results to document expected flag behavior for your team
 
-## Starting fresh
+## Quick Access from Targeting Tab
 
-To start a completely new test with a clean slate, click the **Clear All Fields** button at the top of the results section. This will reset all your inputs (flags, user IDs, and attributes) and allow you to configure a new evaluation from scratch.
+When working on a specific feature flag, you can quickly access the Debugger directly from the **Targeting** tab. This is particularly useful when you want to verify your targeting rules while configuring them, without navigating away from the flag details page.
 
-:::info Edit vs Clear
-Use **Edit Fields** when you want to make adjustments to your current configuration, or **Clear All Fields** when you want to start completely fresh with a new test.
+To access the Debugger from the Targeting tab:
+
+1. Navigate to your feature flag's details page
+2. Go to the **Targeting** tab
+3. Click the **Debugger** button (with the bug icon) located at the bottom right, next to the **Save with Comment** button
+
+<CenteredImg
+ imgURL="img/feature-flags/debugger/debugger-targeting-button.png"
+ alt="Debugger button located at the bottom right of the Targeting tab, next to Save with Comment button"
+ wSize="250px"
+/>
+
+When opened from the Targeting tab, the Debugger will appear as a modal with the current flag already pre-selected, allowing you to immediately test it without having to search for the flag.
+
+<CenteredImg
+ imgURL="img/feature-flags/debugger/debugger-targeting-form.png"
+ alt="Debugger modal opened from Targeting tab with the current flag pre-selected"
+ wSize="500px"
+/>
+
+This workflow is ideal for:
+
+- **Iterative testing**: Test your targeting changes as you configure them
+- **Immediate feedback**: Verify rules work correctly before saving
+- **Focused debugging**: Quickly troubleshoot a specific flag without context switching
+
+:::tip Testing workflow
+When making changes to targeting rules, use the Debugger button in the Targeting tab to test your changes immediately. Once you've confirmed the rules work as expected, save your changes and the results remain visible for documentation.
 :::
-
