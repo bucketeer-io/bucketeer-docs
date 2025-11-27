@@ -165,6 +165,12 @@ const sidebars = {
     },
     {
       type: 'doc',
+      id: 'feature-flags/debugger',
+      label: 'Debugger',
+      className: 'sidebar-debugger',
+    },
+    {
+      type: 'doc',
       id: 'feature-flags/segments',
       label: 'User Segments',
       className: 'sidebar-segments',
