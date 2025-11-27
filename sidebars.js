@@ -239,12 +239,12 @@ const sidebars = {
       items: [
         {
           type: 'doc',
-          id: 'organization-settings/notifications',
+          id: 'organization-settings/slack',
           label: 'Slack',
         },
         {
           type: 'doc',
-          id: 'organization-settings/pushes',
+          id: 'organization-settings/fcm',
           label: 'FCM',
         },
       ],
