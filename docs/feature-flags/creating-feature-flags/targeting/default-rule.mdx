@@ -1,0 +1,60 @@
+---
+title: Default Rule
+slug: /feature-flags/creating-feature-flags/targeting/default-rule
+description: Configure the fallback behavior for users who don't match any targeting rules.
+tags: ['targeting', 'default-rule', 'feature-flag']
+---
+
+import CenteredImg from '@site/src/components/centered-img/CenteredImg';
+
+The default rule defines the fallback behavior when no other rules match. This is the last step in the evaluation order, making it crucial for your flag's behavior.
+
+## Audience Traffic Allocation
+
+The **Audience Traffic Allocation** feature allows you to control what percentage of your total traffic receives the flag evaluation, with the remainder excluded entirely. This is particularly useful for:
+
+- **Controlled experiments** - Test on 10% of traffic while excluding 90%
+- **Beta launches** - Gradually expose features to increasing audience percentages
+- **Risk mitigation** - Limit exposure during initial rollouts
+
+For example, you can set the audience allocation to 10%, then apply a 50/50 rollout split within that 10% audience. This means only 5% of your total users receive each variation, while 90% are excluded from the experiment entirely.
+
+<CenteredImg
+  imgURL="img/feature-flags/targeting/rollout-combined-with-default-strategy.png"
+  alt="Default rule with audience traffic allocation and variation percentage split"
+  wSize="450px"
+/>
+
+## Variation Allocation
+
+Within the audience that receives the flag (determined by Audience Traffic Allocation), you can distribute users across variations using either:
+
+- **Split equally** - Automatically divides traffic evenly across all variations
+- **Split by custom percentage** - Manually define the percentage for each variation
+
+The audience split happens first, then the variation allocation applies to the included audience.
+
+## Progressive Rollout Restriction
+
+:::info Progressive Rollout
+If you have a [progressive rollout](/feature-flags/creating-feature-flags/auto-operation/progressive-rollout) running, you cannot modify the default rule until the rollout completes.
+:::
+
+## Common Use Cases
+
+- **A/B testing** - Split traffic 50/50 between control and treatment variations
+- **Canary releases** - Start with 5% traffic, gradually increase
+- **Multi-variant testing** - Test 3+ variations with custom percentages
+- **Feature ramp-up** - Begin with small audience, expand over time
+- **Percentage-based rollout** - Release to 25% of users not matching any rules
+
+## Best Practices
+
+:::tip Starting Small
+When launching a new feature, start with a small audience allocation (5-10%) in the default rule. Monitor performance and gradually increase the percentage.
+:::
+
+:::caution Excluded Users
+Users excluded by Audience Traffic Allocation will receive the OFF variation, not a random variation from your flag. Consider this when designing your feature logic.
+:::
+

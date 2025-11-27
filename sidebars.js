@@ -125,13 +125,14 @@ const sidebars = {
             id: 'feature-flags/creating-feature-flags/targeting/targeting',
           },
           items: [
-            'feature-flags/creating-feature-flags/targeting/user-attributes',
-            'feature-flags/creating-feature-flags/targeting/user-segments',
-            'feature-flags/creating-feature-flags/targeting/date',
-            'feature-flags/creating-feature-flags/targeting/feature-flag',
+            'feature-flags/creating-feature-flags/targeting/prerequisites',
+            'feature-flags/creating-feature-flags/targeting/individual-targeting',
+            'feature-flags/creating-feature-flags/targeting/custom-rules',
+            'feature-flags/creating-feature-flags/targeting/default-rule',
           ],
         },
-        'feature-flags/creating-feature-flags/manage-variations',
+        'feature-flags/creating-feature-flags/evaluations',
+        'feature-flags/creating-feature-flags/variations',
         {
           type: 'category',
           label: 'Auto Operation',
@@ -146,34 +147,33 @@ const sidebars = {
           ],
         },
         'feature-flags/creating-feature-flags/trigger',
-        'feature-flags/creating-feature-flags/evaluate-results',
-        'feature-flags/creating-feature-flags/settings-and-history'
+        {
+          type: 'category',
+          label: 'Code Reference',
+          link: {
+            type: 'doc',
+            id: 'feature-flags/code-reference/index',
+          },
+          items: [
+            'feature-flags/code-reference/configuration',
+            'feature-flags/code-reference/scan-results'
+          ],
+        },
+        'feature-flags/creating-feature-flags/history',
+        'feature-flags/creating-feature-flags/settings'
       ],
+    },
+    {
+      type: 'doc',
+      id: 'feature-flags/segments',
+      label: 'User Segments',
+      className: 'sidebar-segments',
     },
     {
       type: 'doc',
       id: 'feature-flags/audit-logs',
       label: 'Audit Logs',
       className: 'sidebar-audit-logs',
-    },
-    {
-      type: 'doc',
-      id: 'feature-flags/segments',
-      label: 'Segments',
-      className: 'sidebar-segments',
-    },
-    {
-      type: 'category',
-      label: "CodeReference",
-      link: {
-        type: 'doc',
-        id: 'feature-flags/code-reference/index',
-      },
-      className: 'sidebar-testing-with-flags',
-      items: [
-        'feature-flags/code-reference/configuration',
-        'feature-flags/code-reference/scan-results'
-      ],
     },
 
 

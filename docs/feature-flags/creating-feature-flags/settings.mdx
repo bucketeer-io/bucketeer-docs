@@ -1,0 +1,26 @@
+---
+title: Settings
+# sidebar_position: 
+slug: /feature-flags/creating-feature-flags/settings
+description: Configure your feature flag settings including maintainer, name, description, tags, and perform actions like cloning or archiving flags.
+tags: ['settings','feature-flag', 'clone-flag', 'archive-flag']
+---
+
+import CenteredImg from '@site/src/components/centered-img/CenteredImg';
+
+Update your flag's configuration including maintainer, name, description, and tags. All changes require a comment to maintain clear documentation.
+
+<CenteredImg
+  imgURL="img/feature-flags/settings-history/settings.png"
+  alt="Settings panel"
+  wSize="100%"
+/>
+
+## Clone Flag
+
+Creates a copy of the flag with the same targeting configuration and on/off state. You select the destination environment where the cloned flag will be created.
+
+## Archive Flag
+
+Archives the flag in the current environment. Archived flags only appear when the Archived filter is selected in the flag list.
+
