@@ -48,7 +48,7 @@ jobs:
   create-and-merge-pr:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - name: Update the CHANGELOG.md file
         env:
@@ -61,7 +61,7 @@ jobs:
 
       - name: Create the pull request
         id: create-docs-pull-request
-        uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e # v7.0.8
+        uses: peter-evans/create-pull-request@84ae59a2cdc2258d6fa0732dd66352dddae2a412 # v7.0.9
         with:
           token: ${{ secrets.ACTIONS_PAT }}
           committer: bucketeer-bot <bucketeer-bot@users.noreply.github.com>
