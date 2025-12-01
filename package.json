@@ -20,7 +20,7 @@
     "@docusaurus/theme-mermaid": "^3.9.2",
     "@easyops-cn/docusaurus-search-local": "^0.52.1",
     "@mdx-js/react": "^3.1.1",
-    "@scalar/docusaurus": "0.7.20",
+    "@scalar/docusaurus": "0.7.22",
     "clsx": "^2.1.1",
     "docusaurus-lunr-search": "^3.6.0",
     "docusaurus-plugin-image-zoom": "^3.0.1",

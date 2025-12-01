@@ -2492,26 +2492,18 @@
   resolved "https://registry.npmjs.org/@polka/url/-/url-1.0.0-next.25.tgz"
   integrity sha512-j7P6Rgr3mmtdkeDGTe0E/aYyWEWVtc5yFXtHCRHs28/jptDEWfaVOc5T7cblqy1XKPPfCxJc/8DwQ5YgLOZOVQ==
 
-"@scalar/docusaurus@0.7.20":
-  version "0.7.20"
-  resolved "https://registry.yarnpkg.com/@scalar/docusaurus/-/docusaurus-0.7.20.tgz#568cdcf37f0924fbf2a26c00ba2a550cd6c09d0b"
-  integrity sha512-KS/h0pA71O7nze8nPqCNyXe5kowgLiM/kkpGAXv2iiXcllRppJ6Bl/4QBno1PGJr0h9nV5VqgdFCz8qPl+n3IQ==
+"@scalar/docusaurus@0.7.22":
+  version "0.7.22"
+  resolved "https://registry.yarnpkg.com/@scalar/docusaurus/-/docusaurus-0.7.22.tgz#641093520a29f438d3b78eb82c9e103a1ef1ff25"
+  integrity sha512-MBBXsPz28uoP2iHtPmoNAOAOr0xPKyWJIIyGsgNtITQphKmydkEXxguQmZ99a69tRNpDmnS+BdEXfbhAxj48hw==
   dependencies:
-    "@scalar/types" "0.3.2"
+    "@scalar/types" "0.5.0"
 
-"@scalar/openapi-types@0.5.0":
+"@scalar/types@0.5.0":
   version "0.5.0"
-  resolved "https://registry.yarnpkg.com/@scalar/openapi-types/-/openapi-types-0.5.0.tgz#820a8618009dce6ddd85979f761003bd5417de14"
-  integrity sha512-HJBcLa+/mPP+3TCcQngj/iW5UqynRosOQdEETXjmdy6Ngw8wBjwIcT6C86J5jufJ6sI8++HYnt+e7pAvp5FO6A==
+  resolved "https://registry.yarnpkg.com/@scalar/types/-/types-0.5.0.tgz#4bdbaf50316c88847562771dad50b5962713e81e"
+  integrity sha512-imDMuTieOc5kHM9/Kt/1lmiI5ZtusuaYlzsXTP99IsWvD8mJ7ivF73lPBRj4PKtg4vY+ta5CO/vJpvnCYandRg==
   dependencies:
-    zod "4.1.11"
-
-"@scalar/types@0.3.2":
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/@scalar/types/-/types-0.3.2.tgz#ca3fa11ea21c301ede77297393a9155c814a1495"
-  integrity sha512-+X10CCvG57nAqYbTGteiSzRFQcMYm7DLfCRMeEfiWQ9Bq2ladat17XsMSvkvwcfpOSlsoepWf3P5dErERUSOQQ==
-  dependencies:
-    "@scalar/openapi-types" "0.5.0"
     nanoid "5.1.5"
     type-fest "5.0.0"
     zod "4.1.11"
