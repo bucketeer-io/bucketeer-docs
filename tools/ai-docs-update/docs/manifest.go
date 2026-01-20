@@ -72,15 +72,8 @@ func GenerateManifest(docsDir string, excludeDirs []string, excludeFiles []strin
 		excludeFiles = DefaultExcludeFiles
 	}
 
-	// Convert to maps for O(1) lookup
-	excludeDirSet := make(map[string]bool)
-	for _, dir := range excludeDirs {
-		excludeDirSet[dir] = true
-	}
-	excludeFileSet := make(map[string]bool)
-	for _, file := range excludeFiles {
-		excludeFileSet[file] = true
-	}
+	excludeDirSet := toSet(excludeDirs)
+	excludeFileSet := toSet(excludeFiles)
 
 	var files []DocFile
 
@@ -153,13 +146,7 @@ func parseDocFile(docsDir, filePath string) (*DocFile, error) {
 	}
 
 	// Use frontmatter title or extract from filename
-	title := fm.Title
-	if title == "" {
-		title = fm.Sidebar
-	}
-	if title == "" {
-		title = extractTitleFromFilename(filePath)
-	}
+	title := firstNonEmpty(fm.Title, fm.Sidebar, extractTitleFromFilename(filePath))
 
 	// Extract first paragraph as description if not in frontmatter
 	description := fm.Description
@@ -188,15 +175,12 @@ func extractTitleFromFilename(path string) string {
 	name := strings.TrimSuffix(base, filepath.Ext(base))
 
 	// Replace hyphens and underscores with spaces
-	name = strings.ReplaceAll(name, "-", " ")
-	name = strings.ReplaceAll(name, "_", " ")
+	name = strings.NewReplacer("-", " ", "_", " ").Replace(name)
 
 	// Capitalize first letter of each word
 	words := strings.Fields(name)
 	for i, word := range words {
-		if len(word) > 0 {
-			words[i] = strings.ToUpper(string(word[0])) + word[1:]
-		}
+		words[i] = strings.ToUpper(string(word[0])) + word[1:]
 	}
 
 	return strings.Join(words, " ")
@@ -249,6 +233,25 @@ func truncateString(s string, maxLen int) string {
 		return s
 	}
 	return s[:maxLen-3] + "..."
+}
+
+// toSet converts a slice to a map for O(1) lookup.
+func toSet(items []string) map[string]bool {
+	set := make(map[string]bool, len(items))
+	for _, item := range items {
+		set[item] = true
+	}
+	return set
+}
+
+// firstNonEmpty returns the first non-empty string from the arguments.
+func firstNonEmpty(values ...string) string {
+	for _, v := range values {
+		if v != "" {
+			return v
+		}
+	}
+	return ""
 }
 
 // ReadFile reads the content of a documentation file.

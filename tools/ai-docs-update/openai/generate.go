@@ -105,11 +105,8 @@ Instead of explaining configuration inline, add ONE cross-reference sentence:
 
 {{end}}
 
-## STYLE GUIDE
-- Use contractions (don't, it's, you'll) for a friendly tone
-- Use backticks for code elements: field names, API endpoints, values
-- Use present tense for feature descriptions
-- Be concise and direct
+## STYLE GUIDE (from documentation-style)
+{{.StyleGuide}}
 
 ## CHARACTER ENCODING (MUST FOLLOW)
 - Use only ASCII characters for punctuation:
@@ -140,6 +137,7 @@ type UpdateRequest struct {
 	CurrentContent    string
 	UpdateInstruction string
 	ContentType       string // user-guide, admin-config, developer-reference
+	StyleGuide        string // Formatted style guide rules
 }
 
 // updateTemplateData is the data structure for the update prompt template.
@@ -154,6 +152,7 @@ type updateTemplateData struct {
 	CurrentContent      string
 	UpdateInstruction   string
 	ContentType         string
+	StyleGuide          string
 }
 
 // GenerateDocUpdate executes Phase 2: Update Generation.
@@ -213,6 +212,7 @@ func buildUpdatePrompt(req UpdateRequest) (string, error) {
 		CurrentContent:      req.CurrentContent,
 		UpdateInstruction:   req.UpdateInstruction,
 		ContentType:         req.ContentType,
+		StyleGuide:          req.StyleGuide,
 	}
 
 	var buf bytes.Buffer

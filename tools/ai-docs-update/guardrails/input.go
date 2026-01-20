@@ -4,6 +4,7 @@ package guardrails
 import (
 	"errors"
 	"fmt"
+	"strings"
 )
 
 // Input guardrail limits based on design.md section 4.1
@@ -180,16 +181,14 @@ func estimateTokens(text string) int {
 
 // matchPath performs simple path matching with glob-like patterns
 func matchPath(path, pattern string) bool {
-	// Simple prefix matching for now
-	// TODO: Implement full glob pattern matching if needed
-	if len(pattern) == 0 {
+	if pattern == "" {
 		return false
 	}
 
 	// Handle wildcard suffix (e.g., "proto/**")
-	if len(pattern) >= 2 && pattern[len(pattern)-2:] == "**" {
+	if strings.HasSuffix(pattern, "**") {
 		prefix := pattern[:len(pattern)-2]
-		return len(path) >= len(prefix) && path[:len(prefix)] == prefix
+		return strings.HasPrefix(path, prefix)
 	}
 
 	return path == pattern

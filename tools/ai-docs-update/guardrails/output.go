@@ -113,16 +113,11 @@ func (g *OutputGuardrails) validateMarkdown(content string) error {
 	}
 
 	// Check for frontmatter if present (must be properly closed)
-	if strings.HasPrefix(strings.TrimSpace(content), "---") {
-		// Count frontmatter delimiters at the start
-		trimmed := strings.TrimSpace(content)
-		firstDelim := strings.Index(trimmed, "---")
-		if firstDelim == 0 {
-			rest := trimmed[3:]
-			secondDelim := strings.Index(rest, "---")
-			if secondDelim == -1 {
-				return fmt.Errorf("%w: unclosed frontmatter", ErrInvalidMarkdown)
-			}
+	trimmed := strings.TrimSpace(content)
+	if strings.HasPrefix(trimmed, "---") {
+		rest := trimmed[3:]
+		if !strings.Contains(rest, "---") {
+			return fmt.Errorf("%w: unclosed frontmatter", ErrInvalidMarkdown)
 		}
 	}
 
@@ -205,18 +200,26 @@ func TransformPlaceholders(content string) (string, []string) {
 }
 
 // TransformNonASCII replaces non-ASCII punctuation with ASCII equivalents.
-// Returns transformed content and list of replacements made.
+// Returns transformed content and list of unique replacements made.
 func TransformNonASCII(content string) (string, []string) {
-	var warnings []string
 	var result strings.Builder
+	seen := make(map[rune]bool)
+
 	for _, r := range content {
 		if replacement, found := nonASCIIReplacements[r]; found {
 			result.WriteString(replacement)
-			warnings = append(warnings, fmt.Sprintf("Replaced non-ASCII '%c' (U+%04X) with '%s'", r, r, replacement))
+			seen[r] = true
 		} else {
 			result.WriteRune(r)
 		}
 	}
+
+	// Build warnings for unique replacements only
+	var warnings []string
+	for r := range seen {
+		warnings = append(warnings, fmt.Sprintf("Replaced non-ASCII '%c' (U+%04X) with '%s'", r, r, nonASCIIReplacements[r]))
+	}
+
 	return result.String(), warnings
 }
 

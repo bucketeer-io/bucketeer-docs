@@ -18,6 +18,7 @@ import (
 	"github.com/bucketeer-io/bucketeer-docs/tools/ai-docs-update/glossary"
 	"github.com/bucketeer-io/bucketeer-docs/tools/ai-docs-update/guardrails"
 	"github.com/bucketeer-io/bucketeer-docs/tools/ai-docs-update/openai"
+	"github.com/bucketeer-io/bucketeer-docs/tools/ai-docs-update/styleguide"
 )
 
 const appTimeout = 5 * time.Minute
@@ -41,24 +42,9 @@ func main() {
 		log.Fatal("ERROR: --issue-title-file and --issue-body-file are required")
 	}
 
-	// Parse exclude dirs (nil = use defaults, empty slice = exclude nothing)
-	var excludeDirsList []string
-	if *excludeDirs != "" {
-		excludeDirsList = strings.Split(*excludeDirs, ",")
-		for i := range excludeDirsList {
-			excludeDirsList[i] = strings.TrimSpace(excludeDirsList[i])
-		}
-	}
-
-	// Parse exclude files (nil = use defaults, empty slice = exclude nothing)
-	var excludeFilesList []string
-	if *excludeFiles != "" {
-		excludeFilesList = strings.Split(*excludeFiles, ",")
-		for i := range excludeFilesList {
-			excludeFilesList[i] = strings.TrimSpace(excludeFilesList[i])
-		}
-	}
-	// nil means use defaults
+	// Parse exclude lists (nil = use defaults, empty slice = exclude nothing)
+	excludeDirsList := parseCommaSeparatedList(*excludeDirs)
+	excludeFilesList := parseCommaSeparatedList(*excludeFiles)
 
 	// Set up global timeout
 	appCtx, cancel := context.WithTimeout(context.Background(), appTimeout)
@@ -119,6 +105,16 @@ func run(ctx context.Context, cfg config) error {
 		log.Printf("Loaded %d glossary entries", len(glossaryEntries))
 	}
 
+	// 3.5. Load style guide (optional - continue with defaults if loading fails)
+	styleGuideDir := filepath.Join(cfg.docsDir, "contribution-guide", "documentation-style")
+	styleGuideData, err := styleguide.Load(styleGuideDir)
+	if err != nil {
+		log.Printf("Warning: Failed to load style guide: %v (using defaults)", err)
+	} else {
+		log.Printf("Loaded %d style guide rules", styleGuideData.RuleCount())
+	}
+	formattedStyleGuide := styleGuideData.Format()
+
 	// 4. Input guardrails validation
 	inputGuard := guardrails.NewInputGuardrails()
 	if err := inputGuard.ValidateContext(toGuardrailsIssueContext(issueCtx), toGuardrailsPRContext(prCtx)); err != nil {
@@ -132,7 +128,9 @@ func run(ctx context.Context, cfg config) error {
 		return fmt.Errorf("failed to generate docs manifest: %w", err)
 	}
 	log.Printf("Found %d documentation files (excluded dirs: %v, excluded files: %v)",
-		len(manifest.Files), getExcludedDirs(cfg.excludeDirs), getExcludedFiles(cfg.excludeFiles))
+		len(manifest.Files),
+		withDefault(cfg.excludeDirs, docs.DefaultExcludeDirs),
+		withDefault(cfg.excludeFiles, docs.DefaultExcludeFiles))
 
 	// 6. Log context summary (for debugging)
 	logContextSummary(issueCtx, prCtx, glossaryEntries, manifest)
@@ -221,6 +219,7 @@ func run(ctx context.Context, cfg config) error {
 			CurrentContent:    currentContent,
 			UpdateInstruction: fileUpdate.BriefDescription,
 			ContentType:       contentType,
+			StyleGuide:        formattedStyleGuide,
 		})
 		if err != nil {
 			log.Printf("ERROR: OpenAI error for %s: %v (skipping)", fileUpdate.Path, err)
@@ -349,31 +348,33 @@ func toOpenAIDocsManifest(m *docs.Manifest) *openai.DocsManifest {
 	return &openai.DocsManifest{Files: files}
 }
 
-// findContentType looks up the content type for a file path from the manifest
-func findContentType(m *docs.Manifest, path string) string {
-	if m == nil {
-		return "user-guide" // default
+// parseCommaSeparatedList splits a comma-separated string into a trimmed slice.
+// Returns nil for empty input (to use defaults), or a slice of trimmed values.
+func parseCommaSeparatedList(s string) []string {
+	if s == "" {
+		return nil
 	}
+	parts := strings.Split(s, ",")
+	for i := range parts {
+		parts[i] = strings.TrimSpace(parts[i])
+	}
+	return parts
+}
+
+// findContentType looks up the content type for a file path from the manifest.
+func findContentType(m *docs.Manifest, path string) string {
 	for _, f := range m.Files {
 		if f.Path == path {
 			return string(f.ContentType)
 		}
 	}
-	return "user-guide" // default
+	return "user-guide"
 }
 
-// getExcludedDirs returns the actual excluded directories (defaults if nil)
-func getExcludedDirs(excludeDirs []string) []string {
-	if excludeDirs == nil {
-		return docs.DefaultExcludeDirs
+// withDefault returns the slice if non-nil, otherwise returns the default.
+func withDefault(slice, defaultSlice []string) []string {
+	if slice == nil {
+		return defaultSlice
 	}
-	return excludeDirs
-}
-
-// getExcludedFiles returns the actual excluded files (defaults if nil)
-func getExcludedFiles(excludeFiles []string) []string {
-	if excludeFiles == nil {
-		return docs.DefaultExcludeFiles
-	}
-	return excludeFiles
+	return slice
 }

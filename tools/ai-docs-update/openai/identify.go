@@ -5,6 +5,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"strings"
 	"text/template"
 )
 
@@ -244,41 +245,34 @@ func parseIdentifyResponse(response string) (*IdentifyResponse, error) {
 
 // extractJSON attempts to extract JSON from a response that might contain markdown.
 func extractJSON(response string) string {
-	// Try to find JSON in code blocks
-	start := -1
-	end := -1
-
 	// Look for ```json or ``` block
-	jsonBlockStart := "```json"
-	jsonBlockEnd := "```"
+	const jsonBlockStart = "```json"
+	const codeBlockMarker = "```"
 
-	startIdx := bytes.Index([]byte(response), []byte(jsonBlockStart))
+	start := -1
+	startIdx := strings.Index(response, jsonBlockStart)
 	if startIdx != -1 {
 		start = startIdx + len(jsonBlockStart)
 	} else {
 		// Try plain ``` block
-		startIdx = bytes.Index([]byte(response), []byte("```"))
+		startIdx = strings.Index(response, codeBlockMarker)
 		if startIdx != -1 {
-			start = startIdx + len("```")
+			start = startIdx + len(codeBlockMarker)
 		}
 	}
 
 	if start != -1 {
 		// Find the closing ```
 		remaining := response[start:]
-		endIdx := bytes.Index([]byte(remaining), []byte(jsonBlockEnd))
+		endIdx := strings.Index(remaining, codeBlockMarker)
 		if endIdx != -1 {
-			end = start + endIdx
+			return response[start : start+endIdx]
 		}
 	}
 
-	if start != -1 && end != -1 {
-		return response[start:end]
-	}
-
 	// Look for raw JSON (starts with { and ends with })
-	braceStart := bytes.Index([]byte(response), []byte("{"))
-	braceEnd := bytes.LastIndex([]byte(response), []byte("}"))
+	braceStart := strings.Index(response, "{")
+	braceEnd := strings.LastIndex(response, "}")
 	if braceStart != -1 && braceEnd != -1 && braceEnd > braceStart {
 		return response[braceStart : braceEnd+1]
 	}

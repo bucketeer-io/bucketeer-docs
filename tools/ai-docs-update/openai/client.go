@@ -196,8 +196,7 @@ func (c *Client) CreateChatCompletion(ctx context.Context, messages []ChatMessag
 
 		lastErr = err
 
-		// Exponential backoff: 2s, 8s, 32s (2^(i+1) * 2 = 2, 8, 32)
-		// Actually: 2^1=2, 2^3=8, 2^5=32 -> using 2 << (i*2) for i=0,1,2 gives 2,8,32
+		// Exponential backoff: 2s, 8s, 32s
 		delay := time.Duration(2<<(i*2)) * time.Second
 		log.Printf("OpenAI API retry %d/%d after %v: %v", i+1, c.maxRetries, delay, err)
 
