@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"regexp"
 	"strings"
+
+	"golang.org/x/text/unicode/norm"
 )
 
 // Output guardrail limits based on design.md section 4.2
@@ -116,59 +118,15 @@ func ExtractDocumentContent(output string) string {
 	return strings.TrimSpace(output[startIdx:endIdx])
 }
 
-// Non-ASCII punctuation replacements
-var nonASCIIReplacements = map[rune]string{
-	// Dashes
-	'\u2010': "-",  // hyphen → ASCII hyphen
-	'\u2011': "-",  // non-breaking hyphen → ASCII hyphen
-	'\u2012': "-",  // figure dash → ASCII hyphen
-	'\u2013': "-",  // en-dash → ASCII hyphen
-	'\u2014': "--", // em-dash → double hyphen
-	'\u2015': "--", // horizontal bar → double hyphen
-
-	// Quotes
-	'\u2018': "'",   // left single quote → apostrophe
-	'\u2019': "'",   // right single quote → apostrophe
-	'\u201C': "\"",  // left double quote → quote
-	'\u201D': "\"",  // right double quote → quote
-	'\u2026': "...", // ellipsis → three dots
-
-	// Math symbols (use HTML entities for MDX compatibility)
-	'\u2264': "&lt;=", // ≤ less-than or equal → HTML entity
-	'\u2265': "&gt;=", // ≥ greater-than or equal → HTML entity
-	'\u2260': "!=",    // ≠ not equal → !=
-	'\u00D7': "x",     // × multiplication sign → x
-	'\u00F7': "/",     // ÷ division sign → /
-
-	// Special spaces
-	'\u00A0': " ", // NO-BREAK SPACE → regular space
-	'\u202F': " ", // NARROW NO-BREAK SPACE → regular space
-	'\u2009': " ", // THIN SPACE → regular space
-	'\u200B': "",  // ZERO WIDTH SPACE → remove
-}
-
-// TransformNonASCII replaces non-ASCII punctuation with ASCII equivalents.
-// Returns transformed content and list of unique replacements made.
+// TransformNonASCII normalizes Unicode and replaces typographic punctuation.
+// Returns transformed content and list of warnings when changes occur.
 func TransformNonASCII(content string) (string, []string) {
-	var result strings.Builder
-	seen := make(map[rune]bool)
-
-	for _, r := range content {
-		if replacement, found := nonASCIIReplacements[r]; found {
-			result.WriteString(replacement)
-			seen[r] = true
-		} else {
-			result.WriteRune(r)
-		}
-	}
-
-	// Build warnings for unique replacements only
 	var warnings []string
-	for r := range seen {
-		warnings = append(warnings, fmt.Sprintf("Replaced non-ASCII '%c' (U+%04X) with '%s'", r, r, nonASCIIReplacements[r]))
+	normalized := norm.NFKC.String(content)
+	if normalized != content {
+		warnings = append(warnings, "Normalized Unicode with NFKC")
 	}
-
-	return result.String(), warnings
+	return normalized, warnings
 }
 
 // PostProcess transforms AI output to fix common issues.

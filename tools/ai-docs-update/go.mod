@@ -1,8 +1,11 @@
 module github.com/bucketeer-io/bucketeer-docs/tools/ai-docs-update
 
-go 1.24
+go 1.24.0
 
-require github.com/adrg/frontmatter v0.2.0
+require (
+	github.com/adrg/frontmatter v0.2.0
+	golang.org/x/text v0.33.0
+)
 
 require (
 	github.com/BurntSushi/toml v0.3.1 // indirect
