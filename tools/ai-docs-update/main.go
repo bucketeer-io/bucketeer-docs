@@ -122,8 +122,16 @@ func run(ctx context.Context, cfg config) error {
 		return nil // Skip without error - this is expected behavior
 	}
 
-	// 4.5. Validate diff structure (file count, line count)
+	// 4.5. Summarize large diffs and validate structure
 	if prCtx.Diff != "" {
+		// Summarize if diff is too large
+		originalSize := len(prCtx.Diff)
+		prCtx.Diff = guardrails.SummarizeLargeDiff(prCtx.Diff, guardrails.MaxDiffSizeBytes)
+		if len(prCtx.Diff) < originalSize {
+			log.Printf("Large diff summarized: %d → %d bytes", originalSize, len(prCtx.Diff))
+		}
+
+		// Validate diff structure (file count, line count)
 		parsedDiff := guardrails.ParseDiff(prCtx.Diff)
 		if err := inputGuard.ValidateDiff(parsedDiff); err != nil {
 			log.Printf("Diff guardrails triggered (skipping): %v", err)

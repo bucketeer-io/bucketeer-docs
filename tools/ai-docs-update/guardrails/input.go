@@ -50,6 +50,9 @@ var (
 type DiffFile struct {
 	Path      string
 	LineCount int
+	Additions int    // Number of added lines
+	Deletions int    // Number of deleted lines
+	Content   string // Raw diff content for this file
 }
 
 // Diff represents a code diff with metadata
@@ -149,13 +152,70 @@ func (g *InputGuardrails) ValidateContext(issue *IssueContext, pr *PRContext) er
 		if len(pr.Body) > g.MaxPRBodyLen {
 			return fmt.Errorf("%w: %d bytes (max %d)", ErrPRBodyTooLarge, len(pr.Body), g.MaxPRBodyLen)
 		}
-
-		if len(pr.Diff) > g.MaxDiffSizeBytes {
-			return fmt.Errorf("%w: %d bytes (max %d)", ErrDiffTooLarge, len(pr.Diff), g.MaxDiffSizeBytes)
-		}
+		// Note: Diff size is NOT validated here - large diffs are summarized instead
+		// See SummarizeLargeDiff for handling
 	}
 
 	return nil
+}
+
+// SummarizeLargeDiff creates a summary for diffs exceeding the size limit.
+// Returns the original diff if it's within limits, or a summary otherwise.
+func SummarizeLargeDiff(diff string, maxSize int) string {
+	if len(diff) <= maxSize {
+		return diff
+	}
+
+	// Parse the diff to extract file information
+	parsed := ParseDiff(diff)
+
+	var summary strings.Builder
+	summary.WriteString("## Diff Summary (original too large)\n\n")
+	summary.WriteString(fmt.Sprintf("Total: %d files changed, %d bytes\n\n", len(parsed.Files), parsed.TotalSize))
+	summary.WriteString("### Changed Files:\n")
+
+	for _, f := range parsed.Files {
+		summary.WriteString(fmt.Sprintf("- %s (+%d/-%d lines)\n", f.Path, f.Additions, f.Deletions))
+	}
+
+	// Include truncated content of key files (prioritize non-test, non-vendor files)
+	summary.WriteString("\n### Key Changes (truncated):\n")
+	remainingBytes := maxSize - summary.Len() - 100 // Reserve space
+
+	for _, f := range parsed.Files {
+		// Skip test files and vendor
+		if isTestOrVendorFile(f.Path) {
+			continue
+		}
+
+		if remainingBytes <= 0 {
+			break
+		}
+
+		// Include first portion of each file's diff
+		content := f.Content
+		if len(content) > remainingBytes/len(parsed.Files) {
+			content = content[:remainingBytes/len(parsed.Files)] + "\n...[truncated]"
+		}
+
+		summary.WriteString(fmt.Sprintf("\n#### %s\n```diff\n%s\n```\n", f.Path, content))
+		remainingBytes -= len(content) + 50
+	}
+
+	return summary.String()
+}
+
+// isTestOrVendorFile checks if a file path is a test or vendor file
+func isTestOrVendorFile(path string) bool {
+	lowerPath := strings.ToLower(path)
+	return strings.Contains(lowerPath, "_test.") ||
+		strings.Contains(lowerPath, "/test/") ||
+		strings.Contains(lowerPath, "/vendor/") ||
+		strings.Contains(lowerPath, "/node_modules/") ||
+		strings.HasSuffix(lowerPath, ".test.ts") ||
+		strings.HasSuffix(lowerPath, ".test.tsx") ||
+		strings.HasSuffix(lowerPath, ".spec.ts") ||
+		strings.HasSuffix(lowerPath, ".spec.tsx")
 }
 
 // IsAllowedPath checks if a file path is in the allowed source paths
@@ -208,14 +268,18 @@ func ParseDiff(diffContent string) *Diff {
 
 	lines := strings.Split(diffContent, "\n")
 	var currentFile *DiffFile
-	lineCount := 0
+	var contentBuilder strings.Builder
+	additions, deletions := 0, 0
 
 	for _, line := range lines {
 		// Detect new file in diff (diff --git a/path b/path)
 		if strings.HasPrefix(line, "diff --git ") {
 			// Save previous file if exists
 			if currentFile != nil {
-				currentFile.LineCount = lineCount
+				currentFile.LineCount = additions + deletions
+				currentFile.Additions = additions
+				currentFile.Deletions = deletions
+				currentFile.Content = contentBuilder.String()
 				diff.Files = append(diff.Files, *currentFile)
 			}
 
@@ -225,24 +289,31 @@ func ParseDiff(diffContent string) *Diff {
 				// Remove "a/" or "b/" prefix
 				path := strings.TrimPrefix(parts[2], "a/")
 				currentFile = &DiffFile{Path: path}
-				lineCount = 0
+				contentBuilder.Reset()
+				additions, deletions = 0, 0
 			}
 			continue
 		}
 
-		// Count added/removed lines
+		// Collect content and count lines
 		if currentFile != nil {
+			contentBuilder.WriteString(line)
+			contentBuilder.WriteString("\n")
+
 			if strings.HasPrefix(line, "+") && !strings.HasPrefix(line, "+++") {
-				lineCount++
+				additions++
 			} else if strings.HasPrefix(line, "-") && !strings.HasPrefix(line, "---") {
-				lineCount++
+				deletions++
 			}
 		}
 	}
 
 	// Save last file
 	if currentFile != nil {
-		currentFile.LineCount = lineCount
+		currentFile.LineCount = additions + deletions
+		currentFile.Additions = additions
+		currentFile.Deletions = deletions
+		currentFile.Content = contentBuilder.String()
 		diff.Files = append(diff.Files, *currentFile)
 	}
 
