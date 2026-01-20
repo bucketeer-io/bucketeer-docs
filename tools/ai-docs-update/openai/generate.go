@@ -239,16 +239,8 @@ func buildUpdatePrompt(req UpdateRequest) (string, error) {
 	return buf.String(), nil
 }
 
-// NOTE: ExtractDocumentContent has been consolidated into guardrails package.
-// Use guardrails.ExtractDocumentContent() for extracting document content.
-
 // HasDocumentTags checks if the output contains the required document tags.
 func HasDocumentTags(output string) bool {
 	return strings.Contains(output, "<updated_document>") &&
 		strings.Contains(output, "</updated_document>")
-}
-
-// HasTODOMarkers checks if the content contains TODO markers that need review.
-func HasTODOMarkers(content string) bool {
-	return strings.Contains(content, "TODO: Needs confirmation")
 }

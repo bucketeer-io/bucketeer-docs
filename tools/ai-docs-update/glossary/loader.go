@@ -44,16 +44,3 @@ func Load(path string) ([]Entry, error) {
 
 	return vocab.VocabularyList, nil
 }
-
-// FormatForPrompt formats glossary entries for inclusion in an AI prompt.
-func FormatForPrompt(entries []Entry) string {
-	if len(entries) == 0 {
-		return ""
-	}
-
-	var result string
-	for _, entry := range entries {
-		result += fmt.Sprintf("- **%s**: %s\n", entry.Name, entry.Description)
-	}
-	return result
-}

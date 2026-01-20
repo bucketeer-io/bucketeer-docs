@@ -166,9 +166,10 @@ func deduplicateRules(rules []string, maxCount int) []string {
 }
 
 // Format returns the style guide as prompt-ready markdown text.
+// Returns empty string if no rules are loaded.
 func (sg *StyleGuide) Format() string {
 	if sg == nil || len(sg.Categories) == 0 {
-		return defaultStyleGuide()
+		return ""
 	}
 
 	var sb strings.Builder
@@ -189,34 +190,7 @@ func (sg *StyleGuide) Format() string {
 		sb.WriteString("\n")
 	}
 
-	result := sb.String()
-	if result == "" {
-		return defaultStyleGuide()
-	}
-
-	return result
-}
-
-// defaultStyleGuide returns a minimal fallback style guide.
-func defaultStyleGuide() string {
-	return `### Voice and Tone
-- Use conversational, friendly, and professional tone
-- Avoid figures of speech and internet slang
-- Keep sentences under 25-30 words
-
-### Language and Grammar
-- Use active voice: "The team deploys..." not "is deployed by the team"
-- Use contractions (don't, it's, you'll) for informal tone
-- State goal/condition before instruction
-
-### UI Elements
-- Use **bold** for UI elements: buttons, menus, dialogs
-- Use sentence case for all UI labels
-
-### Code Elements
-- Use backticks for: filenames, class names, method names, HTTP status codes
-- Use code blocks for code samples
-`
+	return sb.String()
 }
 
 // RuleCount returns the total number of rules loaded.

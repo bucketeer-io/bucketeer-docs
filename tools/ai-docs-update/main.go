@@ -83,18 +83,14 @@ func run(ctx context.Context, cfg config) error {
 	if err != nil {
 		return fmt.Errorf("failed to load issue context: %w", err)
 	}
-	log.Printf("Issue: %s", issueCtx.Title)
+	log.Printf("Issue: %q", issueCtx.Title)
 
 	// 2. Load PR context
 	prCtx, err := appctx.LoadPR(cfg.prTitleFile, cfg.prBodyFile, cfg.diffFile)
 	if err != nil {
 		return fmt.Errorf("failed to load PR context: %w", err)
 	}
-	if prCtx.Title != "" {
-		log.Printf("PR: %s", prCtx.Title)
-	} else {
-		log.Println("PR: (no PR context provided)")
-	}
+	log.Printf("PR: %q", prCtx.Title)
 
 	// 3. Load glossary (optional - continue without it if loading fails)
 	glossaryEntries, err := glossary.Load(cfg.glossaryFile)
@@ -117,7 +113,7 @@ func run(ctx context.Context, cfg config) error {
 
 	// 4. Input guardrails validation
 	inputGuard := guardrails.NewInputGuardrails()
-	if err := inputGuard.ValidateContext(toGuardrailsIssueContext(issueCtx), toGuardrailsPRContext(prCtx)); err != nil {
+	if err := inputGuard.ValidateContext(issueCtx, prCtx); err != nil {
 		log.Printf("Input guardrails triggered (skipping): %v", err)
 		return nil // Skip without error - this is expected behavior
 	}
@@ -280,17 +276,12 @@ func run(ctx context.Context, cfg config) error {
 			log.Printf("Post-process warning for %s: %s", fileUpdate.Path, w)
 		}
 
-		// Log TODO markers if any
-		if openai.HasTODOMarkers(content) {
-			log.Printf("TODO markers found in %s (requires manual review)", fileUpdate.Path)
-		}
-
 		// Write file (validates path is in manifest)
 		if err := writer.Write(fileUpdate.Path, content); err != nil {
 			log.Printf("ERROR: Failed to write %s: %v (skipping)", fileUpdate.Path, err)
 			continue
 		}
-		log.Printf("Successfully updated: %s", fileUpdate.Path)
+		log.Printf("Successfully updated: %q", fileUpdate.Path)
 
 		successCount++
 	}
@@ -321,31 +312,6 @@ func logContextSummary(
 
 	log.Printf("Documentation Files: %d", len(manifest.Files))
 	log.Println("=======================")
-}
-
-// Type conversion helpers
-
-// toGuardrailsIssueContext converts context.IssueContext to guardrails.IssueContext
-func toGuardrailsIssueContext(ic *appctx.IssueContext) *guardrails.IssueContext {
-	if ic == nil {
-		return nil
-	}
-	return &guardrails.IssueContext{
-		Title: ic.Title,
-		Body:  ic.Body,
-	}
-}
-
-// toGuardrailsPRContext converts context.PRContext to guardrails.PRContext
-func toGuardrailsPRContext(pc *appctx.PRContext) *guardrails.PRContext {
-	if pc == nil {
-		return nil
-	}
-	return &guardrails.PRContext{
-		Title: pc.Title,
-		Body:  pc.Body,
-		Diff:  pc.Diff,
-	}
 }
 
 // toOpenAIGlossary converts glossary.Entry slice to openai.GlossaryEntry slice
@@ -440,18 +406,18 @@ func estimatePhase1Tokens(
 
 	// Issue context
 	if issue != nil {
-		tokens += estimateTokens(issue.Title)
-		tokens += estimateTokens(issue.Body)
+		tokens += guardrails.EstimateTokens(issue.Title)
+		tokens += guardrails.EstimateTokens(issue.Body)
 	}
 
 	// PR context
 	if pr != nil {
-		tokens += estimateTokens(pr.Title)
-		tokens += estimateTokens(pr.Body)
+		tokens += guardrails.EstimateTokens(pr.Title)
+		tokens += guardrails.EstimateTokens(pr.Body)
 	}
 
 	// Diff summary
-	tokens += estimateTokens(diffSummary)
+	tokens += guardrails.EstimateTokens(diffSummary)
 
 	// Glossary (estimate ~20 tokens per entry)
 	tokens += len(glossaryEntries) * 20
@@ -462,9 +428,4 @@ func estimatePhase1Tokens(
 	}
 
 	return tokens
-}
-
-// estimateTokens provides simple token estimation (1 token ≈ 4 chars).
-func estimateTokens(text string) int {
-	return len(text) / 4
 }

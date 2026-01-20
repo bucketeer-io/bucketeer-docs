@@ -264,7 +264,7 @@ func ReadFile(path string) (string, error) {
 }
 
 // inferDocMetadata derives category, audience, and content type from path.
-// Based on actual docs structure analysis (78 files in 10 directories).
+// Based on actual docs structure analysis.
 //
 // ContentType determines what kind of content is appropriate:
 //   - user-guide: User-facing behavior (NO implementation details, code internals)

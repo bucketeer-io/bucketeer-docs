@@ -5,6 +5,8 @@ import (
 	"errors"
 	"fmt"
 	"strings"
+
+	appctx "github.com/bucketeer-io/bucketeer-docs/tools/ai-docs-update/context"
 )
 
 // Input guardrail limits based on design.md section 4.1
@@ -61,18 +63,11 @@ type Diff struct {
 	Files     []DiffFile
 }
 
-// IssueContext represents the issue context for validation
-type IssueContext struct {
-	Title string
-	Body  string
-}
+// IssueContext is an alias to context.IssueContext for validation.
+type IssueContext = appctx.IssueContext
 
-// PRContext represents the PR context for validation
-type PRContext struct {
-	Title string
-	Body  string
-	Diff  string
-}
+// PRContext is an alias to context.PRContext for validation.
+type PRContext = appctx.PRContext
 
 // InputGuardrails provides input validation for the AI docs update tool
 type InputGuardrails struct {
@@ -133,7 +128,7 @@ func (g *InputGuardrails) ValidateDocContent(content string) error {
 
 // ValidateTokenLimit checks if the combined context exceeds the token limit
 func (g *InputGuardrails) ValidateTokenLimit(prContext, docContent string) error {
-	total := estimateTokens(prContext) + estimateTokens(docContent)
+	total := EstimateTokens(prContext) + EstimateTokens(docContent)
 	if total > g.MaxInputTokens {
 		return fmt.Errorf("%w: %d tokens (max %d)", ErrTokenLimitExceeded, total, g.MaxInputTokens)
 	}
@@ -233,9 +228,9 @@ func (g *InputGuardrails) IsAllowedPath(path string) bool {
 	return false
 }
 
-// estimateTokens provides a simple token estimation
-// Rule of thumb: 1 token ≈ 4 characters for English text
-func estimateTokens(text string) int {
+// EstimateTokens provides a simple token estimation.
+// Rule of thumb: 1 token ≈ 4 characters for English text.
+func EstimateTokens(text string) int {
 	return len(text) / 4
 }
 

@@ -71,8 +71,3 @@ func (w *Writer) Write(relativePath, content string) error {
 
 	return nil
 }
-
-// Write is a convenience function for single file writes.
-func Write(rootDir, relativePath, content string, manifestPaths []string) error {
-	return NewWriter(rootDir, manifestPaths).Write(relativePath, content)
-}

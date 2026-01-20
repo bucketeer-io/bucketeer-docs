@@ -5,14 +5,6 @@ import (
 	"strings"
 )
 
-// Sanitization limits for prompt injection protection.
-const (
-	MaxTitleLen     = 200
-	MaxBodyLen      = 10000
-	MaxIssueBodyLen = 10000
-	MaxDiffLen      = 50000
-)
-
 // SanitizedContext holds sanitized Issue/PR context for safe prompt inclusion.
 type SanitizedContext struct {
 	IssueTitle string
@@ -22,12 +14,19 @@ type SanitizedContext struct {
 	Diff       string
 }
 
+// Constants for sanitization limits
+const (
+	MaxTitleLen = 200
+	MaxBodyLen  = 10 * 1024 // 10KB
+	MaxDiffLen  = 50000     // 50KB
+)
+
 // NewSanitizedContext creates a SanitizedContext with all inputs properly sanitized.
 // This protects against prompt injection attacks by escaping XML tags and code blocks.
 func NewSanitizedContext(issueTitle, issueBody, prTitle, prBody, diff string) SanitizedContext {
 	return SanitizedContext{
 		IssueTitle: SanitizeForPrompt(issueTitle, MaxTitleLen),
-		IssueBody:  SanitizeForPrompt(issueBody, MaxIssueBodyLen),
+		IssueBody:  SanitizeForPrompt(issueBody, MaxBodyLen),
 		PRTitle:    SanitizeForPrompt(prTitle, MaxTitleLen),
 		PRBody:     SanitizeForPrompt(prBody, MaxBodyLen),
 		Diff:       SanitizeForPrompt(diff, MaxDiffLen),
@@ -55,24 +54,4 @@ func SanitizeForPrompt(input string, maxLen int) string {
 	input = strings.ReplaceAll(input, "```", "` ` `")
 
 	return input
-}
-
-// SanitizeTitle is a convenience function for sanitizing titles.
-func SanitizeTitle(title string) string {
-	return SanitizeForPrompt(title, MaxTitleLen)
-}
-
-// SanitizeBody is a convenience function for sanitizing body content.
-func SanitizeBody(body string) string {
-	return SanitizeForPrompt(body, MaxBodyLen)
-}
-
-// SanitizeIssueBody is a convenience function for sanitizing issue body content.
-func SanitizeIssueBody(body string) string {
-	return SanitizeForPrompt(body, MaxIssueBodyLen)
-}
-
-// SanitizeDiff is a convenience function for sanitizing diff content.
-func SanitizeDiff(diff string) string {
-	return SanitizeForPrompt(diff, MaxDiffLen)
 }
