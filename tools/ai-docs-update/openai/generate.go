@@ -125,6 +125,11 @@ Instead of explaining configuration inline, add ONE cross-reference sentence:
   - Apostrophe: ' (U+0027), NOT curly quotes (U+2019)
   - Quotation marks: " (U+0022), NOT curly quotes (U+201C, U+201D)
   - Ellipsis: ... (three periods), NOT ellipsis character (U+2026)
+- **MDX compatibility**: Use HTML entities for comparison operators in prose:
+  - Less than: &amp;lt; (renders as <)
+  - Greater than: &amp;gt; (renders as >)
+  - Example: "TTL &amp;lt;= 1 minute" NOT "TTL <= 1 minute"
+  - Exception: Inside code blocks (backticks), use raw < > characters
 - Exception: Curly quotes are allowed in quoted content from external sources
 
 ## OUTPUT FORMAT

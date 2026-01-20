@@ -133,12 +133,12 @@ var nonASCIIReplacements = map[rune]string{
 	'\u201D': "\"",  // right double quote → quote
 	'\u2026': "...", // ellipsis → three dots
 
-	// Math symbols
-	'\u2264': "<=", // ≤ less-than or equal → <=
-	'\u2265': ">=", // ≥ greater-than or equal → >=
-	'\u2260': "!=", // ≠ not equal → !=
-	'\u00D7': "x",  // × multiplication sign → x
-	'\u00F7': "/",  // ÷ division sign → /
+	// Math symbols (use HTML entities for MDX compatibility)
+	'\u2264': "&lt;=", // ≤ less-than or equal → HTML entity
+	'\u2265': "&gt;=", // ≥ greater-than or equal → HTML entity
+	'\u2260': "!=",    // ≠ not equal → !=
+	'\u00D7': "x",     // × multiplication sign → x
+	'\u00F7': "/",     // ÷ division sign → /
 
 	// Special spaces
 	'\u00A0': " ", // NO-BREAK SPACE → regular space
@@ -180,7 +180,11 @@ func (g *OutputGuardrails) PostProcess(content string) (string, []string) {
 	result, warnings := TransformNonASCII(content)
 	allWarnings = append(allWarnings, warnings...)
 
-	// 2. Ensure trailing newline (standard for text files)
+	// 2. Check for MDX compatibility issues
+	mdxWarnings := CheckMDXCompatibility(result)
+	allWarnings = append(allWarnings, mdxWarnings...)
+
+	// 3. Ensure trailing newline (standard for text files)
 	result = normalizeTrailingNewline(result)
 
 	return result, allWarnings
@@ -191,4 +195,54 @@ func normalizeTrailingNewline(content string) string {
 	// Trim trailing whitespace and newlines, then add exactly one newline
 	trimmed := strings.TrimRight(content, " \t\n\r")
 	return trimmed + "\n"
+}
+
+// CheckMDXCompatibility checks for patterns that may cause MDX parsing issues.
+// Returns warnings for any detected issues (does not modify content).
+func CheckMDXCompatibility(content string) []string {
+	var warnings []string
+
+	// Skip content inside code blocks for analysis
+	// Simple heuristic: check lines not inside triple-backtick blocks
+	lines := strings.Split(content, "\n")
+	inCodeBlock := false
+
+	for i, line := range lines {
+		if strings.HasPrefix(strings.TrimSpace(line), "```") {
+			inCodeBlock = !inCodeBlock
+			continue
+		}
+
+		if inCodeBlock {
+			continue
+		}
+
+		// Check for problematic patterns outside code blocks
+		if strings.Contains(line, "<=") || strings.Contains(line, ">=") {
+			// Exclude if inside inline code (backticks)
+			if !isInsideInlineCode(line, "<=") && strings.Contains(line, "<=") {
+				warnings = append(warnings, fmt.Sprintf("Line %d: '<=' may break MDX - use '&lt;=' instead", i+1))
+			}
+			if !isInsideInlineCode(line, ">=") && strings.Contains(line, ">=") {
+				warnings = append(warnings, fmt.Sprintf("Line %d: '>=' may break MDX - use '&gt;=' instead", i+1))
+			}
+		}
+	}
+
+	return warnings
+}
+
+// isInsideInlineCode checks if a pattern appears inside backtick-enclosed code.
+func isInsideInlineCode(line, pattern string) bool {
+	idx := strings.Index(line, pattern)
+	if idx == -1 {
+		return false
+	}
+
+	// Count backticks before the pattern
+	before := line[:idx]
+	backtickCount := strings.Count(before, "`")
+
+	// Odd count means we're inside inline code
+	return backtickCount%2 == 1
 }
