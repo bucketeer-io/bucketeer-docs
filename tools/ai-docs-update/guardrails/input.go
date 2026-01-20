@@ -37,13 +37,13 @@ const (
 
 // Input validation errors
 var (
-	ErrDiffTooLarge      = errors.New("diff size exceeds maximum allowed")
-	ErrTooManyFiles      = errors.New("too many changed files")
-	ErrFileTooLarge      = errors.New("file exceeds maximum lines")
-	ErrDocTooLarge       = errors.New("document content exceeds maximum size")
+	ErrDiffTooLarge       = errors.New("diff size exceeds maximum allowed")
+	ErrTooManyFiles       = errors.New("too many changed files")
+	ErrFileTooLarge       = errors.New("file exceeds maximum lines")
+	ErrDocTooLarge        = errors.New("document content exceeds maximum size")
 	ErrTokenLimitExceeded = errors.New("total token count exceeds limit")
-	ErrIssueBodyTooLarge = errors.New("issue body exceeds maximum size")
-	ErrPRBodyTooLarge    = errors.New("PR body exceeds maximum size")
+	ErrIssueBodyTooLarge  = errors.New("issue body exceeds maximum size")
+	ErrPRBodyTooLarge     = errors.New("PR body exceeds maximum size")
 )
 
 // DiffFile represents a single file in a diff
