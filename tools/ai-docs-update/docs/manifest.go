@@ -23,14 +23,33 @@ var DefaultExcludeDirs = []string{
 	"contribution-guide", // Static contribution guidelines (not feature-related)
 }
 
+// DefaultExcludeFiles lists specific files excluded from manifest generation by default.
+// These files are overview/navigation pages that should not receive feature-specific content.
+var DefaultExcludeFiles = []string{
+	"bucketeer-docs.mdx", // Homepage - overview and quick links only, not for feature details
+}
+
+// ContentType describes what type of content is appropriate for a doc file.
+type ContentType string
+
+const (
+	// ContentTypeUserGuide is for user-facing behavior docs (no implementation details).
+	ContentTypeUserGuide ContentType = "user-guide"
+	// ContentTypeAdminConfig is for configuration options (CLI flags, Helm values, env vars).
+	ContentTypeAdminConfig ContentType = "admin-config"
+	// ContentTypeDeveloperRef is for SDK/API reference (public methods, code examples).
+	ContentTypeDeveloperRef ContentType = "developer-reference"
+)
+
 // DocFile represents a single documentation file.
 type DocFile struct {
-	Path        string   `json:"path"`        // Relative path from docs root (e.g., "feature-flags/segments.mdx")
-	Title       string   `json:"title"`       // Title from frontmatter
-	Description string   `json:"description"` // First paragraph of content
-	Tags        []string `json:"tags"`        // Tags from frontmatter for categorization
-	Category    string   `json:"category"`    // Inferred category (sdk, feature-flags, etc.)
-	Audience    string   `json:"audience"`    // Inferred audience (external-developers, operators, admins)
+	Path        string      `json:"path"`         // Relative path from docs root (e.g., "feature-flags/segments.mdx")
+	Title       string      `json:"title"`        // Title from frontmatter
+	Description string      `json:"description"`  // First paragraph of content
+	Tags        []string    `json:"tags"`         // Tags from frontmatter for categorization
+	Category    string      `json:"category"`     // Inferred category (sdk, feature-flags, etc.)
+	Audience    string      `json:"audience"`     // Inferred audience (external-developers, operators, admins)
+	ContentType ContentType `json:"content_type"` // What type of content belongs here
 }
 
 // FrontMatter represents the frontmatter of a documentation file.
@@ -44,15 +63,23 @@ type FrontMatter struct {
 
 // GenerateManifest scans the docs directory and generates a manifest of all .mdx files.
 // Directories in excludeDirs are skipped. If excludeDirs is nil, DefaultExcludeDirs is used.
-func GenerateManifest(docsDir string, excludeDirs []string) (*Manifest, error) {
+// Files in excludeFiles are skipped. If excludeFiles is nil, DefaultExcludeFiles is used.
+func GenerateManifest(docsDir string, excludeDirs []string, excludeFiles []string) (*Manifest, error) {
 	if excludeDirs == nil {
 		excludeDirs = DefaultExcludeDirs
 	}
+	if excludeFiles == nil {
+		excludeFiles = DefaultExcludeFiles
+	}
 
-	// Convert to map for O(1) lookup
-	excludeSet := make(map[string]bool)
+	// Convert to maps for O(1) lookup
+	excludeDirSet := make(map[string]bool)
 	for _, dir := range excludeDirs {
-		excludeSet[dir] = true
+		excludeDirSet[dir] = true
+	}
+	excludeFileSet := make(map[string]bool)
+	for _, file := range excludeFiles {
+		excludeFileSet[file] = true
 	}
 
 	var files []DocFile
@@ -69,7 +96,7 @@ func GenerateManifest(docsDir string, excludeDirs []string) (*Manifest, error) {
 		if info.IsDir() {
 			// Check if this directory is in exclude list
 			topDir := strings.Split(relPath, string(filepath.Separator))[0]
-			if excludeSet[topDir] {
+			if excludeDirSet[topDir] {
 				return filepath.SkipDir
 			}
 			return nil
@@ -77,6 +104,11 @@ func GenerateManifest(docsDir string, excludeDirs []string) (*Manifest, error) {
 
 		// Only process .mdx files
 		if !strings.HasSuffix(path, ".mdx") {
+			return nil
+		}
+
+		// Skip excluded files
+		if excludeFileSet[relPath] || excludeFileSet[filepath.Base(relPath)] {
 			return nil
 		}
 
@@ -135,8 +167,8 @@ func parseDocFile(docsDir, filePath string) (*DocFile, error) {
 		description = extractFirstParagraph(string(content))
 	}
 
-	// Infer category and audience from path
-	category, audience := inferCategoryAndAudience(relPath)
+	// Infer category, audience, and content type from path
+	category, audience, contentType := inferDocMetadata(relPath)
 
 	return &DocFile{
 		Path:        relPath,
@@ -145,6 +177,7 @@ func parseDocFile(docsDir, filePath string) (*DocFile, error) {
 		Tags:        fm.Tags,
 		Category:    category,
 		Audience:    audience,
+		ContentType: contentType,
 	}, nil
 }
 
@@ -227,43 +260,48 @@ func ReadFile(path string) (string, error) {
 	return string(data), nil
 }
 
-// inferCategoryAndAudience derives category and audience from path.
+// inferDocMetadata derives category, audience, and content type from path.
 // Based on actual docs structure analysis (78 files in 10 directories).
-func inferCategoryAndAudience(path string) (category, audience string) {
+//
+// ContentType determines what kind of content is appropriate:
+//   - user-guide: User-facing behavior (NO implementation details, code internals)
+//   - admin-config: Configuration options (CLI flags, Helm values, env vars)
+//   - developer-reference: SDK/API reference (public methods, integration code)
+func inferDocMetadata(path string) (category, audience string, contentType ContentType) {
 	switch {
-	// External developers - SDK integration
+	// External developers - SDK integration (developer-reference)
 	case strings.HasPrefix(path, "sdk/"):
-		return "sdk", "external-developers"
+		return "sdk", "external-developers", ContentTypeDeveloperRef
 	case strings.HasPrefix(path, "integration/"):
-		return "integration", "external-developers"
+		return "integration", "external-developers", ContentTypeDeveloperRef
 
-	// New users - onboarding
+	// New users - onboarding (user-guide)
 	case strings.HasPrefix(path, "getting-started/"):
-		return "getting-started", "new-users"
+		return "getting-started", "new-users", ContentTypeUserGuide
 
-	// Operators/Product teams - feature management
+	// Operators/Product teams - feature management (user-guide)
 	case strings.HasPrefix(path, "feature-flags/"):
-		return "feature-flags", "operators"
+		return "feature-flags", "operators", ContentTypeUserGuide
 	case strings.HasPrefix(path, "experimentation/"):
-		return "experimentation", "operators"
+		return "experimentation", "operators", ContentTypeUserGuide
 
-	// Admins - organization management
+	// Admins - organization management (admin-config)
 	case strings.HasPrefix(path, "organization-settings/"):
-		return "organization-settings", "admins"
+		return "organization-settings", "admins", ContentTypeAdminConfig
 
-	// All users - changelog (separate sidebar)
+	// All users - changelog (user-guide)
 	case strings.HasPrefix(path, "changelog/"):
-		return "changelog", "all"
+		return "changelog", "all", ContentTypeUserGuide
 
-	// Engineering leads - best practices
+	// Engineering leads - best practices (user-guide)
 	case strings.HasPrefix(path, "best-practices/"):
-		return "best-practices", "engineering-leads"
+		return "best-practices", "engineering-leads", ContentTypeUserGuide
 
-	// Contributors - contribution guide
+	// Contributors - contribution guide (user-guide)
 	case strings.HasPrefix(path, "contribution-guide/"):
-		return "contribution-guide", "contributors"
+		return "contribution-guide", "contributors", ContentTypeUserGuide
 
 	default:
-		return "general", "all"
+		return "general", "all", ContentTypeUserGuide
 	}
 }

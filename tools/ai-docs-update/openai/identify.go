@@ -51,8 +51,13 @@ PR Description:
 
 ## AVAILABLE DOCUMENTATION FILES
 {{range .DocsManifest.Files}}
-- {{.Path}} [{{.Category}}|{{.Audience}}]: {{.Title}}
+- {{.Path}} [{{.Category}}|{{.Audience}}|{{.ContentType}}]: {{.Title}}
 {{end}}
+
+## CONTENT TYPE DEFINITIONS
+- **user-guide**: User-facing behavior docs (what users see/experience). NO implementation details.
+- **admin-config**: Configuration docs for operators (CLI flags, Helm values, env vars).
+- **developer-reference**: SDK/API reference for external developers (public methods, integration code).
 
 ## OUTPUT FORMAT (JSON only)
 {
@@ -75,6 +80,17 @@ PR Description:
 5. **CRITICAL**: Match audience - SDK changes go to SDK docs, Dashboard changes go to dashboard docs
 6. If the PR modifies ui/dashboard/src/**, do NOT update /docs/sdk/** files
 7. If the PR modifies SDK packages (@bucketeer/*-sdk), do NOT update dashboard operation guides
+
+## SINGLE SOURCE OF TRUTH (CRITICAL - Prevents Duplication)
+8. **Each piece of information should appear in ONLY ONE document.**
+   - Per-environment configuration → environments.mdx (NOT settings.mdx)
+   - Per-organization configuration → settings.mdx
+   - User-facing dashboard behavior → bucketeer-dashboard.mdx
+   - SDK integration details → sdk/**
+9. **When information could fit multiple files, choose the MOST SPECIFIC one.**
+   - Token TTL config (per-env) → environments.mdx only
+   - Organization name/URL → settings.mdx only
+10. **Cross-reference instead of duplicate.** If a doc needs to mention related content, link to the authoritative doc instead of repeating the information.
 `
 
 // GlossaryEntry represents a term in the glossary.
@@ -91,6 +107,7 @@ type DocFile struct {
 	Tags        []string `json:"tags,omitempty"`
 	Category    string   `json:"category,omitempty"`
 	Audience    string   `json:"audience,omitempty"`
+	ContentType string   `json:"content_type,omitempty"` // user-guide, admin-config, developer-reference
 }
 
 // DocsManifest represents the list of available documentation files.

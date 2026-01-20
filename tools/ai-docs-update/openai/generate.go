@@ -37,6 +37,7 @@ a feature flag and A/B testing platform.
 
 ## DOCUMENT TO UPDATE
 File: {{.DocPath}}
+Content Type: {{.ContentType}}
 <current_document>
 {{.CurrentContent}}
 </current_document>
@@ -55,6 +56,54 @@ File: {{.DocPath}}
 8. Use terminology from the GLOSSARY consistently
 9. **NEVER use version placeholders** like "X.Y.Z", "vN.N.N", "TBD", or similar. Use "TODO: Needs confirmation - version number" instead
 10. If a specific version number is not provided in the issue/PR, omit version references entirely or use TODO markers
+
+## CONTENT TYPE RULES (Based on Content Type: {{.ContentType}})
+{{if eq .ContentType "user-guide"}}
+### user-guide: Focus on USER EXPERIENCE
+**Principle:** Describe BEHAVIOR (what users see/experience), not implementation or configuration.
+
+**WRITE about:**
+- What the feature does for the user (observable behavior)
+- What users experience when using the feature
+- When/why certain things happen automatically
+
+**NEVER include these patterns:**
+- Internal code references: React hooks (use*), components (*Provider, *Context), file paths (*.ts, *.tsx, src/**)
+- Configuration syntax: environment variables (UPPER_SNAKE_CASE), CLI flags (--flag-name), YAML/Helm values
+- Internal constants or variable names
+
+**When configuration is relevant:**
+Instead of explaining configuration inline, add ONE cross-reference sentence:
+"Administrators can configure [feature] per environment. See [Section Name](/path/to/admin-doc#section) for details."
+
+{{else if eq .ContentType "admin-config"}}
+### admin-config: Focus on CONFIGURATION
+**Principle:** Describe HOW TO CONFIGURE with concrete options and examples.
+
+**WRITE about:**
+- Configuration options: CLI flags (--flag-name), environment variables, Helm chart values
+- Syntax, default values, valid ranges
+- Recommended settings for different scenarios (dev vs prod)
+- Step-by-step setup instructions with code examples
+
+**NEVER include:**
+- Internal implementation details (hooks, components, internal file paths)
+- Detailed user-facing behavior descriptions (link to user-guide docs instead)
+
+{{else if eq .ContentType "developer-reference"}}
+### developer-reference: Focus on PUBLIC SDK/API
+**Principle:** Describe the PUBLIC interface for external developers.
+
+**WRITE about:**
+- Public SDK methods, parameters, return values
+- Integration code examples that external developers write
+- Installation, initialization, usage patterns
+
+**NEVER include:**
+- Bucketeer internal implementation (dashboard code, internal services)
+- How operators configure the system (link to admin-config docs)
+
+{{end}}
 
 ## STYLE GUIDE
 - Use contractions (don't, it's, you'll) for a friendly tone
@@ -90,6 +139,7 @@ type UpdateRequest struct {
 	DocPath           string
 	CurrentContent    string
 	UpdateInstruction string
+	ContentType       string // user-guide, admin-config, developer-reference
 }
 
 // updateTemplateData is the data structure for the update prompt template.
@@ -103,6 +153,7 @@ type updateTemplateData struct {
 	DocPath             string
 	CurrentContent      string
 	UpdateInstruction   string
+	ContentType         string
 }
 
 // GenerateDocUpdate executes Phase 2: Update Generation.
@@ -161,6 +212,7 @@ func buildUpdatePrompt(req UpdateRequest) (string, error) {
 		DocPath:             req.DocPath,
 		CurrentContent:      req.CurrentContent,
 		UpdateInstruction:   req.UpdateInstruction,
+		ContentType:         req.ContentType,
 	}
 
 	var buf bytes.Buffer

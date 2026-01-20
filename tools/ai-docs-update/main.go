@@ -32,6 +32,7 @@ func main() {
 		glossaryFile   = flag.String("glossary-file", "", "Path to vocabulary.json file")
 		docsDir        = flag.String("docs-dir", "docs", "Path to docs directory")
 		excludeDirs    = flag.String("exclude-dirs", "", "Comma-separated directories to exclude (default: changelog,contribution-guide)")
+		excludeFiles   = flag.String("exclude-files", "", "Comma-separated files to exclude (default: bucketeer-docs.mdx)")
 	)
 	flag.Parse()
 
@@ -46,6 +47,15 @@ func main() {
 		excludeDirsList = strings.Split(*excludeDirs, ",")
 		for i := range excludeDirsList {
 			excludeDirsList[i] = strings.TrimSpace(excludeDirsList[i])
+		}
+	}
+
+	// Parse exclude files (nil = use defaults, empty slice = exclude nothing)
+	var excludeFilesList []string
+	if *excludeFiles != "" {
+		excludeFilesList = strings.Split(*excludeFiles, ",")
+		for i := range excludeFilesList {
+			excludeFilesList[i] = strings.TrimSpace(excludeFilesList[i])
 		}
 	}
 	// nil means use defaults
@@ -63,6 +73,7 @@ func main() {
 		glossaryFile:   *glossaryFile,
 		docsDir:        *docsDir,
 		excludeDirs:    excludeDirsList,
+		excludeFiles:   excludeFilesList,
 	}); err != nil {
 		log.Fatalf("ERROR: %v", err)
 	}
@@ -77,6 +88,7 @@ type config struct {
 	glossaryFile   string
 	docsDir        string
 	excludeDirs    []string // nil = use defaults, empty slice = exclude nothing
+	excludeFiles   []string // nil = use defaults, empty slice = exclude nothing
 }
 
 func run(ctx context.Context, cfg config) error {
@@ -114,12 +126,13 @@ func run(ctx context.Context, cfg config) error {
 		return nil // Skip without error - this is expected behavior
 	}
 
-	// 5. Generate docs manifest (excludeDirs: nil = use defaults)
-	manifest, err := docs.GenerateManifest(cfg.docsDir, cfg.excludeDirs)
+	// 5. Generate docs manifest (nil = use defaults for exclusions)
+	manifest, err := docs.GenerateManifest(cfg.docsDir, cfg.excludeDirs, cfg.excludeFiles)
 	if err != nil {
 		return fmt.Errorf("failed to generate docs manifest: %w", err)
 	}
-	log.Printf("Found %d documentation files (excluded dirs: %v)", len(manifest.Files), getExcludedDirs(cfg.excludeDirs))
+	log.Printf("Found %d documentation files (excluded dirs: %v, excluded files: %v)",
+		len(manifest.Files), getExcludedDirs(cfg.excludeDirs), getExcludedFiles(cfg.excludeFiles))
 
 	// 6. Log context summary (for debugging)
 	logContextSummary(issueCtx, prCtx, glossaryEntries, manifest)
@@ -173,6 +186,9 @@ func run(ctx context.Context, cfg config) error {
 		// Build full path (docsDir + relative path from manifest)
 		fullPath := filepath.Join(cfg.docsDir, fileUpdate.Path)
 
+		// Look up content type from manifest
+		contentType := findContentType(manifest, fileUpdate.Path)
+
 		// Read current content
 		currentContent, err := docs.ReadFile(fullPath)
 		if err != nil {
@@ -204,6 +220,7 @@ func run(ctx context.Context, cfg config) error {
 			DocPath:           fileUpdate.Path,
 			CurrentContent:    currentContent,
 			UpdateInstruction: fileUpdate.BriefDescription,
+			ContentType:       contentType,
 		})
 		if err != nil {
 			log.Printf("ERROR: OpenAI error for %s: %v (skipping)", fileUpdate.Path, err)
@@ -326,9 +343,23 @@ func toOpenAIDocsManifest(m *docs.Manifest) *openai.DocsManifest {
 			Tags:        f.Tags,
 			Category:    f.Category,
 			Audience:    f.Audience,
+			ContentType: string(f.ContentType),
 		}
 	}
 	return &openai.DocsManifest{Files: files}
+}
+
+// findContentType looks up the content type for a file path from the manifest
+func findContentType(m *docs.Manifest, path string) string {
+	if m == nil {
+		return "user-guide" // default
+	}
+	for _, f := range m.Files {
+		if f.Path == path {
+			return string(f.ContentType)
+		}
+	}
+	return "user-guide" // default
 }
 
 // getExcludedDirs returns the actual excluded directories (defaults if nil)
@@ -337,4 +368,12 @@ func getExcludedDirs(excludeDirs []string) []string {
 		return docs.DefaultExcludeDirs
 	}
 	return excludeDirs
+}
+
+// getExcludedFiles returns the actual excluded files (defaults if nil)
+func getExcludedFiles(excludeFiles []string) []string {
+	if excludeFiles == nil {
+		return docs.DefaultExcludeFiles
+	}
+	return excludeFiles
 }
