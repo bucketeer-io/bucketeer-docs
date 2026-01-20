@@ -122,6 +122,16 @@ func run(ctx context.Context, cfg config) error {
 		return nil // Skip without error - this is expected behavior
 	}
 
+	// 4.5. Validate diff structure (file count, line count)
+	if prCtx.Diff != "" {
+		parsedDiff := guardrails.ParseDiff(prCtx.Diff)
+		if err := inputGuard.ValidateDiff(parsedDiff); err != nil {
+			log.Printf("Diff guardrails triggered (skipping): %v", err)
+			return nil
+		}
+		log.Printf("Diff validated: %d files, %d bytes", len(parsedDiff.Files), parsedDiff.TotalSize)
+	}
+
 	// 5. Generate docs manifest (nil = use defaults for exclusions)
 	manifest, err := docs.GenerateManifest(cfg.docsDir, cfg.excludeDirs, cfg.excludeFiles)
 	if err != nil {
@@ -151,11 +161,24 @@ func run(ctx context.Context, cfg config) error {
 
 	// 8. Phase 1: AI identifies which docs to update
 	log.Println("Phase 1: Identifying documents to update...")
+
+	// Create diff summary for Phase 1 (efficient format, not full diff)
+	diffSummary := guardrails.SummarizeDiff(prCtx.Diff)
+
+	// Token limit check for Phase 1 (includes glossary, manifest, diff summary)
+	phase1TokenEstimate := estimatePhase1Tokens(issueCtx, prCtx, glossaryEntries, manifest, diffSummary)
+	if phase1TokenEstimate > guardrails.MaxInputTokens {
+		log.Printf("Phase 1 token limit exceeded: ~%d tokens (max %d)", phase1TokenEstimate, guardrails.MaxInputTokens)
+		return fmt.Errorf("phase 1 context too large: ~%d tokens", phase1TokenEstimate)
+	}
+	log.Printf("Phase 1 token estimate: ~%d tokens", phase1TokenEstimate)
+
 	identification, err := client.IdentifyDocsToUpdate(ctx, openai.IdentifyRequest{
 		IssueTitle:   issueCtx.Title,
 		IssueBody:    issueCtx.Body,
 		PRTitle:      prCtx.Title,
 		PRBody:       prCtx.Body,
+		DiffSummary:  diffSummary,
 		Glossary:     toOpenAIGlossary(glossaryEntries),
 		DocsManifest: toOpenAIDocsManifest(manifest),
 	})
@@ -178,10 +201,14 @@ func run(ctx context.Context, cfg config) error {
 	outputGuard := guardrails.NewOutputGuardrails()
 	var successCount int
 
+	// Create Writer with manifest paths for validation
+	manifestPaths := getManifestPaths(manifest)
+	writer := file.NewWriter(cfg.docsDir, manifestPaths)
+
 	for _, fileUpdate := range identification.FilesToUpdate {
 		log.Printf("Processing: %s (%s)", fileUpdate.Path, fileUpdate.UpdateType)
 
-		// Build full path (docsDir + relative path from manifest)
+		// Build full path for reading (docsDir + relative path from manifest)
 		fullPath := filepath.Join(cfg.docsDir, fileUpdate.Path)
 
 		// Look up content type from manifest
@@ -250,12 +277,12 @@ func run(ctx context.Context, cfg config) error {
 			log.Printf("TODO markers found in %s (requires manual review)", fileUpdate.Path)
 		}
 
-		// Write file
-		if err := file.Write(fullPath, content); err != nil {
-			log.Printf("ERROR: Failed to write %s: %v (skipping)", fullPath, err)
+		// Write file (validates path is in manifest)
+		if err := writer.Write(fileUpdate.Path, content); err != nil {
+			log.Printf("ERROR: Failed to write %s: %v (skipping)", fileUpdate.Path, err)
 			continue
 		}
-		log.Printf("Successfully updated: %s", fullPath)
+		log.Printf("Successfully updated: %s", fileUpdate.Path)
 
 		successCount++
 	}
@@ -377,4 +404,59 @@ func withDefault(slice, defaultSlice []string) []string {
 		return defaultSlice
 	}
 	return slice
+}
+
+// getManifestPaths extracts all file paths from the manifest.
+func getManifestPaths(m *docs.Manifest) []string {
+	if m == nil {
+		return nil
+	}
+	paths := make([]string, len(m.Files))
+	for i, f := range m.Files {
+		paths[i] = f.Path
+	}
+	return paths
+}
+
+// estimatePhase1Tokens estimates token count for Phase 1 prompt.
+// Includes: issue, PR, glossary, manifest, diff summary, and prompt template overhead.
+func estimatePhase1Tokens(
+	issue *appctx.IssueContext,
+	pr *appctx.PRContext,
+	glossaryEntries []glossary.Entry,
+	manifest *docs.Manifest,
+	diffSummary string,
+) int {
+	// Base overhead for prompt template (~500 tokens)
+	tokens := 500
+
+	// Issue context
+	if issue != nil {
+		tokens += estimateTokens(issue.Title)
+		tokens += estimateTokens(issue.Body)
+	}
+
+	// PR context
+	if pr != nil {
+		tokens += estimateTokens(pr.Title)
+		tokens += estimateTokens(pr.Body)
+	}
+
+	// Diff summary
+	tokens += estimateTokens(diffSummary)
+
+	// Glossary (estimate ~20 tokens per entry)
+	tokens += len(glossaryEntries) * 20
+
+	// Manifest (estimate ~30 tokens per file entry)
+	if manifest != nil {
+		tokens += len(manifest.Files) * 30
+	}
+
+	return tokens
+}
+
+// estimateTokens provides simple token estimation (1 token ≈ 4 chars).
+func estimateTokens(text string) int {
+	return len(text) / 4
 }

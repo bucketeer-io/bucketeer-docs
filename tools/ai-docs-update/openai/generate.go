@@ -56,6 +56,11 @@ Content Type: {{.ContentType}}
 8. Use terminology from the GLOSSARY consistently
 9. **NEVER use version placeholders** like "X.Y.Z", "vN.N.N", "TBD", or similar. Use "TODO: Needs confirmation - version number" instead
 10. If a specific version number is not provided in the issue/PR, omit version references entirely or use TODO markers
+11. **Keep additions CONCISE** - For any new section:
+    - Maximum 15-20 lines of content (STRICT)
+    - At most 1 code block per section
+    - Prefer tables over multiple code examples
+    - Never repeat the same information in different formats
 
 ## CONTENT TYPE RULES (Based on Content Type: {{.ContentType}})
 {{if eq .ContentType "user-guide"}}
@@ -78,17 +83,23 @@ Instead of explaining configuration inline, add ONE cross-reference sentence:
 
 {{else if eq .ContentType "admin-config"}}
 ### admin-config: Focus on CONFIGURATION
-**Principle:** Describe HOW TO CONFIGURE with concrete options and examples.
+**Principle:** Describe HOW TO CONFIGURE - be concise and reference-oriented.
 
 **WRITE about:**
-- Configuration options: CLI flags (--flag-name), environment variables, Helm chart values
-- Syntax, default values, valid ranges
-- Recommended settings for different scenarios (dev vs prod)
-- Step-by-step setup instructions with code examples
+- Configuration options with syntax and defaults
+- Recommended settings (use a table, not prose)
+
+**FORMAT RULES (STRICT):**
+- Maximum 20 lines per new section
+- Use ONE table for all options (CLI flag, Helm value, default, description)
+- Use at most ONE code block (only if essential)
+- Do NOT show multiple YAML examples for different environments - use table instead
+- Do NOT explain env var injection or internal implementation
 
 **NEVER include:**
-- Internal implementation details (hooks, components, internal file paths)
-- Detailed user-facing behavior descriptions (link to user-guide docs instead)
+- Multiple code blocks showing the same thing in different ways
+- Step-by-step explanations of how Helm injects values
+- Prose that repeats what the table already shows
 
 {{else if eq .ContentType "developer-reference"}}
 ### developer-reference: Focus on PUBLIC SDK/API

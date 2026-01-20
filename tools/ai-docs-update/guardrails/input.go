@@ -193,3 +193,83 @@ func matchPath(path, pattern string) bool {
 
 	return path == pattern
 }
+
+// ParseDiff parses a unified diff and extracts file information.
+// Uses simple regex to count files and estimate line changes.
+func ParseDiff(diffContent string) *Diff {
+	if diffContent == "" {
+		return nil
+	}
+
+	diff := &Diff{
+		TotalSize: len(diffContent),
+		Files:     []DiffFile{},
+	}
+
+	lines := strings.Split(diffContent, "\n")
+	var currentFile *DiffFile
+	lineCount := 0
+
+	for _, line := range lines {
+		// Detect new file in diff (diff --git a/path b/path)
+		if strings.HasPrefix(line, "diff --git ") {
+			// Save previous file if exists
+			if currentFile != nil {
+				currentFile.LineCount = lineCount
+				diff.Files = append(diff.Files, *currentFile)
+			}
+
+			// Extract file path from "diff --git a/path b/path"
+			parts := strings.Split(line, " ")
+			if len(parts) >= 4 {
+				// Remove "a/" or "b/" prefix
+				path := strings.TrimPrefix(parts[2], "a/")
+				currentFile = &DiffFile{Path: path}
+				lineCount = 0
+			}
+			continue
+		}
+
+		// Count added/removed lines
+		if currentFile != nil {
+			if strings.HasPrefix(line, "+") && !strings.HasPrefix(line, "+++") {
+				lineCount++
+			} else if strings.HasPrefix(line, "-") && !strings.HasPrefix(line, "---") {
+				lineCount++
+			}
+		}
+	}
+
+	// Save last file
+	if currentFile != nil {
+		currentFile.LineCount = lineCount
+		diff.Files = append(diff.Files, *currentFile)
+	}
+
+	return diff
+}
+
+// SummarizeDiff creates a concise summary of diff for Phase 1.
+// Returns a list of changed files with change type indicators.
+func SummarizeDiff(diffContent string) string {
+	if diffContent == "" {
+		return ""
+	}
+
+	parsed := ParseDiff(diffContent)
+	if parsed == nil || len(parsed.Files) == 0 {
+		return ""
+	}
+
+	var sb strings.Builder
+	sb.WriteString("Changed files:\n")
+	for _, f := range parsed.Files {
+		changeType := "modified"
+		if f.LineCount > 100 {
+			changeType = "heavily modified"
+		}
+		sb.WriteString(fmt.Sprintf("- %s (%s, ~%d lines)\n", f.Path, changeType, f.LineCount))
+	}
+
+	return sb.String()
+}

@@ -23,35 +23,19 @@ const (
 var (
 	ErrMissingDocumentTags = errors.New("missing <updated_document> tags in output")
 	ErrOutputTooLarge      = errors.New("output content exceeds maximum size")
-	ErrForbiddenPattern    = errors.New("forbidden pattern found in output")
 	ErrInvalidMarkdown     = errors.New("invalid markdown syntax detected")
 	ErrEmptyContent        = errors.New("extracted document content is empty")
 )
 
-// Default forbidden patterns that should not appear in documentation
-var defaultForbiddenPatterns = []string{
-	"OPENAI_API_KEY",
-	"SECRET_KEY",
-	"API_SECRET",
-	"password=",
-	"BEGIN RSA PRIVATE KEY",
-	"BEGIN PRIVATE KEY",
-	"BEGIN EC PRIVATE KEY",
-	"BEGIN DSA PRIVATE KEY",
-	"BEGIN OPENSSH PRIVATE KEY",
-}
-
 // OutputGuardrails provides output validation for AI-generated content
 type OutputGuardrails struct {
-	MaxOutputSize     int
-	ForbiddenPatterns []string
+	MaxOutputSize int
 }
 
 // NewOutputGuardrails creates a new OutputGuardrails with default settings
 func NewOutputGuardrails() *OutputGuardrails {
 	return &OutputGuardrails{
-		MaxOutputSize:     MaxOutputSize,
-		ForbiddenPatterns: defaultForbiddenPatterns,
+		MaxOutputSize: MaxOutputSize,
 	}
 }
 
@@ -73,12 +57,7 @@ func (g *OutputGuardrails) Validate(output string) error {
 		return fmt.Errorf("%w: %d bytes (max %d)", ErrOutputTooLarge, len(content), g.MaxOutputSize)
 	}
 
-	// 4. Check forbidden patterns
-	if err := g.checkForbiddenPatterns(content); err != nil {
-		return err
-	}
-
-	// 5. Basic markdown syntax validation
+	// 4. Basic markdown syntax validation
 	if err := g.validateMarkdown(content); err != nil {
 		return err
 	}
@@ -90,16 +69,6 @@ func (g *OutputGuardrails) Validate(output string) error {
 func (g *OutputGuardrails) validateDocumentTags(output string) error {
 	if !strings.Contains(output, OpenTag) || !strings.Contains(output, CloseTag) {
 		return ErrMissingDocumentTags
-	}
-	return nil
-}
-
-// checkForbiddenPatterns scans content for any forbidden patterns
-func (g *OutputGuardrails) checkForbiddenPatterns(content string) error {
-	for _, pattern := range g.ForbiddenPatterns {
-		if strings.Contains(content, pattern) {
-			return fmt.Errorf("%w: %s", ErrForbiddenPattern, pattern)
-		}
 	}
 	return nil
 }
@@ -147,56 +116,35 @@ func ExtractDocumentContent(output string) string {
 	return strings.TrimSpace(output[startIdx:endIdx])
 }
 
-// AddForbiddenPattern adds a new forbidden pattern to the guardrails
-func (g *OutputGuardrails) AddForbiddenPattern(pattern string) {
-	g.ForbiddenPatterns = append(g.ForbiddenPatterns, pattern)
-}
-
-// SetForbiddenPatterns replaces all forbidden patterns
-func (g *OutputGuardrails) SetForbiddenPatterns(patterns []string) {
-	g.ForbiddenPatterns = patterns
-}
-
-// Placeholder patterns that indicate AI guessing
-var placeholderPatterns = map[string]string{
-	"X.Y.Z":     "<!-- TODO: Needs confirmation - replace X.Y.Z with actual version -->",
-	"N.N.N":     "<!-- TODO: Needs confirmation - replace N.N.N with actual version -->",
-	"vX.X.X":    "<!-- TODO: Needs confirmation - replace vX.X.X with actual version -->",
-	"[version]": "<!-- TODO: Needs confirmation - specify version number -->",
-	"[VERSION]": "<!-- TODO: Needs confirmation - specify version number -->",
-	"<version>": "<!-- TODO: Needs confirmation - specify version number -->",
-	"TBD":       "<!-- TODO: Needs confirmation - TBD -->",
-}
-
 // Non-ASCII punctuation replacements
 var nonASCIIReplacements = map[rune]string{
-	'\u2010': "-",   // hyphen → ASCII hyphen
-	'\u2011': "-",   // non-breaking hyphen → ASCII hyphen
-	'\u2012': "-",   // figure dash → ASCII hyphen
-	'\u2013': "-",   // en-dash → ASCII hyphen
-	'\u2014': "--",  // em-dash → double hyphen
-	'\u2015': "--",  // horizontal bar → double hyphen
+	// Dashes
+	'\u2010': "-",  // hyphen → ASCII hyphen
+	'\u2011': "-",  // non-breaking hyphen → ASCII hyphen
+	'\u2012': "-",  // figure dash → ASCII hyphen
+	'\u2013': "-",  // en-dash → ASCII hyphen
+	'\u2014': "--", // em-dash → double hyphen
+	'\u2015': "--", // horizontal bar → double hyphen
+
+	// Quotes
 	'\u2018': "'",   // left single quote → apostrophe
 	'\u2019': "'",   // right single quote → apostrophe
 	'\u201C': "\"",  // left double quote → quote
 	'\u201D': "\"",  // right double quote → quote
 	'\u2026': "...", // ellipsis → three dots
-	'\u00A0': " ",   // non-breaking space → regular space
-}
 
-// TransformPlaceholders converts version placeholders to TODO comments.
-// Returns transformed content and list of warnings.
-func TransformPlaceholders(content string) (string, []string) {
-	var warnings []string
-	result := content
-	for pattern, todoComment := range placeholderPatterns {
-		if strings.Contains(result, pattern) {
-			// Add TODO comment after the placeholder
-			result = strings.ReplaceAll(result, pattern, pattern+" "+todoComment)
-			warnings = append(warnings, fmt.Sprintf("Placeholder '%s' found - added TODO marker", pattern))
-		}
-	}
-	return result, warnings
+	// Math symbols
+	'\u2264': "<=", // ≤ less-than or equal → <=
+	'\u2265': ">=", // ≥ greater-than or equal → >=
+	'\u2260': "!=", // ≠ not equal → !=
+	'\u00D7': "x",  // × multiplication sign → x
+	'\u00F7': "/",  // ÷ division sign → /
+
+	// Special spaces
+	'\u00A0': " ", // NO-BREAK SPACE → regular space
+	'\u202F': " ", // NARROW NO-BREAK SPACE → regular space
+	'\u2009': " ", // THIN SPACE → regular space
+	'\u200B': "",  // ZERO WIDTH SPACE → remove
 }
 
 // TransformNonASCII replaces non-ASCII punctuation with ASCII equivalents.
@@ -228,15 +176,11 @@ func TransformNonASCII(content string) (string, []string) {
 func (g *OutputGuardrails) PostProcess(content string) (string, []string) {
 	var allWarnings []string
 
-	// 1. Transform placeholders to TODO comments
-	result, warnings := TransformPlaceholders(content)
+	// 1. Transform non-ASCII punctuation
+	result, warnings := TransformNonASCII(content)
 	allWarnings = append(allWarnings, warnings...)
 
-	// 2. Transform non-ASCII punctuation
-	result, warnings = TransformNonASCII(result)
-	allWarnings = append(allWarnings, warnings...)
-
-	// 3. Ensure trailing newline (standard for text files)
+	// 2. Ensure trailing newline (standard for text files)
 	result = normalizeTrailingNewline(result)
 
 	return result, allWarnings

@@ -50,6 +50,11 @@ PR Title: {{.PRTitle}}
 PR Description:
 {{.PRDescription}}
 
+{{if .DiffSummary}}
+## CODE CHANGES (file summary)
+{{.DiffSummary}}
+{{end}}
+
 ## AVAILABLE DOCUMENTATION FILES
 {{range .DocsManifest.Files}}
 - {{.Path}} [{{.Category}}|{{.Audience}}|{{.ContentType}}]: {{.Title}}
@@ -122,6 +127,7 @@ type IdentifyRequest struct {
 	IssueBody    string
 	PRTitle      string
 	PRBody       string
+	DiffSummary  string // Summary of changed files (not full diff)
 	Glossary     []GlossaryEntry
 	DocsManifest *DocsManifest
 }
@@ -147,6 +153,7 @@ type identifyTemplateData struct {
 	IssueBody     string
 	PRTitle       string
 	PRDescription string
+	DiffSummary   string
 	DocsManifest  *DocsManifest
 }
 
@@ -199,7 +206,7 @@ func buildIdentifyPrompt(req IdentifyRequest) (string, error) {
 		req.IssueBody,
 		req.PRTitle,
 		req.PRBody,
-		"", // No diff needed for identification
+		"", // Full diff not needed for identification - we use summary
 	)
 
 	data := identifyTemplateData{
@@ -208,6 +215,7 @@ func buildIdentifyPrompt(req IdentifyRequest) (string, error) {
 		IssueBody:     sanitized.IssueBody,
 		PRTitle:       sanitized.PRTitle,
 		PRDescription: sanitized.PRBody,
+		DiffSummary:   req.DiffSummary,
 		DocsManifest:  req.DocsManifest,
 	}
 
