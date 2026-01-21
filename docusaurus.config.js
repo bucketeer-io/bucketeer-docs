@@ -40,7 +40,7 @@ const config = {
   url: 'https://docs.bucketeer.io',
   baseUrl: '/',
   onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
+  onBrokenMarkdownLinks: 'throw',  // Changed from 'warn' for AI docs update validation
   favicon: 'img/favicon.ico',
   organizationName: 'bucketeer-io', // Usually your GitHub org/user name.
   projectName: 'bucketeer', // Usually your repo name.
