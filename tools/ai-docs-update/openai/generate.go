@@ -62,24 +62,48 @@ Content Type: {{.ContentType}}
     - Prefer tables over multiple code examples
     - Never repeat the same information in different formats
 
+## CONTENT DEPTH MATCHING (CRITICAL)
+12. **Analyze existing document before adding content:**
+    - Count sentences per paragraph in surrounding content
+    - Check if section has code blocks
+    - Match your additions to this pattern
+
+13. **For add_inline or modify_section:**
+    - add_inline: Add ONLY 1-2 sentences to existing paragraph
+    - modify_section: Add at most 1 new paragraph (3-4 sentences)
+    - Do NOT create new headings (###) unless update_type is "add_section"
+    - Do NOT add code blocks if surrounding content has none
+
+14. **Implementation details NEVER belong in user-guide:**
+    - Backend conversion/caching → OMIT
+    - SDK delivery mechanism → OMIT
+    - Storage format/JSON representation → OMIT
+    - Say "[Feature] supports [user benefit]" and STOP
+
 ## CONTENT TYPE RULES (Based on Content Type: {{.ContentType}})
 {{if eq .ContentType "user-guide"}}
-### user-guide: Focus on USER EXPERIENCE
-**Principle:** Describe BEHAVIOR (what users see/experience), not implementation or configuration.
+### user-guide: Focus on USER EXPERIENCE (STRICT)
+**Principle:** Describe BEHAVIOR (what users see/experience), not implementation.
 
-**WRITE about:**
-- What the feature does for the user (observable behavior)
-- What users experience when using the feature
-- When/why certain things happen automatically
+**CONTENT SCALING (based on update_type):**
+- add_inline: Add 1-2 sentences to existing paragraph. NO new headings. NO code blocks.
+- modify_section: Add up to 1 paragraph. May add bullet list if existing style uses them.
+- Match the prose density of surrounding paragraphs
 
-**NEVER include these patterns:**
-- Internal code references: React hooks (use*), components (*Provider, *Context), file paths (*.ts, *.tsx, src/**)
-- Configuration syntax: environment variables (UPPER_SNAKE_CASE), CLI flags (--flag-name), YAML/Helm values
-- Internal constants or variable names
+**WRITE LIKE THIS:**
+- "YAML variations support comments for better readability."
+- "You can add or modify variations as needed."
 
-**When configuration is relevant:**
-Instead of explaining configuration inline, add ONE cross-reference sentence:
-"Administrators can configure [feature] per environment. See [Section Name](/path/to/admin-doc#section) for details."
+**NEVER WRITE LIKE THIS:**
+- "The backend parses YAML and converts it to JSON..."
+- "SDKs receive the JSON representation..."
+- "Results are cached for performance..."
+- Any internal code references, configuration syntax, or implementation details
+
+**When update_type is "add_inline":**
+- Find the most relevant existing paragraph
+- Add 1-2 sentences that extend it naturally
+- Do NOT create any new headings or code blocks
 
 {{else if eq .ContentType "admin-config"}}
 ### admin-config: Focus on CONFIGURATION
@@ -132,6 +156,25 @@ Instead of explaining configuration inline, add ONE cross-reference sentence:
   - Exception: Inside code blocks (backticks), use raw < > characters
 - Exception: Curly quotes are allowed in quoted content from external sources
 
+## UPDATE TYPE CONSTRAINTS
+{{if eq .UpdateType "add_inline"}}
+**INLINE MODE (STRICTEST):**
+- Add ONLY 1-2 sentences to an existing paragraph
+- NO new headings (###)
+- NO code blocks
+- NO bullet lists
+- Find the target paragraph and extend it naturally
+{{else if eq .UpdateType "modify_section"}}
+**MODIFY MODE:**
+- Add up to 1 new paragraph to existing section
+- May add bullet list if style matches
+- NO new H2 (##) headings
+{{else if eq .UpdateType "add_section"}}
+**NEW SECTION MODE:**
+- Create new section with heading
+- Limit to 10-15 lines maximum
+{{end}}
+
 ## OUTPUT FORMAT
 Return the COMPLETE updated document content wrapped in tags.
 Do NOT output a diff - output the full file content with your changes applied.
@@ -154,6 +197,7 @@ type UpdateRequest struct {
 	UpdateInstruction string
 	ContentType       string // user-guide, admin-config, developer-reference
 	StyleGuide        string // Formatted style guide rules
+	UpdateType        string // add_inline, modify_section, add_section, add_example
 }
 
 // updateTemplateData is the data structure for the update prompt template.
@@ -169,6 +213,7 @@ type updateTemplateData struct {
 	UpdateInstruction   string
 	ContentType         string
 	StyleGuide          string
+	UpdateType          string
 }
 
 // GenerateDocUpdate executes Phase 2: Update Generation.
@@ -229,6 +274,7 @@ func buildUpdatePrompt(req UpdateRequest) (string, error) {
 		UpdateInstruction:   req.UpdateInstruction,
 		ContentType:         req.ContentType,
 		StyleGuide:          req.StyleGuide,
+		UpdateType:          req.UpdateType,
 	}
 
 	var buf bytes.Buffer

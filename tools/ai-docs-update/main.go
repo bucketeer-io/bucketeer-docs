@@ -197,7 +197,7 @@ func run(ctx context.Context, cfg config) error {
 
 	log.Printf("AI identified %d files to update", len(identification.FilesToUpdate))
 	for _, f := range identification.FilesToUpdate {
-		log.Printf("  - %s (%s): %s", f.Path, f.UpdateType, f.BriefDescription)
+		log.Printf("  - %s (%s): %s [target: %s]", f.Path, f.UpdateType, f.BriefDescription, f.TargetLocation)
 	}
 
 	// 9. Phase 2: Generate updates for each identified file
@@ -251,6 +251,7 @@ func run(ctx context.Context, cfg config) error {
 			UpdateInstruction: fileUpdate.BriefDescription,
 			ContentType:       contentType,
 			StyleGuide:        formattedStyleGuide,
+			UpdateType:        fileUpdate.UpdateType,
 		})
 		if err != nil {
 			log.Printf("ERROR: OpenAI error for %s: %v (skipping)", fileUpdate.Path, err)

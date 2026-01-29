@@ -72,8 +72,9 @@ PR Description:
   "files_to_update": [
     {
       "path": "feature-flags/xxx.mdx",
-      "update_type": "add_section|modify_section|add_example",
-      "brief_description": "what to add/change"
+      "update_type": "add_inline|modify_section|add_section|add_example",
+      "brief_description": "what to add/change",
+      "target_location": "which paragraph/section to modify (for add_inline/modify_section)"
     }
   ]
 }
@@ -97,6 +98,26 @@ PR Description:
    - Token TTL config (per-env) → environments.mdx only
    - Organization name/URL → settings.mdx only
 10. **Cross-reference instead of duplicate.** If a doc needs to mention related content, link to the authoritative doc instead of repeating the information.
+
+## UPDATE TYPE SELECTION (CRITICAL)
+11. **Prefer add_inline or modify_section over add_section:**
+    - add_inline: Feature enhances existing capability → add 1-2 sentences to existing paragraph
+    - modify_section: Feature needs more explanation → add a paragraph to existing section
+    - add_section: Entirely new concept with no existing context (RARE - needs justification)
+
+12. **Scale content to change scope:**
+    - Minor feature/option → add_inline (1-2 sentences)
+    - New variation type or configuration option → modify_section (1 paragraph or table row)
+    - Completely new concept → add_section (rare)
+
+13. **In brief_description, specify WHERE to add:**
+    - For add_inline: "Add to [paragraph about X] that [feature] supports [benefit]"
+    - For add_section: "Create section because [justification - no existing related content]"
+
+14. **API overview pages should NOT contain specification details:**
+    - API specification details (new types, parameters, endpoints) belong in OpenAPI/Swagger docs
+    - Pages like http-api.mdx are for authentication and overview only
+    - Do NOT select API overview pages for type/schema changes - they auto-update via Swagger
 `
 
 // GlossaryEntry represents a term in the glossary.
@@ -137,6 +158,7 @@ type FileToUpdate struct {
 	Path             string `json:"path"`
 	UpdateType       string `json:"update_type"`
 	BriefDescription string `json:"brief_description"`
+	TargetLocation   string `json:"target_location"` // Where to add content (for add_inline/modify_section)
 }
 
 // IdentifyResponse represents the AI's response for document identification.
