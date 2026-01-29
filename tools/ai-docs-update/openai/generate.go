@@ -52,7 +52,7 @@ Content Type: {{.ContentType}}
 4. If information is unclear, add "TODO: Needs confirmation" instead of guessing
 5. Maintain the existing document structure and style
 6. Keep changes minimal and focused
-7. Preserve all existing content that is not being updated
+7. **NEVER delete or replace existing text.** Only ADD new sentences/paragraphs. Preserve all existing content exactly as-is
 8. Use terminology from the GLOSSARY consistently
 9. **NEVER use version placeholders** like "X.Y.Z", "vN.N.N", "TBD", or similar. Use "TODO: Needs confirmation - version number" instead
 10. If a specific version number is not provided in the issue/PR, omit version references entirely or use TODO markers

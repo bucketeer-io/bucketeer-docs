@@ -95,38 +95,37 @@ Helm values, Kubernetes ConfigMaps, environment variables for deployment, and in
 7. If the PR modifies SDK packages (@bucketeer/*-sdk), do NOT update dashboard operation guides
 
 ## SINGLE SOURCE OF TRUTH (CRITICAL - Prevents Duplication)
-8. **Each piece of information should appear in ONLY ONE document.**
+8. **Each piece of information should appear in ONLY ONE document. Select only one file per topic.**
    - Per-environment configuration → environments.mdx (NOT settings.mdx)
    - Per-organization configuration → settings.mdx
    - User-facing dashboard behavior → bucketeer-dashboard.mdx
    - SDK integration details → sdk/**
-9. **When information could fit multiple files, choose the MOST SPECIFIC one.**
-   - Token TTL config (per-env) → environments.mdx only
-   - Organization name/URL → settings.mdx only
+9. **When information could fit multiple files, choose ONLY the MOST SPECIFIC one.**
+   - If a parent page links to a child page for details, update ONLY the child page
+   - Example: targeting.mdx links to custom-rules.mdx → update custom-rules.mdx ONLY
 10. **Cross-reference instead of duplicate.** If a doc needs to mention related content, link to the authoritative doc instead of repeating the information.
+11. **NEVER add feature details to overview/hub pages.** Pages that primarily link to other docs or describe "what this section contains" should not receive feature-specific content.
 
 ## UPDATE TYPE SELECTION (CRITICAL)
-11. **Prefer add_inline or modify_section over add_section:**
+12. **Prefer add_inline or modify_section over add_section:**
     - add_inline: Feature enhances existing capability → add 1-2 sentences to existing paragraph
     - modify_section: Feature needs more explanation → add a paragraph to existing section
     - add_section: Entirely new concept with no existing context (RARE - needs justification)
 
-12. **Scale content to change scope:**
+13. **Scale content to change scope:**
     - Minor feature/option → add_inline (1-2 sentences)
     - New variation type or configuration option → modify_section (1 paragraph or table row)
     - Completely new concept → add_section (rare)
 
-13. **target_location must be PRECISE (CRITICAL):**
+14. **target_location must be PRECISE (CRITICAL):**
     - Specify a section heading (## or ###) by name
     - Include position within section (e.g., "after step 4", "in the bullet list")
     - NEVER target the first paragraph (introduction/overview)
     - Good: "In '## Inviting New Members' section, after step 4"
     - Bad: "In the paragraph that lists dashboard capabilities"
 
-14. **API overview pages should NOT contain specification details:**
-    - API specification details (new types, parameters, endpoints) belong in OpenAPI/Swagger docs
-    - Pages like http-api.mdx are for authentication and overview only
-    - Do NOT select API overview pages for type/schema changes - they auto-update via Swagger
+15. **API specification details belong in OpenAPI/Swagger docs, not documentation pages.**
+    If the change is about API types, parameters, or endpoints, the API reference auto-updates via Swagger.
 `
 
 // GlossaryEntry represents a term in the glossary.
