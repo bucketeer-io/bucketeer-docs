@@ -35,7 +35,7 @@ type ContentType string
 const (
 	// ContentTypeUserGuide is for user-facing behavior docs (no implementation details).
 	ContentTypeUserGuide ContentType = "user-guide"
-	// ContentTypeAdminConfig is for UI administration guides (dashboard operations, NOT Helm/K8s config).
+	// ContentTypeAdminConfig is for UI administration guides (dashboard operations only).
 	ContentTypeAdminConfig ContentType = "admin-config"
 	// ContentTypeDeveloperRef is for SDK/API reference (public methods, code examples).
 	ContentTypeDeveloperRef ContentType = "developer-reference"
@@ -268,7 +268,7 @@ func ReadFile(path string) (string, error) {
 //
 // ContentType determines what kind of content is appropriate:
 //   - user-guide: User-facing behavior (NO implementation details, code internals)
-//   - admin-config: Configuration options (CLI flags, Helm values, env vars)
+//   - admin-config: Dashboard UI administration (NO CLI flags, Helm values, env vars)
 //   - developer-reference: SDK/API reference (public methods, integration code)
 func inferDocMetadata(path string) (category, audience string, contentType ContentType) {
 	switch {

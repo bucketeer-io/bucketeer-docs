@@ -19,24 +19,6 @@ a feature flag and A/B testing platform.
 - **{{.Name}}**: {{.Description}}
 {{end}}
 
-## CRITICAL: AUDIENCE DISTINCTION
-The Bucketeer project has TWO distinct codebases:
-
-1. **Bucketeer SDKs** (for EXTERNAL developers)
-   - npm packages: @bucketeer/js-client-sdk, @bucketeer/react-client-sdk
-   - Native SDKs: Android, iOS, Flutter
-   - Server SDKs: Go, Node.js
-   - Documentation in: /docs/sdk/**
-   - Audience: External developers integrating feature flags into THEIR applications
-
-2. **Bucketeer Dashboard** (for INTERNAL operators)
-   - React web application in ui/dashboard/src/
-   - Used by Bucketeer operators to manage feature flags
-   - Documentation in: /docs/getting-started/bucketeer-dashboard.mdx and dashboard-related guides
-   - Audience: Operators using the Bucketeer admin console
-
-**NEVER** document internal Dashboard code (React hooks, components from ui/dashboard/src/) in SDK documentation.
-
 ## TASK
 Analyze the following feature change and identify which documentation files need to be updated.
 
@@ -62,13 +44,13 @@ PR Description:
 
 ## CONTENT TYPE DEFINITIONS
 - **user-guide**: User-facing behavior docs (what users see/experience). NO implementation details.
-- **admin-config**: Dashboard administration guides (UI operations for org settings). NOT for Helm/K8s config.
+- **admin-config**: Dashboard administration guides (UI operations for org settings). NO Helm/K8s config.
 - **developer-reference**: SDK/API reference for external developers (public methods, integration code).
 
 ## INFRASTRUCTURE CONFIG EXCLUSION (CRITICAL)
 Helm values, Kubernetes ConfigMaps, environment variables for deployment, and infrastructure setup:
-- Do NOT belong in ANY documentation file in this repository
-- These docs are for END USERS of the Bucketeer dashboard, not cluster administrators
+- Do NOT belong in user-facing documentation in this repository
+- These docs are for Bucketeer users and integrators, not cluster administrators
 - If a PR adds Helm/K8s config, only document the USER-FACING behavior, not the infrastructure setup
 
 ## OUTPUT FORMAT (JSON only)
@@ -97,7 +79,7 @@ Helm values, Kubernetes ConfigMaps, environment variables for deployment, and in
 ## SINGLE SOURCE OF TRUTH (CRITICAL - Prevents Duplication)
 8. **Each piece of information should appear in ONLY ONE document. Select only one file per topic.**
    - Per-environment configuration → environments.mdx (NOT settings.mdx)
-   - Per-organization configuration → settings.mdx
+   - Per-organization configuration → organization-settings/settings.mdx
    - User-facing dashboard behavior → bucketeer-dashboard.mdx
    - SDK integration details → sdk/**
 9. **When information could fit multiple files, choose ONLY the MOST SPECIFIC one.**
