@@ -35,7 +35,7 @@ type ContentType string
 const (
 	// ContentTypeUserGuide is for user-facing behavior docs (no implementation details).
 	ContentTypeUserGuide ContentType = "user-guide"
-	// ContentTypeAdminConfig is for configuration options (CLI flags, Helm values, env vars).
+	// ContentTypeAdminConfig is for UI administration guides (dashboard operations, NOT Helm/K8s config).
 	ContentTypeAdminConfig ContentType = "admin-config"
 	// ContentTypeDeveloperRef is for SDK/API reference (public methods, code examples).
 	ContentTypeDeveloperRef ContentType = "developer-reference"

@@ -62,8 +62,14 @@ PR Description:
 
 ## CONTENT TYPE DEFINITIONS
 - **user-guide**: User-facing behavior docs (what users see/experience). NO implementation details.
-- **admin-config**: Configuration docs for operators (CLI flags, Helm values, env vars).
+- **admin-config**: Dashboard administration guides (UI operations for org settings). NOT for Helm/K8s config.
 - **developer-reference**: SDK/API reference for external developers (public methods, integration code).
+
+## INFRASTRUCTURE CONFIG EXCLUSION (CRITICAL)
+Helm values, Kubernetes ConfigMaps, environment variables for deployment, and infrastructure setup:
+- Do NOT belong in ANY documentation file in this repository
+- These docs are for END USERS of the Bucketeer dashboard, not cluster administrators
+- If a PR adds Helm/K8s config, only document the USER-FACING behavior, not the infrastructure setup
 
 ## OUTPUT FORMAT (JSON only)
 {
@@ -110,9 +116,12 @@ PR Description:
     - New variation type or configuration option → modify_section (1 paragraph or table row)
     - Completely new concept → add_section (rare)
 
-13. **In brief_description, specify WHERE to add:**
-    - For add_inline: "Add to [paragraph about X] that [feature] supports [benefit]"
-    - For add_section: "Create section because [justification - no existing related content]"
+13. **target_location must be PRECISE (CRITICAL):**
+    - Specify a section heading (## or ###) by name
+    - Include position within section (e.g., "after step 4", "in the bullet list")
+    - NEVER target the first paragraph (introduction/overview)
+    - Good: "In '## Inviting New Members' section, after step 4"
+    - Bad: "In the paragraph that lists dashboard capabilities"
 
 14. **API overview pages should NOT contain specification details:**
     - API specification details (new types, parameters, endpoints) belong in OpenAPI/Swagger docs

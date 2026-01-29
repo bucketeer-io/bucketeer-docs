@@ -80,6 +80,17 @@ Content Type: {{.ContentType}}
     - Storage format/JSON representation → OMIT
     - Say "[Feature] supports [user benefit]" and STOP
 
+15. **Documentation language must be TIMELESS:**
+    - NEVER use: "now", "new", "recently", "currently", "just added", "as of version"
+    - Write as if the feature has always existed
+    - Good: "The Members page includes an option to email invitations"
+    - Bad: "The Members page now includes an option to email invitations"
+
+16. **Introduction paragraphs are OFF-LIMITS:**
+    - First paragraph after frontmatter describes the page's PURPOSE only
+    - Do NOT add feature-specific content to introduction paragraphs
+    - Feature details belong in specific sections (## or ### headings)
+
 ## CONTENT TYPE RULES (Based on Content Type: {{.ContentType}})
 {{if eq .ContentType "user-guide"}}
 ### user-guide: Focus on USER EXPERIENCE (STRICT)
@@ -106,24 +117,25 @@ Content Type: {{.ContentType}}
 - Do NOT create any new headings or code blocks
 
 {{else if eq .ContentType "admin-config"}}
-### admin-config: Focus on CONFIGURATION
-**Principle:** Describe HOW TO CONFIGURE - be concise and reference-oriented.
+### admin-config: Focus on UI ADMINISTRATION OPERATIONS
+**Principle:** Describe how administrators use the Bucketeer DASHBOARD to manage settings.
 
 **WRITE about:**
-- Configuration options with syntax and defaults
-- Recommended settings (use a table, not prose)
+- How to navigate to settings pages in the dashboard
+- What options are available in the UI
+- Step-by-step instructions for UI operations
+- Permission requirements for admin actions
 
-**FORMAT RULES (STRICT):**
-- Maximum 20 lines per new section
-- Use ONE table for all options (CLI flag, Helm value, default, description)
-- Use at most ONE code block (only if essential)
-- Do NOT show multiple YAML examples for different environments - use table instead
-- Do NOT explain env var injection or internal implementation
+**NEVER include (CRITICAL):**
+- Helm values, Kubernetes ConfigMaps, or deployment configuration
+- CLI flags or environment variables for server configuration
+- Infrastructure setup or installation instructions
+- Backend implementation details
 
-**NEVER include:**
-- Multiple code blocks showing the same thing in different ways
-- Step-by-step explanations of how Helm injects values
-- Prose that repeats what the table already shows
+**If the feature change involves Helm/K8s configuration:**
+- Do NOT add Helm tables or deployment config to these docs
+- Only mention the USER-FACING behavior (e.g., "Email notifications can be enabled by your administrator")
+- Infrastructure config belongs in deployment guides (outside this documentation scope)
 
 {{else if eq .ContentType "developer-reference"}}
 ### developer-reference: Focus on PUBLIC SDK/API
