@@ -7,6 +7,7 @@
 # Generated files
 .docusaurus
 .cache-loader
+tools/ai-docs-update/ai-docs-update
 
 # Misc
 /.idea

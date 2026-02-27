@@ -1,0 +1,175 @@
+name: AI Docs Update
+
+on:
+  repository_dispatch:
+    types: [ai-docs-update]
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: 'Source issue number from bucketeer repo'
+        required: true
+        type: string
+      pr_number:
+        description: 'Source PR number (optional, but recommended for diff)'
+        required: false
+        type: string
+
+# Prevent concurrent runs - prioritize earlier jobs
+concurrency:
+  group: ai-docs-update
+  cancel-in-progress: false
+
+jobs:
+  ai-update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout bucketeer-docs
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.24'
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Fetch issue and PR context from bucketeer repo
+        id: context
+        env:
+          GH_TOKEN: ${{ secrets.BUCKETEER_REPO_TOKEN }}
+        run: |
+          mkdir -p .ai-context
+          ISSUE_NUMBER="${{ github.event.client_payload.issue_number || inputs.issue_number }}"
+          PR_NUMBER="${{ github.event.client_payload.pr_number || inputs.pr_number }}"
+          COMMIT_SHA="${{ github.event.client_payload.commit_sha }}"
+
+          echo "issue_number=${ISSUE_NUMBER}" >> $GITHUB_OUTPUT
+          echo "pr_number=${PR_NUMBER}" >> $GITHUB_OUTPUT
+
+          # Fetch issue information
+          gh api "/repos/bucketeer-io/bucketeer/issues/$ISSUE_NUMBER" \
+            --jq '.title' > .ai-context/issue_title.txt
+
+          gh api "/repos/bucketeer-io/bucketeer/issues/$ISSUE_NUMBER" \
+            --jq '.body // ""' > .ai-context/issue_body.txt
+
+          echo "Fetched issue #${ISSUE_NUMBER}: $(cat .ai-context/issue_title.txt)"
+
+          # Fetch PR information and diff (if PR number is provided)
+          if [ -n "$PR_NUMBER" ]; then
+            gh api "/repos/bucketeer-io/bucketeer/pulls/$PR_NUMBER" \
+              --jq '.title' > .ai-context/pr_title.txt
+
+            gh api "/repos/bucketeer-io/bucketeer/pulls/$PR_NUMBER" \
+              --jq '.body // ""' > .ai-context/pr_body.txt
+
+            echo "Fetched PR #${PR_NUMBER}: $(cat .ai-context/pr_title.txt)"
+
+            # Fetch diff from PR (works for both open and merged PRs)
+            gh api "/repos/bucketeer-io/bucketeer/pulls/$PR_NUMBER" \
+              -H "Accept: application/vnd.github.diff" > .ai-context/diff.patch || true
+            echo "Fetched diff from PR #${PR_NUMBER}"
+          else
+            echo "" > .ai-context/pr_title.txt
+            echo "" > .ai-context/pr_body.txt
+            echo "" > .ai-context/diff.patch
+            echo "No PR number provided"
+          fi
+
+          # Override with commit SHA diff if provided (repository_dispatch case)
+          if [ -n "$COMMIT_SHA" ]; then
+            gh api "/repos/bucketeer-io/bucketeer/commits/$COMMIT_SHA" \
+              -H "Accept: application/vnd.github.diff" > .ai-context/diff.patch || true
+            echo "Fetched diff for commit: ${COMMIT_SHA}"
+          fi
+
+          # Log diff size
+          DIFF_SIZE=$(wc -c < .ai-context/diff.patch | tr -d ' ')
+          echo "Diff size: ${DIFF_SIZE} bytes"
+
+      - name: Run AI docs update
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_API_BASE: ${{ secrets.OPENAI_API_BASE }}
+          OPENAI_MODEL: ${{ secrets.OPENAI_MODEL }}
+        run: |
+          cd tools/ai-docs-update
+          go build -o ai-docs-update .
+          ./ai-docs-update \
+            --issue-title-file=../../.ai-context/issue_title.txt \
+            --issue-body-file=../../.ai-context/issue_body.txt \
+            --pr-title-file=../../.ai-context/pr_title.txt \
+            --pr-body-file=../../.ai-context/pr_body.txt \
+            --diff-file=../../.ai-context/diff.patch \
+            --glossary-file=../../static/data/vocabulary/vocabulary.json \
+            --docs-dir=../../docs
+
+      - name: Check for changes
+        id: check
+        run: |
+          if git diff --quiet; then
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+            echo "No documentation changes detected"
+          else
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+            echo "Documentation changes detected:"
+            git diff --stat
+          fi
+
+      - name: Build validation
+        if: steps.check.outputs.has_changes == 'true'
+        run: yarn build
+
+      - name: Read issue body for PR description
+        if: steps.check.outputs.has_changes == 'true'
+        id: issue_body
+        run: |
+          # Read issue body from file (avoid heredoc syntax issues)
+          {
+            echo 'content<<ISSUEBODYEOF'
+            cat .ai-context/issue_body.txt
+            echo 'ISSUEBODYEOF'
+          } >> $GITHUB_OUTPUT
+
+      - name: Create Pull Request
+        if: steps.check.outputs.has_changes == 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          committer: bucketeer-bot <bucketeer-bot@users.noreply.github.com>
+          author: bucketeer-bot <bucketeer-bot@users.noreply.github.com>
+          branch: bot/ai-docs/issue-${{ steps.context.outputs.issue_number }}
+          title: "docs: update for issue #${{ steps.context.outputs.issue_number }}"
+          body: |
+            ## Summary
+            Auto-generated documentation updates based on changes in the bucketeer repository.
+
+            ## Source
+            - Issue: bucketeer-io/bucketeer#${{ steps.context.outputs.issue_number }}
+            - PR: bucketeer-io/bucketeer#${{ steps.context.outputs.pr_number || 'N/A' }}
+
+            ## Issue Description
+            ${{ steps.issue_body.outputs.content }}
+
+            ## Validation
+            - [x] `yarn build` passed
+
+            ---
+            > Generated by AI Docs Update workflow
+          labels: |
+            ai-generated
+            documentation
+          commit-message: "docs: auto-update for issue #${{ steps.context.outputs.issue_number }}"
+          delete-branch: true
