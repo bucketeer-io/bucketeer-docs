@@ -96,8 +96,8 @@ func (c *Client) IdentifyDocsToUpdate(ctx context.Context, req IdentifyRequest) 
 		},
 	}
 
-	// Call OpenAI API
-	response, err := c.CreateChatCompletion(ctx, messages)
+	// Call OpenAI API with JSON response format to guarantee valid JSON output
+	response, err := c.CreateChatCompletion(ctx, messages, WithJSONResponse())
 	if err != nil {
 		return nil, fmt.Errorf("openai api call failed: %w", err)
 	}
@@ -170,6 +170,9 @@ func parseIdentifyResponse(response string) (*IdentifyResponse, error) {
 }
 
 // extractJSON attempts to extract JSON from a response that might contain markdown.
+// This serves as a defensive fallback even when response_format: json_object is enabled,
+// because the JSON guarantee may not hold for all models or proxies configurable
+// via OPENAI_MODEL / OPENAI_API_BASE.
 func extractJSON(response string) string {
 	// Look for ```json or ``` block
 	const jsonBlockStart = "```json"

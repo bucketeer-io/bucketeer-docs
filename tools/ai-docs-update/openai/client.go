@@ -1,16 +1,17 @@
 package openai
 
 import (
-	"bytes"
 	"context"
-	"encoding/json"
 	"errors"
 	"fmt"
-	"io"
 	"log"
 	"net/http"
 	"os"
 	"time"
+
+	sdkopenai "github.com/openai/openai-go/v3"
+	"github.com/openai/openai-go/v3/option"
+	"github.com/openai/openai-go/v3/shared"
 )
 
 // Default configuration values.
@@ -29,15 +30,20 @@ const (
 	EnvOpenAIAPIBase = "OPENAI_API_BASE"
 )
 
-// Client is an OpenAI API client with retry logic and circuit breaker.
+// Client is an OpenAI API client using the official SDK.
 type Client struct {
-	apiKey      string
-	apiBase     string
+	sdkClient   sdkopenai.Client
 	model       string
+	apiBase     string
 	temperature float64
 	maxTokens   int
 	maxRetries  int
-	httpClient  *http.Client
+}
+
+// ChatMessage represents a message in the chat completion request.
+type ChatMessage struct {
+	Role    string `json:"role"`
+	Content string `json:"content"`
 }
 
 // ClientOption is a function that configures a Client.
@@ -78,7 +84,7 @@ func WithMaxRetries(retries int) ClientOption {
 	}
 }
 
-// NewClient creates a new OpenAI API client.
+// NewClient creates a new OpenAI API client using the official SDK.
 // It reads configuration from environment variables with sensible defaults.
 func NewClient(apiKey string, opts ...ClientOption) *Client {
 	// Get model from environment or use default
@@ -94,15 +100,11 @@ func NewClient(apiKey string, opts ...ClientOption) *Client {
 	}
 
 	c := &Client{
-		apiKey:      apiKey,
-		apiBase:     apiBase,
 		model:       model,
+		apiBase:     apiBase,
 		temperature: 0, // Deterministic output
 		maxTokens:   DefaultMaxTokens,
 		maxRetries:  DefaultMaxRetries,
-		httpClient: &http.Client{
-			Timeout: RequestTimeout,
-		},
 	}
 
 	// Apply options
@@ -110,180 +112,78 @@ func NewClient(apiKey string, opts ...ClientOption) *Client {
 		opt(c)
 	}
 
+	// Initialize SDK client with configured values
+	c.sdkClient = sdkopenai.NewClient(
+		option.WithAPIKey(apiKey),
+		option.WithBaseURL(c.apiBase),
+		option.WithMaxRetries(c.maxRetries),
+		option.WithHTTPClient(&http.Client{Timeout: RequestTimeout}),
+	)
+
 	return c
 }
 
-// ChatMessage represents a message in the chat completion request.
-type ChatMessage struct {
-	Role    string `json:"role"`
-	Content string `json:"content"`
-}
+// RequestOption configures a per-request option for chat completions.
+// This is distinct from ClientOption which configures the client itself.
+type RequestOption func(*sdkopenai.ChatCompletionNewParams)
 
-// ChatCompletionRequest represents the request body for chat completions.
-type ChatCompletionRequest struct {
-	Model       string        `json:"model"`
-	Messages    []ChatMessage `json:"messages"`
-	Temperature float64       `json:"temperature"`
-	MaxTokens   int           `json:"max_tokens"`
-}
-
-// ChatCompletionResponse represents the response from chat completions.
-type ChatCompletionResponse struct {
-	ID      string `json:"id"`
-	Object  string `json:"object"`
-	Created int64  `json:"created"`
-	Model   string `json:"model"`
-	Choices []struct {
-		Index   int `json:"index"`
-		Message struct {
-			Role    string `json:"role"`
-			Content string `json:"content"`
-		} `json:"message"`
-		FinishReason string `json:"finish_reason"`
-	} `json:"choices"`
-	Usage struct {
-		PromptTokens     int `json:"prompt_tokens"`
-		CompletionTokens int `json:"completion_tokens"`
-		TotalTokens      int `json:"total_tokens"`
-	} `json:"usage"`
-	Error *APIError `json:"error,omitempty"`
-}
-
-// APIError represents an error from the OpenAI API.
-type APIError struct {
-	Message string `json:"message"`
-	Type    string `json:"type"`
-	Code    string `json:"code"`
-}
-
-func (e *APIError) Error() string {
-	return fmt.Sprintf("OpenAI API error: %s (type: %s, code: %s)", e.Message, e.Type, e.Code)
-}
-
-// HTTPError represents an HTTP error with status code.
-type HTTPError struct {
-	StatusCode int
-	Message    string
-}
-
-func (e *HTTPError) Error() string {
-	return fmt.Sprintf("HTTP %d: %s", e.StatusCode, e.Message)
-}
-
-// CreateChatCompletion sends a chat completion request with retry logic.
-// Implements exponential backoff (2s, 8s, 32s) and circuit breaker pattern.
-func (c *Client) CreateChatCompletion(ctx context.Context, messages []ChatMessage) (string, error) {
-	var lastErr error
-
-	for i := 0; i < c.maxRetries; i++ {
-		// Create request-scoped context with timeout
-		reqCtx, cancel := context.WithTimeout(ctx, RequestTimeout)
-
-		response, err := c.doRequest(reqCtx, messages)
-		cancel() // Always cancel to avoid context leak
-
-		if err == nil {
-			if len(response.Choices) == 0 {
-				return "", errors.New("no choices in response")
-			}
-			return response.Choices[0].Message.Content, nil
-		}
-
-		// Check if error is retryable
-		if !isRetryableError(err) {
-			return "", fmt.Errorf("openai api error (non-retryable): %w", err)
-		}
-
-		lastErr = err
-
-		// Exponential backoff: 2s, 8s, 32s
-		delay := time.Duration(2<<(i*2)) * time.Second
-		log.Printf("OpenAI API retry %d/%d after %v: %v", i+1, c.maxRetries, delay, err)
-
-		select {
-		case <-ctx.Done():
-			return "", fmt.Errorf("context cancelled during retry: %w", ctx.Err())
-		case <-time.After(delay):
+// WithJSONResponse sets response_format to json_object, guaranteeing valid JSON output.
+// IMPORTANT: The system or user message MUST contain the word "JSON"
+// when using this option, otherwise the API returns a 400 error.
+func WithJSONResponse() RequestOption {
+	return func(p *sdkopenai.ChatCompletionNewParams) {
+		jsonObj := shared.NewResponseFormatJSONObjectParam()
+		p.ResponseFormat = sdkopenai.ChatCompletionNewParamsResponseFormatUnion{
+			OfJSONObject: &jsonObj,
 		}
 	}
-
-	// Circuit breaker: max retries exceeded
-	return "", fmt.Errorf("circuit breaker open: max retries (%d) exceeded: %w", c.maxRetries, lastErr)
 }
 
-// doRequest performs the actual HTTP request to OpenAI API.
-func (c *Client) doRequest(ctx context.Context, messages []ChatMessage) (*ChatCompletionResponse, error) {
-	reqBody := ChatCompletionRequest{
-		Model:       c.model,
-		Messages:    messages,
-		Temperature: c.temperature,
-		MaxTokens:   c.maxTokens,
+// CreateChatCompletion sends a chat completion request via the SDK.
+// The SDK handles retry logic with exponential backoff automatically.
+func (c *Client) CreateChatCompletion(ctx context.Context, messages []ChatMessage, opts ...RequestOption) (string, error) {
+	params := sdkopenai.ChatCompletionNewParams{
+		Model:               c.model,
+		Messages:            toSDKMessages(messages),
+		Temperature:         sdkopenai.Float(c.temperature),
+		MaxCompletionTokens: sdkopenai.Int(int64(c.maxTokens)),
 	}
 
-	jsonBody, err := json.Marshal(reqBody)
+	// Apply per-request options
+	for _, opt := range opts {
+		opt(&params)
+	}
+
+	log.Printf("Calling OpenAI API (model: %s)", c.model)
+	completion, err := c.sdkClient.Chat.Completions.New(ctx, params)
 	if err != nil {
-		return nil, fmt.Errorf("failed to marshal request: %w", err)
+		return "", fmt.Errorf("openai api error: %w", err)
 	}
 
-	url := c.apiBase + "/chat/completions"
-	req, err := http.NewRequestWithContext(ctx, http.MethodPost, url, bytes.NewReader(jsonBody))
-	if err != nil {
-		return nil, fmt.Errorf("failed to create request: %w", err)
+	if len(completion.Choices) == 0 {
+		return "", errors.New("no choices in response")
 	}
 
-	req.Header.Set("Content-Type", "application/json")
-	req.Header.Set("Authorization", "Bearer "+c.apiKey)
+	return completion.Choices[0].Message.Content, nil
+}
 
-	resp, err := c.httpClient.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("request failed: %w", err)
-	}
-	defer resp.Body.Close()
-
-	body, err := io.ReadAll(resp.Body)
-	if err != nil {
-		return nil, fmt.Errorf("failed to read response: %w", err)
-	}
-
-	// Check for HTTP errors
-	if resp.StatusCode != http.StatusOK {
-		return nil, &HTTPError{
-			StatusCode: resp.StatusCode,
-			Message:    string(body),
+// toSDKMessages converts ChatMessage slice to SDK message union types.
+func toSDKMessages(messages []ChatMessage) []sdkopenai.ChatCompletionMessageParamUnion {
+	result := make([]sdkopenai.ChatCompletionMessageParamUnion, len(messages))
+	for i, m := range messages {
+		switch m.Role {
+		case "system":
+			result[i] = sdkopenai.SystemMessage(m.Content)
+		case "user":
+			result[i] = sdkopenai.UserMessage(m.Content)
+		case "assistant":
+			result[i] = sdkopenai.AssistantMessage(m.Content)
+		default:
+			log.Printf("WARNING: unknown message role %q, treating as user message", m.Role)
+			result[i] = sdkopenai.UserMessage(m.Content)
 		}
 	}
-
-	var response ChatCompletionResponse
-	if err := json.Unmarshal(body, &response); err != nil {
-		return nil, fmt.Errorf("failed to unmarshal response: %w", err)
-	}
-
-	// Check for API-level errors
-	if response.Error != nil {
-		return nil, response.Error
-	}
-
-	return &response, nil
-}
-
-// isRetryableError determines if an error is retryable.
-// 429 (Rate Limit) and 5xx errors are retryable.
-// Context timeout/cancel errors are NOT retryable.
-func isRetryableError(err error) bool {
-	// Context timeout/cancel is not retryable
-	if errors.Is(err, context.DeadlineExceeded) || errors.Is(err, context.Canceled) {
-		return false
-	}
-
-	// Check for HTTP errors
-	var httpErr *HTTPError
-	if errors.As(err, &httpErr) {
-		// 429 (Rate Limit) and 5xx errors are retryable
-		return httpErr.StatusCode == http.StatusTooManyRequests || httpErr.StatusCode >= 500
-	}
-
-	// Network errors are generally retryable
-	return true
+	return result
 }
 
 // GetModel returns the model being used.
