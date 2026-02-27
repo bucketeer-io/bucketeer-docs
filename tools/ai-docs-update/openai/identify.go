@@ -3,6 +3,7 @@ package openai
 import (
 	"bytes"
 	"context"
+	_ "embed"
 	"encoding/json"
 	"fmt"
 	"strings"
@@ -11,104 +12,9 @@ import (
 
 // DocIdentificationPrompt is the prompt template for Phase 1: Document Identification.
 // It analyzes issue/PR context to determine which documentation files need updates.
-const DocIdentificationPrompt = `You are a documentation analyst for Bucketeer,
-a feature flag and A/B testing platform.
-
-## GLOSSARY (Use these terms consistently)
-{{range .Glossary}}
-- **{{.Name}}**: {{.Description}}
-{{end}}
-
-## TASK
-Analyze the following feature change and identify which documentation files need to be updated.
-
-## ISSUE CONTEXT
-Issue Title: {{.IssueTitle}}
-Issue Body:
-{{.IssueBody}}
-
-## LINKED PR
-PR Title: {{.PRTitle}}
-PR Description:
-{{.PRDescription}}
-
-{{if .DiffSummary}}
-## CODE CHANGES (file summary)
-{{.DiffSummary}}
-{{end}}
-
-## AVAILABLE DOCUMENTATION FILES
-{{range .DocsManifest.Files}}
-- {{.Path}} [{{.Category}}|{{.Audience}}|{{.ContentType}}]: {{.Title}}
-{{end}}
-
-## CONTENT TYPE DEFINITIONS
-- **user-guide**: User-facing behavior docs (what users see/experience). NO implementation details.
-- **admin-config**: Dashboard administration guides (UI operations for org settings). NO Helm/K8s config.
-- **developer-reference**: SDK/API reference for external developers (public methods, integration code).
-
-## INFRASTRUCTURE CONFIG EXCLUSION (CRITICAL)
-Helm values, Kubernetes ConfigMaps, environment variables for deployment, and infrastructure setup:
-- Do NOT belong in user-facing documentation in this repository
-- These docs are for Bucketeer users and integrators, not cluster administrators
-- If a PR adds Helm/K8s config, only document the USER-FACING behavior, not the infrastructure setup
-
-## OUTPUT FORMAT (JSON only)
-{
-  "needs_update": true/false,
-  "reason": "brief explanation",
-  "files_to_update": [
-    {
-      "path": "feature-flags/xxx.mdx",
-      "update_type": "add_inline|modify_section|add_section|add_example",
-      "brief_description": "what to add/change",
-      "target_location": "which paragraph/section to modify (for add_inline/modify_section)"
-    }
-  ]
-}
-
-## RULES
-1. Only select files that are DIRECTLY related to the feature
-2. If the feature is entirely new and no existing doc covers it, set needs_update to false and explain
-3. Prefer updating existing sections over creating new ones
-4. Maximum 3 files per feature change
-5. **CRITICAL**: Match audience - SDK changes go to SDK docs, Dashboard changes go to dashboard docs
-6. If the PR modifies ui/dashboard/src/**, do NOT update /docs/sdk/** files
-7. If the PR modifies SDK packages (@bucketeer/*-sdk), do NOT update dashboard operation guides
-
-## SINGLE SOURCE OF TRUTH (CRITICAL - Prevents Duplication)
-8. **Each piece of information should appear in ONLY ONE document. Select only one file per topic.**
-   - Per-environment configuration → environments.mdx (NOT settings.mdx)
-   - Per-organization configuration → organization-settings/settings.mdx
-   - User-facing dashboard behavior → bucketeer-dashboard.mdx
-   - SDK integration details → sdk/**
-9. **When information could fit multiple files, choose ONLY the MOST SPECIFIC one.**
-   - If a parent page links to a child page for details, update ONLY the child page
-   - Example: targeting.mdx links to custom-rules.mdx → update custom-rules.mdx ONLY
-10. **Cross-reference instead of duplicate.** If a doc needs to mention related content, link to the authoritative doc instead of repeating the information.
-11. **NEVER add feature details to overview/hub pages.** Pages that primarily link to other docs or describe "what this section contains" should not receive feature-specific content.
-
-## UPDATE TYPE SELECTION (CRITICAL)
-12. **Prefer add_inline or modify_section over add_section:**
-    - add_inline: Feature enhances existing capability → add 1-2 sentences to existing paragraph
-    - modify_section: Feature needs more explanation → add a paragraph to existing section
-    - add_section: Entirely new concept with no existing context (RARE - needs justification)
-
-13. **Scale content to change scope:**
-    - Minor feature/option → add_inline (1-2 sentences)
-    - New variation type or configuration option → modify_section (1 paragraph or table row)
-    - Completely new concept → add_section (rare)
-
-14. **target_location must be PRECISE (CRITICAL):**
-    - Specify a section heading (## or ###) by name
-    - Include position within section (e.g., "after step 4", "in the bullet list")
-    - NEVER target the first paragraph (introduction/overview)
-    - Good: "In '## Inviting New Members' section, after step 4"
-    - Bad: "In the paragraph that lists dashboard capabilities"
-
-15. **API specification details belong in OpenAPI/Swagger docs, not documentation pages.**
-    If the change is about API types, parameters, or endpoints, the API reference auto-updates via Swagger.
-`
+//
+//go:embed prompts/identify.tmpl
+var DocIdentificationPrompt string
 
 // GlossaryEntry represents a term in the glossary.
 type GlossaryEntry struct {
