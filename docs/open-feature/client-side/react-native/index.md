@@ -13,7 +13,7 @@ This is a beta version. Breaking changes may be introduced before general releas
 
 This is the official React Native OpenFeature provider for [Bucketeer](https://bucketeer.io/).
 
-### Installation (React Native)
+### Installation
 
 ```bash
 npm install @bucketeer/openfeature-js-client-sdk @openfeature/react-sdk
@@ -58,7 +58,7 @@ If `@react-native-async-storage/async-storage` is not installed, the SDK will gr
 For more details, see: https://react-native-async-storage.github.io/async-storage/docs/install/
 :::
 
-### Usage (React Native)
+### Usage
 
 Please use the [OpenFeature React SDK](https://openfeature.dev/docs/reference/sdks/client/web/react/) to use feature flags in your React Native application.
 

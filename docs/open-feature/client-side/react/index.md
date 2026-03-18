@@ -13,7 +13,7 @@ This is a beta version. Breaking changes may be introduced before general releas
 
 This is the official React OpenFeature provider for [Bucketeer](https://bucketeer.io/).
 
-### Installation (React)
+### Installation
 
 ```bash
 npm install @bucketeer/openfeature-js-client-sdk @openfeature/react-sdk
@@ -29,7 +29,7 @@ npm install @openfeature/core @openfeature/web-sdk @bucketeer/js-client-sdk
 ```
 :::
 
-### Usage (React)
+### Usage
 
 Please use the [OpenFeature React SDK](https://openfeature.dev/docs/reference/sdks/client/web/react/) to use feature flags in your React application.
 

@@ -13,13 +13,13 @@ This is a beta version. Breaking changes may be introduced before general releas
 
 This is the official JavaScript OpenFeature provider for [Bucketeer](https://bucketeer.io/).
 
-### Installation (Web)
+### Installation
 
 ```bash
 npm install @bucketeer/openfeature-js-client-sdk
 ```
 
-### Usage (Web)
+### Usage
 
 #### Configuration
 
