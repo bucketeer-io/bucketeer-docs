@@ -25,7 +25,7 @@ npm install @bucketeer/openfeature-js-client-sdk
 
 Use `defineBKTConfig` to create your configuration.
 
-```js
+```js showLineNumbers
 import { defineBKTConfig } from '@bucketeer/openfeature-js-client-sdk';
 
 const config = defineBKTConfig({
@@ -43,7 +43,7 @@ See our [documentation](https://docs.bucketeer.io/sdk/client-side/javascript#con
 
 Initialize and set the Bucketeer provider to OpenFeature.
 
-```js
+```js showLineNumbers
 import { OpenFeature } from '@openfeature/web-sdk';
 import { defineBKTConfig, BucketeerProvider } from '@bucketeer/openfeature-js-client-sdk';
 
@@ -68,7 +68,7 @@ await OpenFeature.setProviderAndWait(provider)
 
 After the provider is set and the provider's status is `ClientProviderEvents.Ready`, you can evaluate a feature flag using the OpenFeature client.
 
-```js
+```js showLineNumbers
 const client = OpenFeature.getClient();
 
 // boolean flag
@@ -93,7 +93,7 @@ The `targetingKey` is the user ID (Unique ID) and cannot be empty.
 
 You can update the evaluation context with the new attributes if the user attributes change.
 
-```js
+```js showLineNumbers
 const newEvaluationContext = {
   targetingKey: 'USER_ID',
   app_version: '2.0.0',
@@ -109,7 +109,7 @@ Changing the `targetingKey` is not supported in the current implementation of th
 
 To change the user ID, the BucketeerProvider must be removed and reinitialized.
 
-```js
+```js showLineNumbers
 await OpenFeature.clearProviders()
 await OpenFeature.clearContext()
 

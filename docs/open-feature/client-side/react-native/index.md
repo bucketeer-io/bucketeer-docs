@@ -66,7 +66,7 @@ Please use the [OpenFeature React SDK](https://openfeature.dev/docs/reference/sd
 
 Use `defineBKTConfig` to create your configuration and set up the `OpenFeatureProvider`. Make sure to use the global `fetch` API.
 
-```js
+```js showLineNumbers
 import { OpenFeatureProvider, OpenFeature } from '@openfeature/react-sdk';
 import { defineBKTConfig, BucketeerReactNativeProvider } from '@bucketeer/openfeature-js-client-sdk';
 
@@ -108,7 +108,7 @@ In the React Native environment, any `idGenerator` or `storageFactory` provided 
 
 The OpenFeature React SDK provides hooks for evaluating feature flags.
 
-```js
+```js showLineNumbers
 import { useBooleanFlagValue, useStringFlagValue, useNumberFlagValue, useObjectFlagValue } from '@openfeature/react-sdk';
 
 // boolean flag
@@ -133,7 +133,7 @@ The `targetingKey` is the user ID (Unique ID) and cannot be empty.
 
 You can update the evaluation context with the new attributes if the user attributes change.
 
-```js
+```js showLineNumbers
 import { OpenFeature } from '@openfeature/react-sdk';
 
 const newEvaluationContext = {
