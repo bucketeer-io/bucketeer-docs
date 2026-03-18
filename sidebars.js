@@ -296,6 +296,27 @@ const sidebars = {
     },
     {
       type: 'html',
+      value: "<span class='sidebar-title'>OpenFeature</span>",
+      defaultStyle: true,
+    },
+    {
+      type: 'doc',
+      id: 'open-feature/overview',
+      label: 'Overview',
+      className: 'sidebar-overview',
+    },
+    {
+      type: 'category',
+      label: 'Client-side',
+      className: 'sidebar-client',
+      items: [
+        'open-feature/client-side/javascript/index',
+        'open-feature/client-side/react/index',
+        'open-feature/client-side/react-native/index',
+      ],
+    },
+    {
+      type: 'html',
       value: "<span class='sidebar-title'>Developer Tools</span>",
       defaultStyle: true,
     },
