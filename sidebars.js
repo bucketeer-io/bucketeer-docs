@@ -263,7 +263,7 @@ const sidebars = {
     // },
     {
       type: 'html',
-      value: "<span class='sidebar-title'>SDKS</span>",
+      value: "<span class='sidebar-title'>SDKs & Providers</span>",
       defaultStyle: true,
     },
     {
@@ -295,24 +295,13 @@ const sidebars = {
       ],
     },
     {
-      type: 'html',
-      value: "<span class='sidebar-title'>OpenFeature</span>",
-      defaultStyle: true,
-    },
-    {
-      type: 'doc',
-      id: 'open-feature/overview',
-      label: 'Overview',
-      className: 'sidebar-overview',
-    },
-    {
       type: 'category',
-      label: 'Client-side',
+      label: 'OpenFeature Providers',
       className: 'sidebar-client',
       items: [
-        'open-feature/client-side/javascript/index',
-        'open-feature/client-side/react/index',
-        'open-feature/client-side/react-native/index',
+        'open-feature/javascript/index',
+        'open-feature/react/index',
+        'open-feature/react-native/index',
       ],
     },
     {

@@ -1,6 +1,6 @@
 ---
 title: JavaScript
-slug: /open-feature/client-side/javascript
+slug: /open-feature/javascript
 ---
 
 # Web (JavaScript / TypeScript)

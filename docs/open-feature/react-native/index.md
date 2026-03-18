@@ -1,6 +1,6 @@
 ---
 title: React Native
-slug: /open-feature/client-side/react-native
+slug: /open-feature/react-native
 ---
 
 # React Native
@@ -146,5 +146,5 @@ await OpenFeature.setContext(newEvaluationContext)
 ```
 
 :::warning
-Changing the `targetingKey` is not supported in the current implementation of the BucketeerProvider. To change the user ID, the Provider must be removed and reinitialized exactly as demonstrated in the [JavaScript / Web section](/open-feature/client-side/javascript#update-the-evaluation-context).
+Changing the `targetingKey` is not supported in the current implementation of the BucketeerProvider. To change the user ID, the Provider must be removed and reinitialized exactly as demonstrated in the [JavaScript / Web section](/open-feature/javascript#update-the-evaluation-context).
 :::
