@@ -29,9 +29,8 @@ Before starting, ensure that you follow the [Getting Started](/getting-started) 
 
 | Status | React Version |
 | :--- | :--- |
-| **Supported** | 18.2.0 - 18.3.x |
+| **Supported** | React 18.2.0 and above |
 | **May work** | 18.0.0 - 18.1.x (not officially supported) |
-| **Not supported** | 19.0.0 and above |
 
 ## Getting started
 
