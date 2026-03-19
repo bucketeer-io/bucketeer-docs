@@ -17,18 +17,21 @@ Bucketeer React SDK is a beta version. Breaking changes may be introduced before
 
 ## Features
 
-- 🚀 React Context and Hooks for easy integration
-- 🔧 TypeScript support with full type safety
-- 🔄 Automatic re-rendering on flag changes
+- React Context and Hooks for easy integration
+- TypeScript support with full type safety
+- Automatic re-rendering on flag changes
 
 ## Requirements
 
 Before starting, ensure that you follow the [Getting Started](/getting-started) guide.
 
-**React Version Support:**
-- ✅ Supported: React 18.2.0 - 18.3.x
-- ⚠️ May work: React 18.0.0 - 18.1.x (not officially supported)
-- ❌ Not supported: React 19.0.0 and above
+**React Version Support**
+
+| Status | React Version |
+| :--- | :--- |
+| **Supported** | 18.2.0 - 18.3.x |
+| **May work** | 18.0.0 - 18.1.x (not officially supported) |
+| **Not supported** | 19.0.0 and above |
 
 ## Getting started
 
