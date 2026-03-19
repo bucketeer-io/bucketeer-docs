@@ -26,12 +26,9 @@ Bucketeer React Native SDK is a beta version. Breaking changes may be introduced
 Before starting, ensure that you follow the [Getting Started](/getting-started) guide.
 
 **React Native Version Support:**
-
-| Status | React Version | React Native Version |
-| :--- | :--- | :--- |
-| **Supported** | 18.2.0 - 18.3.x | 0.76.0 - 0.78.x |
-| **May work** | 18.0.0 - 18.1.x | (not officially supported) |
-| **Not supported** | 19.0.0 and above | 0.79.0 and above |
+- ✅ Supported: React 18.2.0 - 18.3.x and React Native 0.76.0 - 0.78.x
+- ⚠️ May work: React 18.0.0 - 18.1.x (not officially supported)
+- ❌ Not supported: React 19.0.0 and above, React Native 0.79.0 and above
 
 ## Getting started
 
