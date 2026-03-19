@@ -5,6 +5,9 @@ description: How to add or update documentation pages
 
 When the user asks you to modify the documentation, carefully determine whether you are **Adding a New Document** or **Updating an Existing Document**, and follow the corresponding steps to ensure the Docusaurus site structure remains intact.
 
+> [!IMPORTANT]
+> When generating or updating documentation, **do not use icons or emojis (emotes)** in the text content. Keep the text professional and clean.
+
 ### Scenario A: Adding a New Document
 
 (e.g., adding a new OpenFeature provider, a new SDK, or a tutorial)

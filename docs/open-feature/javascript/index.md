@@ -3,7 +3,7 @@ title: JavaScript
 slug: /open-feature/javascript
 ---
 
-# Web (JavaScript / TypeScript)
+# Web (JavaScript)
 
 :::warning Web Provider (Beta)
 
