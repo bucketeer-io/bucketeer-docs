@@ -15,7 +15,7 @@ This is the official React Native OpenFeature provider for [Bucketeer](https://b
 
 ### Installation
 
-```bash
+```bash showLineNumbers
 npm install @bucketeer/openfeature-js-client-sdk @openfeature/react-sdk
 ```
 
@@ -23,7 +23,7 @@ npm install @bucketeer/openfeature-js-client-sdk @openfeature/react-sdk
 npm versions 7 and above will automatically install the required peer dependencies.
 If you got an error about missing peer dependencies, please install them manually:
 
-```bash
+```bash showLineNumbers
 npm install @openfeature/core @openfeature/web-sdk @bucketeer/js-client-sdk
 ```
 :::
@@ -35,7 +35,7 @@ The Bucketeer React Native provider relies on `@react-native-async-storage/async
 Simply installing the Bucketeer OpenFeature JS provider is sufficient.
 No additional steps are required for Android.
 For iOS, navigate to the iOS folder and run `pod install`.
-```bash
+```bash showLineNumbers
 cd ios && pod install  # For iOS
 ```
 
@@ -45,7 +45,7 @@ No additional steps are required for Android.
 For iOS, navigate to the iOS folder and run `pod install`.
 This is necessary because React Native's auto-linking feature does not support transitive dependencies (see [CLI Issue #1347](https://github.com/react-native-community/cli/issues/1347)).
 
-```bash
+```bash showLineNumbers
 npm install @react-native-async-storage/async-storage react-native-uuid
 cd ios && pod install  # For iOS
 ```

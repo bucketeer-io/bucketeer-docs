@@ -15,7 +15,7 @@ This is the official React OpenFeature provider for [Bucketeer](https://bucketee
 
 ### Installation
 
-```bash
+```bash showLineNumbers
 npm install @bucketeer/openfeature-js-client-sdk @openfeature/react-sdk
 ```
 

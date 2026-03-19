@@ -15,7 +15,7 @@ This is the official JavaScript OpenFeature provider for [Bucketeer](https://buc
 
 ### Installation
 
-```bash
+```bash showLineNumbers
 npm install @bucketeer/openfeature-js-client-sdk
 ```
 
@@ -24,7 +24,7 @@ npm versions 7 and above will automatically install the required peer dependenci
 `@openfeature/web-sdk` and `@bucketeer/js-client-sdk`.
 If you got an error about missing peer dependencies, please install them manually:
 
-```bash
+```bash showLineNumbers
 npm install @openfeature/core @openfeature/web-sdk @bucketeer/js-client-sdk
 ```
 :::
