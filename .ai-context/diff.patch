@@ -1,0 +1,130 @@
+diff --git a/pkg/batch/jobs/opsevent/progressive_rollout_watcher_test.go b/pkg/batch/jobs/opsevent/progressive_rollout_watcher_test.go
+index 456ac4cbd3..5f4e278cef 100644
+--- a/pkg/batch/jobs/opsevent/progressive_rollout_watcher_test.go
++++ b/pkg/batch/jobs/opsevent/progressive_rollout_watcher_test.go
+@@ -258,6 +258,108 @@ func TestRunProgressiveRolloutWatcher(t *testing.T) {
+ 			},
+ 			expectedErr: nil,
+ 		},
++		{
++			desc: "success: skip stopped progressive rollout",
++			setup: func(w *progressiveRolloutWatcher) {
++				w.envClient.(*envclientemock.MockClient).EXPECT().ListEnvironmentsV2(
++					gomock.Any(),
++					&environmentproto.ListEnvironmentsV2Request{
++						PageSize: 0,
++						Archived: wrapperspb.Bool(false),
++					},
++				).Return(
++					&environmentproto.ListEnvironmentsV2Response{
++						Environments: []*environmentproto.EnvironmentV2{
++							{Id: "eID", ProjectId: "pID"},
++						},
++					},
++					nil,
++				)
++				dc := &autoopsproto.ProgressiveRolloutTemplateScheduleClause{
++					Schedules: []*autoopsproto.ProgressiveRolloutSchedule{
++						{
++							ScheduleId: "sID",
++							ExecuteAt:  time.Now().Unix(),
++						},
++					},
++				}
++				c, err := ptypes.MarshalAny(dc)
++				require.NoError(t, err)
++				w.aoClient.(*aoclientemock.MockClient).EXPECT().ListProgressiveRollouts(
++					gomock.Any(),
++					&autoopsproto.ListProgressiveRolloutsRequest{
++						EnvironmentId: "eID",
++						PageSize:      0,
++					},
++				).Return(
++					&autoopsproto.ListProgressiveRolloutsResponse{
++						ProgressiveRollouts: []*autoopsproto.ProgressiveRollout{
++							{
++								Id:        "sID",
++								FeatureId: "fID",
++								Clause:    c,
++								Type:      autoopsproto.ProgressiveRollout_TEMPLATE_SCHEDULE,
++								Status:    autoopsproto.ProgressiveRollout_STOPPED,
++							},
++						},
++					},
++					nil,
++				)
++				// No executor call expected - stopped rollouts should be skipped
++			},
++			expectedErr: nil,
++		},
++		{
++			desc: "success: skip finished progressive rollout",
++			setup: func(w *progressiveRolloutWatcher) {
++				w.envClient.(*envclientemock.MockClient).EXPECT().ListEnvironmentsV2(
++					gomock.Any(),
++					&environmentproto.ListEnvironmentsV2Request{
++						PageSize: 0,
++						Archived: wrapperspb.Bool(false),
++					},
++				).Return(
++					&environmentproto.ListEnvironmentsV2Response{
++						Environments: []*environmentproto.EnvironmentV2{
++							{Id: "eID", ProjectId: "pID"},
++						},
++					},
++					nil,
++				)
++				dc := &autoopsproto.ProgressiveRolloutTemplateScheduleClause{
++					Schedules: []*autoopsproto.ProgressiveRolloutSchedule{
++						{
++							ScheduleId: "sID",
++							ExecuteAt:  time.Now().Unix(),
++						},
++					},
++				}
++				c, err := ptypes.MarshalAny(dc)
++				require.NoError(t, err)
++				w.aoClient.(*aoclientemock.MockClient).EXPECT().ListProgressiveRollouts(
++					gomock.Any(),
++					&autoopsproto.ListProgressiveRolloutsRequest{
++						EnvironmentId: "eID",
++						PageSize:      0,
++					},
++				).Return(
++					&autoopsproto.ListProgressiveRolloutsResponse{
++						ProgressiveRollouts: []*autoopsproto.ProgressiveRollout{
++							{
++								Id:        "sID",
++								FeatureId: "fID",
++								Clause:    c,
++								Type:      autoopsproto.ProgressiveRollout_TEMPLATE_SCHEDULE,
++								Status:    autoopsproto.ProgressiveRollout_FINISHED,
++							},
++						},
++					},
++					nil,
++				)
++				// No executor call expected - finished rollouts should be skipped
++			},
++			expectedErr: nil,
++		},
+ 	}
+ 	for _, p := range patterns {
+ 		t.Run(p.desc, func(t *testing.T) {
+diff --git a/pkg/batch/jobs/opsevent/progressove_rollout_watcher.go b/pkg/batch/jobs/opsevent/progressove_rollout_watcher.go
+index 01159f16ab..926638debf 100644
+--- a/pkg/batch/jobs/opsevent/progressove_rollout_watcher.go
++++ b/pkg/batch/jobs/opsevent/progressove_rollout_watcher.go
+@@ -82,6 +82,12 @@ func (w *progressiveRolloutWatcher) Run(
+ 		}
+ 		var executed bool
+ 		for _, p := range progressiveRollouts {
++			progressiveRollout := &autoopsdomain.ProgressiveRollout{ProgressiveRollout: p}
++			// Skip finished or stopped progressive rollouts to avoid unnecessary processing
++			// This is consistent with datetime_watcher and event_count_watcher behavior
++			if progressiveRollout.IsFinished() || progressiveRollout.IsStopped() {
++				continue
++			}
+ 			wasExecuted, err := w.executeProgressiveRollout(ctx, p, e.Id)
+ 			if err != nil {
+ 				lastErr = err

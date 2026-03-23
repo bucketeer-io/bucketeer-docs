@@ -1,0 +1,1 @@
+fix: progressive rollout watcher to skip stopped/finished rollouts

@@ -1,0 +1,20 @@
+Fix https://github.com/bucketeer-io/bucketeer/issues/2381
+
+## Summary
+- Fix bug where stopped/finished progressive rollouts were still being processed by the batch watcher
+- This caused stopped rollouts to trigger RPC calls and cache refreshes every minute indefinitely
+- Aligns progressive rollout watcher behavior with datetime_watcher and event_count_watcher
+
+## Problem
+When a user stops a progressive rollout, the batch watcher would continue to:
+1. Fetch the stopped rollout from the database
+2. Find schedules with `TriggeredAt == 0 && ExecuteAt <= now`
+3. Call ExecuteProgressiveRollout RPC (which silently skips due to stopped status)
+4. Trigger unnecessary cache refresh
+5. Repeat every minute forever
+
+## Solution
+Add status check before processing, consistent with other operation watchers:
+- datetime_watcher: `if aor.IsFinished() || aor.IsStopped() { continue }`
+- event_count_watcher: `if aor.IsFinished() || aor.IsStopped() { continue }`
+- progressive_rollout_watcher: Now also checks `if pr.IsFinished() || pr.IsStopped() { continue }`
