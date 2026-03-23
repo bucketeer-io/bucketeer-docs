@@ -48,7 +48,7 @@ jobs:
       - name: Fetch issue and PR context from bucketeer repo
         id: context
         env:
-          GH_TOKEN: ${{ secrets.BUCKETEER_REPO_TOKEN }}
+          GH_TOKEN: ${{ secrets.REPO_ACCESS_PAT }}
         run: |
           mkdir -p .ai-context
           ISSUE_NUMBER="${{ github.event.client_payload.issue_number || inputs.issue_number }}"
