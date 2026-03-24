@@ -1,16 +1,14 @@
-name: AI Docs Update
+name: ai-docs-update
 
 on:
-  repository_dispatch:
-    types: [ai-docs-update]
   workflow_dispatch:
     inputs:
       issue_number:
         description: 'Source issue number from bucketeer repo'
         required: true
         type: string
-      pr_number:
-        description: 'Source PR number (optional, but recommended for diff)'
+      pr_numbers:
+        description: 'PR numbers (comma-separated, e.g. "123" or "123,456,789")'
         required: false
         type: string
 
@@ -29,15 +27,15 @@ jobs:
 
     steps:
       - name: Checkout bucketeer-docs
-        uses: actions/checkout@v4
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Setup Go
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@4b73464bb391d4059bd26b0524d20df3927bd417 # v6.3.0
         with:
           go-version: '1.24'
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
         with:
           node-version: '20'
           cache: 'yarn'
@@ -49,50 +47,59 @@ jobs:
         id: context
         env:
           GH_TOKEN: ${{ secrets.REPO_ACCESS_PAT }}
+          INPUT_ISSUE_NUMBER: ${{ inputs.issue_number }}
+          INPUT_PR_NUMBERS: ${{ inputs.pr_numbers }}
         run: |
+          # Validate inputs
+          if ! [[ "$INPUT_ISSUE_NUMBER" =~ ^[0-9]+$ ]]; then
+            echo "::error::Invalid issue number: ${INPUT_ISSUE_NUMBER}"
+            exit 1
+          fi
+          if [[ -n "$INPUT_PR_NUMBERS" ]] && ! [[ "$INPUT_PR_NUMBERS" =~ ^[0-9]+(,[[:space:]]*[0-9]+)*$ ]]; then
+            echo "::error::Invalid PR numbers format: ${INPUT_PR_NUMBERS}"
+            exit 1
+          fi
           mkdir -p .ai-context
-          ISSUE_NUMBER="${{ github.event.client_payload.issue_number || inputs.issue_number }}"
-          PR_NUMBER="${{ github.event.client_payload.pr_number || inputs.pr_number }}"
-          COMMIT_SHA="${{ github.event.client_payload.commit_sha }}"
-
-          echo "issue_number=${ISSUE_NUMBER}" >> $GITHUB_OUTPUT
-          echo "pr_number=${PR_NUMBER}" >> $GITHUB_OUTPUT
+          echo "issue_number=${INPUT_ISSUE_NUMBER}" >> $GITHUB_OUTPUT
+          echo "pr_numbers=${INPUT_PR_NUMBERS}" >> $GITHUB_OUTPUT
 
           # Fetch issue information
-          gh api "/repos/bucketeer-io/bucketeer/issues/$ISSUE_NUMBER" \
+          gh api "/repos/bucketeer-io/bucketeer/issues/${INPUT_ISSUE_NUMBER}" \
             --jq '.title' > .ai-context/issue_title.txt
 
-          gh api "/repos/bucketeer-io/bucketeer/issues/$ISSUE_NUMBER" \
+          gh api "/repos/bucketeer-io/bucketeer/issues/${INPUT_ISSUE_NUMBER}" \
             --jq '.body // ""' > .ai-context/issue_body.txt
 
-          echo "Fetched issue #${ISSUE_NUMBER}: $(cat .ai-context/issue_title.txt)"
+          echo "Fetched issue #${INPUT_ISSUE_NUMBER}: $(cat .ai-context/issue_title.txt)"
 
-          # Fetch PR information and diff (if PR number is provided)
-          if [ -n "$PR_NUMBER" ]; then
-            gh api "/repos/bucketeer-io/bucketeer/pulls/$PR_NUMBER" \
-              --jq '.title' > .ai-context/pr_title.txt
+          # Initialize PR context files
+          > .ai-context/pr_title.txt
+          > .ai-context/pr_body.txt
+          > .ai-context/diff.patch
 
-            gh api "/repos/bucketeer-io/bucketeer/pulls/$PR_NUMBER" \
-              --jq '.body // ""' > .ai-context/pr_body.txt
+          # Fetch PR information and diff for each PR (comma-separated)
+          if [ -n "$INPUT_PR_NUMBERS" ]; then
+            for PR_NUMBER in $(echo "$INPUT_PR_NUMBERS" | tr ',' ' '); do
+              PR_NUMBER="${PR_NUMBER// /}"
+              echo "Fetching PR #${PR_NUMBER}..."
 
-            echo "Fetched PR #${PR_NUMBER}: $(cat .ai-context/pr_title.txt)"
+              echo "--- PR #${PR_NUMBER} ---" >> .ai-context/pr_title.txt
+              gh api "/repos/bucketeer-io/bucketeer/pulls/${PR_NUMBER}" \
+                --jq '.title' >> .ai-context/pr_title.txt
 
-            # Fetch diff from PR (works for both open and merged PRs)
-            gh api "/repos/bucketeer-io/bucketeer/pulls/$PR_NUMBER" \
-              -H "Accept: application/vnd.github.diff" > .ai-context/diff.patch || true
-            echo "Fetched diff from PR #${PR_NUMBER}"
+              echo "--- PR #${PR_NUMBER} ---" >> .ai-context/pr_body.txt
+              gh api "/repos/bucketeer-io/bucketeer/pulls/${PR_NUMBER}" \
+                --jq '.body // ""' >> .ai-context/pr_body.txt
+              echo "" >> .ai-context/pr_body.txt
+
+              gh api "/repos/bucketeer-io/bucketeer/pulls/${PR_NUMBER}" \
+                -H "Accept: application/vnd.github.diff" >> .ai-context/diff.patch \
+                || echo "::warning::Failed to fetch diff for PR #${PR_NUMBER}"
+
+              echo "Fetched PR #${PR_NUMBER}"
+            done
           else
-            echo "" > .ai-context/pr_title.txt
-            echo "" > .ai-context/pr_body.txt
-            echo "" > .ai-context/diff.patch
-            echo "No PR number provided"
-          fi
-
-          # Override with commit SHA diff if provided (repository_dispatch case)
-          if [ -n "$COMMIT_SHA" ]; then
-            gh api "/repos/bucketeer-io/bucketeer/commits/$COMMIT_SHA" \
-              -H "Accept: application/vnd.github.diff" > .ai-context/diff.patch || true
-            echo "Fetched diff for commit: ${COMMIT_SHA}"
+            echo "No PR numbers provided"
           fi
 
           # Log diff size
@@ -116,7 +123,20 @@ jobs:
             --glossary-file=../../static/data/vocabulary/vocabulary.json \
             --docs-dir=../../docs
 
+      - name: Read issue body for PR description
+        id: issue_body
+        run: |
+          if [ -f .ai-context/issue_body.txt ]; then
+            DELIMITER="ISSUEBODY_$(head -c 16 /dev/urandom | xxd -p)"
+            {
+              echo "content<<${DELIMITER}"
+              cat .ai-context/issue_body.txt
+              echo "${DELIMITER}"
+            } >> $GITHUB_OUTPUT
+          fi
+
       - name: Clean up temporary context files
+        if: always()
         run: rm -rf .ai-context
 
       - name: Check for changes
@@ -135,20 +155,9 @@ jobs:
         if: steps.check.outputs.has_changes == 'true'
         run: yarn build
 
-      - name: Read issue body for PR description
-        if: steps.check.outputs.has_changes == 'true'
-        id: issue_body
-        run: |
-          # Read issue body from file (avoid heredoc syntax issues)
-          {
-            echo 'content<<ISSUEBODYEOF'
-            cat .ai-context/issue_body.txt
-            echo 'ISSUEBODYEOF'
-          } >> $GITHUB_OUTPUT
-
       - name: Create Pull Request
         if: steps.check.outputs.has_changes == 'true'
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@c0f553fe549906ede9cf27b5156039d195d2ece0 # v8.1.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           committer: bucketeer-bot <bucketeer-bot@users.noreply.github.com>
@@ -161,7 +170,7 @@ jobs:
 
             ## Source
             - Issue: bucketeer-io/bucketeer#${{ steps.context.outputs.issue_number }}
-            - PR: bucketeer-io/bucketeer#${{ steps.context.outputs.pr_number || 'N/A' }}
+            - PRs: ${{ steps.context.outputs.pr_numbers || 'N/A' }}
 
             ## Issue Description
             ${{ steps.issue_body.outputs.content }}
