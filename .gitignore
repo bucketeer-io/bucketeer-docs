@@ -8,6 +8,7 @@
 .docusaurus
 .cache-loader
 tools/ai-docs-update/ai-docs-update
+.ai-context
 
 # Misc
 /.idea
