@@ -116,6 +116,9 @@ jobs:
             --glossary-file=../../static/data/vocabulary/vocabulary.json \
             --docs-dir=../../docs
 
+      - name: Clean up temporary context files
+        run: rm -rf .ai-context
+
       - name: Check for changes
         id: check
         run: |
