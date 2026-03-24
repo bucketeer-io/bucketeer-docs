@@ -27,11 +27,11 @@ const (
 	// MaxInputTokens is the maximum token limit for GPT-4o (with margin from 128K limit)
 	MaxInputTokens = 100000
 
-	// MaxIssueBodyLen is the maximum length for issue body (10KB)
-	MaxIssueBodyLen = 10 * 1024
+	// MaxIssueBodyLen is the maximum length for issue body (20KB)
+	MaxIssueBodyLen = 20 * 1024
 
-	// MaxPRBodyLen is the maximum length for PR body (10KB)
-	MaxPRBodyLen = 10 * 1024
+	// MaxPRBodyLen is the maximum length for PR body (50KB, supports multiple PRs combined)
+	MaxPRBodyLen = 50 * 1024
 
 	// MaxTitleLen is the maximum length for issue/PR titles
 	MaxTitleLen = 200
