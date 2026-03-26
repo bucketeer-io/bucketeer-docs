@@ -263,7 +263,7 @@ const sidebars = {
     // },
     {
       type: 'html',
-      value: "<span class='sidebar-title'>SDKS</span>",
+      value: "<span class='sidebar-title'>SDKs & Providers</span>",
       defaultStyle: true,
     },
     {
@@ -292,6 +292,20 @@ const sidebars = {
       items: [
         'sdk/server-side/go/index',
         'sdk/server-side/node-js/index',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'OpenFeature Providers',
+      className: 'sidebar-client',
+      items: [
+        'open-feature/android/index',
+        'open-feature/ios/index',
+        'open-feature/javascript/index',
+        'open-feature/react/index',
+        'open-feature/react-native/index',
+        'open-feature/go/index',
+        'open-feature/node-js/index',
       ],
     },
     {
