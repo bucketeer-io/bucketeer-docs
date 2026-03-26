@@ -15,6 +15,12 @@ Bucketeer React SDK is a beta version. Breaking changes may be introduced before
 
 :::
 
+:::info Compatibility
+
+The Bucketeer SDK is compatible with React versions 18.2.0 and higher. Versions 18.0.0 - 18.1.x may work but are not officially supported.
+
+:::
+
 ## Features
 
 - React Context and Hooks for easy integration
@@ -24,13 +30,6 @@ Bucketeer React SDK is a beta version. Breaking changes may be introduced before
 ## Requirements
 
 Before starting, ensure that you follow the [Getting Started](/getting-started) guide.
-
-**React Version Support**
-
-| Status | React Version |
-| :--- | :--- |
-| **Supported** | React 18.2.0 and above |
-| **May work** | 18.0.0 - 18.1.x (not officially supported) |
 
 ## Getting started
 
