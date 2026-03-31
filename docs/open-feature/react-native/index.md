@@ -101,7 +101,7 @@ function App() {
 See our [documentation](https://docs.bucketeer.io/sdk/client-side/javascript#configuring-client) for more SDK configuration.
 
 :::important
-Use `defineBKTConfigForReactNative` for the standard setup — you do not need to provide an `idGenerator`. The `BucketeerReactNativeProvider` automatically loads and injects the correct React Native implementation (`react-native-uuid`) during initialization.
+Use `defineBKTConfigForReactNative` for the standard setup — you do not need to provide an `idGenerator`. During initialization, `BucketeerReactNativeProvider` uses the React Native ID generator implementation backed by `react-native-uuid`, which must be installed and available at runtime.
 :::
 
 #### Evaluate a feature flag
