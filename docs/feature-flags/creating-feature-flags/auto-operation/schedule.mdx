@@ -12,7 +12,7 @@ The Schedule feature allows you to deliver or remove a feature at a specific dat
 
 ## How the schedule works
 
-When using Bucketeer Operation with the Schedule condition, you can manage your flags based on specific dates and times. Once Bucketeer receives the SDK request, the schedule condition checks if the specified date and time have been reached. If they have, the operation to enable or disable a flag variation is executed.
+When using Bucketeer Operation with the Schedule condition, you can manage your flags based on specific dates and times. Once Bucketeer receives the SDK request, the schedule condition checks if the specified date and time have been reached. If they have, the operation to enable or disable a flag variation is executed. In addition to one‐time schedules, you can create recurring schedules that repeat daily, weekly (selecting days of the week), or monthly (selecting a day of the month). Each recurring schedule includes a time of day, an IANA timezone, and an optional end condition (by date, by maximum occurrences, or never). One‐time and recurring schedules can both exist for the same feature.
 
 :::info Schedule requisites 
 
