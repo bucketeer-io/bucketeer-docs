@@ -66,7 +66,7 @@ Please use the [OpenFeature React SDK](https://openfeature.dev/docs/reference/sd
 
 :::warning
 
-Make sure not to use defineConfig in the React Native environment, as it is not supported.
+Make sure not to use `defineConfig` in the React Native environment, as it is not supported.
 
 :::
 
