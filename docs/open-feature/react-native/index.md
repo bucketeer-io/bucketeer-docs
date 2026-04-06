@@ -64,13 +64,19 @@ Please use the [OpenFeature React SDK](https://openfeature.dev/docs/reference/sd
 
 #### Configuration & Initialization
 
-Use `defineBKTConfig` to create your configuration and set up the `OpenFeatureProvider`. Make sure to use the global `fetch` API.
+:::warning
+
+Make sure not to use `defineBKTConfig` in the React Native environment, as it is not supported.
+
+:::
+
+Use `defineBKTConfigForReactNative` to create your configuration and set up the `OpenFeatureProvider`. Make sure to use the global `fetch` API.
 
 ```js showLineNumbers
 import { OpenFeatureProvider, OpenFeature } from '@openfeature/react-sdk';
-import { defineBKTConfig, BucketeerReactNativeProvider } from '@bucketeer/openfeature-js-client-sdk';
+import { defineBKTConfigForReactNative, BucketeerReactNativeProvider } from '@bucketeer/openfeature-js-client-sdk';
 
-const config = defineBKTConfig({
+const config = defineBKTConfigForReactNative({
   apiEndpoint: 'BUCKETEER_API_ENDPOINT',
   apiKey: 'BUCKETEER_API_KEY',
   featureTag: 'FEATURE_TAG',
@@ -100,7 +106,7 @@ function App() {
 
 See our [documentation](https://docs.bucketeer.io/sdk/client-side/javascript#configuring-client) for more SDK configuration.
 
-:::important
+:::note
 In the React Native environment, any `idGenerator` or `storageFactory` provided in the configuration will be **ignored**. The `BucketeerReactNativeProvider` automatically provides specialized React Native implementations for these during initialization.
 :::
 
@@ -146,5 +152,5 @@ await OpenFeature.setContext(newEvaluationContext)
 ```
 
 :::warning
-Changing the `targetingKey` is not supported in the current implementation of the BucketeerProvider. To change the user ID, the Provider must be removed and reinitialized exactly as demonstrated in the [JavaScript / Web section](/open-feature/javascript#update-the-evaluation-context).
+Changing the `targetingKey` is not supported in the current implementation of the BucketeerReactNativeProvider. To change the user ID, the Provider must be removed and reinitialized exactly as demonstrated in the [JavaScript / Web section](/open-feature/javascript#update-the-evaluation-context).
 :::
