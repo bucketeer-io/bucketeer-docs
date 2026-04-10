@@ -8,7 +8,7 @@ tags: ['log', 'audit-logs']
 
 import CenteredImg from '@site/src/components/centered-img/CenteredImg';
 
-The Audit Logs feature stores all log history from the current Environment. You can use the logs to identify problems or who performed modifications in your project flags. 
+The Audit Logs feature stores all log history from the current Environment. You can use the logs to identify problems or who performed modifications in your project flags. Sensitive data such as API keys, refresh tokens, and webhook URLs are automatically obfuscated or omitted from the log entries to protect security.
 
 To check the logs, access the **Audit Logs** page from the sidebar menu. To check logs from other environments, you first need to change to the desired environment and then access the Audit Logs page.
 
@@ -707,6 +707,3 @@ Several actions can create a log in Bucketeer. The toggle below contains a table
     </table>
   </div>
 </details>
-
-
-
