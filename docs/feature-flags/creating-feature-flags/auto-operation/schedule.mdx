@@ -64,6 +64,8 @@ While active, you can edit, stop, or delete the schedule:
 - **Stop Schedule**: Stops the schedule, preventing future scheduled operations from being performed. The schedule is finished.
 - **Delete Schedule**: Stops and removes the schedule information from the server. Use this option carefully. 
 
+Editing a recurring clause that has already been executed is now allowed; the time picker and state dropdown are always enabled. When any scheduling‐relevant field (time, frequency, timezone, days of week, day of month, end date, or max occurrences) is changed, Bucketeer automatically recalculates the next execution timestamp for that clause.
+
 ## Schedule lifecycle
 
 When you create a schedule, it will be active and available in the **Active** tab in the Operation panel.  
