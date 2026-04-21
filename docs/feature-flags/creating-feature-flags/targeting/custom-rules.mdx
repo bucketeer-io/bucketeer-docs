@@ -202,6 +202,8 @@ When using rollout percentage based on percentage distribution, the sum should a
 Custom rules are evaluated in the order they appear. Place more specific rules before general ones. The first matching rule wins and returns its variation.
 :::
 
+You can change the order of custom rules directly in the UI by moving a rule up or down in the list. The updated sequence is stored via the `rule_order` field, so the new evaluation order is retained.
+
 :::tip Attribute Types
 - **Strings**: Use equals, contains, starts with, ends with operators
 - **Numbers**: Use comparison operators (`>`, `<`, `>=`, `<=`, `=`)
