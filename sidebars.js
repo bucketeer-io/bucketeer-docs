@@ -51,6 +51,12 @@ const sidebars = {
       className: 'sidebar-bucketeer-dashboard',
     },
     {
+      type: 'doc',
+      id: 'getting-started/ai-assistant',
+      label: 'AI Assistant',
+      className: 'sidebar-ai-assistant',
+    },
+    {
       type: 'category',
       label: "Quickstart",
       link: {
