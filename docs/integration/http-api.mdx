@@ -31,5 +31,4 @@ authorization: <your-api-key>
 
 ## API specification
 
-API reference is available [here](/api).
-
+API reference is available [here](/api). The `GetFeatureFlags` endpoint may include `ForceUpdate=true` when the diff filter would otherwise return no features, prompting the SDK to fetch the full payload and recover from a stale state. This ensures the SDK stays consistent even during rapid flag updates.
