@@ -117,8 +117,14 @@ chat UI is hidden.
 |----------|---------|---------|
 | `BUCKETEER_WEB_OPENAI_API_KEY` | _(empty)_ | API key for the LLM provider. When empty, the AI Assistant is fully disabled. |
 | `BUCKETEER_WEB_OPENAI_BASE_URL` | _(provider default)_ | Base URL for the LLM API. Override to use an OpenAI-compatible provider such as Azure OpenAI, vLLM, or Ollama. |
-| `BUCKETEER_WEB_AICHAT_MODEL` | `gpt-4o-mini` | The model used to generate answers. Configurable for organizations that need a different model. |
+| `BUCKETEER_WEB_AICHAT_MODEL` | _(empty)_ | The model used to generate answers. Required when the API key is set (for example, `gpt-4o-mini`). |
 | `BUCKETEER_WEB_AICHAT_GITHUB_TOKEN` | _(empty)_ | Optional. Increases the GitHub API rate limit used when searching the documentation. |
+
+In addition to the web service variables above, the frontend exposes a `window.env`
+toggle that shows or hides the chat UI:
+
+| Variable | Default | Purpose |
+|----------|---------|---------|
 | `AI_CHAT_ENABLED` | `false` | Frontend toggle that shows or hides the chat UI. |
 
 :::tip
