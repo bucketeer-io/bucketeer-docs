@@ -58,6 +58,13 @@ When a member has the **Member** organization role, you must assign specific env
 - You can assign different roles per environment (e.g., Editor in Development, Viewer in Production)
 :::
 
+The e2e test suite uses role‐scoped access tokens that represent four distinct member types. Each token is tied to a specific organization or environment role and enforces the permissions described below.
+
+- **System admin token** – belongs to a user with the Owner role in the `e2e` organization; can perform any action within that organization but cannot write to an organization where the user is not a member.  
+- **Org owner token** – belongs to a user who is Owner of both the `default` and `e2e` organizations; can manage members and settings but cannot create a new organization.  
+- **Env editor token** – belongs to a Member of the `default` organization with the Editor role on the `e2e` environment; can create and modify features but cannot create organizations or add members.  
+- **Env viewer token** – belongs to a Member of the `default` organization with the Viewer role on the `e2e` environment; can list features but cannot create features, organizations, or members.
+
 ## Inviting New Members
 
 To invite a new team member:
