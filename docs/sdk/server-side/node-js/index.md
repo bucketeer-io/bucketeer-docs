@@ -95,6 +95,12 @@ Depending on your use, you may want to change the optional configurations availa
 - **enableLocalEvaluation** (Default is false)
 - **cachePollingInterval** (Default is 1 minute - specify in milliseconds)
 - **scheme** (Default is `https`) - Useful for local development when using `http`. If the `apiEndpoint` includes a scheme (e.g., `https://api.example.com`), the scheme from the URL will take precedence.
+- **maxRetries** (Default is 3) - Maximum retry attempts for failed HTTP requests. Set to `0` to disable retries.
+- **retryInitialInterval** (Default is 1 second - specify in milliseconds) - Initial backoff interval before the first retry.
+- **retryMaxInterval** (Default is 10 seconds - specify in milliseconds) - Caps the exponential backoff interval. Set to `0` for no cap.
+- **retryMultiplier** (Default is 2.0) - Multiplier controlling how quickly the backoff grows between retries.
+
+The SDK automatically retries failed requests using exponential backoff. Set **maxRetries** to `0` to turn this off.
 
 For more information, please check the Option implementation [here](https://github.com/bucketeer-io/node-server-sdk/blob/master/src/config.ts).
 
