@@ -40,6 +40,8 @@ The audience split happens first, then the variation allocation applies to the i
 If you have a [progressive rollout](/feature-flags/creating-feature-flags/auto-operation/progressive-rollout) running, you cannot modify the default rule until the rollout completes.
 :::
 
+The progressive targeting tab now lets you select both a control and a target variation, supporting flags with three or more variations.
+
 ## Common Use Cases
 
 - **A/B testing** - Split traffic 50/50 between control and treatment variations
@@ -57,4 +59,3 @@ When launching a new feature, start with a small audience allocation (5-10%) in 
 :::caution Excluded Users
 Users excluded by Audience Traffic Allocation will receive the OFF variation, not a random variation from your flag. Consider this when designing your feature logic.
 :::
-

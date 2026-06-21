@@ -14,6 +14,8 @@ The Progressive Rollout solution automates the release process of new features t
 
 The flag must have **two variations** to use the rollout feature. For example, consider that you have a boolean flag with two variations: `true` and `false`. This flag determines whether new content is available to users or not. 
 
+Progressive rollout now supports flags that have three or more variations. When configuring a rollout, you can explicitly select the **Control variation** (the variation currently served) and the **Target variation** (the variation to be rolled out) using the new `control_variation_id` and `target_variation_id` fields. The rollout gradually shifts traffic from the control variation to the target variation while any additional variations remain unchanged.
+
 Currently, the `false` variation is the [OFF variation](/feature-flags/creating-feature-flags/targeting#the-targeting-page), meaning users can't see the new content. However, you want to make the content available to all users within ten days. In this case, you can use the rollout feature to progressively roll out the `true` variation to 10% of your users daily. 
 
 On the first day of the rollout, 10% of your users will see the new content. On the second day, 20% will see it, and so on. After ten days, the rollout will be complete, and all users will have access to the new content. The image below summarizes the rollout process described.
@@ -40,6 +42,8 @@ The progressive rollout only works for flags with **two variations** and no **ru
 You can have only one active rollout out for each feature flag.
 
 :::
+
+Progressive rollout now works for flags with three or more variations, allowing you to choose both the original (control) and the new (target) variations via the dedicated fields. This gives you full control over which variations participate in the rollout.
 
 :::info Disabled Flag behavior
 
