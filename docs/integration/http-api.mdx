@@ -33,3 +33,20 @@ authorization: <your-api-key>
 
 API reference is available [here](/api).
 
+The API includes a bulk flag duplication operation. `POST /v1/feature/bulk_clone` clones a feature flag from a source **Environment** to multiple target **Environments** in a single call. The request body must contain:
+
+| Field | Type | Description |
+|---|---|---|
+| `id` | string | Identifier of the feature flag to clone. |
+| `environmentId` | string | Source environment where the flag currently exists. |
+| `targetEnvironmentIds` | array of string | List of destination environments to receive the cloned flag. |
+
+The response returns a list of per‐environment results:
+
+| Field | Type | Description |
+|---|---|---|
+| `environmentId` | string | Target environment identifier. |
+| `status` | enum `BulkCloneFeatureStatus` | Cloning outcome (`BULK_CLONE_FEATURE_STATUS_SUCCESS`, `BULK_CLONE_FEATURE_STATUS_ALREADY_EXISTS`, `BULK_CLONE_FEATURE_STATUS_FAILED`). |
+| `error` | string | Error message when `status` is `BULK_CLONE_FEATURE_STATUS_FAILED`. |
+
+Possible error responses follow the standard Bucketeer HTTP API conventions: `400` for validation failures (e.g., missing fields, duplicate targets, or source equals target), `401` for unauthenticated requests, `404` when the source flag is not found, and `503` for internal errors.
