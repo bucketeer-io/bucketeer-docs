@@ -52,6 +52,8 @@ When a member has the **Member** organization role, you must assign specific env
 | **Editor** | Can create, update, and manage feature flags, experiments, goals, and segments within assigned environments. |
 | **Viewer** | Read-only access to feature flags and data in assigned environments. Cannot modify any settings. |
 
+System Admin accounts automatically have Viewer (read‐only) access to all projects and environments in the organization, regardless of explicit membership. They can edit (Editor role) only in the environments where they are assigned an Editor role or where they are the organization admin.
+
 :::tip Role Hierarchy
 - **Owner/Admin** roles have automatic access to all environments
 - **Member** roles require explicit environment assignments
