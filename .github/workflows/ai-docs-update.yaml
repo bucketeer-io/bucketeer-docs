@@ -46,7 +46,7 @@ jobs:
       - name: Fetch issue and PR context from bucketeer repo
         id: context
         env:
-          GH_TOKEN: ${{ secrets.REPO_ACCESS_PAT }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }} # bucketeer-io/bucketeer is public, read-only API access needs no PAT
           INPUT_ISSUE_NUMBER: ${{ inputs.issue_number }}
           INPUT_PR_NUMBERS: ${{ inputs.pr_numbers }}
         run: |
