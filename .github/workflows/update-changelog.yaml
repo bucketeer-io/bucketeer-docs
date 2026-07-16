@@ -59,11 +59,19 @@ jobs:
           CHANGELOG_URL: ${{ github.event.inputs.changelog_url }}
         run: ./hack/update-changelog.sh
 
+      - uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        id: app-token
+        with:
+          client-id: ${{ secrets.RELEASE_BOT_APP_ID }}
+          private-key: ${{ secrets.RELEASE_BOT_PRIVATE_KEY }}
+          permission-contents: write
+          permission-pull-requests: write
+
       - name: Create the pull request
         id: create-docs-pull-request
         uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
         with:
-          token: ${{ secrets.ACTIONS_PAT }}
+          token: ${{ steps.app-token.outputs.token }}
           committer: bucketeer-bot <bucketeer-bot@users.noreply.github.com>
           author: bucketeer-bot <bucketeer-bot@users.noreply.github.com>
           commit-message: "docs: update ${{ github.event.inputs.doc_filename }} to ${{ github.event.inputs.release_tag }}"
@@ -77,7 +85,7 @@ jobs:
         id: automerge
         uses: pascalgn/automerge-action@7961b8b5eec56cc088c140b56d864285eabd3f67 # v0.16.4
         env:
-          GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_PAT }}
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
           PULL_REQUEST: ${{ steps.create-docs-pull-request.outputs.pull-request-number }}
           MERGE_LABELS: automerge
           MERGE_METHOD: squash
