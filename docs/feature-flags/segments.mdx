@@ -36,7 +36,7 @@ Click **Submit** to create the segment.
 You are not required to add the user list when initially creating the segment. If you need to include a segment in your targeting rule strategy but need to know the users who should be in the segment, you can create an empty segment and add users later.
 :::
 
-After submitting, the segment will be available with a `Not in use` status. However, you will see a message `UPLOADING` under the segment's name on the list page, which informs you that the user list is uploading to the server in the background.<br />
+After submitting, the segment will be available with a `Not in use` status. However, you will see a message `UPLOADING` under the segment's name on the list page, which informs you that the user list is uploading to the server in the background.<br />
 This process may take up to 1 minute to complete, depending on the amount of user IDs.
 
 <CenteredImg
@@ -51,6 +51,10 @@ Please wait until the upload finishes before using the segment in your targeting
 <CenteredImg
  imgURL="img/feature-flags/segments/segment-ready-to-use.png"
 />
+
+## Rule‐based segments
+
+Segments can also define membership with attribute‐based rules. In the segment editor a **rule builder** lets you add one or more rules; conditions inside a rule are combined with **AND**, while multiple rules are combined with **OR**. A user belongs to the segment if they appear in the uploaded user‐ID list **or** they satisfy any of the defined rules. When a segment is referenced by a flag, any change to the segment’s rules or user list is applied automatically to all flags that use that segment.
 
 ## Editing segments
 
@@ -72,7 +76,7 @@ You can update segments that are being used by feature flags, including the user
 
 :::
 
-You can update the **Name**, **Description**, and user list. Note that the previously added user list is not showing due to the size of the ID list.
+You can update the **Name**, **Description**, and user list. Note that the previously added user list is not showing due to the size of the ID list.
 
 :::warning
 By updating the user ID list, you will override the current list in the database. If you want to add or remove users from the list, please download the list and edit it on your PC before submitting it.
@@ -80,7 +84,7 @@ By updating the user ID list, you will override the current list in the database
 
 ## Downloading an existing user list
 
-After creating a User Segment, you can download the user's list. To do this, access the User Segment page, find the desired segment list and click on the action menu (three dots). After, select **Download User Segment**.
+After creating a User Segment, you can download the user's list. To do this, access the User Segment page, find the desired segment list and click the action menu (three dots). After, select **Download User Segment**.
 
 With the User Segment, you can updated the list and, after, upload the updated list to the same segment, if necessary.
 
@@ -92,5 +96,5 @@ To delete a segment:
 2. Find the desired segment, click the action button (three dots) on the list page, and select **Delete User Segment**.
 
 :::warning In use segments
-You cannot delete a segment with an `In use` status. If you try to delete it, the Bucketeer will show all feature flags currently using the segment. Before deleting, you must remove it from all feature flags.
+You cannot delete a segment with an `In use` status. If you try to delete it, the Bucketeer will show all feature flags currently using the segment. Before deleting, you must remove it from all feature flags.
 :::

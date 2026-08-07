@@ -147,7 +147,7 @@ Target users based on their attributes like `app_version`, `language`, `device_m
 **Example use cases**: Progressive rollout by app version, platform-specific features, localization testing
 
 #### User Segments
-Target predefined groups of users by their IDs. Create reusable segments like "Beta Testers", "VIP Users", or "Internal Team" and apply them across multiple flags.
+Target predefined groups of users by their IDs. Create reusable segments like "Beta Testers", "VIP Users", or "Internal Team" and apply them across multiple flags. When a rule includes a SEGMENT clause with multiple segment IDs, the clause matches if the user belongs to any of the listed segments (OR logic). To require a user to be in all of several segments, add separate SEGMENT clauses for each segment within the same rule.
 
 **Example use cases**: Beta testing, VIP features, internal testing, regional rollouts
 
@@ -193,4 +193,3 @@ Within the audience that receives the flag (determined by Audience Traffic Alloc
 - **Split by custom percentage** - Manually define the percentage for each variation
 
 The audience split happens first, then the variation allocation applies to the included audience.
-
