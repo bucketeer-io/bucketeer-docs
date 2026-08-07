@@ -53,10 +53,10 @@ await initializeBKTClient(config, user);
 
 ### User Segments
 
-Target predefined groups of users by their IDs. Create reusable segments like "Beta Testers", "VIP Users", or "Internal Team" and apply them across multiple flags.
+Target predefined groups of users by their IDs or by attribute-based rules. Create reusable segments like "Beta Testers", "VIP Users", or "Internal Team" and apply them across multiple flags.
 
 **How it works:**
-User segments allow you to create user groups based on the unique ID of end users. Once you've created a segment, you can use it in your targeting rules to assign variations to all users in that segment.
+User segments allow you to create user groups based on the unique ID of end users, on attribute-based segment rules, or both. A user belongs to the segment if their ID is in the uploaded user list or if they match any of the segment rules. Once you've created a segment, you can use it in your targeting rules to assign variations to all users in that segment.
 
 :::info Create segments
 Learn more about creating and managing segments on the [Segments](/feature-flags/segments) page.
@@ -79,6 +79,7 @@ Learn more about creating and managing segments on the [Segments](/feature-flags
 - Reuse across multiple flags
 - Easier maintenance than individual targeting
 - Bulk operations with CSV uploads
+- Rule-based membership - target users by attributes without maintaining ID lists (see [Segment rules](/feature-flags/segments#segment-rules))
 
 ### Date-Based Conditions
 
