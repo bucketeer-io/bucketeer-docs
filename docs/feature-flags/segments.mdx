@@ -87,7 +87,7 @@ Because segments are shared, updating a segment's rules immediately affects **al
 
 Rule-based segments require Bucketeer `v2.3.0` or later.
 
-If you use a server-side SDK with [local evaluation](/sdk/server-side/go#evaluating-users-within-sdk-locally) enabled, the SDK must also support segment rules (Go server SDK `v1.8.0` or later). Older server SDK versions only evaluate the segment's uploaded user list and ignore the rules. Client-side SDKs and server-side SDKs using remote evaluation are not affected, since the evaluation runs on the server.
+If you use a server-side SDK with [local evaluation](/sdk/server-side/go#evaluating-users-within-sdk-locally) enabled, the SDK must also support segment rules ([Go server SDK](/sdk/server-side/go) `v1.8.0` or later, [Node.js server SDK](/sdk/server-side/node-js) `v0.4.7` or later). Older server SDK versions only evaluate the segment's uploaded user list and ignore the rules. Client-side SDKs and server-side SDKs using remote evaluation are not affected, since the evaluation runs on the server.
 
 :::
 
