@@ -8,11 +8,13 @@ tags: ['user-segments', 'segments', 'targeting', 'feature-flag']
 
 import CenteredImg from '@site/src/components/centered-img/CenteredImg';
 
-Segments enable you to create user groups based on the unique ID of end users defined when initializing the Bucketeer SDK. It allows you to create specific user targets to manage all users for a single feature flag variation or beta tests on a small number of users.
+Segments enable you to create user groups based on the unique ID of end users defined when initializing the Bucketeer SDK, on attribute-based rules, or both. A user is included in a segment if their ID is in the uploaded user list **or** if they match any of the segment rules. It allows you to create specific user targets to manage all users for a single feature flag variation or beta tests on a small number of users.
 
 ## Use case
 
 You can use segments to target specific user groups and make a new feature only available to them. For example, before releasing a new feature, the QA team may need to test it. In such a situation, you can create a segment with all QA team members' IDs and make the new feature only available to them.
+
+With [segment rules](#segment-rules), you can also define membership by user attributes instead of maintaining an ID list. For example, you can create a segment for all users on a premium plan in Japan, and every feature flag using that segment will automatically target them — no user list uploads required.
 
 :::info 
 Access the [Targeting with feature flags](/feature-flags/creating-feature-flags/targeting/custom-rules#user-segments) page to learn how to use segments to target users.
@@ -24,6 +26,7 @@ To create a segment on Bucketeer, navigate to the **User Segments** page and cli
 
 - **Name** and **Description** for the segment
 - **User list** (optional) - Upload a CSV or TXT file with user IDs separated by commas, or manually enter user IDs
+- **Rules** (optional) - Define conditions on user attributes to include users in the segment. See [Segment rules](#segment-rules) below.
 
 Click **Submit** to create the segment.
 
@@ -52,6 +55,42 @@ Please wait until the upload finishes before using the segment in your targeting
  imgURL="img/feature-flags/segments/segment-ready-to-use.png"
 />
 
+## Segment rules
+
+In addition to the uploaded user list, you can define **rules** that include users in the segment based on their attributes. The attributes are the same end-user attributes you define when initializing the Bucketeer SDK.
+
+A rule contains one or more conditions, each with an attribute key, an operator, and one or more values. Segment rules support the same comparison operators as flag targeting rules. See the [Supported Operators](/feature-flags/creating-feature-flags/targeting/custom-rules#supported-operators) table for the complete list.
+
+<CenteredImg
+ imgURL="img/feature-flags/segments/segment-rules.png"
+ alt="Segment rules with multiple conditions"
+/>
+
+:::info How segment membership is evaluated
+
+- A user is included in the segment if their ID is in the **user list** OR they match **any rule**.
+- Within a rule, all conditions are combined with **AND** — every condition must match.
+- Across rules, the conditions are combined with **OR** — matching a single rule is enough.
+
+For example, a segment with the user list `[user-1]` and the rules below includes `user-1`, every premium-plan user in Japan, and every user whose email starts with `test@`:
+
+- Rule 1: `plan = premium` AND `country = japan`
+- Rule 2: `email starts with test@`
+
+:::
+
+Segment rules only support conditions based on user attributes. Conditions based on other segments or on feature flag evaluations are not available inside segment rules.
+
+Because segments are shared, updating a segment's rules immediately affects **all** feature flags that use the segment — you don't need to update the flags themselves.
+
+:::caution Version requirements
+
+Rule-based segments require Bucketeer `v2.3.0` or later.
+
+If you use a server-side SDK with [local evaluation](/sdk/server-side/go#evaluating-users-within-sdk-locally) enabled, the SDK must also support segment rules ([Go server SDK](/sdk/server-side/go) `v1.8.0` or later, [Node.js server SDK](/sdk/server-side/node-js) `v0.4.7` or later). Older server SDK versions only evaluate the segment's uploaded user list and ignore the rules. Client-side SDKs and server-side SDKs using remote evaluation are not affected, since the evaluation runs on the server.
+
+:::
+
 ## Editing segments
 
 To edit a segment:
@@ -61,7 +100,7 @@ To edit a segment:
 
 :::warning Editing Segments in Active Experiments
 
-You can update segments that are being used by feature flags, including the user list. However, if these flags are part of active experiments, changing the segment may affect result accuracy since it modifies which users are included in each variation.
+You can update segments that are being used by feature flags, including the user list and the rules. However, if these flags are part of active experiments, changing the segment may affect result accuracy since it modifies which users are included in each variation.
 
 **Before updating a segment in use:**
 - Check which flags are using it (shown in the warning message)
@@ -72,7 +111,7 @@ You can update segments that are being used by feature flags, including the user
 
 :::
 
-You can update the **Name**, **Description**, and user list. Note that the previously added user list is not showing due to the size of the ID list.
+You can update the **Name**, **Description**, user list, and rules. Note that the previously added user list is not showing due to the size of the ID list.
 
 :::warning
 By updating the user ID list, you will override the current list in the database. If you want to add or remove users from the list, please download the list and edit it on your PC before submitting it.

@@ -141,6 +141,12 @@ Keep in mind that it might contain sensitive information, so be careful when sha
 
 :::
 
+:::info Rule-based segments
+
+[Rule-based user segments](/feature-flags/segments#segment-rules) require the Node.js server SDK `v0.4.7` or later and Bucketeer `v2.3.0` or later. Older SDK versions only evaluate the segment's uploaded user list and ignore the segment rules when evaluating locally.
+
+:::
+
 When initializing the SDK you must enable the local evaluation setting.
 
 <Tabs>
