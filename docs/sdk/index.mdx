@@ -368,3 +368,5 @@ Supported OpenFeature providers:
 [View all OpenFeature integrations](https://openfeature.dev/ecosystem?instant_search%5BrefinementList%5D%5Bvendor%5D%5B0%5D=Bucketeer) in the OpenFeature ecosystem.
 
 :::
+
+The TypeScript evaluation package is released through a manual GitHub Actions workflow that uses npm OIDC trusted publishing. The workflow builds the package and publishes it without requiring an NPM_TOKEN; the legacy token configuration has been removed. To publish a new version, update the version in `package.json`, merge to `main`, and trigger the “Publish TypeScript evaluation to npm” workflow, optionally enabling dry run.
