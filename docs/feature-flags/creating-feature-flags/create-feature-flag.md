@@ -68,7 +68,7 @@ Once you have created a flag, it will automatically appear on the **Feature Flag
   borderWidth="1px"
 />
 
-You can clone and archive flags as well. To perform these actions, click the three-dot button on the desired flag.
+You can clone and archive flags as well. To perform these actions, click the three-dot button on the desired flag. Cloning copies the flag into one or more other environments at once. Check the [Clone Flag](/feature-flags/creating-feature-flags/settings#clone-flag) section to learn what is copied.
 
 :::info Feature flag status
 

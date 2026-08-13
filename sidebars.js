@@ -183,6 +183,12 @@ const sidebars = {
     },
     {
       type: 'doc',
+      id: 'feature-flags/insights',
+      label: 'Insights',
+      className: 'sidebar-insights',
+    },
+    {
+      type: 'doc',
       id: 'feature-flags/audit-logs',
       label: 'Audit Logs',
       className: 'sidebar-audit-logs',
