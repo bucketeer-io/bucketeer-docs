@@ -67,8 +67,8 @@ Please remember that the progressive rollout will be stopped in the following sc
 
 The rollout provides two main options when setting it up:
 
-- [**Template**](/feature-flags/creating-feature-flags/auto-operation/progressive-rollout#template-rollout): With this option, you define the percentual increment and the frequency of the rollout. The weight of each phase and the execution time are automatically defined until the rollout reaches 100%.
-- [**Manual**](/feature-flags/creating-feature-flags/auto-operation/progressive-rollout#manual-rollout): In this case, you are responsible for defining each rollout phase's percentual weight and release time.
+- [**Template**](/feature-flags/creating-feature-flags/auto-operation/progressive-rollout#template-rollout): With this option, you define the percentage increment and the frequency of the rollout. The weight of each phase and the execution time are automatically defined until the rollout reaches 100%.
+- [**Manual**](/feature-flags/creating-feature-flags/auto-operation/progressive-rollout#manual-rollout): In this case, you are responsible for defining each rollout phase's percentage weight and release time.
 
 ### Template rollout
 
@@ -77,7 +77,7 @@ If you choose to use the Template rollout, you need to define the following conf
 - **Control variation**: Choose the variation your users receive today, which traffic is moved away from.
 - **Target variation**: Choose the variation to roll out. It must be different from the control variation. You should not choose the same variation selected as [OFF variation](/feature-flags/creating-feature-flags/targeting#the-targeting-page). Otherwise, it could affect what the end users see.
 - **Start Date**: The rollout starting date and time. 
-- **Increment**: The percentual increment used at each rollout release phase. This option will define, as a result, the total number of rollout releases. If you choose 10%, ten stages are required to reach the total rollout.
+- **Increment**: The percentage increment used at each rollout release phase. This option will define, as a result, the total number of rollout releases. If you choose 10%, ten stages are required to reach the total rollout.
 - **Frequency**: The frequency of each rollout phase (hourly, daily, weekly) will be released. The first phase will depend on the **Start Date** value you selected, and the remaining phases will rely on this starting point. 
 
 Notice that when using the Template rollout, all phases increment the percentage of users accessing the new variation by the same amount, defined by the **Increment** parameter. The image below summarizes an example of a configuration using the Template configuration.
@@ -95,7 +95,7 @@ When using the Manual rollout, the configurations required to submit the rollout
 
 - **Control variation**: Choose the variation your users receive today, which traffic is moved away from.
 - **Target variation**: Choose the variation to roll out. It must be different from the control variation. You should not choose the same variation selected as [OFF variation](/feature-flags/creating-feature-flags/targeting#the-targeting-page). Otherwise, you will receive an error message.
-- **Weight**: The percentual value of users receiving the target variation at the selected date. 
+- **Weight**: The percentage of users receiving the target variation at the selected date. 
 - **Execute at**: The date and time when the rollout phase will be released, updating the percentage of users accessing the selected variation.
 
 Using the Manual rollout, you do not need to follow an incremental rule for each rollout phase. The only restriction is that each new rollout phase must have a higher **weight** than the previous one and more than **5 minutes** between the rollouts. 

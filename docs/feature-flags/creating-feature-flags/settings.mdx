@@ -20,7 +20,7 @@ Update your flag's configuration including maintainer, name, description, and ta
 
 Creates a copy of the flag in one or more other environments. Select the origin environment and then every destination environment you want the flag copied to. Bucketeer reports the result of each destination separately, so if the flag already exists in one environment, the remaining environments are still cloned.
 
-The cloned flag keeps the original flag's variations, individual targeting, off variation, and default rule. Note the following differences from the original flag:
+The cloned flag keeps the original flag's variations, individual targeting, **OFF variation**, and default rule. Note the following differences from the original flag:
 
 - The clone is always created in the **OFF** state, even if the original flag is on. Turn it on when the destination environment is ready.
 - **Prerequisites are not copied**, because they reference flags that may not exist in the destination environment.
