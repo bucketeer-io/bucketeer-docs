@@ -12,11 +12,16 @@ The Progressive Rollout solution automates the release process of new features t
 
 ## How rollout works
 
-The flag must have **two variations** to use the rollout feature. For example, consider that you have a boolean flag with two variations: `true` and `false`. This flag determines whether new content is available to users or not. 
+A rollout shifts traffic from one variation to another. When you configure it, you choose two variations:
 
-Progressive rollout now supports flags that have three or more variations. When configuring a rollout, you can explicitly select the **Control variation** (the variation currently served) and the **Target variation** (the variation to be rolled out) using the new `control_variation_id` and `target_variation_id` fields. The rollout gradually shifts traffic from the control variation to the target variation while any additional variations remain unchanged.
+- **Control variation**: the variation your users receive today.
+- **Target variation**: the variation you want to roll out.
 
-Currently, the `false` variation is the [OFF variation](/feature-flags/creating-feature-flags/targeting#the-targeting-page), meaning users can't see the new content. However, you want to make the content available to all users within ten days. In this case, you can use the rollout feature to progressively roll out the `true` variation to 10% of your users daily. 
+The rollout gradually moves users from the control variation to the target variation. Both variations must be different, and any other variations the flag has remain untouched during the rollout.
+
+For example, consider that you have a boolean flag with two variations: `true` and `false`. This flag determines whether new content is available to users or not. 
+
+Currently, the `false` variation is the [OFF variation](/feature-flags/creating-feature-flags/targeting#the-targeting-page), meaning users can't see the new content. However, you want to make the content available to all users within ten days. In this case, you can select `false` as the control variation and `true` as the target variation, and progressively roll out the `true` variation to 10% of your users daily. 
 
 On the first day of the rollout, 10% of your users will see the new content. On the second day, 20% will see it, and so on. After ten days, the rollout will be complete, and all users will have access to the new content. The image below summarizes the rollout process described.
 
@@ -37,13 +42,17 @@ To add a rollout to a feature flag, you need to follow the steps below:
 
 :::caution Restrictions
 
-The progressive rollout only works for flags with **two variations** and no **running experiment**. 
+You can't create a progressive rollout for a flag that has a **waiting or running experiment**.
 
-You can have only one active rollout out for each feature flag.
+You can have only one active rollout for each feature flag.
 
 :::
 
-Progressive rollout now works for flags with three or more variations, allowing you to choose both the original (control) and the new (target) variations via the dedicated fields. This gives you full control over which variations participate in the rollout.
+:::info Flags with three or more variations
+
+Progressive rollout works with any number of variations. Because you select the control and the target variation explicitly, the rollout only shifts traffic between those two, and users receiving any other variation are not affected.
+
+:::
 
 :::info Disabled Flag behavior
 
@@ -58,16 +67,17 @@ Please remember that the progressive rollout will be stopped in the following sc
 
 The rollout provides two main options when setting it up:
 
-- [**Template**](/feature-flags/creating-feature-flags/auto-operation/progressive-rollout#template-rollout): With this option, you define the percentual increment and the frequency of the rollout. The weight of each phase and the execution time are automatically defined until the rollout reaches 100%.
-- [**Manual**](/feature-flags/creating-feature-flags/auto-operation/progressive-rollout#manual-rollout): In this case, you are responsible for defining each rollout phase's percentual weight and release time.
+- [**Template**](/feature-flags/creating-feature-flags/auto-operation/progressive-rollout#template-rollout): With this option, you define the percentage increment and the frequency of the rollout. The weight of each phase and the execution time are automatically defined until the rollout reaches 100%.
+- [**Manual**](/feature-flags/creating-feature-flags/auto-operation/progressive-rollout#manual-rollout): In this case, you are responsible for defining each rollout phase's percentage weight and release time.
 
 ### Template rollout
 
 If you choose to use the Template rollout, you need to define the following configurations before submitting it:
 
-- **Flag Variation**: Choose the variation to roll out. You should not choose the same variation selected as [OFF variation](/feature-flags/creating-feature-flags/targeting#the-targeting-page). Otherwise, it could affect what the end users see.
+- **Control variation**: Choose the variation your users receive today, which traffic is moved away from.
+- **Target variation**: Choose the variation to roll out. It must be different from the control variation. You should not choose the same variation selected as [OFF variation](/feature-flags/creating-feature-flags/targeting#the-targeting-page). Otherwise, it could affect what the end users see.
 - **Start Date**: The rollout starting date and time. 
-- **Increment**: The percentual increment used at each rollout release phase. This option will define, as a result, the total number of rollout releases. If you choose 10%, ten stages are required to reach the total rollout.
+- **Increment**: The percentage increment used at each rollout release phase. This option will define, as a result, the total number of rollout releases. If you choose 10%, ten stages are required to reach the total rollout.
 - **Frequency**: The frequency of each rollout phase (hourly, daily, weekly) will be released. The first phase will depend on the **Start Date** value you selected, and the remaining phases will rely on this starting point. 
 
 Notice that when using the Template rollout, all phases increment the percentage of users accessing the new variation by the same amount, defined by the **Increment** parameter. The image below summarizes an example of a configuration using the Template configuration.
@@ -83,8 +93,9 @@ Notice that when using the Template rollout, all phases increment the percentage
 
 When using the Manual rollout, the configurations required to submit the rollout differ from those used on the Template rollout. In this case, you need to set the following parameters:
 
-- **Variation**: Choose the variation to roll out. You should not choose the same variation selected as [OFF variation](/feature-flags/creating-feature-flags/targeting#the-targeting-page). Otherwise, you will receive an error message.
-- **Weight**: The percentual value of users receiving the selected variation at the selected date. 
+- **Control variation**: Choose the variation your users receive today, which traffic is moved away from.
+- **Target variation**: Choose the variation to roll out. It must be different from the control variation. You should not choose the same variation selected as [OFF variation](/feature-flags/creating-feature-flags/targeting#the-targeting-page). Otherwise, you will receive an error message.
+- **Weight**: The percentage of users receiving the target variation at the selected date. 
 - **Execute at**: The date and time when the rollout phase will be released, updating the percentage of users accessing the selected variation.
 
 Using the Manual rollout, you do not need to follow an incremental rule for each rollout phase. The only restriction is that each new rollout phase must have a higher **weight** than the previous one and more than **5 minutes** between the rollouts. 
@@ -149,9 +160,9 @@ Creating and using progressive rollout features have certain restrictions to ens
 
 ### Restrictions when creating a rollout
 
-The progressive rollout is designed to work exclusively with flags having two variations and no running experiment.
+You can't create a progressive rollout for a flag that has a waiting or running experiment. The rollout itself works with any number of variations, because you select the control and the target variation explicitly.
 
-If you create a progressive rollout and the flag default strategy uses a [rollout percentage](/feature-flags/creating-feature-flags/targeting#rollout-percentage), the existing rollout rules will be overridden. The default strategy will be reset according to the settings defined during the progressive rollout creation.
+If you create a progressive rollout and the flag default strategy uses a [variation allocation percentage](/feature-flags/creating-feature-flags/targeting/default-rule#variation-allocation), the existing rollout rules will be overridden. The default strategy will be reset according to the settings defined during the progressive rollout creation.
 
 :::info Flag type
 

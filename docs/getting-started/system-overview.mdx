@@ -39,11 +39,23 @@ Batch servers run essential jobs that are triggered via APIs for caching, sendin
 
 ### Event Publishing and Processing
 
-Google Pub/Sub is used for event streaming. The subscriber service pulls evaluation and goal events from the SDK client and audit logs to persist the data into the storage layer.
+Bucketeer uses a message queue for event streaming. The subscriber service pulls evaluation and goal events from the SDK client and audit logs to persist the data into the storage layer.
+
+Two backends are supported, selected with the `pubsub-type` option on each service:
+
+- **Google Pub/Sub** (default): recommended for production deployments on GCP.
+- **Redis Streams:** lets you run Bucketeer without a cloud message queue. The Docker Compose environment uses this backend.
 
 ### Storage and Cache
 
 Bucketeer implements a storage layer using these stacks:
-- **MySQL:** Stores feature flags, experiments, goals, notifications, and many other data with related configurations.
-- **Redis:** High-performance cache to support low-latency reading.
-- **BigQuery:** Serves as a data warehouse for storing and analyzing user evaluation and goal events.
+
+- **Operational database:** stores feature flags, experiments, goals, notifications, and many other data with related configurations. Both **MySQL** and **PostgreSQL** are supported, selected with the `storage-type` option on each service (`mysql` is the default).
+- **Redis:** high-performance cache to support low-latency reading.
+- **Data warehouse:** stores and analyzes user evaluation and goal events, which feed the experiment results and the [Insights](/feature-flags/insights) page. **BigQuery**, **MySQL**, and **PostgreSQL** are supported, selected with the `type` field of the data warehouse configuration.
+
+:::info Choosing a storage stack
+
+The operational database and the data warehouse are configured independently, so you can, for example, keep flag configuration in MySQL while sending events to BigQuery. Using the same engine for both is also supported, which is the simplest option for self-hosted deployments that do not use a cloud data warehouse.
+
+:::
