@@ -31,3 +31,12 @@ The image below presents the Bucketeer dashboard sidebar, and after you find a d
     - Members and API keys.
     - Available integrations, such as Slack and FCM.
 
+## Onboarding Walkthrough
+
+The dashboard includes an interactive onboarding walkthrough that helps new users create their first flag, API key, and SDK connection.
+
+- A **Get Started** button (rocket icon) is pinned at the bottom of the sidebar; clicking it launches the walkthrough at any time.  
+- For first‐time users the walkthrough starts automatically after login when `account.lastSeen` is `0`.  
+- The spotlight flow guides the user through three steps: **Feature Flags** menu → **Create Flag** form → **Create API key** page → **Connect SDK** modal with starter code.  
+- Each step provides a **Skip walkthrough** button; the overlay can be dismissed only with the provided controls.  
+- The walkthrough can be disabled by setting the configuration flag `WALKTHROUGH_ENABLED` to `false` (environment variable `VITE_WALKTHROUGH_ENABLED` or `window.env.WALKTHROUGH_ENABLED`).
