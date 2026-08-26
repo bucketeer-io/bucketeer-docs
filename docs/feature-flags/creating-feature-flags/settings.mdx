@@ -8,7 +8,7 @@ tags: ['settings','feature-flag', 'clone-flag', 'archive-flag']
 
 import CenteredImg from '@site/src/components/centered-img/CenteredImg';
 
-Update your flag's configuration including maintainer, name, description, and tags. All changes require a comment to maintain clear documentation.
+Update your flag's configuration including maintainer, name, description, and tags. All changes require a comment to maintain clear documentation. You can also configure a variation value schema in the Variations tab, which is persisted when the flag is updated via the `PATCH /v1/feature` endpoint.
 
 <CenteredImg
   imgURL="img/feature-flags/settings-history/settings.png"
@@ -31,4 +31,3 @@ After cloning, review the new flag's targeting in the destination environment an
 ## Archive Flag
 
 Archives the flag in the current environment. Archived flags only appear when the Archived filter is selected in the flag list.
-

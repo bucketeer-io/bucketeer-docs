@@ -20,6 +20,8 @@ To access the variations page on the Bucketeer dashboard, access the **Feature F
 
 For boolean flags, you can modify the name and description of each variation. When dealing with multivariate flags (string, number, JSON, and YAML types), you can add or delete variations as needed in addition to editing the value, name, and description of variations. After finishing the flag variations edition, save it and provide a comment describing your changes.
 
+At the top of the Variations tab a **Value Schema** card lets you define a schema for the variation values of the flag. Supported schema types are Enum (for string or number variations), Regex (for string variations), and JSON Schema (for JSON variations). When a schema is active, the UI validates each variation value against it and displays inline validation errors—such as disallowed enum values, pattern mismatches, or JSON schema violations—preventing the variation from being saved until the errors are resolved.
+
 :::info Restrictions to change variations
 
 You can't delete a variation if:
