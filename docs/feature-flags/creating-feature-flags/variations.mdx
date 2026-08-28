@@ -36,6 +36,8 @@ You can edit the values, names, and descriptions of existing variations even dur
 
 :::
 
+When a variation cannot be deleted because it is still referenced, Bucketeer now returns a clear error that explains the cause, such as “Variation X cannot be deleted because it is used as a prerequisite for flag Y” or “Variation X cannot be deleted because it is the OFF variation.” The console shows a friendly message based on the specific error type, and the server logs include detailed relationship information, including the IDs and names of the involved variation and feature.
+
 ## Deleting Variations
 
 When you successfully delete a variation:
