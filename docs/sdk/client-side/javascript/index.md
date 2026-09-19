@@ -95,6 +95,7 @@ Depending on your use, you may want to change the optional configurations availa
 - **eventsFlushInterval** - Default is 10 seconds (In Milliseconds)
 - **eventsMaxQueueSize** - Default is 50 events
 - **enableAutoPageLifecycleFlush** - Automatically flush events when page is hidden or closed. Default is `true`
+- **enableStreaming** - Receive evaluation updates in real-time instead of waiting for the next poll. Default is `false`. [See more](#updating-user-evaluations-in-real-time)
 - **storageKeyPrefix** - Default is empty
 - **userAgent** - Default is `window.navigator.userAgent`
 - **fetch** - Default is `globalThis.fetch`
@@ -132,7 +133,7 @@ If you want to use the feature flag on Splash or Main views, the SDK cache may b
 
 :::info Initialization Timeout error
 
-During the initialization process, errors **are not** related to the initialization itself. Instead, they arise from a timeout request, indicating the variations data from the server weren't received. Therefore, the SDK will work as usual and update the variations in the next [polling](javascript#polling) request.
+During the initialization process, errors **are not** related to the initialization itself. Instead, they arise from a timeout request, indicating the variations data from the server weren't received. Therefore, the SDK will work as usual and update the variations on the next [polling](javascript#polling) request, or as soon as a [streamed update](javascript#updating-user-evaluations-in-real-time) arrives.
 
 :::
 
@@ -162,7 +163,9 @@ initialFetchPromise
 
 #### Polling
 
-The initialize process starts polling right away the latest evaluations from the Bucketeer server in the background using the interval `pollingInterval` configuration. JavaScript SDK **does not support** Background fetch.
+By default, the initialize process starts polling right away the latest evaluations from the Bucketeer server in the background using the interval `pollingInterval` configuration. JavaScript SDK **does not support** Background fetch.
+
+Polling also runs as a fallback when [real-time updates](#updating-user-evaluations-in-real-time) are enabled but the connection to the server isn't available.
 
 #### Polling retry behavior
 
@@ -259,7 +262,7 @@ Those methods are:
 - **`BKTClient#fetchEvaluations()`**
 - **`BKTClient#flush()`**
 
-These methods return `Promise` and might reject with `BKTException``, so you should make sure to catch the error.
+These methods return `Promise` and might reject with `BKTException`, so you should make sure to catch the error.
 
 ## Supported features
 
@@ -424,6 +427,38 @@ await client?.fetchEvaluations(timeout);
 </TabItem>
 </Tabs>
 
+### Updating user evaluations in real-time
+
+Instead of waiting for the next poll, the SDK can keep a connection open to the Bucketeer server and apply flag changes as soon as they happen, using [Server-Sent Events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events) (SSE).
+
+This feature requires the JavaScript client SDK `v2.7.0` or later and Bucketeer `v2.3.0` or later.
+
+To enable it, set `enableStreaming` to `true` when configuring the client.
+
+<Tabs>
+<TabItem value="js" label="JavaScript">
+
+```js showLineNumbers
+const config = defineBKTConfig({
+  apiKey: 'YOUR_API_KEY',
+  apiEndpoint: 'YOUR_API_URL',
+  featureTag: 'YOUR_FEATURE_TAG', // Optional
+  appVersion: 'YOUR_APP_VERSION',
+  enableStreaming: true,
+});
+```
+
+</TabItem>
+</Tabs>
+
+While the connection is healthy, the SDK stops polling. If the connection drops, the SDK reconnects automatically, waiting a little longer before each attempt.
+
+If the connection can't be restored after a while, the SDK fetches the latest evaluations right away and resumes polling, while it keeps trying to restore the connection in the background. Polling stops again once the connection is back.
+
+If streaming can't be used, for example because the API key is invalid, the SDK logs a warning and keeps polling for the rest of the client's lifetime. Call [destroy](#destroying-client) and initialize the client again to retry the connection.
+
+[Evaluation update listeners](#listening-to-evaluation-updates) fire for streamed updates as well as for polling.
+
 ### Reporting custom events
 
 This method lets you save user actions in your application as events. You can connect these events to metrics in the experiments console UI.
@@ -517,6 +552,8 @@ This updating method will override the current data.
 
 :::
 
+If [real-time updates](#updating-user-evaluations-in-real-time) are enabled, updating the attributes also reconnects the stream, so the server evaluates the new attributes right away. Otherwise, the change is picked up on the next poll.
+
 ### Getting user information
 
 This method will return the current user configured in the SDK. This is useful when you want to check the current user id and attributes before updating them through [updateUserAttributes](#getting-user-information).
@@ -534,7 +571,7 @@ const user = client?.currentUser();
 ### Listening to evaluation updates
 
 The SDK can notify when the evaluation is updated.
-The listener can detect both automatic polling and manual fetching.
+The listener can detect polling, [real-time streamed updates](#updating-user-evaluations-in-real-time), and manual fetching.
 
 <Tabs>
 <TabItem value="js" label="JavaScript">
