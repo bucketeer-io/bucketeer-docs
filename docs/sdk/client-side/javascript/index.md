@@ -433,7 +433,7 @@ By default, the SDK checks the Bucketeer server for flag changes on a schedule s
 
 With real-time updates, the SDK keeps a connection open to the Bucketeer server, and the server sends each flag change as soon as it happens. This connection uses [Server-Sent Events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events) (SSE).
 
-This feature requires the JavaScript client SDK `v2.7.0` or later and Bucketeer `v2.3.0` or later.
+Real-time updates require the JavaScript client SDK `v2.7.0` or later. If you self-host Bucketeer, your backend must be `v2.3.0` or later.
 
 To enable it, set `enableStreaming` to `true` when configuring the client.
 
