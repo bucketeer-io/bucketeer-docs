@@ -163,7 +163,7 @@ initialFetchPromise
 
 #### Polling
 
-By default, the initialize process starts polling right away the latest evaluations from the Bucketeer server in the background using the interval `pollingInterval` configuration. JavaScript SDK **does not support** Background fetch.
+By default, initializing the client starts polling the Bucketeer server for the latest evaluations in the background, using the interval set by `pollingInterval`. JavaScript SDK **does not support** Background fetch.
 
 Polling also runs as a fallback when [real-time updates](#real-time-updates-with-streaming) are enabled but the real-time connection isn't available.
 
