@@ -95,7 +95,7 @@ Depending on your use, you may want to change the optional configurations availa
 - **eventsFlushInterval** - Default is 10 seconds (In Milliseconds)
 - **eventsMaxQueueSize** - Default is 50 events
 - **enableAutoPageLifecycleFlush** - Automatically flush events when page is hidden or closed. Default is `true`
-- **enableStreaming** - Apply flag changes as soon as they happen, instead of checking the server on a schedule (see `pollingInterval`). Default is `false`. [See more](#updating-user-evaluations-in-real-time)
+- **enableStreaming** - Apply flag changes as soon as they happen, instead of checking the server on a schedule (see `pollingInterval`). Default is `false`. [See more](#real-time-updates-with-streaming)
 - **storageKeyPrefix** - Default is empty
 - **userAgent** - Default is `window.navigator.userAgent`
 - **fetch** - Default is `globalThis.fetch`
@@ -133,7 +133,7 @@ If you want to use the feature flag on Splash or Main views, the SDK cache may b
 
 :::info Initialization Timeout error
 
-During the initialization process, errors **are not** related to the initialization itself. Instead, they arise from a timeout request, indicating the variations data from the server weren't received. Therefore, the SDK will work as usual and update the variations on the next [polling](javascript#polling) request, or when a [real-time update](javascript#updating-user-evaluations-in-real-time) arrives.
+During the initialization process, errors **are not** related to the initialization itself. Instead, they arise from a timeout request, indicating the variations data from the server weren't received. Therefore, the SDK will work as usual and update the variations on the next [polling](javascript#polling) request, or when a [real-time update](javascript#real-time-updates-with-streaming) arrives.
 
 :::
 
@@ -165,7 +165,7 @@ initialFetchPromise
 
 By default, the initialize process starts polling right away the latest evaluations from the Bucketeer server in the background using the interval `pollingInterval` configuration. JavaScript SDK **does not support** Background fetch.
 
-Polling also runs as a fallback when [real-time updates](#updating-user-evaluations-in-real-time) are enabled but the real-time connection isn't available.
+Polling also runs as a fallback when [real-time updates](#real-time-updates-with-streaming) are enabled but the real-time connection isn't available.
 
 #### Polling retry behavior
 
@@ -427,7 +427,7 @@ await client?.fetchEvaluations(timeout);
 </TabItem>
 </Tabs>
 
-### Updating user evaluations in real-time
+### Real-time updates with streaming
 
 By default, the SDK checks the Bucketeer server for flag changes on a schedule set by `pollingInterval`. This is called polling, so a change can take a while to reach your app.
 
@@ -554,7 +554,7 @@ This updating method will override the current data.
 
 :::
 
-If [real-time updates](#updating-user-evaluations-in-real-time) are enabled, updating the attributes also reopens the real-time connection, so the server evaluates the new attributes right away. Otherwise, the change is picked up on the next polling request.
+If [real-time updates](#real-time-updates-with-streaming) are enabled, updating the attributes also reopens the real-time connection, so the server evaluates the new attributes right away. Otherwise, the change is picked up on the next polling request.
 
 ### Getting user information
 
@@ -573,7 +573,7 @@ const user = client?.currentUser();
 ### Listening to evaluation updates
 
 The SDK can notify when the evaluation is updated.
-The listener can detect polling, [real-time updates](#updating-user-evaluations-in-real-time), and manual fetching.
+The listener can detect polling, [real-time updates](#real-time-updates-with-streaming), and manual fetching.
 
 <Tabs>
 <TabItem value="js" label="JavaScript">
