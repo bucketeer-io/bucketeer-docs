@@ -814,19 +814,6 @@ code {
   letter-spacing: 1px;
 }
 
-.prism-code .token-line > span:nth-child(1) {
-  background-color: transparent;
-  margin-left: 10px !important;
-  display: none;
-}
-.prism-code .token-line > span.token.plain {
-  display: inline-block;
-}
-
-.prism-code .token-line > span:nth-child(2) {
-  margin-left: 15px !important;
-}
-
 .prism-code {
   background: linear-gradient(90deg, #573792 2.5rem, #efecf5 0);
 }
