@@ -47,9 +47,13 @@ When you successfully delete a variation:
 
 ## Value Schema
 
-By default, Bucketeer only checks that a variation value matches the flag type. A value schema adds stricter, flag-specific validation on top of that. Once a schema is defined, every variation value is validated against it, and values that violate the schema can't be saved. This prevents mistakes—such as a typo in an allowed option or a JSON payload missing a required field—from reaching your users.
+By default, Bucketeer only checks that a variation value matches the flag type. A value schema adds stricter, flag-specific validation on top of that. Once a schema is defined, every variation value is validated against it, and values that violate the schema can't be saved. This prevents mistakes such as a typo in an allowed option or a JSON payload missing a required field—from reaching your users.
 
-The **Value Schema** card appears at the top of the **Variations** tab. Boolean and YAML flags don't support value schemas, so the card isn't displayed for those flag types.
+:::info
+
+The **Value Schema** card appears at the top of the Variations tab. **Boolean** and **YAML** flags don't support value schemas, so the card isn't displayed for those flag types.
+
+:::
 
 <CenteredImg
   imgURL="img/feature-flags/variations/value-schema-card.png"
@@ -79,7 +83,7 @@ To define a value schema:
 
 1. Go to the flag's **Variations** tab and click **Add Schema** on the **Value Schema** card.
 2. If the flag type supports multiple schema types, select the type you want to use.
-3. Define the schema: enter the allowed values (Enum), the pattern (Regex), or the schema document (JSON Schema).
+3. Define the schema: enter the allowed values (**Enum**), the pattern (**Regex**), or the schema document (**JSON Schema**).
 4. Optionally, add a description explaining the purpose of the schema.
 5. Click **Test against current variations** to check whether each existing variation value satisfies the schema. The dialog shows a pass or fail result for every variation.
 6. Click **Save** to close the dialog, then save the flag with a comment, as with any other variation change.
@@ -91,10 +95,6 @@ To define a value schema:
 />
 
 All current variation values must satisfy the schema before you can save it. If any value violates the schema, an inline error appears on that variation, and the save is blocked until you fix the value or adjust the schema.
-
-:::note Scheduling is not supported
-Schema changes can't be included in a [scheduled flag update](/feature-flags/creating-feature-flags/auto-operation/schedule). If you modify the value schema, the change must be applied immediately when you save the flag.
-:::
 
 ### How validation works
 
