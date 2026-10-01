@@ -2,8 +2,8 @@
 title: Variations
 # sidebar_position:
 slug: /feature-flags/creating-feature-flags/variations
-description: Learn how to create and manage feature flag variations.
-tags: ['feature-flag', 'variations']
+description: Learn how to create and manage feature flag variations and validate variation values with a value schema.
+tags: ['feature-flag', 'variations', 'value-schema']
 ---
 
 import CenteredImg from '@site/src/components/centered-img/CenteredImg';
@@ -20,7 +20,7 @@ To access the variations page on the Bucketeer dashboard, access the **Feature F
 
 For boolean flags, you can modify the name and description of each variation. When dealing with multivariate flags (string, number, JSON, and YAML types), you can add or delete variations as needed in addition to editing the value, name, and description of variations. After finishing the flag variations edition, save it and provide a comment describing your changes.
 
-At the top of the Variations tab a **Value Schema** card lets you define a schema for the variation values of the flag. Supported schema types are Enum (for string or number variations), Regex (for string variations), and JSON Schema (for JSON variations). When a schema is active, the UI validates each variation value against it and displays inline validation errors—such as disallowed enum values, pattern mismatches, or JSON schema violations—preventing the variation from being saved until the errors are resolved.
+For string, number, and JSON flags, you can also define a [value schema](#value-schema) to validate variation values before they're saved.
 
 :::info Restrictions to change variations
 
@@ -44,3 +44,92 @@ When you successfully delete a variation:
 - Its individual targeting entry will be removed automatically
 - It will be removed from custom rules where it has 0% rollout weight
 - The flag's configuration remains valid and functional
+
+## Value Schema
+
+By default, Bucketeer only checks that a variation value matches the flag type. A value schema adds stricter, flag-specific validation on top of that. Once a schema is defined, every variation value is validated against it, and values that violate the schema can't be saved. This prevents mistakes—such as a typo in an allowed option or a JSON payload missing a required field—from reaching your users.
+
+The **Value Schema** card appears at the top of the **Variations** tab. Boolean and YAML flags don't support value schemas, so the card isn't displayed for those flag types.
+
+<CenteredImg
+  imgURL="img/feature-flags/variations/value-schema-card.png"
+  alt="Value Schema card at the top of the Variations tab"
+  wSize="650px"
+/>
+
+### Schema types
+
+The available schema types depend on the flag type:
+
+| Schema type | String | Number | JSON | Description |
+|:---|:---:|:---:|:---:|:---|
+| **Enum** | ✓ | ✓ | – | The value must be one of a list of allowed values. |
+| **Regex** | ✓ | – | – | The value must match a regular expression. |
+| **JSON Schema** | – | – | ✓ | The value must conform to a [JSON Schema](https://json-schema.org/) (draft 2020-12). |
+
+Additional notes per schema type:
+
+- **Enum**: For number flags, values are compared numerically, so `1.0` and `1` are considered the same value. When an enum schema is active, the variation value field becomes a dropdown listing the allowed values.
+- **Regex**: Patterns use [RE2 syntax](https://github.com/google/re2/wiki/Syntax), the same syntax used by Go's `regexp` package. Perl-style constructs such as lookaheads aren't supported. The pattern is compiled as you type, so syntax errors are reported immediately. Matching is partial by default: the pattern only needs to match somewhere within the value. Anchor the pattern with `^` and `$` to require a full match.
+- **JSON Schema**: The schema is validated as JSON Schema draft 2020-12. You can use features such as `required`, `enum`, numeric ranges, and `additionalProperties: false` to tightly control the shape of your JSON variations.
+
+### Defining a schema
+
+To define a value schema:
+
+1. Go to the flag's **Variations** tab and click **Add Schema** on the **Value Schema** card.
+2. If the flag type supports multiple schema types, select the type you want to use.
+3. Define the schema: enter the allowed values (Enum), the pattern (Regex), or the schema document (JSON Schema).
+4. Optionally, add a description explaining the purpose of the schema.
+5. Click **Test against current variations** to check whether each existing variation value satisfies the schema. The dialog shows a pass or fail result for every variation.
+6. Click **Save** to close the dialog, then save the flag with a comment, as with any other variation change.
+
+<CenteredImg
+  imgURL="img/feature-flags/variations/value-schema-dialog.png"
+  alt="Add Value Schema dialog showing a JSON Schema and test results for each variation"
+  wSize="650px"
+/>
+
+All current variation values must satisfy the schema before you can save it. If any value violates the schema, an inline error appears on that variation, and the save is blocked until you fix the value or adjust the schema.
+
+:::note Scheduling is not supported
+Schema changes can't be included in a [scheduled flag update](/feature-flags/creating-feature-flags/auto-operation/schedule). If you modify the value schema, the change must be applied immediately when you save the flag.
+:::
+
+### How validation works
+
+Once a schema is active, variation values are validated whenever a variation is created or updated:
+
+- The dashboard validates values as you edit them and shows inline errors, so you can fix problems before saving.
+- The server enforces the same validation when the flag is saved, so invalid values are also rejected when flags are updated through the [HTTP API](/developer-tools/http-api).
+
+For example, consider a JSON flag with the following schema:
+
+```json
+{
+  "type": "object",
+  "properties": {
+    "theme": { "type": "string", "enum": ["light", "dark"] },
+    "maxItems": { "type": "integer", "minimum": 1, "maximum": 100 },
+    "showPromo": { "type": "boolean" }
+  },
+  "required": ["theme", "maxItems"],
+  "additionalProperties": false
+}
+```
+
+A variation value like the following is rejected:
+
+```json
+{
+  "theme": "blue",
+  "maxItems": "20",
+  "extraField": "x"
+}
+```
+
+The validation errors point to each failing field: `theme` must be one of `light` or `dark`, `maxItems` must be an integer, and `extraField` isn't allowed.
+
+### Editing or removing a schema
+
+Use the **Edit** and **Remove** actions on the **Value Schema** card to change or delete the schema. When you edit a schema, the same rule applies as when creating one: all current variation values must satisfy the updated schema before you can save. Removing the schema stops the validation; existing variation values are kept as they are.
