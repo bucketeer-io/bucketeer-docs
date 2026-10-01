@@ -814,11 +814,17 @@ code {
   letter-spacing: 1px;
 }
 
-/* The custom gutter below numbers every line already, so hide the
-   line-number column Docusaurus adds for ```showLineNumbers blocks.
-   (Its counter conflicts with ours and would render every number as 0.) */
-.prism-code .token-line > span[class*='codeLineNumber'] {
+.prism-code .token-line > span:nth-child(1) {
+  background-color: transparent;
+  margin-left: 10px !important;
   display: none;
+}
+.prism-code .token-line > span.token.plain {
+  display: inline-block;
+}
+
+.prism-code .token-line > span:nth-child(2) {
+  margin-left: 15px !important;
 }
 
 .prism-code {
