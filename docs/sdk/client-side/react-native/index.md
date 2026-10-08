@@ -168,8 +168,6 @@ Depending on your use, you may want to change the optional configurations availa
 
 The Bucketeer SDK doesn't save the user data. The Application must save and set it when initializing the client SDK.
 
-Real-time evaluation updates are also not available in React Native yet. The SDK uses polling instead.
-
 :::
 
 ### Initializing client
@@ -357,7 +355,7 @@ useObjectVariation(featureId: string, defaultValue: BKTValue): BKTValue;
 
 #### Polling
 
-The initialization process starts polling the latest evaluations from the Bucketeer server in the background using the interval `pollingInterval` configuration. React Native SDK **does not support** Background fetch.
+The initialization process starts polling the latest evaluations from the Bucketeer server in the background using the interval `pollingInterval` configuration. React Native SDK **does not support** Background fetch. Real-time updates are not available yet either, so the SDK always uses polling.
 
 #### Polling retry behavior
 

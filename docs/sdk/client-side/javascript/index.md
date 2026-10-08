@@ -556,6 +556,12 @@ This updating method will override the current data.
 
 If [real-time updates](#real-time-updates-with-streaming) are enabled, updating the attributes also reopens the real-time connection, so the server evaluates the new attributes right away. Otherwise, the change is picked up on the next polling request.
 
+:::note
+
+If you self-host Bucketeer, correctly re-evaluating flags that use targeting rules on reconnect requires a release later than `v2.3.0`. On `v2.3.0` or earlier, those flags may keep their previous variation. To refresh them, call [fetchEvaluations](#updating-user-evaluations) after updating the attributes.
+
+:::
+
 ### Getting user information
 
 This method will return the current user configured in the SDK. This is useful when you want to check the current user id and attributes before updating them through [updateUserAttributes](#getting-user-information).
