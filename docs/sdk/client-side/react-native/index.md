@@ -355,7 +355,7 @@ useObjectVariation(featureId: string, defaultValue: BKTValue): BKTValue;
 
 #### Polling
 
-The initialization process starts polling the latest evaluations from the Bucketeer server in the background using the interval `pollingInterval` configuration. React Native SDK **does not support** Background fetch.
+The initialization process starts polling the latest evaluations from the Bucketeer server in the background using the interval `pollingInterval` configuration. React Native SDK **does not support** Background fetch. Real-time updates are not available yet either, so the SDK always uses polling.
 
 #### Polling retry behavior
 
