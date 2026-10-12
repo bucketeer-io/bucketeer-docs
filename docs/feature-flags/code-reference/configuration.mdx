@@ -228,7 +228,7 @@ bucketeer-find-code-refs \
 
 ### Using environment variables with multiple API keys
 
-This approach stores multiple API keys in an environment variable (`BUCKETEER_APIKEY`) instead of specifying them explicitly in the command line. This enhances security and simplifies repeated executions by avoiding the need to pass API keys explicitly in the command.  
+This approach stores multiple API keys in an environment variable (`BUCKETEER_APIKEY`) instead of specifying them explicitly in the command line. This enhances security and simplifies repeated executions by avoiding the need to pass API keys explicitly in the command.  
 
 ```sh
 export BUCKETEER_APIKEY="key1,key2,key3"
@@ -279,3 +279,5 @@ bucketeer-find-code-refs \
   --revision="REPO_REVISION_STRING" \
   --branch="dev"
 ```
+
+To connect Bucketeer services to a TLS‐enabled Redis/Valkey deployment, use the Redis TLS flags. For each Redis block (main, persistent, non‐persistent, and pubsub) the following flags are available: `--redis-tls-enabled` (boolean), `--redis-tls-ca-cert` (path to CA certificate), `--redis-tls-cert` (path to client certificate), `--redis-tls-key` (path to client private key), and `--redis-tls-insecure-skip-verify` (boolean, for testing only). Corresponding Helm chart values are `<block>.tlsEnabled`, `<block>.tlsCACert`, `<block>.tlsCert`, `<block>.tlsKey`, and `<block>.tlsInsecureSkipVerify`. A shared secret containing TLS material can be referenced with `global.pubsub.redis.tlsSecretName` and is mounted at `/usr/local/certs/redis` in all services.
