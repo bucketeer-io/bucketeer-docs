@@ -32,3 +32,5 @@ authorization: <your-api-key>
 ## API specification
 
 API reference is available [here](/api). The `GetFeatureFlags` endpoint may include `ForceUpdate=true` when the diff filter would otherwise return no features, prompting the SDK to fetch the full payload and recover from a stale state. This ensures the SDK stays consistent even during rapid flag updates.
+
+The `feature_version` field in the `ListExperimentResults` response is optional and may be null. When the field is absent, the service logs the version using `zap.Int32p`, which records a null value without causing a panic. This change prevents runtime errors when experiments are listed without a feature version.
