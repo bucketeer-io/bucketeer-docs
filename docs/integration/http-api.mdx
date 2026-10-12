@@ -32,3 +32,5 @@ authorization: <your-api-key>
 ## API specification
 
 API reference is available [here](/api). The `GetFeatureFlags` endpoint may include `ForceUpdate=true` when the diff filter would otherwise return no features, prompting the SDK to fetch the full payload and recover from a stale state. This ensures the SDK stays consistent even during rapid flag updates.
+
+When a client reconnects to the SSE stream, the server sets `userAttributesUpdated=true` for the initial put. This causes all rule‐based flags to be re‐evaluated, so the response includes the latest variation for each of those flags. The behavior aligns the SSE path with the REST evaluation path, guaranteeing that attribute changes are reflected immediately after a reconnect.
