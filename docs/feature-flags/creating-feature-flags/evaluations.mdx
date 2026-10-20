@@ -22,6 +22,8 @@ Navigate to **Feature Flags** → select your flag → **Evaluations** tab.
 
 Bucketeer stores evaluation data for **30 days**, allowing you to track trends and analyze variation performance over time.
 
+Evaluation data is kept in three tiers of time buckets: minute‐resolution keys for the most recent hour, hour‐resolution keys for the past 24 hours, and day‐resolution keys for longer periods. This enables the **Past hour** view, which shows counts per minute, as well as extended range options of 60 days and 90 days in the Evaluations tab. The day‐tier keys retain data for up to 92 days, so you can explore trends over two to three months without additional configuration.
+
 ## Understanding the Metrics
 
 ### Event Count
