@@ -457,7 +457,7 @@ While the real-time connection is working, the SDK doesn't need to poll, so it s
 
 If the connection can't be restored after a while, the SDK fetches the latest evaluations right away and goes back to polling, while it keeps trying to restore the real-time connection in the background. Polling stops again once the connection is back.
 
-If real-time updates can't be used, for example because the API key is invalid, the SDK logs a warning and keeps polling for the rest of the client's lifetime. To try again, call [destroy](#destroying-client) and initialize the client again.
+If the server refuses the real-time connection permanently, the SDK stops trying, logs a warning, and keeps polling until you call [destroy](#destroying-client) and initialize the client again.
 
 [Evaluation update listeners](#listening-to-evaluation-updates) are also called when a real-time update arrives.
 
