@@ -213,7 +213,7 @@ do {
 
 #### Polling
 
-The initialize process immediately starts polling the latest evaluations from the Bucketeer server in the background using the interval `pollingInterval` configuration while the application is in the **foreground state**. When the application changes to the **background state**, it will use the `backgroundPollingInterval` configuration when the [Background fetch](/sdk/client-side/ios#background-mode) is configured.
+By default, the initialize process immediately starts polling the latest evaluations from the Bucketeer server in the background using the interval `pollingInterval` configuration while the application is in the **foreground state**. When the application changes to the **background state**, it will use the `backgroundPollingInterval` configuration when the [Background fetch](/sdk/client-side/ios#background-mode) is configured.
 
 Polling also runs as a fallback when [real-time updates](#real-time-updates-with-streaming) are enabled but the real-time connection isn't available.
 
@@ -600,7 +600,7 @@ While the real-time connection is working, the SDK doesn't need to poll, so it s
 
 If the connection can't be restored after a while, the SDK fetches the latest evaluations right away and goes back to polling, while it keeps trying to restore the real-time connection in the background. Polling stops again once the connection is back.
 
-If real-time updates can't be used, for example because the API key is invalid, the SDK keeps polling for the rest of the client's lifetime. If you set a `logger` in the **BKTConfig**, the SDK logs a warning. To try again, call [destroy](#destroying-client) and initialize the client again.
+If the server refuses the real-time connection permanently, the SDK stops trying and keeps polling until you call [destroy](#destroying-client) and initialize the client again. If you set a `logger` in the **BKTConfig**, the SDK logs a warning.
 
 [Evaluation update listeners](#listening-to-evaluation-updates) are also called when a real-time update arrives.
 
@@ -714,7 +714,7 @@ This updating method will override the current data.
 
 :::
 
-If [real-time updates](#real-time-updates-with-streaming) are enabled, updating the attributes also reopens the real-time connection, so the server evaluates the new attributes right away. This also happens while the SDK is polling because the connection was lost. If the application is in the background, the new attributes are sent when the connection opens again in the foreground. After a permanent streaming failure, or when real-time updates are disabled, the change is picked up on the next polling request.
+If [real-time updates](#real-time-updates-with-streaming) are enabled, updating the attributes also reopens the real-time connection, so the server evaluates the new attributes right away. This also happens while the SDK is polling because the connection was lost. If the application is in the background, the new attributes are sent by the next [Background fetch](#background-mode) or when the connection opens again in the foreground. After a permanent streaming failure, or when real-time updates are disabled, the change is picked up on the next polling request.
 
 :::note
 
