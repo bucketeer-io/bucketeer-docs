@@ -154,6 +154,8 @@ When using the Debugger, consider these best practices:
 4. **Verify multiple scenarios**: Test with different combinations of attributes to ensure your flags behave correctly under various conditions
 5. **Document results**: Use the Debugger results to document expected flag behavior for your team
 
+The Debugger now reflects the latest flag state more reliably because the cache refresher automatically retries cache updates when Redis temporarily rejects writes. This reduces the likelihood of seeing outdated variations due to missed SSE patch events.
+
 ## Quick Access from Targeting Tab
 
 When working on a specific feature flag, you can quickly access the Debugger directly from the **Targeting** tab. This is particularly useful when you want to verify your targeting rules while configuring them, without navigating away from the flag details page.
