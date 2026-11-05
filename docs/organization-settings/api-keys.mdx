@@ -35,6 +35,8 @@ In Bucketeer, when you create an API key, you have to select a key role. The Key
 | **Public API (Read and Write)** | Allows reading and writing data in Bucketeer. |
 | **Public API (Admin)** | Allows full read and write access to all data in Bucketeer, including environment settings. |
 
+Public API (Read Only) keys can only read account information that belongs to the same organization as the key. When using these keys, attempts to fetch or list accounts from a different organization or from an environment that does not belong to the key’s organization are rejected. This restriction ensures that a read‐only key cannot expose data across organizational boundaries.
+
 :::info Server SDK Evaluation Options
 
 When using server SDKs, you have two evaluation options:
