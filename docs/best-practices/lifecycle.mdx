@@ -47,6 +47,8 @@ Bucketeer does not reevaluate previously evaluated flags unless specific conditi
 
 :::
 
+Domain events are now emitted only after the related database transaction has successfully committed. This guarantees that audit‐log entries, notifications, and cache refreshes are created only for changes that actually took effect, eliminating phantom events.
+
 ### How to archive a flag
 
 Follow these steps to archive flags showing "No Recent Traffic":
@@ -135,7 +137,7 @@ By incorporating a permanent boolean flag in the app code, developers can contro
 ### Flag reuse for multiple tests
 
 While not ideal, reusing flags for multiple tests can be practical for mobile apps. This approach:
-- Avoids constantly asking users to update the app
+- Avoids constantly asking users to update their app
 - Bypasses slow app store review processes (Google Play, App Store)
 
 Flag reuse is necessary because you can't control when users update their applications. Since you can't always rely on flags from the latest release, maintaining fixed flags enables common actions:
