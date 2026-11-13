@@ -1,6 +1,6 @@
 module github.com/bucketeer-io/bucketeer-docs/tools/ai-docs-update
 
-go 1.24.0
+go 1.26.11
 
 require (
 	github.com/adrg/frontmatter v0.2.0
