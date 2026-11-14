@@ -47,33 +47,7 @@ Bucketeer does not reevaluate previously evaluated flags unless specific conditi
 
 :::
 
-### How to archive a flag
-
-Follow these steps to archive flags showing "No Recent Traffic":
-
-1. **Remove the flag code** from your application
-2. Navigate to the **Feature Flags** list page
-3. Archive the flag using one of these methods:
-
-**Option 1: From the flag list**
-- Click the flag's action menu (**...**) and select **Archive Flag**
-
-<CenteredImg
-  imgURL="img/best-practices/flag-archive.png"
-  alt="Archive flag option in action menu"
-  wSize="700px"
-  borderWidth="1px"
-/>
-
-**Option 2: From the flag details page**
-- Open the flag details
-- Navigate to the **Settings** tab
-- Scroll to the **Archive Flag** section
-- Click the **Archive Flag** button
-
-For more details about the Settings tab, see [Settings](/feature-flags/creating-feature-flags/settings#archive-flag).
-
-4. Provide a comment for the update, then click **Submit**
+The cache refresher treats write refusals from Redis as repeatable errors. When a write or invalidation publish is rejected, the event is not acknowledged but redelivered, so the API pod publishes the cache‐invalidation and connected SSE clients receive the patch event without needing to reconnect.
 
 :::note Archiving warning
 

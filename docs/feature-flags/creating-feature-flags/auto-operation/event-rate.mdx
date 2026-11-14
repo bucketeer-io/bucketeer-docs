@@ -16,7 +16,7 @@ The event rate condition is designed to turn off flags based on the usage rate. 
 
 ## How the event rate works
 
-The event rate condition triggers the operation when the frequency of a particular event reaches a specific threshold. For instance, whenever a user visits a flag, you can send an event through the SDK to track that visit. The Bucketeer system then receives these events and keeps track of the frequency of each flag variation. Thus, the system can evaluate the event rate and determine if it needs to turn off a particular flag.
+The event rate condition triggers the operation when the frequency of a particular event reaches a specific threshold. The platform also guarantees that flag changes are not lost: if Redis temporarily rejects a cache write (for example OOM, NOPERM, or READONLY), the cache refresher event is retried until it succeeds, ensuring streaming clients receive the correct patch. For instance, whenever a user visits a flag, you can send an event through the SDK to track that visit. The Bucketeer system then receives these events and keeps track of the frequency of each flag variation. Thus, the system can evaluate the event rate and determine if it needs to turn off a particular flag.
 
 To set up the event rate condition, you need to define the following configurations:
 
