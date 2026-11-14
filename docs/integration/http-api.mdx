@@ -27,7 +27,7 @@ Bucketeer API uses token-based authentication. Each request must include an `aut
 authorization: <your-api-key>
 ```
 
-[API Key](/organization-settings/api-keys) can be created in the Bucketeer dashboard under Organization Settings.
+GetAccountV2, GetAccountV2ByEnvironmentID, and ListAccountsV2 enforce the caller’s organization and environment scope based on the API key. A request that supplies a mismatched organization ID, or omits the organization ID when the key lacks scope, is rejected with an error.
 
 ## API specification
 
