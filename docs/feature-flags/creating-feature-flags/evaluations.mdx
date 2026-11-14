@@ -40,6 +40,8 @@ Evaluation data updates in **real-time**. Depending on your traffic volume:
 - **Typical**: Updates appear within **3 minutes**
 - **High traffic**: May take up to a few hours to fully reflect
 
+If your SDK client omits the feature tag, evaluations are still refreshed when flag variations change. The system treats an empty tag as encompassing all flags, ensuring the Evaluations tab reflects the latest data.
+
 ## Verification
 
 If you see data in the Evaluations tab, your SDK integration is working correctly. If no data appears after using the flag, review your SDK integration and ensure the flag is being evaluated in your application.
