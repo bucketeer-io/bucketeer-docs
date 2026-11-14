@@ -137,6 +137,7 @@ Depending on your use, you may want to change the optional configurations availa
 - **backgroundPollingInterval** - Minimum 20 minutes. Default is 1 hour (In Milliseconds)
 - **eventsFlushInterval** - Minimum 60 seconds. Default is 60 seconds (In Milliseconds)
 - **eventsMaxQueueSize** - Default is 50 events
+- **enableStreaming** - Apply flag changes as soon as they happen, instead of checking the server on a schedule (see `pollingInterval`). Default is `false`. [See more](#real-time-updates-with-streaming)
 
 :::
 
@@ -171,7 +172,7 @@ If you want to use the feature flag on Splash or Main views, the SDK cache may b
 
 :::info Initialization Timeout error
 
-During the initialization process, errors **are not** related to the initialization itself. Instead, they arise from a timeout request, indicating the variations data from the server weren't received. Therefore, the SDK will work as usual and update the variations in the next [polling](ios#polling) request.
+During the initialization process, errors **are not** related to the initialization itself. Instead, they arise from a timeout request, indicating the variations data from the server weren't received. Therefore, the SDK will work as usual and update the variations on the next [polling](ios#polling) request, or when a [real-time update](ios#real-time-updates-with-streaming) arrives.
 
 The completion callback is called on the **main thread**.
 
@@ -212,7 +213,9 @@ do {
 
 #### Polling
 
-The initialize process immediately starts polling the latest evaluations from the Bucketeer server in the background using the interval `pollingInterval` configuration while the application is in the **foreground state**. When the application changes to the **background state**, it will use the `backgroundPollingInterval` configuration when the [Background fetch](/sdk/client-side/ios#background-mode) is configured.
+By default, the initialize process immediately starts polling the latest evaluations from the Bucketeer server in the background using the interval `pollingInterval` configuration while the application is in the **foreground state**. When the application changes to the **background state**, it will use the `backgroundPollingInterval` configuration when the [Background fetch](/sdk/client-side/ios#background-mode) is configured.
+
+Polling also runs as a fallback when [real-time updates](#real-time-updates-with-streaming) are enabled but the real-time connection isn't available.
 
 #### Polling retry behavior
 
@@ -494,7 +497,7 @@ client?.fetchEvaluations(timeoutMillis: timeout) { error in
 
 Depending on the client network, it could take a few seconds until the SDK fetches the data from the server, so use this carefully.
 
-You don't need to call this method manually in regular use because the SDK is polling the latest variations in the background.
+You don't need to call this method manually in regular use because the SDK keeps the variations up to date in the background, through polling or [real-time updates](#real-time-updates-with-streaming).
 
 :::
 
@@ -502,6 +505,8 @@ You don't need to call this method manually in regular use because the SDK is po
 
 Bucketeer SDK supports FCM ([Firebase Cloud Messaging](https://firebase.google.com/docs/cloud-messaging)).<br />
 Every time you change a feature flag on the admin console, Bucketeer will send a silent notification using the FCM V1 API to notify the client so that you can update the evaluations in real-time.
+
+This section uses push notifications. To receive flag changes over a connection kept open by the SDK instead, see [Real-time updates with streaming](#real-time-updates-with-streaming).
 
 :::info Before using
 1. You need to register your FCM Service Account on the admin console. Check the [FCM](/organization-settings/fcm) section to learn how to do it.
@@ -562,6 +567,42 @@ func application(
 
 </TabItem>
 </Tabs>
+
+### Real-time updates with streaming
+
+By default, the SDK checks the Bucketeer server for flag changes on a schedule set by `pollingInterval`. This is called polling, so a change can take a while to reach your app.
+
+With real-time updates, the SDK keeps a connection open to the Bucketeer server, and the server sends each flag change as soon as it happens. This connection uses [Server-Sent Events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events) (SSE).
+
+Real-time updates require the iOS SDK `v2.4.0` or later. If you self-host Bucketeer, your backend must be `v2.3.0` or later.
+
+To enable it, set `enableStreaming` to `true` when configuring the client.
+
+<Tabs>
+<TabItem value="swift" label="Swift">
+
+```swift showLineNumbers
+let config = try BKTConfig.Builder()
+  .with(apiKey: "YOUR_API_KEY")
+  .with(apiEndpoint: "YOUR_API_ENDPOINT")
+  .with(featureTag: "YOUR_FEATURE_TAG")
+  .with(appVersion: Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String)
+  .with(enableStreaming: true)
+  .build()
+```
+
+</TabItem>
+</Tabs>
+
+The real-time connection is opened after the initial fetch, and only while the application is in the **foreground state**. When the application changes to the **background state**, the SDK closes the connection and uses [Background fetch](#background-mode) as usual. The connection is opened again when the application returns to the foreground.
+
+While the real-time connection is working, the SDK doesn't need to poll, so it stops. If the connection drops, the SDK reconnects automatically, waiting a little longer before each attempt.
+
+If the connection can't be restored after a while, the SDK fetches the latest evaluations right away and goes back to polling, while it keeps trying to restore the real-time connection in the background. Polling stops again once the connection is back.
+
+If the server refuses the real-time connection permanently, the SDK stops trying and keeps polling until you call [destroy](#destroying-client) and initialize the client again. If you set a `logger` in the **BKTConfig**, the SDK logs a warning.
+
+[Evaluation update listeners](#listening-to-evaluation-updates) are also called when a real-time update arrives.
 
 ### Reporting custom events
 
@@ -673,6 +714,14 @@ This updating method will override the current data.
 
 :::
 
+If [real-time updates](#real-time-updates-with-streaming) are enabled, updating the attributes also reopens the real-time connection, so the server evaluates the new attributes right away. This also happens while the SDK is polling because the connection was lost. If the application is in the background, the new attributes are sent by the next [Background fetch](#background-mode) or when the connection opens again in the foreground. After a permanent streaming failure, or when real-time updates are disabled, the change is picked up on the next polling request.
+
+:::note
+
+If you self-host Bucketeer, correctly re-evaluating flags that use targeting rules on reconnect requires a release later than `v2.3.0`. On `v2.3.0` or earlier, those flags may keep their previous variation. To refresh them, call [fetchEvaluations](#updating-user-evaluations) right after `updateUserAttributes()` returns.
+
+:::
+
 ### Getting user information
 
 This method will return the current user configured in the SDK. This is useful when you want to check the current user id and attributes before updating them through [updateUserAttributes](#getting-user-information).
@@ -691,7 +740,7 @@ let user = client?.currentUser()
 ### Listening to evaluation updates
 
 The SDK can notify when the evaluation is updated.
-The listener can detect both automatic polling and manual fetching.
+The listener can detect polling, [real-time updates](#real-time-updates-with-streaming), and manual fetching.
 
 :::info
 
