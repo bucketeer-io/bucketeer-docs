@@ -83,3 +83,5 @@ After performing all operations, the schedule moves to the **Finished** tab. In 
   alt="Schedule operation finished"
   borderWidth="1px"
 />
+
+The scheduled flag change APIs now surface publishing failures. When the domain event for a create, update, cancel, or execute operation cannot be published, the API returns an Internal error, and an audit‐log entry is recorded only if the request succeeds.
